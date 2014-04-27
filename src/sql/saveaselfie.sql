@@ -25,3 +25,7 @@ create table photos
 	uploadedby text not null references users(name),
 	comment text
 );
+
+create view photo_count as 
+    select uploadedby as user, count(*) as count from photos
+	group by uploadedby;
