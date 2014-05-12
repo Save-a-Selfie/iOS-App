@@ -23,6 +23,7 @@
 		344A06E4190D5E7700DA383F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 344A06C0190D5E7700DA383F /* UIKit.framework */; };
 		344A06EC190D5E7700DA383F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 344A06EA190D5E7700DA383F /* InfoPlist.strings */; };
 		344A06EE190D5E7700DA383F /* Save_a_SelfieTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 344A06ED190D5E7700DA383F /* Save_a_SelfieTests.m */; };
+		854AE0CC1921842A00ED2232 /* UploadPictureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 854AE0CB1921842A00ED2232 /* UploadPictureViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +59,8 @@
 		344A06E9190D5E7700DA383F /* Save-a-SelfieTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Save-a-SelfieTests-Info.plist"; sourceTree = "<group>"; };
 		344A06EB190D5E7700DA383F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		344A06ED190D5E7700DA383F /* Save_a_SelfieTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Save_a_SelfieTests.m; sourceTree = "<group>"; };
+		854AE0CA1921842A00ED2232 /* UploadPictureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadPictureViewController.h; sourceTree = "<group>"; };
+		854AE0CB1921842A00ED2232 /* UploadPictureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadPictureViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +123,8 @@
 				344A06CB190D5E7700DA383F /* AppDelegate.h */,
 				344A06CC190D5E7700DA383F /* AppDelegate.m */,
 				344A06CE190D5E7700DA383F /* Main_iPhone.storyboard */,
+				854AE0CA1921842A00ED2232 /* UploadPictureViewController.h */,
+				854AE0CB1921842A00ED2232 /* UploadPictureViewController.m */,
 				344A06D1190D5E7700DA383F /* Main_iPad.storyboard */,
 				344A06D4190D5E7700DA383F /* MainViewController.h */,
 				344A06D5190D5E7700DA383F /* MainViewController.m */,
@@ -261,6 +266,7 @@
 				344A06CD190D5E7700DA383F /* AppDelegate.m in Sources */,
 				344A06D6190D5E7700DA383F /* MainViewController.m in Sources */,
 				344A06D9190D5E7700DA383F /* FlipsideViewController.m in Sources */,
+				854AE0CC1921842A00ED2232 /* UploadPictureViewController.m in Sources */,
 				344A06C9190D5E7700DA383F /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

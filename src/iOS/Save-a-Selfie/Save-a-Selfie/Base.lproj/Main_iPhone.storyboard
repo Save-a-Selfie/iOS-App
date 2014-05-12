@@ -44,7 +44,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="tcm-qp-2pd" kind="relationship" relationship="viewControllers" id="0m0-Pk-RQr"/>
-                        <segue destination="vPz-2C-ctT" kind="relationship" relationship="viewControllers" id="tWp-zO-HEJ"/>
+                        <segue destination="YdP-bb-153" kind="relationship" relationship="viewControllers" id="hvR-zS-eyq"/>
                         <segue destination="z4z-rT-kNv" kind="relationship" relationship="viewControllers" id="g8H-YN-u2q"/>
                     </connections>
                 </tabBarController>
@@ -52,68 +52,10 @@
             </objects>
             <point key="canvasLocation" x="-998" y="278"/>
         </scene>
-        <!--Navigation Controller - Take picture-->
-        <scene sceneID="emp-tf-d6W">
-            <objects>
-                <navigationController title="Take picture" definesPresentationContext="YES" id="vPz-2C-ctT" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Upload" id="lSh-gA-WrV"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="29e-Nw-0s1">
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="hpk-bc-yve" kind="relationship" relationship="rootViewController" id="U3L-5I-kPr"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="VKH-lR-rHL" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-475" y="598"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="HdI-ec-Eb2">
-            <objects>
-                <viewController id="hpk-bc-yve" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="G6k-BP-cro"/>
-                        <viewControllerLayoutGuide type="bottom" id="urX-BF-BQK"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="FC4-g5-VxA">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1u8-Dn-ZJt">
-                                <rect key="frame" x="0.0" y="64" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <items>
-                                    <navigationItem title="Choose picture" id="AAY-Hx-xG1"/>
-                                </items>
-                            </navigationBar>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LZb-D4-eM6">
-                                <rect key="frame" x="0.0" y="108" width="320" height="354"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="08o-ux-eGa">
-                                <rect key="frame" x="220" y="477" width="94" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Use photo">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="YdP-bb-153" kind="push" id="uTn-4C-VAh"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="EXG-nN-LSx"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="SNG-83-FTM" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-83" y="593"/>
-        </scene>
-        <!--View Controller-->
+        <!--Upload Picture View Controller - Upload-->
         <scene sceneID="Mhb-iV-IdC">
             <objects>
-                <viewController id="YdP-bb-153" sceneMemberID="viewController">
+                <viewController title="Upload" id="YdP-bb-153" customClass="UploadPictureViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="PV8-10-vYy"/>
                         <viewControllerLayoutGuide type="bottom" id="p9Y-Rq-zbv"/>
@@ -129,7 +71,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NqY-3S-2Vp">
-                                <rect key="frame" x="4" y="105" width="313" height="280"/>
+                                <rect key="frame" x="4" y="113" width="313" height="272"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gTe-vN-Lmz">
@@ -149,17 +91,20 @@
                                 <rect key="frame" x="0.0" y="61" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <items>
-                                    <navigationItem title="Add information" id="tui-qS-zjU"/>
+                                    <navigationItem title="Upload a selfie" id="tui-qS-zjU">
+                                        <barButtonItem key="rightBarButtonItem" systemItem="camera" id="sCV-od-IGA"/>
+                                    </navigationItem>
                                 </items>
                             </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Upload a selfie" id="fAY-kV-WtE"/>
                     <navigationItem key="navigationItem" id="aed-0Q-1l3"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CYk-47-h3e" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="305" y="593"/>
+            <point key="canvasLocation" x="-459" y="617"/>
         </scene>
         <!--View Controller - Information-->
         <scene sceneID="h3X-Je-fhJ">
@@ -186,7 +131,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h1b-x3-g2R" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-466" y="1252"/>
+            <point key="canvasLocation" x="-450" y="1366"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
