@@ -480,6 +480,7 @@
 				344A06F3190D5E7700DA383F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		344A06F4190D5E7700DA383F /* Build configuration list for PBXNativeTarget "Save-a-SelfieTests" */ = {
 			isa = XCConfigurationList;
@@ -488,6 +489,7 @@
 				344A06F6190D5E7700DA383F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
