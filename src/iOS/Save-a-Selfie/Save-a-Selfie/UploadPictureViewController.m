@@ -9,6 +9,7 @@
 #import "UploadPictureViewController.h"
 
 @interface UploadPictureViewController ()
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *selectButton;
 
 @end
 
@@ -45,5 +46,54 @@
     // Pass the selected object to the new view controller.
 }
 */
+- (IBAction)handleSelectClick:(id)sender {
+    UIActionSheet *as = [[UIActionSheet alloc] initWithTitle:@"Select image source" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Take photo", @"Choose from existing", nil];
+    as.tag = 1;
+    [as showInView:[UIApplication sharedApplication].keyWindow];
+}
+
+- (void)actionSheet:(UIActionSheet *)popup clickedButtonAtIndex:(NSInteger)buttonIndex {
+    
+    switch (popup.tag) {
+        case 1: {
+            switch (buttonIndex) {
+                case 0:
+                    [self useCamera];
+                    break;
+                case 1:
+                    [self useCameraRoll];
+                    break;
+            }
+            break;
+        }
+        default:
+            break;
+    }
+}
+
+// todo: if no camera is available, don't even show the button, but this works for now
+- (IBAction)useCamera {
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        [picker setSourceType:UIImagePickerControllerSourceTypeCamera];
+        [self presentViewController:picker animated:YES completion:nil];
+    }
+    else {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Camera could not be found" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+    }
+}
+
+- (IBAction)useCameraRoll {
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
+        [picker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+        [self presentViewController:picker animated:YES completion:nil];
+    }
+    else {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Photo library could not be found" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+    }
+}
 
 @end

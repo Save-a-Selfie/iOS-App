@@ -7,7 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MobileCoreServices/MobileCoreServices.h>
+
 
 @interface UploadPictureViewController : UIViewController
+<UIImagePickerControllerDelegate,
+UIActionSheetDelegate,
+UINavigationControllerDelegate>
 
+@property BOOL newMedia;
+@property (strong, nonatomic) IBOutlet UIImageView *imageView;
+- (IBAction)useCamera;
+- (IBAction)useCameraRoll;
 @end
