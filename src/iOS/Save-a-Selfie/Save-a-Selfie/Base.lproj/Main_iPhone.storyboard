@@ -36,7 +36,7 @@
         <scene sceneID="nPv-Tt-rdK">
             <objects>
                 <tabBarController definesPresentationContext="YES" id="2c0-HS-cEq" sceneMemberID="viewController">
-                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="Vjl-9m-xj6">
                         <rect key="frame" x="129" y="330" width="163" height="49"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
@@ -65,30 +65,30 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mor-wA-8o7">
-                                <rect key="frame" x="7" y="444" width="302" height="30"/>
+                                <rect key="frame" x="7" y="388" width="302" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NqY-3S-2Vp">
-                                <rect key="frame" x="4" y="113" width="313" height="272"/>
+                                <rect key="frame" x="4" y="72" width="313" height="251"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gTe-vN-Lmz">
-                                <rect key="frame" x="247" y="482" width="62" height="30"/>
+                                <rect key="frame" x="247" y="426" width="62" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Upload">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Add extra information about the AED (e.g. its location in the building)" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="313" translatesAutoresizingMaskIntoConstraints="NO" id="9KI-N0-mkY">
-                                <rect key="frame" x="7" y="393" width="313" height="43"/>
+                                <rect key="frame" x="4" y="337" width="313" height="43"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bdr-qn-8fU">
-                                <rect key="frame" x="0.0" y="61" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="20" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <items>
                                     <navigationItem title="Upload a selfie" id="tui-qS-zjU">
@@ -106,6 +106,7 @@
                     <tabBarItem key="tabBarItem" title="Upload a selfie" id="fAY-kV-WtE"/>
                     <navigationItem key="navigationItem" id="aed-0Q-1l3"/>
                     <connections>
+                        <outlet property="imageView" destination="NqY-3S-2Vp" id="l7q-Wr-Vba"/>
                         <outlet property="selectButton" destination="sCV-od-IGA" id="Mya-5J-74r"/>
                     </connections>
                 </viewController>

@@ -28,6 +28,9 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.picker = [[UIImagePickerController alloc] init];
+    _picker.delegate = self;
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -73,10 +76,9 @@
 
 // todo: if no camera is available, don't even show the button, but this works for now
 - (IBAction)useCamera {
-    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
     if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-        [picker setSourceType:UIImagePickerControllerSourceTypeCamera];
-        [self presentViewController:picker animated:YES completion:nil];
+        [_picker setSourceType:UIImagePickerControllerSourceTypeCamera];
+        [self presentViewController:_picker animated:YES completion:nil];
     }
     else {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Camera could not be found" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
@@ -85,15 +87,35 @@
 }
 
 - (IBAction)useCameraRoll {
-    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
     if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
-        [picker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
-        [self presentViewController:picker animated:YES completion:nil];
+        [_picker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+        [self presentViewController:_picker animated:YES completion:nil];
     }
     else {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Photo library could not be found" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
     }
+}
+
+- (void) imagePickerControllerDidCancel: (UIImagePickerController *) picker {
+    
+    [self.picker dismissViewControllerAnimated:NO completion:nil];
+}
+
+- (void) imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    UIImage *imageToSave;
+    if([info objectForKey:UIImagePickerControllerEditedImage]) {
+        imageToSave = info[UIImagePickerControllerEditedImage];
+    }
+    else if([info objectForKey:UIImagePickerControllerOriginalImage]) {
+        imageToSave = info[UIImagePickerControllerOriginalImage];
+    }
+    else {UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Selected image could not be found" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+    }
+    [_imageView setImage:imageToSave];
+    [self.picker dismissViewControllerAnimated:YES completion:nil];
+    
 }
 
 @end

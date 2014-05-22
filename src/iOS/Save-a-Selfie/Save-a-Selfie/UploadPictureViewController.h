@@ -17,6 +17,9 @@ UINavigationControllerDelegate>
 
 @property BOOL newMedia;
 @property (strong, nonatomic) IBOutlet UIImageView *imageView;
+@property UIImagePickerController *picker;
 - (IBAction)useCamera;
 - (IBAction)useCameraRoll;
+- (void) imagePickerControllerDidCancel: (UIImagePickerController *) picker;
+- (void) imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info;
 @end
