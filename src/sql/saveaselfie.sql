@@ -21,6 +21,7 @@ create table photos
 	longseconds numeric not null,
 
 	image bytea not null,
+	thumbnail bytea not null,
 
 	uploadedby text not null references users(name),
 	comment text
