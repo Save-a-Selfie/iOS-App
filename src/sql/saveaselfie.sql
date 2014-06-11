@@ -1,3 +1,5 @@
+create database saveaselfie;
+
 create table users
 (
 	name text not null primary key
