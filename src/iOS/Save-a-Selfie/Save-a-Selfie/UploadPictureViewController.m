@@ -116,6 +116,81 @@
     [_imageView setImage:imageToSave];
     [self.picker dismissViewControllerAnimated:YES completion:nil];
     
+    [self addLocationDataToImage];
+    
+    [self sendImageToServer:imageToSave];
+    
+}
+
+- (void) addLocationDataToImage {
+    if(nil == _locationManager)
+    {
+        _locationManager = [[CLLocationManager alloc] init];
+    }
+    _locationManager.delegate = self;
+    
+    if([CLLocationManager locationServicesEnabled]) {
+        [_locationManager startUpdatingLocation];
+        
+    }
+    else {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Location Services disabled" message:@"For now, we need your location to place your selfie on the map. Would you like to turn on Location Services?" delegate:self cancelButtonTitle:@"No thanks" otherButtonTitles:@"Yes",nil];
+        [alert show];
+    }
+    
+}
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    // the user clicked OK
+    if (buttonIndex == 1) {
+        if(nil == _locationManager)
+        {
+            _locationManager = [[CLLocationManager alloc] init];
+        }
+        _locationManager.delegate = self;
+        [_locationManager startUpdatingLocation];
+    }
+}
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation {
+    _currentLocation = newLocation.coordinate;
+    [_locationManager stopUpdatingLocation];
+}
+
+- (void) sendImageToServer:(UIImage *) image {
+    NSData *imageData = UIImagePNGRepresentation(image);
+
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    [request setHTTPMethod:@"POST"];
+    [request setURL:[NSURL URLWithString:@"http://gunfire.becquerel.org/entries/create"]];
+    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    
+    NSString *imageStr = [[NSString alloc] initWithData:imageData encoding:NSUTF8StringEncoding];
+    
+    NSArray *parameters = [[NSArray alloc] initWithObjects:@"latitude=", [NSString stringWithFormat:@"%f", _currentLocation.latitude], @"longitude=", [NSString stringWithFormat:@"%f", _currentLocation.latitude], @"uploadedby", @"", @"comment=", @"", @"image=", @"test", @"thumbnail=", @"test", nil];
+    
+    NSString *body = [parameters componentsJoinedByString:@"&"];
+    
+                        
+    NSString *postLength = [NSString stringWithFormat:@"%d", [body length]];
+    [request setHTTPBody:imageData];
+    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+
+    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    
+    if(!connection)
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Upload error" message:@"An error occurred establishing the HTTP connection. Please try again later." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+    }
+    
+}
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
+{
+    CLLocation *l = locations[0];
+    
+    
 }
 
 @end
