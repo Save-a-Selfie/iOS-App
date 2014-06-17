@@ -165,10 +165,9 @@
     [request setURL:[NSURL URLWithString:@"http://gunfire.becquerel.org/entries/create"]];
     [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
     
-    NSString *imageStr = [[NSString alloc] initWithData:imageData encoding:NSUTF8StringEncoding];
-    
+    NSString *imageStr = [imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
     NSData *thumbnailData = UIImagePNGRepresentation([self createThumbnail:image]);
-    NSString *thumbnailStr = [[NSString alloc] initWithData:thumbnailData encoding:NSUTF8StringEncoding];
+    NSString *thumbnailStr = [thumbnailData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
     
     NSArray *parameters = [[NSArray alloc] initWithObjects:@"latitude=", [NSString stringWithFormat:@"%f", _currentLocation.latitude], @"&longitude=", [NSString stringWithFormat:@"%f", _currentLocation.latitude], @"&uploadedby", @"", @"&comment=", @"", @"&image=", imageStr, @"&thumbnail=", thumbnailStr, nil];
     
