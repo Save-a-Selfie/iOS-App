@@ -167,9 +167,12 @@
     
     NSString *imageStr = [[NSString alloc] initWithData:imageData encoding:NSUTF8StringEncoding];
     
-    NSArray *parameters = [[NSArray alloc] initWithObjects:@"latitude=", [NSString stringWithFormat:@"%f", _currentLocation.latitude], @"longitude=", [NSString stringWithFormat:@"%f", _currentLocation.latitude], @"uploadedby", @"", @"comment=", @"", @"image=", @"test", @"thumbnail=", @"test", nil];
+    NSData *thumbnailData = UIImagePNGRepresentation([self createThumbnail:image]);
+    NSString *thumbnailStr = [[NSString alloc] initWithData:thumbnailData encoding:NSUTF8StringEncoding];
     
-    NSString *body = [parameters componentsJoinedByString:@"&"];
+    NSArray *parameters = [[NSArray alloc] initWithObjects:@"latitude=", [NSString stringWithFormat:@"%f", _currentLocation.latitude], @"&longitude=", [NSString stringWithFormat:@"%f", _currentLocation.latitude], @"&uploadedby", @"", @"&comment=", @"", @"&image=", imageStr, @"&thumbnail=", thumbnailStr, nil];
+    
+    NSString *body = [parameters componentsJoinedByString:@""];
     
                         
     NSString *postLength = [NSString stringWithFormat:@"%d", [body length]];
@@ -184,6 +187,18 @@
         [alert show];
     }
     
+}
+
+- (UIImage *) createThumbnail: (UIImage *) original
+{
+    CGSize newSize = CGSizeMake(100, 100);
+
+    UIGraphicsBeginImageContext(newSize);
+    [original drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+    UIImage *thumbnail = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return thumbnail;
+
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations

@@ -29,5 +29,7 @@ CLLocationManagerDelegate>
 - (void) imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info;
 - (void) addLocationDataToImage;
 - (void) sendImageToServer:(UIImage *) image;
-- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation; 
+- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation;
+
+- (UIImage *) createThumbnail: (UIImage *) orig;
 @end
