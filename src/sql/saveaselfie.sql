@@ -7,7 +7,7 @@ create table users
 
 create table photos
 (
-	id integer not null primary key,
+	id serial not null primary key,
 
 	-- GPS data
 	latitude numeric not null,
@@ -16,7 +16,7 @@ create table photos
 	image bytea not null,
 	thumbnail bytea not null,
 
-	uploadedby text not null references users(name),
+	uploadedby text,
 	comment text
 );
 
