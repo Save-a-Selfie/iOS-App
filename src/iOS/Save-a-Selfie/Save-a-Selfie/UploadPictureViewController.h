@@ -23,6 +23,7 @@ CLLocationManagerDelegate>
 @property UIImagePickerController *picker;
 @property (readonly) CLLocationManager *locationManager;
 @property (readonly) CLLocationCoordinate2D currentLocation;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 - (IBAction)useCamera;
 - (IBAction)useCameraRoll;
 - (void) imagePickerControllerDidCancel: (UIImagePickerController *) picker;
@@ -30,6 +31,7 @@ CLLocationManagerDelegate>
 - (void) addLocationDataToImage;
 - (void) sendImageToServer:(UIImage *) image;
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation;
+
 
 - (UIImage *) createThumbnail: (UIImage *) orig;
 @end

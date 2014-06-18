@@ -30,6 +30,8 @@
     // Do any additional setup after loading the view.
     self.picker = [[UIImagePickerController alloc] init];
     _picker.delegate = self;
+    _activityIndicator.hidesWhenStopped = YES;
+    _activityIndicator.hidden = YES;
     
 }
 
@@ -169,15 +171,17 @@
     NSData *thumbnailData = UIImagePNGRepresentation([self createThumbnail:image]);
     NSString *thumbnailStr = [thumbnailData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
     
-    NSArray *parameters = [[NSArray alloc] initWithObjects:@"latitude=", [NSString stringWithFormat:@"%f", _currentLocation.latitude], @"&longitude=", [NSString stringWithFormat:@"%f", _currentLocation.latitude], @"&uploadedby", @"", @"&comment=", @"", @"&image=", imageStr, @"&thumbnail=", thumbnailStr, nil];
+    NSArray *parameters = [[NSArray alloc] initWithObjects:@"latitude=", [NSString stringWithFormat:@"%f", _currentLocation.latitude], @"&longitude=", [NSString stringWithFormat:@"%f", _currentLocation.latitude], @"&uploadedby", @"", @"&comment=", @"", @"&image=", thumbnailStr, @"&thumbnail=", thumbnailStr, nil];
     
     NSString *body = [parameters componentsJoinedByString:@""];
     
                         
     NSString *postLength = [NSString stringWithFormat:@"%d", [body length]];
-    [request setHTTPBody:imageData];
+    [request setHTTPBody:[body dataUsingEncoding:NSUTF8StringEncoding]];
     [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
 
+    [_activityIndicator startAnimating];
+    
     NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
     
     if(!connection)
@@ -185,6 +189,17 @@
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Upload error" message:@"An error occurred establishing the HTTP connection. Please try again later." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
     }
+    
+}
+
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
+    // The request has failed for some reason!
+    // Check the error var
+    NSLog(error.description);
+}
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
+    [_activityIndicator stopAnimating];
     
 }
 
