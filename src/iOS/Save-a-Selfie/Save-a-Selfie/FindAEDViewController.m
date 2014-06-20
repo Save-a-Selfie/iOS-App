@@ -7,6 +7,7 @@
 //
 
 #import "FindAEDViewController.h"
+#import <Foundation/NSJSONSerialization.h>
 
 @interface FindAEDViewController ()
 
@@ -26,7 +27,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    _mapView.delegate = self;
+    _mapView.showsUserLocation = YES;
+    [_mapView setCenterCoordinate:_mapView.userLocation.location.coordinate animated:YES];
+    
+    [self populateMapViewFromJSON];
 }
 
 - (void)didReceiveMemoryWarning
@@ -35,6 +40,51 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation
+{
+    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(userLocation.coordinate, 800, 800);
+    [self.mapView setRegion:[self.mapView regionThatFits:region] animated:YES];
+}
+
+
+- (void) populateMapViewFromJSON
+{
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://gunfire.becquerel.org/entries/"]
+                                             cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                         timeoutInterval:60.0];
+    
+    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    
+}
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
+{
+    [_jsonData setLength:0];
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
+    if(!_jsonData) {
+        _jsonData = [NSMutableData data];
+    }
+    
+    [_jsonData appendData:data];
+}
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
+    NSError *error = nil;
+    if(_jsonData) {
+    
+        NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:_jsonData options:kNilOptions error:&error];
+        
+        for(NSDictionary *item in jsonArray) {
+            NSLog(@"latitude: %@", [item valueForKey:@"latitude"]);
+        }
+
+    }
+    else {
+        NSLog(@"_jsonData is nil");
+    }
+    
+}
 /*
 #pragma mark - Navigation
 
