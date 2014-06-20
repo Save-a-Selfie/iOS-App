@@ -55,6 +55,10 @@
     
     NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
     
+    if(!connection) {
+        NSLog(@"Error establishing the HTTP connection.");
+    }
+    
 }
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
@@ -72,19 +76,30 @@
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
     NSError *error = nil;
     if(_jsonData) {
-    
         NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:_jsonData options:kNilOptions error:&error];
         
         for(NSDictionary *item in jsonArray) {
             NSLog(@"latitude: %@", [item valueForKey:@"latitude"]);
+            NSNumber * latitude = [item valueForKey:@"latitude"];
+            NSNumber * longitude = [item valueForKey:@"longitude"];
+            CLLocationCoordinate2D coord;
+            coord.latitude = (CLLocationDegrees) [latitude doubleValue];
+            coord.longitude = (CLLocationDegrees) [longitude doubleValue];
+            MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
+            [annotation setCoordinate:coord];
+            [annotation setTitle:[item valueForKey:@"uploadedby"]];
+            [annotation setSubtitle:[item valueForKey:@"comment"]];
+            MKAnnotationView *view = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier: [item valueForKey:@"id"]];
+            
+            [_mapView addAnnotation:annotation];
         }
-
     }
     else {
         NSLog(@"_jsonData is nil");
     }
     
 }
+
 /*
 #pragma mark - Navigation
 
