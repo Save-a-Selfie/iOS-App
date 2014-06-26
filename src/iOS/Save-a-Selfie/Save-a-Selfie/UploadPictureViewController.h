@@ -15,8 +15,10 @@
 <UIImagePickerControllerDelegate,
 UIActionSheetDelegate,
 UINavigationControllerDelegate,
-CLLocationManagerDelegate>
+CLLocationManagerDelegate,
+UITextFieldDelegate>
 
+- (IBAction)didTouchButton:(id)sender;
 @property (weak, nonatomic) IBOutlet UITextField *commentField;
 @property BOOL newMedia;
 @property (strong, nonatomic) IBOutlet UIImageView *imageView;

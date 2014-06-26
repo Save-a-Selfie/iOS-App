@@ -32,6 +32,7 @@
     _picker.delegate = self;
     _activityIndicator.hidesWhenStopped = YES;
     _activityIndicator.hidden = YES;
+    _commentField.delegate = self;
     
 }
 
@@ -118,10 +119,6 @@
     [_imageView setImage:imageToSave];
     [self.picker dismissViewControllerAnimated:YES completion:nil];
     
-    [self addLocationDataToImage];
-    
-    [self sendImageToServer:imageToSave];
-    
 }
 
 - (void) addLocationDataToImage {
@@ -129,7 +126,7 @@
     {
         _locationManager = [[CLLocationManager alloc] init];
     }
-    _locationManager.delegate = self;
+    [_locationManager setDelegate:self];
     
     if([CLLocationManager locationServicesEnabled]) {
         [_locationManager startUpdatingLocation];
@@ -145,18 +142,18 @@
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
     // the user clicked OK
     if (buttonIndex == 1) {
-        if(nil == _locationManager)
-        {
-            _locationManager = [[CLLocationManager alloc] init];
-        }
-        _locationManager.delegate = self;
+        
         [_locationManager startUpdatingLocation];
     }
 }
 
-- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation {
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
+    
+    CLLocation *newLocation = [locations lastObject];
     _currentLocation = newLocation.coordinate;
-    [_locationManager stopUpdatingLocation];
+    
+    [self sendImageToServer:_imageView.image];
+    
 }
 
 - (void) sendImageToServer:(UIImage *) image {
@@ -164,14 +161,14 @@
 
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     [request setHTTPMethod:@"POST"];
-    [request setURL:[NSURL URLWithString:@"http://gunfire.becquerel.org/entries/create"]];
+    [request setURL:[NSURL URLWithString:@"http://gunfire.becquerel.org/entries/create/"]];
     [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
     
     NSString *imageStr = [imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
     NSData *thumbnailData = UIImagePNGRepresentation([self createThumbnail:image]);
     NSString *thumbnailStr = [thumbnailData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
     
-    NSArray *parameters = [[NSArray alloc] initWithObjects:@"latitude=", [NSString stringWithFormat:@"%f", _currentLocation.latitude], @"&longitude=", [NSString stringWithFormat:@"%f", _currentLocation.latitude], @"&uploadedby", @"", @"&comment=", @"", @"&image=", thumbnailStr, @"&thumbnail=", thumbnailStr, nil];
+    NSArray *parameters = [[NSArray alloc] initWithObjects:@"latitude=37.00000", @"&longitude=-127.0000", @"&uploadedby=", @"", @"&comment=", @"", @"&image=", thumbnailStr, @"&thumbnail=", thumbnailStr, nil];
     
     NSString *body = [parameters componentsJoinedByString:@""];
     
@@ -190,6 +187,12 @@
         [alert show];
     }
     
+    [_locationManager stopUpdatingLocation];
+    
+}
+
+- (IBAction)didTouchButton:(id)sender {
+    [self addLocationDataToImage];
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
@@ -215,11 +218,9 @@
 
 }
 
-- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
-{
-    CLLocation *l = locations[0];
-    
-    
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return YES;
 }
 
 @end
