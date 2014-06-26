@@ -23,7 +23,11 @@
 		344A06E4190D5E7700DA383F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 344A06C0190D5E7700DA383F /* UIKit.framework */; };
 		344A06EC190D5E7700DA383F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 344A06EA190D5E7700DA383F /* InfoPlist.strings */; };
 		344A06EE190D5E7700DA383F /* Save_a_SelfieTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 344A06ED190D5E7700DA383F /* Save_a_SelfieTests.m */; };
+		852F47B1194108DE00B09E91 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 852F47B0194108DE00B09E91 /* CoreLocation.framework */; };
 		854AE0CC1921842A00ED2232 /* UploadPictureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 854AE0CB1921842A00ED2232 /* UploadPictureViewController.m */; };
+		85C731C7192FAEE500B2FD31 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85C731C6192FAEE500B2FD31 /* MapKit.framework */; };
+		85C731CA192FAF6A00B2FD31 /* FindAEDViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 85C731C9192FAF6A00B2FD31 /* FindAEDViewController.m */; };
+		85C731CD192FB2D400B2FD31 /* MapPin.m in Sources */ = {isa = PBXBuildFile; fileRef = 85C731CC192FB2D400B2FD31 /* MapPin.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,8 +63,14 @@
 		344A06E9190D5E7700DA383F /* Save-a-SelfieTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Save-a-SelfieTests-Info.plist"; sourceTree = "<group>"; };
 		344A06EB190D5E7700DA383F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		344A06ED190D5E7700DA383F /* Save_a_SelfieTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Save_a_SelfieTests.m; sourceTree = "<group>"; };
+		852F47B0194108DE00B09E91 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		854AE0CA1921842A00ED2232 /* UploadPictureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadPictureViewController.h; sourceTree = "<group>"; };
 		854AE0CB1921842A00ED2232 /* UploadPictureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadPictureViewController.m; sourceTree = "<group>"; };
+		85C731C6192FAEE500B2FD31 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		85C731C8192FAF6A00B2FD31 /* FindAEDViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindAEDViewController.h; sourceTree = "<group>"; };
+		85C731C9192FAF6A00B2FD31 /* FindAEDViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindAEDViewController.m; sourceTree = "<group>"; };
+		85C731CB192FB2D400B2FD31 /* MapPin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapPin.h; sourceTree = "<group>"; };
+		85C731CC192FB2D400B2FD31 /* MapPin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapPin.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +78,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				852F47B1194108DE00B09E91 /* CoreLocation.framework in Frameworks */,
+				85C731C7192FAEE500B2FD31 /* MapKit.framework in Frameworks */,
 				344A06BF190D5E7700DA383F /* CoreGraphics.framework in Frameworks */,
 				344A06C1190D5E7700DA383F /* UIKit.framework in Frameworks */,
 				344A06BD190D5E7700DA383F /* Foundation.framework in Frameworks */,
@@ -109,6 +121,8 @@
 		344A06BB190D5E7700DA383F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				852F47B0194108DE00B09E91 /* CoreLocation.framework */,
+				85C731C6192FAEE500B2FD31 /* MapKit.framework */,
 				344A06BC190D5E7700DA383F /* Foundation.framework */,
 				344A06BE190D5E7700DA383F /* CoreGraphics.framework */,
 				344A06C0190D5E7700DA383F /* UIKit.framework */,
@@ -123,6 +137,10 @@
 				344A06CB190D5E7700DA383F /* AppDelegate.h */,
 				344A06CC190D5E7700DA383F /* AppDelegate.m */,
 				344A06CE190D5E7700DA383F /* Main_iPhone.storyboard */,
+				85C731C8192FAF6A00B2FD31 /* FindAEDViewController.h */,
+				85C731CB192FB2D400B2FD31 /* MapPin.h */,
+				85C731CC192FB2D400B2FD31 /* MapPin.m */,
+				85C731C9192FAF6A00B2FD31 /* FindAEDViewController.m */,
 				854AE0CA1921842A00ED2232 /* UploadPictureViewController.h */,
 				854AE0CB1921842A00ED2232 /* UploadPictureViewController.m */,
 				344A06D1190D5E7700DA383F /* Main_iPad.storyboard */,
@@ -263,8 +281,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				85C731CA192FAF6A00B2FD31 /* FindAEDViewController.m in Sources */,
 				344A06CD190D5E7700DA383F /* AppDelegate.m in Sources */,
 				344A06D6190D5E7700DA383F /* MainViewController.m in Sources */,
+				85C731CD192FB2D400B2FD31 /* MapPin.m in Sources */,
 				344A06D9190D5E7700DA383F /* FlipsideViewController.m in Sources */,
 				854AE0CC1921842A00ED2232 /* UploadPictureViewController.m in Sources */,
 				344A06C9190D5E7700DA383F /* main.m in Sources */,
