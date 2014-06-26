@@ -122,6 +122,7 @@
 }
 
 - (void) addLocationDataToImage {
+    
     if(nil == _locationManager)
     {
         _locationManager = [[CLLocationManager alloc] init];
@@ -129,6 +130,7 @@
     [_locationManager setDelegate:self];
     
     if([CLLocationManager locationServicesEnabled]) {
+        _haveCurrentLocation = NO;
         [_locationManager startUpdatingLocation];
         
     }
@@ -148,11 +150,13 @@
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
+    if(!_haveCurrentLocation) {
+        CLLocation *newLocation = [locations lastObject];
+        _currentLocation = newLocation.coordinate;
     
-    CLLocation *newLocation = [locations lastObject];
-    _currentLocation = newLocation.coordinate;
-    
-    [self sendImageToServer:_imageView.image];
+        [self sendImageToServer:_imageView.image];
+        _haveCurrentLocation = YES;
+    }
     
 }
 

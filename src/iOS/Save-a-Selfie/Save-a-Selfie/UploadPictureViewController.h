@@ -26,6 +26,8 @@ UITextFieldDelegate>
 @property (readonly) CLLocationManager *locationManager;
 @property (readonly) CLLocationCoordinate2D currentLocation;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+//! state variable to avoid calling the sendImageToServer method multiple times
+@property (readonly) BOOL haveCurrentLocation;
 - (IBAction)useCamera;
 - (IBAction)useCameraRoll;
 - (void) imagePickerControllerDidCancel: (UIImagePickerController *) picker;
