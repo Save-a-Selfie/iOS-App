@@ -13,8 +13,8 @@ create table photos
 	latitude numeric not null,
 	longitude numeric not null,
 
-	image bytea not null,
-	thumbnail bytea not null,
+	image text not null,
+	thumbnail text not null,
 
 	uploadedby text,
 	comment text
