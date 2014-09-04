@@ -12,7 +12,8 @@
 @interface FindAEDViewController : UIViewController
 <MKMapViewDelegate>
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
-@property NSMutableData *jsonData;
+@property (readonly) NSMutableData *jsonData;
+@property (readonly) NSArray *jsonArray;
 
 - (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation;
 - (void)populateMapViewFromJSON;
