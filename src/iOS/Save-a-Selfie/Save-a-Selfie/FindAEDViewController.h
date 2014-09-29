@@ -12,7 +12,7 @@
 #define IS_OS_8_OR_LATER ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
 
 @interface FindAEDViewController : UIViewController
-<MKMapViewDelegate>
+<MKMapViewDelegate, CLLocationManagerDelegate>
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (readonly) NSMutableData *jsonData;
 @property (readonly) NSArray *jsonArray;

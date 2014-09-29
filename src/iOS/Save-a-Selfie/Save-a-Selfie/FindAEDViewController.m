@@ -38,7 +38,6 @@
     self.locationManager = [[CLLocationManager alloc] init];
     if(IS_OS_8_OR_LATER) {
         [self.locationManager requestWhenInUseAuthorization];
-        [self.locationManager requestAlwaysAuthorization];
     }
     [self.locationManager startUpdatingLocation];
     
@@ -63,7 +62,7 @@
 
 - (void) populateMapViewFromJSON
 {
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://gunfire.becquerel.org/entries/5/"]
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://gunfire.becquerel.org/entries/"]
                                              cachePolicy:NSURLRequestUseProtocolCachePolicy
                                          timeoutInterval:60.0];
     
