@@ -48,7 +48,7 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>NSLocationUsageDescription</key>
+	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>We&apos;ll only use your location to place your selfie on the map. It will be stored in our remote database.</string>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>

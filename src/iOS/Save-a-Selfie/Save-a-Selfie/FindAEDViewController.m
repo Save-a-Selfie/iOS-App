@@ -32,6 +32,16 @@
 {
     [super viewDidLoad];
     _mapView.delegate = self;
+    
+    self.locationManager = [[CLLocationManager alloc] init];
+    self.locationManager.delegate = self;
+    self.locationManager = [[CLLocationManager alloc] init];
+    if(IS_OS_8_OR_LATER) {
+        [self.locationManager requestWhenInUseAuthorization];
+        [self.locationManager requestAlwaysAuthorization];
+    }
+    [self.locationManager startUpdatingLocation];
+    
     _mapView.showsUserLocation = YES;
     [_mapView setCenterCoordinate:_mapView.userLocation.location.coordinate animated:YES];
     
@@ -46,10 +56,10 @@
 
 - (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation
 {
+    
     MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(userLocation.coordinate, 800, 800);
     [self.mapView setRegion:[self.mapView regionThatFits:region] animated:YES];
 }
-
 
 - (void) populateMapViewFromJSON
 {
@@ -125,7 +135,7 @@
     UIImage *image;
     
     for(NSDictionary *item in _jsonArray) {
-        NSLog(@"%d", [[item valueForKey:@"id"] integerValue]);
+        NSLog(@"%ld", (long)[[item valueForKey:@"id"] integerValue]);
         if([[item valueForKey:@"id"] integerValue] == location.databaseID) {
             NSString *imageString = [item objectForKey:@"thumbnail"];
             if(imageString) {

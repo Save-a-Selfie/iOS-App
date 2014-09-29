@@ -10,29 +10,29 @@
 	<string>Save-a-Selfie</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>2F3900FC-E173-4A3A-86DF-51FB3262EC64</key>
+		<key>4CBA75EF976F56F56E072EE5CFE150E490E15DD5</key>
 		<string>ssh://github.com/machinelady/save-a-selfie.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>src/iOS/Save-a-Selfie/Save-a-Selfie.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>2F3900FC-E173-4A3A-86DF-51FB3262EC64</key>
+		<key>4CBA75EF976F56F56E072EE5CFE150E490E15DD5</key>
 		<string>../../../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>ssh://github.com/machinelady/save-a-selfie.git</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>2F3900FC-E173-4A3A-86DF-51FB3262EC64</string>
+	<string>4CBA75EF976F56F56E072EE5CFE150E490E15DD5</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>2F3900FC-E173-4A3A-86DF-51FB3262EC64</string>
+			<string>4CBA75EF976F56F56E072EE5CFE150E490E15DD5</string>
 			<key>IDESourceControlWCCName</key>
 			<string>save-a-selfie</string>
 		</dict>

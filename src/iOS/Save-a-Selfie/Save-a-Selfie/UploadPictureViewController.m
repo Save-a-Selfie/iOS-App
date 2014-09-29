@@ -127,6 +127,7 @@
     {
         _locationManager = [[CLLocationManager alloc] init];
     }
+    [_locationManager requestWhenInUseAuthorization];
     [_locationManager setDelegate:self];
     
     if([CLLocationManager locationServicesEnabled]) {
@@ -177,7 +178,7 @@
     NSString *body = [parameters componentsJoinedByString:@""];
     
                         
-    NSString *postLength = [NSString stringWithFormat:@"%d", [body length]];
+    NSString *postLength = [NSString stringWithFormat:@"%lu", (unsigned long)[body length]];
     [request setHTTPBody:[body dataUsingEncoding:NSUTF8StringEncoding]];
     [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
 
