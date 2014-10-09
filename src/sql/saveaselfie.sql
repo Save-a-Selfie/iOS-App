@@ -17,7 +17,9 @@ create table photos
 	thumbnail text not null,
 
 	uploadedby text,
-	comment text
+	comment text,
+	-- is this an AED, a first aid kit etc
+	kind text
 );
 
 create view photo_count as 
