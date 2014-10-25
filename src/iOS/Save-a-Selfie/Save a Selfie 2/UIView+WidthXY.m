@@ -3,7 +3,6 @@
 //  Save a Selfie 2
 //
 //  Created by Peter FitzGerald on 25/10/2014.
-//  Copyright (c) 2014 Peter FitzGerald. All rights reserved.
 //
 
 #import "UIView+WidthXY.h"

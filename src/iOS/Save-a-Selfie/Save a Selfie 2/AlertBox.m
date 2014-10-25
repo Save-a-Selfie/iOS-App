@@ -3,7 +3,6 @@
 //  Photoapp4it
 //
 //  Created by Peter FitzGerald on 23/05/2013.
-//  Copyright (c) 2013 Peter FitzGerald. All rights reserved.
 //
 
 #import "AlertBox.h"

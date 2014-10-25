@@ -12,11 +12,6 @@
 		D700239919F52E8800E45408 /* UIButton+Maker.m in Sources */ = {isa = PBXBuildFile; fileRef = D700239819F52E8800E45408 /* UIButton+Maker.m */; };
 		D700239C19F52E9E00E45408 /* UIView+FrameValues.m in Sources */ = {isa = PBXBuildFile; fileRef = D700239B19F52E9E00E45408 /* UIView+FrameValues.m */; };
 		D700239D19F52EB700E45408 /* ExtendNSLogFunctionality.m in Sources */ = {isa = PBXBuildFile; fileRef = D756A29619F175230089EF80 /* ExtendNSLogFunctionality.m */; };
-		D700239F19F84E3A00E45408 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D700239E19F84E3A00E45408 /* Default-568h@2x.png */; };
-		D70023AC19F9CB4000E45408 /* globe.png in Resources */ = {isa = PBXBuildFile; fileRef = D70023AA19F9CB4000E45408 /* globe.png */; };
-		D70023AD19F9CB4000E45408 /* globe@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D70023AB19F9CB4000E45408 /* globe@2x.png */; };
-		D70023B019F9D27100E45408 /* camera.png in Resources */ = {isa = PBXBuildFile; fileRef = D70023AE19F9D27100E45408 /* camera.png */; };
-		D70023B119F9D27100E45408 /* camera@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D70023AF19F9D27100E45408 /* camera@2x.png */; };
 		D70023B419FBC5A600E45408 /* UIView+WidthXY.m in Sources */ = {isa = PBXBuildFile; fileRef = D70023B319FBC5A600E45408 /* UIView+WidthXY.m */; };
 		D72E1DB319EE841E005DD8A5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D72E1DB219EE841E005DD8A5 /* main.m */; };
 		D72E1DB619EE841E005DD8A5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D72E1DB519EE841E005DD8A5 /* AppDelegate.m */; };
@@ -24,11 +19,8 @@
 		D72E1DBF19EE841E005DD8A5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D72E1DBD19EE841E005DD8A5 /* Main.storyboard */; };
 		D72E1DC119EE841F005DD8A5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D72E1DC019EE841F005DD8A5 /* Images.xcassets */; };
 		D72E1DC419EE841F005DD8A5 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = D72E1DC219EE841F005DD8A5 /* LaunchScreen.xib */; };
-		D72E1DD019EE841F005DD8A5 /* Save_a_Selfie_2Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = D72E1DCF19EE841F005DD8A5 /* Save_a_Selfie_2Tests.m */; };
 		D72E1DDA19EE8652005DD8A5 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D72E1DD919EE8652005DD8A5 /* AVFoundation.framework */; };
 		D72E1E4319EF3529005DD8A5 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D72E1E4219EF3529005DD8A5 /* MapKit.framework */; };
-		D72E1E4619F019DF005DD8A5 /* TemplateIcon2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D72E1E4519F019DF005DD8A5 /* TemplateIcon2x.png */; };
-		D72E1E4819F01A2D005DD8A5 /* ThirdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D72E1E4719F01A2D005DD8A5 /* ThirdViewController.m */; };
 		D72E1E4B19F06AE7005DD8A5 /* UploadPictureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D72E1E4A19F06AE7005DD8A5 /* UploadPictureViewController.m */; };
 		D72E1E4D19F06CEB005DD8A5 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D72E1E4C19F06CEB005DD8A5 /* CoreLocation.framework */; };
 		D756A28C19F1735E0089EF80 /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = D756A28B19F1735E0089EF80 /* UIImage+Resize.m */; };
@@ -41,37 +33,18 @@
 		D756A29F19F1D4F10089EF80 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D756A29E19F1D4F10089EF80 /* AssetsLibrary.framework */; };
 		D756A2A119F1D5D50089EF80 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D756A2A019F1D5D50089EF80 /* ImageIO.framework */; };
 		D756A2A919F309690089EF80 /* TabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = D756A2A819F309690089EF80 /* TabBarController.m */; };
-		D756A2AB19F444410089EF80 /* SAS vertical 75.png in Resources */ = {isa = PBXBuildFile; fileRef = D756A2AA19F444410089EF80 /* SAS vertical 75.png */; };
-		D756A2AD19F444660089EF80 /* SAS vertical 320.png in Resources */ = {isa = PBXBuildFile; fileRef = D756A2AC19F444660089EF80 /* SAS vertical 320.png */; };
-		D756A2AF19F444A10089EF80 /* SAS vertical 280.png in Resources */ = {isa = PBXBuildFile; fileRef = D756A2AE19F444A10089EF80 /* SAS vertical 280.png */; };
-		D756A2B319F455950089EF80 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D756A2B219F455950089EF80 /* Default@2x.png */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		D72E1DCA19EE841F005DD8A5 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D72E1DA519EE841E005DD8A5 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = D72E1DAC19EE841E005DD8A5;
-			remoteInfo = "Save a Selfie 2";
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
-		D700239219F5253C00E45408 /* AlertBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertBox.h; sourceTree = "<group>"; };
-		D700239319F5253C00E45408 /* AlertBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertBox.m; sourceTree = "<group>"; };
-		D700239419F5253C00E45408 /* AlertBox.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AlertBox.xib; sourceTree = "<group>"; };
-		D700239719F52E8800E45408 /* UIButton+Maker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+Maker.h"; sourceTree = "<group>"; };
-		D700239819F52E8800E45408 /* UIButton+Maker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+Maker.m"; sourceTree = "<group>"; };
-		D700239A19F52E9E00E45408 /* UIView+FrameValues.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+FrameValues.h"; sourceTree = "<group>"; };
-		D700239B19F52E9E00E45408 /* UIView+FrameValues.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+FrameValues.m"; sourceTree = "<group>"; };
-		D700239E19F84E3A00E45408 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		D70023AA19F9CB4000E45408 /* globe.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = globe.png; sourceTree = "<group>"; };
-		D70023AB19F9CB4000E45408 /* globe@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "globe@2x.png"; sourceTree = "<group>"; };
-		D70023AE19F9D27100E45408 /* camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera.png; sourceTree = "<group>"; };
-		D70023AF19F9D27100E45408 /* camera@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera@2x.png"; sourceTree = "<group>"; };
-		D70023B219FBC5A600E45408 /* UIView+WidthXY.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+WidthXY.h"; sourceTree = "<group>"; };
-		D70023B319FBC5A600E45408 /* UIView+WidthXY.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WidthXY.m"; sourceTree = "<group>"; };
+		D700239219F5253C00E45408 /* AlertBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AlertBox.h; path = "Save a Selfie 2/AlertBox.h"; sourceTree = "<group>"; };
+		D700239319F5253C00E45408 /* AlertBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AlertBox.m; path = "Save a Selfie 2/AlertBox.m"; sourceTree = "<group>"; };
+		D700239419F5253C00E45408 /* AlertBox.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AlertBox.xib; path = "Save a Selfie 2/AlertBox.xib"; sourceTree = "<group>"; };
+		D700239719F52E8800E45408 /* UIButton+Maker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIButton+Maker.h"; path = "Save a Selfie 2/UIButton+Maker.h"; sourceTree = "<group>"; };
+		D700239819F52E8800E45408 /* UIButton+Maker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIButton+Maker.m"; path = "Save a Selfie 2/UIButton+Maker.m"; sourceTree = "<group>"; };
+		D700239A19F52E9E00E45408 /* UIView+FrameValues.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+FrameValues.h"; path = "Save a Selfie 2/UIView+FrameValues.h"; sourceTree = "<group>"; };
+		D700239B19F52E9E00E45408 /* UIView+FrameValues.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+FrameValues.m"; path = "Save a Selfie 2/UIView+FrameValues.m"; sourceTree = "<group>"; };
+		D70023B219FBC5A600E45408 /* UIView+WidthXY.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+WidthXY.h"; path = "Save a Selfie 2/UIView+WidthXY.h"; sourceTree = "<group>"; };
+		D70023B319FBC5A600E45408 /* UIView+WidthXY.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+WidthXY.m"; path = "Save a Selfie 2/UIView+WidthXY.m"; sourceTree = "<group>"; };
 		D72E1DAD19EE841E005DD8A5 /* Save a Selfie 2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Save a Selfie 2.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D72E1DB119EE841E005DD8A5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D72E1DB219EE841E005DD8A5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -84,39 +57,31 @@
 		D72E1DBE19EE841E005DD8A5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D72E1DC019EE841F005DD8A5 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		D72E1DC319EE841F005DD8A5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		D72E1DC919EE841F005DD8A5 /* Save a Selfie 2Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Save a Selfie 2Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		D72E1DCE19EE841F005DD8A5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D72E1DCF19EE841F005DD8A5 /* Save_a_Selfie_2Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Save_a_Selfie_2Tests.m; sourceTree = "<group>"; };
 		D72E1DD919EE8652005DD8A5 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		D72E1E4219EF3529005DD8A5 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		D72E1E4419F019DF005DD8A5 /* ThirdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThirdViewController.h; sourceTree = "<group>"; };
-		D72E1E4519F019DF005DD8A5 /* TemplateIcon2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TemplateIcon2x.png; sourceTree = "<group>"; };
 		D72E1E4719F01A2D005DD8A5 /* ThirdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThirdViewController.m; sourceTree = "<group>"; };
 		D72E1E4919F06AE7005DD8A5 /* UploadPictureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadPictureViewController.h; sourceTree = "<group>"; };
 		D72E1E4A19F06AE7005DD8A5 /* UploadPictureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadPictureViewController.m; sourceTree = "<group>"; };
 		D72E1E4C19F06CEB005DD8A5 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
-		D756A28A19F1735E0089EF80 /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Resize.h"; sourceTree = "<group>"; };
-		D756A28B19F1735E0089EF80 /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Resize.m"; sourceTree = "<group>"; };
+		D756A28A19F1735E0089EF80 /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+Resize.h"; path = "Save a Selfie 2/UIImage+Resize.h"; sourceTree = "<group>"; };
+		D756A28B19F1735E0089EF80 /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Resize.m"; path = "Save a Selfie 2/UIImage+Resize.m"; sourceTree = "<group>"; };
 		D756A28D19F173F00089EF80 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
 		D756A28F19F174330089EF80 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		D756A29019F174330089EF80 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		D756A29119F174330089EF80 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		D756A29519F175230089EF80 /* ExtendNSLogFunctionality.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExtendNSLogFunctionality.h; sourceTree = "<group>"; };
-		D756A29619F175230089EF80 /* ExtendNSLogFunctionality.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExtendNSLogFunctionality.m; sourceTree = "<group>"; };
-		D756A29719F175230089EF80 /* UIImage+Alpha.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Alpha.h"; sourceTree = "<group>"; };
-		D756A29819F175230089EF80 /* UIImage+Alpha.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Alpha.m"; sourceTree = "<group>"; };
-		D756A29919F175230089EF80 /* UIImage+RoundedCorner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+RoundedCorner.h"; sourceTree = "<group>"; };
-		D756A29A19F175230089EF80 /* UIImage+RoundedCorner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+RoundedCorner.m"; sourceTree = "<group>"; };
+		D756A29519F175230089EF80 /* ExtendNSLogFunctionality.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ExtendNSLogFunctionality.h; path = "Save a Selfie 2/ExtendNSLogFunctionality.h"; sourceTree = "<group>"; };
+		D756A29619F175230089EF80 /* ExtendNSLogFunctionality.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ExtendNSLogFunctionality.m; path = "Save a Selfie 2/ExtendNSLogFunctionality.m"; sourceTree = "<group>"; };
+		D756A29719F175230089EF80 /* UIImage+Alpha.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+Alpha.h"; path = "Save a Selfie 2/UIImage+Alpha.h"; sourceTree = "<group>"; };
+		D756A29819F175230089EF80 /* UIImage+Alpha.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Alpha.m"; path = "Save a Selfie 2/UIImage+Alpha.m"; sourceTree = "<group>"; };
+		D756A29919F175230089EF80 /* UIImage+RoundedCorner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+RoundedCorner.h"; path = "Save a Selfie 2/UIImage+RoundedCorner.h"; sourceTree = "<group>"; };
+		D756A29A19F175230089EF80 /* UIImage+RoundedCorner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+RoundedCorner.m"; path = "Save a Selfie 2/UIImage+RoundedCorner.m"; sourceTree = "<group>"; };
 		D756A29E19F1D4F10089EF80 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		D756A2A019F1D5D50089EF80 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		D756A2A419F2F83D0089EF80 /* IntroViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntroViewController.h; sourceTree = "<group>"; };
 		D756A2A519F2F83D0089EF80 /* IntroViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntroViewController.m; sourceTree = "<group>"; };
 		D756A2A719F309690089EF80 /* TabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabBarController.h; sourceTree = "<group>"; };
 		D756A2A819F309690089EF80 /* TabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabBarController.m; sourceTree = "<group>"; };
-		D756A2AA19F444410089EF80 /* SAS vertical 75.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SAS vertical 75.png"; sourceTree = "<group>"; };
-		D756A2AC19F444660089EF80 /* SAS vertical 320.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SAS vertical 320.png"; sourceTree = "<group>"; };
-		D756A2AE19F444A10089EF80 /* SAS vertical 280.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SAS vertical 280.png"; sourceTree = "<group>"; };
-		D756A2B219F455950089EF80 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,17 +101,48 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D72E1DC619EE841F005DD8A5 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		D72E1DA419EE841E005DD8A5 = {
+		D70023C119FC440C00E45408 /* helpers */ = {
+			isa = PBXGroup;
+			children = (
+				D700239219F5253C00E45408 /* AlertBox.h */,
+				D700239319F5253C00E45408 /* AlertBox.m */,
+				D700239419F5253C00E45408 /* AlertBox.xib */,
+				D756A29519F175230089EF80 /* ExtendNSLogFunctionality.h */,
+				D756A29619F175230089EF80 /* ExtendNSLogFunctionality.m */,
+				D700239719F52E8800E45408 /* UIButton+Maker.h */,
+				D700239819F52E8800E45408 /* UIButton+Maker.m */,
+				D756A29719F175230089EF80 /* UIImage+Alpha.h */,
+				D756A29819F175230089EF80 /* UIImage+Alpha.m */,
+				D756A28A19F1735E0089EF80 /* UIImage+Resize.h */,
+				D756A28B19F1735E0089EF80 /* UIImage+Resize.m */,
+				D756A29919F175230089EF80 /* UIImage+RoundedCorner.h */,
+				D756A29A19F175230089EF80 /* UIImage+RoundedCorner.m */,
+				D700239A19F52E9E00E45408 /* UIView+FrameValues.h */,
+				D700239B19F52E9E00E45408 /* UIView+FrameValues.m */,
+				D70023B219FBC5A600E45408 /* UIView+WidthXY.h */,
+				D70023B319FBC5A600E45408 /* UIView+WidthXY.m */,
+			);
+			name = helpers;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		D70023C319FC448700E45408 /* not used */ = {
+			isa = PBXGroup;
+			children = (
+				D756A2A419F2F83D0089EF80 /* IntroViewController.h */,
+				D756A2A519F2F83D0089EF80 /* IntroViewController.m */,
+				D72E1E4419F019DF005DD8A5 /* ThirdViewController.h */,
+				D72E1E4719F01A2D005DD8A5 /* ThirdViewController.m */,
+				D72E1DBA19EE841E005DD8A5 /* SnapViewController.h */,
+				D72E1DBB19EE841E005DD8A5 /* SnapViewController.m */,
+			);
+			name = "not used";
+			sourceTree = "<group>";
+		};
+		D70023C419FC45FB00E45408 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				D756A2A019F1D5D50089EF80 /* ImageIO.framework */,
@@ -158,8 +154,14 @@
 				D72E1E4C19F06CEB005DD8A5 /* CoreLocation.framework */,
 				D72E1E4219EF3529005DD8A5 /* MapKit.framework */,
 				D72E1DD919EE8652005DD8A5 /* AVFoundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D72E1DA419EE841E005DD8A5 = {
+			isa = PBXGroup;
+			children = (
 				D72E1DAF19EE841E005DD8A5 /* Save a Selfie 2 */,
-				D72E1DCC19EE841F005DD8A5 /* Save a Selfie 2Tests */,
 				D72E1DAE19EE841E005DD8A5 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -168,7 +170,6 @@
 			isa = PBXGroup;
 			children = (
 				D72E1DAD19EE841E005DD8A5 /* Save a Selfie 2.app */,
-				D72E1DC919EE841F005DD8A5 /* Save a Selfie 2Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -176,47 +177,17 @@
 		D72E1DAF19EE841E005DD8A5 /* Save a Selfie 2 */ = {
 			isa = PBXGroup;
 			children = (
-				D70023AE19F9D27100E45408 /* camera.png */,
-				D70023AF19F9D27100E45408 /* camera@2x.png */,
-				D70023AA19F9CB4000E45408 /* globe.png */,
-				D70023AB19F9CB4000E45408 /* globe@2x.png */,
-				D700239E19F84E3A00E45408 /* Default-568h@2x.png */,
-				D700239219F5253C00E45408 /* AlertBox.h */,
-				D700239319F5253C00E45408 /* AlertBox.m */,
-				D700239419F5253C00E45408 /* AlertBox.xib */,
 				D72E1DB419EE841E005DD8A5 /* AppDelegate.h */,
 				D72E1DB519EE841E005DD8A5 /* AppDelegate.m */,
-				D756A2B219F455950089EF80 /* Default@2x.png */,
-				D756A29519F175230089EF80 /* ExtendNSLogFunctionality.h */,
-				D756A29619F175230089EF80 /* ExtendNSLogFunctionality.m */,
+				D70023C419FC45FB00E45408 /* Frameworks */,
+				D70023C119FC440C00E45408 /* helpers */,
 				D72E1DC019EE841F005DD8A5 /* Images.xcassets */,
-				D756A2A419F2F83D0089EF80 /* IntroViewController.h */,
-				D756A2A519F2F83D0089EF80 /* IntroViewController.m */,
 				D72E1DC219EE841F005DD8A5 /* LaunchScreen.xib */,
 				D72E1DBD19EE841E005DD8A5 /* Main.storyboard */,
-				D756A2AA19F444410089EF80 /* SAS vertical 75.png */,
-				D756A2AE19F444A10089EF80 /* SAS vertical 280.png */,
-				D756A2AC19F444660089EF80 /* SAS vertical 320.png */,
-				D72E1DBA19EE841E005DD8A5 /* SnapViewController.h */,
-				D72E1DBB19EE841E005DD8A5 /* SnapViewController.m */,
+				D70023C319FC448700E45408 /* not used */,
 				D72E1DB019EE841E005DD8A5 /* Supporting Files */,
 				D756A2A719F309690089EF80 /* TabBarController.h */,
 				D756A2A819F309690089EF80 /* TabBarController.m */,
-				D72E1E4519F019DF005DD8A5 /* TemplateIcon2x.png */,
-				D72E1E4419F019DF005DD8A5 /* ThirdViewController.h */,
-				D72E1E4719F01A2D005DD8A5 /* ThirdViewController.m */,
-				D700239719F52E8800E45408 /* UIButton+Maker.h */,
-				D700239819F52E8800E45408 /* UIButton+Maker.m */,
-				D756A29719F175230089EF80 /* UIImage+Alpha.h */,
-				D756A29819F175230089EF80 /* UIImage+Alpha.m */,
-				D700239A19F52E9E00E45408 /* UIView+FrameValues.h */,
-				D70023B219FBC5A600E45408 /* UIView+WidthXY.h */,
-				D70023B319FBC5A600E45408 /* UIView+WidthXY.m */,
-				D700239B19F52E9E00E45408 /* UIView+FrameValues.m */,
-				D756A28A19F1735E0089EF80 /* UIImage+Resize.h */,
-				D756A28B19F1735E0089EF80 /* UIImage+Resize.m */,
-				D756A29919F175230089EF80 /* UIImage+RoundedCorner.h */,
-				D756A29A19F175230089EF80 /* UIImage+RoundedCorner.m */,
 				D72E1E4919F06AE7005DD8A5 /* UploadPictureViewController.h */,
 				D72E1E4A19F06AE7005DD8A5 /* UploadPictureViewController.m */,
 				D72E1DB719EE841E005DD8A5 /* WebsiteViewController.h */,
@@ -230,23 +201,6 @@
 			children = (
 				D72E1DB119EE841E005DD8A5 /* Info.plist */,
 				D72E1DB219EE841E005DD8A5 /* main.m */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		D72E1DCC19EE841F005DD8A5 /* Save a Selfie 2Tests */ = {
-			isa = PBXGroup;
-			children = (
-				D72E1DCF19EE841F005DD8A5 /* Save_a_Selfie_2Tests.m */,
-				D72E1DCD19EE841F005DD8A5 /* Supporting Files */,
-			);
-			path = "Save a Selfie 2Tests";
-			sourceTree = "<group>";
-		};
-		D72E1DCD19EE841F005DD8A5 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				D72E1DCE19EE841F005DD8A5 /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -271,24 +225,6 @@
 			productReference = D72E1DAD19EE841E005DD8A5 /* Save a Selfie 2.app */;
 			productType = "com.apple.product-type.application";
 		};
-		D72E1DC819EE841F005DD8A5 /* Save a Selfie 2Tests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = D72E1DD619EE841F005DD8A5 /* Build configuration list for PBXNativeTarget "Save a Selfie 2Tests" */;
-			buildPhases = (
-				D72E1DC519EE841F005DD8A5 /* Sources */,
-				D72E1DC619EE841F005DD8A5 /* Frameworks */,
-				D72E1DC719EE841F005DD8A5 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				D72E1DCB19EE841F005DD8A5 /* PBXTargetDependency */,
-			);
-			name = "Save a Selfie 2Tests";
-			productName = "Save a Selfie 2Tests";
-			productReference = D72E1DC919EE841F005DD8A5 /* Save a Selfie 2Tests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -300,10 +236,6 @@
 				TargetAttributes = {
 					D72E1DAC19EE841E005DD8A5 = {
 						CreatedOnToolsVersion = 6.0.1;
-					};
-					D72E1DC819EE841F005DD8A5 = {
-						CreatedOnToolsVersion = 6.0.1;
-						TestTargetID = D72E1DAC19EE841E005DD8A5;
 					};
 				};
 			};
@@ -321,7 +253,6 @@
 			projectRoot = "";
 			targets = (
 				D72E1DAC19EE841E005DD8A5 /* Save a Selfie 2 */,
-				D72E1DC819EE841F005DD8A5 /* Save a Selfie 2Tests */,
 			);
 		};
 /* End PBXProject section */
@@ -331,27 +262,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D756A2AD19F444660089EF80 /* SAS vertical 320.png in Resources */,
-				D756A2AB19F444410089EF80 /* SAS vertical 75.png in Resources */,
-				D756A2AF19F444A10089EF80 /* SAS vertical 280.png in Resources */,
-				D700239F19F84E3A00E45408 /* Default-568h@2x.png in Resources */,
-				D70023B119F9D27100E45408 /* camera@2x.png in Resources */,
-				D70023AC19F9CB4000E45408 /* globe.png in Resources */,
-				D756A2B319F455950089EF80 /* Default@2x.png in Resources */,
 				D700239619F5253C00E45408 /* AlertBox.xib in Resources */,
-				D70023B019F9D27100E45408 /* camera.png in Resources */,
-				D72E1E4619F019DF005DD8A5 /* TemplateIcon2x.png in Resources */,
-				D70023AD19F9CB4000E45408 /* globe@2x.png in Resources */,
 				D72E1DBF19EE841E005DD8A5 /* Main.storyboard in Resources */,
 				D72E1DC419EE841F005DD8A5 /* LaunchScreen.xib in Resources */,
 				D72E1DC119EE841F005DD8A5 /* Images.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D72E1DC719EE841F005DD8A5 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -364,7 +278,6 @@
 			files = (
 				D700239919F52E8800E45408 /* UIButton+Maker.m in Sources */,
 				D756A29C19F175230089EF80 /* UIImage+Alpha.m in Sources */,
-				D72E1E4819F01A2D005DD8A5 /* ThirdViewController.m in Sources */,
 				D72E1DB619EE841E005DD8A5 /* AppDelegate.m in Sources */,
 				D72E1DB919EE841E005DD8A5 /* WebsiteViewController.m in Sources */,
 				D756A2A919F309690089EF80 /* TabBarController.m in Sources */,
@@ -379,23 +292,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D72E1DC519EE841F005DD8A5 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D72E1DD019EE841F005DD8A5 /* Save_a_Selfie_2Tests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		D72E1DCB19EE841F005DD8A5 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = D72E1DAC19EE841E005DD8A5 /* Save a Selfie 2 */;
-			targetProxy = D72E1DCA19EE841F005DD8A5 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		D72E1DBD19EE841E005DD8A5 /* Main.storyboard */ = {
@@ -521,40 +418,6 @@
 			};
 			name = Release;
 		};
-		D72E1DD719EE841F005DD8A5 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "Save a Selfie 2Tests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Save a Selfie 2.app/Save a Selfie 2";
-			};
-			name = Debug;
-		};
-		D72E1DD819EE841F005DD8A5 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "Save a Selfie 2Tests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Save a Selfie 2.app/Save a Selfie 2";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -572,15 +435,6 @@
 			buildConfigurations = (
 				D72E1DD419EE841F005DD8A5 /* Debug */,
 				D72E1DD519EE841F005DD8A5 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		D72E1DD619EE841F005DD8A5 /* Build configuration list for PBXNativeTarget "Save a Selfie 2Tests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				D72E1DD719EE841F005DD8A5 /* Debug */,
-				D72E1DD819EE841F005DD8A5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

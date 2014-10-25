@@ -61,12 +61,15 @@ BOOL firstAppearance = YES;
 
 // To do
 //
-// Icons for tab bar
 // If no GPS on image, use user location
 // Save list of uploaded photos – and ask if uploading with same name; save etc. with this info
 // Save while quitting
-// Add map to view
 // 'Close' button on images in website
+// replace UIAlertView with AlertBox everywhere
+// need to sort out compiler warnings
+// littleGuy image a bit pixellated?
+
+#pragma mark Set-up
 
 - (void)viewDidLoad
 {
@@ -80,7 +83,6 @@ BOOL firstAppearance = YES;
     screenWidth = screenRect.size.width;
     [self checkPermissions];
     _whiteBackground.hidden = NO;
-//    UIView *temp; temp.frame = _mapView.frame;
     [_mapView changeViewWidth:screenWidth atX:0 centreIt:YES duration:0.5];
     _picker = [[UIImagePickerController alloc] init];
     _picker.delegate = self;
@@ -102,20 +104,17 @@ BOOL firstAppearance = YES;
     [self OKAction:self];
 }
 
--(void)makeSendButtonRed {
+-(void)makeSendButtonRed { // turns it grey for some reason
     _sendButton.enabled = NO; // initially disabled – until user types some sort of description in commentField
     _sendButton.tintColor = [UIColor colorWithRed:1 green:0 blue:0 alpha:0.5];
     [_sendButton setTitle:@"Send" forState:UIControlStateNormal];
 }
 
 -(void) viewDidAppear:(BOOL)animated {
-    plog(@"* viewDidAppear...%d", gettingImage);
     [super viewDidAppear:animated];
-//    firstAppearance = YES;
-//    if (!showingActionSheet && _SASLogoButton.hidden == YES && !gettingImage && !uploading) [self handleSelectClick:self];
 }
 
--(void)OKAction:(id)sender {
+-(void)OKAction:(id)sender { // used be linked from an 'Enter...' button, which is now gone; performs set-ups on labels, etc.
     plog(@"OKAction");
     _OKButton.hidden = YES;
     _whiteBackground.hidden = YES;
@@ -124,9 +123,6 @@ BOOL firstAppearance = YES;
     [_commentField changeViewWidth:screenWidth - 40 atX:9999 centreIt:YES duration:0];
     CGRect f = _commentField.frame;
     _typeInfoHere.frame = CGRectMake(f.origin.x + 15, f.origin.y + 15, _typeInfoHere.frame.size.width, _typeInfoHere.frame.size.height);
-//    [self changeViewWidth:_mapView to:screenWidth atX:0];
-//    plog(@"after 2: %@", _mapView);
-//    [self changeViewWidth:_imageView to:0 atX:screenWidth];
     [_littleGuy moveObject:-100 overTimePeriod:0];
     _littleGuy.hidden = NO;
     [_littleGuy moveObject:330 overTimePeriod:0.5];
@@ -144,7 +140,6 @@ BOOL firstAppearance = YES;
     _typeInfoHere.hidden = YES;
     _commentField.hidden = YES;
     firstAppearance = NO;
-//    if (!gettingImage) [self handleSelectClick:self];
     self.tabBarController.tabBar.hidden = NO;
 }
 
@@ -154,15 +149,8 @@ BOOL firstAppearance = YES;
     // Dispose of any resources that can be recreated.
 }
 
-- (void)tabBarController:(UITabBarController *)tabBarController
- didSelectViewController:(UIViewController *)viewController
-{
-    if (tabBarController.selectedIndex != 0) { firstAppearance = YES; return; }
-    if (!firstAppearance) {
-        [self handleSelectClick:self];
-    } else firstAppearance = NO;
-}
 #pragma mark - Permissions
+// not all permissions sorted out yet
 
 -(BOOL)checkPermissions {
     BOOL allGrand = NO;
@@ -212,7 +200,15 @@ BOOL firstAppearance = YES;
 
 #pragma mark - Navigation
 
-- (IBAction)handleSelectClick:(id)sender {
+- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController
+{
+    if (tabBarController.selectedIndex != 0) { firstAppearance = YES; return; }
+    if (!firstAppearance) {
+        [self showActionSheet:self];
+    } else firstAppearance = NO;
+}
+
+- (IBAction)showActionSheet:(id)sender {
     actionSheet = [[UIActionSheet alloc] initWithTitle:@"Select image source" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Take photo", @"Choose from existing", nil];
     actionSheet.tag = 1;
     showingActionSheet = YES;
@@ -310,15 +306,9 @@ BOOL firstAppearance = YES;
         photoID = [a[1] stringByReplacingOccurrencesOfString:@"id=" withString:@""];
         photoID = [photoID stringByReplacingOccurrencesOfString:@"&ext=JPG" withString:@""];
         plog(@"photo ID is %@", photoID);
-        
-        // create the asset library in the init method of your custom object or view controller
-        //_library = [[ALAssetsLibrary alloc] init];
-        //
-        ALAssetsLibrary *library;
-        library = [[ALAssetsLibrary alloc] init];
+        ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
         [library assetForURL:assetURL resultBlock:^(ALAsset *asset) {
             // try to retrieve gps metadata coordinates
-            plog(@"asset info: %@", asset);
             photoLocation = [self locationFromAsset:asset];
             plog(@"location found: %f, %f", photoLocation.coordinate.latitude, -photoLocation.coordinate.longitude);
             // move map to location
@@ -354,7 +344,6 @@ BOOL firstAppearance = YES;
         [alert fillAlertBox:@"Problem" button1Text:@"Selected image could not be found" button2Text:nil action1:@selector(removeAlert) action2:nil calledFrom:self opacity:0.85 centreText:YES];
         [alert addBoxToView:self.view withOrientation:0];
     }
-//    plog(@"photo info %@", info);
     [_picker dismissViewControllerAnimated:YES completion:nil];
     
     // check if have already uploaded this photo
@@ -409,74 +398,9 @@ BOOL firstAppearance = YES;
     [UIView animateWithDuration:5.0 animations:^{ _imageView.alpha = 0.5; }];
 }
 
-//    [[NSUserDefaults standardUserDefaults] setInteger:(startCount + 1) forKey:@"startCount"];
-//    [[NSUserDefaults standardUserDefaults] synchronize];
-//    plog(@"start count is now %d", [[NSUserDefaults standardUserDefaults] integerForKey:@"startCount"]);
-
-- (void) startLocating {
-    
-    if(nil == _locationManager)
-    {
-        _locationManager = [[CLLocationManager alloc] init];
-    }
-    SEL requestSelector = NSSelectorFromString(@"requestWhenInUseAuthorization");
-    if ([_locationManager respondsToSelector:requestSelector]) { // requestWhenInUseAuthorization only works from iOS 8
-        [_locationManager performSelector:requestSelector withObject:NULL];
-    }
-    [_locationManager setDelegate:self];
-    
-    if([CLLocationManager locationServicesEnabled]) {
-        [_locationManager startUpdatingLocation];
-    }
-    else {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Location Services disabled" message:@"For now, we need your location to place your selfie on the map. Would you like to turn on Location Services?" delegate:self cancelButtonTitle:@"No thanks" otherButtonTitles:@"Yes",nil];
-        [alert show];
-    }
-    plog(@"have started locating?");
-}
-
 - (IBAction)sendIt:(id)sender {
     [self sendImageToServer:_imageView.image];
     [self shutKeyboard:_commentField];
-}
-
-- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
-    // the user clicked OK
-    if (buttonIndex == 1) {
-        
-        [_locationManager startUpdatingLocation];
-    }
-}
-
-- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
-    CLLocation *newLocation = [locations lastObject];
-    _currentLocation = newLocation.coordinate;
-    if (firstLocated) { [self setLocation:newLocation reverseLongitude:NO]; firstLocated = NO; }
-//        NSLog(@"%f",adjustedRegion.span.latitudeDelta);
-    [self zoom];
-}
-
--(void)zoom {
-    // MKCoordinateSpan
-    //
-    // A structure that defines the area spanned by a map region.
-    //
-    // typedef struct {
-    // 	CLLocationDegrees latitudeDelta;
-    // 	CLLocationDegrees longitudeDelta;
-    // } MKCoordinateSpan;
-//    plog(@"zooming");
-    float z2 = 0.003 * mapZoomValue;
-    MKCoordinateSpan span = MKCoordinateSpanMake(z2, z2);
-    [_mapView setRegion:MKCoordinateRegionMake(_currentLocation, span) animated:YES];
-}
-
--(void) setLocation:(CLLocation *)loc reverseLongitude:(BOOL)reverse {
-    CLLocationCoordinate2D startCoord = CLLocationCoordinate2DMake(loc.coordinate.latitude, reverse ? -loc.coordinate.longitude : loc.coordinate.longitude);
-    MKCoordinateRegion adjustedRegion = [self.mapView regionThatFits:MKCoordinateRegionMakeWithDistance(startCoord, 800, 800)];
-    adjustedRegion.span.longitudeDelta  = 0.005;
-    adjustedRegion.span.latitudeDelta  = 0.005;
-    [self.mapView setRegion:adjustedRegion animated:YES];
 }
 
 - (void) sendImageToServer:(UIImage *) image {
@@ -532,7 +456,6 @@ BOOL firstAppearance = YES;
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
     // The request has failed for some reason!
-    // Check the error var
     plog(error.description);
 }
 
@@ -551,6 +474,67 @@ BOOL firstAppearance = YES;
     [[NSUserDefaults standardUserDefaults] setValue:caption forKey:photoID];
     [[NSUserDefaults standardUserDefaults] synchronize];
 //    NSString *existingCaption = [[NSUserDefaults standardUserDefaults] valueForKey:photoID];
+}
+
+#pragma mark Location services
+
+- (void) startLocating {
+    
+    if(nil == _locationManager)
+    {
+        _locationManager = [[CLLocationManager alloc] init];
+    }
+    SEL requestSelector = NSSelectorFromString(@"requestWhenInUseAuthorization");
+    if ([_locationManager respondsToSelector:requestSelector]) { // requestWhenInUseAuthorization only works from iOS 8
+        [_locationManager performSelector:requestSelector withObject:NULL];
+    }
+    [_locationManager setDelegate:self];
+    
+    if([CLLocationManager locationServicesEnabled]) {
+        [_locationManager startUpdatingLocation];
+    }
+    else {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Location Services disabled" message:@"For now, we need your location to place your selfie on the map. Would you like to turn on Location Services?" delegate:self cancelButtonTitle:@"No thanks" otherButtonTitles:@"Yes",nil];
+        [alert show];
+    }
+    plog(@"have started locating?");
+}
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    // the user clicked OK
+    if (buttonIndex == 1) {
+        [_locationManager startUpdatingLocation];
+    }
+}
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
+    CLLocation *newLocation = [locations lastObject];
+    _currentLocation = newLocation.coordinate;
+    if (firstLocated) { [self setLocation:newLocation reverseLongitude:NO]; firstLocated = NO; }
+    //        plog(@"%f",adjustedRegion.span.latitudeDelta);
+    [self zoom];
+}
+
+-(void)zoom {
+    // MKCoordinateSpan
+    //
+    // A structure that defines the area spanned by a map region.
+    //
+    // typedef struct {
+    // 	CLLocationDegrees latitudeDelta;
+    // 	CLLocationDegrees longitudeDelta;
+    // } MKCoordinateSpan;
+    float z2 = 0.003 * mapZoomValue;
+    MKCoordinateSpan span = MKCoordinateSpanMake(z2, z2);
+    [_mapView setRegion:MKCoordinateRegionMake(_currentLocation, span) animated:YES];
+}
+
+-(void) setLocation:(CLLocation *)loc reverseLongitude:(BOOL)reverse {
+    CLLocationCoordinate2D startCoord = CLLocationCoordinate2DMake(loc.coordinate.latitude, reverse ? -loc.coordinate.longitude : loc.coordinate.longitude);
+    MKCoordinateRegion adjustedRegion = [self.mapView regionThatFits:MKCoordinateRegionMakeWithDistance(startCoord, 800, 800)];
+    adjustedRegion.span.longitudeDelta  = 0.005;
+    adjustedRegion.span.latitudeDelta  = 0.005;
+    [self.mapView setRegion:adjustedRegion animated:YES];
 }
 
 #pragma mark - Text View delegates

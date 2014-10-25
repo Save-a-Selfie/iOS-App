@@ -2,7 +2,10 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "second.pdf"
+      "filename" : "Default-568h@2x.png",
+      "unassigned" : true,
+      "subtype" : "retina4",
+      "scale" : "2x"
     }
   ],
   "info" : {
