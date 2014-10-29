@@ -2,8 +2,8 @@
 //  TabBarController.h
 //  Save a Selfie 2
 //
-//  Created by Peter FitzGerald on 18/10/2014.
-//  Copyright (c) 2014 Code for Ireland. All rights reserved.
+//  Created by Nadja Deininger and Peter FitzGerald
+//  GNU General Public License
 //
 
 #import <UIKit/UIKit.h>

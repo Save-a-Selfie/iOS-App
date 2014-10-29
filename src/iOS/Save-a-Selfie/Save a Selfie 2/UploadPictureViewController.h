@@ -2,8 +2,8 @@
 //  UploadPictureViewController.h
 //  Save-a-Selfie
 //
-//  Created by Nadja Deininger on 12/05/14.
-//  Copyright (c) 2014 Code for All Ireland. All rights reserved.
+//  Created by Nadja Deininger and Peter FitzGerald
+//  GNU General Public License
 //
 
 #import <UIKit/UIKit.h>

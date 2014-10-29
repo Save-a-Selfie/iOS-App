@@ -2,8 +2,8 @@
 //  UploadPictureViewController.m
 //  Save-a-Selfie
 //
-//  Created by Nadja Deininger on 12/05/14.
-//  Copyright (c) 2014 Code for All Ireland. All rights reserved.
+//  Created by Nadja Deininger and Peter FitzGerald
+//  GNU General Public License
 //
 
 #import "UploadPictureViewController.h"
@@ -58,6 +58,7 @@ BOOL firstLocated = YES;
 float mapZoomValue = 5.0;
 CGFloat screenHeight, screenWidth;
 BOOL firstAppearance = YES;
+extern NSString *const applicationWillEnterForeground;
 
 // To do
 //
@@ -102,6 +103,15 @@ BOOL firstAppearance = YES;
     }
     [self startLocating]; // may not need to locate user if user is just picking from Camera Roll...
     [self OKAction:self];
+    [[NSNotificationCenter defaultCenter]
+     addObserver:self selector:@selector(clearPermissionsBox)
+     name:applicationWillEnterForeground
+     object:nil];
+}
+
+-(void) clearPermissionsBox { // called when returning from outside app
+    if (permissionsBox) [permissionsBox removeFromSuperview]; permissionsBox = nil;
+    //	[locationManager startUpdatingLocation];
 }
 
 -(void)makeSendButtonRed { // turns it grey for some reason
@@ -147,55 +157,6 @@ BOOL firstAppearance = YES;
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-#pragma mark - Permissions
-// not all permissions sorted out yet
-
--(BOOL)checkPermissions {
-    BOOL allGrand = NO;
-   	plog(@"checking permissions");
-    // checks location permissions
-    if([CLLocationManager locationServicesEnabled]){
-        //			plog(@"Location Services Enabled");
-        
-        // Switch through the possible location
-        // authorization states
-        switch([CLLocationManager authorizationStatus]){
-            case kCLAuthorizationStatusAuthorized:
-                plog(@"We have access to location services");
-                allGrand = YES;
-                break;
-            case kCLAuthorizationStatusDenied:
-                [self permissionsProblem:@"Please enable location services for this app. You need to launch the iPhone Settings app to do this (in it, go to Privacy > Location Services, scroll down until you see Smappr and switch it to 'On'). You'll have to go out of this app temporarily now, using the 'Home' button below this screen."];
-                allGrand = NO;
-                //					plog(@"Location services denied by user");
-                break;
-            case kCLAuthorizationStatusRestricted:
-                plog(@"Parental controls restrict location services");
-                break;
-            case kCLAuthorizationStatusNotDetermined:
-                plog(@"Unable to determine, possibly not available");
-                allGrand = YES;
-        }
-    }
-    else {
-        // locationServicesEnabled was set to NO
-        plog(@"Location Services Are Disabled");
-        [self permissionsProblem:@"Please enable location services on your phone. You need to launch the iPhone Settings app to do this (in it, go to Privacy > Location Services and switch it to 'On'). You'll have to go out of this app temporarily now, using the 'Home' button below this screen."];
-        allGrand = NO;
-    }
-    return allGrand;
-}
-
--(void)permissionsProblem:(NSString *)message {
-    [[NSBundle mainBundle] loadNibNamed:@"AlertBox" owner:self options:nil];
-    int boxHeight = 240;
-    if (!permissionsBox) permissionsBox = [[AlertBox alloc] initWithFrame:CGRectMake(70, (screenHeight - boxHeight) * 0.5, 220, boxHeight)];
-    [permissionsBox fillAlertBox:message button1Text:nil button2Text:nil action1:nil action2:nil calledFrom:self opacity:0.85 centreText:NO];
-    permissionsBox.center = self.view.center;
-    //	[self addSubview:permissionsBox];
-    [permissionsBox addBoxToView:self.view withOrientation:0];
 }
 
 #pragma mark - Navigation
@@ -478,40 +439,71 @@ BOOL firstAppearance = YES;
 
 #pragma mark Location services
 
-- (void) startLocating {
-    
-    if(nil == _locationManager)
-    {
-        _locationManager = [[CLLocationManager alloc] init];
-    }
-    SEL requestSelector = NSSelectorFromString(@"requestWhenInUseAuthorization");
-    if ([_locationManager respondsToSelector:requestSelector]) { // requestWhenInUseAuthorization only works from iOS 8
-        [_locationManager performSelector:requestSelector withObject:NULL];
-    }
-    [_locationManager setDelegate:self];
-    
-    if([CLLocationManager locationServicesEnabled]) {
-        [_locationManager startUpdatingLocation];
-    }
-    else {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Location Services disabled" message:@"For now, we need your location to place your selfie on the map. Would you like to turn on Location Services?" delegate:self cancelButtonTitle:@"No thanks" otherButtonTitles:@"Yes",nil];
-        [alert show];
-    }
-    plog(@"have started locating?");
+-(void)permissionsProblem:(NSString *)message {
+    [[NSBundle mainBundle] loadNibNamed:@"AlertBox" owner:self options:nil];
+    int boxHeight = 240;
+    if (!permissionsBox) permissionsBox = [[AlertBox alloc] initWithFrame:CGRectMake(70, (screenHeight - boxHeight) * 0.5, 220, boxHeight)];
+    [permissionsBox fillAlertBox:message button1Text:nil button2Text:nil action1:nil action2:nil calledFrom:self opacity:0.85 centreText:NO];
+    permissionsBox.center = self.view.center;
+    //	[self addSubview:permissionsBox];
+    [permissionsBox addBoxToView:self.view withOrientation:0];
 }
 
-- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
-    // the user clicked OK
-    if (buttonIndex == 1) {
-        [_locationManager startUpdatingLocation];
+- (void) startLocating {
+    if(nil == _locationManager) { _locationManager = [[CLLocationManager alloc] init]; }
+    [_locationManager setDelegate:self];
+    if([CLLocationManager locationServicesEnabled]) {
+        plog(@"location services enabled");
+        if ([self checkPermissions]) [_locationManager startUpdatingLocation];
+    } else {
+        SEL requestSelector = NSSelectorFromString(@"requestWhenInUseAuthorization");
+        if ([_locationManager respondsToSelector:requestSelector]) { // requestWhenInUseAuthorization only works from iOS 8
+            [_locationManager performSelector:requestSelector withObject:NULL];
+            [self checkPermissions];
+        }
     }
+}
+
+-(void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
+    [self checkPermissions];
+}
+
+-(BOOL)checkPermissions {
+    BOOL allGrand = NO;
+    plog(@"checking permissions");
+    if (permissionsBox) [permissionsBox removeFromSuperview]; // get rid of any existing permissions box blocking access to camera etc.
+    if([CLLocationManager locationServicesEnabled]){
+			plog(@"Location Services Enabled");
+        switch([CLLocationManager authorizationStatus]){
+            case kCLAuthorizationStatusAuthorizedAlways:
+            case kCLAuthorizationStatusAuthorizedWhenInUse:
+                plog(@"We have access to location services");
+                allGrand = YES;
+                break;
+            case kCLAuthorizationStatusDenied:
+                [self permissionsProblem:@"Please enable location services for this app. You need to launch the iPhone Settings app to do this (in it, go to Privacy > Location Services, scroll down until you see Save a Selfie and switch it to 'On'). You'll have to go out of this app temporarily now, using the 'Home' button below this screen."];
+                plog(@"Location services denied by user");
+                break;
+            case kCLAuthorizationStatusRestricted:
+                plog(@"Parental controls restrict location services");
+                break;
+            case kCLAuthorizationStatusNotDetermined:
+                plog(@"Unable to determine, possibly not available");
+                allGrand = YES;
+        }
+    } else {
+        // locationServicesEnabled is set to NO
+        plog(@"Location Services Are Disabled");
+        [self permissionsProblem:@"Please enable location services on your phone. You need to launch the iPhone Settings app to do this (in it, go to Privacy > Location Services and switch it to 'On'). You'll have to go out of this app temporarily now, using the 'Home' button below this screen."];
+    }
+    return allGrand;
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
     CLLocation *newLocation = [locations lastObject];
     _currentLocation = newLocation.coordinate;
     if (firstLocated) { [self setLocation:newLocation reverseLongitude:NO]; firstLocated = NO; }
-    //        plog(@"%f",adjustedRegion.span.latitudeDelta);
+//    plog(@"didUpdateLocations with %f, %f", newLocation.coordinate.latitude, newLocation.coordinate.longitude);
     [self zoom];
 }
 

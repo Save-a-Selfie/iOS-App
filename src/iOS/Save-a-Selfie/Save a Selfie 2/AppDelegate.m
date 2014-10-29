@@ -2,8 +2,8 @@
 //  AppDelegate.m
 //  Save a Selfie 2
 //
-//  Created by Peter FitzGerald on 15/10/2014.
-//  Copyright (c) 2014 Code for Ireland. All rights reserved.
+//  Created by Nadja Deininger and Peter FitzGerald
+//  GNU General Public License
 //
 
 #import "AppDelegate.h"
@@ -15,6 +15,7 @@
 
 @implementation AppDelegate
 
+NSString *const applicationWillEnterForeground = @"application returned to foreground"; // for detail – to check that current photo wasn't just deleted
 BOOL NSLogOn = YES; // YES to show logs, NO if not
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
@@ -30,13 +31,15 @@ BOOL NSLogOn = YES; // YES to show logs, NO if not
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
 }
 
-- (void)applicationDidEnterBackground:(UIApplication *)application {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+- (void)applicationDidEnterBackground:(UIApplication *)application
+{
+    plog(@"entering background");
 }
 
-- (void)applicationWillEnterForeground:(UIApplication *)application {
-    // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+- (void)applicationWillEnterForeground:(UIApplication *)application
+{
+    plog(@"entering foreground");
+    [[NSNotificationCenter defaultCenter] postNotificationName:applicationWillEnterForeground object:nil];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
