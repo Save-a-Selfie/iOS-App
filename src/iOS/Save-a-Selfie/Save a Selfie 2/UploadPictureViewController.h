@@ -12,6 +12,7 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 #import <ImageIO/ImageIO.h>
 #import <MapKit/MapKit.h>
+#import <MessageUI/MessageUI.h>
 
 @interface UploadPictureViewController : UIViewController
 <UIImagePickerControllerDelegate,

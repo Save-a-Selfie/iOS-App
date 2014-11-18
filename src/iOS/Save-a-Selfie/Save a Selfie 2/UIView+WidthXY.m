@@ -18,6 +18,19 @@
     [UIView commitAnimations];
 }
 
+-(void)bounceObject:(float)y {
+    // now bounce the button
+    float t = self.frame.origin.y;
+    float bounceUpDuration = y * 0.015;
+    [self moveObject:t - y overTimePeriod:bounceUpDuration];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(bounceUpDuration * NSEC_PER_SEC)), dispatch_get_main_queue(),
+                   ^{ [self moveObject:t overTimePeriod:bounceUpDuration * 0.75]; });
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(bounceUpDuration * 1.75 * NSEC_PER_SEC)), dispatch_get_main_queue(),
+                   ^{ [self moveObject:t - y * 0.25 overTimePeriod:bounceUpDuration * 0.25]; });
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(bounceUpDuration * 2 * NSEC_PER_SEC)), dispatch_get_main_queue(),
+                   ^{ [self moveObject:t overTimePeriod:bounceUpDuration * 0.25]; });
+}
+
 -(void)changeViewWidth:(float)newWidth atX:(float)x centreIt:(BOOL)centrify duration:(float)duration {
     // !! autolayout must be OFF in Storyboard !!
     // centrify overrides x

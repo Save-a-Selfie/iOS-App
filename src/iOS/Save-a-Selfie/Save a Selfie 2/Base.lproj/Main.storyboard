@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="49e-Tb-3d3">
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <deployment defaultVersion="1792" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <scenes>
-        <!--Locate / Info-->
+        <!--Locate-->
         <scene sceneID="hNz-n2-bh7">
             <objects>
                 <viewController storyboardIdentifier="WebsiteViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="9pv-A4-QxB" customClass="WebsiteViewController" sceneMemberID="viewController">
@@ -21,7 +21,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Locate / Info" image="globe.png" id="acW-dT-cKf"/>
+                    <tabBarItem key="tabBarItem" title="Locate" image="globe" id="acW-dT-cKf"/>
                     <connections>
                         <outlet property="webView" destination="Gei-tg-Xot" id="rEx-1U-MJW"/>
                     </connections>
@@ -29,6 +29,44 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="26.399999999999999" y="203.77000000000001"/>
+        </scene>
+        <!--Info-->
+        <scene sceneID="Smb-hj-4hT">
+            <objects>
+                <viewController id="LKF-Xc-SHc" customClass="ThirdViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="zng-Bf-EMx">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="JzE-qh-yUP">
+                                <rect key="frame" x="76" y="48" width="150" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button" image="SAS vertical 280">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="KAK-eD-hkX">
+                                <rect key="frame" x="92" y="203" width="150" height="150"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button" image="dublin fire brigade 300">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="6Xg-Um-u1g">
+                                <rect key="frame" x="117" y="366" width="150" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button" image="Code for ireland logo transparent">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Info" image="info_24" id="Dcc-4p-yO1"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vur-sD-egv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="26" y="950"/>
         </scene>
         <!--Upload Picture View Controller-->
         <scene sceneID="aAA-FK-5Kq">
@@ -38,6 +76,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="tcg-9c-rJL">
+                                <rect key="frame" x="24" y="332" width="24" height="24"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="arrow_left">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="backArrowAction:" destination="TVY-Ut-sMj" eventType="touchUpInside" id="aww-I5-Bz3"/>
+                                </connections>
+                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Type info here..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ato-4C-iGz">
                                 <rect key="frame" x="23" y="371" width="171" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -96,6 +144,20 @@
                                 <rect key="frame" x="203" y="329" width="75" height="75"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="bIk-oi-EUm">
+                                <rect key="frame" x="16" y="517" width="51" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="sendToFBAction:" destination="TVY-Ut-sMj" eventType="valueChanged" id="MPX-PU-bIC"/>
+                                </connections>
+                            </switch>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Share this on Facebook" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Hc2-62-CLw">
+                                <rect key="frame" x="87" y="522" width="182" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -103,6 +165,7 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="activityIndicator" destination="kwJ-kD-PEo" id="8rQ-4a-40R"/>
+                        <outlet property="backArrow" destination="tcg-9c-rJL" id="eVb-ND-j0i"/>
                         <outlet property="commentField" destination="2lg-S4-d5n" id="dtK-qe-DeG"/>
                         <outlet property="imageView" destination="Rqg-SJ-Mhe" id="ZQk-7H-fcU"/>
                         <outlet property="littleGuy" destination="TDz-PB-oDo" id="EXj-VV-TOf"/>
@@ -110,6 +173,8 @@
                         <outlet property="multilabelBackground" destination="uRp-Lq-gq7" id="h9L-eX-Czi"/>
                         <outlet property="multipurposeLabel" destination="6vp-A0-96U" id="sD2-eN-Rd8"/>
                         <outlet property="sendButton" destination="3vJ-kL-pyY" id="nxx-3Q-w5f"/>
+                        <outlet property="sendToFBButton" destination="bIk-oi-EUm" id="YRQ-fg-EWi"/>
+                        <outlet property="sendToFBLabel" destination="Hc2-62-CLw" id="vCE-eF-sBN"/>
                         <outlet property="typeInfoHere" destination="ato-4C-iGz" id="NDa-83-cpW"/>
                     </connections>
                 </viewController>
@@ -128,19 +193,78 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="1a3-aJ-wlg" kind="relationship" relationship="viewControllers" id="lzU-1b-eKA"/>
+                        <segue destination="hN3-jW-XAE" kind="relationship" relationship="viewControllers" id="oSZ-4H-9kb"/>
                         <segue destination="9pv-A4-QxB" kind="relationship" relationship="viewControllers" id="u7Y-xg-7CH"/>
+                        <segue destination="LKF-Xc-SHc" kind="relationship" relationship="viewControllers" id="yyW-6A-ew7"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-450.39999999999998" y="-194.53999999999999"/>
         </scene>
+        <!--Hi!-->
+        <scene sceneID="dXh-pC-Nno">
+            <objects>
+                <viewController storyboardIdentifier="FacebookVC" title="Hi!" id="hN3-jW-XAE" customClass="FacebookVC" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="4lV-sW-BDB">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" alpha="0.80000001192092896" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Oog-4A-Wl2">
+                                <rect key="frame" x="20" y="200" width="294" height="100"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.5" green="0.0" blue="0.5" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="uUB-vD-MVu">
+                                <rect key="frame" x="23" y="203" width="280" height="90"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SAS_75" id="NGI-4J-wy2">
+                                <rect key="frame" x="210" y="87" width="75" height="75"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Hkh-lR-e5f">
+                                <rect key="frame" x="88" y="428" width="145" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Skip Facebook Login">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="skipFacebookLoginTapped:" destination="hN3-jW-XAE" eventType="touchUpInside" id="q0H-8b-th4"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="Jzn-QE-EhX">
+                                <rect key="frame" x="50" y="77" width="75" height="75"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Start" image="SAS_25" id="Ivf-QW-ma5"/>
+                    <connections>
+                        <outlet property="FBUserFace" destination="Jzn-QE-EhX" id="GkN-mL-m0B"/>
+                        <outlet property="littleGuy" destination="NGI-4J-wy2" id="AQe-9Q-BpG"/>
+                        <outlet property="multilabelBackground" destination="Oog-4A-Wl2" id="LCg-fd-Llk"/>
+                        <outlet property="multipurposeLabel" destination="uUB-vD-MVu" id="krT-so-Ci9"/>
+                        <outlet property="skipFacebookLoginButton" destination="Hkh-lR-e5f" id="pxN-6x-kxw"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IEp-X6-upy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="26" y="-1077"/>
+        </scene>
         <!--Photo-->
         <scene sceneID="NxK-6W-YLx">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="1a3-aJ-wlg" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Photo" image="camera.png" id="cPa-gy-q4n"/>
+                    <tabBarItem key="tabBarItem" title="Photo" image="camera" id="cPa-gy-q4n"/>
                     <toolbarItems/>
                     <nil key="simulatedTopBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="C3m-ev-xMy">
@@ -158,9 +282,15 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Code for ireland logo transparent" width="100" height="53"/>
+        <image name="SAS vertical 280" width="280" height="262"/>
+        <image name="SAS_25" width="25" height="25"/>
         <image name="SAS_75" width="75" height="75"/>
-        <image name="camera.png" width="24" height="24"/>
-        <image name="globe.png" width="24" height="24"/>
+        <image name="arrow_left" width="24" height="24"/>
+        <image name="camera" width="24" height="24"/>
+        <image name="dublin fire brigade 300" width="300" height="300"/>
+        <image name="globe" width="24" height="24"/>
+        <image name="info_24" width="24" height="24"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

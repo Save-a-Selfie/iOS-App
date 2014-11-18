@@ -12,6 +12,14 @@
 #import "ExtendNSLogFunctionality.h"
 #import "AppDelegate.h"
 #import "UIView+WidthXY.h"
+#import "EmergencyObjects.h"
+#import "UIView+NibInitializer.h"
+#import "FBProtocols.h"
+#import "FacebookVC.h"
+#import <FacebookSDK/FBRequest.h>
+#import <FacebookSDK/FacebookSDK.h>
+//#import <Accounts/Accounts.h>
+#import <Social/Social.h>
 
 @interface UploadPictureViewController ()
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *selectButton;
@@ -21,7 +29,6 @@
 @property UIImagePickerController *picker;
 @property (readonly) CLLocationManager *locationManager;
 @property (readonly) CLLocationCoordinate2D currentLocation;
-@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIButton *OKButton;
 @property (weak, nonatomic) IBOutlet UIButton *SASLogoButton;
 @property (weak, nonatomic) IBOutlet UILabel *whiteBackground;
@@ -31,14 +38,18 @@
 @property (weak, nonatomic) IBOutlet UIImageView *littleGuy;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
-//! state variable to avoid calling the sendImageToServer method multiple times
+@property (weak, nonatomic) IBOutlet UISwitch *sendToFBButton;
+@property (weak, nonatomic) IBOutlet UILabel *sendToFBLabel;
+@property (weak, nonatomic) IBOutlet UIButton *backArrow;
+- (IBAction)backArrowAction:(id)sender;
+- (IBAction)sendToFBAction:(id)sender;
 - (IBAction)OKAction:(id)sender;
 - (IBAction)useCamera;
 - (IBAction)useCameraRoll;
 - (void) imagePickerControllerDidCancel: (UIImagePickerController *) picker;
 - (void) imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info;
 - (IBAction)sendIt:(id)sender;
-- (void) sendImageToServer:(UIImage *)image;
+- (void) sendImageToServer;
 @end
 
 @implementation UploadPictureViewController
@@ -50,7 +61,6 @@ NSString *caption;
 UIImage *imageToSave;
 AlertBox *alert, *permissionsBox;
 BOOL uploading = NO;
-BOOL gettingImage = NO;
 BOOL showingActionSheet = NO;
 UIActionSheet *actionSheet;
 BOOL pickingViaCamera;
@@ -58,30 +68,62 @@ BOOL firstLocated = YES;
 float mapZoomValue = 5.0;
 CGFloat screenHeight, screenWidth;
 BOOL firstAppearance = YES;
+BOOL shareOnFacebook = YES;
+EmergencyObjects *emergencyObjects;
+BOOL commentFieldAltered = NO;
+UIImage *largerImage;
 extern NSString *const applicationWillEnterForeground;
+extern NSString *const objectChosen;
+extern NSString *const handledFBResponse;
+extern int chosenObject;
+extern BOOL FBLoggedIn;
+extern NSString *facebookUsername;
 
 // To do
 //
-// If no GPS on image, use user location
-// Save list of uploaded photos – and ask if uploading with same name; save etc. with this info
+// Message after FB upload
+// Back button getting hidden at times
+// Allow user to cancel before uploading
 // Save while quitting
 // 'Close' button on images in website
 // replace UIAlertView with AlertBox everywhere
 // need to sort out compiler warnings
-// littleGuy image a bit pixellated?
 
 #pragma mark Set-up
 
-- (void)viewDidLoad
+- (id)initWithCoder:(NSCoder*)aDecoder
 {
+    if(self = [super initWithCoder:aDecoder])
+    {
+    }
+    return self;
+}
+
+- (void)viewDidLoad {
     [super viewDidLoad];
+	
+	CGRect screenRect = [[UIScreen mainScreen] bounds];
+	screenHeight = screenRect.size.height;
+	screenWidth = screenRect.size.width;
+
+	// change tab bar icon and title – have swapped out initial FacebookVC
+	UITabBarController *tabBarController = (UITabBarController *)self.tabBarController;
+	UITabBar *tabBar = tabBarController.tabBar;
+	UITabBarItem *tabBarItem1 = [tabBar.items objectAtIndex:0];
+	tabBarItem1.title = @"Photo";
+	[tabBarItem1 setImage:[UIImage imageNamed:@"camera"]];
+	
+    // move buttons off-screen
     [_SASLogoButton changeViewWidth:_SASLogoButton.frame.size.width atX:9999 centreIt:YES duration:0];
     [_OKButton changeViewWidth:_OKButton.frame.size.width atX:9999 centreIt:YES duration:0];
-    self.tabBarController.tabBar.hidden = YES;
-    [self makeSendButtonRed];
-    CGRect screenRect = [[UIScreen mainScreen] bounds];
-    screenHeight = screenRect.size.height;
-    screenWidth = screenRect.size.width;
+	[_sendToFBButton moveObject:screenHeight + 100 overTimePeriod:0];
+	[_sendToFBLabel moveObject:screenHeight + 100 overTimePeriod:0];
+	
+//    self.tabBarController.tabBar.hidden = YES;
+    
+    // dull out Send button
+    [self makeSendButtonGrey];
+
     [self checkPermissions];
     _whiteBackground.hidden = NO;
     [_mapView changeViewWidth:screenWidth atX:0 centreIt:YES duration:0.5];
@@ -94,7 +136,6 @@ extern NSString *const applicationWillEnterForeground;
     _littleGuy.hidden = YES;
     [[_multilabelBackground layer] setCornerRadius:10.0f];
     [[_multilabelBackground layer] setMasksToBounds:YES];
-    gettingImage = NO;
     self.tabBarController.delegate = self;
     if (!alert) {
         [[NSBundle mainBundle] loadNibNamed:@"AlertBox" owner:self options:nil];
@@ -107,6 +148,10 @@ extern NSString *const applicationWillEnterForeground;
      addObserver:self selector:@selector(clearPermissionsBox)
      name:applicationWillEnterForeground
      object:nil];
+    [[NSNotificationCenter defaultCenter]
+     addObserver:self selector:@selector(objectTypeChosen)
+     name:objectChosen
+     object:nil];
 }
 
 -(void) clearPermissionsBox { // called when returning from outside app
@@ -114,17 +159,17 @@ extern NSString *const applicationWillEnterForeground;
     //	[locationManager startUpdatingLocation];
 }
 
--(void)makeSendButtonRed { // turns it grey for some reason
+-(void)makeSendButtonGrey { // turns it grey for some reason
     _sendButton.enabled = NO; // initially disabled – until user types some sort of description in commentField
-    _sendButton.tintColor = [UIColor colorWithRed:1 green:0 blue:0 alpha:0.5];
-    [_sendButton setTitle:@"Send" forState:UIControlStateNormal];
+    _sendButton.tintColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:0.5];
+    [_sendButton setTitle:@"Next" forState:UIControlStateNormal];
 }
 
 -(void) viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
 }
 
--(void)OKAction:(id)sender { // used be linked from an 'Enter...' button, which is now gone; performs set-ups on labels, etc.
+-(void)OKAction:(id)sender { // performs set-ups on labels, etc.
     plog(@"OKAction");
     _OKButton.hidden = YES;
     _whiteBackground.hidden = YES;
@@ -147,6 +192,7 @@ extern NSString *const applicationWillEnterForeground;
     _multipurposeLabel.text = @"Tap 'Photo' below to take or retrieve a photo, or 'Locate / Info' to find a defibrillator, see photos, or learn about the project";
     float newSendX = _multilabelBackground.frame.origin.x + _multilabelBackground.frame.size.width - _sendButton.frame.size.width;
     [_sendButton changeViewWidth:_sendButton.frame.size.width atX:newSendX centreIt:NO duration:0];
+    _backArrow.frame = CGRectMake(_multilabelBackground.frame.origin.x, _littleGuy.frame.origin.y + 20, _backArrow.frame.size.width,     _backArrow.frame.size.height);
     _typeInfoHere.hidden = YES;
     _commentField.hidden = YES;
     firstAppearance = NO;
@@ -167,6 +213,23 @@ extern NSString *const applicationWillEnterForeground;
     if (!firstAppearance) {
         [self showActionSheet:self];
     } else firstAppearance = NO;
+}
+
+- (IBAction)backArrowAction:(id)sender {
+	[self swapViewControllers];
+}
+
+-(void)swapViewControllers {
+	// if logged into Facebook, or if user has chosen to skip login, change to 'proper' first view controller
+	//    ((UITabBarController*)self.window.rootViewController).selectedViewController;
+//	plog(@"Root: %@", self.window.rootViewController);
+	UITabBarController *tabController = (UITabBarController *)self.tabBarController;
+	NSMutableArray *mArray = [NSMutableArray arrayWithArray:tabController.viewControllers];
+	plog(@"mArray: %@", mArray);
+	UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+	FacebookVC *FBVC = [storyboard instantiateViewControllerWithIdentifier:@"FacebookVC"];
+	[mArray replaceObjectAtIndex:0 withObject:FBVC];
+	[tabController setViewControllers:mArray animated:NO];
 }
 
 - (IBAction)showActionSheet:(id)sender {
@@ -200,7 +263,6 @@ extern NSString *const applicationWillEnterForeground;
 
 // todo: if no camera is available, don't even show the button, but this works for now
 - (IBAction)useCamera {
-    gettingImage = YES;
     pickingViaCamera = YES;
     if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         [self hideLabels];
@@ -214,7 +276,6 @@ extern NSString *const applicationWillEnterForeground;
 }
 
 - (IBAction)useCameraRoll {
-    gettingImage = YES;
     pickingViaCamera = NO;
     if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
         [self hideLabels];
@@ -249,7 +310,7 @@ extern NSString *const applicationWillEnterForeground;
         NSNumber* nLat = [gpsInfo objectForKey:(__bridge NSString *)kCGImagePropertyGPSLatitude];
         NSNumber* nLng = [gpsInfo objectForKey:(__bridge NSString *)kCGImagePropertyGPSLongitude];
         if (nLat && nLng)
-            return [[CLLocation alloc]initWithLatitude:[nLat doubleValue] longitude:[nLng doubleValue]];
+            return [[CLLocation alloc]initWithLatitude:[nLat doubleValue] longitude:-[nLng doubleValue]]; // ! sign of longitude is incorrect in retrieved photos !
     }
     plog(@"no GPS info found");
     return nil;
@@ -268,24 +329,29 @@ extern NSString *const applicationWillEnterForeground;
         photoID = [photoID stringByReplacingOccurrencesOfString:@"&ext=JPG" withString:@""];
         plog(@"photo ID is %@", photoID);
         ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
+
+        // try to retrieve gps metadata coordinates
         [library assetForURL:assetURL resultBlock:^(ALAsset *asset) {
-            // try to retrieve gps metadata coordinates
             photoLocation = [self locationFromAsset:asset];
-            plog(@"location found: %f, %f", photoLocation.coordinate.latitude, -photoLocation.coordinate.longitude);
+            plog(@"location found: %f, %f", photoLocation.coordinate.latitude, photoLocation.coordinate.longitude);
+
             // move map to location
             [_locationManager stopUpdatingLocation];
-            [self setLocation:photoLocation reverseLongitude:YES];
+            [self setLocation:photoLocation reverseLongitude:NO];
+
+            // add a marker to the map at location of snap
             [_mapView removeAnnotations:[_mapView annotations]];
             CLLocationCoordinate2D coord1;
-            coord1.longitude = -photoLocation.coordinate.longitude;
+            coord1.longitude = photoLocation.coordinate.longitude;
             coord1.latitude = photoLocation.coordinate.latitude;
             MKPointAnnotation *myAnnotation = [[MKPointAnnotation alloc] init];
             myAnnotation.coordinate = coord1;
             myAnnotation.title = @"Photo";
-            myAnnotation.subtitle =@"was taken here";
+            myAnnotation.subtitle = @"was taken here";
             [_mapView addAnnotation:myAnnotation];
+
         } failureBlock:^(NSError *error) {
-            plog(@"Failed to get asset from library");
+            plog(@"Failed to get GPS info for photo"); // ** need to deal with this fail
         }];
     } else { // image taken with camera => no GPS info available, use location CLocation
         // once iOS 8 is widely adopted, would be better to use PHPhotoLibrary to fetch the last image; see: http://stackoverflow.com/questions/8867496/get-last-image-from-photos-app
@@ -293,8 +359,11 @@ extern NSString *const applicationWillEnterForeground;
         photoLocation = tempLocation;
         photoID = [self getCurrentTimeStamp];
     }
+    
+    // set image and map widths to half screen width
     [_imageView changeViewWidth:screenWidth * 0.5 atX:screenWidth * 0.5 centreIt:NO duration:1];
     [_mapView changeViewWidth:screenWidth * 0.5 atX:0 centreIt:NO duration:1];
+
     if([info objectForKey:UIImagePickerControllerEditedImage]) {
         imageToSave = info[UIImagePickerControllerEditedImage];
     }
@@ -303,17 +372,19 @@ extern NSString *const applicationWillEnterForeground;
     }
     else {
         [alert fillAlertBox:@"Problem" button1Text:@"Selected image could not be found" button2Text:nil action1:@selector(removeAlert) action2:nil calledFrom:self opacity:0.85 centreText:YES];
-        [alert addBoxToView:self.view withOrientation:0];
+        [alert addBoxToView:self.view withOrientation:0]; // ** need to deal with this fail
     }
+
     [_picker dismissViewControllerAnimated:YES completion:nil];
     
     // check if have already uploaded this photo
 //    plog(@"%@", [[NSUserDefaults standardUserDefaults] dictionaryRepresentation]);
 
-    NSString *existingCaption = [[NSUserDefaults standardUserDefaults] valueForKey:photoID];
+    NSString *existingCaption = [self decodeFromPercentEscapeString:[[NSUserDefaults standardUserDefaults] valueForKey:photoID]];
     [_imageView setImage:imageToSave];
     if (existingCaption.length > 0) {
         plog(@"already uploaded...");
+        // it's OK – ask if user wants to replace it
         _commentField.text = existingCaption;
         _typeInfoHere.hidden = YES;
         _commentField.alpha = 1;
@@ -321,15 +392,37 @@ extern NSString *const applicationWillEnterForeground;
         [alert fillAlertBox:@"Photo already uploaded" button1Text:@"Replace" button2Text:@"Don't replace" action1:@selector(replacePhoto) action2:@selector(doNotProceed) calledFrom:self opacity:0.85 centreText:YES];
         [alert addBoxToView:self.view withOrientation:0];
     } else {
-        _typeInfoHere.hidden = NO; _commentField.alpha = 0.5; [self proceedWithPhoto];
-        _commentField.text = @""; [self makeSendButtonRed];
+        _typeInfoHere.hidden = NO; _commentField.alpha = 0.5;
+        [self getTheDescription];
+        _commentField.text = @""; [self makeSendButtonGrey];
     }
+}
+
+- (UIImage *) doubleMerge: (UIImage *) photo
+                      withImage:(UIImage *) logo1 atX: (int) x andY:(int)y withStrength:(float) mapOpacity
+                       andImage:(UIImage *) logo2 atX2:(int) x2 andY2:(int)y2
+                       strength: (float) strength {
+    float extraHeight = 0.0;
+    // see http://stackoverflow.com/questions/10931155/uigraphicsbeginimagecontextwithoptions-and-multithreading re calling UIGraphicsBeginImageContextWithOptions on background thread – apparently it's fine
+    UIGraphicsBeginImageContextWithOptions(CGSizeMake([photo size].width,[photo size].height + extraHeight), NO, 1.0); // last parameter is scaling - should be 1.0 not 0.0, or doubles image size
+    [photo drawAtPoint: CGPointMake(0,0)];
+    
+    plog(@"height of logo 1 is %f, of logo 2 is %f", logo1.size.height, logo2.size.height);
+    [logo1 drawAtPoint: CGPointMake(x, y)
+                      blendMode: kCGBlendModeNormal
+                          alpha: strength]; // 0 - 1
+    [logo2 drawAtPoint: CGPointMake(x2, y2)
+                 blendMode: kCGBlendModeNormal
+                     alpha: strength]; // 0 - 1
+    UIImage *mergedImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return mergedImage;
 }
 
 -(void)replacePhoto {
     _typeInfoHere.hidden = YES; _commentField.alpha = 1;
-    [self makeSendButtonRed];
-    [self proceedWithPhoto];
+    [self makeSendButtonGrey];
+    [self getTheDescription];
     [self removeAlert];
 }
 
@@ -347,53 +440,92 @@ extern NSString *const applicationWillEnterForeground;
     _multipurposeLabel.textAlignment = NSTextAlignmentLeft;
     _littleGuy.hidden = NO;
 }
--(void)proceedWithPhoto {
-    // now want the description
+-(void)getTheDescription {
+    // now want the description; when the user has typed something in the description field then the 'Next' button will be enabled, allowing the user to proceed to the final stage
     [_littleGuy moveObject:165 overTimePeriod:0.5];
     [_multipurposeLabel moveObject:231 overTimePeriod:0.85];
     [_multilabelBackground moveObject:225 overTimePeriod:0.85];
     _commentField.hidden = NO;
     _commentField.editable = YES;
     _typeInfoHere.hidden = NO;
+    _backArrow.frame = CGRectOffset(_backArrow.frame, 0, -18);
     [self showInstructions:@"Before uploading, please add some useful information below – name of location, where the defibrillator is in the location, etc."];
+    // fade out the photo, as the instructions have come up in front of it
     [UIView animateWithDuration:5.0 animations:^{ _imageView.alpha = 0.5; }];
+	FBLoggedIn = YES;
+	if (FBLoggedIn) {
+		if (!commentFieldAltered) _commentField.frame = CGRectMake(_commentField.frame.origin.x, _commentField.frame.origin.y, _commentField.frame.size.width, _commentField.frame.size.height - 50);
+        commentFieldAltered = YES;
+		_sendToFBButton.frame = CGRectMake(_commentField.frame.origin.x, _sendToFBButton.frame.origin.y, _sendToFBButton.frame.size.width, _sendToFBButton.frame.size.height);
+		_sendToFBLabel.frame = CGRectMake(_sendToFBLabel.frame.origin.x, _sendToFBButton.frame.origin.y + _sendToFBButton.frame.size.height, _sendToFBLabel.frame.size.width, _sendToFBLabel.frame.size.height);
+		[_sendToFBButton moveObject:screenHeight - 90 overTimePeriod:0.5];
+		[_sendToFBLabel moveObject:screenHeight - 90 overTimePeriod:0.5];
+	}
 }
 
-- (IBAction)sendIt:(id)sender {
-    [self sendImageToServer:_imageView.image];
+#pragma mark Send image to server
+
+- (IBAction)sendIt:(id)sender { // not ready to send quite yet: find out which type of object (AED, life-ring, etc.)
     [self shutKeyboard:_commentField];
+    // move little guy etc. down
+    [_littleGuy moveObject:230 overTimePeriod:0.5];
+    [_multipurposeLabel moveObject:300 overTimePeriod:0.5];
+    [_multilabelBackground moveObject:294 overTimePeriod:0.5];
+    _multipurposeLabel.text = @"Please select one of the objects above, corresponding to what is in the photo.";
+
+    // display set of four objects
+    emergencyObjects = [[EmergencyObjects alloc] initWithNibNamed:nil];
+    [emergencyObjects EmergencyObjectsViewLoaded];
+    [self.view insertSubview:emergencyObjects belowSubview:_multilabelBackground];
+    // when user has chosen which type of object, program will move on to objectTypeChosen
 }
 
-- (void) sendImageToServer:(UIImage *) image {
+-(void)objectTypeChosen {
+    // comes here after user chooses object type via EmergencyObjects.m
+    [emergencyObjects moveObject:-emergencyObjects.frame.size.height overTimePeriod:0.75]; // hide display of object types
+    [self sendImageToServer];
+	[self shareViaFB];
+}
 
-    gettingImage = NO;
+- (void) sendImageToServer {
+
+    // have got the photo, the description, and know what type of emergency object it is – ready to upload
+
+    // first, resize image
+    UIImage *image = _imageView.image;
     plog(@"resizing...");
     float maxWidth = 400, thumbSize = 150;
     float ratio = maxWidth / image.size.width;
-    float height, width, minDim;
+    float height, width, minDim, tWidth, tHeight;
     if (ratio >= 1.0) { width = image.size.width; height = image.size.height; }
     else { width = maxWidth; height = image.size.height * ratio; }
     plog(@"resizing to %f, %f (%f, %f, %f)", width, height, ratio, image.size.width, image.size.height);
-    UIImage *smallerImage = [image resizedImage:CGSizeMake(width, height) interpolationQuality:kCGInterpolationHigh];
+    largerImage = [image resizedImage:CGSizeMake(width, height) interpolationQuality:kCGInterpolationHigh];
+
+    // generate thumbnail
     minDim = height < width ? height : width;
-    ratio = thumbSize / minDim; width *= ratio; height *= ratio;
-    plog(@"resizing to %f, %f", width, height);
-    UIImage *thumbnail = [smallerImage resizedImage:CGSizeMake(width, height) interpolationQuality:kCGInterpolationHigh];
-    plog(@"sending...");
+    ratio = thumbSize / minDim; tWidth = width * ratio; tHeight = height * ratio;
+    plog(@"resizing to %f, %f", tWidth, tHeight);
+    UIImage *thumbnail = [largerImage resizedImage:CGSizeMake(tWidth, tHeight) interpolationQuality:kCGInterpolationHigh];
+    
+    // add 'watermarks'
+    largerImage = [self doubleMerge:largerImage withImage:[UIImage imageNamed:@"SASLogo75"] atX:20 andY:20 withStrength:1.0 andImage:[UIImage imageNamed:@"Code for ireland logo transparent85"] atX2:width - 95 andY2:height - 60 strength:1.0];
 
-    _imageView.alpha = 0.25;
-    NSData *imageData = UIImageJPEGRepresentation(smallerImage, 0.9);
+    _imageView.alpha = 0.25; // fade photo
+
+    // construct information for uploading
+    NSData *imageData = UIImageJPEGRepresentation(largerImage, 0.9);
     NSData *imageDataTh = UIImageJPEGRepresentation(thumbnail, 0.9);
-
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     [request setHTTPMethod:@"POST"];
     [request setURL:[NSURL URLWithString:@"http://iculture.info/saveaselfie/wp-content/themes/magazine-child/iPhone.php"]];
     [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-    
     NSString *imageStr = [imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
     NSString *imageStrTh = [imageDataTh base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
-    
-    NSString *parameters = [ NSString stringWithFormat:@"id=%@&latitude=%f&longitude=%f&location=%@&caption=%@&image=%@&thumbnail=%@", photoID, photoLocation.coordinate.latitude, photoLocation.coordinate.longitude, @"", [caption stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], imageStr, imageStrTh];
+    caption = [self encodeToPercentEscapeString:caption];
+    NSString *user = [self encodeToPercentEscapeString:facebookUsername];
+    plog(@"caption is %@", caption);
+    NSString *parameters = [ NSString stringWithFormat:@"id=%@&typeOfObject=%d&latitude=%f&longitude=%f&location=%@&user=%@&caption=%@&image=%@&thumbnail=%@", photoID, chosenObject, photoLocation.coordinate.latitude, photoLocation.coordinate.longitude, @"", user, caption, imageStr, imageStrTh];
                         
     NSString *postLength = [NSString stringWithFormat:@"%lu", (unsigned long)[parameters length]];
     [request setHTTPBody:[parameters dataUsingEncoding:NSUTF8StringEncoding]];
@@ -415,6 +547,25 @@ extern NSString *const applicationWillEnterForeground;
     
 }
 
+// Encode a string to embed in an URL. See http://cybersam.com/ios-dev/proper-url-percent-encoding-in-ios
+-(NSString*) encodeToPercentEscapeString:(NSString *)string {
+    return (NSString *)
+    CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(NULL,
+                                            (CFStringRef) string,
+                                            NULL,
+                                            (CFStringRef) @"!*'();:@&=+$,/?%#[]",
+                                            kCFStringEncodingUTF8));
+}
+
+// Decode a percent escape encoded string. See http://cybersam.com/ios-dev/proper-url-percent-encoding-in-ios
+-(NSString*) decodeFromPercentEscapeString:(NSString *)string {
+    return (NSString *)
+    CFBridgingRelease(CFURLCreateStringByReplacingPercentEscapesUsingEncoding(NULL,
+                                                            (CFStringRef) string,
+                                                            CFSTR(""),
+                                                            kCFStringEncodingUTF8));
+}
+
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
     // The request has failed for some reason!
     plog(error.description);
@@ -427,10 +578,14 @@ extern NSString *const applicationWillEnterForeground;
     [self shutKeyboard:_commentField];
     _sendButton.tintColor = [UIColor colorWithRed:0 green:0 blue:1 alpha:0.5];
     _sendButton.enabled = NO;
-    [_sendButton setTitle:@"Sent" forState:UIControlStateNormal];
-    [actionSheet showFromTabBar:self.tabBarController.tabBar];
-    _multipurposeLabel.text = @"Photo uploaded – thank you!";
+    [_sendButton setTitle:@"Next" forState:UIControlStateNormal];
+//    [actionSheet showFromTabBar:self.tabBarController.tabBar];
+    _multipurposeLabel.text = @"Photo uploaded – thank you! (If you need to make any changes, you can still do so – type below, then click on 'Next'.)";
     _multipurposeLabel.textAlignment = NSTextAlignmentCenter;
+    // move little guy etc. down
+    [_littleGuy moveObject:280 overTimePeriod:0.5];
+    [_multipurposeLabel moveObject:350 overTimePeriod:0.5];
+    [_multilabelBackground moveObject:344 overTimePeriod:0.5];
     // save ID and caption to user's data file - to avoid duplicates
     [[NSUserDefaults standardUserDefaults] setValue:caption forKey:photoID];
     [[NSUserDefaults standardUserDefaults] synchronize];
@@ -460,7 +615,7 @@ extern NSString *const applicationWillEnterForeground;
         if ([_locationManager respondsToSelector:requestSelector]) { // requestWhenInUseAuthorization only works from iOS 8
             [_locationManager performSelector:requestSelector withObject:NULL];
             [self checkPermissions];
-        }
+        } else [_locationManager startUpdatingLocation];
     }
 }
 
@@ -522,17 +677,22 @@ extern NSString *const applicationWillEnterForeground;
 }
 
 -(void) setLocation:(CLLocation *)loc reverseLongitude:(BOOL)reverse {
+    // moves mapView to specified location; longitude may need reversing
     CLLocationCoordinate2D startCoord = CLLocationCoordinate2DMake(loc.coordinate.latitude, reverse ? -loc.coordinate.longitude : loc.coordinate.longitude);
     MKCoordinateRegion adjustedRegion = [self.mapView regionThatFits:MKCoordinateRegionMakeWithDistance(startCoord, 800, 800)];
     adjustedRegion.span.longitudeDelta  = 0.005;
     adjustedRegion.span.latitudeDelta  = 0.005;
-    [self.mapView setRegion:adjustedRegion animated:YES];
+    [_mapView setRegion:adjustedRegion animated:YES];
 }
 
 #pragma mark - Text View delegates
 
 -(void)textViewDidBeginEditing:(UITextView *)textView{
-    plog(@"Did begin editing");
+//    plog(@"Did begin editing");
+    if (emergencyObjects) { // means user has returned to editing, after hitting 'Next'
+        [emergencyObjects moveObject:-emergencyObjects.frame.size.height overTimePeriod:0.75]; // hide display of object types
+        [self getTheDescription];
+    }
     _typeInfoHere.hidden = YES;
     _commentField.alpha = 1.0;
     [UIView beginAnimations:nil context:nil];
@@ -551,35 +711,34 @@ extern NSString *const applicationWillEnterForeground;
 
 -(void)shutKeyboard:(UITextView *)textView {
     [textView resignFirstResponder];
-    [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationDuration:0.3];
-    self.view.frame = CGRectMake(self.view.frame.origin.x, 0, self.view.frame.size.width, self.view.frame.size.height);
-    [UIView commitAnimations];
+    [self.view moveObject:0 overTimePeriod:0.5];
 }
 
 -(void)textViewDidChange:(UITextView *)textView{
 }
 
 -(void)textViewDidEndEditing:(UITextView *)textView{
-    plog(@"Did End editing");
+//    plog(@"textViewDidEndEditing");
     caption = textView.text;
 //    caption = [caption stringByReplacingOccurrencesOfString:@"\"" withString:@"\\\""];
 //    caption = [caption stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 }
 
 -(BOOL)textViewShouldEndEditing:(UITextView *)textView{
+//    plog(@"textViewShouldEndEditing");
     [textView resignFirstResponder];
+    _backArrow.frame = CGRectOffset(_backArrow.frame, 0, 18);
     return YES;
 }
 
 // http://stackoverflow.com/questions/1456120/hiding-the-keyboard-when-losing-focus-on-a-uitextview
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    plog(@"Touch");
-    UITouch *touch = [[event allTouches] anyObject];
-    if ([_commentField isFirstResponder] && [touch view] != _commentField) {
-        [_commentField resignFirstResponder];
-    }
-    [super touchesBegan:touches withEvent:event];
+//    plog(@"Touch");
+//    UITouch *touch = [[event allTouches] anyObject];
+//    if ([_commentField isFirstResponder] && [touch view] != _commentField) {
+//        [_commentField resignFirstResponder];
+//    }
+//    [super touchesBegan:touches withEvent:event];
 }
 
 # pragma Timestamp
@@ -602,10 +761,42 @@ extern NSString *const applicationWillEnterForeground;
 - (NSString *)getUTCDateTimeFromLocalTime:(NSString *)IN_strLocalTime {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyyMMddHHmmss"];
-    NSDate  *objDate    = [dateFormatter dateFromString:IN_strLocalTime];
+    NSDate *objDate = [dateFormatter dateFromString:IN_strLocalTime];
     [dateFormatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
     NSString *strDateTime   = [dateFormatter stringFromDate:objDate];
     return strDateTime;
+}
+
+#pragma mark Facebook
+
+- (IBAction)sendToFBAction:(id)sender {
+	shareOnFacebook = !shareOnFacebook;
+	plog(@"Facebook sharing: %d", shareOnFacebook);
+}
+
+-(void) shareViaFB {
+    if (!shareOnFacebook) return;
+	if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook]) {
+		SLComposeViewController *fbPost = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
+		NSString *shareString = [NSString stringWithFormat:@"%@ %@ Link:", @"I'm sharing a selfie as part of Save a Selfie!", _commentField.text];
+		[fbPost setInitialText:shareString];
+		[fbPost addImage:largerImage];
+		[fbPost addURL: [NSURL URLWithString:@"http://www.iculture.info/saveaselfie"]];
+		[self presentViewController:fbPost animated:YES completion:nil];
+		[fbPost setCompletionHandler:^(SLComposeViewControllerResult result) {
+			switch (result) {
+				case SLComposeViewControllerResultCancelled:
+					plog(@"Post Cancelled");
+					break;
+				case SLComposeViewControllerResultDone:
+					plog(@"Post Sucessful");
+					break;
+				default:
+					break;
+			}
+			[self dismissViewControllerAnimated:YES completion:nil];
+		}];
+	} else plog(@"isAvailableForServiceType says NO");
 }
 
 @end

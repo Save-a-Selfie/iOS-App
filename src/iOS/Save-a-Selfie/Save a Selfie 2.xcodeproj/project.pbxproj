@@ -7,12 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D0409D021A0ED2F30021AE67 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0409D011A0ED2F20021AE67 /* FacebookSDK.framework */; };
+		D0EAAC0B1A0FD59B00C0F955 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0EAAC0A1A0FD59B00C0F955 /* Social.framework */; };
+		D0EAAC0D1A0FD63B00C0F955 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0EAAC0C1A0FD63B00C0F955 /* MessageUI.framework */; };
+		D0EAAC0F1A100F2D00C0F955 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0EAAC0E1A100F2D00C0F955 /* Accounts.framework */; };
 		D700239519F5253C00E45408 /* AlertBox.m in Sources */ = {isa = PBXBuildFile; fileRef = D700239319F5253C00E45408 /* AlertBox.m */; };
 		D700239619F5253C00E45408 /* AlertBox.xib in Resources */ = {isa = PBXBuildFile; fileRef = D700239419F5253C00E45408 /* AlertBox.xib */; };
 		D700239919F52E8800E45408 /* UIButton+Maker.m in Sources */ = {isa = PBXBuildFile; fileRef = D700239819F52E8800E45408 /* UIButton+Maker.m */; };
 		D700239C19F52E9E00E45408 /* UIView+FrameValues.m in Sources */ = {isa = PBXBuildFile; fileRef = D700239B19F52E9E00E45408 /* UIView+FrameValues.m */; };
 		D700239D19F52EB700E45408 /* ExtendNSLogFunctionality.m in Sources */ = {isa = PBXBuildFile; fileRef = D756A29619F175230089EF80 /* ExtendNSLogFunctionality.m */; };
 		D70023B419FBC5A600E45408 /* UIView+WidthXY.m in Sources */ = {isa = PBXBuildFile; fileRef = D70023B319FBC5A600E45408 /* UIView+WidthXY.m */; };
+		D715E4861A05A5480026D91F /* ThirdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D72E1E4719F01A2D005DD8A5 /* ThirdViewController.m */; };
+		D715E48F1A064FDA0026D91F /* UIView+NibInitializer.m in Sources */ = {isa = PBXBuildFile; fileRef = D715E48E1A064FDA0026D91F /* UIView+NibInitializer.m */; };
+		D715E4911A06504C0026D91F /* EmergencyObjects.xib in Resources */ = {isa = PBXBuildFile; fileRef = D715E4901A06504C0026D91F /* EmergencyObjects.xib */; };
+		D715E4941A06509B0026D91F /* EmergencyObjects.m in Sources */ = {isa = PBXBuildFile; fileRef = D715E4931A06509B0026D91F /* EmergencyObjects.m */; };
+		D715E4971A0936010026D91F /* UIButton+VerticalLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = D715E4961A0936010026D91F /* UIButton+VerticalLayout.m */; };
 		D72E1DB319EE841E005DD8A5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D72E1DB219EE841E005DD8A5 /* main.m */; };
 		D72E1DB619EE841E005DD8A5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D72E1DB519EE841E005DD8A5 /* AppDelegate.m */; };
 		D72E1DB919EE841E005DD8A5 /* WebsiteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D72E1DB819EE841E005DD8A5 /* WebsiteViewController.m */; };
@@ -33,9 +42,16 @@
 		D756A29F19F1D4F10089EF80 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D756A29E19F1D4F10089EF80 /* AssetsLibrary.framework */; };
 		D756A2A119F1D5D50089EF80 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D756A2A019F1D5D50089EF80 /* ImageIO.framework */; };
 		D756A2A919F309690089EF80 /* TabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = D756A2A819F309690089EF80 /* TabBarController.m */; };
+		D7F1D3EC1A0C3285001F33D6 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D7F1D3EB1A0C3285001F33D6 /* FacebookSDK.framework */; };
+		D7F1D3F11A111074001F33D6 /* FacebookVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D7F1D3EE1A111074001F33D6 /* FacebookVC.m */; };
+		D7F1D3F21A111074001F33D6 /* FacebookVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D7F1D3F01A111074001F33D6 /* FacebookVC.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D0409D011A0ED2F20021AE67 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../../../../../FacebookSDK/FacebookSDK.framework; sourceTree = "<group>"; };
+		D0EAAC0A1A0FD59B00C0F955 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		D0EAAC0C1A0FD63B00C0F955 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		D0EAAC0E1A100F2D00C0F955 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		D700239219F5253C00E45408 /* AlertBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AlertBox.h; path = "Save a Selfie 2/AlertBox.h"; sourceTree = "<group>"; };
 		D700239319F5253C00E45408 /* AlertBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AlertBox.m; path = "Save a Selfie 2/AlertBox.m"; sourceTree = "<group>"; };
 		D700239419F5253C00E45408 /* AlertBox.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AlertBox.xib; path = "Save a Selfie 2/AlertBox.xib"; sourceTree = "<group>"; };
@@ -45,6 +61,13 @@
 		D700239B19F52E9E00E45408 /* UIView+FrameValues.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+FrameValues.m"; path = "Save a Selfie 2/UIView+FrameValues.m"; sourceTree = "<group>"; };
 		D70023B219FBC5A600E45408 /* UIView+WidthXY.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+WidthXY.h"; path = "Save a Selfie 2/UIView+WidthXY.h"; sourceTree = "<group>"; };
 		D70023B319FBC5A600E45408 /* UIView+WidthXY.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+WidthXY.m"; path = "Save a Selfie 2/UIView+WidthXY.m"; sourceTree = "<group>"; };
+		D715E48D1A064FDA0026D91F /* UIView+NibInitializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+NibInitializer.h"; sourceTree = "<group>"; };
+		D715E48E1A064FDA0026D91F /* UIView+NibInitializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+NibInitializer.m"; sourceTree = "<group>"; };
+		D715E4901A06504C0026D91F /* EmergencyObjects.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmergencyObjects.xib; sourceTree = "<group>"; };
+		D715E4921A06509B0026D91F /* EmergencyObjects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmergencyObjects.h; sourceTree = "<group>"; };
+		D715E4931A06509B0026D91F /* EmergencyObjects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmergencyObjects.m; sourceTree = "<group>"; };
+		D715E4951A0936010026D91F /* UIButton+VerticalLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+VerticalLayout.h"; sourceTree = "<group>"; };
+		D715E4961A0936010026D91F /* UIButton+VerticalLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+VerticalLayout.m"; sourceTree = "<group>"; };
 		D72E1DAD19EE841E005DD8A5 /* Save a Selfie 2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Save a Selfie 2.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D72E1DB119EE841E005DD8A5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D72E1DB219EE841E005DD8A5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -82,6 +105,13 @@
 		D756A2A519F2F83D0089EF80 /* IntroViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntroViewController.m; sourceTree = "<group>"; };
 		D756A2A719F309690089EF80 /* TabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabBarController.h; sourceTree = "<group>"; };
 		D756A2A819F309690089EF80 /* TabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabBarController.m; sourceTree = "<group>"; };
+		D7F1D3E01A0C2DA6001F33D6 /* FacebookLogin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookLogin.h; sourceTree = "<group>"; };
+		D7F1D3E11A0C2DA6001F33D6 /* FacebookLogin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacebookLogin.m; sourceTree = "<group>"; };
+		D7F1D3E51A0C2DA6001F33D6 /* FBProtocols.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBProtocols.h; sourceTree = "<group>"; };
+		D7F1D3EB1A0C3285001F33D6 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../../../../../FacebookSDK/FacebookSDK.framework; sourceTree = "<group>"; };
+		D7F1D3EE1A111074001F33D6 /* FacebookVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacebookVC.m; sourceTree = "<group>"; };
+		D7F1D3EF1A111074001F33D6 /* FacebookVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookVC.h; sourceTree = "<group>"; };
+		D7F1D3F01A111074001F33D6 /* FacebookVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FacebookVC.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,13 +119,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0EAAC0F1A100F2D00C0F955 /* Accounts.framework in Frameworks */,
+				D0EAAC0D1A0FD63B00C0F955 /* MessageUI.framework in Frameworks */,
+				D0EAAC0B1A0FD59B00C0F955 /* Social.framework in Frameworks */,
 				D756A2A119F1D5D50089EF80 /* ImageIO.framework in Frameworks */,
+				D7F1D3EC1A0C3285001F33D6 /* FacebookSDK.framework in Frameworks */,
 				D756A29F19F1D4F10089EF80 /* AssetsLibrary.framework in Frameworks */,
 				D756A29219F174330089EF80 /* CoreFoundation.framework in Frameworks */,
 				D756A29319F174330089EF80 /* CoreGraphics.framework in Frameworks */,
 				D756A29419F174330089EF80 /* UIKit.framework in Frameworks */,
 				D756A28E19F173F00089EF80 /* CoreImage.framework in Frameworks */,
 				D72E1E4D19F06CEB005DD8A5 /* CoreLocation.framework in Frameworks */,
+				D0409D021A0ED2F30021AE67 /* FacebookSDK.framework in Frameworks */,
 				D72E1E4319EF3529005DD8A5 /* MapKit.framework in Frameworks */,
 				D72E1DDA19EE8652005DD8A5 /* AVFoundation.framework in Frameworks */,
 			);
@@ -112,6 +147,9 @@
 				D700239419F5253C00E45408 /* AlertBox.xib */,
 				D756A29519F175230089EF80 /* ExtendNSLogFunctionality.h */,
 				D756A29619F175230089EF80 /* ExtendNSLogFunctionality.m */,
+				D7F1D3E01A0C2DA6001F33D6 /* FacebookLogin.h */,
+				D7F1D3E11A0C2DA6001F33D6 /* FacebookLogin.m */,
+				D7F1D3E51A0C2DA6001F33D6 /* FBProtocols.h */,
 				D700239719F52E8800E45408 /* UIButton+Maker.h */,
 				D700239819F52E8800E45408 /* UIButton+Maker.m */,
 				D756A29719F175230089EF80 /* UIImage+Alpha.h */,
@@ -134,8 +172,6 @@
 			children = (
 				D756A2A419F2F83D0089EF80 /* IntroViewController.h */,
 				D756A2A519F2F83D0089EF80 /* IntroViewController.m */,
-				D72E1E4419F019DF005DD8A5 /* ThirdViewController.h */,
-				D72E1E4719F01A2D005DD8A5 /* ThirdViewController.m */,
 				D72E1DBA19EE841E005DD8A5 /* SnapViewController.h */,
 				D72E1DBB19EE841E005DD8A5 /* SnapViewController.m */,
 			);
@@ -145,6 +181,11 @@
 		D70023C419FC45FB00E45408 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D0EAAC0E1A100F2D00C0F955 /* Accounts.framework */,
+				D0EAAC0C1A0FD63B00C0F955 /* MessageUI.framework */,
+				D0EAAC0A1A0FD59B00C0F955 /* Social.framework */,
+				D0409D011A0ED2F20021AE67 /* FacebookSDK.framework */,
+				D7F1D3EB1A0C3285001F33D6 /* FacebookSDK.framework */,
 				D756A2A019F1D5D50089EF80 /* ImageIO.framework */,
 				D756A29E19F1D4F10089EF80 /* AssetsLibrary.framework */,
 				D756A28F19F174330089EF80 /* CoreFoundation.framework */,
@@ -177,8 +218,14 @@
 		D72E1DAF19EE841E005DD8A5 /* Save a Selfie 2 */ = {
 			isa = PBXGroup;
 			children = (
+				D7F1D3EE1A111074001F33D6 /* FacebookVC.m */,
+				D7F1D3EF1A111074001F33D6 /* FacebookVC.h */,
+				D7F1D3F01A111074001F33D6 /* FacebookVC.xib */,
 				D72E1DB419EE841E005DD8A5 /* AppDelegate.h */,
 				D72E1DB519EE841E005DD8A5 /* AppDelegate.m */,
+				D715E4921A06509B0026D91F /* EmergencyObjects.h */,
+				D715E4931A06509B0026D91F /* EmergencyObjects.m */,
+				D715E4901A06504C0026D91F /* EmergencyObjects.xib */,
 				D70023C419FC45FB00E45408 /* Frameworks */,
 				D70023C119FC440C00E45408 /* helpers */,
 				D72E1DC019EE841F005DD8A5 /* Images.xcassets */,
@@ -188,10 +235,16 @@
 				D72E1DB019EE841E005DD8A5 /* Supporting Files */,
 				D756A2A719F309690089EF80 /* TabBarController.h */,
 				D756A2A819F309690089EF80 /* TabBarController.m */,
+				D72E1E4419F019DF005DD8A5 /* ThirdViewController.h */,
+				D72E1E4719F01A2D005DD8A5 /* ThirdViewController.m */,
+				D715E48D1A064FDA0026D91F /* UIView+NibInitializer.h */,
+				D715E48E1A064FDA0026D91F /* UIView+NibInitializer.m */,
 				D72E1E4919F06AE7005DD8A5 /* UploadPictureViewController.h */,
 				D72E1E4A19F06AE7005DD8A5 /* UploadPictureViewController.m */,
 				D72E1DB719EE841E005DD8A5 /* WebsiteViewController.h */,
 				D72E1DB819EE841E005DD8A5 /* WebsiteViewController.m */,
+				D715E4951A0936010026D91F /* UIButton+VerticalLayout.h */,
+				D715E4961A0936010026D91F /* UIButton+VerticalLayout.m */,
 			);
 			path = "Save a Selfie 2";
 			sourceTree = "<group>";
@@ -236,6 +289,7 @@
 				TargetAttributes = {
 					D72E1DAC19EE841E005DD8A5 = {
 						CreatedOnToolsVersion = 6.0.1;
+						DevelopmentTeam = X4V83UZ84G;
 					};
 				};
 			};
@@ -265,7 +319,9 @@
 				D700239619F5253C00E45408 /* AlertBox.xib in Resources */,
 				D72E1DBF19EE841E005DD8A5 /* Main.storyboard in Resources */,
 				D72E1DC419EE841F005DD8A5 /* LaunchScreen.xib in Resources */,
+				D7F1D3F21A111074001F33D6 /* FacebookVC.xib in Resources */,
 				D72E1DC119EE841F005DD8A5 /* Images.xcassets in Resources */,
+				D715E4911A06504C0026D91F /* EmergencyObjects.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -276,16 +332,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D7F1D3F11A111074001F33D6 /* FacebookVC.m in Sources */,
 				D700239919F52E8800E45408 /* UIButton+Maker.m in Sources */,
 				D756A29C19F175230089EF80 /* UIImage+Alpha.m in Sources */,
 				D72E1DB619EE841E005DD8A5 /* AppDelegate.m in Sources */,
+				D715E48F1A064FDA0026D91F /* UIView+NibInitializer.m in Sources */,
 				D72E1DB919EE841E005DD8A5 /* WebsiteViewController.m in Sources */,
 				D756A2A919F309690089EF80 /* TabBarController.m in Sources */,
+				D715E4941A06509B0026D91F /* EmergencyObjects.m in Sources */,
 				D700239C19F52E9E00E45408 /* UIView+FrameValues.m in Sources */,
+				D715E4861A05A5480026D91F /* ThirdViewController.m in Sources */,
 				D756A29D19F175230089EF80 /* UIImage+RoundedCorner.m in Sources */,
 				D72E1E4B19F06AE7005DD8A5 /* UploadPictureViewController.m in Sources */,
 				D72E1DB319EE841E005DD8A5 /* main.m in Sources */,
 				D700239519F5253C00E45408 /* AlertBox.m in Sources */,
+				D715E4971A0936010026D91F /* UIButton+VerticalLayout.m in Sources */,
 				D700239D19F52EB700E45408 /* ExtendNSLogFunctionality.m in Sources */,
 				D756A28C19F1735E0089EF80 /* UIImage+Resize.m in Sources */,
 				D70023B419FBC5A600E45408 /* UIView+WidthXY.m in Sources */,
@@ -397,6 +458,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Save",
+					a,
+					Selfie,
+					2,
+					/Users/peterfitzgerald/Documents/app/FacebookSDK,
+					/Users/Peter/Documents/app/FacebookSDK,
+				);
 				INFOPLIST_FILE = "Save a Selfie 2/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -410,6 +480,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Save",
+					a,
+					Selfie,
+					2,
+					/Users/peterfitzgerald/Documents/app/FacebookSDK,
+					/Users/Peter/Documents/app/FacebookSDK,
+				);
 				INFOPLIST_FILE = "Save a Selfie 2/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
