@@ -52,11 +52,11 @@ extern BOOL NSLogOn;
 	[self addSubview:messageLabel];
 	if (button1Text) {
 		button1 = [UIButton buttonWithType:UIButtonTypeCustom];
-		button1 = [UIButton makeButton:button1Text dimensions:CGRectMake(0, 0, boxWidth, boxHeight * 0.3)];
+        button1 = [UIButton makeButton:button1Text addShine:YES dimensions:CGRectMake(0, 0, boxWidth, boxHeight * 0.3)];
 		[button1 addTarget:callingViewController action:action1 forControlEvents:UIControlEventTouchUpInside];
 		if (button2Text) {
 			button2 = [UIButton buttonWithType:UIButtonTypeCustom];
-			button2 = [UIButton makeButton:button2Text dimensions:CGRectMake(boxWidth * 0.525, boxHeight * 0.6, boxWidth * 0.425, boxHeight * 0.3)];
+			button2 = [UIButton makeButton:button2Text addShine:YES dimensions:CGRectMake(boxWidth * 0.525, boxHeight * 0.6, boxWidth * 0.425, boxHeight * 0.3)];
 			[button2 addTarget:callingViewController action:action2 forControlEvents:UIControlEventTouchUpInside];
 			[self addSubview:button2];
 			button1.frame = CGRectMake(0.05 * boxWidth, boxHeight * 0.6, boxWidth * 0.425, boxHeight * 0.3);

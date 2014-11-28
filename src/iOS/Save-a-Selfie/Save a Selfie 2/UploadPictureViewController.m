@@ -180,19 +180,19 @@ extern NSString *facebookUsername;
     _typeInfoHere.frame = CGRectMake(f.origin.x + 15, f.origin.y + 15, _typeInfoHere.frame.size.width, _typeInfoHere.frame.size.height);
     [_littleGuy moveObject:-100 overTimePeriod:0];
     _littleGuy.hidden = NO;
-    [_littleGuy moveObject:330 overTimePeriod:0.5];
+    [_littleGuy moveObject:300 overTimePeriod:0.5];
     [_multipurposeLabel changeViewWidth:screenWidth - 52 atX:9999 centreIt:YES duration:0];
     [_multilabelBackground changeViewWidth:screenWidth - 40 atX:9999 centreIt:YES duration:0];
     [_multipurposeLabel moveObject:screenHeight + 100 overTimePeriod:0];
     _multipurposeLabel.hidden = NO;
-    [_multipurposeLabel moveObject:400 overTimePeriod:0.5];
+    [_multipurposeLabel moveObject:370 overTimePeriod:0.5];
     [_multilabelBackground moveObject:screenHeight + 100 overTimePeriod:0];
     _multilabelBackground.hidden = NO;
-    [_multilabelBackground moveObject:394 overTimePeriod:0.5];
+    [_multilabelBackground moveObject:364 overTimePeriod:0.5];
     _multipurposeLabel.text = @"Tap 'Photo' below to take or retrieve a photo, or 'Locate / Info' to find a defibrillator, see photos, or learn about the project";
     float newSendX = _multilabelBackground.frame.origin.x + _multilabelBackground.frame.size.width - _sendButton.frame.size.width;
     [_sendButton changeViewWidth:_sendButton.frame.size.width atX:newSendX centreIt:NO duration:0];
-    _backArrow.frame = CGRectMake(_multilabelBackground.frame.origin.x, _littleGuy.frame.origin.y + 20, _backArrow.frame.size.width,     _backArrow.frame.size.height);
+    _backArrow.frame = CGRectMake(_multilabelBackground.frame.origin.x, _littleGuy.frame.origin.y + 30, _backArrow.frame.size.width, _backArrow.frame.size.height);
     _typeInfoHere.hidden = YES;
     _commentField.hidden = YES;
     firstAppearance = NO;
@@ -448,7 +448,7 @@ extern NSString *facebookUsername;
     _commentField.hidden = NO;
     _commentField.editable = YES;
     _typeInfoHere.hidden = NO;
-    _backArrow.frame = CGRectOffset(_backArrow.frame, 0, -18);
+//    _backArrow.frame = CGRectOffset(_backArrow.frame, 0, -18);
     [self showInstructions:@"Before uploading, please add some useful information below – name of location, where the defibrillator is in the location, etc."];
     // fade out the photo, as the instructions have come up in front of it
     [UIView animateWithDuration:5.0 animations:^{ _imageView.alpha = 0.5; }];
@@ -468,10 +468,13 @@ extern NSString *facebookUsername;
 - (IBAction)sendIt:(id)sender { // not ready to send quite yet: find out which type of object (AED, life-ring, etc.)
     [self shutKeyboard:_commentField];
     // move little guy etc. down
-    [_littleGuy moveObject:230 overTimePeriod:0.5];
-    [_multipurposeLabel moveObject:300 overTimePeriod:0.5];
-    [_multilabelBackground moveObject:294 overTimePeriod:0.5];
+    [_littleGuy moveObject:260 overTimePeriod:0.5];
+    [_multipurposeLabel moveObject:330 overTimePeriod:0.5];
+    [_multilabelBackground moveObject:324 overTimePeriod:0.5];
     _multipurposeLabel.text = @"Please select one of the objects above, corresponding to what is in the photo.";
+    
+    [_multipurposeLabel changeViewWidth:_multipurposeLabel.frame.size.width * 0.75 atX:screenWidth * 0.25 centreIt:NO duration:0.5];
+    [_multilabelBackground changeViewWidth:_multilabelBackground.frame.size.width * 0.75 atX:screenWidth * 0.25 - 6 centreIt:NO duration:0.5];
 
     // display set of four objects
     emergencyObjects = [[EmergencyObjects alloc] initWithNibNamed:nil];
@@ -482,9 +485,12 @@ extern NSString *facebookUsername;
 
 -(void)objectTypeChosen {
     // comes here after user chooses object type via EmergencyObjects.m
+    plog(@"chosen object: %d", chosenObject);
     [emergencyObjects moveObject:-emergencyObjects.frame.size.height overTimePeriod:0.75]; // hide display of object types
-    [self sendImageToServer];
-	[self shareViaFB];
+    if(chosenObject >= 0) { // -1 => cancelled
+        [self sendImageToServer];
+        [self shareViaFB];
+    } else [self OKAction:self];
 }
 
 - (void) sendImageToServer {
@@ -586,6 +592,9 @@ extern NSString *facebookUsername;
     [_littleGuy moveObject:280 overTimePeriod:0.5];
     [_multipurposeLabel moveObject:350 overTimePeriod:0.5];
     [_multilabelBackground moveObject:344 overTimePeriod:0.5];
+    [_multipurposeLabel changeViewWidth:screenWidth - 52 atX:26 centreIt:YES duration:0.5];
+    [_multilabelBackground changeViewWidth:screenWidth - 40 atX:20 centreIt:YES duration:0.5];
+
     // save ID and caption to user's data file - to avoid duplicates
     [[NSUserDefaults standardUserDefaults] setValue:caption forKey:photoID];
     [[NSUserDefaults standardUserDefaults] synchronize];
@@ -620,7 +629,8 @@ extern NSString *facebookUsername;
 }
 
 -(void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
-    [self checkPermissions];
+    plog(@"didChangeAuthorizationStatus");
+    if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorizedWhenInUse) [_locationManager startUpdatingLocation];
 }
 
 -(BOOL)checkPermissions {
@@ -727,7 +737,7 @@ extern NSString *facebookUsername;
 -(BOOL)textViewShouldEndEditing:(UITextView *)textView{
 //    plog(@"textViewShouldEndEditing");
     [textView resignFirstResponder];
-    _backArrow.frame = CGRectOffset(_backArrow.frame, 0, 18);
+//    _backArrow.frame = CGRectOffset(_backArrow.frame, 0, 18);
     return YES;
 }
 

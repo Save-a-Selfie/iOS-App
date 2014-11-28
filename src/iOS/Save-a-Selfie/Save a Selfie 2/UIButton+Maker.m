@@ -9,7 +9,7 @@
 
 @implementation UIButton (Maker)
 
-+(UIButton *)makeButton:(NSString *)buttonText dimensions:(CGRect)dimensions {
++(UIButton *)makeButton:(NSString *)buttonText addShine:(BOOL)addShine dimensions:(CGRect)dimensions {
 	UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
 	button.frame = dimensions;
 	[button setShowsTouchWhenHighlighted:YES];
@@ -25,7 +25,7 @@
 	button.alpha = 1.0;
 	[button setTitleColor:[UIColor colorWithRed:0.1 green:0.1 blue:0.5 alpha:1.0] forState:UIControlStateNormal];
 	[button.titleLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:16.0]];
-	[UIButton addShineLayer:button];
+	if (addShine) [UIButton addShineLayer:button];
 	return button;
 }
 

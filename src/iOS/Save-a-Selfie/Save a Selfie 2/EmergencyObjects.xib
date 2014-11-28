@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
@@ -39,16 +39,6 @@
                     </state>
                     <connections>
                         <action selector="EmObjTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="y40-fF-sce"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="DTI-8v-Gbi">
-                    <rect key="frame" x="43" y="288" width="94" height="50"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="Upload photo">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="uploadPhoto:" destination="iN0-l3-epB" eventType="touchUpInside" id="UJY-mY-eCm"/>
                     </connections>
                 </button>
                 <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="oah-6I-I1v">
@@ -100,15 +90,14 @@
                 <outlet property="background2" destination="dfC-6g-1Kn" id="qbi-ZS-H9Z"/>
                 <outlet property="background3" destination="uPh-ev-pWc" id="gzR-uX-gdM"/>
                 <outlet property="background4" destination="TIS-TS-NeI" id="wn6-gv-zxt"/>
-                <outlet property="uploadButton" destination="DTI-8v-Gbi" id="Yvc-Qu-P8K"/>
             </connections>
             <point key="canvasLocation" x="18" y="474"/>
         </view>
     </objects>
     <resources>
         <image name="defibrillator@2x.jpg" width="320" height="299"/>
-        <image name="firstAidKit.jpg" width="320" height="299"/>
-        <image name="hydrant.jpg" width="320" height="299"/>
+        <image name="firstAidKit.jpg" width="40" height="40"/>
+        <image name="hydrant.jpg" width="40" height="47"/>
         <image name="lifeRing-1" width="40" height="40"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

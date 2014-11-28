@@ -13,12 +13,11 @@
 @property (weak, nonatomic) IBOutlet UIButton *EmObj2;
 @property (weak, nonatomic) IBOutlet UIButton *EmObj3;
 @property (weak, nonatomic) IBOutlet UIButton *EmObj4;
-@property (weak, nonatomic) IBOutlet UIButton *uploadButton;
+//@property (weak, nonatomic) IBOutlet UIButton *uploadButton;
 @property (weak, nonatomic) IBOutlet UILabel *background1;
 @property (weak, nonatomic) IBOutlet UILabel *background2;
 @property (weak, nonatomic) IBOutlet UILabel *background3;
 @property (weak, nonatomic) IBOutlet UILabel *background4;
 - (IBAction)EmObjTapped:(id)sender;
 - (IBAction)EmergencyObjectsViewLoaded;
-- (IBAction)uploadPhoto:(id)sender;
 @end

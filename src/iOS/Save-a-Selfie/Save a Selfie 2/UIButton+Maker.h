@@ -10,7 +10,7 @@
 
 @interface UIButton (Maker)
 
-+(UIButton *) makeButton:(NSString *)buttonText dimensions:(CGRect)dimensions;
++(UIButton *)makeButton:(NSString *)buttonText addShine:(BOOL)addShine dimensions:(CGRect)dimensions;
 +(void)addShineLayer:(UIButton *)button;
 
 @end
