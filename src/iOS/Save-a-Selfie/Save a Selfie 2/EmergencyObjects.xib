@@ -4,6 +4,14 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="trade-gothic-lt-1361519976.ttf">
+            <string>TradeGothicLT</string>
+            <string>TradeGothicLT</string>
+            <string>TradeGothicLT</string>
+            <string>TradeGothicLT</string>
+        </mutableArray>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -14,7 +22,8 @@
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="8Sv-bI-pjE">
                     <rect key="frame" x="18" y="101" width="132" height="39"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="Defibrillator" image="defibrillator@2x.jpg">
+                    <fontDescription key="fontDescription" name="TradeGothicLT" family="TradeGothic LT" pointSize="15"/>
+                    <state key="normal" title="Defibrillator" image="defibrillator">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -24,6 +33,7 @@
                 <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Hso-aA-RoZ">
                     <rect key="frame" x="180" y="76" width="111" height="40"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" name="TradeGothicLT" family="TradeGothic LT" pointSize="15"/>
                     <state key="normal" title="Life Ring" image="lifeRing-1">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -34,7 +44,8 @@
                 <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="wyB-rA-O65">
                     <rect key="frame" x="183" y="176" width="105" height="47"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="Hydrant" image="hydrant.jpg">
+                    <fontDescription key="fontDescription" name="TradeGothicLT" family="TradeGothic LT" pointSize="15"/>
+                    <state key="normal" title="Hydrant" image="hydrant">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -44,7 +55,8 @@
                 <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="oah-6I-I1v">
                     <rect key="frame" x="17" y="180" width="134" height="40"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="First Aid Kit" image="firstAidKit.jpg">
+                    <fontDescription key="fontDescription" name="TradeGothicLT" family="TradeGothic LT" pointSize="15"/>
+                    <state key="normal" title="First Aid Kit" image="firstAidKit">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -95,9 +107,9 @@
         </view>
     </objects>
     <resources>
-        <image name="defibrillator@2x.jpg" width="320" height="299"/>
-        <image name="firstAidKit.jpg" width="40" height="40"/>
-        <image name="hydrant.jpg" width="40" height="47"/>
+        <image name="defibrillator" width="40" height="37"/>
+        <image name="firstAidKit" width="40" height="40"/>
+        <image name="hydrant" width="40" height="47"/>
         <image name="lifeRing-1" width="40" height="40"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

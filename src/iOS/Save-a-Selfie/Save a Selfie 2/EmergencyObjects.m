@@ -127,7 +127,8 @@ extern int chosenObject;
     [button setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
 //    [(UILabel *)labelPointer[button.tag] setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.125]];
     uploadButton.enabled = YES;
-    [uploadButton setTitleColor:[UIColor colorWithRed:0.25 green:1 blue:0.25 alpha:1] forState:UIControlStateNormal];
+    [uploadButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [uploadButton setBackgroundColor:[UIColor colorWithRed:0.2 green:1 blue:0.2 alpha:0.5]];
     chosenObject = button.tag;
     [button bounceObject:20];
 }

@@ -23,11 +23,14 @@ NSString *facebookUsername;
 NSString *const objectChosen = @"object chosen"; // will be used in EmergencyObjects.m
 NSString *const userSkippedLogin = @"user skipped login";
 NSString *const applicationWillEnterForeground = @"application returned to foreground"; // may have left to sort out permissions issues
+UIFont *customFont, *customFontSmaller;
 
 BOOL NSLogOn = YES; // YES to show logs, NO if not
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     plog(@"Launching");
+    customFont = [UIFont fontWithName:@"TradeGothic LT" size:17];
+    customFontSmaller = [UIFont fontWithName:@"TradeGothic LT" size:14];
     [FBLoginView class];
     // Whenever a person opens the app, check for a cached session
     if (FBSession.activeSession.state == FBSessionStateCreatedTokenLoaded) {
@@ -45,7 +48,6 @@ BOOL NSLogOn = YES; // YES to show logs, NO if not
 	 addObserver:self selector:@selector(swapViewControllers)
 	 name:userSkippedLogin
 	 object:nil];
-
     return YES;
 }
 

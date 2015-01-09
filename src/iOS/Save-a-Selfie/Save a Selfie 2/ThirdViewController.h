@@ -10,7 +10,10 @@
 #import <AVFoundation/AVFoundation.h>
 
 @interface ThirdViewController : UIViewController <UIWebViewDelegate>
-@property (weak, nonatomic) IBOutlet UIWebView *webView;
+@property (weak, nonatomic) IBOutlet UILabel *multipurposeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *multilabelBackground;
+@property (weak, nonatomic) IBOutlet UIImageView *littleGuy;
+- (IBAction)buttonTapped:(id)sender;
 
 @end
 

@@ -22,6 +22,7 @@ extern UIImage *photoImage;
 extern NSString *const userSkippedLogin;
 float screenHeight, screenWidth;
 AlertBox *FBAlert;
+extern UIFont *customFont;
 
 // **** need to check whether user is already logged in
 
@@ -55,7 +56,8 @@ AlertBox *FBAlert;
         [_multilabelBackground moveObject:screenHeight + 100 overTimePeriod:0];
         _multilabelBackground.hidden = NO;
         [_multilabelBackground moveObject:screenHeight * 0.5 - 6 overTimePeriod:0.5];
-        _multipurposeLabel.text = @"Welcome! If you have a Facebook account, you can log in to it in order to share your selfies. Or tap 'Skip Facebook Login'";
+        _multipurposeLabel.text = @"Welcome! If you have a Facebook account, you can log in to it in order to share your selfies. Or tap 'Skip Facebook Login'.";
+        _multipurposeLabel.font = customFont;
         [loginView moveObject:screenHeight - 150 overTimePeriod:1];
         [_skipFacebookLoginButton moveObject:screenHeight - 75 overTimePeriod:1.25];
     });

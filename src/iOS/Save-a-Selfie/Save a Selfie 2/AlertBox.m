@@ -15,6 +15,7 @@
 
 @synthesize messageLabel, button1, button2, backgroundBox;
 extern BOOL NSLogOn;
+extern UIFont *customFont, *customFontSmaller;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -42,11 +43,12 @@ extern BOOL NSLogOn;
 	[self addSubview:backgroundBox];
 	messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(layer.borderWidth * 2, 0, boxWidth - layer.borderWidth * 4, button1Text ? boxHeight * 0.6 : boxHeight)];
 	messageLabel.text = message;
+    messageLabel.font = customFont;
 //	messageLabel.textColor = [UIColor whiteColor];
 	messageLabel.textColor = [UIColor blackColor];
 	messageLabel.backgroundColor = [UIColor clearColor];
 //	messageLabel.layer.cornerRadius = 12.0f;
-	[messageLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:15.0]];
+//	[messageLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:15.0]];
 	messageLabel.textAlignment = centreText ? NSTextAlignmentCenter : NSTextAlignmentLeft;
 	messageLabel.numberOfLines = 0;
 	[self addSubview:messageLabel];
@@ -54,10 +56,12 @@ extern BOOL NSLogOn;
 		button1 = [UIButton buttonWithType:UIButtonTypeCustom];
         button1 = [UIButton makeButton:button1Text addShine:YES dimensions:CGRectMake(0, 0, boxWidth, boxHeight * 0.3)];
 		[button1 addTarget:callingViewController action:action1 forControlEvents:UIControlEventTouchUpInside];
+        button1.titleLabel.font = customFontSmaller;
 		if (button2Text) {
 			button2 = [UIButton buttonWithType:UIButtonTypeCustom];
 			button2 = [UIButton makeButton:button2Text addShine:YES dimensions:CGRectMake(boxWidth * 0.525, boxHeight * 0.6, boxWidth * 0.425, boxHeight * 0.3)];
 			[button2 addTarget:callingViewController action:action2 forControlEvents:UIControlEventTouchUpInside];
+            button2.titleLabel.font = customFontSmaller;
 			[self addSubview:button2];
 			button1.frame = CGRectMake(0.05 * boxWidth, boxHeight * 0.6, boxWidth * 0.425, boxHeight * 0.3);
 		} else {

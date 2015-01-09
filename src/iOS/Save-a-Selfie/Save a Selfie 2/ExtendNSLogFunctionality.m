@@ -1,8 +1,5 @@
 //
 //  ExtendNSLogFunctionality.m
-//  Photoapp4it
-//
-//  Created by Peter FitzGerald on 17/11/2013.
 //
 
 #import "ExtendNSLogFunctionality.h"

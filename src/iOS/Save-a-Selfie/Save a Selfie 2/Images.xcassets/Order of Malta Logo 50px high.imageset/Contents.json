@@ -2,12 +2,12 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x"
+      "scale" : "1x",
+      "filename" : "Order of Malta Logo 50px high.png"
     },
     {
       "idiom" : "universal",
-      "scale" : "2x",
-      "filename" : "globe@2x.png"
+      "scale" : "2x"
     },
     {
       "idiom" : "universal",
