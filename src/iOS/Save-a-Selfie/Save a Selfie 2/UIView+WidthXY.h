@@ -9,6 +9,7 @@
 
 @interface UIView (WidthXY)
 -(void)moveObject:(float)y overTimePeriod:(float)period;
+-(void)moveObject:(float)y overTimePeriod:(float)period notification:(NSString *)notification;
 -(void)bounceObject:(float)y;
 -(void)changeViewWidth:(float)newWidth atX:(float)x centreIt:(BOOL)centrify duration:(float)duration;
 @end

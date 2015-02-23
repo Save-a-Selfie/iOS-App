@@ -25,6 +25,7 @@ extern NSArray *deviceNames;
         _app = [info objectAtIndex:6]; // iPhone app / Instagram / Twitter
         plog(@"_standard_resolution: %@", _standard_resolution);
 	}
+    plog(@"%@", self);
 	return self;
 }
 @end

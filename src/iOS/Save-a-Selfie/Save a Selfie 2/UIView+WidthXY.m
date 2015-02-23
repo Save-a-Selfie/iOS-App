@@ -6,16 +6,34 @@
 //
 
 #import "UIView+WidthXY.h"
+#import "AppDelegate.h"
+#import "ExtendNSLogFunctionality.h"
 
 @implementation UIView (WidthXY)
 
--(void)moveObject:(float)y overTimePeriod:(float)period {
+-(void)xmoveObject:(float)y overTimePeriod:(float)period {
     // moves any view to y value over period seconds
     // !! autolayout must be OFF in Storyboard !!
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:period];
     self.frame = CGRectMake(self.frame.origin.x, y, self.frame.size.width, self.frame.size.height);
     [UIView commitAnimations];
+}
+
+-(void)moveObject:(float)y overTimePeriod:(float)period {
+    [UIView animateWithDuration:period animations:^{
+        self.frame = CGRectMake(self.frame.origin.x, y, self.frame.size.width, self.frame.size.height);
+    } completion:^(BOOL finished){
+//        plog(@"%@ now at %f", self, self.frame.origin.y);
+    }];
+}
+
+-(void)moveObject:(float)y overTimePeriod:(float)period notification:(NSString *)notification {
+    [UIView animateWithDuration:period animations:^{
+        self.frame = CGRectMake(self.frame.origin.x, y, self.frame.size.width, self.frame.size.height);
+    } completion:^(BOOL finished){
+        [[NSNotificationCenter defaultCenter] postNotificationName:notification object:nil];
+    }];
 }
 
 -(void)bounceObject:(float)y {

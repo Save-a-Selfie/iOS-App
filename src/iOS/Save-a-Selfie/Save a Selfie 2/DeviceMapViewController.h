@@ -6,7 +6,6 @@
 #import <MapKit/MapKit.h>
 #import <ImageIO/ImageIO.h>
 #import <MapKit/MKAnnotation.h>
-#import "MBProgressHUD.h"
 #import "MKSASAnnotationView.h"
 #import <MobileCoreServices/MobileCoreServices.h>
 #import <CoreLocation/CoreLocation.h>
@@ -18,5 +17,7 @@
 
 @interface DeviceMapViewController : UIViewController <MKMapViewDelegate, CLLocationManagerDelegate, UITextFieldDelegate, UINavigationControllerDelegate, CLLocationManagerDelegate, UITabBarControllerDelegate>
 @property(weak, nonatomic) IBOutlet MKMapView *mapView;
+@property (strong, nonatomic) IBOutlet UIButton *locateUserButton;
+- (IBAction)locateUserMethod:(id)sender;
 
 @end

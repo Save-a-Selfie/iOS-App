@@ -12,7 +12,7 @@
 @interface PopupImage : UIView
 @property (weak, nonatomic) IBOutlet UITextView *textView;
 @property (weak, nonatomic) IBOutlet UILabel *background;
-@property (weak, nonatomic) IBOutlet UIButton *xButton;
+@property (strong, nonatomic) IBOutlet UIButton *xButton;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 - (IBAction)closePopup:(id)sender;
 

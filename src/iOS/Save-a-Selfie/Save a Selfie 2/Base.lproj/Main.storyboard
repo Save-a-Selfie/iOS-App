@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="49e-Tb-3d3">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="trade-gothic-lt-1361519976.ttf">
+            <string>TradeGothicLT</string>
+            <string>TradeGothicLT</string>
             <string>TradeGothicLT</string>
             <string>TradeGothicLT</string>
             <string>TradeGothicLT</string>
@@ -26,11 +28,22 @@
                                 <rect key="frame" x="0.0" y="20" width="320" height="502"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="fzB-ad-Zro">
+                                <rect key="frame" x="238" y="386" width="43" height="43"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="locationIcon">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="locateUserMethod:" destination="2wZ-ue-5em" eventType="touchUpInside" id="xr1-0c-2EH"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Locate" image="globe" id="2EB-UL-wsH"/>
                     <connections>
+                        <outlet property="locateUserButton" destination="fzB-ad-Zro" id="Ta2-yX-5rW"/>
                         <outlet property="mapView" destination="9DK-rr-TIi" id="sjz-rJ-WEC"/>
                     </connections>
                 </viewController>
@@ -76,16 +89,6 @@
                                     <action selector="buttonTapped:" destination="LKF-Xc-SHc" eventType="touchUpInside" id="o6F-7D-4jQ"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="6Xg-Um-u1g">
-                                <rect key="frame" x="187" y="152" width="150" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="Code for ireland logo transparent">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="buttonTapped:" destination="LKF-Xc-SHc" eventType="touchUpInside" id="1s4-a5-jG1"/>
-                                </connections>
-                            </button>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" alpha="0.80000001192092896" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="gXb-fi-H8P">
                                 <rect key="frame" x="16" y="323" width="294" height="100"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -106,11 +109,25 @@
                                 <rect key="frame" x="203" y="336" width="75" height="75"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="6Xg-Um-u1g">
+                                <rect key="frame" x="187" y="152" width="150" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="Code for ireland logo transparent">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="buttonTapped:" destination="LKF-Xc-SHc" eventType="touchUpInside" id="1s4-a5-jG1"/>
+                                </connections>
+                            </button>
                         </subviews>
-                        <color key="backgroundColor" white="0.89915707236842102" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Info" image="info_24" id="Dcc-4p-yO1"/>
                     <connections>
+                        <outlet property="button1" destination="cwu-c2-Mng" id="W8i-wm-NCC"/>
+                        <outlet property="button2" destination="JzE-qh-yUP" id="0JN-jw-FRn"/>
+                        <outlet property="button3" destination="KAK-eD-hkX" id="usf-FL-adh"/>
+                        <outlet property="button4" destination="6Xg-Um-u1g" id="KnT-A3-kuy"/>
                         <outlet property="littleGuy" destination="hDv-oj-CD0" id="Kua-MA-mNE"/>
                         <outlet property="multilabelBackground" destination="gXb-fi-H8P" id="R2o-ZW-3gQ"/>
                         <outlet property="multipurposeLabel" destination="7GL-mp-O2W" id="Lf7-fm-QMb"/>
@@ -138,31 +155,20 @@
                                     <action selector="backArrowAction:" destination="TVY-Ut-sMj" eventType="touchUpInside" id="aww-I5-Bz3"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Type location info here..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ato-4C-iGz">
-                                <rect key="frame" x="23" y="371" width="171" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="TradeGothicLT" family="TradeGothic LT" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.5" contentMode="scaleToFill" id="2lg-S4-d5n">
-                                <rect key="frame" x="13" y="362" width="294" height="157"/>
+                                <rect key="frame" x="10" y="364" width="294" height="157"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="TradeGothicLT" family="TradeGothic LT" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="3vJ-kL-pyY">
-                                <rect key="frame" x="250" y="329" width="37" height="30"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Type location info here..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ato-4C-iGz">
+                                <rect key="frame" x="23" y="371" width="221" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="TradeGothicLT" family="TradeGothic LT" pointSize="15"/>
-                                <state key="normal" title="Send">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="sendIt:" destination="TVY-Ut-sMj" eventType="touchUpInside" id="GLC-S2-50W"/>
-                                </connections>
-                            </button>
+                                <fontDescription key="fontDescription" name="TradeGothicLT" family="TradeGothic LT" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="Rqg-SJ-Mhe">
                                 <rect key="frame" x="160" y="42" width="160" height="285"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -176,7 +182,7 @@
                                 <rect key="frame" x="0.0" y="42" width="160" height="285"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </mapView>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" alpha="0.79999999999999982" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="uRp-Lq-gq7">
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" alpha="0.89999999999999991" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="uRp-Lq-gq7">
                                 <rect key="frame" x="13" y="393" width="294" height="100"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -203,8 +209,8 @@
                                     <action selector="sendToFBAction:" destination="TVY-Ut-sMj" eventType="valueChanged" id="MPX-PU-bIC"/>
                                 </connections>
                             </switch>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Share this on Facebook" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Hc2-62-CLw">
-                                <rect key="frame" x="87" y="522" width="182" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Share on Facebook" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Hc2-62-CLw">
+                                <rect key="frame" x="77" y="522" width="182" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="TradeGothicLT" family="TradeGothic LT" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -224,7 +230,6 @@
                         <outlet property="mapView" destination="GKL-ZG-39F" id="cF1-OZ-rX7"/>
                         <outlet property="multilabelBackground" destination="uRp-Lq-gq7" id="FB0-sV-Fgv"/>
                         <outlet property="multipurposeLabel" destination="6vp-A0-96U" id="D2n-oM-xXB"/>
-                        <outlet property="sendButton" destination="3vJ-kL-pyY" id="nxx-3Q-w5f"/>
                         <outlet property="sendToFBButton" destination="bIk-oi-EUm" id="YRQ-fg-EWi"/>
                         <outlet property="sendToFBLabel" destination="Hc2-62-CLw" id="vCE-eF-sBN"/>
                         <outlet property="typeInfoHere" destination="ato-4C-iGz" id="NDa-83-cpW"/>
@@ -279,20 +284,9 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SAS_75" id="NGI-4J-wy2">
-                                <rect key="frame" x="210" y="87" width="75" height="75"/>
+                                <rect key="frame" x="210" y="83" width="75" height="75"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Hkh-lR-e5f">
-                                <rect key="frame" x="88" y="428" width="145" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="TradeGothicLT" family="TradeGothic LT" pointSize="15"/>
-                                <state key="normal" title="Skip Facebook Login">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="skipFacebookLoginTapped:" destination="hN3-jW-XAE" eventType="touchUpInside" id="q0H-8b-th4"/>
-                                </connections>
-                            </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="Jzn-QE-EhX">
                                 <rect key="frame" x="50" y="77" width="75" height="75"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -301,16 +295,56 @@
                                 <rect key="frame" x="24" y="20" width="145" height="138"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SAVING LIVES." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="kve-mp-Yhw">
+                                <rect key="frame" x="24" y="239" width="200" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="TradeGothicLT" family="TradeGothic LT" pointSize="17"/>
+                                <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CHANGING LIVES." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="cvW-Gd-IeP">
+                                <rect key="frame" x="24" y="319" width="200" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="TradeGothicLT" family="TradeGothic LT" pointSize="17"/>
+                                <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TOUCHING LIVES." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="foo-hq-1pK">
+                                <rect key="frame" x="24" y="272" width="200" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="TradeGothicLT" family="TradeGothic LT" pointSize="17"/>
+                                <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SAS 300" id="nhD-Iy-nM1">
+                                <rect key="frame" x="40" y="150" width="240" height="230"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Hkh-lR-e5f">
+                                <rect key="frame" x="128" y="428" width="64" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="TradeGothicLT" family="TradeGothic LT" pointSize="15"/>
+                                <state key="normal" title="Continue!">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="skipFacebookLoginTapped:" destination="hN3-jW-XAE" eventType="touchUpInside" id="q0H-8b-th4"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Start" image="SAS_25" id="Ivf-QW-ma5"/>
                     <connections>
                         <outlet property="FBUserFace" destination="Jzn-QE-EhX" id="GkN-mL-m0B"/>
+                        <outlet property="biggerGuy" destination="nhD-Iy-nM1" id="mgF-Qp-o1H"/>
                         <outlet property="littleGuy" destination="NGI-4J-wy2" id="AQe-9Q-BpG"/>
                         <outlet property="multilabelBackground" destination="Oog-4A-Wl2" id="LCg-fd-Llk"/>
                         <outlet property="multipurposeLabel" destination="uUB-vD-MVu" id="krT-so-Ci9"/>
                         <outlet property="skipFacebookLoginButton" destination="Hkh-lR-e5f" id="pxN-6x-kxw"/>
+                        <outlet property="slogan1" destination="kve-mp-Yhw" id="x02-Wu-Jhe"/>
+                        <outlet property="slogan2" destination="cvW-Gd-IeP" id="bhl-KF-niz"/>
+                        <outlet property="slogan3" destination="foo-hq-1pK" id="7jz-as-jqL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IEp-X6-upy" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -341,6 +375,7 @@
     <resources>
         <image name="Code for ireland logo transparent" width="100" height="53"/>
         <image name="Order of Malta 300" width="300" height="108"/>
+        <image name="SAS 300" width="300" height="313"/>
         <image name="SAS vertical 280" width="280" height="262"/>
         <image name="SAS_25" width="25" height="25"/>
         <image name="SAS_75" width="75" height="75"/>
@@ -349,6 +384,7 @@
         <image name="dublin fire brigade 300" width="300" height="300"/>
         <image name="globe" width="24" height="24"/>
         <image name="info_24" width="24" height="24"/>
+        <image name="locationIcon" width="43" height="43"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

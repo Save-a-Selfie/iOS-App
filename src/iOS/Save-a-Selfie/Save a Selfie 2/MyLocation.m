@@ -19,8 +19,8 @@ extern NSArray *devicePins;
         _device = d;
         _index = dNo;
     }
-    plog(@"dNo is %d", dNo);
-    plog(@"self.image (%d): %@, %@, %d, %@", dNo, self.image, _image, d.typeOfObjectInt, d.typeOfObject);
+//    plog(@"dNo is %d", dNo);
+//    plog(@"self.image (%d): %@, %@, %d, %@", dNo, self.image, _image, d.typeOfObjectInt, d.typeOfObject);
     return self;
 }
 

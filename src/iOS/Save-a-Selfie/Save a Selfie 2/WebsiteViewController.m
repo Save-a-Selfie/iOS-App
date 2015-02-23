@@ -41,7 +41,7 @@ BOOL iPhone5;
     iPhone5 = YES;
     responseData = [NSMutableData data];
     [_webView changeViewWidth:[[UIScreen mainScreen] bounds].size.width atX:0 centreIt:YES duration:0];
-    NSURL *url = [NSURL URLWithString:@"http://iculture.info/saveaselfie/ix.html"];
+    NSURL *url = [NSURL URLWithString:@"http://www.saveaselfie.org/wp/ix.html"];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
 }

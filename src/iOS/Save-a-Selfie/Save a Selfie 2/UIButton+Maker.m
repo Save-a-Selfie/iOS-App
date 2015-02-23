@@ -11,22 +11,26 @@
 
 +(UIButton *)makeButton:(NSString *)buttonText addShine:(BOOL)addShine dimensions:(CGRect)dimensions {
 	UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-	button.frame = dimensions;
-	[button setShowsTouchWhenHighlighted:YES];
+    return [UIButton changeButton:button buttonText:buttonText addShine:addShine dimensions:dimensions];
+}
+
++(UIButton *)changeButton:(UIButton *) button buttonText:(NSString *)buttonText addShine:(BOOL)addShine dimensions:(CGRect)dimensions {
+    button.frame = dimensions;
+    [button setShowsTouchWhenHighlighted:YES];
     [button setTitle:buttonText forState:UIControlStateNormal];
     [button setEnabled:YES];
     [button setUserInteractionEnabled:YES];
-	button.backgroundColor = [UIColor colorWithWhite:1.0 alpha:0.75];
-	CALayer *layer = button.layer;
+    button.backgroundColor = [UIColor colorWithWhite:1.0 alpha:0.75];
+    CALayer *layer = button.layer;
     layer.cornerRadius = 8.0f;
     layer.masksToBounds = YES;
     layer.borderWidth = 3.0f;
     layer.borderColor = [UIColor colorWithWhite:0.3f alpha:0.2f].CGColor;
-	button.alpha = 1.0;
-	[button setTitleColor:[UIColor colorWithRed:0.1 green:0.1 blue:0.5 alpha:1.0] forState:UIControlStateNormal];
-	[button.titleLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:16.0]];
-	if (addShine) [UIButton addShineLayer:button];
-	return button;
+    button.alpha = 1.0;
+    [button setTitleColor:[UIColor colorWithRed:0.1 green:0.1 blue:0.5 alpha:1.0] forState:UIControlStateNormal];
+    [button.titleLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:16.0]];
+    if (addShine) [UIButton addShineLayer:button];
+    return button;
 }
 
 +(void)addShineLayer:(UIButton *)button {

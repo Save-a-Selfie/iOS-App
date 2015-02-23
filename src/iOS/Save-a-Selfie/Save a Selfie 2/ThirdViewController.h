@@ -13,6 +13,10 @@
 @property (weak, nonatomic) IBOutlet UILabel *multipurposeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *multilabelBackground;
 @property (weak, nonatomic) IBOutlet UIImageView *littleGuy;
+@property (strong, nonatomic) IBOutlet UIButton *button1;
+@property (strong, nonatomic) IBOutlet UIButton *button2;
+@property (strong, nonatomic) IBOutlet UIButton *button3;
+@property (strong, nonatomic) IBOutlet UIButton *button4;
 - (IBAction)buttonTapped:(id)sender;
 
 @end

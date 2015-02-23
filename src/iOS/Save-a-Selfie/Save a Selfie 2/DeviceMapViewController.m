@@ -11,6 +11,8 @@
 #import "PopupImage.h"
 #import "UIView+NibInitializer.h"
 #import "UIView+WidthXY.h"
+#import "UIView+Alert.h"
+#import "AlertBox.h"
 
 @interface DeviceMapViewController ()
 
@@ -26,13 +28,16 @@ MyLocation *specialAnnotation = nil; // may be set if one pin is singled out via
 NSMutableArray *devices;
 NSString *pin;
 PopupImage *popupImage;
-MBProgressHUD *HUD;
 UIView *blocker;
 NSArray *deviceNames;
 NSArray *devicePins;
+AlertBox *permissionsBox;
 bool removingPopup = false;
 extern CLLocationManager *locationManager;
 extern CLLocationCoordinate2D currentLocation;
+extern BOOL mappingAllowed;
+extern NSString *permissionsProblem1;
+extern NSString *permissionsProblem2;
 
 - (id)initWithCoder:(NSCoder*)aDecoder
 {
@@ -54,19 +59,64 @@ extern CLLocationCoordinate2D currentLocation;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    popupImage = [[PopupImage alloc] initWithNibNamed:nil];
     deviceNames = [[NSArray alloc] initWithObjects:@"defibrillator", @"life-ring", @"first-aid kit", @"hydrant", nil];
     devicePins = @[[UIImage imageNamed:@"defibrillator"], [UIImage imageNamed:@"lifeRing-1"], [UIImage imageNamed:@"firstAidKit"], [UIImage imageNamed:@"hydrant"]];
     //    popupImage = [[PopupImage alloc] init]; // for some reason initWithNibNamed does not work (!)
     locationManager = [[CLLocationManager alloc] init];
-    [self findUser:self];
     responseData = [NSMutableData data];
-    NSURL *url = [NSURL URLWithString:@"http://iculture.info/saveaselfie/wp-content/themes/magazine-child/getMapData.php"];
+    NSURL *url = [NSURL URLWithString:@"http://www.saveaselfie.org/wp/wp-content/themes/magazine-child/getMapData.php"];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
     //	Device *d = [devices objectAtIndex:stationIndex];
     self.navigationItem.title = @"Map";
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    _locateUserButton.frame = CGRectMake(screenRect.size.width - 50, screenRect.size.height - 100, _locateUserButton.frame.size.width, _locateUserButton.frame.size.height);
+}
+
+-(void)viewWillAppear:(BOOL)animated {
+    plog(@"viewWillAppear");
+    [super viewWillAppear:animated];
+    if ([self checkPermissions]) {
+        _mapView.userInteractionEnabled = YES;
+        [self findUser:self];
+        [self locateUser];
+        _mapView.pitchEnabled = [_mapView respondsToSelector:NSSelectorFromString(@"setPitchEnabled")];
+    } else _mapView.userInteractionEnabled = NO;
+}
+
+-(void)showPermissionsProblem:(NSString *)text {
+    [self clearPermissionsBox];
+    permissionsBox = [self.view permissionsProblem:text];
+}
+
+-(void)clearPermissionsBox { // called when returning from outside app
+    if (permissionsBox) [permissionsBox removeFromSuperview]; permissionsBox = nil;
+}
+
+-(BOOL)checkPermissions {
+    if([CLLocationManager locationServicesEnabled]){
+        switch([CLLocationManager authorizationStatus]){
+            case kCLAuthorizationStatusDenied:
+                plog(@"Location services denied by user");
+                [self showPermissionsProblem:permissionsProblem1]; return NO;
+                break;
+            case kCLAuthorizationStatusRestricted:
+                plog(@"Parental controls restrict location services");
+                [self showPermissionsProblem:permissionsProblem1]; return NO;
+                break;
+            default:return YES;
+        }
+    } else {
+        // locationServicesEnabled is set to NO
+        plog(@"Location Services Are Disabled");
+        [self showPermissionsProblem:permissionsProblem2]; return NO;
+    }
+}
+
+-(void) locateUser {
     // 1
-    CLLocationCoordinate2D zoomLocation = currentLocation;
+    CLLocationCoordinate2D zoomLocation = currentLocation; // plog(@"here: %@", currentLocation);
     // 2
     MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(zoomLocation, 0.5*METERS_PER_MILE, 0.5*METERS_PER_MILE);
     // 3
@@ -110,22 +160,28 @@ extern CLLocationCoordinate2D currentLocation;
 }
 
 - (void)mapView:(MKMapView *)mapView didAddAnnotationViews:(NSArray *)views{
-    for (id<MKAnnotation> currentAnnotation in mapView.annotations) {
-        if ([currentAnnotation isEqual: specialAnnotation]) {
-            [mapView selectAnnotation:currentAnnotation animated:FALSE]; // note: must use 'FALSE'!
-        }
-    }
+//    for (id<MKAnnotation> currentAnnotation in mapView.annotations) {
+//        if ([currentAnnotation isEqual: specialAnnotation]) {
+//            [mapView selectAnnotation:currentAnnotation animated:FALSE]; // note: must use 'FALSE'!
+//        }
+//    }
 }
 
 - (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view
 {
+    plog(@"didSelectAnnotationView %@", view);
+    if ([view.annotation isKindOfClass:MKUserLocation.class]) { return; } // user's own location
+
     MyLocation *annotation = view.annotation;
+    plog(@"annotation: %@", annotation.device.standard_resolution);
     [view bounceObject:15];
-    NSData * data = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString:annotation.device.standard_resolution]];
-    if ( data == nil ) { plog(@"nil for %@ (%@)", view, annotation.device.standard_resolution); return; }
     // using solution at http://stackoverflow.com/questions/15241340/how-to-add-custom-view-in-maps-annotations-callouts
     dispatch_async(dispatch_get_global_queue(0,0), ^{
-        dispatch_async(dispatch_get_main_queue(), ^{
+        plog(@"dispatch_async 1");
+        NSData * data = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString:annotation.device.standard_resolution]];
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            plog(@"dispatch_async 2");
+            if ( data == nil ) { plog(@"nil for %@ (%@)", view, annotation.device.standard_resolution); return; }
             UIImage *image = [UIImage imageWithData:data];
             CGRect screenRect = [[UIScreen mainScreen] bounds];
             /*
@@ -148,7 +204,6 @@ extern CLLocationCoordinate2D currentLocation;
             float h, w;
             if (r >= 1.0) { w = image.size.width; h = image.size.height; }
             else { w = maxWidth; h = image.size.height * r; }
-            popupImage = [[PopupImage alloc] initWithNibNamed:nil];
             float h0 = screenRect.size.height - 20;
             float h1 = h0 * 0.85;
             float h2 = h1 * 0.67;
@@ -185,12 +240,14 @@ extern CLLocationCoordinate2D currentLocation;
              object:nil];
             [popupImage moveObject:popupImgTop overTimePeriod:0.5];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                plog(@"dispatch_after");
                 [popupImage bounceObject:10];});
         });
     });
 }
 
 -(void)closePopup {
+    plog(@"closePopup with popupImage %@", popupImage);
     CGRect screenRect = [[UIScreen mainScreen] bounds];
     if (!removingPopup) {
         removingPopup = true;
@@ -205,11 +262,11 @@ extern CLLocationCoordinate2D currentLocation;
                                  _mapView.scrollEnabled = YES;
                                  _mapView.zoomEnabled = YES;
                                  [popupImage removeFromSuperview];
-                                 popupImage = nil;
                                 removingPopup = false;
                              }
                          }];
-        }
+    }
+    [self plotPositions]; // ! important ! (don't know why)
 }
 
 - (MKAnnotationView *)mapView:(MKMapView *)theMapView viewForAnnotation:(MyLocation*)annotation {
@@ -246,4 +303,8 @@ extern CLLocationCoordinate2D currentLocation;
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+- (IBAction)locateUserMethod:(id)sender {
+    plog(@"locating user...");
+    [self locateUser];
+}
 @end

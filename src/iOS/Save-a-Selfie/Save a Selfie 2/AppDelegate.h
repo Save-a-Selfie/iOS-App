@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "IntroViewController.h"
 #import "FBProtocols.h"
 #import <FacebookSDK/FacebookSDK.h>
 #define plog(args...) ExtendNSLog(__FILE__,__LINE__,__PRETTY_FUNCTION__,args);

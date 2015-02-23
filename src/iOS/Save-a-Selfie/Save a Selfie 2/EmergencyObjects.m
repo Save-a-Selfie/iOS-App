@@ -19,6 +19,7 @@ NSArray *buttonPointer;
 UIButton *uploadButton, *cancelButton;
 extern NSString *const objectChosen;
 extern int chosenObject;
+extern UIFont *customFont;
 
 /*
 // Only override drawRect: if you perform custom drawing.
@@ -67,6 +68,7 @@ extern int chosenObject;
     uploadButton = [UIButton buttonWithType:UIButtonTypeCustom];
     uploadButton = [UIButton makeButton:@"Upload photo" addShine:NO dimensions:CGRectMake(0, 0, buttonWidth * 0.75, buttonHeight * 0.3)];
     uploadButton.enabled = NO;
+    uploadButton.titleLabel.font = customFont;
     [uploadButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     uploadButton.frame = CGRectMake((buttonWidth - uploadButton.frame.size.width) * 0.65, -buttonHeight, buttonWidth * 0.75, buttonHeight * 0.3);
     [uploadButton addTarget:self action:@selector(uploadPhoto) forControlEvents:UIControlEventTouchUpInside];
@@ -74,6 +76,7 @@ extern int chosenObject;
     cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
     cancelButton = [UIButton makeButton:@"Cancel" addShine:NO dimensions:CGRectMake(0, 0, buttonWidth * 0.55, buttonHeight * 0.3)];
     cancelButton.enabled = YES;
+    cancelButton.titleLabel.font = customFont;
     [cancelButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
     cancelButton.frame = CGRectMake(uploadButton.frame.origin.x + uploadButton.frame.size.width + 20, -buttonHeight, buttonWidth * 0.55, buttonHeight * 0.3);
     [cancelButton addTarget:self action:@selector(cancelUpload) forControlEvents:UIControlEventTouchUpInside];
@@ -128,8 +131,16 @@ extern int chosenObject;
 //    [(UILabel *)labelPointer[button.tag] setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.125]];
     uploadButton.enabled = YES;
     [uploadButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [uploadButton setBackgroundColor:[UIColor colorWithRed:0.2 green:1 blue:0.2 alpha:0.5]];
-    chosenObject = button.tag;
+    [uploadButton setBackgroundColor:[UIColor colorWithRed:0.2 green:0.7 blue:0.2 alpha:0.75]];
+    
+    // http://benscheirman.com/2011/09/creating-a-glow-effect-for-uilabel-and-uibutton/
+    UIColor *color = uploadButton.currentTitleColor;
+    uploadButton.titleLabel.layer.shadowColor = [color CGColor];
+    uploadButton.titleLabel.layer.shadowRadius = 4.0f;
+    uploadButton.titleLabel.layer.shadowOpacity = .9;
+    uploadButton.titleLabel.layer.shadowOffset = CGSizeZero;
+    uploadButton.titleLabel.layer.masksToBounds = NO;
+    chosenObject = (int)button.tag;
     [button bounceObject:20];
 }
 
