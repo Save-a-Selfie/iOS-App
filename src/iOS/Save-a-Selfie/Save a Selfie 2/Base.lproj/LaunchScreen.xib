@@ -24,15 +24,15 @@
                     </attributedString>
                     <nil key="highlightedColor"/>
                 </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="SAS 300" translatesAutoresizingMaskIntoConstraints="NO" id="cbO-OJ-P7f">
+                    <rect key="frame" x="90" y="242" width="194" height="183"/>
+                </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="YOUR SMILE COULD SAVE A LIFE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YpM-aq-JXp">
-                    <rect key="frame" x="53" y="74" width="268" height="51"/>
+                    <rect key="frame" x="53" y="75" width="268" height="51"/>
                     <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="15"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="SAS 300" translatesAutoresizingMaskIntoConstraints="NO" id="cbO-OJ-P7f">
-                    <rect key="frame" x="90" y="242" width="194" height="183"/>
-                </imageView>
             </subviews>
             <color key="backgroundColor" white="0.96350740131578949" alpha="1" colorSpace="calibratedWhite"/>
             <color key="tintColor" white="0.79576994243421062" alpha="1" colorSpace="calibratedWhite"/>

@@ -57,7 +57,6 @@
 
 
 
-//53.373281, -6.317398000000026
 - (void) locateUser {
     
     if([self.sasLocation checkLocationPermissions]) {

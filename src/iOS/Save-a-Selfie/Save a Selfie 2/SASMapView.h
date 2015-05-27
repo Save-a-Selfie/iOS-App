@@ -12,8 +12,11 @@
 #define METERS_PER_MILE 1609.344
 
 
+// SASMapView holds A MKMapView and looks after
+// the main functionality of the Map needed within the
+// app.
 @interface SASMapView : UIView <SASLocationDelegate>
 
--(void) locateUser;
+- (void) locateUser;
 
 @end

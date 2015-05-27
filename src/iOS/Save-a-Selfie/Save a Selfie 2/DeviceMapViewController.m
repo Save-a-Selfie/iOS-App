@@ -82,7 +82,10 @@ extern NSString *permissionsProblem2;
         [self findUser:self];
         [self locateUser];
         _mapView.pitchEnabled = [_mapView respondsToSelector:NSSelectorFromString(@"setPitchEnabled")];
-    } else _mapView.userInteractionEnabled = NO;
+    } else {
+        _mapView.userInteractionEnabled = NO;
+    }
+    
 }
 
 -(void)showPermissionsProblem:(NSString *)text {

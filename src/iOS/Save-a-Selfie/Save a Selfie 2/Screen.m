@@ -15,7 +15,7 @@
     return [[UIScreen mainScreen] bounds].size.width;
 }
 
-+(CGFloat)height {
++ (CGFloat)height {
     return [[UIScreen mainScreen] bounds].size.height;
 }
 @end

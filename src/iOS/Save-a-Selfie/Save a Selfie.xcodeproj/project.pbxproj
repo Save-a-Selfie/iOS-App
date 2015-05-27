@@ -10,6 +10,7 @@
 		18A524F71B166BAB00E8F8F6 /* SASLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A524F61B166BAB00E8F8F6 /* SASLocation.m */; };
 		18A524FB1B166C2300E8F8F6 /* SASMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A524FA1B166C2300E8F8F6 /* SASMapView.m */; };
 		18A525031B166C9100E8F8F6 /* Screen.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A525021B166C9100E8F8F6 /* Screen.m */; };
+		18A525081B16708400E8F8F6 /* SASMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A525071B16708400E8F8F6 /* SASMapViewController.m */; };
 		D0EAAC0B1A0FD59B00C0F955 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0EAAC0A1A0FD59B00C0F955 /* Social.framework */; };
 		D0EAAC0D1A0FD63B00C0F955 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0EAAC0C1A0FD63B00C0F955 /* MessageUI.framework */; };
 		D0EAAC0F1A100F2D00C0F955 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0EAAC0E1A100F2D00C0F955 /* Accounts.framework */; };
@@ -78,6 +79,8 @@
 		18A524FA1B166C2300E8F8F6 /* SASMapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASMapView.m; sourceTree = "<group>"; };
 		18A525011B166C9100E8F8F6 /* Screen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Screen.h; sourceTree = "<group>"; };
 		18A525021B166C9100E8F8F6 /* Screen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Screen.m; sourceTree = "<group>"; };
+		18A525061B16708400E8F8F6 /* SASMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASMapViewController.h; sourceTree = "<group>"; };
+		18A525071B16708400E8F8F6 /* SASMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASMapViewController.m; sourceTree = "<group>"; };
 		D0EAAC0A1A0FD59B00C0F955 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		D0EAAC0C1A0FD63B00C0F955 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		D0EAAC0E1A100F2D00C0F955 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
@@ -215,6 +218,24 @@
 			name = Screen;
 			sourceTree = "<group>";
 		};
+		18A525051B166E0D00E8F8F6 /* Device */ = {
+			isa = PBXGroup;
+			children = (
+				D786E1761A48C02900A20FDD /* Device.h */,
+				D786E1771A48C02900A20FDD /* Device.m */,
+			);
+			name = Device;
+			sourceTree = "<group>";
+		};
+		18A525091B16708600E8F8F6 /* SASMapViewController */ = {
+			isa = PBXGroup;
+			children = (
+				18A525061B16708400E8F8F6 /* SASMapViewController.h */,
+				18A525071B16708400E8F8F6 /* SASMapViewController.m */,
+			);
+			name = SASMapViewController;
+			sourceTree = "<group>";
+		};
 		D70023C119FC440C00E45408 /* helpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -307,10 +328,10 @@
 			children = (
 				D72E1DB419EE841E005DD8A5 /* AppDelegate.h */,
 				D72E1DB519EE841E005DD8A5 /* AppDelegate.m */,
-				D786E1761A48C02900A20FDD /* Device.h */,
-				D786E1771A48C02900A20FDD /* Device.m */,
+				18A525051B166E0D00E8F8F6 /* Device */,
 				D786E1791A48C03500A20FDD /* DeviceMapViewController.h */,
 				D786E17A1A48C03500A20FDD /* DeviceMapViewController.m */,
+				18A525091B16708600E8F8F6 /* SASMapViewController */,
 				18A525041B166C9300E8F8F6 /* Screen */,
 				18A524FC1B166C2700E8F8F6 /* SASMapView */,
 				18A524F81B166BAF00E8F8F6 /* SASLocation */,
@@ -468,6 +489,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D700239919F52E8800E45408 /* UIButton+Maker.m in Sources */,
+				18A525081B16708400E8F8F6 /* SASMapViewController.m in Sources */,
 				D786E1781A48C02900A20FDD /* Device.m in Sources */,
 				18A524F71B166BAB00E8F8F6 /* SASLocation.m in Sources */,
 				D756A29C19F175230089EF80 /* UIImage+Alpha.m in Sources */,

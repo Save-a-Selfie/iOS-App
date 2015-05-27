@@ -52,7 +52,37 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ori-nG-Jo8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="405" y="198"/>
+            <point key="canvasLocation" x="641" y="197"/>
+        </scene>
+        <!--Map View Controller-->
+        <scene sceneID="Tku-EJ-KZ6">
+            <objects>
+                <viewController id="wxp-4h-T6p" customClass="SASMapViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="XjZ-Ty-pLe">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ZSL-vM-Epo">
+                                <rect key="frame" x="241" y="440" width="43" height="43"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="locationIcon">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="locateUser:" destination="wxp-4h-T6p" eventType="touchUpInside" id="N6f-Pl-79q"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" systemItem="mostViewed" id="4lX-aT-Siu"/>
+                    <connections>
+                        <outlet property="locateUserButton" destination="ZSL-vM-Epo" id="O0k-1F-lr0"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IA3-XG-E4V" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="170" y="204"/>
         </scene>
         <!--Info-->
         <scene sceneID="Smb-hj-4hT">
@@ -253,8 +283,8 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="2wZ-ue-5em" kind="relationship" relationship="viewControllers" id="F8c-A0-4qJ"/>
                         <segue destination="LKF-Xc-SHc" kind="relationship" relationship="viewControllers" id="yyW-6A-ew7"/>
+                        <segue destination="wxp-4h-T6p" kind="relationship" relationship="viewControllers" id="wHb-nl-hvQ"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
