@@ -7,12 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "FBProtocols.h"
-#import <FacebookSDK/FacebookSDK.h>
 #define plog(args...) ExtendNSLog(__FILE__,__LINE__,__PRETTY_FUNCTION__,args);
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate, FBLoginViewDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate>
 @property (strong, nonatomic) UIWindow *window;
+
 -(void)swapViewControllers;
 @end
 

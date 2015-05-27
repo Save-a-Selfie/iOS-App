@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 #import "ExtendNSLogFunctionality.h"
-#import <FacebookSDK/FacebookSDK.h>
+
 #import "UploadPictureViewController.h"
 
 @interface AppDelegate ()

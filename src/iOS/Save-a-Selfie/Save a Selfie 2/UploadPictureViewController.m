@@ -14,10 +14,8 @@
 #import "UIView+WidthXY.h"
 #import "EmergencyObjects.h"
 #import "UIView+NibInitializer.h"
-#import "FBProtocols.h"
-#import "FacebookVC.h"
-#import <FacebookSDK/FBRequest.h>
-#import <FacebookSDK/FacebookSDK.h>
+
+
 #import "PopupImage.h"
 #import "UIButton+Maker.h"
 #import "UIView+Alert.h"
@@ -210,24 +208,8 @@ extern UIFont *customFont, *customFontSmaller;
     } else firstAppearance = NO;
 }
 
-- (IBAction)backArrowAction:(id)sender {
-    [self swapViewControllers];
-}
 
--(void)swapViewControllers {
-    // if logged into Facebook, or if user has chosen to skip login, change to 'proper' first view controller
-    //    ((UITabBarController*)self.window.rootViewController).selectedViewController;
-    plog(@"swapping back");
-//    plog(@"Root: %@", self.window.rootViewController);
-    UITabBarController *tabController = (UITabBarController *)self.tabBarController;
-    NSMutableArray *mArray = [NSMutableArray arrayWithArray:tabController.viewControllers];
-    plog(@"mArray: %@", mArray);
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    FacebookVC *FBVC = [storyboard instantiateViewControllerWithIdentifier:@"FacebookVC"];
-    [mArray replaceObjectAtIndex:0 withObject:FBVC];
-    _backArrow = _OKButton = _SASLogoButton = nil; _imageView = nil; // releasing strong objects
-    [tabController setViewControllers:mArray animated:NO];
-}
+
 
 - (IBAction)showActionSheet:(id)sender {
     if (emergencyObjects) { [emergencyObjects removeFromSuperview]; emergencyObjects = nil; }
