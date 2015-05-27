@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		18A524F71B166BAB00E8F8F6 /* SASLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A524F61B166BAB00E8F8F6 /* SASLocation.m */; };
 		D0EAAC0B1A0FD59B00C0F955 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0EAAC0A1A0FD59B00C0F955 /* Social.framework */; };
 		D0EAAC0D1A0FD63B00C0F955 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0EAAC0C1A0FD63B00C0F955 /* MessageUI.framework */; };
 		D0EAAC0F1A100F2D00C0F955 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0EAAC0E1A100F2D00C0F955 /* Accounts.framework */; };
@@ -69,6 +70,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		18A524F51B166BAB00E8F8F6 /* SASLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASLocation.h; sourceTree = "<group>"; };
+		18A524F61B166BAB00E8F8F6 /* SASLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASLocation.m; sourceTree = "<group>"; };
 		D0EAAC0A1A0FD59B00C0F955 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		D0EAAC0C1A0FD63B00C0F955 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		D0EAAC0E1A100F2D00C0F955 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
@@ -179,6 +182,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		18A524F81B166BAF00E8F8F6 /* SASLocation */ = {
+			isa = PBXGroup;
+			children = (
+				18A524F51B166BAB00E8F8F6 /* SASLocation.h */,
+				18A524F61B166BAB00E8F8F6 /* SASLocation.m */,
+			);
+			name = SASLocation;
+			sourceTree = "<group>";
+		};
 		D70023C119FC440C00E45408 /* helpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -275,6 +287,7 @@
 				D786E1771A48C02900A20FDD /* Device.m */,
 				D786E1791A48C03500A20FDD /* DeviceMapViewController.h */,
 				D786E17A1A48C03500A20FDD /* DeviceMapViewController.m */,
+				18A524F81B166BAF00E8F8F6 /* SASLocation */,
 				D715E4921A06509B0026D91F /* EmergencyObjects.h */,
 				D715E4931A06509B0026D91F /* EmergencyObjects.m */,
 				D715E4901A06504C0026D91F /* EmergencyObjects.xib */,
@@ -366,7 +379,7 @@
 				TargetAttributes = {
 					D72E1DAC19EE841E005DD8A5 = {
 						CreatedOnToolsVersion = 6.0.1;
-						DevelopmentTeam = X4V83UZ84G;
+						DevelopmentTeam = N9HC9H544M;
 					};
 				};
 			};
@@ -430,6 +443,7 @@
 			files = (
 				D700239919F52E8800E45408 /* UIButton+Maker.m in Sources */,
 				D786E1781A48C02900A20FDD /* Device.m in Sources */,
+				18A524F71B166BAB00E8F8F6 /* SASLocation.m in Sources */,
 				D756A29C19F175230089EF80 /* UIImage+Alpha.m in Sources */,
 				D786E1811A48C10500A20FDD /* MyLocation.m in Sources */,
 				D786E24C1A50A93100A20FDD /* MKSASAnnotationView.m in Sources */,

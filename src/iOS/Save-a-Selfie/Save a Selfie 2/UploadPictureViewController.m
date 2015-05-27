@@ -704,7 +704,10 @@ extern UIFont *customFont, *customFontSmaller;
             _mapView.userInteractionEnabled = [self checkPermissions];
         });
         [locationManager requestWhenInUseAuthorization];
-    } else { [locationManager startUpdatingLocation]; mappingAllowed = YES; }
+    } else {
+        [locationManager startUpdatingLocation];
+        mappingAllowed = YES;
+    }
     _mapView.pitchEnabled = [_mapView respondsToSelector:NSSelectorFromString(@"setPitchEnabled")];
 }
 
