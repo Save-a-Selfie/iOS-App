@@ -54,6 +54,7 @@
 }
 
 
+
 - (void) startUpdatingUsersLocation {
     if([self canStartLocating]) {
         [locationManager startUpdatingLocation];
@@ -61,6 +62,14 @@
         NSLog(@"Cannot update users location");
     }
 }
+
+
+
+- (void) stopUpdatingUsersLocation {
+    [self.locationManager stopUpdatingLocation];
+}
+
+
 
 
 - (BOOL) canStartLocating {
@@ -99,7 +108,6 @@
                 return NO;
                 break;
                 
-                
             default:
                 return YES;
                 break;
@@ -131,7 +139,9 @@
 
 
 - (void) locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
-    
+    if(delegate != nil) {
+        [delegate locationPermissionsHaveChanged:status];
+    }
 }
 
 

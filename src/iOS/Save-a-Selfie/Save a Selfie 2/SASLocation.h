@@ -15,22 +15,28 @@
 @protocol SASLocationDelegate
 
 - (void) locationDidUpdate: (CLLocationCoordinate2D) location;
+- (void) locationPermissionsHaveChanged: (CLAuthorizationStatus) status;
 
 @end
+
 
 @interface SASLocation : NSObject <CLLocationManagerDelegate> {
     @public
     BOOL mappingAllowed;
 }
 
+
 @property(assign) id<SASLocationDelegate> delegate;
 
-// Returns the last know location of the user.
+// Returns the last known location of the user.
 - (CLLocationCoordinate2D) currentUserLocation;
 
-// Call this to begin receiving updates on the users location.
+// Call this to begin receiving updates on the user's location.
 - (void) startUpdatingUsersLocation;
 
+
+// Call this to stop receiving updates on the user's location.
+- (void) stopUpdatingUsersLocation;
 
 // Call this method to check what we have persmission to in terms of location services.
 //  @return NO : We don't have permission to location services on the user's device.

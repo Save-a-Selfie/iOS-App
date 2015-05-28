@@ -7,26 +7,34 @@
 //
 
 #import "SASMapViewController.h"
-#import "SASMapView.h"
-#include "Screen.h"
+#import "AppDelegate.h"
+#import "Screen.h"
+#import "UIView+Alert.h"
 
 @interface SASMapViewController ()
 
 @property(strong, nonatomic) SASMapView* sasMapView;
-@property (strong, nonatomic) IBOutlet UIButton *locateUserButton;
-@property (strong, nonatomic) IBOutlet UIButton *addImageButton;
+@property(strong, nonatomic) IBOutlet UIButton *locateUserButton;
+@property(strong, nonatomic) IBOutlet UIButton *addImageButton;
+
+@property(strong, nonatomic) AlertBox* permissionsBox;
 
 @end
 
 @implementation SASMapViewController
 
+NSString *permissionsProblemOne = @"Please enable location services for this app. Launch the iPhone Settings app to do this. Go to Privacy > Location Services > Save a Selfie > While Using the App. You have to go out of this app, using the 'Home' button.";
+NSString *permissionsProblemTwo = @"Please enable location services on your phone. Launch the iPhone Settings app to do this. Go to Privacy > Location Services > On. You have to go out of this app, using the 'Home' button.";
+
 @synthesize sasMapView;
 @synthesize locateUserButton;
 @synthesize addImageButton;
+@synthesize permissionsBox;
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.userInteractionEnabled = YES;
+    
     
 }
 
@@ -39,6 +47,11 @@
                                                               0,
                                                               [Screen width],
                                                               [Screen height])];
+    // Receive updates i.e location permission changes etc.
+    // See SASMapView's: @protocol SASMapViewNotifications
+    // for all available botifications.
+    self.sasMapView.notificationReceiver = self;
+    
     [self.sasMapView locateUser];
     
     [self.view addSubview:sasMapView];
@@ -50,6 +63,66 @@
 
 - (IBAction)locateUser:(id)sender {
      [self.sasMapView locateUser];
+}
+
+
+
+
+-(void)showPermissionsProblem:(NSString *)text {
+    [self clearPermissionsBox];
+    permissionsBox = [self.view permissionsProblem:text];
+}
+
+
+
+-(void)clearPermissionsBox { // called when returning from outside app
+    if (permissionsBox) {
+        [permissionsBox removeFromSuperview];
+        permissionsBox = nil;
+    }
+}
+
+
+
+
+
+#pragma SASMapViewNotifications
+- (void) authorizationStatusHasChanged:(CLAuthorizationStatus)status {
+    
+    if (permissionsBox) {
+            [permissionsBox removeFromSuperview]; // get rid of any existing permissions box blocking access to camera etc.
+    }
+    
+    if([CLLocationManager locationServicesEnabled]){
+        
+        switch([CLLocationManager authorizationStatus]){
+            
+            case kCLAuthorizationStatusAuthorizedAlways:
+                //plog(@"We have access to location services");
+                break;
+            
+            case kCLAuthorizationStatusAuthorizedWhenInUse:
+                NSLog(@"We have access to location services");
+                break;
+            
+            case kCLAuthorizationStatusDenied:
+                NSLog(@"Location services denied by user");
+                [self showPermissionsProblem:permissionsProblemOne];
+                break;
+            
+            case kCLAuthorizationStatusRestricted:
+                NSLog(@"Parental controls restrict location services");
+                break;
+            
+            case kCLAuthorizationStatusNotDetermined:
+                NSLog(@"Unable to determine, possibly not available");
+                break;
+        }
+    }
+    else {
+        NSLog(@"Location Services Are Disabled");
+        [self showPermissionsProblem:permissionsProblemTwo];
+    }
 }
 
 

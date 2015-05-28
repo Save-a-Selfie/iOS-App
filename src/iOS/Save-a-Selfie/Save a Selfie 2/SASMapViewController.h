@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SASMapView.h"
 
-@interface SASMapViewController : UIViewController
+@interface SASMapViewController : UIViewController <SASMapViewNotifications>
 
 @end

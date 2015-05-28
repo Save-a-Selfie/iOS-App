@@ -9,6 +9,7 @@
 #import "SASMapView.h"
 #import "SASLocation.h"
 
+
 @interface SASMapView() {
     CLLocationCoordinate2D currentLocation;
 }
@@ -21,13 +22,18 @@
 @implementation SASMapView
 
 @synthesize sasLocation;
+@synthesize notificationReceiver;
 
 - (instancetype) initWithFrame:(CGRect)frame {
     
     if(self == [super initWithFrame:frame]) {
-        self.mapType = MKMapTypeStandard;
-        self.showsUserLocation = YES;
         
+        self.mapType = MKMapTypeSatellite;
+        self.showsUserLocation = YES;
+        self.pitchEnabled = [self respondsToSelector:NSSelectorFromString(@"setPitchEnabled")];
+
+        
+        // Our location object.
         self.sasLocation = [[SASLocation alloc] init];
         self.sasLocation.delegate = self;
     }
@@ -54,13 +60,25 @@
 
 
 
-
-
 #pragma SASLocatin delegate method
 - (void) locationDidUpdate:(CLLocationCoordinate2D)location {
     currentLocation = location;
     [self locateUser];
     printf("Updated");
+}
+
+
+// Discussion:
+//  The following method locationPermssionsHaveChanged:(CLAuthorizationStatus) is a protocol method from
+//  SASLocationDelegate. However, any object who holds a SASMapView shouldn't need to adobt the SASLocation
+//  delegate as it's SASMapView they should only really be interested in. So when this object(SASMapView) gets
+//  an update from SASLocation about authorization changes for location services, we simply forward them onto
+//  any object who wants to receive said notifications. This makes a nice object that updates, adoptees of location
+//  and map changes.
+- (void) locationPermissionsHaveChanged:(CLAuthorizationStatus)status {
+    if(notificationReceiver != nil) {
+        [notificationReceiver authorizationStatusHasChanged:status];
+    }
 }
 
 
