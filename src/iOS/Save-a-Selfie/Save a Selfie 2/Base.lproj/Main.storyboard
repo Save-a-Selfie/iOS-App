@@ -34,13 +34,6 @@
                                     <action selector="locateUserMethod:" destination="2wZ-ue-5em" eventType="touchUpInside" id="xr1-0c-2EH"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="C0G-jG-H1v">
-                                <rect key="frame" x="23" y="45" width="43" height="43"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="locationIcon">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -63,13 +56,23 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ZSL-vM-Epo">
-                                <rect key="frame" x="241" y="440" width="43" height="43"/>
+                                <rect key="frame" x="216" y="410" width="72" height="72"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="locationIcon">
+                                <state key="normal" image="LocationPin">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="locateUser:" destination="wxp-4h-T6p" eventType="touchUpInside" id="N6f-Pl-79q"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="4W9-mg-heO">
+                                <rect key="frame" x="16" y="20" width="64" height="58"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="CameraPin">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="locateUser:" destination="wxp-4h-T6p" eventType="touchUpInside" id="66i-6B-5dq"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -77,6 +80,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" systemItem="mostViewed" id="4lX-aT-Siu"/>
                     <connections>
+                        <outlet property="addImageButton" destination="4W9-mg-heO" id="9dz-wB-17b"/>
                         <outlet property="locateUserButton" destination="ZSL-vM-Epo" id="O0k-1F-lr0"/>
                     </connections>
                 </viewController>
@@ -313,7 +317,9 @@
         </scene>
     </scenes>
     <resources>
+        <image name="CameraPin" width="228" height="205"/>
         <image name="Code for ireland logo transparent" width="100" height="53"/>
+        <image name="LocationPin" width="205" height="205"/>
         <image name="Order of Malta 300" width="300" height="108"/>
         <image name="SAS vertical 280" width="280" height="262"/>
         <image name="SAS_75" width="75" height="75"/>

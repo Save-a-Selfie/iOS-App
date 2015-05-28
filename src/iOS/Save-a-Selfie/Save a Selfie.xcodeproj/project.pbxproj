@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1891E3D31B1743C8008CC10C /* SASMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1891E3D21B1743C8008CC10C /* SASMapView.m */; };
 		18A524F71B166BAB00E8F8F6 /* SASLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A524F61B166BAB00E8F8F6 /* SASLocation.m */; };
-		18A524FB1B166C2300E8F8F6 /* SASMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A524FA1B166C2300E8F8F6 /* SASMapView.m */; };
 		18A525031B166C9100E8F8F6 /* Screen.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A525021B166C9100E8F8F6 /* Screen.m */; };
 		18A525081B16708400E8F8F6 /* SASMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A525071B16708400E8F8F6 /* SASMapViewController.m */; };
 		D0EAAC0B1A0FD59B00C0F955 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0EAAC0A1A0FD59B00C0F955 /* Social.framework */; };
@@ -73,10 +73,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1891E3D11B1743C8008CC10C /* SASMapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASMapView.h; sourceTree = "<group>"; };
+		1891E3D21B1743C8008CC10C /* SASMapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASMapView.m; sourceTree = "<group>"; };
 		18A524F51B166BAB00E8F8F6 /* SASLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASLocation.h; sourceTree = "<group>"; };
 		18A524F61B166BAB00E8F8F6 /* SASLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASLocation.m; sourceTree = "<group>"; };
-		18A524F91B166C2300E8F8F6 /* SASMapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASMapView.h; sourceTree = "<group>"; };
-		18A524FA1B166C2300E8F8F6 /* SASMapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASMapView.m; sourceTree = "<group>"; };
 		18A525011B166C9100E8F8F6 /* Screen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Screen.h; sourceTree = "<group>"; };
 		18A525021B166C9100E8F8F6 /* Screen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Screen.m; sourceTree = "<group>"; };
 		18A525061B16708400E8F8F6 /* SASMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASMapViewController.h; sourceTree = "<group>"; };
@@ -203,8 +203,8 @@
 		18A524FC1B166C2700E8F8F6 /* SASMapView */ = {
 			isa = PBXGroup;
 			children = (
-				18A524F91B166C2300E8F8F6 /* SASMapView.h */,
-				18A524FA1B166C2300E8F8F6 /* SASMapView.m */,
+				1891E3D11B1743C8008CC10C /* SASMapView.h */,
+				1891E3D21B1743C8008CC10C /* SASMapView.m */,
 			);
 			name = SASMapView;
 			sourceTree = "<group>";
@@ -511,9 +511,9 @@
 				D700239D19F52EB700E45408 /* ExtendNSLogFunctionality.m in Sources */,
 				D756A28C19F1735E0089EF80 /* UIImage+Resize.m in Sources */,
 				D786E2511A50AC7F00A20FDD /* PopupImage.m in Sources */,
+				1891E3D31B1743C8008CC10C /* SASMapView.m in Sources */,
 				18A525031B166C9100E8F8F6 /* Screen.m in Sources */,
 				D70023B419FBC5A600E45408 /* UIView+WidthXY.m in Sources */,
-				18A524FB1B166C2300E8F8F6 /* SASMapView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

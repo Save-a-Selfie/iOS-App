@@ -25,8 +25,10 @@
 
 @property(assign) id<SASLocationDelegate> delegate;
 
-
+// Returns the last know location of the user.
 - (CLLocationCoordinate2D) currentUserLocation;
+
+// Call this to begin receiving updates on the users location.
 - (void) startUpdatingUsersLocation;
 
 

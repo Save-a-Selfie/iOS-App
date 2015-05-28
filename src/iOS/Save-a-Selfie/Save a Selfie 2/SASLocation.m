@@ -38,6 +38,8 @@
     self.locationManager.delegate = (id<CLLocationManagerDelegate>)self;
     self.locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation;
     self.locationManager.distanceFilter = kCLDistanceFilterNone;
+    
+    [self startUpdatingUsersLocation];
 }
 
 
