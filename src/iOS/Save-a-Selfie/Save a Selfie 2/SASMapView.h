@@ -20,7 +20,7 @@
 @end
 
 
-@interface SASMapView : MKMapView <SASLocationDelegate>
+@interface SASMapView : MKMapView <MKMapViewDelegate, SASLocationDelegate, SASMapAnnotationRetrieverDelegate>
 
 
 @property (assign) id<SASMapViewNotifications> notificationReceiver;
@@ -28,5 +28,8 @@
 // Calling this will bring you to the current user's location, on the map.
 - (void) locateUser;
 
+// Shows the MKAnnotations, which in the case of this app is
+// a Device object.
+- (void) showAnnotations: (BOOL) show;
 
 @end

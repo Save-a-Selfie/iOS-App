@@ -53,6 +53,7 @@ NSString *permissionsProblemTwo = @"Please enable location services on your phon
     self.sasMapView.notificationReceiver = self;
     
     [self.sasMapView locateUser];
+    [self.sasMapView showAnnotations:YES];
     
     [self.view addSubview:sasMapView];
     [self.view bringSubviewToFront:locateUserButton];
@@ -85,12 +86,11 @@ NSString *permissionsProblemTwo = @"Please enable location services on your phon
 
 
 
-
-#pragma SASMapViewNotifications
+#pragma SASMapViewNotifications methods.
 - (void) authorizationStatusHasChanged:(CLAuthorizationStatus)status {
     
     if (permissionsBox) {
-            [permissionsBox removeFromSuperview]; // get rid of any existing permissions box blocking access to camera etc.
+        [permissionsBox removeFromSuperview]; // get rid of any existing permissions box blocking access to camera etc.
     }
     
     if([CLLocationManager locationServicesEnabled]){
@@ -98,7 +98,7 @@ NSString *permissionsProblemTwo = @"Please enable location services on your phon
         switch([CLLocationManager authorizationStatus]){
             
             case kCLAuthorizationStatusAuthorizedAlways:
-                //plog(@"We have access to location services");
+                NSLog(@"We have access to location services");
                 break;
             
             case kCLAuthorizationStatusAuthorizedWhenInUse:

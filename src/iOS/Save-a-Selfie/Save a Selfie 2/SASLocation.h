@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
+#import "SASMapAnnotationRetriever.h"
 
 // This protocol provides a wrapper for CLLocationManagerDelegate, and enables us to retreive
 // the appropriate location information needed.
-
 @protocol SASLocationDelegate
 
 - (void) locationDidUpdate: (CLLocationCoordinate2D) location;
@@ -38,7 +38,7 @@
 // Call this to stop receiving updates on the user's location.
 - (void) stopUpdatingUsersLocation;
 
-// Call this method to check what we have persmission to in terms of location services.
+// Call this method to check what persmissions we have in terms of location services.
 //  @return NO : We don't have permission to location services on the user's device.
 //               This could be due to the user not allowing this app to use the location
 //               or having location services turned off altogether.

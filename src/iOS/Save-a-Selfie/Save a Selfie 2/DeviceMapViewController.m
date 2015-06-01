@@ -68,6 +68,7 @@ extern NSString *permissionsProblem2;
     NSURL *url = [NSURL URLWithString:@"http://www.saveaselfie.org/wp/wp-content/themes/magazine-child/getMapData.php"];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    
     //	Device *d = [devices objectAtIndex:stationIndex];
     self.navigationItem.title = @"Map";
     CGRect screenRect = [[UIScreen mainScreen] bounds];
@@ -139,7 +140,9 @@ extern NSString *permissionsProblem2;
 -(void) connectionDidFinishLoading:(NSURLConnection *)connection{
     NSString *data = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
     NSArray *devs = [data componentsSeparatedByString:@"\n"];
+    
     devices = [[NSMutableArray alloc] init];
+    
     for (int n = 0; n < [devs count]; n++) {
         if ([devs[n] length] != 0) {
             Device *d = [[Device alloc] initWithInfoString:[devs objectAtIndex:n]];
