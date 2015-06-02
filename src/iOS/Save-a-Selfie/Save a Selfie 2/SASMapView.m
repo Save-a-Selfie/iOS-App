@@ -23,7 +23,6 @@
 
 @interface SASMapView() <SASMapAnnotationRetrieverDelegate, SASLocationDelegate> {
     CLLocationCoordinate2D currentLocation;
-    BOOL showAnnotations;
 }
 
 
@@ -33,11 +32,6 @@
 // Object to retrieve annotations from the server.
 @property(strong, nonatomic) SASMapAnnotationRetriever *sasAnnotationRetriever;
 
-// Hold key/value pair.
-//      Key: NSString with the device name.
-//      Value: UIImage with the corresponding value.
-@property(strong, nonatomic) NSMutableDictionary* deviceAnnotations;
-@property(strong, nonatomic) PopupImage* popupImage;
 
 
 @end
@@ -51,8 +45,9 @@
 @synthesize sasLocation;
 @synthesize sasAnnotationRetriever;
 @synthesize notificationReceiver;
-@synthesize deviceAnnotations;
-@synthesize popupImage;
+
+@synthesize showAnnotations;
+
 
 
 - (instancetype) initWithFrame:(CGRect)frame {
@@ -63,7 +58,7 @@
         self.showsUserLocation = YES;
         self.pitchEnabled = [self respondsToSelector:NSSelectorFromString(@"setPitchEnabled")];
         self.delegate = self;
-        [self showAnnotations:YES];
+        self.showAnnotations = YES;
         
         // Our location object.
         self.sasLocation = [[SASLocation alloc] init];
@@ -97,12 +92,33 @@
 
 
 
+
+// Displays a single annotation on the map.
+- (void) showAnnotation:(SASAnnotation*) annotation {
+    [self removeExistingAnnotationsFromMapView];
+    self.showsUserLocation = NO;
+    
+    [self addAnnotation:annotation];
+}
+
+
+
+// Removes any existing annotations.
+- (void) removeExistingAnnotationsFromMapView {
+    for(id<MKAnnotation> annotation in self.annotations) {
+        [self removeAnnotation:annotation];
+    }
+}
+
+
+
 #pragma SASLocation delegate method
 - (void) locationDidUpdate:(CLLocationCoordinate2D)location {
     currentLocation = location;
     [self locateUser];
     plog(@"locationDidUpdate.");
 }
+
 
 
 // @Discussion:
@@ -122,31 +138,24 @@
 
 #pragma SASMapAnnotationRetrieverDelegate method
 - (void) sasAnnotationsRetrieved:(NSMutableArray *)devices {
-    if(showAnnotations) {
+    if(self.showAnnotations) {
         [self plotAnnotationsWithDeviceInformation:devices];
     }
 }
 
 
-- (void) showAnnotations: (BOOL) show {
-    showAnnotations = show;
-}
-
 
 
 // @Discussion
-//  Plots the annotations to the map using the information from sasAnnotationsRetrieved
-//  which gives us the information about each device.
-- (void) plotAnnotationsWithDeviceInformation: (NSMutableArray*) annotations {
+// Plots the annotations according to each device retreived from
+// SASMapAnnotationRetrieverDelegate's method sasAnnotationsRetrieved:
+- (void) plotAnnotationsWithDeviceInformation: (NSMutableArray*) devices {
     
-    // Remove any existing annotations.
-    for(id<MKAnnotation> annotation in self.annotations) {
-        [self removeAnnotation:annotation];
-    }
+    [self removeExistingAnnotationsFromMapView];
     
     int deviceNumber = 0;
     
-    for (Device *d in annotations) {
+    for (Device *d in devices) {
         SASAnnotation *annotation = [[SASAnnotation alloc] initAnnotationWithDevice:d index:deviceNumber];
 
         deviceNumber++;
@@ -171,6 +180,7 @@
         [self.notificationReceiver sasMapViewAnnotationTapped:selectedAnnotation];
     }
 }
+
 
 
 

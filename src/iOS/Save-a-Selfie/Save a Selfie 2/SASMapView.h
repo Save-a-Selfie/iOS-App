@@ -28,15 +28,25 @@
 
 @interface SASMapView : MKMapView <MKMapViewDelegate>
 
+
 // Reference this object to receive appropriate method calls for
 //      @protocol SASMapViewNotifications. 
 @property (assign) id<SASMapViewNotifications> notificationReceiver;
 
+
+// Shows the annotations on the map according to their coordinated.
+@property(nonatomic, assign) BOOL showAnnotations;
+
+
 // Calling this will bring you to the current user's location, on the map.
 - (void) locateUser;
 
-// Shows the MKAnnotations, which in the case of this app is
-// a Device object.
-- (void) showAnnotations: (BOOL) show;
+
+// Call this to show a single annotation on the SASMapView.
+//
+// Calling this method will set showsCurrentUserLocation to NO;
+// All other annotations except for the one passed within this
+// method call will be shown.
+- (void) showAnnotation:(SASAnnotation*) annotation;
 
 @end

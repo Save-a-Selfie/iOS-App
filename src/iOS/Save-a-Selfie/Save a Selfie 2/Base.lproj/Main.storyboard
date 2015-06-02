@@ -62,11 +62,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="Tjv-A9-dsb">
-                                <rect key="frame" x="51" y="20" width="219" height="246"/>
+                                <rect key="frame" x="23" y="20" width="274" height="308"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" id="mWk-T9-tVE">
-                                <rect key="frame" x="40" y="284" width="240" height="71"/>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" id="mWk-T9-tVE" customClass="SASMapView">
+                                <rect key="frame" x="40" y="336" width="240" height="71"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </mapView>
                         </subviews>
@@ -74,6 +74,7 @@
                     </view>
                     <connections>
                         <outlet property="sasImageView" destination="Tjv-A9-dsb" id="fKY-s4-cdq"/>
+                        <outlet property="sasMapView" destination="mWk-T9-tVE" id="Nfi-P1-8XY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8mT-kw-3eP" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -55,7 +55,7 @@ NSString *permissionsProblemTwo = @"Please enable location services on your phon
     self.sasMapView.notificationReceiver = self;
     
     [self.sasMapView locateUser];
-    [self.sasMapView showAnnotations:YES];
+    self.sasMapView.showAnnotations = YES;
     
     [self.view addSubview:sasMapView];
     [self.view bringSubviewToFront:locateUserButton];
