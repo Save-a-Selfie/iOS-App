@@ -157,11 +157,11 @@ extern NSString *permissionsProblem2;
         [_mapView removeAnnotation:annotation];
     }
     int dNo = 0;
-    for (Device *d in devices) {
+    //for (Device *d in devices) {
         //SASAnnotation *annotation = [[SASAnnotation alloc] initWithDevice:d index:dNo];
         dNo++;
         //[_mapView addAnnotation:annotation];
-    }
+    //}
     _mapView.delegate=self;
 }
 
@@ -200,7 +200,7 @@ extern NSString *permissionsProblem2;
              h:		image height after scaling
              h3:	text-box height plus bottom border (10px)
              h4:	text-box height
-             hTab:	tab-bar height
+             hTab:	tab-bar heightsa
              r:		ratio of image width to original image width
              r2:	corrected r value (if necessary)
              */

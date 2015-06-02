@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface EmergencyObjects : UIView
+
 @property (strong, nonatomic) IBOutlet UIButton *EmObj1;
 @property (strong, nonatomic) IBOutlet UIButton *EmObj2;
 @property (strong, nonatomic) IBOutlet UIButton *EmObj3;

@@ -3,11 +3,13 @@
 //  Save a Selfie
 //
 //  Created by Stephen Fox on 27/05/2015.
-//  Copyright (c) 2015 Peter FitzGerald. All rights reserved.
+//  Copyright (c) 2015 Stephen Fox. All rights reserved.
 //
 
 #import "SASMapViewController.h"
 #import "AppDelegate.h"
+#import "SASImageViewController.h"
+#import "ExtendNSLogFunctionality.h"
 #import "Screen.h"
 #import "UIView+Alert.h"
 
@@ -87,6 +89,22 @@ NSString *permissionsProblemTwo = @"Please enable location services on your phon
 
 
 #pragma SASMapViewNotifications methods.
+- (void)sasMapViewAnnotationTapped:(SASAnnotation*)annotation {
+    
+    
+    // Present the SASImageviewController to display the image associated
+    // with the annotation selected.
+    SASImageViewController *sasImageViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SASImageViewController"];
+    
+    sasImageViewController.annotation = annotation;
+    
+    [self presentViewController:sasImageViewController animated:YES completion:nil];
+
+}
+
+
+
+
 - (void) authorizationStatusHasChanged:(CLAuthorizationStatus)status {
     
     if (permissionsBox) {

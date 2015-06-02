@@ -158,15 +158,18 @@
 
 
 #pragma MKMapViewDelegate
+// @Discussion:
+//  Here we are going to forward on the SASAnnotation which was tapped to any object conforming to SASMapViewNotifications
+//  and who references notificationReceiver.
+//  That object can handle what they do with the information provided by the
+//  annotation.
 - (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
     
-    plog(@"didSelectAnnotationView %@", view);
-
-    // The annotation associated with the user's location.
-    if([view.annotation isKindOfClass:MKUserLocation.class]) {
-        return;
-    }
+    SASAnnotation* selectedAnnotation = view.annotation;
     
+    if(self.notificationReceiver != nil) {
+        [self.notificationReceiver sasMapViewAnnotationTapped:selectedAnnotation];
+    }
 }
 
 

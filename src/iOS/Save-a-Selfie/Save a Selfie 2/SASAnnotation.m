@@ -16,11 +16,6 @@
 @implementation SASAnnotation
 
 
-@synthesize device = _device;
-
-
-
-
 - (instancetype) initAnnotationWithDevice:(Device*) device index:(int) deviceNumber {
     if (self = [super init]) {
         
@@ -36,21 +31,17 @@
 
 
 
-
 - (NSString *)title {
     return _name;
 }
-
-
-
 
 - (Device *)device { return _device; }
 - (int)index { return _index; }
 - (UIImage *)image { return _image; }
 - (NSString *)subtitle { return _address; }
 
-- (void)dealloc
-{
+
+- (void)dealloc {
     _name = nil;
     _address = nil;
     _image = nil;

@@ -25,7 +25,7 @@ NSString *const userSkippedLogin = @"user skipped login";
 NSString *const applicationWillEnterForeground = @"application returned to foreground"; // may have left to sort out permissions issues
 UIFont *customFont, *customFontSmaller;
 
-BOOL NSLogOn = YES; // YES to show logs, NO if not
+BOOL NSLogOn = NO; // YES to show logs, NO if not
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     plog(@"Launching");

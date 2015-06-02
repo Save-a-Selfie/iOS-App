@@ -12,41 +12,6 @@
         </mutableArray>
     </customFonts>
     <scenes>
-        <!--Map View-->
-        <scene sceneID="CPB-if-t7Q">
-            <objects>
-                <viewController title="Map View" id="2wZ-ue-5em" customClass="DeviceMapViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="0KO-Zs-t2u">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" id="9DK-rr-TIi">
-                                <rect key="frame" x="0.0" y="20" width="320" height="502"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                            </mapView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="fzB-ad-Zro">
-                                <rect key="frame" x="236" y="379" width="43" height="43"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="locationIcon">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="locateUserMethod:" destination="2wZ-ue-5em" eventType="touchUpInside" id="xr1-0c-2EH"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Locate" image="globe" id="2EB-UL-wsH"/>
-                    <connections>
-                        <outlet property="locateUserButton" destination="fzB-ad-Zro" id="Ta2-yX-5rW"/>
-                        <outlet property="mapView" destination="9DK-rr-TIi" id="sjz-rJ-WEC"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ori-nG-Jo8" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="641" y="197"/>
-        </scene>
         <!--Map View Controller-->
         <scene sceneID="Tku-EJ-KZ6">
             <objects>
@@ -86,7 +51,34 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IA3-XG-E4V" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="170" y="204"/>
+            <point key="canvasLocation" x="-520" y="594"/>
+        </scene>
+        <!--Image View Controller-->
+        <scene sceneID="Jym-xK-rPa">
+            <objects>
+                <viewController storyboardIdentifier="SASImageViewController" id="a1b-sM-og2" customClass="SASImageViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="sqk-mN-XYn">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="Tjv-A9-dsb">
+                                <rect key="frame" x="51" y="20" width="219" height="246"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" id="mWk-T9-tVE">
+                                <rect key="frame" x="40" y="284" width="240" height="71"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="sasImageView" destination="Tjv-A9-dsb" id="fKY-s4-cdq"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8mT-kw-3eP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-520" y="1229"/>
         </scene>
         <!--Info-->
         <scene sceneID="Smb-hj-4hT">
@@ -172,7 +164,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vur-sD-egv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="462" y="947"/>
+            <point key="canvasLocation" x="658" y="611"/>
         </scene>
         <!--Upload Picture View Controller-->
         <scene sceneID="aAA-FK-5Kq">
@@ -326,9 +318,7 @@
         <image name="arrow_left" width="24" height="24"/>
         <image name="camera" width="24" height="24"/>
         <image name="dublin fire brigade 300" width="300" height="300"/>
-        <image name="globe" width="24" height="24"/>
         <image name="info_24" width="24" height="24"/>
-        <image name="locationIcon" width="43" height="43"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

@@ -12,6 +12,7 @@
 		18A524F71B166BAB00E8F8F6 /* SASLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A524F61B166BAB00E8F8F6 /* SASLocation.m */; };
 		18A525031B166C9100E8F8F6 /* Screen.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A525021B166C9100E8F8F6 /* Screen.m */; };
 		18A525081B16708400E8F8F6 /* SASMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A525071B16708400E8F8F6 /* SASMapViewController.m */; };
+		18C323991B1E2F1E0027BDEA /* SASImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C323981B1E2F1E0027BDEA /* SASImageViewController.m */; };
 		D0EAAC0B1A0FD59B00C0F955 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0EAAC0A1A0FD59B00C0F955 /* Social.framework */; };
 		D0EAAC0D1A0FD63B00C0F955 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0EAAC0C1A0FD63B00C0F955 /* MessageUI.framework */; };
 		D0EAAC0F1A100F2D00C0F955 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0EAAC0E1A100F2D00C0F955 /* Accounts.framework */; };
@@ -84,6 +85,8 @@
 		18A525021B166C9100E8F8F6 /* Screen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Screen.m; sourceTree = "<group>"; };
 		18A525061B16708400E8F8F6 /* SASMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASMapViewController.h; sourceTree = "<group>"; };
 		18A525071B16708400E8F8F6 /* SASMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASMapViewController.m; sourceTree = "<group>"; };
+		18C323971B1E2F1E0027BDEA /* SASImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASImageViewController.h; sourceTree = "<group>"; };
+		18C323981B1E2F1E0027BDEA /* SASImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASImageViewController.m; sourceTree = "<group>"; };
 		D0EAAC0A1A0FD59B00C0F955 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		D0EAAC0C1A0FD63B00C0F955 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		D0EAAC0E1A100F2D00C0F955 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
@@ -254,10 +257,29 @@
 		18C323901B1DFAAC0027BDEA /* SASAnnotation */ = {
 			isa = PBXGroup;
 			children = (
+				1891E3DA1B176E9F008CC10C /* SASMapAnnotationRetriever */,
 				D786E17F1A48C10500A20FDD /* SASAnnotation.h */,
 				D786E1801A48C10500A20FDD /* SASAnnotation.m */,
 			);
 			name = SASAnnotation;
+			sourceTree = "<group>";
+		};
+		18C323941B1E1FDC0027BDEA /* SASImageViewController */ = {
+			isa = PBXGroup;
+			children = (
+				18C323971B1E2F1E0027BDEA /* SASImageViewController.h */,
+				18C323981B1E2F1E0027BDEA /* SASImageViewController.m */,
+			);
+			name = SASImageViewController;
+			sourceTree = "<group>";
+		};
+		18C3239A1B1E33140027BDEA /* AppDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				D72E1DB419EE841E005DD8A5 /* AppDelegate.h */,
+				D72E1DB519EE841E005DD8A5 /* AppDelegate.m */,
+			);
+			name = AppDelegate;
 			sourceTree = "<group>";
 		};
 		D70023C119FC440C00E45408 /* helpers */ = {
@@ -334,6 +356,7 @@
 			children = (
 				D759B32C1A7D3DC5009EA131 /* default (1).gpx */,
 				18A525041B166C9300E8F8F6 /* Screen */,
+				D72E1DBD19EE841E005DD8A5 /* Main.storyboard */,
 				D72E1DAF19EE841E005DD8A5 /* Save a Selfie 2 */,
 				D786E2031A4B65FB00A20FDD /* SDWebImageTests */,
 				D72E1DAE19EE841E005DD8A5 /* Products */,
@@ -351,10 +374,9 @@
 		D72E1DAF19EE841E005DD8A5 /* Save a Selfie 2 */ = {
 			isa = PBXGroup;
 			children = (
-				D72E1DB419EE841E005DD8A5 /* AppDelegate.h */,
-				D72E1DB519EE841E005DD8A5 /* AppDelegate.m */,
+				18C3239A1B1E33140027BDEA /* AppDelegate */,
 				18A525051B166E0D00E8F8F6 /* Device */,
-				1891E3DA1B176E9F008CC10C /* SASMapAnnotationRetriever */,
+				18C323941B1E1FDC0027BDEA /* SASImageViewController */,
 				18C323901B1DFAAC0027BDEA /* SASAnnotation */,
 				18A524FC1B166C2700E8F8F6 /* SASMapView */,
 				18A525091B16708600E8F8F6 /* SASMapViewController */,
@@ -366,7 +388,6 @@
 				D70023C119FC440C00E45408 /* helpers */,
 				D72E1DC019EE841F005DD8A5 /* Images.xcassets */,
 				D759B3301A813FA2009EA131 /* LaunchScreen.xib */,
-				D72E1DBD19EE841E005DD8A5 /* Main.storyboard */,
 				D786E24A1A50A93100A20FDD /* MKSASAnnotationView.h */,
 				D786E24B1A50A93100A20FDD /* MKSASAnnotationView.m */,
 				D786E24F1A50AC7F00A20FDD /* PopupImage.h */,
@@ -510,6 +531,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18C323991B1E2F1E0027BDEA /* SASImageViewController.m in Sources */,
 				D700239919F52E8800E45408 /* UIButton+Maker.m in Sources */,
 				18A525081B16708400E8F8F6 /* SASMapViewController.m in Sources */,
 				D786E1781A48C02900A20FDD /* Device.m in Sources */,
@@ -549,6 +571,7 @@
 				D72E1DBE19EE841E005DD8A5 /* Base */,
 			);
 			name = Main.storyboard;
+			path = "Save a Selfie 2";
 			sourceTree = "<group>";
 		};
 		D759B3301A813FA2009EA131 /* LaunchScreen.xib */ = {

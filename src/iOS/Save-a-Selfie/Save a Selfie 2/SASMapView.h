@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 #import "SASLocation.h"
+#import "SASAnnotation.h"
 
 // To receive noitification from SASMapView, please reference the notificationReceiver property.
 // Ideally this should be changed to the Observer Design Pattern to update registered
@@ -17,7 +18,12 @@
 
 - (void) authorizationStatusHasChanged: (CLAuthorizationStatus) status;
 
+@optional
+- (void) sasMapViewAnnotationTapped: (SASAnnotation*) annotation;
+
 @end
+
+
 
 
 @interface SASMapView : MKMapView <MKMapViewDelegate>
