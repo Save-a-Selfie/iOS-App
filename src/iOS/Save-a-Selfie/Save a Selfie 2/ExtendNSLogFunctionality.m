@@ -22,6 +22,7 @@ void ExtendNSLog(const char *file, int lineNumber, const char *functionName, NSS
     {
         format = [format stringByAppendingString: @"\n"];
     }
+    
     NSString *body = [[NSString alloc] initWithFormat:format arguments:ap];
     // End using variable argument list.
     va_end (ap);

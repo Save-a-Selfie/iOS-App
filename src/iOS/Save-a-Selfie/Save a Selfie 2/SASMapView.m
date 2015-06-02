@@ -8,20 +8,42 @@
 
 #import "SASMapView.h"
 #import "SASLocation.h"
-#import "MyLocation.h"
+#import "SASAnnotation.h"
 #import "SASMapAnnotationRetriever.h"
+#import "PopupImage.h"
+
+#import "UIView+NibInitializer.h"
+#import "UIView+WidthXY.h"
+#import "UIView+Alert.h"
+#import "UIImage+Resize.h"
+
+#import "AppDelegate.h"
+#import "ExtendNSLogFunctionality.h"
 
 
-@interface SASMapView() {
+@interface SASMapView() <SASMapAnnotationRetrieverDelegate, SASLocationDelegate> {
     CLLocationCoordinate2D currentLocation;
     BOOL showAnnotations;
 }
 
+
+
 @property(strong, nonatomic) SASLocation* sasLocation;
+
+// Object to retrieve annotations from the server.
 @property(strong, nonatomic) SASMapAnnotationRetriever *sasAnnotationRetriever;
+
+// Hold key/value pair.
+//      Key: NSString with the device name.
+//      Value: UIImage with the corresponding value.
+@property(strong, nonatomic) NSMutableDictionary* deviceAnnotations;
+@property(strong, nonatomic) PopupImage* popupImage;
 
 
 @end
+
+
+
 
 
 @implementation SASMapView
@@ -29,6 +51,9 @@
 @synthesize sasLocation;
 @synthesize sasAnnotationRetriever;
 @synthesize notificationReceiver;
+@synthesize deviceAnnotations;
+@synthesize popupImage;
+
 
 - (instancetype) initWithFrame:(CGRect)frame {
     
@@ -38,6 +63,7 @@
         self.showsUserLocation = YES;
         self.pitchEnabled = [self respondsToSelector:NSSelectorFromString(@"setPitchEnabled")];
         self.delegate = self;
+        [self showAnnotations:YES];
         
         // Our location object.
         self.sasLocation = [[SASLocation alloc] init];
@@ -46,6 +72,7 @@
         // Our annotationRetriever Object
         self.sasAnnotationRetriever = [[SASMapAnnotationRetriever alloc] init];
         self.sasAnnotationRetriever.delegate = self;
+        
     }
     return self;
 }
@@ -64,7 +91,7 @@
         [self setRegion: MKCoordinateRegionMake(currentLocation, span) animated:YES];
     }
     else {
-        NSLog(@"SASMapView could not access location services.");
+        plog(@"SASMapView could not access location services.");
     }
 }
 
@@ -74,11 +101,11 @@
 - (void) locationDidUpdate:(CLLocationCoordinate2D)location {
     currentLocation = location;
     [self locateUser];
-    printf("Updated");
+    plog(@"locationDidUpdate.");
 }
 
 
-// Discussion:
+// @Discussion:
 //  The following method locationPermssionsHaveChanged:(CLAuthorizationStatus) is a protocol method from
 //  SASLocationDelegate. However, any object who holds a SASMapView shouldn't need to adobt the SASLocation
 //  delegate as it's SASMapView they should only really be interested in. So when this object(SASMapView) gets
@@ -94,26 +121,9 @@
 
 
 #pragma SASMapAnnotationRetrieverDelegate method
-- (void) sasAnnotatonsRetrieved:(NSMutableArray *)device {
-    [self plotAnnotationsPositions:device];
-}
-
-
-
-// Plots the annotations to the map
-- (void) plotAnnotationsPositions: (NSMutableArray*) annotations {
-    
-    // Remove any existing annotations.
-    for(id<MKAnnotation> annotation in self.annotations) {
-        [self removeAnnotation:annotation];
-    }
-    
-    
-    for(int i = 0; i < [annotations count]; i++ ) {
-        MyLocation *annotation = [[MyLocation alloc] initWithDevice: [annotations objectAtIndex:i]
-                                                              index:i];
-        
-        [self addAnnotation:annotation];
+- (void) sasAnnotationsRetrieved:(NSMutableArray *)devices {
+    if(showAnnotations) {
+        [self plotAnnotationsWithDeviceInformation:devices];
     }
 }
 
@@ -121,6 +131,71 @@
 - (void) showAnnotations: (BOOL) show {
     showAnnotations = show;
 }
+
+
+
+// @Discussion
+//  Plots the annotations to the map using the information from sasAnnotationsRetrieved
+//  which gives us the information about each device.
+- (void) plotAnnotationsWithDeviceInformation: (NSMutableArray*) annotations {
+    
+    // Remove any existing annotations.
+    for(id<MKAnnotation> annotation in self.annotations) {
+        [self removeAnnotation:annotation];
+    }
+    
+    int deviceNumber = 0;
+    
+    for (Device *d in annotations) {
+        SASAnnotation *annotation = [[SASAnnotation alloc] initAnnotationWithDevice:d index:deviceNumber];
+
+        deviceNumber++;
+        [self addAnnotation:annotation];
+    }
+}
+
+
+
+
+#pragma MKMapViewDelegate
+- (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
+    
+    plog(@"didSelectAnnotationView %@", view);
+
+    // The annotation associated with the user's location.
+    if([view.annotation isKindOfClass:MKUserLocation.class]) {
+        return;
+    }
+    
+}
+
+
+
+
+- (MKAnnotationView *)mapView:(MKMapView *)theMapView viewForAnnotation:(SASAnnotation*)annotation {
+    
+    static NSString *AnnotationViewID = @"MyLocation";
+    
+    if ([annotation isKindOfClass:MKUserLocation.class]) {
+        theMapView.showsUserLocation = YES;
+        theMapView.userLocation.title = @"You are here";
+        return nil;
+    }
+    
+    MKAnnotationView *annotationView = (MKAnnotationView *)[theMapView dequeueReusableAnnotationViewWithIdentifier:AnnotationViewID];
+    
+    if (annotationView == nil) {
+        annotationView = [[MKAnnotationView alloc] initWithAnnotation:annotation
+                                                      reuseIdentifier:AnnotationViewID];
+    }
+    
+    annotationView.image = annotation.image;
+    annotationView.annotation = annotation;
+    annotationView.enabled = YES;
+    annotationView.canShowCallout = NO;
+    return annotationView;
+}
+
 
 
 @end

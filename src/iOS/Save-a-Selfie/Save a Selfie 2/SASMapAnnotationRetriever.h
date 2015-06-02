@@ -9,17 +9,40 @@
 #import <UIKit/UIKit.h>
 
 
+
 @protocol SASMapAnnotationRetrieverDelegate <NSObject>
 
+
 // @Discussion
-//  This method will be pass
+//  This method will pass
 //  a NSMutableArray with information regarding an annotation.
-- (void) sasAnnotatonsRetrieved: (NSMutableArray*) device;
+//
+//  @param device: NSMutable array which contains device information.
+- (void) sasAnnotationsRetrieved: (NSMutableArray*) devices;
 
 @end
 
+
+
+// This class will allow us to fetch/ retrieve MKMapAnnotations.
+// This app uses Device.h/.m to wrap up extra information about the device
+// i.e image, location etc...
+// For more information refer to Device.h.
 @interface SASMapAnnotationRetriever : NSObject
 
+
 @property(assign) id<SASMapAnnotationRetrieverDelegate> delegate;
+
+
+//  Call this method when you need a newer set of the annotations
+//  available from the server.
+//  @warning: Can return nil, if there was an error fetching the annotations.
+//
+//  @Note:
+//      This could be improved by trying to catch any errors,
+//      while fetching the annotations any forwarding on to
+//      any caller.
+- (NSMutableArray*) fetchMapAnnotations;
+
 
 @end

@@ -5,7 +5,12 @@
 #import <Foundation/Foundation.h>
 #import <MapKit/MapKit.h>
 
+
 @interface Device : NSObject;
+
+@property(strong, nonatomic, readonly, getter=getDeviceNames) NSArray* deviceNames;
+@property(strong, nonatomic, readonly, getter=getDeviceImages) NSArray* deviceImages;
+
 
 @property (nonatomic, strong) NSString *standard_resolution;
 @property (nonatomic, strong) NSString *caption;

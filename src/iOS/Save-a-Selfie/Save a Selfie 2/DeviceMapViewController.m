@@ -4,7 +4,7 @@
 
 #import "DeviceMapViewController.h"
 #import "Device.h"
-#import "MyLocation.h"
+#import "SASAnnotation.h"
 #import "ExtendNSLogFunctionality.h"
 #import "AppDelegate.h"
 #import "UIImage+Resize.h"
@@ -24,7 +24,7 @@ NSMutableData *responseData;
 NSMutableData *responseData;
 NSURLConnection *connection;
 CLLocationManager *locationManager;
-MyLocation *specialAnnotation = nil; // may be set if one pin is singled out via mapVenue;
+SASAnnotation *specialAnnotation = nil; // may be set if one pin is singled out via mapVenue;
 NSMutableArray *devices;
 NSString *pin;
 PopupImage *popupImage;
@@ -158,9 +158,9 @@ extern NSString *permissionsProblem2;
     }
     int dNo = 0;
     for (Device *d in devices) {
-        MyLocation *annotation = [[MyLocation alloc] initWithDevice:d index:dNo];
+        //SASAnnotation *annotation = [[SASAnnotation alloc] initWithDevice:d index:dNo];
         dNo++;
-        [_mapView addAnnotation:annotation];
+        //[_mapView addAnnotation:annotation];
     }
     _mapView.delegate=self;
 }
@@ -178,7 +178,7 @@ extern NSString *permissionsProblem2;
     plog(@"didSelectAnnotationView %@", view);
     if ([view.annotation isKindOfClass:MKUserLocation.class]) { return; } // user's own location
 
-    MyLocation *annotation = view.annotation;
+    SASAnnotation *annotation = view.annotation;
     plog(@"annotation: %@", annotation.device.standard_resolution);
     [view bounceObject:15];
     // using solution at http://stackoverflow.com/questions/15241340/how-to-add-custom-view-in-maps-annotations-callouts
@@ -275,7 +275,7 @@ extern NSString *permissionsProblem2;
     [self plotPositions]; // ! important ! (don't know why)
 }
 
-- (MKAnnotationView *)mapView:(MKMapView *)theMapView viewForAnnotation:(MyLocation*)annotation {
+- (MKAnnotationView *)mapView:(MKMapView *)theMapView viewForAnnotation:(SASAnnotation*)annotation {
     static NSString *AnnotationViewID = @"MyLocation";
     if ([annotation isKindOfClass:MKUserLocation.class]) {
         theMapView.showsUserLocation = YES;

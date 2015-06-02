@@ -15,6 +15,8 @@
 @protocol SASLocationDelegate
 
 - (void) locationDidUpdate: (CLLocationCoordinate2D) location;
+
+@optional
 - (void) locationPermissionsHaveChanged: (CLAuthorizationStatus) status;
 
 @end

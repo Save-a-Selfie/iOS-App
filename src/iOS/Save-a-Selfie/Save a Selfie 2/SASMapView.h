@@ -20,9 +20,10 @@
 @end
 
 
-@interface SASMapView : MKMapView <MKMapViewDelegate, SASLocationDelegate, SASMapAnnotationRetrieverDelegate>
+@interface SASMapView : MKMapView <MKMapViewDelegate>
 
-
+// Reference this object to receive appropriate method calls for
+//      @protocol SASMapViewNotifications. 
 @property (assign) id<SASMapViewNotifications> notificationReceiver;
 
 // Calling this will bring you to the current user's location, on the map.

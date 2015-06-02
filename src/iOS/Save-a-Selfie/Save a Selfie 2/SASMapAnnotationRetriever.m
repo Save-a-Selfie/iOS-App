@@ -46,7 +46,7 @@
 // Set up all connection & data objects here
 - (instancetype)init
 {
-    if(self == [super init]) {
+    if(self = [super init]) {
         [self setUrl: [NSURL URLWithString: @"http://www.saveaselfie.org/wp/wp-content/themes/magazine-child/getMapData.php"]];
         
         self.request = [NSURLRequest requestWithURL:self.url];
@@ -62,16 +62,22 @@
 
 
 
+- (NSMutableArray*) fetchMapAnnotations {
+    [NSURLConnection connectionWithRequest:self.request delegate:self];
+    
+    return self.devices;
+}
+
+
+
 #pragma NSURLConnectionDataDelegate methods
 - (void) connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
-    plog(@"ket1");
     [self.responseData setLength: 0];
 }
 
 
 
 - (void) connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
-    plog(@"ket2");
     [self.responseData appendData: data];
 }
 
@@ -81,7 +87,6 @@
 #pragma NSURLConnectionDelegate methods
 - (void) connectionDidFinishLoading:(NSURLConnection *)connection {
     
-    plog(@"ket3");
     NSString *data = [[NSString alloc] initWithData:self.responseData
                                            encoding:NSUTF8StringEncoding];
     
@@ -89,7 +94,7 @@
     
     self.devices = [[NSMutableArray alloc] init];
     
-
+    
     for(int i = 0; i < [deviceData count]; i++) {
         if([deviceData[i] length] != 0) {
             
@@ -98,17 +103,13 @@
         }
     }
     
+    
     // Pass on the device data to any conforming object.
     if(delegate != nil) {
         plog(@"Passing on annotations");
-        [delegate sasAnnotatonsRetrieved:self.devices];
+        [delegate sasAnnotationsRetrieved:self.devices];
     }
 }
-
-
-
-
-
 
 
 @end
