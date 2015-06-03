@@ -8,7 +8,7 @@
 
 #import "SASLocation.h"
 #import "AppDelegate.h"
-#import <ExtendNSLogFunctionality.h>
+#import "ExtendNSLogFunctionality.h"
 
 
 @interface SASLocation() {

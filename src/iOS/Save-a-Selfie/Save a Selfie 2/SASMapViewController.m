@@ -34,9 +34,9 @@ NSString *permissionsProblemTwo = @"Please enable location services on your phon
 @synthesize permissionsBox;
 
 
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     
 }
 
@@ -58,6 +58,7 @@ NSString *permissionsProblemTwo = @"Please enable location services on your phon
     [self.view addSubview:sasMapView];
     [self.view bringSubviewToFront:locateUserButton];
     [self.view bringSubviewToFront:addImageButton];
+    printf("Hi");
 
 }
 
