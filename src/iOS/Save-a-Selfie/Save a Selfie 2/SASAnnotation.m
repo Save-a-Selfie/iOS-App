@@ -1,5 +1,5 @@
 //
-//  MyLocation.m
+//  SASAnnotation.m
 //
 
 #import "SASAnnotation.h"

@@ -7,6 +7,8 @@
 //
 
 #import "SASLocation.h"
+#import "AppDelegate.h"
+#import <ExtendNSLogFunctionality.h>
 
 
 @interface SASLocation() {
@@ -59,7 +61,7 @@
     if([self canStartLocating]) {
         [locationManager startUpdatingLocation];
     } else {
-        NSLog(@"Cannot update users location");
+        plog(@"Cannot update users location");
     }
 }
 
