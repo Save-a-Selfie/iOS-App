@@ -2,12 +2,13 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x"
+      "scale" : "1x",
+      "filename" : "LifeRing@1x.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "FAPicAttachment.png"
+      "filename" : "LifeRing@2x.png"
     },
     {
       "idiom" : "universal",

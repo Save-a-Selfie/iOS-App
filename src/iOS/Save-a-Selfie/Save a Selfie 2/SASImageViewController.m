@@ -17,9 +17,8 @@
 
 @property (strong, nonatomic) IBOutlet UITextView *photoDescription;
 @property (strong, nonatomic) UIImage *sasImage;
-
-
 @property (strong, nonatomic) IBOutlet UIImageView *sasImageView;
+
 @property (strong, nonatomic) IBOutlet SASMapView *sasMapView;
 
 @property (strong, nonatomic) IBOutlet UIImageView *deviceImageView;
@@ -32,6 +31,7 @@
 @synthesize annotation;
 
 @synthesize scrollView;
+
 // This property is the image which has been fetched from
 // the server getSASImageWithURLFromString:
 @synthesize sasImage;
@@ -43,8 +43,15 @@
 @synthesize deviceNameLabel;
 @synthesize contentView;
 
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    // Set the content size for the scroll view.
+    [self.scrollView setContentSize:CGSizeMake([Screen width], 700)];
+    
+    self.scrollView.backgroundColor = [UIColor clearColor];
 }
 
 
@@ -54,10 +61,10 @@
     
     if(self.annotation != nil) {
         
-        // Set the content size for the scroll view.
-        [self.scrollView setContentSize:CGSizeMake([Screen width], 700)];
-        self.scrollView.backgroundColor = [UIColor clearColor];
-
+        
+        
+        // Add shadow to the contentView associated with the scrollView
+        [self setShadowForView:self.contentView];
         
         
         // Set the image from the URLString contained within the device property
@@ -69,11 +76,10 @@
         self.deviceImageView.image = [self deviceImageFromAnnotation:self.annotation.device];
         self.deviceNameLabel.text = [self getDeviceName:self.annotation.device];
         
-        NSLog(@"%f, %f", self.sasImage.size.height, self.sasImage.size.width);
-        
-        
+
         // Set the text description of the photo.
-        self.photoDescription.text = [NSString stringWithFormat:@"%@\n%@", annotation.name, annotation.device.caption];
+        self.photoDescription.text = [NSString stringWithFormat:@"%@", annotation.device.caption];
+
         [self.photoDescription setFont:[UIFont fontWithName:@"Avenir Next" size:18]];
         
         
@@ -88,8 +94,43 @@
                                animated:NO];
         
         
+        
+        
     }
 }
+
+
+
+- (CGFloat) correctSizeForView: (UIView*) view {
+
+    CGFloat h = 0;
+    
+    for (UIView* subview in view.subviews) {
+        for(UIView* v in subview.subviews) {
+            h += v.bounds.size.height;
+            NSLog(@"%@", subview);
+        }
+        
+        NSLog(@"%@", subview);
+        h += subview.bounds.size.height;
+        printf("%f\n", h);
+    }
+    
+    return h;
+
+}
+
+
+
+
+- (void) setShadowForView: (UIView*) view {
+    view.layer.shadowColor = [UIColor blackColor].CGColor;
+    view.layer.shadowOffset = CGSizeMake(0, -2);
+    view.layer.shadowOpacity = 0.5;
+    view.layer.shadowRadius = 1.0;
+    view.clipsToBounds = NO;
+}
+
 
 
 - (NSString*) getDeviceName:(Device *) fromDevice {
@@ -105,16 +146,8 @@
 
 
 - (UIImage*) deviceImageFromAnnotation: (Device*) device {
-    NSArray *deviceImageNames = @[[UIImage imageNamed:@"FAPicAttachment"],
-                                  [UIImage imageNamed:@"LRPicAttachment"],
-                                  [UIImage imageNamed:@"FAPicAttachment"],
-                                  [UIImage imageNamed:@"FHPicAttachment"]
-                                  ];
-    
-    NSLog(@"Device type: %d ", device.typeOfObjectInt );
-    return deviceImageNames[device.typeOfObjectInt];
+    return [device getDeviceImages][device.typeOfObjectInt];
 }
-
 
 
 

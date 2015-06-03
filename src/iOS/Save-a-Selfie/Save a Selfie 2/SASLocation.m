@@ -138,6 +138,8 @@
 
 
 
+// Forward permissions changes to any object referencing
+// 'id<SASLocationDelegate> delegate'.
 - (void) locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
     if(delegate != nil) {
         [delegate locationPermissionsHaveChanged:status];

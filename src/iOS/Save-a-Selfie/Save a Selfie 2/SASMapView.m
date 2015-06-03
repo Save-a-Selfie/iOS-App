@@ -25,6 +25,8 @@
     // This variable is gotten from the SASLocationDelegate method
     //  locationDidUpdate:
     CLLocationCoordinate2D currentLocation;
+    
+    BOOL userAlreadyLocated;
 }
 
 
@@ -53,6 +55,8 @@
 - (instancetype) initWithFrame:(CGRect)frame {
     
     if(self == [super initWithFrame:frame]) {
+        
+        userAlreadyLocated = NO;
         
         self.mapType = MKMapTypeSatellite;
         self.showsUserLocation = YES;
@@ -130,8 +134,16 @@
 #pragma SASLocation delegate method
 - (void) locationDidUpdate:(CLLocationCoordinate2D)location {
     currentLocation = location;
-    [self locateUser];
-    plog(@"locationDidUpdate.");
+    
+    // We only want the map to zoom the user
+    // when it is first opened. We check `userAlreadyLocated`
+    // so the map does no keep zooming every time the user's
+    // location is updated.
+    if (!userAlreadyLocated) {
+        [self locateUser];
+        userAlreadyLocated = YES;
+        plog(@"This is the problem");
+    }
 }
 
 
@@ -200,23 +212,25 @@
 
 
 
-- (MKAnnotationView *)mapView:(MKMapView *)theMapView viewForAnnotation:(SASAnnotation*)annotation {
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(SASAnnotation*)annotation {
     
     static NSString *annotationViewID = @"MyLocation";
     
     if ([annotation isKindOfClass:MKUserLocation.class]) {
-        theMapView.showsUserLocation = YES;
-        theMapView.userLocation.title = @"You are here";
+        mapView.showsUserLocation = YES;
+        mapView.userLocation.title = @"You are here";
+        plog(@"HERE");
         return nil;
     }
     
-    MKAnnotationView *annotationView = (MKAnnotationView *)[theMapView dequeueReusableAnnotationViewWithIdentifier:annotationViewID];
+    MKAnnotationView *annotationView = (MKAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:annotationViewID];
     
     if (annotationView == nil) {
         annotationView = [[MKAnnotationView alloc] initWithAnnotation:annotation
                                                       reuseIdentifier:annotationViewID];
     }
     
+
     annotationView.image = annotation.image;
     annotationView.annotation = annotation;
     annotationView.enabled = YES;

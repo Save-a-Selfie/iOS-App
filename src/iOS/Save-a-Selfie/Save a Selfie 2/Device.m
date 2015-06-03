@@ -48,19 +48,19 @@
 
 - (NSArray *)getDeviceNames {
     return deviceNames = [[NSArray alloc] initWithObjects:
-                          @"defibrillator",
-                          @"life-ring",
-                          @"first-aid kit",
-                          @"hydrant",
+                          @"Defibrillator",
+                          @"LifeRing",
+                          @"FirstAidKit",
+                          @"FireHydrant",
                           nil];
 }
 
 
 - (NSArray *)getDeviceImages {
-    return deviceImages = @[[UIImage imageNamed:@"defibrillator"],
-                            [UIImage imageNamed:@"lifeRing-1"],
-                            [UIImage imageNamed:@"firstAidKit"],
-                            [UIImage imageNamed:@"hydrant"]
+    return deviceImages = @[[UIImage imageNamed:@"Defibrillator"],
+                            [UIImage imageNamed:@"LifeRing"],
+                            [UIImage imageNamed:@"FirstAidKit"],
+                            [UIImage imageNamed:@"FireHydrant"]
                             ];
 }
 
