@@ -7,21 +7,21 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>B099F12B-AB42-4EA3-AA75-7775828C25C7</string>
 	<key>IDESourceControlProjectName</key>
-	<string>Save a Selfie</string>
+	<string>project</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>4CBA75EF976F56F56E072EE5CFE150E490E15DD5</key>
-		<string>https://github.com/pfitzgld/save-a-selfie</string>
+		<string>https://github.com/StephenFox1995/save-a-selfie</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>src/iOS/Save-a-Selfie/Save a Selfie.xcodeproj</string>
+	<string>src/iOS/Save-a-Selfie/Save a Selfie.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>4CBA75EF976F56F56E072EE5CFE150E490E15DD5</key>
 		<string>../../../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/pfitzgld/save-a-selfie</string>
+	<string>https://github.com/StephenFox1995/save-a-selfie</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>

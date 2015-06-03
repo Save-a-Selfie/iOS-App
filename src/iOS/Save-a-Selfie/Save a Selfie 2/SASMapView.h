@@ -42,11 +42,15 @@
 - (void) locateUser;
 
 
+
 // Call this to show a single annotation on the SASMapView.
-//
 // Calling this method will set showsCurrentUserLocation to NO;
 // All other annotations except for the one passed within this
 // method call will be shown.
-- (void) showAnnotation:(SASAnnotation*) annotation;
+//
+// @param: annotation: The annotation to show on the map.
+// @param: andZoom: Zoom the coordinate of the annotation.
+// @param: animated: Animate when zooming to region/ location.
+- (void) showAnnotation:(SASAnnotation*) annotation andZoom:(BOOL) zoom animated:(BOOL) animated;
 
 @end

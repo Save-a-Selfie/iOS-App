@@ -63,7 +63,6 @@
 		D756A2A119F1D5D50089EF80 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D756A2A019F1D5D50089EF80 /* ImageIO.framework */; };
 		D756A2A919F309690089EF80 /* TabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = D756A2A819F309690089EF80 /* TabBarController.m */; };
 		D759B32D1A7D3DC6009EA131 /* default (1).gpx in Resources */ = {isa = PBXBuildFile; fileRef = D759B32C1A7D3DC5009EA131 /* default (1).gpx */; };
-		D759B3321A813FA2009EA131 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = D759B3301A813FA2009EA131 /* LaunchScreen.xib */; };
 		D786E1731A4823B500A20FDD /* trade-gothic-no-18-condensed-1361519964.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D786E1721A4823B500A20FDD /* trade-gothic-no-18-condensed-1361519964.ttf */; };
 		D786E1751A4827D300A20FDD /* trade-gothic-lt-1361519976.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D786E1741A4827D300A20FDD /* trade-gothic-lt-1361519976.ttf */; };
 		D786E1781A48C02900A20FDD /* Device.m in Sources */ = {isa = PBXBuildFile; fileRef = D786E1771A48C02900A20FDD /* Device.m */; };
@@ -157,7 +156,6 @@
 		D756A2A719F309690089EF80 /* TabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabBarController.h; sourceTree = "<group>"; };
 		D756A2A819F309690089EF80 /* TabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabBarController.m; sourceTree = "<group>"; };
 		D759B32C1A7D3DC5009EA131 /* default (1).gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "default (1).gpx"; sourceTree = "<group>"; };
-		D759B3311A813FA2009EA131 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		D786E1721A4823B500A20FDD /* trade-gothic-no-18-condensed-1361519964.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "trade-gothic-no-18-condensed-1361519964.ttf"; sourceTree = "<group>"; };
 		D786E1741A4827D300A20FDD /* trade-gothic-lt-1361519976.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "trade-gothic-lt-1361519976.ttf"; sourceTree = "<group>"; };
 		D786E1761A48C02900A20FDD /* Device.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Device.h; sourceTree = "<group>"; };
@@ -387,7 +385,6 @@
 				D70023C419FC45FB00E45408 /* Frameworks */,
 				D70023C119FC440C00E45408 /* helpers */,
 				D72E1DC019EE841F005DD8A5 /* Images.xcassets */,
-				D759B3301A813FA2009EA131 /* LaunchScreen.xib */,
 				D786E24A1A50A93100A20FDD /* MKSASAnnotationView.h */,
 				D786E24B1A50A93100A20FDD /* MKSASAnnotationView.m */,
 				D786E24F1A50AC7F00A20FDD /* PopupImage.h */,
@@ -520,7 +517,6 @@
 				D786E1751A4827D300A20FDD /* trade-gothic-lt-1361519976.ttf in Resources */,
 				D72D02CD1A9BDFC2008C2597 /* galleryAndMaps.php in Resources */,
 				D72D02CF1A9BDFC2008C2597 /* page.php in Resources */,
-				D759B3321A813FA2009EA131 /* LaunchScreen.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -572,14 +568,6 @@
 			);
 			name = Main.storyboard;
 			path = "Save a Selfie 2";
-			sourceTree = "<group>";
-		};
-		D759B3301A813FA2009EA131 /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				D759B3311A813FA2009EA131 /* Base */,
-			);
-			name = LaunchScreen.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

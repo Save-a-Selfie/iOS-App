@@ -200,7 +200,7 @@ extern NSString *permissionsProblem2;
              h:		image height after scaling
              h3:	text-box height plus bottom border (10px)
              h4:	text-box height
-             hTab:	tab-bar heightsas
+             hTab:	tab-bar heightsasprosas
              r:		ratio of image width to original image width
              r2:	corrected r value (if necessary)
              */

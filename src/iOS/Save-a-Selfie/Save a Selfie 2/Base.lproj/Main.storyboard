@@ -62,24 +62,68 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="Tjv-A9-dsb">
-                                <rect key="frame" x="23" y="20" width="274" height="308"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="334"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" id="mWk-T9-tVE" customClass="SASMapView">
-                                <rect key="frame" x="40" y="336" width="240" height="71"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="eub-ih-yoo">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </mapView>
+                                <subviews>
+                                    <view contentMode="scaleToFill" id="57Q-FF-DiC">
+                                        <rect key="frame" x="0.0" y="323" width="320" height="245"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <subviews>
+                                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" id="mWk-T9-tVE" customClass="SASMapView">
+                                                <rect key="frame" x="0.0" y="101" width="320" height="78"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            </mapView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="UG9-0e-7OB">
+                                                <rect key="frame" x="120" y="-18" width="80" height="80"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="0CH-w4-myM">
+                                                <rect key="frame" x="9" y="63" width="303" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <attributedString key="attributedText">
+                                                    <fragment content="FIRE HYDRANT">
+                                                        <attributes>
+                                                            <color key="NSColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                            <font key="NSFont" size="20" name="AvenirNext-Regular"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="10"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                </attributedString>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="iMp-bt-0Y0">
+                                                <rect key="frame" x="0.0" y="213" width="320" height="171"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="18"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                            </textView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
+                                </subviews>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="contentView" destination="57Q-FF-DiC" id="3VE-7d-7cI"/>
+                        <outlet property="deviceImageView" destination="UG9-0e-7OB" id="yOt-q1-PUV"/>
+                        <outlet property="deviceNameLabel" destination="0CH-w4-myM" id="UNn-QR-MaS"/>
+                        <outlet property="photoDescription" destination="iMp-bt-0Y0" id="3nJ-OB-08x"/>
                         <outlet property="sasImageView" destination="Tjv-A9-dsb" id="fKY-s4-cdq"/>
                         <outlet property="sasMapView" destination="mWk-T9-tVE" id="Nfi-P1-8XY"/>
+                        <outlet property="scrollView" destination="eub-ih-yoo" id="Wyt-UI-Rfr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8mT-kw-3eP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-520" y="1229"/>
+            <point key="canvasLocation" x="-520" y="1242"/>
         </scene>
         <!--Info-->
         <scene sceneID="Smb-hj-4hT">
@@ -165,7 +209,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vur-sD-egv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="658" y="611"/>
+            <point key="canvasLocation" x="-38" y="594"/>
         </scene>
         <!--Upload Picture View Controller-->
         <scene sceneID="aAA-FK-5Kq">

@@ -22,9 +22,10 @@
 
 
 @interface SASMapView() <SASMapAnnotationRetrieverDelegate, SASLocationDelegate> {
+    // This variable is gotten from the SASLocationDelegate method
+    //  locationDidUpdate:
     CLLocationCoordinate2D currentLocation;
 }
-
 
 
 @property(strong, nonatomic) SASLocation* sasLocation;
@@ -35,7 +36,6 @@
 
 
 @end
-
 
 
 
@@ -56,7 +56,7 @@
         
         self.mapType = MKMapTypeSatellite;
         self.showsUserLocation = YES;
-        self.pitchEnabled = [self respondsToSelector:NSSelectorFromString(@"setPitchEnabled")];
+        
         self.delegate = self;
         self.showAnnotations = YES;
         
@@ -75,15 +75,12 @@
 
 
 
-
+// Locates the user's current location and
+// zooms to that location.
 - (void) locateUser {
     
     if([self.sasLocation checkLocationPermissions]) {
-        
-        float z2 = 0.003 * 4.0;
-        
-        MKCoordinateSpan span = MKCoordinateSpanMake(z2, z2);
-        [self setRegion: MKCoordinateRegionMake(currentLocation, span) animated:YES];
+        [self zoomToCoordinates:currentLocation animated:YES];
     }
     else {
         plog(@"SASMapView could not access location services.");
@@ -94,11 +91,29 @@
 
 
 // Displays a single annotation on the map.
-- (void) showAnnotation:(SASAnnotation*) annotation {
-    [self removeExistingAnnotationsFromMapView];
-    self.showsUserLocation = NO;
+- (void) showAnnotation:(SASAnnotation*) annotation andZoom:(BOOL) zoom animated:(BOOL) animated{
+    if(showAnnotations) {
+        [self removeExistingAnnotationsFromMapView];
+        self.showsUserLocation = NO;
     
-    [self addAnnotation:annotation];
+        [self addAnnotation:annotation];
+    }
+    
+    if(zoom) {
+        [self zoomToCoordinates:annotation.coordinate animated:animated];
+    }
+}
+
+
+
+// Zooms to a region on the map view.
+- (void) zoomToCoordinates:(CLLocationCoordinate2D) coordinates animated:(BOOL) animated{
+    float zoomTo = 0.003 * 0.3;
+    
+    MKCoordinateSpan span = MKCoordinateSpanMake(zoomTo, zoomTo);
+    
+    [self setRegion: MKCoordinateRegionMake(coordinates, span) animated:animated];
+
 }
 
 
@@ -187,7 +202,7 @@
 
 - (MKAnnotationView *)mapView:(MKMapView *)theMapView viewForAnnotation:(SASAnnotation*)annotation {
     
-    static NSString *AnnotationViewID = @"MyLocation";
+    static NSString *annotationViewID = @"MyLocation";
     
     if ([annotation isKindOfClass:MKUserLocation.class]) {
         theMapView.showsUserLocation = YES;
@@ -195,11 +210,11 @@
         return nil;
     }
     
-    MKAnnotationView *annotationView = (MKAnnotationView *)[theMapView dequeueReusableAnnotationViewWithIdentifier:AnnotationViewID];
+    MKAnnotationView *annotationView = (MKAnnotationView *)[theMapView dequeueReusableAnnotationViewWithIdentifier:annotationViewID];
     
     if (annotationView == nil) {
         annotationView = [[MKAnnotationView alloc] initWithAnnotation:annotation
-                                                      reuseIdentifier:AnnotationViewID];
+                                                      reuseIdentifier:annotationViewID];
     }
     
     annotationView.image = annotation.image;

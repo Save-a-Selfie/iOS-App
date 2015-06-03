@@ -13,6 +13,12 @@
 @synthesize deviceNames;
 @synthesize deviceImages;
 
+// Device types:
+// 0 - Defibrillator
+// 1 - Life Ring
+// 2 - First Aid Kit
+// 3 - Fire Hydrant
+
 
 -(id) initWithInfoString: (NSString *)infoString {
 	self = [super init];

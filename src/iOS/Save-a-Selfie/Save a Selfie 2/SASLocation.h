@@ -33,6 +33,7 @@
 // Returns the last known location of the user.
 - (CLLocationCoordinate2D) currentUserLocation;
 
+
 // Call this to begin receiving updates on the user's location.
 - (void) startUpdatingUsersLocation;
 
