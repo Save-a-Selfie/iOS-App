@@ -22,10 +22,7 @@
 @end
 
 
-@interface SASLocation : NSObject <CLLocationManagerDelegate> {
-    @public
-    BOOL mappingAllowed;
-}
+@interface SASLocation : NSObject <CLLocationManagerDelegate>
 
 
 @property(assign) id<SASLocationDelegate> delegate;

@@ -12,7 +12,7 @@
         </mutableArray>
     </customFonts>
     <scenes>
-        <!--Map View Controller-->
+        <!--Map-->
         <scene sceneID="Tku-EJ-KZ6">
             <objects>
                 <viewController id="wxp-4h-T6p" customClass="SASMapViewController" sceneMemberID="viewController">
@@ -43,7 +43,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" systemItem="more" id="4lX-aT-Siu"/>
+                    <tabBarItem key="tabBarItem" title="Map" image="TabBarLocationPin" id="4lX-aT-Siu"/>
                     <connections>
                         <outlet property="addImageButton" destination="4W9-mg-heO" id="9dz-wB-17b"/>
                         <outlet property="locateUserButton" destination="ZSL-vM-Epo" id="O0k-1F-lr0"/>
@@ -371,6 +371,7 @@
         <image name="Order of Malta 300" width="300" height="108"/>
         <image name="SAS vertical 280" width="280" height="262"/>
         <image name="SAS_75" width="75" height="75"/>
+        <image name="TabBarLocationPin" width="21" height="34"/>
         <image name="arrow_left" width="24" height="24"/>
         <image name="camera" width="24" height="24"/>
         <image name="dublin fire brigade 300" width="300" height="300"/>

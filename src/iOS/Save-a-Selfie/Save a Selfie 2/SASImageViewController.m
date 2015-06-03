@@ -61,8 +61,6 @@
     
     if(self.annotation != nil) {
         
-        
-        
         // Add shadow to the contentView associated with the scrollView
         [self setShadowForView:self.contentView];
         
@@ -73,15 +71,22 @@
         self.sasImageView.image = [self getSASImageWithURLFromString:annotation.device.standard_resolution];
         
         
+        // Set the image for the device associated with the image.
         self.deviceImageView.image = [self deviceImageFromAnnotation:self.annotation.device];
-        self.deviceNameLabel.text = [self getDeviceName:self.annotation.device];
         
-
+        
+        // Using attributed string to increase the character spacing for deviceNameLabel
+        NSString *deviceName = [self getDeviceName:self.annotation.device];
+        
+        NSMutableAttributedString *attributedDeviceNameLabel = [[NSMutableAttributedString alloc] initWithString:[self getDeviceName:self.annotation.device]];
+        [attributedDeviceNameLabel addAttribute:NSKernAttributeName value:@(2.5)
+                                          range:NSMakeRange(0, [deviceName length])];
+        self.deviceNameLabel.attributedText = attributedDeviceNameLabel;
+        
+        
         // Set the text description of the photo.
         self.photoDescription.text = [NSString stringWithFormat:@"%@", annotation.device.caption];
-
         [self.photoDescription setFont:[UIFont fontWithName:@"Avenir Next" size:18]];
-        
         
         
         // The sasMapView property should show the location
@@ -92,9 +97,6 @@
         [self.sasMapView showAnnotation:self.annotation
                                 andZoom:YES
                                animated:NO];
-        
-        
-        
         
     }
 }

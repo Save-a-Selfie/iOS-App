@@ -28,7 +28,9 @@
 
 - (instancetype) init {
     if(self == [super init]) {
-        [self setUpLocationManager];
+        if (self.locationManager == nil) {
+            [self setUpLocationManager];
+        }
     }
     return self;
 }
@@ -38,7 +40,7 @@
 - (void) setUpLocationManager {
     self.locationManager = [[CLLocationManager alloc] init];
     self.locationManager.delegate = (id<CLLocationManagerDelegate>)self;
-    self.locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation;
+    self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
     self.locationManager.distanceFilter = kCLDistanceFilterNone;
     
     [self startUpdatingUsersLocation];
