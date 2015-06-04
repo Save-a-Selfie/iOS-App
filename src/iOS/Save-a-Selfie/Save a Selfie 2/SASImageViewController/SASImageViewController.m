@@ -12,8 +12,12 @@
 #import "SASColour.h"
 #import "SASActivityIndicator.h"
 #import "SASUtilities.h"
+#import "SASSocial.h"
 
-@interface SASImageViewController () <SASMapViewNotifications>
+
+@interface SASImageViewController () <SASMapViewNotifications> {
+    int deviceType;
+}
 
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (strong, nonatomic) IBOutlet UIView *contentView;
@@ -66,9 +70,13 @@
     
     if(self.annotation != nil) {
         
+        // Store the type of device shown in the image
+        deviceType = annotation.device.typeOfObjectInt;
+        
+        
         // Set the content size for the scroll view.
         [self.scrollView setContentSize:CGSizeMake([Screen width], 1000)];
-
+        [self.scrollView setFrame:CGRectMake(0, 0, [Screen width], [Screen height])];
         self.scrollView.backgroundColor = [UIColor clearColor];
         
         self.contentView.frame = CGRectMake(0, [Screen height] * 0.56, [Screen width], [Screen height]);
@@ -106,8 +114,8 @@
         
         
         // Using attributed string to increase the character spacing for deviceNameLabel
-        NSString *deviceName = [self getDeviceName:self.annotation.device];
-        NSMutableAttributedString *attributedDeviceNameLabel = [[NSMutableAttributedString alloc] initWithString:[self getDeviceName:self.annotation.device]];
+        NSString *deviceName = [self.annotation.device getDeviceNames][deviceType];
+        NSMutableAttributedString *attributedDeviceNameLabel = [[NSMutableAttributedString alloc] initWithString:deviceName];
         [attributedDeviceNameLabel addAttribute:NSKernAttributeName value:@(2.0)
                                           range:NSMakeRange(0, [deviceName length])];
         self.deviceNameLabel.attributedText = attributedDeviceNameLabel;
@@ -137,9 +145,11 @@
 
 
 
+// Shows the location of the device on the map.
 - (IBAction)showDeviceLocation:(id)sender {
     [self.sasMapView showAnnotation:self.annotation andZoom:YES animated:YES];
 }
+
 
 
 
@@ -153,15 +163,8 @@
 
 
 
-- (NSString*) getDeviceName:(Device *) fromDevice {
-    NSArray *deviceNames = @[@"DEFIBRILLATOR",
-                             @"LIFE RING",
-                             @"FRIST AID KIT",
-                             @"FIRE HYDRANT"];
-    
-    return deviceNames[fromDevice.typeOfObjectInt];
-}
-
+// Sets all the UIElements of this view, whose colour
+// is dependant on the device being shown in the image.
 - (void) setColourForColouredUIElements:(Device*) device {
     NSArray* mapPinButtonImages = @[[UIImage imageNamed:@"MapPinAEDRed"],
                                     [UIImage imageNamed:@"MapPinLifeRingRed"],
@@ -171,13 +174,15 @@
 }
 
 
+
+// Gets the image associated with the device.
 - (UIImage*) deviceImageFromAnnotation: (Device*) device {
     return [device getDeviceImages][device.typeOfObjectInt];
 }
 
 
 
-
+// Gets the image for the view from the URL
 - (UIImage*) getSASImageWithURLFromString: (NSString *) string {
     
     NSData *data = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:string]];
@@ -198,6 +203,16 @@
     
     self.distanceLabel.text = distanceString;
 }
+
+
+#pragma Share to Social Media
+- (IBAction)shareToSocialMedia:(id)sender {
+    if(annotation != nil) {
+        [SASSocial shareToSocialMedia:self.annotation.device.caption andImage:self.sasImage target:self];
+    }
+}
+
+
 
 
 - (IBAction)dissmissView:(id)sender {

@@ -31,7 +31,7 @@
 @interface SASMapAnnotationRetriever : NSObject
 
 
-@property(assign) id<SASMapAnnotationRetrieverDelegate> delegate;
+@property(nonatomic, weak) id<SASMapAnnotationRetrieverDelegate> delegate;
 
 
 //  Call this method when you need a newer set of the annotations

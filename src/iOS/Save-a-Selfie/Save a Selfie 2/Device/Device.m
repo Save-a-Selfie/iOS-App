@@ -49,9 +49,9 @@
 - (NSArray *)getDeviceNames {
     return deviceNames = [[NSArray alloc] initWithObjects:
                           @"Defibrillator",
-                          @"LifeRing",
-                          @"FirstAidKit",
-                          @"FireHydrant",
+                          @"Life Ring",
+                          @"First Aid Kit",
+                          @"Fire Hydrant",
                           nil];
 }
 

@@ -11,6 +11,7 @@
 		1845C4EC1B20920300E3D7BC /* SASActivityIndicatorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1845C4EB1B20920300E3D7BC /* SASActivityIndicatorView.xib */; };
 		1845C4EF1B209E6C00E3D7BC /* SASUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 1845C4EE1B209E6C00E3D7BC /* SASUtilities.m */; };
 		185A39B81B1FD7B900699D31 /* SASColour.m in Sources */ = {isa = PBXBuildFile; fileRef = 185A39B71B1FD7B900699D31 /* SASColour.m */; };
+		188CAEE51B20EA59006A90EB /* SASSocial.m in Sources */ = {isa = PBXBuildFile; fileRef = 188CAEE41B20EA59006A90EB /* SASSocial.m */; };
 		1891E3D31B1743C8008CC10C /* SASMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1891E3D21B1743C8008CC10C /* SASMapView.m */; };
 		1891E3D91B176E9B008CC10C /* SASMapAnnotationRetriever.m in Sources */ = {isa = PBXBuildFile; fileRef = 1891E3D81B176E9B008CC10C /* SASMapAnnotationRetriever.m */; };
 		18A524F71B166BAB00E8F8F6 /* SASLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A524F61B166BAB00E8F8F6 /* SASLocation.m */; };
@@ -84,6 +85,8 @@
 		1845C4EE1B209E6C00E3D7BC /* SASUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASUtilities.m; sourceTree = "<group>"; };
 		185A39B61B1FD7B900699D31 /* SASColour.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SASColour.h; path = "../Save a Selfie 2/SASColour.h"; sourceTree = "<group>"; };
 		185A39B71B1FD7B900699D31 /* SASColour.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SASColour.m; path = "../Save a Selfie 2/SASColour.m"; sourceTree = "<group>"; };
+		188CAEE31B20EA59006A90EB /* SASSocial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASSocial.h; sourceTree = "<group>"; };
+		188CAEE41B20EA59006A90EB /* SASSocial.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASSocial.m; sourceTree = "<group>"; };
 		1891E3D11B1743C8008CC10C /* SASMapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASMapView.h; sourceTree = "<group>"; };
 		1891E3D21B1743C8008CC10C /* SASMapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASMapView.m; sourceTree = "<group>"; };
 		1891E3D71B176E9B008CC10C /* SASMapAnnotationRetriever.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASMapAnnotationRetriever.h; sourceTree = "<group>"; };
@@ -231,6 +234,15 @@
 			);
 			name = SASColour;
 			path = ../Screen;
+			sourceTree = "<group>";
+		};
+		188CAEE61B20EA5D006A90EB /* SASSocial */ = {
+			isa = PBXGroup;
+			children = (
+				188CAEE31B20EA59006A90EB /* SASSocial.h */,
+				188CAEE41B20EA59006A90EB /* SASSocial.m */,
+			);
+			name = SASSocial;
 			sourceTree = "<group>";
 		};
 		1891E3DA1B176E9F008CC10C /* SASMapAnnotationRetriever */ = {
@@ -414,6 +426,7 @@
 				18A525051B166E0D00E8F8F6 /* Device */,
 				1845C4E71B2091C800E3D7BC /* SASActivityIndicator */,
 				185A39B91B1FD7C500699D31 /* SASColour */,
+				188CAEE61B20EA5D006A90EB /* SASSocial */,
 				18C323941B1E1FDC0027BDEA /* SASImageViewController */,
 				18C323901B1DFAAC0027BDEA /* SASAnnotation */,
 				18A524FC1B166C2700E8F8F6 /* SASMapView */,
@@ -581,6 +594,7 @@
 				1845C4EF1B209E6C00E3D7BC /* SASUtilities.m in Sources */,
 				D756A2A919F309690089EF80 /* TabBarController.m in Sources */,
 				D73550A41A84DBF500F9093C /* UIView+Alert.m in Sources */,
+				188CAEE51B20EA59006A90EB /* SASSocial.m in Sources */,
 				D715E4941A06509B0026D91F /* EmergencyObjects.m in Sources */,
 				D700239C19F52E9E00E45408 /* UIView+FrameValues.m in Sources */,
 				D715E4861A05A5480026D91F /* ThirdViewController.m in Sources */,
