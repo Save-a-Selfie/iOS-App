@@ -9,6 +9,8 @@
 #import "SASImageViewController.h"
 #import "SASMapView.h"
 #import "Screen.h"
+#import "SASColour.h"
+#import "SASActivityIndicator.h"
 
 @interface SASImageViewController ()
 
@@ -18,6 +20,7 @@
 @property (strong, nonatomic) IBOutlet UITextView *photoDescription;
 @property (strong, nonatomic) UIImage *sasImage;
 @property (strong, nonatomic) IBOutlet UIImageView *sasImageView;
+@property (strong, nonatomic) SASActivityIndicator *sasActivityIndicator;
 
 @property (strong, nonatomic) IBOutlet SASMapView *sasMapView;
 
@@ -42,6 +45,7 @@
 @synthesize deviceImageView;
 @synthesize deviceNameLabel;
 @synthesize contentView;
+@synthesize sasActivityIndicator;
 
 
 
@@ -51,7 +55,12 @@
     // Set the content size for the scroll view.
     [self.scrollView setContentSize:CGSizeMake([Screen width], 700)];
     
-    self.scrollView.backgroundColor = [UIColor clearColor];
+
+    
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    
 }
 
 
@@ -61,27 +70,50 @@
     
     if(self.annotation != nil) {
         
+        // Set the content size for the scroll view.
+        [self.scrollView setContentSize:CGSizeMake([Screen width], 700)];
+        self.scrollView.backgroundColor = [UIColor clearColor];
+        
+        
         // Add shadow to the contentView associated with the scrollView
         [self setShadowForView:self.contentView];
-        
-        
-        // Set the image from the URLString contained within the device property
-        // of the annotation passed to this object.
-        // NOTE: The URLString is contained inside the device.standard_resolution property.
-        self.sasImageView.image = [self getSASImageWithURLFromString:annotation.device.standard_resolution];
         
         
         // Set the image for the device associated with the image.
         self.deviceImageView.image = [self deviceImageFromAnnotation:self.annotation.device];
         
         
+        // Begin animation of sasActivityIndicator until image is loaded.
+        self.sasActivityIndicator = [[SASActivityIndicator alloc] init];
+        [self.view addSubview:sasActivityIndicator];
+        self.sasActivityIndicator.center = self.sasImageView.center;
+        [self.sasActivityIndicator startAnimating];
+        
+        // Set the image from the URLString contained within the device property
+        // of the annotation passed to this object.
+        // NOTE: The URLString is contained inside the device.standard_resolution property.
+        dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            
+            UIImage* imageFromURL = [self getSASImageWithURLFromString:annotation.device.standard_resolution];
+            
+            dispatch_async( dispatch_get_main_queue(), ^{
+                self.sasImageView.image = imageFromURL;
+                [self.sasActivityIndicator stopAnimating];
+                [self.sasActivityIndicator removeFromSuperview];
+                self.sasActivityIndicator = nil;
+            });
+        });
+        
+        
         // Using attributed string to increase the character spacing for deviceNameLabel
         NSString *deviceName = [self getDeviceName:self.annotation.device];
         
         NSMutableAttributedString *attributedDeviceNameLabel = [[NSMutableAttributedString alloc] initWithString:[self getDeviceName:self.annotation.device]];
-        [attributedDeviceNameLabel addAttribute:NSKernAttributeName value:@(2.5)
+        [attributedDeviceNameLabel addAttribute:NSKernAttributeName value:@(2.0)
                                           range:NSMakeRange(0, [deviceName length])];
+        
         self.deviceNameLabel.attributedText = attributedDeviceNameLabel;
+        
         
         
         // Set the text description of the photo.

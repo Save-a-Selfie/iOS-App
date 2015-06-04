@@ -133,6 +133,7 @@
 
 #pragma SASLocation delegate method
 - (void) locationDidUpdate:(CLLocationCoordinate2D)location {
+   
     currentLocation = location;
     
     // We only want the map to zoom the user
