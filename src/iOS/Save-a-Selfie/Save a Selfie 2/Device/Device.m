@@ -8,10 +8,9 @@
 
 @implementation Device
 
-
-
 @synthesize deviceNames;
 @synthesize deviceImages;
+@synthesize deviceMapPins;
 
 // Device types:
 // 0 - Defibrillator
@@ -62,6 +61,14 @@
                             [UIImage imageNamed:@"FirstAidKit"],
                             [UIImage imageNamed:@"FireHydrant"]
                             ];
+}
+
+- (NSArray*) getDeviceMapPins {
+    return deviceMapPins = @[[UIImage imageNamed:@"DefibrillatorMapPin"],
+                             [UIImage imageNamed:@"LifeRingMapPin"],
+                             [UIImage imageNamed:@"FirstAidKitMapPin"],
+                             [UIImage imageNamed:@"FireHydrantMapPin"]
+                             ];
 }
 
 @end

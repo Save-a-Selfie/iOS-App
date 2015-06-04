@@ -10,6 +10,7 @@
 
 @property(strong, nonatomic, readonly, getter=getDeviceNames) NSArray* deviceNames;
 @property(strong, nonatomic, readonly, getter=getDeviceImages) NSArray* deviceImages;
+@property(strong, nonatomic, readonly, getter=getDeviceImages) NSArray* deviceMapPins;
 
 
 @property (nonatomic, strong) NSString *standard_resolution;
