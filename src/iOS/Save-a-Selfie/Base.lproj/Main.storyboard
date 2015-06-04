@@ -112,6 +112,13 @@
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                             </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="f01-VB-Huq">
+                                                <rect key="frame" x="9" y="11" width="64" height="21"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
+                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
@@ -136,6 +143,7 @@
                         <outlet property="contentView" destination="57Q-FF-DiC" id="3VE-7d-7cI"/>
                         <outlet property="deviceImageView" destination="UG9-0e-7OB" id="yOt-q1-PUV"/>
                         <outlet property="deviceNameLabel" destination="0CH-w4-myM" id="UNn-QR-MaS"/>
+                        <outlet property="distanceLabel" destination="f01-VB-Huq" id="8oo-1k-gxX"/>
                         <outlet property="photoDescription" destination="iMp-bt-0Y0" id="3nJ-OB-08x"/>
                         <outlet property="sasImageView" destination="Tjv-A9-dsb" id="fKY-s4-cdq"/>
                         <outlet property="sasMapView" destination="mWk-T9-tVE" id="Nfi-P1-8XY"/>

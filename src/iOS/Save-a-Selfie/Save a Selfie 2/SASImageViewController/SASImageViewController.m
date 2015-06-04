@@ -27,6 +27,8 @@
 @property (strong, nonatomic) IBOutlet UIImageView *deviceImageView;
 @property (strong, nonatomic) IBOutlet UILabel *deviceNameLabel;
 
+@property (strong, nonatomic) IBOutlet UILabel *distanceLabel;
+
 @end
 
 @implementation SASImageViewController
@@ -46,6 +48,7 @@
 @synthesize deviceNameLabel;
 @synthesize contentView;
 @synthesize sasActivityIndicator;
+@synthesize distanceLabel;
 
 
 
@@ -87,6 +90,7 @@
         self.sasActivityIndicator = [[SASActivityIndicator alloc] init];
         [self.view addSubview:sasActivityIndicator];
         self.sasActivityIndicator.center = self.sasImageView.center;
+        self.sasActivityIndicator.backgroundColor = [UIColor clearColor];
         [self.sasActivityIndicator startAnimating];
         
         // Set the image from the URLString contained within the device property

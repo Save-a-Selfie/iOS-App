@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1845C4EA1B2091F600E3D7BC /* SASActivityIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 1845C4E91B2091F600E3D7BC /* SASActivityIndicator.m */; };
 		1845C4EC1B20920300E3D7BC /* SASActivityIndicatorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1845C4EB1B20920300E3D7BC /* SASActivityIndicatorView.xib */; };
+		1845C4EF1B209E6C00E3D7BC /* SASUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 1845C4EE1B209E6C00E3D7BC /* SASUtilities.m */; };
 		185A39B81B1FD7B900699D31 /* SASColour.m in Sources */ = {isa = PBXBuildFile; fileRef = 185A39B71B1FD7B900699D31 /* SASColour.m */; };
 		1891E3D31B1743C8008CC10C /* SASMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1891E3D21B1743C8008CC10C /* SASMapView.m */; };
 		1891E3D91B176E9B008CC10C /* SASMapAnnotationRetriever.m in Sources */ = {isa = PBXBuildFile; fileRef = 1891E3D81B176E9B008CC10C /* SASMapAnnotationRetriever.m */; };
@@ -71,7 +72,6 @@
 		D786E1781A48C02900A20FDD /* Device.m in Sources */ = {isa = PBXBuildFile; fileRef = D786E1771A48C02900A20FDD /* Device.m */; };
 		D786E17B1A48C03500A20FDD /* DeviceMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D786E17A1A48C03500A20FDD /* DeviceMapViewController.m */; };
 		D786E1811A48C10500A20FDD /* SASAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = D786E1801A48C10500A20FDD /* SASAnnotation.m */; };
-		D786E24C1A50A93100A20FDD /* MKSASAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = D786E24B1A50A93100A20FDD /* MKSASAnnotationView.m */; };
 		D786E24E1A50AB1500A20FDD /* PopupImage.xib in Resources */ = {isa = PBXBuildFile; fileRef = D786E24D1A50AB1500A20FDD /* PopupImage.xib */; };
 		D786E2511A50AC7F00A20FDD /* PopupImage.m in Sources */ = {isa = PBXBuildFile; fileRef = D786E2501A50AC7F00A20FDD /* PopupImage.m */; };
 /* End PBXBuildFile section */
@@ -80,6 +80,8 @@
 		1845C4E81B2091F600E3D7BC /* SASActivityIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SASActivityIndicator.h; path = ../../../../../../../Developer/SASActivityIndicator/SASActivityIndicator/SASActivityIndicator.h; sourceTree = "<group>"; };
 		1845C4E91B2091F600E3D7BC /* SASActivityIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SASActivityIndicator.m; path = ../../../../../../../Developer/SASActivityIndicator/SASActivityIndicator/SASActivityIndicator.m; sourceTree = "<group>"; };
 		1845C4EB1B20920300E3D7BC /* SASActivityIndicatorView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SASActivityIndicatorView.xib; path = ../../../../../../../Developer/SASActivityIndicator/SASActivityIndicatorView.xib; sourceTree = "<group>"; };
+		1845C4ED1B209E6C00E3D7BC /* SASUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASUtilities.h; sourceTree = "<group>"; };
+		1845C4EE1B209E6C00E3D7BC /* SASUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASUtilities.m; sourceTree = "<group>"; };
 		185A39B61B1FD7B900699D31 /* SASColour.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SASColour.h; path = "../Save a Selfie 2/SASColour.h"; sourceTree = "<group>"; };
 		185A39B71B1FD7B900699D31 /* SASColour.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SASColour.m; path = "../Save a Selfie 2/SASColour.m"; sourceTree = "<group>"; };
 		1891E3D11B1743C8008CC10C /* SASMapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASMapView.h; sourceTree = "<group>"; };
@@ -173,8 +175,6 @@
 		D786E17F1A48C10500A20FDD /* SASAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASAnnotation.h; sourceTree = "<group>"; };
 		D786E1801A48C10500A20FDD /* SASAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASAnnotation.m; sourceTree = "<group>"; };
 		D786E2051A4B65FB00A20FDD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D786E24A1A50A93100A20FDD /* MKSASAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKSASAnnotationView.h; sourceTree = "<group>"; };
-		D786E24B1A50A93100A20FDD /* MKSASAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKSASAnnotationView.m; sourceTree = "<group>"; };
 		D786E24D1A50AB1500A20FDD /* PopupImage.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PopupImage.xib; sourceTree = "<group>"; };
 		D786E24F1A50AC7F00A20FDD /* PopupImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopupImage.h; sourceTree = "<group>"; };
 		D786E2501A50AC7F00A20FDD /* PopupImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopupImage.m; sourceTree = "<group>"; };
@@ -212,6 +212,15 @@
 			);
 			name = SASActivityIndicator;
 			path = Device;
+			sourceTree = "<group>";
+		};
+		1845C4F01B209E7C00E3D7BC /* SASUtlities */ = {
+			isa = PBXGroup;
+			children = (
+				1845C4ED1B209E6C00E3D7BC /* SASUtilities.h */,
+				1845C4EE1B209E6C00E3D7BC /* SASUtilities.m */,
+			);
+			name = SASUtlities;
 			sourceTree = "<group>";
 		};
 		185A39B91B1FD7C500699D31 /* SASColour */ = {
@@ -399,6 +408,7 @@
 		D72E1DAF19EE841E005DD8A5 /* Save a Selfie 2 */ = {
 			isa = PBXGroup;
 			children = (
+				1845C4F01B209E7C00E3D7BC /* SASUtlities */,
 				18A525041B166C9300E8F8F6 /* Screen */,
 				18C3239A1B1E33140027BDEA /* AppDelegate */,
 				18A525051B166E0D00E8F8F6 /* Device */,
@@ -415,8 +425,6 @@
 				D70023C419FC45FB00E45408 /* Frameworks */,
 				D70023C119FC440C00E45408 /* helpers */,
 				D72E1DC019EE841F005DD8A5 /* Images.xcassets */,
-				D786E24A1A50A93100A20FDD /* MKSASAnnotationView.h */,
-				D786E24B1A50A93100A20FDD /* MKSASAnnotationView.m */,
 				D786E24F1A50AC7F00A20FDD /* PopupImage.h */,
 				D786E2501A50AC7F00A20FDD /* PopupImage.m */,
 				D786E24D1A50AB1500A20FDD /* PopupImage.xib */,
@@ -566,11 +574,11 @@
 				D756A29C19F175230089EF80 /* UIImage+Alpha.m in Sources */,
 				1891E3D91B176E9B008CC10C /* SASMapAnnotationRetriever.m in Sources */,
 				D786E1811A48C10500A20FDD /* SASAnnotation.m in Sources */,
-				D786E24C1A50A93100A20FDD /* MKSASAnnotationView.m in Sources */,
 				D786E17B1A48C03500A20FDD /* DeviceMapViewController.m in Sources */,
 				1845C4EA1B2091F600E3D7BC /* SASActivityIndicator.m in Sources */,
 				D72E1DB619EE841E005DD8A5 /* AppDelegate.m in Sources */,
 				D715E48F1A064FDA0026D91F /* UIView+NibInitializer.m in Sources */,
+				1845C4EF1B209E6C00E3D7BC /* SASUtilities.m in Sources */,
 				D756A2A919F309690089EF80 /* TabBarController.m in Sources */,
 				D73550A41A84DBF500F9093C /* UIView+Alert.m in Sources */,
 				D715E4941A06509B0026D91F /* EmergencyObjects.m in Sources */,

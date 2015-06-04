@@ -10,6 +10,7 @@
 #import "ExtendNSLogFunctionality.h"
 
 #import "UploadPictureViewController.h"
+#import "SASUtilities.h"
 
 @interface AppDelegate ()
 
@@ -28,6 +29,7 @@ UIFont *customFont, *customFontSmaller;
 BOOL NSLogOn = NO; // YES to show logs, NO if not
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
     plog(@"Launching");
     customFont = [UIFont fontWithName:@"TradeGothic LT" size:17];
     customFontSmaller = [UIFont fontWithName:@"TradeGothic LT" size:14];

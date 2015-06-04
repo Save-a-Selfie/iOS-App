@@ -6,7 +6,6 @@
 #import <MapKit/MapKit.h>
 #import <ImageIO/ImageIO.h>
 #import <MapKit/MKAnnotation.h>
-#import "MKSASAnnotationView.h"
 #import <MobileCoreServices/MobileCoreServices.h>
 #import <CoreLocation/CoreLocation.h>
 #import <AssetsLibrary/AssetsLibrary.h>
