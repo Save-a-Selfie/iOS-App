@@ -40,6 +40,11 @@ NSString *permissionsProblemTwo = @"Please enable location services on your phon
     
 }
 
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
+}
+
 
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -58,9 +63,9 @@ NSString *permissionsProblemTwo = @"Please enable location services on your phon
     [self.view addSubview:sasMapView];
     [self.view bringSubviewToFront:locateUserButton];
     [self.view bringSubviewToFront:addImageButton];
-    printf("Hi");
 
 }
+
 
 
 - (IBAction)locateUser:(id)sender {

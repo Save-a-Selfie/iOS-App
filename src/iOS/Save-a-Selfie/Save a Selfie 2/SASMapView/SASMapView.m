@@ -143,7 +143,13 @@
     if (!userAlreadyLocated) {
         [self locateUser];
         userAlreadyLocated = YES;
-        plog(@"This is the problem");
+    }
+    
+
+    // As the map view is providing a wrapper for the location object
+    // pass on the location update of the user.
+    if (notificationReceiver != nil && [notificationReceiver respondsToSelector:@selector(sasMapViewUsersLocationHasUpdated:)]) {
+        [self.notificationReceiver sasMapViewUsersLocationHasUpdated:location];
     }
 }
 
@@ -157,7 +163,7 @@
 //  any object who wants to receive said notifications. This makes a nice object that updates, adoptees of location
 //  and map changes.
 - (void) locationPermissionsHaveChanged:(CLAuthorizationStatus)status {
-    if(notificationReceiver != nil) {
+    if(notificationReceiver != nil && [notificationReceiver respondsToSelector:@selector(authorizationStatusHasChanged:)]) {
         [notificationReceiver authorizationStatusHasChanged:status];
     }
 }

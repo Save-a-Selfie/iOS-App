@@ -11,8 +11,9 @@
 #import "Screen.h"
 #import "SASColour.h"
 #import "SASActivityIndicator.h"
+#import "SASUtilities.h"
 
-@interface SASImageViewController ()
+@interface SASImageViewController () <SASMapViewNotifications>
 
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (strong, nonatomic) IBOutlet UIView *contentView;
@@ -28,6 +29,8 @@
 @property (strong, nonatomic) IBOutlet UILabel *deviceNameLabel;
 
 @property (strong, nonatomic) IBOutlet UILabel *distanceLabel;
+
+@property (strong, nonatomic) IBOutlet UIButton *showDeviceLocationPin;
 
 @end
 
@@ -49,23 +52,13 @@
 @synthesize contentView;
 @synthesize sasActivityIndicator;
 @synthesize distanceLabel;
+@synthesize showDeviceLocationPin;
 
 
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    // Set the content size for the scroll view.
-    [self.scrollView setContentSize:CGSizeMake([Screen width], 700)];
-    
-
-    
 }
-
-- (void)viewDidAppear:(BOOL)animated {
-    
-}
-
 
 
 
@@ -74,9 +67,12 @@
     if(self.annotation != nil) {
         
         // Set the content size for the scroll view.
-        [self.scrollView setContentSize:CGSizeMake([Screen width], 700)];
+        [self.scrollView setContentSize:CGSizeMake([Screen width], 1000)];
+
         self.scrollView.backgroundColor = [UIColor clearColor];
         
+        self.contentView.frame = CGRectMake(0, [Screen height] * 0.56, [Screen width], [Screen height]);
+
         
         // Add shadow to the contentView associated with the scrollView
         [self setShadowForView:self.contentView];
@@ -111,11 +107,9 @@
         
         // Using attributed string to increase the character spacing for deviceNameLabel
         NSString *deviceName = [self getDeviceName:self.annotation.device];
-        
         NSMutableAttributedString *attributedDeviceNameLabel = [[NSMutableAttributedString alloc] initWithString:[self getDeviceName:self.annotation.device]];
         [attributedDeviceNameLabel addAttribute:NSKernAttributeName value:@(2.0)
                                           range:NSMakeRange(0, [deviceName length])];
-        
         self.deviceNameLabel.attributedText = attributedDeviceNameLabel;
         
         
@@ -123,41 +117,29 @@
         // Set the text description of the photo.
         self.photoDescription.text = [NSString stringWithFormat:@"%@", annotation.device.caption];
         [self.photoDescription setFont:[UIFont fontWithName:@"Avenir Next" size:18]];
+        [self.photoDescription sizeToFit];
+        
         
         
         // The sasMapView property should show the location
         // of where the picture was taken.
         self.sasMapView.showAnnotations = YES;
+        self.sasMapView.notificationReceiver = self;
         self.sasMapView.userInteractionEnabled = YES;
         [self.sasMapView setMapType:MKMapTypeHybrid];
-        [self.sasMapView showAnnotation:self.annotation
-                                andZoom:YES
-                               animated:NO];
+        [self showDeviceLocation:nil];
+        
+        
+        [self setColourForColouredUIElements:self.annotation.device];
         
     }
 }
 
 
 
-- (CGFloat) correctSizeForView: (UIView*) view {
-
-    CGFloat h = 0;
-    
-    for (UIView* subview in view.subviews) {
-        for(UIView* v in subview.subviews) {
-            h += v.bounds.size.height;
-            NSLog(@"%@", subview);
-        }
-        
-        NSLog(@"%@", subview);
-        h += subview.bounds.size.height;
-        printf("%f\n", h);
-    }
-    
-    return h;
-
+- (IBAction)showDeviceLocation:(id)sender {
+    [self.sasMapView showAnnotation:self.annotation andZoom:YES animated:YES];
 }
-
 
 
 
@@ -180,13 +162,18 @@
     return deviceNames[fromDevice.typeOfObjectInt];
 }
 
-
+- (void) setColourForColouredUIElements:(Device*) device {
+    NSArray* mapPinButtonImages = @[[UIImage imageNamed:@"MapPinAEDRed"],
+                                    [UIImage imageNamed:@"MapPinLifeRingRed"],
+                                    [UIImage imageNamed:@"MapPinFAKitGreen"],
+                                    [UIImage imageNamed:@"MapPinHydrantBlue"]];
+    [self.showDeviceLocationPin setImage:mapPinButtonImages[device.typeOfObjectInt] forState:UIControlStateNormal];
+}
 
 
 - (UIImage*) deviceImageFromAnnotation: (Device*) device {
     return [device getDeviceImages][device.typeOfObjectInt];
 }
-
 
 
 
@@ -201,6 +188,15 @@
     self.sasImage = image;
     
     return sasImage;
+}
+
+
+#pragma SASNotificationReceiver
+- (void)sasMapViewUsersLocationHasUpdated:(CLLocationCoordinate2D)coordinate {
+    double distance = [SASUtilities distanceBetween:self.annotation.coordinate and:coordinate];
+    NSString *distanceString = [NSString stringWithFormat:@"%.0fKM Approx", distance];
+    
+    self.distanceLabel.text = distanceString;
 }
 
 

@@ -37,10 +37,8 @@
 	<string></string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Location is required to find out where you are</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Location is required to find out where you are</string>
+	<string>Location is required to find out where you are.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>trade-gothic-no-18-condensed-1361519964.ttf</string>

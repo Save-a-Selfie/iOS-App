@@ -14,12 +14,16 @@
 // To receive noitification from SASMapView, please reference the notificationReceiver property.
 // Ideally this should be changed to the Observer Design Pattern to update registered
 // observers, however, this shall do for the time being.
-@protocol SASMapViewNotifications
+@protocol SASMapViewNotifications <NSObject>
 
+@optional
 - (void) authorizationStatusHasChanged: (CLAuthorizationStatus) status;
 
 @optional
 - (void) sasMapViewAnnotationTapped: (SASAnnotation*) annotation;
+
+@optional
+- (void) sasMapViewUsersLocationHasUpdated: (CLLocationCoordinate2D) coordinate;
 
 @end
 
@@ -32,6 +36,9 @@
 // Reference this object to receive appropriate method calls for
 //      @protocol SASMapViewNotifications. 
 @property (assign) id<SASMapViewNotifications> notificationReceiver;
+
+
+
 
 
 // Shows the annotations on the map according to their coordinated.
