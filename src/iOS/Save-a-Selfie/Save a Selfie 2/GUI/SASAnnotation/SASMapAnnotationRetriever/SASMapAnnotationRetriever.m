@@ -98,7 +98,7 @@
     for(int i = 0; i < [deviceData count]; i++) {
         if([deviceData[i] length] != 0) {
             
-            Device *device = [[Device alloc] initWithInfoString:[deviceData objectAtIndex:i]];
+            Device *device = [[Device alloc] initDeviceWithInformationFromString:[deviceData objectAtIndex:i]];
             [self.devices insertObject:device atIndex:i];
         }
     }

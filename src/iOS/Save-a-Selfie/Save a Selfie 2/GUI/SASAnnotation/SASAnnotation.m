@@ -19,9 +19,9 @@
 - (instancetype) initAnnotationWithDevice:(Device*) device index:(int) deviceNumber {
     if (self = [super init]) {
         
-        _name = [device getDeviceNames][device.typeOfObjectInt];
+        _name = [device getDeviceNames][device.type];
         _coordinate = device.deviceLocation;
-        _image = (UIImage*)[device getDeviceImages][device.typeOfObjectInt];
+        _image = (UIImage*)[device getDeviceImages][device.type];
         _device = device;
         _index = deviceNumber;
 

@@ -35,7 +35,7 @@
 
 // Reference this object to receive appropriate method calls for
 //      @protocol SASMapViewNotifications. 
-@property (nonatomic, weak) id<SASMapViewNotifications> notificationReceiver;
+@property (nonatomic, assign) id<SASMapViewNotifications> notificationReceiver;
 
 
 

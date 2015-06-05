@@ -2,13 +2,12 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x",
-      "filename" : "arrow_left.png"
+      "scale" : "1x"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "arrow_left@2x.png"
+      "filename" : "DefibrillatorMapPin@2x.png"
     },
     {
       "idiom" : "universal",

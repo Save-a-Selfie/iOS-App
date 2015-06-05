@@ -16,25 +16,25 @@
 
 
 @interface SASImageViewController () <SASMapViewNotifications> {
-    int deviceType;
+    DeviceType deviceType;
 }
 
-@property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
-@property (strong, nonatomic) IBOutlet UIView *contentView;
+@property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
+@property (nonatomic, weak) IBOutlet UIView *contentView;
 
-@property (strong, nonatomic) IBOutlet UITextView *photoDescription;
-@property (strong, nonatomic) UIImage *sasImage;
-@property (strong, nonatomic) IBOutlet UIImageView *sasImageView;
-@property (strong, nonatomic) SASActivityIndicator *sasActivityIndicator;
+@property (nonatomic, weak) IBOutlet UITextView *photoDescription;
+@property (nonatomic, strong) UIImage *sasImage;
+@property (nonatomic, weak) IBOutlet UIImageView *sasImageView;
+@property (nonatomic, strong) SASActivityIndicator *sasActivityIndicator;
 
-@property (strong, nonatomic) IBOutlet SASMapView *sasMapView;
+@property (nonatomic, strong) IBOutlet SASMapView *sasMapView;
 
-@property (strong, nonatomic) IBOutlet UIImageView *deviceImageView;
-@property (strong, nonatomic) IBOutlet UILabel *deviceNameLabel;
+@property (nonatomic, weak) IBOutlet UIImageView *deviceImageView;
+@property (nonatomic, weak) IBOutlet UILabel *deviceNameLabel;
 
-@property (strong, nonatomic) IBOutlet UILabel *distanceLabel;
+@property (nonatomic, weak) IBOutlet UILabel *distanceLabel;
 
-@property (strong, nonatomic) IBOutlet UIButton *showDeviceLocationPin;
+@property (nonatomic, weak) IBOutlet UIButton *showDeviceLocationPin;
 
 @end
 
@@ -71,7 +71,7 @@
     if(self.annotation != nil) {
         
         // Store the type of device shown in the image
-        deviceType = annotation.device.typeOfObjectInt;
+        deviceType = annotation.device.type;
         
         
         // Set the content size for the scroll view.
@@ -102,7 +102,7 @@
         // NOTE: The URLString is contained inside the device.standard_resolution property.
         dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             
-            UIImage* imageFromURL = [self getSASImageWithURLFromString:annotation.device.standard_resolution];
+            UIImage* imageFromURL = [self getSASImageWithURLFromString:annotation.device.imageStandardRes];
             
             dispatch_async( dispatch_get_main_queue(), ^{
                 self.sasImageView.image = imageFromURL;
@@ -170,14 +170,16 @@
                                     [UIImage imageNamed:@"MapPinLifeRingRed"],
                                     [UIImage imageNamed:@"MapPinFAKitGreen"],
                                     [UIImage imageNamed:@"MapPinHydrantBlue"]];
-    [self.showDeviceLocationPin setImage:mapPinButtonImages[device.typeOfObjectInt] forState:UIControlStateNormal];
+    [self.showDeviceLocationPin setImage:mapPinButtonImages[deviceType] forState:UIControlStateNormal];
+    
+    self.distanceLabel.textColor = [SASColour getSASColours][deviceType];
 }
 
 
 
 // Gets the image associated with the device.
 - (UIImage*) deviceImageFromAnnotation: (Device*) device {
-    return [device getDeviceImages][device.typeOfObjectInt];
+    return [device getDeviceImages][device.type];
 }
 
 

@@ -15,5 +15,6 @@
 + (UIColor*) sasGreenFirstAidColour;
 + (UIColor*) sasRedAEDColour;
 
++ (NSArray*) getSASColours;
 
 @end

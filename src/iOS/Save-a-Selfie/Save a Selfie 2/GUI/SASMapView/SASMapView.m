@@ -238,7 +238,7 @@
     }
     
 
-    annotationView.image = annotation.image;
+    annotationView.image = [annotation.device getDeviceMapPins][annotation.device.type];
     annotationView.annotation = annotation;
     annotationView.enabled = YES;
     annotationView.canShowCallout = NO;

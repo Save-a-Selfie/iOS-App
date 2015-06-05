@@ -15,9 +15,9 @@
 
 @interface SASMapViewController ()
 
-@property(strong, nonatomic) SASMapView* sasMapView;
-@property(strong, nonatomic) IBOutlet UIButton *locateUserButton;
-@property(strong, nonatomic) IBOutlet UIButton *addImageButton;
+@property(nonatomic, strong) SASMapView* sasMapView;
+@property(nonatomic, weak) IBOutlet UIButton *locateUserButton;
+@property(nonatomic, weak) IBOutlet UIButton *addImageButton;
 
 @property(strong, nonatomic) AlertBox* permissionsBox;
 
