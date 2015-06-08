@@ -39,16 +39,7 @@
 - (void) handleTapGesture: (UIGestureRecognizer*) gesture {
     
     sasImageInspectorView = [[SASImageInspectorView alloc] initWithImage:self.image];
-    
-    [UIView animateWithDuration:3.0
-                          delay:0.2
-         usingSpringWithDamping:1.0
-          initialSpringVelocity:0.2
-                        options:UIViewAnimationOptionCurveEaseIn
-                     animations:^{
-                         [self addSubview:self.sasImageInspectorView];
-                     }
-                     completion:nil];
+    [self addSubview:sasImageInspectorView];
 }
 
 

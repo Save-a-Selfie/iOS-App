@@ -75,16 +75,18 @@
 - (void)viewWillAppear:(BOOL)animated {
 
 #pragma Setup of the UI Elements.
-    // @Suggestion:
-    // It is possible not every property of annotation
-    // will be nil. S check what
-    // properties of annoation are not nil and then
-    // update the UI accordingly.
+    
+    // @Discussion:
+    //  It is possible sone properties of annotation
+    //  may be nil. Check each property
+    //  of annoation for nil and then
+    //  update the UI accordingly.
     
     // Store the type of device shown in the image
     deviceType = annotation.device.type;
     
     // Set the content size for the scroll view.
+    [self.scrollView setFrame:CGRectMake(0, 0, [Screen width], [Screen height])];
     [self.scrollView setContentSize:CGSizeMake([Screen width], 1000)];
     self.scrollView.backgroundColor = [UIColor clearColor];
     
@@ -95,7 +97,8 @@
     // Using attributed string to increase the character spacing for deviceNameLabel
     NSString *deviceName = [Device deviceNames ][deviceType];
     NSMutableAttributedString *attributedDeviceNameLabel = [[NSMutableAttributedString alloc] initWithString:deviceName];
-    [attributedDeviceNameLabel addAttribute:NSKernAttributeName value:@(2.0)
+    [attributedDeviceNameLabel addAttribute:NSKernAttributeName
+                                      value:@(2.0)
                                       range:NSMakeRange(0, [deviceName length])];
     self.deviceNameLabel.attributedText = attributedDeviceNameLabel;
     
@@ -105,6 +108,7 @@
     self.sasMapView.showAnnotations = YES;
     self.sasMapView.notificationReceiver = self;
     self.sasMapView.userInteractionEnabled = YES;
+    self.sasMapView.zoomToUsersLocationInitially = NO;
     self.sasMapView.showsUserLocation = NO;
     [self.sasMapView setMapType:MKMapTypeHybrid];
     [self showDeviceLocation:nil];
@@ -213,10 +217,11 @@
 }
 
 
+
 #pragma SASNotificationReceiver
 - (void)sasMapViewUsersLocationHasUpdated:(CLLocationCoordinate2D)coordinate {
     double distance = [SASUtilities distanceBetween:self.annotation.coordinate and:coordinate];
-    printf("CALLED");
+    
     __weak NSString *distanceString = [NSString stringWithFormat:@"%.0fKM Approx", distance];
     self.distanceLabel.text = distanceString;
 }

@@ -25,7 +25,7 @@
     // This variable is gotten from the SASLocationDelegate method
     //  locationDidUpdate:
     CLLocationCoordinate2D currentLocation;
-    
+
     BOOL userAlreadyLocated;
 }
 
@@ -45,8 +45,10 @@
 @synthesize sasLocation;
 @synthesize sasAnnotationRetriever;
 @synthesize notificationReceiver;
+@synthesize annotationType;
 
 @synthesize showAnnotations;
+@synthesize zoomToUsersLocationInitially;
 
 
 #pragma Object Life Cycle
@@ -79,7 +81,7 @@
 - (void) setupMapView {
     
     userAlreadyLocated = NO;
-    
+    annotationType = Default;
     self.mapType = MKMapTypeSatellite;
     
     self.delegate = self;
@@ -107,7 +109,6 @@
         plog(@"SASMapView could not access location services.");
     }
 }
-
 
 
 
@@ -153,13 +154,15 @@
    
     currentLocation = location;
     
-    // We only want the map to zoom the user
-    // when it is first opened. We check `userAlreadyLocated`
-    // so the map does no keep zooming every time the user's
-    // location is updated.
-    if (!userAlreadyLocated) {
-        [self locateUser];
-        userAlreadyLocated = YES;
+    if(zoomToUsersLocationInitially) {
+        // We only want the map to zoom the user
+        // when it is first opened. We check `userAlreadyLocated`
+        // so the map does no keep zooming every time the user's
+        // location is updated.
+        if (!userAlreadyLocated) {
+            [self locateUser];
+            userAlreadyLocated = YES;
+        }
     }
     
     // As the map view is providing a wrapper for the location object
@@ -235,16 +238,9 @@
 
 
 
-- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(SASAnnotation*)annotation {
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation {
     
     static NSString *annotationViewID = @"MyLocation";
-    
-    if ([annotation isKindOfClass:MKUserLocation.class]) {
-        mapView.showsUserLocation = YES;
-        mapView.userLocation.title = @"You are here";
-        plog(@"HERE");
-        return nil;
-    }
     
     MKAnnotationView *annotationView = (MKAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:annotationViewID];
     
@@ -253,12 +249,31 @@
                                                       reuseIdentifier:annotationViewID];
     }
     
+    // Load the correct annotation image for the device.
+    if(self.annotationType == DevicePin) {
+        
+        SASAnnotation *sasAnnotation = (SASAnnotation*)annotation;
+        
 
-    annotationView.image = [Device deviceMapPins][annotation.device.type];
-    annotationView.annotation = annotation;
-    annotationView.enabled = YES;
-    annotationView.canShowCallout = NO;
-    return annotationView;
+        if ([annotation isKindOfClass:MKUserLocation.class]) {
+            mapView.showsUserLocation = YES;
+            mapView.userLocation.title = @"You are here";
+            
+            return nil;
+        }
+    
+        annotationView.image = [Device deviceMapPins][sasAnnotation.device.type];
+        annotationView.annotation = annotation;
+        annotationView.enabled = YES;
+        annotationView.canShowCallout = NO;
+        return annotationView;
+    }
+    // Default annotation
+    else {
+        return [[MKAnnotationView alloc] init];
+    }
+    
+    
 }
 
 

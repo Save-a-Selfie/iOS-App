@@ -11,6 +11,12 @@
 #import "SASLocation.h"
 #import "SASAnnotation.h"
 
+// Annotation type for the MapView.
+typedef enum: NSUInteger {
+    Default, // Default MapView Pin
+    DevicePin // Annotation with the corresponding device image.
+}AnnotationType;
+
 // To receive noitification from SASMapView, please reference the notificationReceiver property.
 // Ideally this should be changed to the Observer Design Pattern to update registered
 // observers, however, this shall do for the time being.
@@ -38,9 +44,14 @@
 @property (nonatomic, weak) id<SASMapViewNotifications> notificationReceiver;
 
 
-
 // Shows the annotations on the map according to their coordinated.
 @property(nonatomic, assign) BOOL showAnnotations;
+
+// Will zoom to the users location SASMapView object is instansiated first.
+@property(nonatomic, assign) BOOL zoomToUsersLocationInitially;
+
+// The type of annotations for the map.
+@property(nonatomic, assign) AnnotationType annotationType;
 
 
 // Calling this will bring you to the current user's location, on the map.

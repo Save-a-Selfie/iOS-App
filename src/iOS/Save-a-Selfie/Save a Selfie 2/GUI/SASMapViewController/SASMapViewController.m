@@ -58,6 +58,9 @@ NSString *permissionsProblemTwo = @"Please enable location services on your phon
     // for all available botifications.
     self.sasMapView.notificationReceiver = self;
     self.sasMapView.showAnnotations = YES;
+    self.sasMapView.showsUserLocation = YES;
+    self.sasMapView.zoomToUsersLocationInitially = YES;
+    self.sasMapView.annotationType = DevicePin;
     
     [self.view addSubview:sasMapView];
     [self.view bringSubviewToFront:locateUserButton];
