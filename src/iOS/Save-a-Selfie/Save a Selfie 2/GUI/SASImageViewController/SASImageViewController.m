@@ -13,6 +13,7 @@
 #import "SASActivityIndicator.h"
 #import "SASUtilities.h"
 #import "SASSocial.h"
+#import "SASImageView.h"
 
 
 @interface SASImageViewController () <SASMapViewNotifications> {
@@ -24,7 +25,7 @@
 
 @property (nonatomic, weak) IBOutlet UITextView *photoDescription;
 @property (nonatomic, strong) UIImage *sasImage;
-@property (nonatomic, weak) IBOutlet UIImageView *sasImageView;
+@property (nonatomic, weak) IBOutlet SASImageView *sasImageView;
 @property (nonatomic, strong) SASActivityIndicator *sasActivityIndicator;
 
 @property (nonatomic, strong) IBOutlet SASMapView *sasMapView;
@@ -35,6 +36,8 @@
 @property (nonatomic, weak) IBOutlet UILabel *distanceLabel;
 
 @property (nonatomic, weak) IBOutlet UIButton *showDeviceLocationPin;
+
+@property (strong, nonatomic) IBOutlet UIButton *doneButton;
 
 @end
 
@@ -57,11 +60,17 @@
 @synthesize sasActivityIndicator;
 @synthesize distanceLabel;
 @synthesize showDeviceLocationPin;
+@synthesize doneButton;
 
 
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+ 
+    [self.view bringSubviewToFront:self.contentView];
+    
+    [self.view bringSubviewToFront:self.doneButton];
+
 }
 
 
@@ -114,7 +123,7 @@
         
         
         // Using attributed string to increase the character spacing for deviceNameLabel
-        NSString *deviceName = [self.annotation.device getDeviceNames][deviceType];
+        NSString *deviceName = [Device deviceNames ][deviceType];
         NSMutableAttributedString *attributedDeviceNameLabel = [[NSMutableAttributedString alloc] initWithString:deviceName];
         [attributedDeviceNameLabel addAttribute:NSKernAttributeName value:@(2.0)
                                           range:NSMakeRange(0, [deviceName length])];
@@ -128,11 +137,13 @@
         [self.photoDescription sizeToFit];
         
         
+
         
         // The sasMapView property should show the location
         // of where the picture was taken.
         self.sasMapView.showAnnotations = YES;
         self.sasMapView.notificationReceiver = self;
+        NSLog(@"%@", self.sasMapView.notificationReceiver);
         self.sasMapView.userInteractionEnabled = YES;
         [self.sasMapView setMapType:MKMapTypeHybrid];
         [self showDeviceLocation:nil];
@@ -144,7 +155,6 @@
 }
 
 
-
 // Shows the location of the device on the map.
 - (IBAction)showDeviceLocation:(id)sender {
     [self.sasMapView showAnnotation:self.annotation andZoom:YES animated:YES];
@@ -152,7 +162,7 @@
 
 
 
-
+#pragma TODO: Make custom class for this. UIView extension etc.
 - (void) setShadowForView: (UIView*) view {
     view.layer.shadowColor = [UIColor blackColor].CGColor;
     view.layer.shadowOffset = CGSizeMake(0, -2);
@@ -179,7 +189,7 @@
 
 // Gets the image associated with the device.
 - (UIImage*) deviceImageFromAnnotation: (Device*) device {
-    return [device getDeviceImages][device.type];
+    return [Device deviceImages][device.type];
 }
 
 
@@ -189,10 +199,8 @@
     
     NSData *data = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:string]];
     
-    UIImage *image = [UIImage imageWithData:data];
-    
-    // Hold reference to the image within this object.
-    self.sasImage = image;
+    // Hold reference to the image.
+    self.sasImage = [UIImage imageWithData:data];
     
     return sasImage;
 }
@@ -201,8 +209,8 @@
 #pragma SASNotificationReceiver
 - (void)sasMapViewUsersLocationHasUpdated:(CLLocationCoordinate2D)coordinate {
     double distance = [SASUtilities distanceBetween:self.annotation.coordinate and:coordinate];
-    NSString *distanceString = [NSString stringWithFormat:@"%.0fKM Approx", distance];
-    
+    printf("CALLED");
+    __weak NSString *distanceString = [NSString stringWithFormat:@"%.0fKM Approx", distance];
     self.distanceLabel.text = distanceString;
 }
 
@@ -213,7 +221,6 @@
         [SASSocial shareToSocialMedia:self.annotation.device.caption andImage:self.sasImage target:self];
     }
 }
-
 
 
 

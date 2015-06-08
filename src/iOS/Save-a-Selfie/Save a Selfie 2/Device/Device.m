@@ -8,11 +8,6 @@
 
 @implementation Device
 
-@synthesize deviceNames;
-@synthesize deviceImages;
-@synthesize deviceMapPins;
-
-
 
 
 - (id) initDeviceWithInformationFromString: (NSString *)infoString {
@@ -49,31 +44,35 @@
 
 
 
-- (NSArray *)getDeviceNames {
-    return deviceNames = [[NSArray alloc] initWithObjects:
-                          @"Defibrillator",
-                          @"Life Ring",
-                          @"First Aid Kit",
-                          @"Fire Hydrant",
-                          nil];
++ (NSArray *)deviceNames {
+    return [NSArray arrayWithObjects:
+            @"Defibrillator",
+            @"Life Ring",
+            @"First Aid Kit",
+            @"Fire Hydrant",
+            nil];
 }
 
 
-- (NSArray *)getDeviceImages {
-    return deviceImages = @[[UIImage imageNamed:@"Defibrillator"],
-                            [UIImage imageNamed:@"LifeRing"],
-                            [UIImage imageNamed:@"FirstAidKit"],
-                            [UIImage imageNamed:@"FireHydrant"]
-                            ];
++ (NSArray *)deviceImages {
+    
+    return [NSArray arrayWithObjects:
+            [UIImage imageNamed:@"Defibrillator"],
+            [UIImage imageNamed:@"LifeRing"],
+            [UIImage imageNamed:@"FirstAidKit"],
+            [UIImage imageNamed:@"FireHydrant"],
+            nil];
 }
 
 
-- (NSArray*) getDeviceMapPins {
-    return deviceMapPins = @[[UIImage imageNamed:@"DefibrillatorMapPin"],
-                             [UIImage imageNamed:@"LifeRingMapPin"],
-                             [UIImage imageNamed:@"FirstAidKitMapPin"],
-                             [UIImage imageNamed:@"FireHydrantMapPin"]
-                             ];
++ (NSArray*) deviceMapPins {
+    
+    return [NSArray arrayWithObjects:
+            [UIImage imageNamed:@"DefibrillatorMapPin"],
+            [UIImage imageNamed:@"LifeRingMapPin"],
+            [UIImage imageNamed:@"FirstAidKitMapPin"],
+            [UIImage imageNamed:@"FireHydrantMapPin"],
+            nil];
 }
 
 @end

@@ -35,9 +35,7 @@
 
 // Reference this object to receive appropriate method calls for
 //      @protocol SASMapViewNotifications. 
-@property (nonatomic, assign) id<SASMapViewNotifications> notificationReceiver;
-
-
+@property (nonatomic, weak) id<SASMapViewNotifications> notificationReceiver;
 
 
 
@@ -59,5 +57,8 @@
 // @param: andZoom: Zoom the coordinate of the annotation.
 // @param: animated: Animate when zooming to region/ location.
 - (void) showAnnotation:(SASAnnotation*) annotation andZoom:(BOOL) zoom animated:(BOOL) animated;
+
+
+
 
 @end

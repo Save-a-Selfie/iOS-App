@@ -61,16 +61,23 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="Tjv-A9-dsb">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="340"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="mUr-Iu-yal">
+                                <rect key="frame" x="253" y="27" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="DONE">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="dissmissView:" destination="a1b-sM-og2" eventType="touchUpInside" id="NND-bX-rms"/>
+                                </connections>
+                            </button>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="eub-ih-yoo">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <rect key="frame" x="0.0" y="337" width="320" height="231"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" id="57Q-FF-DiC">
-                                        <rect key="frame" x="0.0" y="337" width="320" height="245"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="245"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="UG9-0e-7OB">
@@ -83,7 +90,7 @@
                                                 <attributedString key="attributedText">
                                                     <fragment content="FIRE HYDRANT">
                                                         <attributes>
-                                                            <color key="NSColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                            <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                             <font key="NSFont" size="20" name="AvenirNext-Regular"/>
                                                             <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="10"/>
                                                         </attributes>
@@ -139,19 +146,12 @@
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="mUr-Iu-yal">
-                                        <rect key="frame" x="266" y="28" width="46" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="DONE">
-                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="dissmissView:" destination="a1b-sM-og2" eventType="touchUpInside" id="NND-bX-rms"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
                             </scrollView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="Tjv-A9-dsb" customClass="SASImageView">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="340"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -161,6 +161,7 @@
                         <outlet property="deviceImageView" destination="UG9-0e-7OB" id="yOt-q1-PUV"/>
                         <outlet property="deviceNameLabel" destination="0CH-w4-myM" id="UNn-QR-MaS"/>
                         <outlet property="distanceLabel" destination="f01-VB-Huq" id="8oo-1k-gxX"/>
+                        <outlet property="doneButton" destination="mUr-Iu-yal" id="gsv-Nf-nCA"/>
                         <outlet property="photoDescription" destination="iMp-bt-0Y0" id="3nJ-OB-08x"/>
                         <outlet property="sasImageView" destination="Tjv-A9-dsb" id="fKY-s4-cdq"/>
                         <outlet property="sasMapView" destination="mWk-T9-tVE" id="Nfi-P1-8XY"/>
@@ -170,7 +171,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8mT-kw-3eP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-38" y="1242"/>
+            <point key="canvasLocation" x="-520" y="1252"/>
         </scene>
         <!--Info-->
         <scene sceneID="Smb-hj-4hT">
@@ -256,7 +257,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vur-sD-egv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-38" y="594"/>
+            <point key="canvasLocation" x="-56" y="594"/>
         </scene>
         <!--Upload Picture View Controller-->
         <scene sceneID="aAA-FK-5Kq">

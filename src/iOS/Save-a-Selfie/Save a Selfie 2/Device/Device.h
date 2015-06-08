@@ -21,19 +21,20 @@ typedef enum : NSUInteger {
 
 @interface Device : NSObject;
 
-@property(strong, nonatomic, readonly, getter=getDeviceNames) NSArray* deviceNames;
-@property(strong, nonatomic, readonly, getter=getDeviceImages) NSArray* deviceImages;
-@property(strong, nonatomic, readonly, getter=getDeviceMapPins) NSArray* deviceMapPins;
+// Returns NSArray all the device names as a NSString.
++ (NSArray*) deviceNames;
+// Returns NSArray of UIImages for the devices, respectively.
++ (NSArray*) deviceImages;
+// Returns NSArray of UIImages for the devices as pins for a map.
++ (NSArray*) deviceMapPins;
 
 
 @property (nonatomic, assign) DeviceType type;
-
 @property (nonatomic, strong) NSString *imageStandardRes;
 @property (nonatomic, strong) NSString *caption;
 @property (nonatomic, strong) NSString *thumb;
 @property (nonatomic, strong) NSString *app;
 @property (nonatomic) CLLocationCoordinate2D deviceLocation;
-
 
 
 - (id) initDeviceWithInformationFromString: (NSString *)infoString;

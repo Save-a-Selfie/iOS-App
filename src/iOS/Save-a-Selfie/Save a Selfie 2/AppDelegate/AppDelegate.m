@@ -31,40 +31,18 @@ BOOL NSLogOn = NO; // YES to show logs, NO if not
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     plog(@"Launching");
-    customFont = [UIFont fontWithName:@"TradeGothic LT" size:17];
-    customFontSmaller = [UIFont fontWithName:@"TradeGothic LT" size:14];
-	[[NSNotificationCenter defaultCenter]
-	 addObserver:self selector:@selector(swapViewControllers)
-	 name:userSkippedLogin
-	 object:nil];
-    return YES;
+        return YES;
 }
 
--(void)swapViewControllers {
-    // if logged into Facebook, or if user has chosen to skip login, change to 'proper' first view controller
-//    ((UITabBarController*)self.window.rootViewController).selectedViewController;
-    
-    if (FBVCDisplayed) { // continue only if user has seen FacebookVC screen
-        plog(@"Root: %@", self.window.rootViewController);
-        UITabBarController *tabController = (UITabBarController *)self.window.rootViewController;
-        NSMutableArray *mArray = [NSMutableArray arrayWithArray:tabController.viewControllers];
-        plog(@"mArray: %@", mArray);
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        UploadPictureViewController *UPVC = [storyboard instantiateViewControllerWithIdentifier:@"UploadPictureViewController"];
-        [mArray replaceObjectAtIndex:0 withObject:UPVC];
-        [tabController setViewControllers:mArray animated:NO];
-    }
-}
+
 
 #pragma mark Events
 
-- (void)applicationDidEnterBackground:(UIApplication *)application
-{
+- (void)applicationDidEnterBackground:(UIApplication *)application {
     plog(@"entering background");
 }
 
-- (void)applicationWillEnterForeground:(UIApplication *)application
-{
+- (void)applicationWillEnterForeground:(UIApplication *)application {
     plog(@"entering foreground");
     [[NSNotificationCenter defaultCenter] postNotificationName:applicationWillEnterForeground object:nil];
 }

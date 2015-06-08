@@ -35,8 +35,6 @@
 // Object to retrieve annotations from the server.
 @property(strong, nonatomic) SASMapAnnotationRetriever *sasAnnotationRetriever;
 
-
-
 @end
 
 
@@ -49,7 +47,6 @@
 @synthesize notificationReceiver;
 
 @synthesize showAnnotations;
-
 
 
 - (instancetype) initWithFrame:(CGRect)frame {
@@ -145,7 +142,6 @@
         userAlreadyLocated = YES;
     }
     
-
     // As the map view is providing a wrapper for the location object
     // pass on the location update of the user.
     if (notificationReceiver != nil && [notificationReceiver respondsToSelector:@selector(sasMapViewUsersLocationHasUpdated:)]) {
@@ -238,7 +234,7 @@
     }
     
 
-    annotationView.image = [annotation.device getDeviceMapPins][annotation.device.type];
+    annotationView.image = [Device deviceMapPins][annotation.device.type];
     annotationView.annotation = annotation;
     annotationView.enabled = YES;
     annotationView.canShowCallout = NO;
