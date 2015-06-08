@@ -67,37 +67,64 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
  
-    [self.view bringSubviewToFront:self.contentView];
-    
     [self.view bringSubviewToFront:self.doneButton];
-
 }
 
 
 
 - (void)viewWillAppear:(BOOL)animated {
-    
-    if(self.annotation != nil) {
-        
-        // Store the type of device shown in the image
-        deviceType = annotation.device.type;
-        
-        
-        // Set the content size for the scroll view.
-        [self.scrollView setContentSize:CGSizeMake([Screen width], 1000)];
-        [self.scrollView setFrame:CGRectMake(0, 0, [Screen width], [Screen height])];
-        self.scrollView.backgroundColor = [UIColor clearColor];
-        
-        self.contentView.frame = CGRectMake(0, [Screen height] * 0.56, [Screen width], [Screen height]);
 
+#pragma Setup of the UI Elements.
+    // @Suggestion:
+    // It is possible not every property of annotation
+    // will be nil. S check what
+    // properties of annoation are not nil and then
+    // update the UI accordingly.
+    
+    // Store the type of device shown in the image
+    deviceType = annotation.device.type;
+    
+    // Set the content size for the scroll view.
+    [self.scrollView setContentSize:CGSizeMake([Screen width], 1000)];
+    self.scrollView.backgroundColor = [UIColor clearColor];
+    
+    // Add shadow to the contentView associated with the scrollView
+    [self setShadowForView:self.contentView];
+    
+    
+    // Using attributed string to increase the character spacing for deviceNameLabel
+    NSString *deviceName = [Device deviceNames ][deviceType];
+    NSMutableAttributedString *attributedDeviceNameLabel = [[NSMutableAttributedString alloc] initWithString:deviceName];
+    [attributedDeviceNameLabel addAttribute:NSKernAttributeName value:@(2.0)
+                                      range:NSMakeRange(0, [deviceName length])];
+    self.deviceNameLabel.attributedText = attributedDeviceNameLabel;
+    
+    
+    // The sasMapView property should show the location
+    // of where the device is located.
+    self.sasMapView.showAnnotations = YES;
+    self.sasMapView.notificationReceiver = self;
+    self.sasMapView.userInteractionEnabled = YES;
+    self.sasMapView.showsUserLocation = NO;
+    [self.sasMapView setMapType:MKMapTypeHybrid];
+    [self showDeviceLocation:nil];
+    
+    
+    
+#pragma self.annotation.device nil checking
+    if (self.annotation.device != nil) {
         
-        // Add shadow to the contentView associated with the scrollView
-        [self setShadowForView:self.contentView];
-        
-        
-        // Set the image for the device associated with the image.
+        // Set the image for deviceImageView associated with the device
         self.deviceImageView.image = [self deviceImageFromAnnotation:self.annotation.device];
         
+        // Set the elements of the UI which are coloured to the
+        // respective colour associated with the device.
+        [self setColourForColouredUIElements:self.annotation.device];
+    }
+        
+    
+#pragma self.annotation.device.imageStandardRes nil checking. (Image)
+    if(self.annotation.device.imageStandardRes != nil) {
         
         // Begin animation of sasActivityIndicator until image is loaded.
         self.sasActivityIndicator = [[SASActivityIndicator alloc] init];
@@ -120,39 +147,19 @@
                 self.sasActivityIndicator = nil;
             });
         });
-        
-        
-        // Using attributed string to increase the character spacing for deviceNameLabel
-        NSString *deviceName = [Device deviceNames ][deviceType];
-        NSMutableAttributedString *attributedDeviceNameLabel = [[NSMutableAttributedString alloc] initWithString:deviceName];
-        [attributedDeviceNameLabel addAttribute:NSKernAttributeName value:@(2.0)
-                                          range:NSMakeRange(0, [deviceName length])];
-        self.deviceNameLabel.attributedText = attributedDeviceNameLabel;
-        
-        
-        
+    }
+    
+    
+#pragma self.annotatio.device.caption nil checking
+    if(self.annotation.device.caption != nil) {
         // Set the text description of the photo.
         self.photoDescription.text = [NSString stringWithFormat:@"%@", annotation.device.caption];
         [self.photoDescription setFont:[UIFont fontWithName:@"Avenir Next" size:18]];
         [self.photoDescription sizeToFit];
-        
-        
-
-        
-        // The sasMapView property should show the location
-        // of where the picture was taken.
-        self.sasMapView.showAnnotations = YES;
-        self.sasMapView.notificationReceiver = self;
-        NSLog(@"%@", self.sasMapView.notificationReceiver);
-        self.sasMapView.userInteractionEnabled = YES;
-        [self.sasMapView setMapType:MKMapTypeHybrid];
-        [self showDeviceLocation:nil];
-        
-        
-        [self setColourForColouredUIElements:self.annotation.device];
-        
+        [self.photoDescription.layer setBorderWidth:0.0];
     }
 }
+
 
 
 // Shows the location of the device on the map.

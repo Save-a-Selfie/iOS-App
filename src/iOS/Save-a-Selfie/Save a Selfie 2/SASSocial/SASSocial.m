@@ -3,7 +3,7 @@
 //  Save a Selfie
 //
 //  Created by Stephen Fox on 04/06/2015.
-//  Copyright (c) 2015 Peter FitzGerald. All rights reserved.
+//  Copyright (c) 2015 Stephen Fox. All rights reserved.
 //
 
 #import "SASSocial.h"

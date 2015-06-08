@@ -49,30 +49,50 @@
 @synthesize showAnnotations;
 
 
+#pragma Object Life Cycle
 - (instancetype) initWithFrame:(CGRect)frame {
     
     if(self == [super initWithFrame:frame]) {
-        
-        userAlreadyLocated = NO;
-        
-        self.mapType = MKMapTypeSatellite;
-        self.showsUserLocation = YES;
-        
-        self.delegate = self;
-        self.showAnnotations = YES;
-        
-        // Our location object.
-        self.sasLocation = [[SASLocation alloc] init];
-        self.sasLocation.delegate = self;
-        
-        // Our annotationRetriever Object
-        self.sasAnnotationRetriever = [[SASMapAnnotationRetriever alloc] init];
-        self.sasAnnotationRetriever.delegate = self;
-        
+        [self setupMapView];
     }
     return self;
 }
 
+
+- (instancetype)init {
+    if(self = [super init]) {
+        [self setupMapView];
+    }
+    return self;
+}
+
+
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    if(self = [super initWithCoder:aDecoder]) {
+        [self setupMapView];
+    }
+    return self;
+}
+
+
+// Sets up the SASMapView with the appropriate properties.
+- (void) setupMapView {
+    
+    userAlreadyLocated = NO;
+    
+    self.mapType = MKMapTypeSatellite;
+    
+    self.delegate = self;
+    self.showAnnotations = YES;
+    
+    // Our location object.
+    self.sasLocation = [[SASLocation alloc] init];
+    self.sasLocation.delegate = self;
+    
+    // Our annotationRetriever Object
+    self.sasAnnotationRetriever = [[SASMapAnnotationRetriever alloc] init];
+    self.sasAnnotationRetriever.delegate = self;
+}
 
 
 
