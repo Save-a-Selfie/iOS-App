@@ -37,8 +37,6 @@
 
 @property (nonatomic, weak) IBOutlet UIButton *showDeviceLocationPin;
 
-@property (strong, nonatomic) IBOutlet UIButton *doneButton;
-
 @end
 
 @implementation SASImageViewController
@@ -60,19 +58,27 @@
 @synthesize sasActivityIndicator;
 @synthesize distanceLabel;
 @synthesize showDeviceLocationPin;
-@synthesize doneButton;
-
-
 
 - (void)viewDidLoad {
     [super viewDidLoad];
- 
-    [self.view bringSubviewToFront:self.doneButton];
 }
 
 
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    self.navigationController.navigationBarHidden = YES;
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleLightContent;
+}
+
 - (void)viewWillAppear:(BOOL)animated {
+    
+    self.navigationController.navigationBarHidden = NO;
+    self.tabBarController.tabBar.hidden = YES;
+
 
 #pragma Setup of the UI Elements.
     
@@ -90,9 +96,6 @@
     [self.scrollView setContentSize:CGSizeMake([Screen width], 1000)];
     self.scrollView.delegate = self;
     self.scrollView.backgroundColor = [UIColor clearColor];
-    
-    // Add shadow to the contentView associated with the scrollView
-    [self setShadowForView:self.contentView];
     
     
     // Using attributed string to increase the character spacing for deviceNameLabel
@@ -186,14 +189,6 @@
 }*/
 
 
-#pragma TODO: Make custom class for this. UIView extension etc.
-- (void) setShadowForView: (UIView*) view {
-    view.layer.shadowColor = [UIColor blackColor].CGColor;
-    view.layer.shadowOffset = CGSizeMake(0, -2);
-    view.layer.shadowOpacity = 0.5;
-    view.layer.shadowRadius = 1.0;
-    view.clipsToBounds = NO;
-}
 
 
 
@@ -207,6 +202,8 @@
     [self.showDeviceLocationPin setImage:mapPinButtonImages[deviceType] forState:UIControlStateNormal];
     
     self.distanceLabel.textColor = [SASColour getSASColours][deviceType];
+    
+    [self.navigationController.navigationBar setTintColor:[SASColour getSASColours][deviceType]];
 }
 
 
@@ -247,16 +244,5 @@
     }
 }
 
-
-
-- (IBAction)dissmissView:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
-
-
-
-- (BOOL) prefersStatusBarHidden {
-    return YES;
-}
 
 @end

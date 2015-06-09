@@ -20,6 +20,9 @@
 		18A524F71B166BAB00E8F8F6 /* SASLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A524F61B166BAB00E8F8F6 /* SASLocation.m */; };
 		18A525081B16708400E8F8F6 /* SASMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A525071B16708400E8F8F6 /* SASMapViewController.m */; };
 		18C323991B1E2F1E0027BDEA /* SASImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C323981B1E2F1E0027BDEA /* SASImageViewController.m */; };
+		18EBF9771B272B3400EDA48B /* SASImagePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EBF9761B272B3400EDA48B /* SASImagePickerViewController.m */; };
+		18EBF97B1B273A6600EDA48B /* SASUploadImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EBF97A1B273A6600EDA48B /* SASUploadImage.m */; };
+		18EBF9801B2741F600EDA48B /* SASUploadImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EBF97F1B2741F600EDA48B /* SASUploadImageViewController.m */; };
 		D0EAAC0B1A0FD59B00C0F955 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0EAAC0A1A0FD59B00C0F955 /* Social.framework */; };
 		D0EAAC0D1A0FD63B00C0F955 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0EAAC0C1A0FD63B00C0F955 /* MessageUI.framework */; };
 		D0EAAC0F1A100F2D00C0F955 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0EAAC0E1A100F2D00C0F955 /* Accounts.framework */; };
@@ -105,6 +108,12 @@
 		18A525071B16708400E8F8F6 /* SASMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASMapViewController.m; sourceTree = "<group>"; };
 		18C323971B1E2F1E0027BDEA /* SASImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASImageViewController.h; sourceTree = "<group>"; };
 		18C323981B1E2F1E0027BDEA /* SASImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASImageViewController.m; sourceTree = "<group>"; };
+		18EBF9751B272B3400EDA48B /* SASImagePickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SASImagePickerViewController.h; path = "Save a Selfie 2/SASImagePickerViewController.h"; sourceTree = "<group>"; };
+		18EBF9761B272B3400EDA48B /* SASImagePickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SASImagePickerViewController.m; path = "Save a Selfie 2/SASImagePickerViewController.m"; sourceTree = "<group>"; };
+		18EBF9791B273A6600EDA48B /* SASUploadImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SASUploadImage.h; path = "Save a Selfie 2/SASUploadImage.h"; sourceTree = "<group>"; };
+		18EBF97A1B273A6600EDA48B /* SASUploadImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SASUploadImage.m; path = "Save a Selfie 2/SASUploadImage.m"; sourceTree = "<group>"; };
+		18EBF97E1B2741F600EDA48B /* SASUploadImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SASUploadImageViewController.h; path = "Save a Selfie 2/SASUploadImageViewController.h"; sourceTree = SOURCE_ROOT; };
+		18EBF97F1B2741F600EDA48B /* SASUploadImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SASUploadImageViewController.m; path = "Save a Selfie 2/SASUploadImageViewController.m"; sourceTree = SOURCE_ROOT; };
 		D0EAAC0A1A0FD59B00C0F955 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		D0EAAC0C1A0FD63B00C0F955 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		D0EAAC0E1A100F2D00C0F955 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
@@ -270,6 +279,7 @@
 		188CAEE71B20FE46006A90EB /* GUI */ = {
 			isa = PBXGroup;
 			children = (
+				18EBF97D1B273A7700EDA48B /* SASUploadImageViewController */,
 				18C323941B1E1FDC0027BDEA /* SASImageViewController */,
 				18A525091B16708600E8F8F6 /* SASMapViewController */,
 				18A524FC1B166C2700E8F8F6 /* SASMapView */,
@@ -367,6 +377,38 @@
 			path = AppDelegate;
 			sourceTree = "<group>";
 		};
+		18EBF9781B272B3700EDA48B /* SASImagePickerController */ = {
+			isa = PBXGroup;
+			children = (
+				18EBF9751B272B3400EDA48B /* SASImagePickerViewController.h */,
+				18EBF9761B272B3400EDA48B /* SASImagePickerViewController.m */,
+			);
+			name = SASImagePickerController;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		18EBF97C1B273A6900EDA48B /* SASUploadImage */ = {
+			isa = PBXGroup;
+			children = (
+				18EBF9791B273A6600EDA48B /* SASUploadImage.h */,
+				18EBF97A1B273A6600EDA48B /* SASUploadImage.m */,
+			);
+			name = SASUploadImage;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		18EBF97D1B273A7700EDA48B /* SASUploadImageViewController */ = {
+			isa = PBXGroup;
+			children = (
+				18EBF97E1B2741F600EDA48B /* SASUploadImageViewController.h */,
+				18EBF97F1B2741F600EDA48B /* SASUploadImageViewController.m */,
+				18EBF9781B272B3700EDA48B /* SASImagePickerController */,
+				18EBF97C1B273A6900EDA48B /* SASUploadImage */,
+			);
+			name = SASUploadImageViewController;
+			path = ..;
+			sourceTree = "<group>";
+		};
 		D70023C119FC440C00E45408 /* helpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -458,9 +500,9 @@
 			children = (
 				18A525051B166E0D00E8F8F6 /* Device */,
 				18C3239A1B1E33140027BDEA /* AppDelegate */,
+				1845C4F01B209E7C00E3D7BC /* SASUtlities */,
 				18A524F81B166BAF00E8F8F6 /* SASLocation */,
 				188CAEE61B20EA5D006A90EB /* SASSocial */,
-				1845C4F01B209E7C00E3D7BC /* SASUtlities */,
 				188CAEE71B20FE46006A90EB /* GUI */,
 				D715E4921A06509B0026D91F /* EmergencyObjects.h */,
 				D715E4931A06509B0026D91F /* EmergencyObjects.m */,
@@ -595,6 +637,7 @@
 			files = (
 				18C323991B1E2F1E0027BDEA /* SASImageViewController.m in Sources */,
 				D700239919F52E8800E45408 /* UIButton+Maker.m in Sources */,
+				18EBF97B1B273A6600EDA48B /* SASUploadImage.m in Sources */,
 				18A525081B16708400E8F8F6 /* SASMapViewController.m in Sources */,
 				D786E1781A48C02900A20FDD /* Device.m in Sources */,
 				18A524F71B166BAB00E8F8F6 /* SASLocation.m in Sources */,
@@ -607,6 +650,7 @@
 				D72E1DB619EE841E005DD8A5 /* AppDelegate.m in Sources */,
 				D715E48F1A064FDA0026D91F /* UIView+NibInitializer.m in Sources */,
 				1845C4EF1B209E6C00E3D7BC /* SASUtilities.m in Sources */,
+				18EBF9801B2741F600EDA48B /* SASUploadImageViewController.m in Sources */,
 				181D1E5D1B2359EA00FB5928 /* SASImageInspectorView.m in Sources */,
 				D756A2A919F309690089EF80 /* TabBarController.m in Sources */,
 				D73550A41A84DBF500F9093C /* UIView+Alert.m in Sources */,
@@ -617,6 +661,7 @@
 				D756A29D19F175230089EF80 /* UIImage+RoundedCorner.m in Sources */,
 				D72E1E4B19F06AE7005DD8A5 /* UploadPictureViewController.m in Sources */,
 				D72E1DB319EE841E005DD8A5 /* main.m in Sources */,
+				18EBF9771B272B3400EDA48B /* SASImagePickerViewController.m in Sources */,
 				D700239519F5253C00E45408 /* AlertBox.m in Sources */,
 				D715E4971A0936010026D91F /* UIButton+VerticalLayout.m in Sources */,
 				D700239D19F52EB700E45408 /* ExtendNSLogFunctionality.m in Sources */,
