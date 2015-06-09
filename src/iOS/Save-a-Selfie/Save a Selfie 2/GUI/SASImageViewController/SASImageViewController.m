@@ -16,7 +16,7 @@
 #import "SASImageView.h"
 
 
-@interface SASImageViewController () <SASMapViewNotifications> {
+@interface SASImageViewController () <SASMapViewNotifications ,UIScrollViewDelegate> {
     DeviceType deviceType;
 }
 
@@ -88,6 +88,7 @@
     // Set the content size for the scroll view.
     [self.scrollView setFrame:CGRectMake(0, 0, [Screen width], [Screen height])];
     [self.scrollView setContentSize:CGSizeMake([Screen width], 1000)];
+    self.scrollView.delegate = self;
     self.scrollView.backgroundColor = [UIColor clearColor];
     
     // Add shadow to the contentView associated with the scrollView
@@ -171,6 +172,18 @@
     [self.sasMapView showAnnotation:self.annotation andZoom:YES animated:YES];
 }
 
+
+/*- (void)scrollViewDidScroll:(UIScrollView *)scrollview {
+    CGFloat offset = scrollView.contentOffset.y;
+    CGAffineTransform t = scrollView.transform;
+    
+    self.sasImageView.clipsToBounds = YES;
+    
+    if((int)offset % 5 < 0 ) {
+        self.sasImageView.transform = CGAffineTransformScale(CGAffineTransformIdentity, (-1 * offset),  (-1 *offset) );
+    }
+    
+}*/
 
 
 #pragma TODO: Make custom class for this. UIView extension etc.

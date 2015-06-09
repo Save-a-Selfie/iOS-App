@@ -263,7 +263,7 @@
         }
     
         annotationView.image = [Device deviceMapPins][sasAnnotation.device.type];
-        annotationView.annotation = annotation;
+        annotationView.annotation = sasAnnotation;
         annotationView.enabled = YES;
         annotationView.canShowCallout = NO;
         return annotationView;
@@ -272,8 +272,6 @@
     else {
         return [[MKAnnotationView alloc] init];
     }
-    
-    
 }
 
 

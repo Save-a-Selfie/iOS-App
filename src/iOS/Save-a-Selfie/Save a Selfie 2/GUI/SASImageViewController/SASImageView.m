@@ -39,8 +39,10 @@
 - (void) handleTapGesture: (UIGestureRecognizer*) gesture {
     
     sasImageInspectorView = [[SASImageInspectorView alloc] initWithImage:self.image];
-    [self addSubview:sasImageInspectorView];
+    [self.superview addSubview:sasImageInspectorView];
+    [self.superview bringSubviewToFront:sasImageInspectorView];
 }
+
 
 
 
