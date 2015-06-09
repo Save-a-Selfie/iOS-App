@@ -13,6 +13,7 @@
 		1845C4EC1B20920300E3D7BC /* SASActivityIndicatorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1845C4EB1B20920300E3D7BC /* SASActivityIndicatorView.xib */; };
 		1845C4EF1B209E6C00E3D7BC /* SASUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 1845C4EE1B209E6C00E3D7BC /* SASUtilities.m */; };
 		185A39B81B1FD7B900699D31 /* SASColour.m in Sources */ = {isa = PBXBuildFile; fileRef = 185A39B71B1FD7B900699D31 /* SASColour.m */; };
+		1864FEAC1B27A39900EA564A /* UIFont+SASFont.m in Sources */ = {isa = PBXBuildFile; fileRef = 1864FEAB1B27A39900EA564A /* UIFont+SASFont.m */; };
 		188CAEE51B20EA59006A90EB /* SASSocial.m in Sources */ = {isa = PBXBuildFile; fileRef = 188CAEE41B20EA59006A90EB /* SASSocial.m */; };
 		188CAEED1B21006C006A90EB /* Screen.m in Sources */ = {isa = PBXBuildFile; fileRef = 188CAEEC1B21006C006A90EB /* Screen.m */; };
 		1891E3D31B1743C8008CC10C /* SASMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1891E3D21B1743C8008CC10C /* SASMapView.m */; };
@@ -94,6 +95,8 @@
 		1845C4EE1B209E6C00E3D7BC /* SASUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASUtilities.m; sourceTree = "<group>"; };
 		185A39B61B1FD7B900699D31 /* SASColour.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASColour.h; sourceTree = "<group>"; };
 		185A39B71B1FD7B900699D31 /* SASColour.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASColour.m; sourceTree = "<group>"; };
+		1864FEAA1B27A39900EA564A /* UIFont+SASFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIFont+SASFont.h"; path = "../../UIFont+SASFont.h"; sourceTree = "<group>"; };
+		1864FEAB1B27A39900EA564A /* UIFont+SASFont.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIFont+SASFont.m"; path = "../../UIFont+SASFont.m"; sourceTree = "<group>"; };
 		188CAEE31B20EA59006A90EB /* SASSocial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASSocial.h; sourceTree = "<group>"; };
 		188CAEE41B20EA59006A90EB /* SASSocial.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASSocial.m; sourceTree = "<group>"; };
 		188CAEEB1B21006C006A90EB /* Screen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Screen.h; sourceTree = "<group>"; };
@@ -267,6 +270,16 @@
 			path = SASColour;
 			sourceTree = "<group>";
 		};
+		1864FEA91B27A27F00EA564A /* SASFont */ = {
+			isa = PBXGroup;
+			children = (
+				1864FEAA1B27A39900EA564A /* UIFont+SASFont.h */,
+				1864FEAB1B27A39900EA564A /* UIFont+SASFont.m */,
+			);
+			name = SASFont;
+			path = SASMapViewController;
+			sourceTree = "<group>";
+		};
 		188CAEE61B20EA5D006A90EB /* SASSocial */ = {
 			isa = PBXGroup;
 			children = (
@@ -279,6 +292,7 @@
 		188CAEE71B20FE46006A90EB /* GUI */ = {
 			isa = PBXGroup;
 			children = (
+				1864FEA91B27A27F00EA564A /* SASFont */,
 				18EBF97D1B273A7700EDA48B /* SASUploadImageViewController */,
 				18C323941B1E1FDC0027BDEA /* SASImageViewController */,
 				18A525091B16708600E8F8F6 /* SASMapViewController */,
@@ -650,6 +664,7 @@
 				D72E1DB619EE841E005DD8A5 /* AppDelegate.m in Sources */,
 				D715E48F1A064FDA0026D91F /* UIView+NibInitializer.m in Sources */,
 				1845C4EF1B209E6C00E3D7BC /* SASUtilities.m in Sources */,
+				1864FEAC1B27A39900EA564A /* UIFont+SASFont.m in Sources */,
 				18EBF9801B2741F600EDA48B /* SASUploadImageViewController.m in Sources */,
 				181D1E5D1B2359EA00FB5928 /* SASImageInspectorView.m in Sources */,
 				D756A2A919F309690089EF80 /* TabBarController.m in Sources */,

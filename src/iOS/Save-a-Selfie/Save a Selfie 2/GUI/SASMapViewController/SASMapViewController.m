@@ -14,6 +14,7 @@
 #import "UIView+Alert.h"
 #import "SASImagePickerViewController.h"
 #import "SASUploadImageViewController.h"
+#import "UIFont+SASFont.h"
 
 @interface SASMapViewController () <SASImagePickerDelegate>
 
@@ -45,7 +46,7 @@ NSString *permissionsProblemTwo = @"Please enable location services on your phon
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.navigationController.navigationBarHidden = YES;
+    
     
 }
 
@@ -57,7 +58,10 @@ NSString *permissionsProblemTwo = @"Please enable location services on your phon
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
+    self.tabBarController.tabBar.hidden = NO;
     
+
     
     if(sasMapView == nil) {
         sasMapView = [[SASMapView alloc] initWithFrame:CGRectMake(0,

@@ -31,7 +31,6 @@
 @property (nonatomic, strong) IBOutlet SASMapView *sasMapView;
 
 @property (nonatomic, weak) IBOutlet UIImageView *deviceImageView;
-@property (nonatomic, weak) IBOutlet UILabel *deviceNameLabel;
 
 @property (nonatomic, weak) IBOutlet UILabel *distanceLabel;
 
@@ -53,7 +52,6 @@
 @synthesize sasMapView;
 @synthesize photoDescription;
 @synthesize deviceImageView;
-@synthesize deviceNameLabel;
 @synthesize contentView;
 @synthesize sasActivityIndicator;
 @synthesize distanceLabel;
@@ -65,18 +63,11 @@
 
 
 
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    self.navigationController.navigationBarHidden = YES;
-}
-
-- (UIStatusBarStyle)preferredStatusBarStyle {
-    return UIStatusBarStyleLightContent;
-}
 
 - (void)viewWillAppear:(BOOL)animated {
     
     self.navigationController.navigationBarHidden = NO;
+
     self.tabBarController.tabBar.hidden = YES;
 
 
@@ -104,7 +95,7 @@
     [attributedDeviceNameLabel addAttribute:NSKernAttributeName
                                       value:@(2.0)
                                       range:NSMakeRange(0, [deviceName length])];
-    self.deviceNameLabel.attributedText = attributedDeviceNameLabel;
+    self.navigationController.navigationBar.topItem.title = deviceName;
     
     
     // The sasMapView property should show the location
@@ -136,7 +127,7 @@
         
         // Begin animation of sasActivityIndicator until image is loaded.
         self.sasActivityIndicator = [[SASActivityIndicator alloc] init];
-        [self.view addSubview:sasActivityIndicator];
+        [self.sasImageView addSubview:sasActivityIndicator];
         self.sasActivityIndicator.center = self.sasImageView.center;
         self.sasActivityIndicator.backgroundColor = [UIColor clearColor];
         [self.sasActivityIndicator startAnimating];
@@ -204,6 +195,9 @@
     self.distanceLabel.textColor = [SASColour getSASColours][deviceType];
     
     [self.navigationController.navigationBar setTintColor:[SASColour getSASColours][deviceType]];
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [SASColour getSASColours][deviceType],
+                              NSFontAttributeName: [UIFont fontWithName:@"AvenirNext-UltraLight" size:0.0f]}];
+    
 }
 
 
