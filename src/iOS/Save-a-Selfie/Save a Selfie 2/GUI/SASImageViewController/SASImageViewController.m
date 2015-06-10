@@ -136,6 +136,7 @@
             UIImage* imageFromURL = [self getSASImageWithURLFromString:annotation.device.imageStandardRes];
             
             dispatch_async( dispatch_get_main_queue(), ^{
+                self.sasImageView.contentMode = UIViewContentModeScaleAspectFit;
                 self.sasImageView.image = imageFromURL;
                 [self.sasActivityIndicator stopAnimating];
                 [self.sasActivityIndicator removeFromSuperview];
