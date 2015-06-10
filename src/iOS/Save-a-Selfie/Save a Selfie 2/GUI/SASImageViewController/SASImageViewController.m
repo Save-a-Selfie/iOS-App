@@ -145,7 +145,7 @@
     }
     
     
-#pragma self.annotatio.device.caption nil checking
+#pragma self.annotation.device.caption nil checking
     if(self.annotation.device.caption != nil) {
         // Set the text description of the photo.
         self.photoDescription.text = [NSString stringWithFormat:@"%@", annotation.device.caption];
@@ -178,8 +178,9 @@
     
     // Navigation Bar.
     [self.navigationController.navigationBar setTintColor:[SASColour getSASColours][deviceType]];
-    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [SASColour getSASColours][deviceType],
-                              NSFontAttributeName: [UIFont fontWithName:@"AvenirNext-UltraLight" size:0.0f]}];
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName: [UIFont fontWithName:@"AvenirNext-DemiBold" size:15.0f],
+                                                                      NSForegroundColorAttributeName : [SASColour getSASColours][deviceType],
+                                                                      }];
     
 }
 
