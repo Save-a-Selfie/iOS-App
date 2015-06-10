@@ -25,10 +25,10 @@ typedef enum: NSUInteger {
 @optional
 - (void) authorizationStatusHasChanged: (CLAuthorizationStatus) status;
 
-@optional
+
 - (void) sasMapViewAnnotationTapped: (SASAnnotation*) annotation;
 
-@optional
+
 - (void) sasMapViewUsersLocationHasUpdated: (CLLocationCoordinate2D) coordinate;
 
 @end

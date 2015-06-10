@@ -17,8 +17,8 @@
             <objects>
                 <viewController id="wxp-4h-T6p" customClass="SASMapViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="cPz-qM-eaS"/>
-                        <viewControllerLayoutGuide type="bottom" id="Bxl-ir-GPj"/>
+                        <viewControllerLayoutGuide type="top" id="7aH-ej-GOP"/>
+                        <viewControllerLayoutGuide type="bottom" id="evB-Wj-tdQ"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="XjZ-Ty-pLe">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -61,8 +61,8 @@
             <objects>
                 <viewController storyboardIdentifier="SASImageViewController" id="a1b-sM-og2" customClass="SASImageViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="pHY-bp-6fV"/>
-                        <viewControllerLayoutGuide type="bottom" id="L2l-6P-msu"/>
+                        <viewControllerLayoutGuide type="top" id="CNG-5J-ljX"/>
+                        <viewControllerLayoutGuide type="bottom" id="9Q3-V6-TSG"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="sqk-mN-XYn">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -143,13 +143,13 @@
             </objects>
             <point key="canvasLocation" x="-510" y="1258"/>
         </scene>
-        <!--View Controller-->
+        <!--Upload Image View Controller-->
         <scene sceneID="V8n-Dc-Kkx">
             <objects>
-                <viewController storyboardIdentifier="SASUploadImageViewController" id="DJJ-KF-v3U" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SASUploadImageViewController" id="DJJ-KF-v3U" customClass="SASUploadImageViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="f5Q-Dr-Me3"/>
-                        <viewControllerLayoutGuide type="bottom" id="hkB-KS-QRq"/>
+                        <viewControllerLayoutGuide type="top" id="kfn-MW-MsG"/>
+                        <viewControllerLayoutGuide type="bottom" id="2Xv-SZ-YpZ"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="eKH-EA-0ll">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -185,18 +185,21 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="imageView" destination="afK-H1-q78" id="POa-1Y-Bgm"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kh4-HO-sd5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="139" y="1305"/>
+            <point key="canvasLocation" x="12" y="1293"/>
         </scene>
         <!--Info-->
         <scene sceneID="Smb-hj-4hT">
             <objects>
                 <viewController id="LKF-Xc-SHc" customClass="ThirdViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="ZHR-VS-V3g"/>
-                        <viewControllerLayoutGuide type="bottom" id="boG-qK-K3P"/>
+                        <viewControllerLayoutGuide type="top" id="sBH-8C-0AY"/>
+                        <viewControllerLayoutGuide type="bottom" id="Bkv-EO-QN3"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="zng-Bf-EMx">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -278,8 +281,8 @@
             <objects>
                 <viewController storyboardIdentifier="UploadPictureViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="TVY-Ut-sMj" customClass="UploadPictureViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="eVt-w2-g6v"/>
-                        <viewControllerLayoutGuide type="bottom" id="d1s-Ey-PXc"/>
+                        <viewControllerLayoutGuide type="top" id="OwX-to-2aN"/>
+                        <viewControllerLayoutGuide type="bottom" id="gRJ-Af-Vsy"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="ldh-Nz-7bn">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -379,8 +382,8 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="LKF-Xc-SHc" kind="relationship" relationship="viewControllers" id="yyW-6A-ew7"/>
                         <segue destination="Kpf-8A-JuO" kind="relationship" relationship="viewControllers" id="wHb-nl-hvQ"/>
+                        <segue destination="LKF-Xc-SHc" kind="relationship" relationship="viewControllers" id="yyW-6A-ew7"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>

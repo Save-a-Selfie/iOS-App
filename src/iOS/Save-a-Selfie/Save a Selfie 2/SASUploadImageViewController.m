@@ -3,24 +3,27 @@
 //  Save a Selfie
 //
 //  Created by Stephen Fox on 09/06/2015.
-//  Copyright (c) 2015 Peter FitzGerald. All rights reserved.
+//  Copyright (c) 2015 Stephen Fox. All rights reserved.
 //
 
 #import "SASUploadImageViewController.h"
 
 @interface SASUploadImageViewController ()
 
+@property (strong, nonatomic) IBOutlet UIImageView *imageView;
+
 @end
 
 @implementation SASUploadImageViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-}
+@synthesize imageView;
+@synthesize sasUploadImage;
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-}
 
+
+- (void)viewWillAppear:(BOOL)animated {
+    
+    self.imageView.image = self.sasUploadImage;
+}
 
 @end

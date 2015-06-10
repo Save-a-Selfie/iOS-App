@@ -176,12 +176,14 @@ NSString *permissionsProblemTwo = @"Please enable location services on your phon
 //  1. Present sasImagePickerController: Here the user can take a photo
 //     of the desired device.
 //
-//  2. Wait for delegate method -sasImagePickerController:(SASUploadImage*) image to be called.
+//  2. Wait for delegate method - (void)sasImagePickerController didFinishWithImage:(SASUploadImage *)image to be called.
 //     This will give this object SASMapViewController, the image taken by the user.
-//     From here we will present SASDeviceSelectionViewController so we can associate
-//     a device with the image taken.
 //
-//  3.
+//
+//  3. Then the image is handed to sasUploadImageViewController, which will handle all
+//     of the uploading.
+
+
 - (IBAction)uploadNewNewDevice:(id)sender {
     
     if(sasImagePickerController == nil) {
@@ -219,6 +221,8 @@ NSString *permissionsProblemTwo = @"Please enable location services on your phon
         
         self.sasUploadImageViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SASUploadImageViewController"];
     }
+    
+    [self.sasUploadImageViewController setSasUploadImage:image];
     [self.navigationController presentViewController:self.sasUploadImageViewController animated:YES completion:nil];
 
 

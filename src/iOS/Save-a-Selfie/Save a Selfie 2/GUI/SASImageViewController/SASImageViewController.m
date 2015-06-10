@@ -89,12 +89,8 @@
     self.scrollView.backgroundColor = [UIColor clearColor];
     
     
-    // Using attributed string to increase the character spacing for deviceNameLabel
+    // Get the appropriate device name.
     NSString *deviceName = [Device deviceNames ][deviceType];
-    NSMutableAttributedString *attributedDeviceNameLabel = [[NSMutableAttributedString alloc] initWithString:deviceName];
-    [attributedDeviceNameLabel addAttribute:NSKernAttributeName
-                                      value:@(2.0)
-                                      range:NSMakeRange(0, [deviceName length])];
     self.navigationController.navigationBar.topItem.title = deviceName;
     
     
@@ -114,7 +110,7 @@
     if (self.annotation.device != nil) {
         
         // Set the image for deviceImageView associated with the device
-        self.deviceImageView.image = [self deviceImageFromAnnotation:self.annotation.device];
+        self.deviceImageView.image = [self deviceImageForAnnotation:self.annotation.device];
         
         // Set the elements of the UI which are coloured to the
         // respective colour associated with the device.
@@ -167,20 +163,6 @@
 }
 
 
-/*- (void)scrollViewDidScroll:(UIScrollView *)scrollview {
-    CGFloat offset = scrollView.contentOffset.y;
-    CGAffineTransform t = scrollView.transform;
-    
-    self.sasImageView.clipsToBounds = YES;
-    
-    if((int)offset % 5 < 0 ) {
-        self.sasImageView.transform = CGAffineTransformScale(CGAffineTransformIdentity, (-1 * offset),  (-1 *offset) );
-    }
-    
-}*/
-
-
-
 
 
 // Sets all the UIElements of this view, whose colour
@@ -194,6 +176,7 @@
     
     self.distanceLabel.textColor = [SASColour getSASColours][deviceType];
     
+    // Navigation Bar.
     [self.navigationController.navigationBar setTintColor:[SASColour getSASColours][deviceType]];
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [SASColour getSASColours][deviceType],
                               NSFontAttributeName: [UIFont fontWithName:@"AvenirNext-UltraLight" size:0.0f]}];
@@ -202,8 +185,9 @@
 
 
 
-// Gets the image associated with the device.
-- (UIImage*) deviceImageFromAnnotation: (Device*) device {
+// Gets the image associated with the device from
+// the annotation selected on the map.
+- (UIImage*) deviceImageForAnnotation: (Device*) device {
     return [Device deviceImages][device.type];
 }
 

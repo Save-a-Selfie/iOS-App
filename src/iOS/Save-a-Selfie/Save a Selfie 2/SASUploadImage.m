@@ -14,8 +14,10 @@
 @synthesize associatedDevice;
 
 
-- (void)setTimeStamp:(NSString *)timeStamp {
-    self.timeStamp = timeStamp;
+- (instancetype)initWithImage:(UIImage *)image {
+    if(self = [super initWithCGImage:[image CGImage]]) {
+    }
+    return self;
 }
 
 @end

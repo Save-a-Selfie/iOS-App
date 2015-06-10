@@ -249,29 +249,22 @@
                                                       reuseIdentifier:annotationViewID];
     }
     
-    // Load the correct annotation image for the device.
-    if(self.annotationType == DevicePin) {
-        
-        SASAnnotation *sasAnnotation = (SASAnnotation*)annotation;
-        
-
-        if ([annotation isKindOfClass:MKUserLocation.class]) {
-            mapView.showsUserLocation = YES;
-            mapView.userLocation.title = @"You are here";
-            
-            return nil;
-        }
     
-        annotationView.image = [Device deviceMapPins][sasAnnotation.device.type];
-        annotationView.annotation = sasAnnotation;
-        annotationView.enabled = YES;
-        annotationView.canShowCallout = NO;
-        return annotationView;
+    SASAnnotation *sasAnnotation = (SASAnnotation*)annotation;
+        
+    if ([annotation isKindOfClass:MKUserLocation.class]) {
+        mapView.showsUserLocation = YES;
+        mapView.userLocation.title = @"You are here";
+        return nil;
     }
-    // Default annotation
-    else {
-        return [[MKAnnotationView alloc] init];
-    }
+    
+    annotationView.image = [Device deviceMapPins][sasAnnotation.device.type];
+    annotationView.annotation = sasAnnotation;
+    annotationView.enabled = YES;
+    annotationView.canShowCallout = NO;
+    return annotationView;
+    
+
 }
 
 

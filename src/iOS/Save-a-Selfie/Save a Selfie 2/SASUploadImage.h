@@ -12,7 +12,9 @@
 
 @interface SASUploadImage : UIImage
 
-@property(nonatomic, weak) NSString *timeStamp;
-@property(nonatomic, weak) Device *associatedDevice;
+@property(nonatomic, strong) NSString *timeStamp;
+@property(nonatomic, strong) Device *associatedDevice;
+
+- (instancetype) initWithImage:(UIImage*) image;
 
 @end

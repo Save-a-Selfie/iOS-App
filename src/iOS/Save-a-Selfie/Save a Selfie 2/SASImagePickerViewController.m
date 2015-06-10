@@ -64,13 +64,23 @@
     // Get the user's current location.
     currentLocationCoordinates = [sasLocation currentUserLocation];
     
+    
     if([info objectForKey:UIImagePickerControllerOriginalImage]) {
-        self.sasUploadImage = (SASUploadImage*)info[UIImagePickerControllerOriginalImage];
+        
+        UIImage *image = info[UIImagePickerControllerOriginalImage];
+        
+        self.sasUploadImage = [[SASUploadImage alloc] initWithImage:image];
+        
+        // Set the timestamp for the image.
+        self.sasUploadImage.timeStamp = [SASUtilities getCurrentTimeStamp];
+        
+        image = nil;
     }
     
+    
+    
 #pragma TODO: Get this WORKING!!
-    // Set the timestamp for the image.
-    //self.sasUploadImage.timeStamp = [SASUtilities getCurrentTimeStamp];
+   
     
     // Send the image to delegate.
     if(self.sasImagePickerDelegate != nil) {
@@ -81,8 +91,8 @@
 
 
 - (void) imagePickerControllerDidCancel:(UIImagePickerController *)picker {
-    [self removeFromParentViewController];
     
+    [self removeFromParentViewController];
     self.sasLocation = nil;
 }
 
