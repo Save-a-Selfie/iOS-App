@@ -7,13 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreLocation/CoreLocation.h>
 
 @class Device;
 
 @interface SASUploadImage : UIImage
 
-@property(nonatomic, strong) NSString *timeStamp;
-@property(nonatomic, strong) Device *associatedDevice;
+@property(nonatomic, weak) NSString *timeStamp;
+@property(nonatomic, weak) Device *associatedDevice;
+@property(nonatomic, assign) CLLocationCoordinate2D coordinates;
 
 - (instancetype) initWithImage:(UIImage*) image;
 

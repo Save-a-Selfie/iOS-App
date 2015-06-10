@@ -7,17 +7,28 @@
 //
 
 #import "SASUploadImage.h"
+#import "UIImage+SASNormalizeImage.h"
 
 @implementation SASUploadImage
 
 @synthesize timeStamp;
 @synthesize associatedDevice;
-
+@synthesize coordinates;
 
 - (instancetype)initWithImage:(UIImage *)image {
-    if(self = [super initWithCGImage:[image CGImage]]) {
-    }
+    
+    // @Discussion:
+    //  See UIImage+SASNormalizeImage.h
+    // for reason on why we need to normalize
+    // the image property.
+    image = [image normalizedImage];
+    
+    if(self = [super initWithCGImage:[image CGImage]]) {}
+    
     return self;
 }
+
+
+
 
 @end

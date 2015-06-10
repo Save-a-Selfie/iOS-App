@@ -7,10 +7,11 @@
 //
 
 #import "SASUploadImageViewController.h"
+#import "SASImageView.h"
 
 @interface SASUploadImageViewController ()
 
-@property (strong, nonatomic) IBOutlet UIImageView *imageView;
+@property (strong, nonatomic) IBOutlet SASImageView *imageView;
 
 @end
 
@@ -25,5 +26,6 @@
     
     self.imageView.image = self.sasUploadImage;
 }
+
 
 @end

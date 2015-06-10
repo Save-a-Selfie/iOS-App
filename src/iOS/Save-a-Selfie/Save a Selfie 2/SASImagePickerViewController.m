@@ -61,9 +61,6 @@
     //  Once iOS 8 is widely adopted, would be better to use PHPhotoLibrary to fetch the last image
     //  see: http://stackoverflow.com/questions/
     
-    // Get the user's current location.
-    currentLocationCoordinates = [sasLocation currentUserLocation];
-    
     
     if([info objectForKey:UIImagePickerControllerOriginalImage]) {
         
@@ -73,6 +70,9 @@
         
         // Set the timestamp for the image.
         self.sasUploadImage.timeStamp = [SASUtilities getCurrentTimeStamp];
+        
+        // Get the user's current location.
+        currentLocationCoordinates = [sasLocation currentUserLocation];
         
         image = nil;
     }

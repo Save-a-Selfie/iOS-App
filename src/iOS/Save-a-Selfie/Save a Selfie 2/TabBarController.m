@@ -19,10 +19,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    //UINavigationController *sasNavigationController = [[UINavigationController alloc] initWithRootViewController:self];
-    
-    
 }
 
 - (void)viewDidAppear:(BOOL)animated {

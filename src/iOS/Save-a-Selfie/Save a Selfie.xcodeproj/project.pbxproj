@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1810C90A1B289044009063E5 /* UIImage+SASNormalizeImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 1810C9091B289044009063E5 /* UIImage+SASNormalizeImage.m */; };
 		181D1E5D1B2359EA00FB5928 /* SASImageInspectorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 181D1E5C1B2359EA00FB5928 /* SASImageInspectorView.m */; };
 		181D1E621B235CF900FB5928 /* SASImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 181D1E611B235CF900FB5928 /* SASImageView.m */; };
 		1845C4EA1B2091F600E3D7BC /* SASActivityIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 1845C4E91B2091F600E3D7BC /* SASActivityIndicator.m */; };
@@ -84,6 +85,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1810C9081B289044009063E5 /* UIImage+SASNormalizeImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+SASNormalizeImage.h"; path = "Save a Selfie 2/UIImage+SASNormalizeImage.h"; sourceTree = "<group>"; };
+		1810C9091B289044009063E5 /* UIImage+SASNormalizeImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+SASNormalizeImage.m"; path = "Save a Selfie 2/UIImage+SASNormalizeImage.m"; sourceTree = "<group>"; };
 		181D1E5B1B2359EA00FB5928 /* SASImageInspectorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SASImageInspectorView.h; path = "Save a Selfie 2/SASImageInspectorView.h"; sourceTree = "<group>"; };
 		181D1E5C1B2359EA00FB5928 /* SASImageInspectorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SASImageInspectorView.m; path = "Save a Selfie 2/SASImageInspectorView.m"; sourceTree = "<group>"; };
 		181D1E601B235CF900FB5928 /* SASImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASImageView.h; sourceTree = "<group>"; };
@@ -223,6 +226,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1810C90B1B28904A009063E5 /* SASNormalizeImage */ = {
+			isa = PBXGroup;
+			children = (
+				1810C9081B289044009063E5 /* UIImage+SASNormalizeImage.h */,
+				1810C9091B289044009063E5 /* UIImage+SASNormalizeImage.m */,
+			);
+			name = SASNormalizeImage;
+			path = ../..;
+			sourceTree = "<group>";
+		};
 		181D1E5E1B2359EF00FB5928 /* SASImageInspectorView */ = {
 			isa = PBXGroup;
 			children = (
@@ -300,6 +313,7 @@
 				18C323901B1DFAAC0027BDEA /* SASAnnotation */,
 				185A39B91B1FD7C500699D31 /* SASColour */,
 				1845C4E71B2091C800E3D7BC /* SASActivityIndicator */,
+				1810C90B1B28904A009063E5 /* SASNormalizeImage */,
 				188CAEEE1B21008B006A90EB /* Screen */,
 			);
 			path = GUI;
@@ -668,6 +682,7 @@
 				18EBF9801B2741F600EDA48B /* SASUploadImageViewController.m in Sources */,
 				181D1E5D1B2359EA00FB5928 /* SASImageInspectorView.m in Sources */,
 				D756A2A919F309690089EF80 /* TabBarController.m in Sources */,
+				1810C90A1B289044009063E5 /* UIImage+SASNormalizeImage.m in Sources */,
 				D73550A41A84DBF500F9093C /* UIView+Alert.m in Sources */,
 				188CAEE51B20EA59006A90EB /* SASSocial.m in Sources */,
 				D715E4941A06509B0026D91F /* EmergencyObjects.m in Sources */,
