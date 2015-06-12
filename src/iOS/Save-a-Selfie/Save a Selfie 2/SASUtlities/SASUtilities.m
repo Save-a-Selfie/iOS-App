@@ -7,6 +7,7 @@
 //
 
 #import "SASUtilities.h"
+#import "ILTranslucentView.h"
 
 @implementation SASUtilities
 
@@ -56,6 +57,20 @@
     return strDateTime;
 }
 
+
+
++ (void) addSASBlurToView:(UIView*) view {
+    ILTranslucentView *blur = [ILTranslucentView new];
+    
+    blur.frame = view.frame;
+    
+    blur.backgroundColor = [UIColor clearColor];
+    blur.translucentStyle = UIBarStyleDefault;
+    blur.translucentTintColor = [UIColor clearColor];
+    blur.translucentAlpha = 0.999;
+    
+    [view addSubview:blur];
+}
 
 
 

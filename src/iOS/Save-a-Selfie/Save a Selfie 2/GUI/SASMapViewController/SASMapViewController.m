@@ -49,7 +49,9 @@ NSString *permissionsProblemTwo = @"Please enable location services on your phon
     
     
 }
-
+- (void)viewWillDisappear:(BOOL)animated {
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+}
 - (UIStatusBarStyle)preferredStatusBarStyle {
     return UIStatusBarStyleLightContent;
 }
@@ -76,7 +78,9 @@ NSString *permissionsProblemTwo = @"Please enable location services on your phon
         self.sasMapView.showAnnotations = YES;
         self.sasMapView.showsUserLocation = YES;
         self.sasMapView.zoomToUsersLocationInitially = YES;
-        self.sasMapView.annotationType = DevicePin;
+        self.sasMapView.sasAnnotationImage = DevicePin;
+        
+        //[self.sasMapView filterAnnotationsForType:Defibrillator];
         
         [self.view addSubview:sasMapView];
         [self.view bringSubviewToFront:locateUserButton];

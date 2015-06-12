@@ -3,7 +3,7 @@
 //  Save a Selfie
 //
 //  Created by Stephen Fox on 28/05/2015.
-//  Copyright (c) 2015 Stephen Fox. All rights reserved.
+//  Copyright (c) 2015 Stephen Fox & Peter FitzGerald. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
@@ -34,15 +34,9 @@
 @property(nonatomic, weak) id<SASMapAnnotationRetrieverDelegate> delegate;
 
 
-//  Call this method when you need a newer set of the annotations
-//  available from the server.
-//  @warning: Can return nil, if there was an error fetching the annotations.
-//
-//  @Note:
-//      This could be improved by trying to catch any errors,
-//      while fetching the annotations any forwarding on to
-//      any caller.
-- (NSMutableArray*) fetchMapAnnotations;
+
+// Calls the delegate with a 'fresh' set of annotation
+- (void) reloadAnnotations;
 
 
 @end

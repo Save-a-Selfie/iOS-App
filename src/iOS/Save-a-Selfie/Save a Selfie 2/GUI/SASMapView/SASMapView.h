@@ -15,7 +15,9 @@
 typedef enum: NSUInteger {
     Default, // Default MapView Pin
     DevicePin // Annotation with the corresponding device image.
-}AnnotationType;
+}SASAnnotationImage;
+
+
 
 // To receive noitification from SASMapView, please reference the notificationReceiver property.
 // Ideally this should be changed to the Observer Design Pattern to update registered
@@ -50,12 +52,21 @@ typedef enum: NSUInteger {
 // Will zoom to the users location SASMapView object is instansiated first.
 @property(nonatomic, assign) BOOL zoomToUsersLocationInitially;
 
-// The type of annotations for the map.
-@property(nonatomic, assign) AnnotationType annotationType;
+
+@property(nonatomic, assign) SASAnnotationImage sasAnnotationImage;
 
 
 // Calling this will bring you to the current user's location, on the map.
 - (void) locateUser;
+
+
+
+// This can be changed to show specific annotation for the map view.
+// If this is isn't called all annotations will be shown.
+// Calling this to show a specific type of annotation e.g. Defibrillator etc...
+// will result in the map view only showing that type of annotation.
+// Calling with DeviceTypeAll will show all the annotations again.
+- (void) filterAnnotationsForType:(DeviceType) type;
 
 
 

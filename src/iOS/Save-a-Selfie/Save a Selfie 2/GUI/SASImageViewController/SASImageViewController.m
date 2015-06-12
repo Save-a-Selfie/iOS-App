@@ -14,6 +14,7 @@
 #import "SASUtilities.h"
 #import "SASSocial.h"
 #import "SASImageView.h"
+#import "ILTranslucentView.h"
 
 
 @interface SASImageViewController () <SASMapViewNotifications ,UIScrollViewDelegate> {
@@ -26,6 +27,7 @@
 @property (nonatomic, weak) IBOutlet UITextView *photoDescription;
 @property (nonatomic, strong) UIImage *sasImage;
 @property (nonatomic, weak) IBOutlet SASImageView *sasImageView;
+@property (strong, nonatomic) IBOutlet SASImageView *blurredImageView;
 @property (nonatomic, strong) SASActivityIndicator *sasActivityIndicator;
 
 @property (nonatomic, strong) IBOutlet SASMapView *sasMapView;
@@ -49,6 +51,7 @@
 @synthesize sasImage;
 
 @synthesize sasImageView;
+@synthesize blurredImageView;
 @synthesize sasMapView;
 @synthesize photoDescription;
 @synthesize deviceImageView;
@@ -60,8 +63,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 }
-
-
 
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -83,11 +84,9 @@
     deviceType = annotation.device.type;
     
     // Set the content size for the scroll view.
-    [self.scrollView setFrame:CGRectMake(0, 0, [Screen width], [Screen height])];
-    [self.scrollView setContentSize:CGSizeMake([Screen width], 1000)];
     self.scrollView.delegate = self;
     self.scrollView.backgroundColor = [UIColor clearColor];
-    
+    [self.scrollView setContentSize:CGSizeMake([Screen width], 700)];
     
     // Get the appropriate device name.
     NSString *deviceName = [Device deviceNames ][deviceType];
@@ -128,6 +127,8 @@
         self.sasActivityIndicator.backgroundColor = [UIColor clearColor];
         [self.sasActivityIndicator startAnimating];
         
+        
+        
         // Set the image from the URLString contained within the device property
         // of the annotation passed to this object.
         // NOTE: The URLString is contained inside the device.standard_resolution property.
@@ -136,13 +137,22 @@
             UIImage* imageFromURL = [self getSASImageWithURLFromString:annotation.device.imageStandardRes];
             
             dispatch_async( dispatch_get_main_queue(), ^{
+                // The image for the view
                 self.sasImageView.image = imageFromURL;
+                
+
+                // The blurred image background view.
+                self.blurredImageView.contentMode = UIViewContentModeScaleToFill;
+                self.blurredImageView.image = imageFromURL;
+                [SASUtilities addSASBlurToView:self.blurredImageView];
+                
                 [self.sasActivityIndicator stopAnimating];
                 [self.sasActivityIndicator removeFromSuperview];
                 self.sasActivityIndicator = nil;
             });
         });
     }
+    
     
     
 #pragma self.annotation.device.caption nil checking

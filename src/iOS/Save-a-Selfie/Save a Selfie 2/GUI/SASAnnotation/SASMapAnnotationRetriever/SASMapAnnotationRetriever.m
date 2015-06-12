@@ -3,7 +3,7 @@
 //  Save a Selfie
 //
 //  Created by Stephen Fox on 28/05/2015.
-//  Copyright (c) 2015 Stephen Fox. All rights reserved.
+//  Copyright (c) 2015 Stephen Fox & Peter FitzGerald. All rights reserved.
 //
 
 #import "SASMapAnnotationRetriever.h"
@@ -62,12 +62,18 @@
 
 
 
-- (NSMutableArray*) fetchMapAnnotations {
-    [NSURLConnection connectionWithRequest:self.request delegate:self];
-    
-    return self.devices;
+// Calls forwardAnnotationsToDelegate. Wich will fetch
+// new annotations.
+- (void)reloadAnnotations {
+    [self forwardAnnotationsToDelegate];
 }
 
+
+// This will send the delegate an new set of annotations.
+// The annotations are sent within -connectionDidFinishLoading method.
+- (void) forwardAnnotationsToDelegate {
+    [NSURLConnection connectionWithRequest:self.request delegate:self];
+}
 
 
 #pragma NSURLConnectionDataDelegate methods
@@ -80,7 +86,6 @@
 - (void) connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
     [self.responseData appendData: data];
 }
-
 
 
 

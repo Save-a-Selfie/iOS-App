@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1810C90A1B289044009063E5 /* UIImage+SASNormalizeImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 1810C9091B289044009063E5 /* UIImage+SASNormalizeImage.m */; };
+		1810C9141B28ABE3009063E5 /* ILTranslucentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1810C9131B28ABE3009063E5 /* ILTranslucentView.m */; };
 		181D1E5D1B2359EA00FB5928 /* SASImageInspectorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 181D1E5C1B2359EA00FB5928 /* SASImageInspectorView.m */; };
 		181D1E621B235CF900FB5928 /* SASImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 181D1E611B235CF900FB5928 /* SASImageView.m */; };
 		1845C4EA1B2091F600E3D7BC /* SASActivityIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 1845C4E91B2091F600E3D7BC /* SASActivityIndicator.m */; };
@@ -87,6 +88,8 @@
 /* Begin PBXFileReference section */
 		1810C9081B289044009063E5 /* UIImage+SASNormalizeImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+SASNormalizeImage.h"; sourceTree = "<group>"; };
 		1810C9091B289044009063E5 /* UIImage+SASNormalizeImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+SASNormalizeImage.m"; sourceTree = "<group>"; };
+		1810C9121B28ABE3009063E5 /* ILTranslucentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ILTranslucentView.h; sourceTree = "<group>"; };
+		1810C9131B28ABE3009063E5 /* ILTranslucentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ILTranslucentView.m; sourceTree = "<group>"; };
 		181D1E5B1B2359EA00FB5928 /* SASImageInspectorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASImageInspectorView.h; sourceTree = "<group>"; };
 		181D1E5C1B2359EA00FB5928 /* SASImageInspectorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASImageInspectorView.m; sourceTree = "<group>"; };
 		181D1E601B235CF900FB5928 /* SASImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASImageView.h; sourceTree = "<group>"; };
@@ -235,6 +238,16 @@
 			path = SASNormalizeImage;
 			sourceTree = "<group>";
 		};
+		1810C9151B28B1EF009063E5 /* IltranslucentView */ = {
+			isa = PBXGroup;
+			children = (
+				1810C9121B28ABE3009063E5 /* ILTranslucentView.h */,
+				1810C9131B28ABE3009063E5 /* ILTranslucentView.m */,
+			);
+			name = IltranslucentView;
+			path = ..;
+			sourceTree = "<group>";
+		};
 		181D1E5E1B2359EF00FB5928 /* SASImageInspectorView */ = {
 			isa = PBXGroup;
 			children = (
@@ -268,6 +281,7 @@
 			children = (
 				1845C4ED1B209E6C00E3D7BC /* SASUtilities.h */,
 				1845C4EE1B209E6C00E3D7BC /* SASUtilities.m */,
+				1810C9151B28B1EF009063E5 /* IltranslucentView */,
 			);
 			path = SASUtlities;
 			sourceTree = "<group>";
@@ -665,6 +679,7 @@
 				18A524F71B166BAB00E8F8F6 /* SASLocation.m in Sources */,
 				D756A29C19F175230089EF80 /* UIImage+Alpha.m in Sources */,
 				1891E3D91B176E9B008CC10C /* SASMapAnnotationRetriever.m in Sources */,
+				1810C9141B28ABE3009063E5 /* ILTranslucentView.m in Sources */,
 				D786E1811A48C10500A20FDD /* SASAnnotation.m in Sources */,
 				188CAEED1B21006C006A90EB /* Screen.m in Sources */,
 				D786E17B1A48C03500A20FDD /* DeviceMapViewController.m in Sources */,

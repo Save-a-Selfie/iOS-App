@@ -23,7 +23,7 @@
         _caption = [info objectAtIndex:1];
         
         // Type of device. The int value will translate to
-        // a enum called DeviceType.
+        // a enum of type DeviceType.
         _type = [[info objectAtIndex:2] intValue];
 		
         
@@ -65,7 +65,7 @@
 }
 
 
-+ (NSArray*) deviceMapPins {
++ (NSArray*) deviceMapPinImages {
     
     return [NSArray arrayWithObjects:
             [UIImage imageNamed:@"DefibrillatorMapPin"],

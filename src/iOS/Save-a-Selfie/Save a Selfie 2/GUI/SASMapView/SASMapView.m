@@ -35,6 +35,9 @@
 // Object to retrieve annotations from the server.
 @property(strong, nonatomic) SASMapAnnotationRetriever *sasAnnotationRetriever;
 
+// The annotation type for the map to show.
+@property(assign, nonatomic) DeviceType annotationType;
+
 @end
 
 
@@ -45,6 +48,7 @@
 @synthesize sasLocation;
 @synthesize sasAnnotationRetriever;
 @synthesize notificationReceiver;
+@synthesize sasAnnotationImage;
 @synthesize annotationType;
 
 @synthesize showAnnotations;
@@ -81,7 +85,9 @@
 - (void) setupMapView {
     
     userAlreadyLocated = NO;
-    annotationType = Default;
+    sasAnnotationImage = Default;
+    annotationType = All;
+    
     self.mapType = MKMapTypeSatellite;
     
     self.delegate = self;
@@ -126,6 +132,41 @@
     }
 }
 
+
+// Filters the map view and shows only one type of
+// annotation on the map view.
+- (void)filterAnnotationsForType:(DeviceType)type {
+    
+    switch (type) {
+        case All:
+            annotationType = All;
+            break;
+            
+        case Defibrillator:
+            annotationType = Defibrillator;
+            break;
+            
+        case LifeRing:
+            annotationType = LifeRing;
+            break;
+            
+        case FirstAidKit:
+            annotationType = FirstAidKit;
+            break;
+            
+        case FireHydrant:
+            annotationType = FireHydrant;
+            break;
+            
+        default:
+            break;
+    }
+    
+    // This calls  -viewForAnnotation:(id <MKAnnotation>)annotation
+    // which is where the flow control for checking what annotations
+    // to display is located.
+    [self.sasAnnotationRetriever reloadAnnotations];
+}
 
 
 // Zooms to a region on the map view.
@@ -237,8 +278,8 @@
 
 
 
-
-- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation {
+#pragma viewForAnnotation
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(SASAnnotation*)annotation {
     
     static NSString *annotationViewID = @"MyLocation";
     
@@ -250,21 +291,51 @@
     }
     
     
-    SASAnnotation *sasAnnotation = (SASAnnotation*)annotation;
-        
     if ([annotation isKindOfClass:MKUserLocation.class]) {
         mapView.showsUserLocation = YES;
         mapView.userLocation.title = @"You are here";
         return nil;
     }
     
-    annotationView.image = [Device deviceMapPins][sasAnnotation.device.type];
-    annotationView.annotation = sasAnnotation;
-    annotationView.enabled = YES;
-    annotationView.canShowCallout = NO;
-    return annotationView;
+#pragma TODO: Improve control flow here.
+    // If the image for the annotation
+    if(sasAnnotationImage == Default) {
+        return nil;
+    }
     
+    if ([self returnForAnnotationDeviceType:annotation.device.type]) {
+        annotationView.image = [Device deviceMapPinImages][annotation.device.type];
+        annotationView.annotation = annotation;
+        annotationView.enabled = YES;
+        annotationView.canShowCallout = NO;
+        return annotationView;
+        
+    } else {
+        // Return `blank annotation`.
+        return [[MKAnnotationView alloc] init];
+    }
+    
+}
 
+
+
+// @Discussion:
+// Call this method to check whether or not the -viewForAnnotation: should return
+// an MkAnnotationsView. If SASMapView's -filterAnnotationsForType: has been called,
+// then the annoatations shown are custom, therefore we must check is
+// appropriate to return.
+- (BOOL) returnForAnnotationDeviceType:(DeviceType) deviceType {
+    if (annotationType == deviceType) {
+        return YES;
+    }
+    // As deviceType will not be ALL, we must check
+    // it separately.
+    else if(annotationType == All) {
+        return YES;
+    }
+    else {
+        return NO;
+    }
 }
 
 

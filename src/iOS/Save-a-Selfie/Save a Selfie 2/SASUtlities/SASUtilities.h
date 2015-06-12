@@ -16,4 +16,6 @@
 
 + (NSString*) getCurrentTimeStamp;
 
++ (void) addSASBlurToView:(UIView*) view;
+
 @end

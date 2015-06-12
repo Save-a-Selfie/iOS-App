@@ -11,11 +11,13 @@
 // 1 - Life Ring
 // 2 - First Aid Kit
 // 3 - Fire Hydrant
+// 4 - All - All annotations
 typedef enum : NSUInteger {
     Defibrillator,
     LifeRing,
     FirstAidKit,
-    FireHydrant
+    FireHydrant,
+    All
 } DeviceType;
 
 
@@ -26,7 +28,7 @@ typedef enum : NSUInteger {
 // Returns NSArray of UIImages for the devices, respectively.
 + (NSArray*) deviceImages;
 // Returns NSArray of UIImages for the devices as pins for a map.
-+ (NSArray*) deviceMapPins;
++ (NSArray*) deviceMapPinImages;
 
 
 @property (nonatomic, assign) DeviceType type;
