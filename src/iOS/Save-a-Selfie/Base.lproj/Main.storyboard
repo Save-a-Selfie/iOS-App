@@ -6,13 +6,6 @@
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <mutableArray key="trade-gothic-lt-1361519976.ttf">
-            <string>TradeGothicLT</string>
-            <string>TradeGothicLT</string>
-            <string>TradeGothicLT</string>
-        </mutableArray>
-    </customFonts>
     <scenes>
         <!--Map View Controller-->
         <scene sceneID="Tku-EJ-KZ6">
@@ -44,52 +37,14 @@
                             <constraint firstItem="ZSL-vM-Epo" firstAttribute="leading" secondItem="XjZ-Ty-pLe" secondAttribute="leadingMargin" constant="185" id="uCR-fr-bI2"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="2Z4-cZ-Nt2">
-                        <barButtonItem key="leftBarButtonItem" style="plain" id="p1C-T7-N9c">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="4W9-mg-heO">
-                                <rect key="frame" x="16" y="53" width="96" height="38"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="NewImage">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="locateUser:" destination="wxp-4h-T6p" eventType="touchUpInside" id="66i-6B-5dq"/>
-                                    <action selector="uploadNewNewDevice:" destination="wxp-4h-T6p" eventType="touchUpInside" id="o8R-Ld-zih"/>
-                                </connections>
-                            </button>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="2Z4-cZ-Nt2"/>
                     <connections>
-                        <outlet property="addImageButton" destination="4W9-mg-heO" id="9dz-wB-17b"/>
                         <outlet property="locateUserButton" destination="ZSL-vM-Epo" id="O0k-1F-lr0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IA3-XG-E4V" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-114" y="594"/>
-        </scene>
-        <!--Image View Controller-->
-        <scene sceneID="XE9-Ts-XQl">
-            <objects>
-                <viewController id="dty-zp-Agr" customClass="SASImageViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="FOz-M9-3u2"/>
-                        <viewControllerLayoutGuide type="bottom" id="Nq6-gI-NJu"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8kG-Lk-fM4">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="iNn-5x-gcq"/>
-                    <connections>
-                        <outlet property="contentView" destination="57Q-FF-DiC" id="lDb-A0-PHP"/>
-                        <outlet property="scrollView" destination="eub-ih-yoo" id="jQE-ki-Vgx"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="PiH-5e-oCt" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="424" y="1289"/>
+            <point key="canvasLocation" x="-220" y="594"/>
         </scene>
         <!--Image View Controller-->
         <scene sceneID="bXq-ar-DQy">
@@ -115,12 +70,13 @@
                                                     <constraint firstAttribute="width" secondItem="mVF-YI-ZVX" secondAttribute="height" multiplier="16:17" id="Zcr-ro-rd8"/>
                                                 </constraints>
                                             </imageView>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Tjv-A9-dsb" customClass="SASImageView">
-                                                <rect key="frame" x="0.0" y="0.0" width="320" height="340"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" secondItem="Tjv-A9-dsb" secondAttribute="height" multiplier="16:17" id="IgS-Y1-FOX"/>
-                                                </constraints>
-                                            </imageView>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" scrollEnabled="NO" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iMp-bt-0Y0">
+                                                <rect key="frame" x="9" y="541" width="303" height="19"/>
+                                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="textColor" red="0.46845407196969702" green="0.46845407196969702" blue="0.46845407196969702" alpha="0.0" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="fontDescription" name="AvenirNext-UltraLight" family="Avenir Next" pointSize="18"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                            </textView>
                                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="mWk-T9-tVE" customClass="SASMapView">
                                                 <rect key="frame" x="0.0" y="393" width="320" height="78"/>
                                                 <constraints>
@@ -152,9 +108,6 @@
                                                 <state key="normal" image="SmallMapPin">
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
-                                                <connections>
-                                                    <action selector="showDeviceLocation:" destination="dty-zp-Agr" eventType="touchUpInside" id="ShC-9D-vp7"/>
-                                                </connections>
                                             </button>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C7l-vi-VCg">
                                                 <rect key="frame" x="9" y="521" width="311" height="1"/>
@@ -170,13 +123,12 @@
                                                     <constraint firstAttribute="height" constant="52" id="u4P-3H-t2r"/>
                                                 </constraints>
                                             </imageView>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" scrollEnabled="NO" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iMp-bt-0Y0">
-                                                <rect key="frame" x="9" y="541" width="303" height="19"/>
-                                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                <color key="textColor" red="0.46845407196969702" green="0.46845407196969702" blue="0.46845407196969702" alpha="0.0" colorSpace="calibratedRGB"/>
-                                                <fontDescription key="fontDescription" name="AvenirNext-UltraLight" family="Avenir Next" pointSize="18"/>
-                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                            </textView>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Tjv-A9-dsb" customClass="SASImageView">
+                                                <rect key="frame" x="0.0" y="0.0" width="320" height="340"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="Tjv-A9-dsb" secondAttribute="height" multiplier="16:17" id="IgS-Y1-FOX"/>
+                                                </constraints>
+                                            </imageView>
                                         </subviews>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
@@ -243,7 +195,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4SR-gi-5ZI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="764" y="1289"/>
+            <point key="canvasLocation" x="424" y="1277"/>
         </scene>
         <!--Upload Image View Controller-->
         <scene sceneID="V8n-Dc-Kkx">
@@ -378,101 +330,6 @@
             </objects>
             <point key="canvasLocation" x="424" y="607"/>
         </scene>
-        <!--Upload Picture View Controller-->
-        <scene sceneID="aAA-FK-5Kq">
-            <objects>
-                <viewController storyboardIdentifier="UploadPictureViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="TVY-Ut-sMj" customClass="UploadPictureViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="1O1-PC-7GV"/>
-                        <viewControllerLayoutGuide type="bottom" id="E8q-fp-rzq"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="ldh-Nz-7bn">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tcg-9c-rJL">
-                                <rect key="frame" x="24" y="332" width="24" height="24"/>
-                                <state key="normal" image="arrow_left">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="backArrowAction:" destination="TVY-Ut-sMj" eventType="touchUpInside" id="aww-I5-Bz3"/>
-                                </connections>
-                            </button>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.5" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2lg-S4-d5n">
-                                <rect key="frame" x="10" y="364" width="294" height="157"/>
-                                <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" name="TradeGothicLT" family="TradeGothic LT" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Type location info here..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ato-4C-iGz">
-                                <rect key="frame" x="23" y="371" width="221" height="21"/>
-                                <fontDescription key="fontDescription" name="TradeGothicLT" family="TradeGothic LT" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Rqg-SJ-Mhe">
-                                <rect key="frame" x="160" y="42" width="160" height="285"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                            </imageView>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="kwJ-kD-PEo">
-                                <rect key="frame" x="70" y="153" width="20" height="20"/>
-                            </activityIndicatorView>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GKL-ZG-39F">
-                                <rect key="frame" x="0.0" y="42" width="160" height="285"/>
-                            </mapView>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" alpha="0.89999999999999991" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uRp-Lq-gq7">
-                                <rect key="frame" x="13" y="393" width="294" height="100"/>
-                                <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6vp-A0-96U">
-                                <rect key="frame" x="20" y="399" width="280" height="88"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="SAS_75" translatesAutoresizingMaskIntoConstraints="NO" id="TDz-PB-oDo">
-                                <rect key="frame" x="203" y="329" width="75" height="75"/>
-                            </imageView>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bIk-oi-EUm">
-                                <rect key="frame" x="16" y="517" width="51" height="31"/>
-                                <connections>
-                                    <action selector="sendToFBAction:" destination="TVY-Ut-sMj" eventType="valueChanged" id="MPX-PU-bIC"/>
-                                </connections>
-                            </switch>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Share on Facebook" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hc2-62-CLw">
-                                <rect key="frame" x="77" y="522" width="182" height="21"/>
-                                <fontDescription key="fontDescription" name="TradeGothicLT" family="TradeGothic LT" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="A0H-gz-3m6"/>
-                    <nil key="simulatedTopBarMetrics"/>
-                    <connections>
-                        <outlet property="activityIndicator" destination="kwJ-kD-PEo" id="8rQ-4a-40R"/>
-                        <outlet property="backArrow" destination="tcg-9c-rJL" id="eVb-ND-j0i"/>
-                        <outlet property="commentField" destination="2lg-S4-d5n" id="dtK-qe-DeG"/>
-                        <outlet property="imageView" destination="Rqg-SJ-Mhe" id="ZQk-7H-fcU"/>
-                        <outlet property="littleGuy" destination="TDz-PB-oDo" id="7qm-yz-cyc"/>
-                        <outlet property="mapView" destination="GKL-ZG-39F" id="cF1-OZ-rX7"/>
-                        <outlet property="multilabelBackground" destination="uRp-Lq-gq7" id="FB0-sV-Fgv"/>
-                        <outlet property="multipurposeLabel" destination="6vp-A0-96U" id="D2n-oM-xXB"/>
-                        <outlet property="sendToFBButton" destination="bIk-oi-EUm" id="YRQ-fg-EWi"/>
-                        <outlet property="sendToFBLabel" destination="Hc2-62-CLw" id="vCE-eF-sBN"/>
-                        <outlet property="typeInfoHere" destination="ato-4C-iGz" id="NDa-83-cpW"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="nLt-8e-gBz" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="462" y="-444"/>
-        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">
             <objects>
@@ -491,26 +348,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-520" y="-181"/>
-        </scene>
-        <!--Photo-->
-        <scene sceneID="NxK-6W-YLx">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="1a3-aJ-wlg" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Photo" image="camera" id="cPa-gy-q4n"/>
-                    <toolbarItems/>
-                    <nil key="simulatedTopBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="C3m-ev-xMy">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="TVY-Ut-sMj" kind="relationship" relationship="rootViewController" id="CPJ-wD-SQ3"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="h2W-aa-E7D" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="26.399999999999999" y="-438.06999999999999"/>
         </scene>
         <!--Map-->
         <scene sceneID="rYn-Ii-qk3">
@@ -539,14 +376,11 @@
         <image name="FirstAidKit" width="175" height="175"/>
         <image name="LifeRing" width="175" height="175"/>
         <image name="Locate" width="118" height="43"/>
-        <image name="NewImage" width="122" height="43"/>
         <image name="Order of Malta 300" width="300" height="108"/>
         <image name="SAS vertical 280" width="280" height="262"/>
         <image name="SAS_75" width="75" height="75"/>
         <image name="SmallMapPin" width="47" height="47"/>
         <image name="TabBarLocationPin" width="21" height="34"/>
-        <image name="arrow_left" width="24" height="24"/>
-        <image name="camera" width="24" height="24"/>
         <image name="dublin fire brigade 300" width="300" height="300"/>
         <image name="info_24" width="24" height="24"/>
     </resources>

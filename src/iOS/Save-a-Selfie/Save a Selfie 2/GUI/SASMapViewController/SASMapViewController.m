@@ -126,6 +126,7 @@ NSString *permissionsProblemTwo = @"Please enable location services on your phon
     SASImageViewController *sasImageViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SASImageViewController"];
     
     sasImageViewController.annotation = annotation;
+    
     [self.navigationController pushViewController:sasImageViewController animated:YES];
 
     
@@ -216,11 +217,12 @@ NSString *permissionsProblemTwo = @"Please enable location services on your phon
     //
     //  -presentSASUploadImageViewControllerWithImage:
     //
-    [self dismissViewControllerAnimated:self.sasImagePickerController
-                             completion:^(){
-                                 [self presentSASUploadImageViewControllerWithImage:image];
-                                 self.sasImagePickerController = nil;
-                             }];
+    [self.sasImagePickerController dismissViewControllerAnimated:YES completion:^(){
+        [self presentSASUploadImageViewControllerWithImage:image];
+        self.sasImagePickerController = nil;
+    }];
+    
+
 }
 
 
