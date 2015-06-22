@@ -15,6 +15,7 @@
 #import "SASImagePickerViewController.h"
 #import "SASUploadImageViewController.h"
 #import "UIFont+SASFont.h"
+#import "SASFilterView.h"
 
 @interface SASMapViewController () <SASImagePickerDelegate>
 
@@ -26,6 +27,8 @@
 @property(nonatomic, strong) SASUploadImageViewController *sasUploadImageViewController;
 
 @property(strong, nonatomic) AlertBox* permissionsBox;
+
+@property(strong, nonatomic) SASFilterView *sasFilterView;
 
 @end
 
@@ -47,11 +50,11 @@ NSString *permissionsProblemTwo = @"Please enable location services on your phon
     [super viewDidLoad];
     
     
-    
 }
 - (void)viewWillDisappear:(BOOL)animated {
     [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
+
 - (UIStatusBarStyle)preferredStatusBarStyle {
     return UIStatusBarStyleLightContent;
 }
@@ -60,7 +63,7 @@ NSString *permissionsProblemTwo = @"Please enable location services on your phon
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
+    [self.navigationController setNavigationBarHidden:YES animated:NO];
     self.tabBarController.tabBar.hidden = NO;
     
 
@@ -189,17 +192,19 @@ NSString *permissionsProblemTwo = @"Please enable location services on your phon
 
 
 - (IBAction)uploadNewNewDevice:(id)sender {
-    
-    if(sasImagePickerController == nil) {
-        sasImagePickerController = [[SASImagePickerViewController alloc] init];
-        sasImagePickerController.sasImagePickerDelegate = self;
-    }
-    
-    
-    if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-        [sasImagePickerController setSourceType:UIImagePickerControllerSourceTypeCamera];
-        [self presentViewController:sasImagePickerController animated:YES completion:nil];
-    }
+    self.sasFilterView = [[SASFilterView alloc] init];
+    [self.sasMapView addSubview:self.sasFilterView];
+    [self.sasFilterView animateIntoView:self.sasMapView];
+//    if(sasImagePickerController == nil) {
+//        sasImagePickerController = [[SASImagePickerViewController alloc] init];
+//        sasImagePickerController.sasImagePickerDelegate = self;
+//    }
+//    
+//    
+//    if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+//        [sasImagePickerController setSourceType:UIImagePickerControllerSourceTypeCamera];
+//        [self presentViewController:sasImagePickerController animated:YES completion:nil];
+//    }
 }
 
 

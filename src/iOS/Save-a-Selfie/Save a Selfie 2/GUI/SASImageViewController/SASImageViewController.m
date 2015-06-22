@@ -43,7 +43,6 @@
 @implementation SASImageViewController
 
 @synthesize annotation;
-
 @synthesize scrollView;
 
 // This property is the image which has been fetched from
@@ -65,10 +64,11 @@
 }
 
 
-- (void)viewWillAppear:(BOOL)animated {
-    
-    self.navigationController.navigationBarHidden = NO;
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
     self.tabBarController.tabBar.hidden = YES;
 
 
@@ -86,11 +86,12 @@
     // Set the content size for the scroll view.
     self.scrollView.delegate = self;
     self.scrollView.backgroundColor = [UIColor clearColor];
-    [self.scrollView setContentSize:CGSizeMake([Screen width], 700)];
-    
+    //[self.scrollView setContentSize:CGSizeMake([Screen width], 700)];
+
     // Get the appropriate device name.
     NSString *deviceName = [Device deviceNames ][deviceType];
     self.navigationController.navigationBar.topItem.title = deviceName;
+    
     
     
     // The sasMapView property should show the location
@@ -114,6 +115,7 @@
         // Set the elements of the UI which are coloured to the
         // respective colour associated with the device.
         [self setColourForColouredUIElements:self.annotation.device];
+
     }
         
     

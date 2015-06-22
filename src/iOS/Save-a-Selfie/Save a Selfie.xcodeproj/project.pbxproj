@@ -26,6 +26,8 @@
 		18EBF9771B272B3400EDA48B /* SASImagePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EBF9761B272B3400EDA48B /* SASImagePickerViewController.m */; };
 		18EBF97B1B273A6600EDA48B /* SASUploadImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EBF97A1B273A6600EDA48B /* SASUploadImage.m */; };
 		18EBF9801B2741F600EDA48B /* SASUploadImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EBF97F1B2741F600EDA48B /* SASUploadImageViewController.m */; };
+		18F46A4B1B2B9F1F0062BD05 /* SASFilterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F46A4A1B2B9F1F0062BD05 /* SASFilterView.m */; };
+		18F46A4E1B2B9F370062BD05 /* SASFilterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18F46A4D1B2B9F370062BD05 /* SASFilterView.xib */; };
 		D0EAAC0B1A0FD59B00C0F955 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0EAAC0A1A0FD59B00C0F955 /* Social.framework */; };
 		D0EAAC0D1A0FD63B00C0F955 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0EAAC0C1A0FD63B00C0F955 /* MessageUI.framework */; };
 		D0EAAC0F1A100F2D00C0F955 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0EAAC0E1A100F2D00C0F955 /* Accounts.framework */; };
@@ -123,6 +125,9 @@
 		18EBF97A1B273A6600EDA48B /* SASUploadImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASUploadImage.m; sourceTree = "<group>"; };
 		18EBF97E1B2741F600EDA48B /* SASUploadImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASUploadImageViewController.h; sourceTree = "<group>"; };
 		18EBF97F1B2741F600EDA48B /* SASUploadImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASUploadImageViewController.m; sourceTree = "<group>"; };
+		18F46A491B2B9F1F0062BD05 /* SASFilterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASFilterView.h; sourceTree = "<group>"; };
+		18F46A4A1B2B9F1F0062BD05 /* SASFilterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASFilterView.m; sourceTree = "<group>"; };
+		18F46A4D1B2B9F370062BD05 /* SASFilterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SASFilterView.xib; path = "Save a Selfie 2/SASFilterView.xib"; sourceTree = SOURCE_ROOT; };
 		D0EAAC0A1A0FD59B00C0F955 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		D0EAAC0C1A0FD63B00C0F955 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		D0EAAC0E1A100F2D00C0F955 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
@@ -382,6 +387,7 @@
 			children = (
 				18A525061B16708400E8F8F6 /* SASMapViewController.h */,
 				18A525071B16708400E8F8F6 /* SASMapViewController.m */,
+				18F46A4C1B2B9F230062BD05 /* SASFilterView */,
 			);
 			path = SASMapViewController;
 			sourceTree = "<group>";
@@ -443,6 +449,17 @@
 				18EBF97C1B273A6900EDA48B /* SASUploadImage */,
 			);
 			path = SASUploadImageViewController;
+			sourceTree = "<group>";
+		};
+		18F46A4C1B2B9F230062BD05 /* SASFilterView */ = {
+			isa = PBXGroup;
+			children = (
+				18F46A4D1B2B9F370062BD05 /* SASFilterView.xib */,
+				18F46A491B2B9F1F0062BD05 /* SASFilterView.h */,
+				18F46A4A1B2B9F1F0062BD05 /* SASFilterView.m */,
+			);
+			name = SASFilterView;
+			path = ../..;
 			sourceTree = "<group>";
 		};
 		D70023C119FC440C00E45408 /* helpers */ = {
@@ -648,6 +665,7 @@
 				D786E1731A4823B500A20FDD /* trade-gothic-no-18-condensed-1361519964.ttf in Resources */,
 				D72D02C41A9BDFC2008C2597 /* footer.php in Resources */,
 				1845C4EC1B20920300E3D7BC /* SASActivityIndicatorView.xib in Resources */,
+				18F46A4E1B2B9F370062BD05 /* SASFilterView.xib in Resources */,
 				D72D02D21A9BDFC2008C2597 /* testGallery.php in Resources */,
 				D72D02D01A9BDFC2008C2597 /* getMapData.php in Resources */,
 				D72D02CB1A9BDFC2008C2597 /* iPhone.php in Resources */,
@@ -689,6 +707,7 @@
 				1845C4EF1B209E6C00E3D7BC /* SASUtilities.m in Sources */,
 				1864FEAC1B27A39900EA564A /* UIFont+SASFont.m in Sources */,
 				18EBF9801B2741F600EDA48B /* SASUploadImageViewController.m in Sources */,
+				18F46A4B1B2B9F1F0062BD05 /* SASFilterView.m in Sources */,
 				181D1E5D1B2359EA00FB5928 /* SASImageInspectorView.m in Sources */,
 				D756A2A919F309690089EF80 /* TabBarController.m in Sources */,
 				1810C90A1B289044009063E5 /* UIImage+SASNormalizeImage.m in Sources */,
