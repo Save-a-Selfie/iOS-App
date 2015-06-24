@@ -63,13 +63,16 @@
     [super viewDidLoad];
 }
 
+- (BOOL)hidesBottomBarWhenPushed {
+    return YES;
+}
 
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
     [self.navigationController setNavigationBarHidden:NO animated:YES];
-    self.tabBarController.tabBar.hidden = YES;
+
 
 
 #pragma Setup of the UI Elements.
