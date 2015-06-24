@@ -3,7 +3,7 @@
 //  Save a Selfie
 //
 //  Created by Stephen Fox on 28/05/2015.
-//  Copyright (c) 2015 Stephen Fox & Peter FitzGerald. All rights reserved.
+//  Copyright (c) 2015 Stephen Fox & Stephen Fox. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
@@ -35,7 +35,7 @@
 
 
 
-// Calls the delegate with a 'fresh' set of annotation
+// Calls the delegate with a 'fresh' set of annotation i.e fetches from the server again.
 - (void) reloadAnnotations;
 
 

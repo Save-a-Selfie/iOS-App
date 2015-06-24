@@ -10,7 +10,10 @@
 #import "SASUtilities.h"
 #import "ILTranslucentView.h"
 
+
 @implementation SASFilterView
+
+@synthesize delegate;
 
 - (instancetype)init {
     if(self = [super init]) {
@@ -29,6 +32,7 @@
         blur.translucentTintColor = [UIColor clearColor];
         blur.translucentAlpha = 1.0;
         blur.layer.cornerRadius = 8.0;
+        self.layer.cornerRadius = 8.0;
 
         [self addSubview:blur];
         [self sendSubviewToBack:blur];
@@ -52,4 +56,35 @@
                      animations:^(){ self.center = view.center; }
                      completion:nil];
 }
+
+
+// TODO: Reduce code reuse here.
+#pragma Button Presses for FilterView
+- (IBAction)defibrillatorButtonPress:(id)sender {
+    if (delegate != nil && [delegate respondsToSelector:@selector(sasFilterView:buttonWasPressed:)]) {
+        [delegate sasFilterView:self buttonWasPressed:Defibrillator];
+    }
+}
+- (IBAction)lifeRingButtonPress:(id)sender {
+    if (delegate != nil && [delegate respondsToSelector:@selector(sasFilterView:buttonWasPressed:)]) {
+        [delegate sasFilterView:self buttonWasPressed:LifeRing];
+    }
+}
+- (IBAction)firstAidKitButtonPress:(id)sender {
+    if (delegate != nil && [delegate respondsToSelector:@selector(sasFilterView:buttonWasPressed:)]) {
+        [delegate sasFilterView:self buttonWasPressed:FirstAidKit];
+    }
+}
+- (IBAction)fireHydrantButtonPress:(id)sender {
+    if (delegate != nil && [delegate respondsToSelector:@selector(sasFilterView:buttonWasPressed:)]) {
+        [delegate sasFilterView:self buttonWasPressed:FireHydrant];
+    }
+}
+- (IBAction)allButtonWasPressed:(id)sender {
+    if (delegate != nil && [delegate respondsToSelector:@selector(sasFilterView:buttonWasPressed:)]) {
+        [delegate sasFilterView:self buttonWasPressed:All];
+    }
+}
+
+
 @end

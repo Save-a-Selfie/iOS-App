@@ -17,7 +17,7 @@
 #import "UIFont+SASFont.h"
 #import "SASFilterView.h"
 
-@interface SASMapViewController () <SASImagePickerDelegate>
+@interface SASMapViewController () <SASImagePickerDelegate, SASFilterViewDelegate>
 
 @property(nonatomic, strong) SASMapView* sasMapView;
 @property(nonatomic, weak) IBOutlet UIButton *locateUserButton;
@@ -25,6 +25,7 @@
 
 @property(nonatomic, strong) SASImagePickerViewController *sasImagePickerController;
 @property(nonatomic, strong) SASUploadImageViewController *sasUploadImageViewController;
+@property(nonatomic, strong) UINavigationController *uploadImageNavigationController;
 
 @property(strong, nonatomic) AlertBox* permissionsBox;
 
@@ -43,6 +44,7 @@ NSString *permissionsProblemTwo = @"Please enable location services on your phon
 @synthesize permissionsBox;
 @synthesize sasImagePickerController;
 @synthesize sasUploadImageViewController;
+@synthesize uploadImageNavigationController;
 
 
 
@@ -58,6 +60,7 @@ NSString *permissionsProblemTwo = @"Please enable location services on your phon
 - (UIStatusBarStyle)preferredStatusBarStyle {
     return UIStatusBarStyleLightContent;
 }
+
 
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -116,6 +119,11 @@ NSString *permissionsProblemTwo = @"Please enable location services on your phon
 }
 
 
+#pragma SASFilterViewDelegate
+- (void)sasFilterView:(SASFilterView *)view buttonWasPressed:(DeviceType)device {
+    [self.sasMapView filterAnnotationsForType:device];
+    [self.sasFilterView removeFromSuperview];
+}
 
 
 #pragma SASMapViewNotifications methods.
@@ -174,6 +182,12 @@ NSString *permissionsProblemTwo = @"Please enable location services on your phon
 }
 
 
+- (IBAction)filterDevices:(id)sender {
+    self.sasFilterView = [[SASFilterView alloc] init];
+    self.sasFilterView.delegate = self;
+    [self.sasMapView addSubview:self.sasFilterView];
+    [self.sasFilterView animateIntoView:self.sasMapView];
+}
 
 
 #pragma Begin Upload Routine.
@@ -193,19 +207,17 @@ NSString *permissionsProblemTwo = @"Please enable location services on your phon
 
 
 - (IBAction)uploadNewNewDevice:(id)sender {
-    self.sasFilterView = [[SASFilterView alloc] init];
-    [self.sasMapView addSubview:self.sasFilterView];
-    [self.sasFilterView animateIntoView:self.sasMapView];
-//    if(sasImagePickerController == nil) {
-//        sasImagePickerController = [[SASImagePickerViewController alloc] init];
-//        sasImagePickerController.sasImagePickerDelegate = self;
-//    }
-//    
-//    
-//    if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-//        [sasImagePickerController setSourceType:UIImagePickerControllerSourceTypeCamera];
-//        [self presentViewController:sasImagePickerController animated:YES completion:nil];
-//    }
+    
+    if(sasImagePickerController == nil) {
+        sasImagePickerController = [[SASImagePickerViewController alloc] init];
+        sasImagePickerController.sasImagePickerDelegate = self;
+    }
+    
+    
+    if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        [sasImagePickerController setSourceType:UIImagePickerControllerSourceTypeCamera];
+        [self presentViewController:sasImagePickerController animated:YES completion:nil];
+    }
 }
 
 
@@ -226,15 +238,21 @@ NSString *permissionsProblemTwo = @"Please enable location services on your phon
 }
 
 
-
+// Presents a SASUploadImageViewController via
 - (void) presentSASUploadImageViewControllerWithImage:(SASUploadImage*) image {
+    
     if(self.sasUploadImageViewController == nil) {
-        
+
         self.sasUploadImageViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SASUploadImageViewController"];
+
+    }
+    
+    if(self.uploadImageNavigationController == nil) {
+        self.uploadImageNavigationController = [[UINavigationController alloc] initWithRootViewController:self.sasUploadImageViewController];
     }
     
     [self.sasUploadImageViewController setSasUploadImage:image];
-    [self.navigationController presentViewController:self.sasUploadImageViewController animated:YES completion:nil];
+    [self.navigationController presentViewController:self.uploadImageNavigationController animated:YES completion:nil];
 
 
 }

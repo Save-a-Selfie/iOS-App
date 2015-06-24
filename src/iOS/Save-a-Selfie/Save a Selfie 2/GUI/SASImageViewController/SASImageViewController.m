@@ -21,6 +21,7 @@
     DeviceType deviceType;
 }
 
+
 @property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, weak) IBOutlet UIView *contentView;
 
@@ -38,6 +39,7 @@
 
 @property (nonatomic, weak) IBOutlet UIButton *showDeviceLocationPin;
 
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *photoDesriptionHeightContraint;
 @end
 
 @implementation SASImageViewController
@@ -58,10 +60,12 @@
 @synthesize sasActivityIndicator;
 @synthesize distanceLabel;
 @synthesize showDeviceLocationPin;
+@synthesize photoDesriptionHeightContraint;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
 }
+
 
 - (BOOL)hidesBottomBarWhenPushed {
     return YES;
@@ -69,11 +73,10 @@
 
 
 - (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
     
+    [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:NO animated:YES];
-
-
+    
 
 #pragma Setup of the UI Elements.
     
@@ -167,6 +170,9 @@
         [self.photoDescription setFont:[UIFont fontWithName:@"Avenir Next" size:18]];
         [self.photoDescription sizeToFit];
         [self.photoDescription.layer setBorderWidth:0.0];
+        CGSize sizeThatFitsTextView = [self.photoDescription sizeThatFits:CGSizeMake(self.photoDescription.frame.size.width, MAXFLOAT)];
+        photoDesriptionHeightContraint.constant = sizeThatFitsTextView.height;
+
     }
 }
 

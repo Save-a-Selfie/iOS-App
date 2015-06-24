@@ -15,6 +15,7 @@
 	if (self = [super init]) {
         
 		NSArray *info = [infoString componentsSeparatedByString:@"\t"];
+        NSLog(@"%@", info);
 		
         // URL for the image.
         _imageStandardRes = [info objectAtIndex:0];

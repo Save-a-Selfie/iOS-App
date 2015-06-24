@@ -19,7 +19,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZSL-vM-Epo">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZSL-vM-Epo">
                                 <rect key="frame" x="201" y="470" width="103" height="39"/>
                                 <state key="normal" image="Locate">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -28,17 +28,39 @@
                                     <action selector="locateUser:" destination="wxp-4h-T6p" eventType="touchUpInside" id="N6f-Pl-79q"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f2t-3C-hgn">
+                                <rect key="frame" x="16" y="470" width="103" height="39"/>
+                                <state key="normal" image="NewImage">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="uploadNewNewDevice:" destination="wxp-4h-T6p" eventType="touchUpInside" id="TpP-QQ-zvK"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gKB-VO-JHZ">
+                                <rect key="frame" x="211" y="72" width="103" height="39"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="39" id="bG4-lq-wdw"/>
+                                    <constraint firstAttribute="width" constant="103" id="hHo-ds-lx6"/>
+                                </constraints>
+                                <state key="normal" image="NewImage">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="filterDevices:" destination="wxp-4h-T6p" eventType="touchUpInside" id="TCS-mZ-RhX"/>
+                                    <action selector="uploadNewNewDevice:" destination="wxp-4h-T6p" eventType="touchUpInside" id="Oap-CZ-h86"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="ZSL-vM-Epo" firstAttribute="trailing" secondItem="XjZ-Ty-pLe" secondAttribute="trailingMargin" id="SBr-vN-H0X"/>
-                            <constraint firstAttribute="width" secondItem="ZSL-vM-Epo" secondAttribute="height" multiplier="320:39" id="Uc1-hZ-Zud"/>
-                            <constraint firstItem="WI1-wW-Rnp" firstAttribute="top" secondItem="ZSL-vM-Epo" secondAttribute="bottom" constant="10" id="sLG-CL-C7y"/>
-                            <constraint firstItem="ZSL-vM-Epo" firstAttribute="leading" secondItem="XjZ-Ty-pLe" secondAttribute="leadingMargin" constant="185" id="uCR-fr-bI2"/>
+                            <constraint firstItem="gKB-VO-JHZ" firstAttribute="top" secondItem="VOt-Ui-pgj" secondAttribute="bottom" constant="8" id="JOU-GU-0R2"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="gKB-VO-JHZ" secondAttribute="trailing" constant="-10" id="kPy-3p-BmB"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="2Z4-cZ-Nt2"/>
                     <connections>
+                        <outlet property="addImageButton" destination="f2t-3C-hgn" id="FKg-Qh-76K"/>
                         <outlet property="locateUserButton" destination="ZSL-vM-Epo" id="O0k-1F-lr0"/>
                     </connections>
                 </viewController>
@@ -71,8 +93,11 @@
                                                 </constraints>
                                             </imageView>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iMp-bt-0Y0">
-                                                <rect key="frame" x="9" y="541" width="303" height="19"/>
+                                                <rect key="frame" x="9" y="541" width="303" height="160"/>
                                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="160" id="gEF-FK-h68"/>
+                                                </constraints>
                                                 <color key="textColor" red="0.46845407196969702" green="0.46845407196969702" blue="0.46845407196969702" alpha="0.0" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="AvenirNext-UltraLight" family="Avenir Next" pointSize="18"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -108,6 +133,9 @@
                                                 <state key="normal" image="SmallMapPin">
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="showDeviceLocation:" destination="9fG-Be-2bi" eventType="touchUpInside" id="mzQ-0y-Oe0"/>
+                                                </connections>
                                             </button>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C7l-vi-VCg">
                                                 <rect key="frame" x="9" y="521" width="311" height="1"/>
@@ -148,20 +176,19 @@
                                             <constraint firstItem="NHx-ZC-4e7" firstAttribute="top" secondItem="Tjv-A9-dsb" secondAttribute="bottom" constant="9" id="MRo-Qv-ujc"/>
                                             <constraint firstAttribute="trailing" secondItem="Tjv-A9-dsb" secondAttribute="trailing" id="WXr-1g-zht"/>
                                             <constraint firstItem="mWk-T9-tVE" firstAttribute="leading" secondItem="57Q-FF-DiC" secondAttribute="leading" id="Wav-6q-Dd0"/>
+                                            <constraint firstItem="iMp-bt-0Y0" firstAttribute="leading" secondItem="57Q-FF-DiC" secondAttribute="leading" constant="9" id="XSA-hc-QlT"/>
                                             <constraint firstItem="NHx-ZC-4e7" firstAttribute="leading" secondItem="57Q-FF-DiC" secondAttribute="leading" constant="259" id="aG0-yt-2hr"/>
                                             <constraint firstItem="C7l-vi-VCg" firstAttribute="leading" secondItem="57Q-FF-DiC" secondAttribute="leading" constant="9" id="aje-XB-6SS"/>
                                             <constraint firstAttribute="centerX" secondItem="UG9-0e-7OB" secondAttribute="centerX" id="alW-UD-0c3"/>
                                             <constraint firstAttribute="height" constant="568" id="dQT-s2-9Gm"/>
                                             <constraint firstItem="mWk-T9-tVE" firstAttribute="top" secondItem="UG9-0e-7OB" secondAttribute="bottom" constant="1" id="ef3-69-vWZ"/>
-                                            <constraint firstItem="iMp-bt-0Y0" firstAttribute="top" secondItem="mWk-T9-tVE" secondAttribute="bottom" constant="70" id="fcW-Tr-yL2"/>
-                                            <constraint firstItem="iMp-bt-0Y0" firstAttribute="leading" secondItem="57Q-FF-DiC" secondAttribute="leading" constant="9" id="jxW-Jz-JMf"/>
                                             <constraint firstItem="f01-VB-Huq" firstAttribute="leading" secondItem="57Q-FF-DiC" secondAttribute="leading" constant="9" id="luC-IE-LgM"/>
                                             <constraint firstAttribute="trailing" secondItem="C7l-vi-VCg" secondAttribute="trailing" id="meN-23-sjd"/>
+                                            <constraint firstAttribute="trailing" secondItem="iMp-bt-0Y0" secondAttribute="trailing" constant="8" id="oy8-fd-Iov"/>
+                                            <constraint firstItem="iMp-bt-0Y0" firstAttribute="top" secondItem="mWk-T9-tVE" secondAttribute="bottom" constant="70" id="pmn-K3-B1c"/>
                                             <constraint firstItem="Tjv-A9-dsb" firstAttribute="top" secondItem="57Q-FF-DiC" secondAttribute="top" id="qmI-Vb-d4A"/>
                                             <constraint firstAttribute="trailing" secondItem="f01-VB-Huq" secondAttribute="trailing" constant="202" id="uoO-1Y-cdM"/>
                                             <constraint firstItem="mVF-YI-ZVX" firstAttribute="leading" secondItem="57Q-FF-DiC" secondAttribute="leading" id="vHv-WD-60z"/>
-                                            <constraint firstAttribute="trailing" secondItem="iMp-bt-0Y0" secondAttribute="trailing" constant="8" id="wa2-4I-l8z"/>
-                                            <constraint firstAttribute="bottom" secondItem="iMp-bt-0Y0" secondAttribute="bottom" constant="8" id="wv9-9X-va6"/>
                                             <constraint firstAttribute="trailing" secondItem="mVF-YI-ZVX" secondAttribute="trailing" id="zjz-df-EBp"/>
                                         </constraints>
                                     </view>
@@ -186,11 +213,14 @@
                     </view>
                     <connections>
                         <outlet property="blurredImageView" destination="mVF-YI-ZVX" id="T6G-RL-dPn"/>
+                        <outlet property="contentView" destination="57Q-FF-DiC" id="QtR-8s-aRQ"/>
                         <outlet property="deviceImageView" destination="UG9-0e-7OB" id="W6C-jn-7Jg"/>
                         <outlet property="distanceLabel" destination="f01-VB-Huq" id="BQ4-WD-7wI"/>
                         <outlet property="photoDescription" destination="iMp-bt-0Y0" id="Jeo-XD-0tF"/>
+                        <outlet property="photoDesriptionHeightContraint" destination="gEF-FK-h68" id="eEx-tl-jz8"/>
                         <outlet property="sasImageView" destination="Tjv-A9-dsb" id="F7X-zF-K2s"/>
                         <outlet property="sasMapView" destination="mWk-T9-tVE" id="ZyS-RR-PhW"/>
+                        <outlet property="scrollView" destination="eub-ih-yoo" id="2Lw-ez-RYn"/>
                         <outlet property="showDeviceLocationPin" destination="6qR-hW-QA1" id="6BG-sb-gsb"/>
                     </connections>
                 </viewController>
@@ -377,6 +407,7 @@
         <image name="FirstAidKit" width="175" height="175"/>
         <image name="LifeRing" width="175" height="175"/>
         <image name="Locate" width="118" height="43"/>
+        <image name="NewImage" width="122" height="43"/>
         <image name="Order of Malta 300" width="300" height="108"/>
         <image name="SAS vertical 280" width="280" height="262"/>
         <image name="SAS_75" width="75" height="75"/>
