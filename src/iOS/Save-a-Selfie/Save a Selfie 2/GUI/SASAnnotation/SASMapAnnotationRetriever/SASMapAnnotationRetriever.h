@@ -34,9 +34,4 @@
 @property(nonatomic, weak) id<SASMapAnnotationRetrieverDelegate> delegate;
 
 
-
-// Calls the delegate with a 'fresh' set of annotation i.e fetches from the server again.
-- (void) reloadAnnotations;
-
-
 @end

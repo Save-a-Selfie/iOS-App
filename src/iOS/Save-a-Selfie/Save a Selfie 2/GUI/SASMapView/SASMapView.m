@@ -36,7 +36,9 @@
 @property(strong, nonatomic) SASMapAnnotationRetriever *sasAnnotationRetriever;
 
 // The annotation type for the map to show.
-@property(assign, nonatomic) DeviceType annotationType;
+@property(assign, nonatomic) DeviceType annotationTypeToShow;
+
+@property(strong, nonatomic) NSMutableArray *annotationInfoFromServer;
 
 @end
 
@@ -48,8 +50,9 @@
 @synthesize sasLocation;
 @synthesize sasAnnotationRetriever;
 @synthesize notificationReceiver;
+@synthesize annotationInfoFromServer;
 @synthesize sasAnnotationImage;
-@synthesize annotationType;
+@synthesize annotationTypeToShow;
 
 @synthesize showAnnotations;
 @synthesize zoomToUsersLocationInitially;
@@ -81,12 +84,13 @@
 }
 
 
+
 // Sets up the SASMapView with the appropriate properties.
 - (void) setupMapView {
     
     userAlreadyLocated = NO;
     sasAnnotationImage = Default;
-    annotationType = All;
+    annotationTypeToShow = All;
     
     self.mapType = MKMapTypeSatellite;
     
@@ -139,33 +143,38 @@
     
     switch (type) {
         case All:
-            annotationType = All;
+            annotationTypeToShow = All;
             break;
             
         case Defibrillator:
-            annotationType = Defibrillator;
+            annotationTypeToShow = Defibrillator;
             break;
             
         case LifeRing:
-            annotationType = LifeRing;
+            annotationTypeToShow = LifeRing;
             break;
             
         case FirstAidKit:
-            annotationType = FirstAidKit;
+            annotationTypeToShow = FirstAidKit;
             break;
             
         case FireHydrant:
-            annotationType = FireHydrant;
+            annotationTypeToShow = FireHydrant;
             break;
             
         default:
             break;
     }
     
-    // This calls  -viewForAnnotation:(id <MKAnnotation>)annotation
-    // which is where the flow control for checking what annotations
-    // to display is located.
-    [self.sasAnnotationRetriever reloadAnnotations];
+    // Remove the current annotations on the map.
+    [self removeExistingAnnotationsFromMapView];
+    
+    
+    // Call plotAnnotationsWithDeviceInformation:
+    // which will do the checking on whether or not
+    // that annotation should be shown on the map.
+    [self plotAnnotationsWithDeviceInformation:annotationInfoFromServer];
+
 }
 
 
@@ -180,7 +189,7 @@
 }
 
 
-
+#pragma Add & Remove MKAnnotation to MapView.
 // Removes any existing annotations.
 - (void) removeExistingAnnotationsFromMapView {
     for(id<MKAnnotation> annotation in self.annotations) {
@@ -232,11 +241,15 @@
 
 #pragma SASMapAnnotationRetrieverDelegate method
 - (void) sasAnnotationsRetrieved:(NSMutableArray *)devices {
+    
+    if(self.annotationInfoFromServer == nil) {
+        self.annotationInfoFromServer = [[NSMutableArray alloc] initWithArray:devices];
+    }
+    
     if(self.showAnnotations) {
         [self plotAnnotationsWithDeviceInformation:devices];
     }
 }
-
 
 
 
@@ -250,10 +263,17 @@
     int deviceNumber = 0;
     
     for (Device *d in devices) {
-        SASAnnotation *annotation = [[SASAnnotation alloc] initAnnotationWithDevice:d index:deviceNumber];
-
+        
+        SASAnnotation *annotation = [[SASAnnotation alloc] initAnnotationWithDevice:d
+                                                                            index:deviceNumber];
         deviceNumber++;
-        [self addAnnotation:annotation];
+        
+        // Checks whether or not that particular annotation
+        // should be shown on the map. This could be due to the
+        // filtering specific annotations.
+        if ([self returnForAnnotationDeviceType:d.type]) {
+            [self addAnnotation:annotation];
+        }
     }
 }
 
@@ -298,23 +318,22 @@
     }
     
 #pragma TODO: Improve control flow here.
-    // If the image for the annotation
+    // If we're to show the default image for the annotation
     if(sasAnnotationImage == Default) {
         return nil;
     }
-    
-    if ([self returnForAnnotationDeviceType:annotation.device.type]) {
+    else if ([self returnForAnnotationDeviceType:annotation.device.type]) {
         annotationView.image = [Device deviceMapPinImages][annotation.device.type];
         annotationView.annotation = annotation;
         annotationView.enabled = YES;
         annotationView.canShowCallout = NO;
         return annotationView;
         
-    } else {
-        // Return `blank annotation`.
-        return [[MKAnnotationView alloc] init];
     }
-    
+    else {
+        annotationView.hidden = YES;
+        return annotationView;
+    }
 }
 
 
@@ -325,12 +344,12 @@
 // then the annoatations shown are custom, therefore we must check is
 // appropriate to return.
 - (BOOL) returnForAnnotationDeviceType:(DeviceType) deviceType {
-    if (annotationType == deviceType) {
+    if (annotationTypeToShow == deviceType) {
         return YES;
     }
     // As deviceType will not be ALL, we must check
     // it separately.
-    else if(annotationType == All) {
+    else if(annotationTypeToShow == All) {
         return YES;
     }
     else {

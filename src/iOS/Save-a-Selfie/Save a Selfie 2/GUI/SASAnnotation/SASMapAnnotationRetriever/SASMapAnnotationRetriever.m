@@ -25,7 +25,6 @@
 @property(strong, nonatomic) NSURLRequest *request;
 @property(strong, nonatomic) NSURLConnection *connection;
 
-
 @end
 
 
@@ -42,6 +41,7 @@
 
 
 
+
 #pragma Object Life Cycle
 // Set up all connection & data objects here
 - (instancetype)init
@@ -54,26 +54,11 @@
         self.connection = [[NSURLConnection alloc] initWithRequest:self.request delegate:self];
         
         self.responseData = [[NSMutableData alloc] init];
-        
-        
+    
     }
     return self;
 }
 
-
-
-// Calls forwardAnnotationsToDelegate. Which will fetch
-// new annotations.
-- (void)reloadAnnotations {
-    [self forwardAnnotationsToDelegate];
-}
-
-
-// This will send the delegate an new set of annotations.
-// The annotations are sent within -connectionDidFinishLoading method.
-- (void) forwardAnnotationsToDelegate {
-    [NSURLConnection connectionWithRequest:self.request delegate:self];
-}
 
 
 #pragma NSURLConnectionDataDelegate methods
@@ -84,7 +69,7 @@
 
 
 - (void) connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
-    [self.responseData appendData: data];
+    [self.responseData appendData:data];
 }
 
 

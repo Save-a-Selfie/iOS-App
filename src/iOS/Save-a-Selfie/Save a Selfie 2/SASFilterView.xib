@@ -70,7 +70,6 @@
                     </state>
                     <connections>
                         <action selector="allButtonWasPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="Iv6-Vf-ahE"/>
-                        <action selector="fireHydrantButtonPress:" destination="iN0-l3-epB" eventType="touchUpInside" id="EdK-49-rhh"/>
                     </connections>
                 </button>
             </subviews>
