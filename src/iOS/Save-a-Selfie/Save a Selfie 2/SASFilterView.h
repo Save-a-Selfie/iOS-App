@@ -27,4 +27,7 @@
 // Animates with a custom animation into the view of the reciever.
 - (void) animateIntoView:(UIView*) view;
 
+// Animates with a custom animation out of the view of the reciever.
+- (void) animateOutOfView:(UIView*) view;
+
 @end

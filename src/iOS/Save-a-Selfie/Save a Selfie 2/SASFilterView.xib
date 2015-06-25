@@ -11,12 +11,6 @@
             <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="FILTER" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e58-8F-AFY">
-                    <rect key="frame" x="110" y="8" width="80" height="21"/>
-                    <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="17"/>
-                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Line" translatesAutoresizingMaskIntoConstraints="NO" id="Wq6-ea-A0x">
                     <rect key="frame" x="72" y="87" width="220" height="1"/>
                 </imageView>
@@ -29,61 +23,36 @@
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Line" translatesAutoresizingMaskIntoConstraints="NO" id="VjP-PZ-LWY">
                     <rect key="frame" x="72" y="260" width="220" height="1"/>
                 </imageView>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KCe-XE-rGB">
-                    <rect key="frame" x="81" y="149" width="139" height="30"/>
-                    <state key="normal" title="Fire Hydrant">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="fireHydrantButtonPress:" destination="iN0-l3-epB" eventType="touchUpInside" id="5ge-3x-QmR"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MgB-Pd-2od">
-                    <rect key="frame" x="81" y="111" width="139" height="30"/>
-                    <state key="normal" title="First Aid Kit">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="firstAidKitButtonPress:" destination="iN0-l3-epB" eventType="touchUpInside" id="goF-03-Qbm"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x23-lP-OXM">
-                    <rect key="frame" x="81" y="75" width="139" height="30"/>
-                    <state key="normal" title="Life Ring">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="lifeRingButtonPress:" destination="iN0-l3-epB" eventType="touchUpInside" id="7FW-iZ-2Xl"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PIJ-Cq-0qT">
-                    <rect key="frame" x="86" y="37" width="129" height="30"/>
-                    <state key="normal" title="Defibrillator"/>
-                    <connections>
-                        <action selector="defibrillatorButtonPress:" destination="iN0-l3-epB" eventType="touchUpInside" id="eIT-Sy-5jp"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m2L-UM-Tyu">
-                    <rect key="frame" x="81" y="187" width="139" height="30"/>
-                    <state key="normal" title="All">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="allButtonWasPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="Iv6-Vf-ahE"/>
-                    </connections>
-                </button>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Qxa-bo-JtT">
+                    <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </tableView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="Qxa-bo-JtT" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="5sX-2z-G8r"/>
+                <constraint firstItem="Qxa-bo-JtT" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="eH9-4R-bWe"/>
+                <constraint firstAttribute="bottom" secondItem="Qxa-bo-JtT" secondAttribute="bottom" id="wQ3-9P-nR8"/>
+                <constraint firstAttribute="trailing" secondItem="Qxa-bo-JtT" secondAttribute="trailing" id="ySU-sa-4Jp"/>
+            </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="tableView" destination="Qxa-bo-JtT" id="fag-Fn-35P"/>
+            </connections>
             <point key="canvasLocation" x="264" y="313"/>
         </view>
-        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Defibrillator" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Bn6-6P-O2N">
-            <rect key="frame" x="0.0" y="0.0" width="164" height="24"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="17"/>
-            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-            <nil key="highlightedColor"/>
-        </label>
+        <viewController id="lBw-9R-Foo">
+            <layoutGuides>
+                <viewControllerLayoutGuide type="top" id="GWA-TD-kPB"/>
+                <viewControllerLayoutGuide type="bottom" id="EwT-Nl-07U"/>
+            </layoutGuides>
+            <view key="view" contentMode="scaleToFill" id="kbv-sU-bXg">
+                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            </view>
+            <point key="canvasLocation" x="288" y="278"/>
+        </viewController>
     </objects>
     <resources>
         <image name="Line" width="1" height="1"/>

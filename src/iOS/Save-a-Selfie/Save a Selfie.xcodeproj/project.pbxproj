@@ -16,6 +16,8 @@
 		1845C4EF1B209E6C00E3D7BC /* SASUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 1845C4EE1B209E6C00E3D7BC /* SASUtilities.m */; };
 		185A39B81B1FD7B900699D31 /* SASColour.m in Sources */ = {isa = PBXBuildFile; fileRef = 185A39B71B1FD7B900699D31 /* SASColour.m */; };
 		1864FEAC1B27A39900EA564A /* UIFont+SASFont.m in Sources */ = {isa = PBXBuildFile; fileRef = 1864FEAB1B27A39900EA564A /* UIFont+SASFont.m */; };
+		186A39A21B3C933E00F38EDB /* SASFilterViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 186A39A11B3C933E00F38EDB /* SASFilterViewCell.xib */; };
+		186A39A91B3C93E600F38EDB /* SASFilterViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 186A39A81B3C93E600F38EDB /* SASFilterViewCell.m */; };
 		188CAEE51B20EA59006A90EB /* SASSocial.m in Sources */ = {isa = PBXBuildFile; fileRef = 188CAEE41B20EA59006A90EB /* SASSocial.m */; };
 		188CAEED1B21006C006A90EB /* Screen.m in Sources */ = {isa = PBXBuildFile; fileRef = 188CAEEC1B21006C006A90EB /* Screen.m */; };
 		1891E3D31B1743C8008CC10C /* SASMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1891E3D21B1743C8008CC10C /* SASMapView.m */; };
@@ -105,6 +107,9 @@
 		185A39B71B1FD7B900699D31 /* SASColour.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASColour.m; sourceTree = "<group>"; };
 		1864FEAA1B27A39900EA564A /* UIFont+SASFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+SASFont.h"; sourceTree = "<group>"; };
 		1864FEAB1B27A39900EA564A /* UIFont+SASFont.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+SASFont.m"; sourceTree = "<group>"; };
+		186A39A11B3C933E00F38EDB /* SASFilterViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SASFilterViewCell.xib; path = "Save a Selfie 2/SASFilterViewCell.xib"; sourceTree = SOURCE_ROOT; };
+		186A39A71B3C93E600F38EDB /* SASFilterViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASFilterViewCell.h; sourceTree = "<group>"; };
+		186A39A81B3C93E600F38EDB /* SASFilterViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASFilterViewCell.m; sourceTree = "<group>"; };
 		188CAEE31B20EA59006A90EB /* SASSocial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASSocial.h; sourceTree = "<group>"; };
 		188CAEE41B20EA59006A90EB /* SASSocial.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASSocial.m; sourceTree = "<group>"; };
 		188CAEEB1B21006C006A90EB /* Screen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Screen.h; sourceTree = "<group>"; };
@@ -309,6 +314,16 @@
 			path = SASFont;
 			sourceTree = "<group>";
 		};
+		186A39A61B3C938C00F38EDB /* SASFilterViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				186A39A71B3C93E600F38EDB /* SASFilterViewCell.h */,
+				186A39A81B3C93E600F38EDB /* SASFilterViewCell.m */,
+				186A39A11B3C933E00F38EDB /* SASFilterViewCell.xib */,
+			);
+			name = SASFilterViewCell;
+			sourceTree = "<group>";
+		};
 		188CAEE61B20EA5D006A90EB /* SASSocial */ = {
 			isa = PBXGroup;
 			children = (
@@ -457,6 +472,7 @@
 				18F46A4D1B2B9F370062BD05 /* SASFilterView.xib */,
 				18F46A491B2B9F1F0062BD05 /* SASFilterView.h */,
 				18F46A4A1B2B9F1F0062BD05 /* SASFilterView.m */,
+				186A39A61B3C938C00F38EDB /* SASFilterViewCell */,
 			);
 			name = SASFilterView;
 			path = ../..;
@@ -668,6 +684,7 @@
 				18F46A4E1B2B9F370062BD05 /* SASFilterView.xib in Resources */,
 				D72D02D21A9BDFC2008C2597 /* testGallery.php in Resources */,
 				D72D02D01A9BDFC2008C2597 /* getMapData.php in Resources */,
+				186A39A21B3C933E00F38EDB /* SASFilterViewCell.xib in Resources */,
 				D72D02CB1A9BDFC2008C2597 /* iPhone.php in Resources */,
 				D72E1DC119EE841F005DD8A5 /* Images.xcassets in Resources */,
 				D72D02CC1A9BDFC2008C2597 /* infoLink.php in Resources */,
@@ -722,6 +739,7 @@
 				18EBF9771B272B3400EDA48B /* SASImagePickerViewController.m in Sources */,
 				D700239519F5253C00E45408 /* AlertBox.m in Sources */,
 				D715E4971A0936010026D91F /* UIButton+VerticalLayout.m in Sources */,
+				186A39A91B3C93E600F38EDB /* SASFilterViewCell.m in Sources */,
 				D700239D19F52EB700E45408 /* ExtendNSLogFunctionality.m in Sources */,
 				D756A28C19F1735E0089EF80 /* UIImage+Resize.m in Sources */,
 				181D1E621B235CF900FB5928 /* SASImageView.m in Sources */,

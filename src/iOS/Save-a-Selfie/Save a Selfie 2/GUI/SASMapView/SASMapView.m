@@ -270,7 +270,7 @@
         
         // Checks whether or not that particular annotation
         // should be shown on the map. This could be due to the
-        // filtering specific annotations.
+        // user filtering specific annotations.
         if ([self returnForAnnotationDeviceType:d.type]) {
             [self addAnnotation:annotation];
         }
@@ -302,14 +302,12 @@
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(SASAnnotation*)annotation {
     
     static NSString *annotationViewID = @"MyLocation";
-    
     MKAnnotationView *annotationView = (MKAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:annotationViewID];
     
     if (annotationView == nil) {
         annotationView = [[MKAnnotationView alloc] initWithAnnotation:annotation
                                                       reuseIdentifier:annotationViewID];
     }
-    
     
     if ([annotation isKindOfClass:MKUserLocation.class]) {
         mapView.showsUserLocation = YES;
@@ -322,16 +320,11 @@
     if(sasAnnotationImage == Default) {
         return nil;
     }
-    else if ([self returnForAnnotationDeviceType:annotation.device.type]) {
+    else {
         annotationView.image = [Device deviceMapPinImages][annotation.device.type];
         annotationView.annotation = annotation;
         annotationView.enabled = YES;
         annotationView.canShowCallout = NO;
-        return annotationView;
-        
-    }
-    else {
-        annotationView.hidden = YES;
         return annotationView;
     }
 }
@@ -339,16 +332,14 @@
 
 
 // @Discussion:
-// Call this method to check whether or not the -viewForAnnotation: should return
-// an MkAnnotationsView. If SASMapView's -filterAnnotationsForType: has been called,
-// then the annoatations shown are custom, therefore we must check is
-// appropriate to return.
+// Call this method to check whether or not the -mapView:viewForAnnotation: should return
+// an MkAnnotationView. If SASMapView's -filterAnnotationsForType: has been called,
+// then the annoatations shown are custom, therefore we must check the
+// appropriate return.
 - (BOOL) returnForAnnotationDeviceType:(DeviceType) deviceType {
     if (annotationTypeToShow == deviceType) {
         return YES;
     }
-    // As deviceType will not be ALL, we must check
-    // it separately.
     else if(annotationTypeToShow == All) {
         return YES;
     }

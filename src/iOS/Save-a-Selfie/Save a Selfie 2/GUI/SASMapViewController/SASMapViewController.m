@@ -53,6 +53,7 @@ NSString *permissionsProblemTwo = @"Please enable location services on your phon
     [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
+
 - (UIStatusBarStyle)preferredStatusBarStyle {
     return UIStatusBarStyleLightContent;
 }
@@ -103,8 +104,10 @@ NSString *permissionsProblemTwo = @"Please enable location services on your phon
 
 #pragma SASFilterViewDelegate
 - (void)sasFilterView:(SASFilterView *)view buttonWasPressed:(DeviceType)device {
+    printf("Called");
+    [self.sasFilterView animateOutOfView:self.view];
     [self.sasMapView filterAnnotationsForType:device];
-    [self.sasFilterView removeFromSuperview];
+    
 }
 
 
@@ -165,9 +168,16 @@ NSString *permissionsProblemTwo = @"Please enable location services on your phon
 
 
 - (IBAction)filterDevices:(id)sender {
-    self.sasFilterView = [[SASFilterView alloc] init];
-    self.sasFilterView.delegate = self;
-    [self.sasMapView addSubview:self.sasFilterView];
+    if(self.sasFilterView == nil) {
+        self.sasFilterView = [[SASFilterView alloc] init];
+        self.sasFilterView.delegate = self;
+        self.sasFilterView.frame = CGRectMake(self.view.frame.origin.x,
+                                              self.view.frame.origin.y -400,
+                                              self.sasFilterView.frame.size.width,
+                                              self.sasFilterView.frame.size.height);
+        [self.sasMapView addSubview:self.sasFilterView];
+    }
+
     [self.sasFilterView animateIntoView:self.sasMapView];
 }
 
