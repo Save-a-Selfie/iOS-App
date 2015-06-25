@@ -19,6 +19,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="uvr-bw-CUg" customClass="SASMapView">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                            </mapView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZSL-vM-Epo">
                                 <rect key="frame" x="201" y="470" width="103" height="39"/>
                                 <state key="normal" image="Locate">
@@ -48,20 +51,22 @@
                                 </state>
                                 <connections>
                                     <action selector="filterDevices:" destination="wxp-4h-T6p" eventType="touchUpInside" id="TCS-mZ-RhX"/>
-                                    <action selector="uploadNewNewDevice:" destination="wxp-4h-T6p" eventType="touchUpInside" id="Oap-CZ-h86"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="bottom" secondItem="uvr-bw-CUg" secondAttribute="bottom" id="A6l-EL-Dfc"/>
                             <constraint firstItem="gKB-VO-JHZ" firstAttribute="top" secondItem="VOt-Ui-pgj" secondAttribute="bottom" constant="8" id="JOU-GU-0R2"/>
+                            <constraint firstItem="uvr-bw-CUg" firstAttribute="top" secondItem="XjZ-Ty-pLe" secondAttribute="top" id="Mfu-73-4vD"/>
                             <constraint firstAttribute="trailingMargin" secondItem="gKB-VO-JHZ" secondAttribute="trailing" constant="-10" id="kPy-3p-BmB"/>
+                            <constraint firstAttribute="trailing" secondItem="uvr-bw-CUg" secondAttribute="trailing" id="tlg-t5-GCh"/>
+                            <constraint firstItem="uvr-bw-CUg" firstAttribute="leading" secondItem="XjZ-Ty-pLe" secondAttribute="leading" id="yPr-Vm-Mry"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="2Z4-cZ-Nt2"/>
                     <connections>
-                        <outlet property="addImageButton" destination="f2t-3C-hgn" id="FKg-Qh-76K"/>
-                        <outlet property="locateUserButton" destination="ZSL-vM-Epo" id="O0k-1F-lr0"/>
+                        <outlet property="sasMapView" destination="uvr-bw-CUg" id="Zs3-cO-Ay6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IA3-XG-E4V" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -240,35 +245,68 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="afK-H1-q78" customClass="SASImageView">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="319"/>
-                            </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YFb-TA-ZBH">
-                                <rect key="frame" x="172" y="327" width="70" height="70"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YFb-TA-ZBH">
+                                <rect key="frame" x="120" y="327" width="43" height="43"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="43" id="BIF-Zx-GaK"/>
+                                    <constraint firstAttribute="height" constant="43" id="hwA-MA-1cI"/>
+                                </constraints>
                                 <state key="normal" image="FireHydrant">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hRP-EK-fmD">
-                                <rect key="frame" x="94" y="327" width="70" height="70"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hRP-EK-fmD">
+                                <rect key="frame" x="68" y="327" width="44" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="44" id="UvI-Sy-yPY"/>
+                                    <constraint firstAttribute="height" constant="44" id="vAD-jP-7jX"/>
+                                </constraints>
                                 <state key="normal" image="FirstAidKit">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gz1-ER-JpS">
-                                <rect key="frame" x="16" y="327" width="70" height="70"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gz1-ER-JpS">
+                                <rect key="frame" x="16" y="327" width="44" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="44" id="3XQ-SW-wD5"/>
+                                    <constraint firstAttribute="height" constant="44" id="3vy-Px-dkv"/>
+                                </constraints>
                                 <state key="normal" image="Defibrillator">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sro-m6-M9g">
-                                <rect key="frame" x="243" y="327" width="70" height="70"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sro-m6-M9g">
+                                <rect key="frame" x="171" y="327" width="44" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="44" id="hjN-r1-oBt"/>
+                                    <constraint firstAttribute="height" constant="44" id="wVi-fS-eld"/>
+                                </constraints>
                                 <state key="normal" image="LifeRing">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="afK-H1-q78" customClass="SASImageView">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="319"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="afK-H1-q78" secondAttribute="height" multiplier="320:319" id="6fO-bk-9Py"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Sro-m6-M9g" firstAttribute="top" secondItem="afK-H1-q78" secondAttribute="bottom" constant="8" id="07y-gh-aax"/>
+                            <constraint firstItem="gz1-ER-JpS" firstAttribute="top" secondItem="afK-H1-q78" secondAttribute="bottom" constant="8" id="EXY-ky-RbW"/>
+                            <constraint firstItem="Sro-m6-M9g" firstAttribute="top" secondItem="afK-H1-q78" secondAttribute="bottom" constant="8" id="Jgf-gY-W4D"/>
+                            <constraint firstItem="Sro-m6-M9g" firstAttribute="leading" secondItem="YFb-TA-ZBH" secondAttribute="trailing" constant="8" id="Kjl-Xy-vMC"/>
+                            <constraint firstItem="gz1-ER-JpS" firstAttribute="leading" secondItem="eKH-EA-0ll" secondAttribute="leadingMargin" id="Ktl-dH-6uG"/>
+                            <constraint firstItem="hRP-EK-fmD" firstAttribute="leading" secondItem="gz1-ER-JpS" secondAttribute="trailing" constant="8" id="U2X-0f-Ek0"/>
+                            <constraint firstItem="YFb-TA-ZBH" firstAttribute="leading" secondItem="hRP-EK-fmD" secondAttribute="trailing" constant="8" id="Xjg-Im-zhw"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="afK-H1-q78" secondAttribute="trailing" constant="-16" id="YWF-SM-w71"/>
+                            <constraint firstItem="hRP-EK-fmD" firstAttribute="top" secondItem="afK-H1-q78" secondAttribute="bottom" constant="8" id="e7m-NC-8jK"/>
+                            <constraint firstItem="YFb-TA-ZBH" firstAttribute="top" secondItem="afK-H1-q78" secondAttribute="bottom" constant="8" id="kRz-Zy-hmg"/>
+                            <constraint firstItem="afK-H1-q78" firstAttribute="top" secondItem="F97-b0-KWO" secondAttribute="bottom" constant="-20" id="q66-gw-vYV"/>
+                            <constraint firstItem="afK-H1-q78" firstAttribute="leading" secondItem="eKH-EA-0ll" secondAttribute="leadingMargin" constant="-16" id="zjO-CJ-zyt"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="imageView" destination="afK-H1-q78" id="POa-1Y-Bgm"/>
@@ -276,7 +314,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kh4-HO-sd5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1866" y="1248"/>
+            <point key="canvasLocation" x="424" y="1326"/>
         </scene>
         <!--Info-->
         <scene sceneID="Smb-hj-4hT">

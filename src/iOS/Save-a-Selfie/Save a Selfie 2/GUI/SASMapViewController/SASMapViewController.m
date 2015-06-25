@@ -19,9 +19,7 @@
 
 @interface SASMapViewController () <SASImagePickerDelegate, SASFilterViewDelegate>
 
-@property(nonatomic, strong) SASMapView* sasMapView;
-@property(nonatomic, weak) IBOutlet UIButton *locateUserButton;
-@property(nonatomic, weak) IBOutlet UIButton *addImageButton;
+@property(nonatomic, strong) IBOutlet SASMapView* sasMapView;
 
 @property(nonatomic, strong) SASImagePickerViewController *sasImagePickerController;
 @property(nonatomic, strong) SASUploadImageViewController *sasUploadImageViewController;
@@ -39,8 +37,6 @@ NSString *permissionsProblemOne = @"Please enable location services for this app
 NSString *permissionsProblemTwo = @"Please enable location services on your phone. Launch the iPhone Settings app to do this. Go to Privacy > Location Services > On. You have to go out of this app, using the 'Home' button.";
 
 @synthesize sasMapView;
-@synthesize locateUserButton;
-@synthesize addImageButton;
 @synthesize permissionsBox;
 @synthesize sasImagePickerController;
 @synthesize sasUploadImageViewController;
@@ -70,28 +66,14 @@ NSString *permissionsProblemTwo = @"Please enable location services on your phon
     self.tabBarController.tabBar.hidden = NO;
     
 
-    
-    if(sasMapView == nil) {
-        sasMapView = [[SASMapView alloc] initWithFrame:CGRectMake(0,
-                                                                  0,
-                                                                  [Screen width],
-                                                                  [Screen height])];
-        
-        // Receive updates i.e location permission changes etc.
-        // See SASMapView's: @protocol SASMapViewNotifications
-        // for all available botifications.
-        self.sasMapView.notificationReceiver = self;
-        self.sasMapView.showAnnotations = YES;
-        self.sasMapView.showsUserLocation = YES;
-        self.sasMapView.zoomToUsersLocationInitially = YES;
-        self.sasMapView.sasAnnotationImage = DevicePin;
-        
-        //[self.sasMapView filterAnnotationsForType:Defibrillator];
-        
-        [self.view addSubview:sasMapView];
-        [self.view bringSubviewToFront:locateUserButton];
-        [self.view bringSubviewToFront:addImageButton];
-    }
+    // Receive updates i.e location permission changes etc.
+    // See SASMapView's: @protocol SASMapViewNotifications
+    // for all available botifications.
+    self.sasMapView.notificationReceiver = self;
+    self.sasMapView.showAnnotations = YES;
+    self.sasMapView.showsUserLocation = YES;
+    self.sasMapView.zoomToUsersLocationInitially = YES;
+    self.sasMapView.sasAnnotationImage = DevicePin;
 }
 
 
