@@ -19,6 +19,7 @@
 
 @interface SASImageViewController () <SASMapViewNotifications ,UIScrollViewDelegate> {
     DeviceType deviceType;
+    BOOL imageLoaded;
 }
 
 
@@ -126,7 +127,7 @@
         
     
 #pragma self.annotation.device.imageStandardRes nil checking. (Image)
-    if(self.annotation.device.imageStandardRes != nil) {
+    if(self.annotation.device.imageStandardRes != nil && !imageLoaded) {
         
         // Begin animation of sasActivityIndicator until image is loaded.
         self.sasActivityIndicator = [[SASActivityIndicator alloc] init];
@@ -157,6 +158,8 @@
                 [self.sasActivityIndicator stopAnimating];
                 [self.sasActivityIndicator removeFromSuperview];
                 self.sasActivityIndicator = nil;
+                
+                imageLoaded = YES;
             });
         });
     }
@@ -170,10 +173,15 @@
         [self.photoDescription setFont:[UIFont fontWithName:@"Avenir Next" size:18]];
         [self.photoDescription sizeToFit];
         [self.photoDescription.layer setBorderWidth:0.0];
+        
+
     }
 }
 
-
+- (void)viewDidLayoutSubviews {
+    CGSize sizeThatFitsTextView = [self.photoDescription sizeThatFits:CGSizeMake(self.photoDescription.frame.size.width, MAXFLOAT)];
+    photoDesriptionHeightContraint.constant = sizeThatFitsTextView.height;
+}
 
 // Shows the location of the device on the map.
 - (IBAction)showDeviceLocation:(id)sender {
