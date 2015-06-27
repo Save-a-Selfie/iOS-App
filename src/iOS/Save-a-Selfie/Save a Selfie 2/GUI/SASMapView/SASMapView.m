@@ -35,7 +35,7 @@
 @property(strong, nonatomic) SASMapAnnotationRetriever *sasAnnotationRetriever;
 
 // The annotation type for the map to show.
-@property(assign, nonatomic) DeviceType annotationTypeToShow;
+@property(assign, nonatomic) SASDeviceType annotationTypeToShow;
 
 @property(strong, nonatomic) NSMutableArray *annotationInfoFromServer;
 
@@ -138,7 +138,7 @@
 
 // Filters the map view and shows only one type of
 // annotation on the map view.
-- (void)filterAnnotationsForDeviceType:(DeviceType)type {
+- (void)filterAnnotationsForDeviceType:(SASDeviceType)type {
     
     switch (type) {
         case All:
@@ -166,10 +166,6 @@
     }
     
     [self reloadAnnotations];
-}
-
-
-- (void)filterAnnotationsForMultipleDevices:(NSMutableArray *)devices {
 }
 
 
@@ -339,7 +335,7 @@
     }
     else {
         
-        annotationView.image = [SASDevice deviceAnnotationImages][annotation.device.type];
+        annotationView.image = [SASDevice getDeviceMapAnnotationImageForDeviceType:annotation.device.type];
         annotationView.annotation = annotation;
         annotationView.enabled = YES;
         annotationView.canShowCallout = NO;
@@ -354,7 +350,7 @@
 // an MkAnnotationView. If SASMapView's -filterAnnotationsForType: has been called,
 // then the annoatations shown are custom, therefore we must check the
 // appropriate return.
-- (BOOL) returnForAnnotationDeviceType:(DeviceType) deviceType {
+- (BOOL) returnForAnnotationDeviceType:(SASDeviceType) deviceType {
     if (annotationTypeToShow == deviceType) {
         return YES;
     }

@@ -19,8 +19,8 @@
 // This calls the delegate o both -animateIntoView: & -animateOutOfView.
 - (void) sasFilterView:(SASFilterView*)view isVisibleInViewHierarhy:(BOOL) visibility;
 
-// Passes to the delegate the all the devices which have been selected on filterview as an NSArray.
-- (void) sasFilterView:(SASFilterView*) view doneButtonWasPressedWithDevicesSelected:(NSMutableArray*) devices;
+// Passes to the delegate the type of device that has been selected on SASFilterView.
+- (void) sasFilterView:(SASFilterView*) view doneButtonWasPressedWithSelectedDeviceType:(SASDeviceType) device;
 
 @end
 

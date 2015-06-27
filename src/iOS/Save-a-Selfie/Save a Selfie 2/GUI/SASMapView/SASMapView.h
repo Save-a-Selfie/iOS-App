@@ -65,10 +65,7 @@ typedef enum: NSUInteger {
 // Calling this to show a specific type of annotation e.g. Defibrillator etc...
 // will result in the map view only showing that type of annotation.
 // Calling with DeviceTypeAll will show all the annotations again.
-- (void) filterAnnotationsForDeviceType:(DeviceType) type;
-
-
-- (void) filterAnnotationsForMultipleDevices:(NSMutableArray*) devices;
+- (void) filterAnnotationsForDeviceType:(SASDeviceType) type;
 
 
 // Call this to show a single annotation on the SASMapView.

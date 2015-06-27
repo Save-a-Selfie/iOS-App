@@ -6,13 +6,14 @@
 #import "ExtendNSLogFunctionality.h"
 #import "AppDelegate.h"
 
-@implementation SASDevice
 
+@implementation SASDevice
 
 
 - (id) initDeviceWithInformationFromString: (NSString *)infoString {
 
 	if (self = [super init]) {
+        
         
 		NSArray *info = [infoString componentsSeparatedByString:@"\t"];
         
@@ -44,47 +45,126 @@
 
 
 
-+ (NSArray *)deviceNames {
-    return [NSArray arrayWithObjects:
-            @"Defibrillator",
-            @"Life Ring",
-            @"First Aid Kit",
-            @"Fire Hydrant",
-            @"All",
-            nil];
+// @Discussion:
+//  Currently this is quite a verbose way of returning the correct object
+//  for the SASDeviceType, however it is more safe than just returning an array of objects.
+//  Ideally an NSDictionary with key/value pair would be ideal for this and would make this slightly
+//  cleaner. However, as DeviceType is a NS_ENUM we cannot used it as a key in an NSDictionary as
+//  key/values must be objects(id).
+//
+// TODO: Provide an object wrapper for SASDeviceType so we can use NSDictionary for key/value pairs.
+//
+
++ (NSString*) getDeviceNameForDeviceType:(SASDeviceType) deviceType {
+    switch (deviceType) {
+        case Defibrillator:
+            return @"Defibrillator";
+            break;
+            
+        case LifeRing:
+            return @"Life Ring";
+            break;
+            
+        case FirstAidKit:
+            return @"First Aid Kit";
+            break;
+            
+        case FireHydrant:
+            return @"Fire Hydrant";
+            break;
+            
+        case All:
+            return @"All";
+            break;
+            
+        default:
+            break;
+    }
 }
 
-// TODO: These array objects should be moved.
-+ (NSArray *)deviceImages {
++ (UIImage*) getDeviceImageForDeviceType:(SASDeviceType) deviceType {
+    switch (deviceType) {
+            
+        case Defibrillator:
+            return [UIImage imageNamed:@"Defibrillator"];
+            break;
+            
+        case LifeRing:
+            return [UIImage imageNamed:@"LifeRing"];
+            break;
+            
+        case FirstAidKit:
+            return [UIImage imageNamed:@"FirstAidKit"];
+            break;
+            
+            
+        case FireHydrant:
+            return [UIImage imageNamed:@"FireHydrant"];
+            break;
+            
+        case All:
+            return [[UIImage alloc] init];
+            
+        default:
+            break;
+    }
+}
+
+
++ (UIImage*) getDeviceMapAnnotationImageForDeviceType:(SASDeviceType) deviceType {
     
-    return [NSArray arrayWithObjects:
-            [UIImage imageNamed:@"Defibrillator"],
-            [UIImage imageNamed:@"LifeRing"],
-            [UIImage imageNamed:@"FirstAidKit"],
-            [UIImage imageNamed:@"FireHydrant"],
-            [UIImage imageNamed:@"FireHydrant"],
-            nil];
+    switch (deviceType) {
+        case Defibrillator:
+            return [UIImage imageNamed:@"AEDAnnotation"];
+            break;
+            
+        case LifeRing:
+            return [UIImage imageNamed:@"LifeRingAnnotation"];
+            break;
+            
+        case FirstAidKit:
+            return [UIImage imageNamed:@"FAKitAnnotation"];
+            break;
+            
+        case FireHydrant:
+            return [UIImage imageNamed:@"FireHydrantAnnotation"];
+            break;
+            
+        case All:
+            return [[UIImage alloc] init];
+            
+        default:
+            break;
+    }
 }
 
 
-+ (NSArray *) deviceAnnotationImages {
-    return [NSArray arrayWithObjects:
-            [UIImage imageNamed:@"AEDAnnotation"],
-            [UIImage imageNamed:@"LifeRingAnnotation"],
-            [UIImage imageNamed:@"FAKitAnnotation"],
-            [UIImage imageNamed:@"FireHydrantAnnotation"],
-            [UIImage imageNamed:@"FireHydrantAnnotation"],
-            nil];
-}
-
-+ (NSArray*) deviceMapPinImages {
++ (UIImage*) getDeviceMapPinImageForDeviceType:(SASDeviceType) deviceType {
     
-    return [NSArray arrayWithObjects:
-            [UIImage imageNamed:@"MapPinAED"],
-            [UIImage imageNamed:@"MapPinLifeRing"],
-            [UIImage imageNamed:@"MapPinFAKit"],
-            [UIImage imageNamed:@"MapPinFireHydrant"],
-            nil];
+    switch (deviceType) {
+        case Defibrillator:
+            return [UIImage imageNamed:@"MapPinAED"];
+            break;
+            
+        case LifeRing:
+            return [UIImage imageNamed:@"MapPinLifeRing"];
+            break;
+            
+        case FirstAidKit:
+            return [UIImage imageNamed:@"MapPinFAKit"];
+            break;
+            
+        case FireHydrant:
+            return [UIImage imageNamed:@"MapPinFireHydrant"];
+            break;
+            
+        case All:
+            return [[UIImage alloc] init];
+            break;
+            
+        default:
+            break;
+    }
 }
 
 @end

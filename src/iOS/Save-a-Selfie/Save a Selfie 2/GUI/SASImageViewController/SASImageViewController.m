@@ -18,7 +18,6 @@
 
 
 @interface SASImageViewController () <SASMapViewNotifications ,UIScrollViewDelegate> {
-    DeviceType deviceType;
     BOOL imageLoaded;
 }
 
@@ -26,6 +25,7 @@
 @property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, weak) IBOutlet UIView *contentView;
 
+@property (nonatomic, assign) SASDeviceType sasDeviceType;
 @property (nonatomic, weak) IBOutlet UITextView *photoDescription;
 @property (nonatomic, strong) UIImage *sasImage;
 @property (nonatomic, weak) IBOutlet SASImageView *sasImageView;
@@ -47,6 +47,7 @@
 
 @synthesize annotation;
 @synthesize scrollView;
+@synthesize sasDeviceType;
 
 // This property is the image which has been fetched from
 // the server getSASImageWithURLFromString:
@@ -94,15 +95,15 @@
     //  update the UI accordingly.
     
     // Store the type of device shown in the image
-    deviceType = annotation.device.type;
+    self.sasDeviceType = annotation.device.type;
+    printf("%lu", (unsigned long)annotation.device.type);
     
-    // Set the content size for the scroll view.
+    
     self.scrollView.delegate = self;
     self.scrollView.backgroundColor = [UIColor clearColor];
-    //[self.scrollView setContentSize:CGSizeMake([Screen width], 700)];
 
     // Get the appropriate device name.
-    NSString *deviceName = [SASDevice deviceNames ][deviceType];
+    NSString *deviceName = [SASDevice getDeviceNameForDeviceType:self.sasDeviceType];
     self.navigationController.navigationBar.topItem.title = deviceName;
     
     
@@ -152,10 +153,10 @@
             UIImage* imageFromURL = [self getSASImageWithURLFromString:annotation.device.imageStandardRes];
             
             dispatch_async( dispatch_get_main_queue(), ^{
+                
                 // The image for the view
                 self.sasImageView.image = imageFromURL;
                 
-
                 // The blurred image background view.
                 self.blurredImageView.contentMode = UIViewContentModeScaleToFill;
                 self.blurredImageView.image = imageFromURL;
@@ -176,7 +177,6 @@
     if(self.annotation.device.caption != nil) {
         // Set the text description of the photo.
         self.photoDescription.text = [NSString stringWithFormat:@"%@", annotation.device.caption];
-        NSLog(@"%@", annotation.device.caption);
         [self.photoDescription setFont:[UIFont fontWithName:@"Avenir Next" size:18]];
         [self.photoDescription sizeToFit];
         [self.photoDescription.layer setBorderWidth:0.0];
@@ -199,14 +199,15 @@
 // is dependant on the device being shown in the image.
 - (void) setColourForColouredUIElements:(SASDevice*) device {
     
-    [self.showDeviceLocationPin setImage:[SASDevice deviceMapPinImages][deviceType] forState:UIControlStateNormal];
+    [self.showDeviceLocationPin setImage:[SASDevice getDeviceMapPinImageForDeviceType:self.sasDeviceType]
+                                forState:UIControlStateNormal];
     
-    self.distanceLabel.textColor = [SASColour getSASColours][deviceType];
+    self.distanceLabel.textColor = [SASColour getSASColours][self.sasDeviceType];
     
     // Navigation Bar.
-    [self.navigationController.navigationBar setTintColor:[SASColour getSASColours][deviceType]];
+    [self.navigationController.navigationBar setTintColor:[SASColour getSASColours][self.sasDeviceType]];
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName: [UIFont fontWithName:@"AvenirNext-DemiBold" size:15.0f],
-                                                                      NSForegroundColorAttributeName : [SASColour getSASColours][deviceType],
+                                                                      NSForegroundColorAttributeName : [SASColour getSASColours][self.sasDeviceType],
                                                                       }];
     
 }
@@ -216,7 +217,7 @@
 // Gets the image associated with the device from
 // the annotation selected on the map.
 - (UIImage*) deviceImageForAnnotation: (SASDevice*) device {
-    return [SASDevice deviceImages][device.type];
+    return [SASDevice getDeviceImageForDeviceType:device.type];
 }
 
 

@@ -3,7 +3,7 @@
 //  Save a Selfie
 //
 //  Created by Stephen Fox on 28/05/2015.
-//  Copyright (c) 2015 Stephen Fox & Stephen Fox. All rights reserved.
+//  Copyright (c) 2015 Stephen Fox & Peter FitzGerald. All rights reserved.
 //
 
 #import "SASMapAnnotationRetriever.h"
@@ -14,12 +14,8 @@
 
 @interface SASMapAnnotationRetriever() <NSURLConnectionDataDelegate, NSURLConnectionDelegate>
 
-@property(strong, nonatomic) PopupImage *popupImage;
 @property(strong, nonatomic) NSMutableData *responseData;
-
 @property(strong, nonatomic) NSMutableArray *devices;
-@property(strong, nonatomic) NSArray *deviceNames;
-@property(strong, nonatomic) NSArray *popupPins;
 
 @property(strong, nonatomic) NSURL *url;
 @property(strong, nonatomic) NSURLRequest *request;

@@ -2,7 +2,7 @@
 //  Device.h
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 
 
@@ -11,29 +11,34 @@
 // 1 - Life Ring
 // 2 - First Aid Kit
 // 3 - Fire Hydrant
-// 4 - All - All annotations
+// 4 - All - All Devices
 typedef enum : NSUInteger {
+    All,
     Defibrillator,
     LifeRing,
     FirstAidKit,
     FireHydrant,
-    All
-} DeviceType;
+}SASDeviceType;
+
 
 
 @interface SASDevice : NSObject;
 
-// Returns NSArray all the device names as a NSString.
-+ (NSArray*) deviceNames;
-// Returns NSArray of UIImages for the devices, respectively.
-+ (NSArray*) deviceImages;
-// Returns NSArray of UIImages for the devices as pins for a map.
-+ (NSArray*) deviceMapPinImages;
 
-+ (NSArray*) deviceAnnotationImages;
+// @return Device name for specified SASDeviceType.
++ (NSString*) getDeviceNameForDeviceType:(SASDeviceType) deviceType;
+
+// @return Device Image for specified SASDeviceType.
++ (UIImage*) getDeviceImageForDeviceType:(SASDeviceType) deviceType;
+
+// @return Device map annotation image for specified SASDeviceType.
++ (UIImage*) getDeviceMapAnnotationImageForDeviceType:(SASDeviceType) deviceType;
+
+// @return Device map pin image for speified SASDeviceType.
++ (UIImage*) getDeviceMapPinImageForDeviceType:(SASDeviceType) deviceType;
 
 
-@property (nonatomic, assign) DeviceType type;
+@property (nonatomic, assign) SASDeviceType type;
 @property (nonatomic, strong) NSString *imageStandardRes;
 @property (nonatomic, strong) NSString *caption;
 @property (nonatomic, strong) NSString *thumb;

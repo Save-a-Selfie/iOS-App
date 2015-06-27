@@ -19,9 +19,9 @@
 - (instancetype) initAnnotationWithDevice:(SASDevice*) device index:(int) deviceNumber {
     if (self = [super init]) {
         
-        _name = [SASDevice deviceNames][device.type];
+        _name = [SASDevice getDeviceNameForDeviceType:device.type];
         _coordinate = device.deviceLocation;
-        _image = (UIImage*)[SASDevice deviceImages][device.type];
+        _image = (UIImage*)[SASDevice getDeviceMapAnnotationImageForDeviceType:device.type];
         _device = device;
         _index = deviceNumber;
 

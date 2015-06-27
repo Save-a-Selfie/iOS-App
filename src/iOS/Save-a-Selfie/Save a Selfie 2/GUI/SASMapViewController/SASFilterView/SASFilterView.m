@@ -18,7 +18,7 @@
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UILabel *filterLabel;
-@property (strong, nonatomic) NSMutableArray* selectedCellsAssociatedDevice;
+@property (assign, nonatomic) SASDeviceType selectedDevice;
 
 @end
 
@@ -27,8 +27,10 @@
 @synthesize tableView;
 @synthesize filterLabel;
 @synthesize delegate;
-@synthesize selectedCellsAssociatedDevice;
+@synthesize selectedDevice;
 
+
+#pragma Object Life Cycle.
 - (instancetype)init {
     
     if(self = [super init]) {
@@ -38,6 +40,7 @@
                 owner:self
                 options:nil]
                firstObject];
+        
         [UIFont increaseCharacterSpacingForLabel:self.filterLabel byAmount:2.3];
         self.layer.cornerRadius = 8.0;
         
@@ -58,9 +61,20 @@
 
 #pragma UITableViewDelegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [[SASDevice deviceNames] count];
+    return 5;
 }
 
+
+- (void)tableView:(UITableView *)aTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    
+    SASFilterViewCell *selectedCell = (SASFilterViewCell*)[aTableView cellForRowAtIndexPath:indexPath];
+    [selectedCell updateSelectionStatus];
+    
+    self.selectedDevice = selectedCell.associatedDevice.type;
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
 
 
 #pragma UITableViewDataSource
@@ -68,39 +82,22 @@
     
     SASFilterViewCell *sasFilterViewCell = (SASFilterViewCell*)[self.tableView dequeueReusableCellWithIdentifier:@"sasFilterViewCell"];
     
-    sasFilterViewCell.associatedDevice.type = indexPath.row;
+    sasFilterViewCell.associatedDevice.type = 2;
     
-    sasFilterViewCell.deviceNameLabel.text = [SASDevice deviceNames][indexPath.row];
+    sasFilterViewCell.deviceNameLabel.text = [SASDevice getDeviceNameForDeviceType:indexPath.row];
     
-    sasFilterViewCell.imageView.image = [SASDevice deviceImages][indexPath.row];
+    sasFilterViewCell.imageView.image = [SASDevice getDeviceImageForDeviceType:indexPath.row];
     
     return sasFilterViewCell;
 }
 
 
 
-- (void)tableView:(UITableView *)aTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    if(selectedCellsAssociatedDevice == nil) {
-        selectedCellsAssociatedDevice = [[NSMutableArray alloc] init];
-    }
-    
-
-    SASFilterViewCell *selectedCell = (SASFilterViewCell*)[aTableView cellForRowAtIndexPath:indexPath];
-    [selectedCell updateSelectionStatus];
-    //[self.selectedCellsAssociatedDevice addObject:selectedCell.associatedDevice];
-    
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-}
-
-
-
-
 // TODO: Add logic for what cells can be selected together etc.
 // Forwards selected cells associatedDevice to delegate.
 - (IBAction)doneButtonPressed:(id)sender {
-    if(delegate != nil && [delegate respondsToSelector:@selector(sasFilterView:doneButtonWasPressedWithDevicesSelected:)]) {
-        [self.delegate sasFilterView:self doneButtonWasPressedWithDevicesSelected:self.selectedCellsAssociatedDevice];
+    if(delegate != nil && [delegate respondsToSelector:@selector(sasFilterView:doneButtonWasPressedWithSelectedDeviceType:)]) {
+        [self.delegate sasFilterView:self doneButtonWasPressedWithSelectedDeviceType:self.selectedDevice];
     }
 }
 
