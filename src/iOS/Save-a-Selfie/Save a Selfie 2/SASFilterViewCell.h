@@ -7,9 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "SASDevice.h"
 @interface SASFilterViewCell : UITableViewCell
 
-@property (strong, nonatomic) IBOutlet UILabel *deviceName;
+@property (strong, nonatomic) IBOutlet UILabel *deviceNameLabel;
+@property (assign, nonatomic) SASDevice* associatedDevice;
 @property (nonatomic, assign) BOOL selectionStatus;
+
+- (void) updateSelectionStatus:(BOOL) status;
+
 @end

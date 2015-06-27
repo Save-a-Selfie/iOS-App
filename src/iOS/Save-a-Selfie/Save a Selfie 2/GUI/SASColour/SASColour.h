@@ -10,8 +10,8 @@
 
 @interface SASColour : NSObject
 
-+ (UIColor*) sasRedLifeRingColour;
-+ (UIColor*) sasBlueFireHydrantColur;
++ (UIColor*) sasOrangeLifeRingColour;
++ (UIColor*) sasYellowFireHydrantColur;
 + (UIColor*) sasGreenFirstAidColour;
 + (UIColor*) sasRedAEDColour;
 

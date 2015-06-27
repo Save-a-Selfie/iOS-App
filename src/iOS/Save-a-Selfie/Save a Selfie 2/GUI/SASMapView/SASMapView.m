@@ -25,7 +25,6 @@
     // This variable is gotten from the SASLocationDelegate method
     //  locationDidUpdate:
     CLLocationCoordinate2D currentLocation;
-
     BOOL userAlreadyLocated;
 }
 
@@ -53,7 +52,6 @@
 @synthesize annotationInfoFromServer;
 @synthesize sasAnnotationImage;
 @synthesize annotationTypeToShow;
-
 @synthesize showAnnotations;
 @synthesize zoomToUsersLocationInitially;
 
@@ -139,7 +137,7 @@
 
 // Filters the map view and shows only one type of
 // annotation on the map view.
-- (void)filterAnnotationsForType:(DeviceType)type {
+- (void)filterAnnotationsForDeviceType:(DeviceType)type {
     
     switch (type) {
         case All:
@@ -174,7 +172,10 @@
     // which will do the checking on whether or not
     // that annotation should be shown on the map.
     [self plotAnnotationsWithDeviceInformation:annotationInfoFromServer];
+}
 
+
+- (void)filterAnnotationsForMultipleDevices:(NSMutableArray *)devices {
 }
 
 
@@ -262,7 +263,7 @@
     
     int deviceNumber = 0;
     
-    for (Device *d in devices) {
+    for (SASDevice *d in devices) {
         
         SASAnnotation *annotation = [[SASAnnotation alloc] initAnnotationWithDevice:d
                                                                             index:deviceNumber];
@@ -315,13 +316,14 @@
         return nil;
     }
     
-#pragma TODO: Improve control flow here.
+    
     // If we're to show the default image for the annotation
     if(sasAnnotationImage == Default) {
         return nil;
     }
     else {
-        annotationView.image = [Device deviceMapPinImages][annotation.device.type];
+        
+        annotationView.image = [SASDevice deviceAnnotationImages][annotation.device.type];
         annotationView.annotation = annotation;
         annotationView.enabled = YES;
         annotationView.canShowCallout = NO;

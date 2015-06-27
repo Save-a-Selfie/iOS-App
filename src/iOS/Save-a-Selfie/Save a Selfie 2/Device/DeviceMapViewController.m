@@ -3,7 +3,7 @@
 //
 
 #import "DeviceMapViewController.h"
-#import "Device.h"
+#import "SASDevice.h"
 #import "SASAnnotation.h"
 #import "ExtendNSLogFunctionality.h"
 #import "AppDelegate.h"
@@ -145,7 +145,7 @@ extern NSString *permissionsProblem2;
     
     for (int n = 0; n < [devs count]; n++) {
         if ([devs[n] length] != 0) {
-            Device *d = [[Device alloc] initDeviceWithInformationFromString:[devs objectAtIndex:n]];
+            SASDevice *d = [[SASDevice alloc] initDeviceWithInformationFromString:[devs objectAtIndex:n]];
             [devices insertObject:d atIndex:n];
         }
     }

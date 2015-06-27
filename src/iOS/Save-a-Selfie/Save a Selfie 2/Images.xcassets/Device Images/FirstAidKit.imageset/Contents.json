@@ -2,13 +2,12 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x",
-      "filename" : "FirstAidKit@1x.png"
+      "scale" : "1x"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "FirstAidKit@2x.png"
+      "filename" : "FirstAidKit.png"
     },
     {
       "idiom" : "universal",

@@ -4,7 +4,7 @@
 
 #import <Foundation/Foundation.h>
 #import <MapKit/MapKit.h>
-#import "Device.h"
+#import "SASDevice.h"
 
 @interface SASAnnotation : NSObject <MKAnnotation> {
     NSString *_address;
@@ -13,12 +13,12 @@
 
 @property (copy) NSString *name;
 @property (nonatomic, readonly) CLLocationCoordinate2D coordinate;
-@property (nonatomic, strong) Device *device;
+@property (nonatomic, strong) SASDevice *device;
 @property (nonatomic, strong) UIImage *image;
 @property (nonatomic) int index;
 
 
-- (instancetype) initAnnotationWithDevice:(Device*) device index:(int) deviceNumber;
+- (instancetype) initAnnotationWithDevice:(SASDevice*) device index:(int) deviceNumber;
 
 
 @end

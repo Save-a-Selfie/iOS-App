@@ -17,7 +17,7 @@
 // 3 - Fire Hydrant
 
 
-// Red Defibrillator Colour.
+
 + (UIColor *)sasRedAEDColour {
     return [UIColor colorWithRed:0.956
                            green:0.372
@@ -25,28 +25,27 @@
                            alpha:1.0];
 }
 
-// Red Life Ring Colour
-+ (UIColor *)sasRedLifeRingColour {
+
++ (UIColor *)sasOrangeLifeRingColour {
     return [UIColor colorWithRed:1.0
-                           green:0.588
-                            blue:0.588
+                           green:0.638
+                            blue:0.360
                            alpha:1.0];
 }
 
-// Green First Aid Kit Colour
+
 + (UIColor *)sasGreenFirstAidColour {
-    return [UIColor colorWithRed:0.368
-                           green:0.756
-                            blue:0.701
+    return [UIColor colorWithRed:0.055
+                           green:0.545
+                            blue:0.482
                            alpha:1.0];
 }
 
 
-// Blue Fire Hydrant Colour
-+ (UIColor *)sasBlueFireHydrantColur {
-    return [UIColor colorWithRed:0.290
-                           green:0.564
-                            blue:0.886
++ (UIColor *)sasYellowFireHydrantColur {
+    return [UIColor colorWithRed:1.0
+                           green:0.95
+                            blue:0.352
                            alpha:1.0];
 }
 
@@ -55,9 +54,9 @@
 
 + (NSArray*) getSASColours {
     NSArray *colours= @[[SASColour sasRedAEDColour],
-                        [SASColour sasRedLifeRingColour],
+                        [SASColour sasOrangeLifeRingColour],
                         [SASColour sasGreenFirstAidColour],
-                        [SASColour sasBlueFireHydrantColur]
+                        [SASColour sasYellowFireHydrantColur]
                         ];
     return colours;
 }

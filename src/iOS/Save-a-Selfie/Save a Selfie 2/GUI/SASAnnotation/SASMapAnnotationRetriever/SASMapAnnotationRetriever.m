@@ -8,7 +8,7 @@
 
 #import "SASMapAnnotationRetriever.h"
 #import "PopupImage.h"
-#import "Device.h"
+#import "SASDevice.h"
 #import "AppDelegate.h"
 #import "ExtendNSLogFunctionality.h"
 
@@ -89,7 +89,7 @@
     for(int i = 0; i < [deviceData count]; i++) {
         if([deviceData[i] length] != 0) {
             
-            Device *device = [[Device alloc] initDeviceWithInformationFromString:[deviceData objectAtIndex:i]];
+            SASDevice *device = [[SASDevice alloc] initDeviceWithInformationFromString:[deviceData objectAtIndex:i]];
             [self.devices insertObject:device atIndex:i];
         }
     }

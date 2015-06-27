@@ -7,15 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Device.h"
+#import "SASDevice.h"
 
 @class SASFilterView;
 
 
 @protocol SASFilterViewDelegate <NSObject>
 
-// Passes to the delegate the DeviceType correseponding to the button which was pressed.
-- (void) sasFilterView:(SASFilterView*) view buttonWasPressed:(DeviceType) device;
+// Passes to the delegate the all the devices which have been selected on filterview as an NSArray.
+- (void) sasFilterView:(SASFilterView*) view doneButtonWasPressedWithDevicesSelected:(NSMutableArray*) devices;
 
 @end
 

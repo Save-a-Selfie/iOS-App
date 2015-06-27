@@ -9,13 +9,14 @@
 #import "SASFilterView.h"
 #import "SASUtilities.h"
 #import "ILTranslucentView.h"
-#import "Device.h"
+#import "SASDevice.h"
 #import "SASFilterViewCell.h"
 
 
 @interface SASFilterView() <UITableViewDelegate, UITableViewDataSource>
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) NSMutableArray* selectedCellsAssociatedDevice;
 
 @end
 
@@ -23,8 +24,10 @@
 
 @synthesize tableView;
 @synthesize delegate;
+@synthesize selectedCellsAssociatedDevice;
 
 - (instancetype)init {
+    
     if(self = [super init]) {
         
        self = [[[NSBundle mainBundle]
@@ -42,62 +45,62 @@
         // Register SASFilterViewCell.
         [self.tableView registerNib:[UINib nibWithNibName:@"SASFilterViewCell" bundle:nil]
              forCellReuseIdentifier:@"sasFilterViewCell"];
+        
+        self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     }
     return self;
 }
 
 
+
 #pragma UITableViewDelegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [[Device deviceNames] count];
+    return [[SASDevice deviceNames] count];
 }
 
-- (void)tableView:(UITableView *)aTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    SASFilterViewCell *selectedCell = (SASFilterViewCell*)[aTableView cellForRowAtIndexPath:indexPath];
-    selectedCell.selectionStatus = YES;
-    
-    DeviceType selectedDevice = All;
-
-    switch (indexPath.row) {
-        case 0:
-            selectedDevice = Defibrillator;
-            break;
-            
-        case 1:
-            selectedDevice = LifeRing;
-            break;
-            
-        case 2:
-            selectedDevice = FirstAidKit;
-            break;
-            
-        case 3:
-            selectedDevice = FireHydrant;
-            break;
-            
-        case 4:
-            selectedDevice = All;
-            break;
-            
-        default:
-            break;
-    }
-    
-    [self tableViewCellSelected:selectedDevice];
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-}
 
 
 #pragma UITableViewDataSource
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     SASFilterViewCell *sasFilterViewCell = (SASFilterViewCell*)[self.tableView dequeueReusableCellWithIdentifier:@"sasFilterViewCell"];
-    sasFilterViewCell.selectionStatus = NO;
-    sasFilterViewCell.deviceName.text = [Device deviceNames][indexPath.row];
-    sasFilterViewCell.imageView.image = [Device deviceImages][indexPath.row];
+    
+    sasFilterViewCell.associatedDevice.type = indexPath.row;
+    
+    sasFilterViewCell.deviceNameLabel.text = [SASDevice deviceNames][indexPath.row];
+    
+    sasFilterViewCell.imageView.image = [SASDevice deviceImages][indexPath.row];
+    
     return sasFilterViewCell;
 }
+
+
+
+- (void)tableView:(UITableView *)aTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if(selectedCellsAssociatedDevice == nil) {
+        selectedCellsAssociatedDevice = [[NSMutableArray alloc] init];
+    }
+    
+    
+    SASFilterViewCell *selectedCell = (SASFilterViewCell*)[aTableView cellForRowAtIndexPath:indexPath];
+    
+    [self.selectedCellsAssociatedDevice addObject:selectedCell.associatedDevice];
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+
+
+
+// TODO: Add logic for what cells can be selected together etc.
+// Forwards selected cells associatedDevice to delegate.
+- (IBAction)doneButtonPressed:(id)sender {
+    if(delegate != nil && [delegate respondsToSelector:@selector(sasFilterView:doneButtonWasPressedWithDevicesSelected:)]) {
+        [self.delegate sasFilterView:self doneButtonWasPressedWithDevicesSelected:self.selectedCellsAssociatedDevice];
+    }
+}
+
 
 
 #pragma Animations
@@ -128,16 +131,5 @@
                      }
                      completion:nil];
 }
-
-
-
-- (void) tableViewCellSelected:(DeviceType) deviceType {
-
-    if(self.delegate != nil && [self.delegate respondsToSelector:@selector(sasFilterView:buttonWasPressed:)]) {
-        [self.delegate sasFilterView:self buttonWasPressed:deviceType];
-    }
-}
-
-
 
 @end

@@ -5,7 +5,7 @@
 #import "SASAnnotation.h"
 #import "ExtendNSLogFunctionality.h"
 #import "AppDelegate.h"
-#import "Device.h"
+#import "SASDevice.h"
 
 
 @interface SASAnnotation()
@@ -16,12 +16,12 @@
 @implementation SASAnnotation
 
 
-- (instancetype) initAnnotationWithDevice:(Device*) device index:(int) deviceNumber {
+- (instancetype) initAnnotationWithDevice:(SASDevice*) device index:(int) deviceNumber {
     if (self = [super init]) {
         
-        _name = [Device deviceNames][device.type];
+        _name = [SASDevice deviceNames][device.type];
         _coordinate = device.deviceLocation;
-        _image = (UIImage*)[Device deviceImages][device.type];
+        _image = (UIImage*)[SASDevice deviceImages][device.type];
         _device = device;
         _index = deviceNumber;
 
@@ -35,7 +35,7 @@
     return _name;
 }
 
-- (Device *)device { return _device; }
+- (SASDevice *)device { return _device; }
 - (int)index { return _index; }
 - (UIImage *)image { return _image; }
 - (NSString *)subtitle { return _address; }

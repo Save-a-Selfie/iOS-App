@@ -73,6 +73,12 @@
 }
 
 
+- (void)viewDidLayoutSubviews {
+    CGSize sizeThatFitsTextView = [self.photoDescription sizeThatFits:CGSizeMake(self.photoDescription.frame.size.width, MAXFLOAT)];
+    photoDesriptionHeightContraint.constant = sizeThatFitsTextView.height;
+}
+
+
 - (void)viewWillAppear:(BOOL)animated {
     
     [super viewWillAppear:animated];
@@ -96,7 +102,7 @@
     //[self.scrollView setContentSize:CGSizeMake([Screen width], 700)];
 
     // Get the appropriate device name.
-    NSString *deviceName = [Device deviceNames ][deviceType];
+    NSString *deviceName = [SASDevice deviceNames ][deviceType];
     self.navigationController.navigationBar.topItem.title = deviceName;
     
     
@@ -170,6 +176,7 @@
     if(self.annotation.device.caption != nil) {
         // Set the text description of the photo.
         self.photoDescription.text = [NSString stringWithFormat:@"%@", annotation.device.caption];
+        NSLog(@"%@", annotation.device.caption);
         [self.photoDescription setFont:[UIFont fontWithName:@"Avenir Next" size:18]];
         [self.photoDescription sizeToFit];
         [self.photoDescription.layer setBorderWidth:0.0];
@@ -178,10 +185,7 @@
     }
 }
 
-- (void)viewDidLayoutSubviews {
-    CGSize sizeThatFitsTextView = [self.photoDescription sizeThatFits:CGSizeMake(self.photoDescription.frame.size.width, MAXFLOAT)];
-    photoDesriptionHeightContraint.constant = sizeThatFitsTextView.height;
-}
+
 
 // Shows the location of the device on the map.
 - (IBAction)showDeviceLocation:(id)sender {
@@ -193,12 +197,9 @@
 
 // Sets all the UIElements of this view, whose colour
 // is dependant on the device being shown in the image.
-- (void) setColourForColouredUIElements:(Device*) device {
-    NSArray* mapPinButtonImages = @[[UIImage imageNamed:@"MapPinAEDRed"],
-                                    [UIImage imageNamed:@"MapPinLifeRingRed"],
-                                    [UIImage imageNamed:@"MapPinFAKitGreen"],
-                                    [UIImage imageNamed:@"MapPinHydrantBlue"]];
-    [self.showDeviceLocationPin setImage:mapPinButtonImages[deviceType] forState:UIControlStateNormal];
+- (void) setColourForColouredUIElements:(SASDevice*) device {
+    
+    [self.showDeviceLocationPin setImage:[SASDevice deviceMapPinImages][deviceType] forState:UIControlStateNormal];
     
     self.distanceLabel.textColor = [SASColour getSASColours][deviceType];
     
@@ -214,8 +215,8 @@
 
 // Gets the image associated with the device from
 // the annotation selected on the map.
-- (UIImage*) deviceImageForAnnotation: (Device*) device {
-    return [Device deviceImages][device.type];
+- (UIImage*) deviceImageForAnnotation: (SASDevice*) device {
+    return [SASDevice deviceImages][device.type];
 }
 
 

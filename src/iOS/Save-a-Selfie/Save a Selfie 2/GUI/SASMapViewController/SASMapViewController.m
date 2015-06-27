@@ -103,10 +103,9 @@ NSString *permissionsProblemTwo = @"Please enable location services on your phon
 
 
 #pragma SASFilterViewDelegate
-- (void)sasFilterView:(SASFilterView *)view buttonWasPressed:(DeviceType)device {
-    printf("Called");
+- (void)sasFilterView:(SASFilterView *)view doneButtonWasPressedWithDevicesSelected:(NSMutableArray *)devices {
     [self.sasFilterView animateOutOfView:self.view];
-    [self.sasMapView filterAnnotationsForType:device];
+// TODO: Add multiple
     
 }
 
@@ -171,11 +170,11 @@ NSString *permissionsProblemTwo = @"Please enable location services on your phon
     if(self.sasFilterView == nil) {
         self.sasFilterView = [[SASFilterView alloc] init];
         self.sasFilterView.delegate = self;
+        [self.sasMapView addSubview:self.sasFilterView];
         self.sasFilterView.frame = CGRectMake(self.view.frame.origin.x,
                                               self.view.frame.origin.y -400,
                                               self.sasFilterView.frame.size.width,
                                               self.sasFilterView.frame.size.height);
-        [self.sasMapView addSubview:self.sasFilterView];
     }
 
     [self.sasFilterView animateIntoView:self.sasMapView];

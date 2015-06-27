@@ -10,6 +10,7 @@
 #import <MapKit/MapKit.h>
 #import "SASLocation.h"
 #import "SASAnnotation.h"
+#import "SASDevice.h"
 
 // Annotation type for the MapView.
 typedef enum: NSUInteger {
@@ -66,7 +67,10 @@ typedef enum: NSUInteger {
 // Calling this to show a specific type of annotation e.g. Defibrillator etc...
 // will result in the map view only showing that type of annotation.
 // Calling with DeviceTypeAll will show all the annotations again.
-- (void) filterAnnotationsForType:(DeviceType) type;
+- (void) filterAnnotationsForDeviceType:(DeviceType) type;
+
+
+- (void) filterAnnotationsForMultipleDevices:(NSMutableArray*) devices;
 
 
 
