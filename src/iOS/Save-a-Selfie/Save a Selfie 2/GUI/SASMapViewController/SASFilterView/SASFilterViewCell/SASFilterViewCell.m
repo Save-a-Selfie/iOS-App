@@ -11,7 +11,7 @@
 @interface SASFilterViewCell()
 
 @property (strong, nonatomic) IBOutlet UIImageView *selectionStatusImageView;
-
+@property (assign, nonatomic) BOOL selectionStatus;
 @end
 
 @implementation SASFilterViewCell
@@ -22,26 +22,28 @@
 @synthesize associatedDevice;
 
 
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    if (self = [super initWithCoder:aDecoder]) {
+        self.selectionStatus = NO;
+    }
+    return self;
+}
+
+
 - (void)awakeFromNib {
 }
 
 
-
-
-- (void) updateSelectionStatus:(BOOL) status {
-   
-    if(status == YES) {
-        printf("Should be on.\n");
-        self.selectionStatusImageView.image = [UIImage imageNamed:@"CellSelected"];
-    } else if(status == NO) {
-        printf("Should be off.\n");
-        self.selectionStatusImageView.image = [UIImage imageNamed:@"CellUnselected"];
+- (void)updateSelectionStatus {
+    if (self.selectionStatus == NO) {
+        self.selectionStatusImageView.image = [UIImage imageNamed:@"SelectedCell"];
+        self.selectionStatus = YES;
+    }
+    else {
+        self.selectionStatusImageView.image = [UIImage imageNamed:@"UnselectedCell"];
+        self.selectionStatus = NO;
     }
 }
-
-
-
-
 
 
 @end

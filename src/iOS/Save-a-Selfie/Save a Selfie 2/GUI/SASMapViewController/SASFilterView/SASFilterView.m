@@ -82,10 +82,10 @@
         selectedCellsAssociatedDevice = [[NSMutableArray alloc] init];
     }
     
-    
+
     SASFilterViewCell *selectedCell = (SASFilterViewCell*)[aTableView cellForRowAtIndexPath:indexPath];
-    
-    [self.selectedCellsAssociatedDevice addObject:selectedCell.associatedDevice];
+    [selectedCell updateSelectionStatus];
+    //[self.selectedCellsAssociatedDevice addObject:selectedCell.associatedDevice];
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }

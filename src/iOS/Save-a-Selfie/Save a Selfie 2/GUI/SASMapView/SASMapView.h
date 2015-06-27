@@ -21,8 +21,6 @@ typedef enum: NSUInteger {
 
 
 // To receive noitification from SASMapView, please reference the notificationReceiver property.
-// Ideally this should be changed to the Observer Design Pattern to update registered
-// observers, however, this shall do for the time being.
 @protocol SASMapViewNotifications <NSObject>
 
 @optional
@@ -47,7 +45,7 @@ typedef enum: NSUInteger {
 @property (nonatomic, weak) id<SASMapViewNotifications> notificationReceiver;
 
 
-// Shows the annotations on the map according to their coordinated.
+// Shows the annotations on the map according to their coordinates.
 @property(nonatomic, assign) BOOL showAnnotations;
 
 // Will zoom to the users location SASMapView object is instansiated first.
@@ -72,9 +70,6 @@ typedef enum: NSUInteger {
 
 - (void) filterAnnotationsForMultipleDevices:(NSMutableArray*) devices;
 
-
-// Reloads all the current annotations on the mapview.
-- (void) reloadAnnotations;
 
 // Call this to show a single annotation on the SASMapView.
 // Calling this method will set showsCurrentUserLocation to NO;

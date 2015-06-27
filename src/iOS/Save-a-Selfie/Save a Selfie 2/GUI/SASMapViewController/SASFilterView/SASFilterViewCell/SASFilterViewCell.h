@@ -12,8 +12,6 @@
 
 @property (strong, nonatomic) IBOutlet UILabel *deviceNameLabel;
 @property (assign, nonatomic) SASDevice* associatedDevice;
-@property (nonatomic, assign) BOOL selectionStatus;
 
-- (void) updateSelectionStatus:(BOOL) status;
-
+- (void) updateSelectionStatus;
 @end

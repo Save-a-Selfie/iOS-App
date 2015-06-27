@@ -134,21 +134,6 @@
     }
 }
 
-// @Discussion
-//  By calling -removeExistingAnnotationsFromMapView and then calling
-//  -plotAnnotationsWithDeviceInformation the following method
-//  from MKMapViewDelegate -mapView:viewForAnnotation: is called.
-//  This reloads all of the current annotations we have fetched from the server.
-- (void)reloadAnnotations {
-    // Remove the current annotations on the map.
-    [self removeExistingAnnotationsFromMapView];
-    
-    
-    // Call plotAnnotationsWithDeviceInformation:
-    // which will do the checking on whether or not
-    // that annotation should be shown on the map.
-    [self plotAnnotationsWithDeviceInformation:annotationInfoFromServer];
-}
 
 
 // Filters the map view and shows only one type of
@@ -199,7 +184,24 @@
 }
 
 
-#pragma Add & Remove MKAnnotation to MapView.
+
+// @Discussion
+//  By calling -removeExistingAnnotationsFromMapView and then calling
+//  -plotAnnotationsWithDeviceInformation the following method
+//  from MKMapViewDelegate -mapView:viewForAnnotation: is called.
+//  This reloads all of the current annotations we have fetched from the server.
+- (void)reloadAnnotations {
+    // Remove the current annotations on the map.
+    [self removeExistingAnnotationsFromMapView];
+    
+    
+    // Call plotAnnotationsWithDeviceInformation:
+    // which will do the checking on whether or not
+    // that annotation should be shown on the map.
+    [self plotAnnotationsWithDeviceInformation:annotationInfoFromServer];
+}
+
+
 // Removes any existing annotations.
 - (void) removeExistingAnnotationsFromMapView {
     for(id<MKAnnotation> annotation in self.annotations) {
