@@ -46,12 +46,12 @@ NSString *permissionsProblemTwo = @"Please enable location services on your phon
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    
 }
+
 - (void)viewWillDisappear:(BOOL)animated {
     [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
+
 
 
 - (UIStatusBarStyle)preferredStatusBarStyle {

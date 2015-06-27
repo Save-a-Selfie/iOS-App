@@ -17,8 +17,7 @@ typedef enum : NSUInteger {
     LifeRing,
     FirstAidKit,
     FireHydrant,
-    All,
-    numberOfDevices = 5
+    All
 } DeviceType;
 
 

@@ -73,6 +73,8 @@ typedef enum: NSUInteger {
 - (void) filterAnnotationsForMultipleDevices:(NSMutableArray*) devices;
 
 
+// Reloads all the current annotations on the mapview.
+- (void) reloadAnnotations;
 
 // Call this to show a single annotation on the SASMapView.
 // Calling this method will set showsCurrentUserLocation to NO;

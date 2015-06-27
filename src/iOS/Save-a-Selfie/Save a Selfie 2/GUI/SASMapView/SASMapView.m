@@ -134,6 +134,22 @@
     }
 }
 
+// @Discussion
+//  By calling -removeExistingAnnotationsFromMapView and then calling
+//  -plotAnnotationsWithDeviceInformation the following method
+//  from MKMapViewDelegate -mapView:viewForAnnotation: is called.
+//  This reloads all of the current annotations we have fetched from the server.
+- (void)reloadAnnotations {
+    // Remove the current annotations on the map.
+    [self removeExistingAnnotationsFromMapView];
+    
+    
+    // Call plotAnnotationsWithDeviceInformation:
+    // which will do the checking on whether or not
+    // that annotation should be shown on the map.
+    [self plotAnnotationsWithDeviceInformation:annotationInfoFromServer];
+}
+
 
 // Filters the map view and shows only one type of
 // annotation on the map view.
@@ -164,14 +180,7 @@
             break;
     }
     
-    // Remove the current annotations on the map.
-    [self removeExistingAnnotationsFromMapView];
-    
-    
-    // Call plotAnnotationsWithDeviceInformation:
-    // which will do the checking on whether or not
-    // that annotation should be shown on the map.
-    [self plotAnnotationsWithDeviceInformation:annotationInfoFromServer];
+    [self reloadAnnotations];
 }
 
 
@@ -294,6 +303,11 @@
     if(self.notificationReceiver != nil) {
         [self.notificationReceiver sasMapViewAnnotationTapped:selectedAnnotation];
     }
+    
+    // When -didSelectAnnotationView is fired, the annotation will always be marked
+    // as `selected` and the user will not be able to select it again, until a new
+    // annotation is selected. We must manually unselected it ourselfs.
+    [self deselectAnnotation:view.annotation animated:YES];
 }
 
 
