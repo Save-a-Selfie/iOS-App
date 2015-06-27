@@ -58,7 +58,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="filterDevices:" destination="wxp-4h-T6p" eventType="touchUpInside" id="TCS-mZ-RhX"/>
+                                    <action selector="showSASFilterView:" destination="wxp-4h-T6p" eventType="touchUpInside" id="kyY-eL-R2Y"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -78,7 +78,10 @@
                     </view>
                     <navigationItem key="navigationItem" id="2Z4-cZ-Nt2"/>
                     <connections>
+                        <outlet property="locateUserButton" destination="ZSL-vM-Epo" id="TTN-vp-ZQS"/>
                         <outlet property="sasMapView" destination="uvr-bw-CUg" id="Zs3-cO-Ay6"/>
+                        <outlet property="showFilterViewButton" destination="gKB-VO-JHZ" id="Iaq-Vb-f5e"/>
+                        <outlet property="uploadNewImageToServerButton" destination="f2t-3C-hgn" id="VnB-qg-B2y"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IA3-XG-E4V" userLabel="First Responder" sceneMemberID="firstResponder"/>

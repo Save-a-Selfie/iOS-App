@@ -14,6 +14,11 @@
 
 @protocol SASFilterViewDelegate <NSObject>
 
+@optional
+// Tells the delegate whether or not SASFilterView is visible is the current view hiercarchy.
+// This calls the delegate o both -animateIntoView: & -animateOutOfView.
+- (void) sasFilterView:(SASFilterView*)view isVisibleInViewHierarhy:(BOOL) visibility;
+
 // Passes to the delegate the all the devices which have been selected on filterview as an NSArray.
 - (void) sasFilterView:(SASFilterView*) view doneButtonWasPressedWithDevicesSelected:(NSMutableArray*) devices;
 

@@ -11,4 +11,6 @@
 @interface UIFont (SASFont)
 
 + (UIFont*) sasFontForNavBar;
+
++ (void) increaseCharacterSpacingForLabel:(UILabel*) label byAmount:(float) amount;
 @end

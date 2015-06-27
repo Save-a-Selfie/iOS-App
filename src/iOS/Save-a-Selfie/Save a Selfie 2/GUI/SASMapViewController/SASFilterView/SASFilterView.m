@@ -11,11 +11,13 @@
 #import "ILTranslucentView.h"
 #import "SASDevice.h"
 #import "SASFilterViewCell.h"
+#import "UIFont+SASFont.h"
 
 
 @interface SASFilterView() <UITableViewDelegate, UITableViewDataSource>
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UILabel *filterLabel;
 @property (strong, nonatomic) NSMutableArray* selectedCellsAssociatedDevice;
 
 @end
@@ -23,6 +25,7 @@
 @implementation SASFilterView
 
 @synthesize tableView;
+@synthesize filterLabel;
 @synthesize delegate;
 @synthesize selectedCellsAssociatedDevice;
 
@@ -35,7 +38,7 @@
                 owner:self
                 options:nil]
                firstObject];
-        
+        [UIFont increaseCharacterSpacingForLabel:self.filterLabel byAmount:2.3];
         self.layer.cornerRadius = 8.0;
         
         self.tableView.delegate = self;
@@ -108,13 +111,14 @@
 - (void) animateIntoView:(UIView*) view {
     
     
-    [UIView animateWithDuration:0.4
+    [UIView animateWithDuration:0.3
                           delay:0.1
          usingSpringWithDamping:0.6
           initialSpringVelocity:.2
                         options:UIViewAnimationOptionCurveEaseIn
                      animations:^(){ self.center = view.center;}
-                     completion:nil];
+                     completion:^(BOOL visible){[self updateDelegateOnViewVisibility:YES];}
+     ];
 }
 
 
@@ -129,7 +133,16 @@
                                                                self.frame.origin.x,
                                                                -700);
                      }
-                     completion:nil];
+                     completion:^(BOOL visible){[self updateDelegateOnViewVisibility:NO];}
+     ];
 }
+
+
+- (void) updateDelegateOnViewVisibility:(BOOL) visibility {
+    if (self.delegate != nil && [self.delegate respondsToSelector:@selector(sasFilterView:isVisibleInViewHierarhy:)]) {
+        [self.delegate sasFilterView:self isVisibleInViewHierarhy:visibility];
+    }
+}
+
 
 @end

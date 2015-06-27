@@ -28,6 +28,9 @@
 @property(strong, nonatomic) AlertBox* permissionsBox;
 
 @property(strong, nonatomic) SASFilterView *sasFilterView;
+@property (weak, nonatomic) IBOutlet UIButton *showFilterViewButton;
+@property (strong, nonatomic) IBOutlet UIButton *uploadNewImageToServerButton;
+@property (strong, nonatomic) IBOutlet UIButton *locateUserButton;
 
 @end
 
@@ -42,6 +45,11 @@ NSString *permissionsProblemTwo = @"Please enable location services on your phon
 @synthesize sasUploadImageViewController;
 @synthesize uploadImageNavigationController;
 
+// Buttons
+@synthesize showFilterViewButton;
+@synthesize uploadNewImageToServerButton;
+@synthesize locateUserButton;
+
 
 
 - (void)viewDidLoad {
@@ -51,7 +59,6 @@ NSString *permissionsProblemTwo = @"Please enable location services on your phon
 - (void)viewWillDisappear:(BOOL)animated {
     [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
-
 
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
@@ -80,11 +87,10 @@ NSString *permissionsProblemTwo = @"Please enable location services on your phon
 
 
 
-
-
 - (IBAction)locateUser:(id)sender {
      [self.sasMapView locateUser];
 }
+
 
 
 -(void)showPermissionsProblem:(NSString *)text {
@@ -102,11 +108,36 @@ NSString *permissionsProblemTwo = @"Please enable location services on your phon
 }
 
 
+
+- (IBAction)showSASFilterView:(id)sender {
+    if(self.sasFilterView == nil) {
+        self.sasFilterView = [[SASFilterView alloc] init];
+        self.sasFilterView.delegate = self;
+        [self.sasMapView addSubview:self.sasFilterView];
+        self.sasFilterView.frame = CGRectMake(self.view.frame.origin.x,
+                                              self.view.frame.origin.y -400,
+                                              self.sasFilterView.frame.size.width,
+                                              self.sasFilterView.frame.size.height);
+    }
+    
+    [self.sasFilterView animateIntoView:self.sasMapView];
+}
+
+
 #pragma SASFilterViewDelegate
 - (void)sasFilterView:(SASFilterView *)view doneButtonWasPressedWithDevicesSelected:(NSMutableArray *)devices {
     [self.sasFilterView animateOutOfView:self.view];
 // TODO: Add multiple
     
+}
+
+
+
+- (void)sasFilterView:(SASFilterView *)view isVisibleInViewHierarhy:(BOOL)visibility {
+    
+    self.showFilterViewButton.hidden = visibility;
+    self.locateUserButton.hidden = visibility;
+    self.uploadNewImageToServerButton.hidden = visibility;
 }
 
 
@@ -166,19 +197,7 @@ NSString *permissionsProblemTwo = @"Please enable location services on your phon
 }
 
 
-- (IBAction)filterDevices:(id)sender {
-    if(self.sasFilterView == nil) {
-        self.sasFilterView = [[SASFilterView alloc] init];
-        self.sasFilterView.delegate = self;
-        [self.sasMapView addSubview:self.sasFilterView];
-        self.sasFilterView.frame = CGRectMake(self.view.frame.origin.x,
-                                              self.view.frame.origin.y -400,
-                                              self.sasFilterView.frame.size.width,
-                                              self.sasFilterView.frame.size.height);
-    }
 
-    [self.sasFilterView animateIntoView:self.sasMapView];
-}
 
 
 #pragma Begin Upload Routine.
