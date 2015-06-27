@@ -12,10 +12,10 @@
 
 
 @property (copy) NSString *name;
-@property (nonatomic, readonly) CLLocationCoordinate2D coordinate;
+@property (nonatomic, assign) CLLocationCoordinate2D coordinate;
 @property (nonatomic, strong) SASDevice *device;
 @property (nonatomic, strong) UIImage *image;
-@property (nonatomic) int index;
+@property (nonatomic, assign) int index;
 
 
 - (instancetype) initAnnotationWithDevice:(SASDevice*) device index:(int) deviceNumber;

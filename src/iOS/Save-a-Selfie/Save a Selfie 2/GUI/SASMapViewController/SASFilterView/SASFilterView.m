@@ -82,8 +82,6 @@
     
     SASFilterViewCell *sasFilterViewCell = (SASFilterViewCell*)[self.tableView dequeueReusableCellWithIdentifier:@"sasFilterViewCell"];
     
-    sasFilterViewCell.associatedDevice.type = 2;
-    
     sasFilterViewCell.deviceNameLabel.text = [SASDevice getDeviceNameForDeviceType:indexPath.row];
     
     sasFilterViewCell.imageView.image = [SASDevice getDeviceImageForDeviceType:indexPath.row];

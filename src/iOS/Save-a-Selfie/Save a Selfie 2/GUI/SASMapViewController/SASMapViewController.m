@@ -148,7 +148,7 @@ NSString *permissionsProblemTwo = @"Please enable location services on your phon
     // with the annotation selected.
     SASImageViewController *sasImageViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SASImageViewController"];
     
-    sasImageViewController.annotation = annotation;
+    [sasImageViewController setAnnotation:annotation];
     
     [self.navigationController pushViewController:sasImageViewController animated:YES];
 

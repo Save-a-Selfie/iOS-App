@@ -8,43 +8,28 @@
 #import "SASDevice.h"
 
 
-@interface SASAnnotation()
 
-
-@end
 
 @implementation SASAnnotation
 
+@synthesize name;
+@synthesize coordinate;
+@synthesize image;
+@synthesize device;
+@synthesize index;
 
-- (instancetype) initAnnotationWithDevice:(SASDevice*) device index:(int) deviceNumber {
+- (instancetype) initAnnotationWithDevice:(SASDevice*) aDevice index:(int) deviceNumber {
     if (self = [super init]) {
         
-        _name = [SASDevice getDeviceNameForDeviceType:device.type];
-        _coordinate = device.deviceLocation;
-        _image = (UIImage*)[SASDevice getDeviceMapAnnotationImageForDeviceType:device.type];
-        _device = device;
-        _index = deviceNumber;
+        self.name = [SASDevice getDeviceNameForDeviceType:aDevice.type];
+        self.coordinate= aDevice.deviceLocation;
+        self.image = (UIImage*)[SASDevice getDeviceMapAnnotationImageForDeviceType:aDevice.type];
+        self.device = aDevice;
+        self.index = deviceNumber;
 
     }
     return self;
 }
 
-
-
-- (NSString *)title {
-    return _name;
-}
-
-- (SASDevice *)device { return _device; }
-- (int)index { return _index; }
-- (UIImage *)image { return _image; }
-- (NSString *)subtitle { return _address; }
-
-
-- (void)dealloc {
-    _name = nil;
-    _address = nil;
-    _image = nil;
-}
 
 @end

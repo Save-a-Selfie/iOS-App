@@ -3,10 +3,11 @@
 //  Save a Selfie
 //
 //  Created by Stephen Fox on 04/06/2015.
-//  Copyright (c) 2015 Peter FitzGerald. All rights reserved.
+//  Copyright (c) 2015 Stephen Fox. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
+#import "SASDevice.h"
 
 @interface SASColour : NSObject
 
@@ -15,6 +16,7 @@
 + (UIColor*) sasGreenFirstAidColour;
 + (UIColor*) sasRedAEDColour;
 
-+ (NSArray*) getSASColours;
+// @return the colour assocatioed with the device.
++ (UIColor*) getSASColourForDeviceType:(SASDeviceType) deviceType;
 
 @end

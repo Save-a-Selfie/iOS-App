@@ -3,10 +3,11 @@
 //  Save a Selfie
 //
 //  Created by Stephen Fox on 04/06/2015.
-//  Copyright (c) 2015 Peter FitzGerald. All rights reserved.
+//  Copyright (c) 2015 Stephen Fox. All rights reserved.
 //
 
 #import "SASColour.h"
+
 
 @implementation SASColour
 
@@ -50,15 +51,33 @@
 }
 
 
-
-
-+ (NSArray*) getSASColours {
-    NSArray *colours= @[[SASColour sasRedAEDColour],
-                        [SASColour sasOrangeLifeRingColour],
-                        [SASColour sasGreenFirstAidColour],
-                        [SASColour sasYellowFireHydrantColur]
-                        ];
-    return colours;
++ (UIColor*) getSASColourForDeviceType:(SASDeviceType) deviceType {
+    
+    switch (deviceType) {
+        case Defibrillator:
+            return [SASColour sasRedAEDColour];
+            break;
+            
+        case LifeRing:
+            return [SASColour sasOrangeLifeRingColour];
+            break;
+        
+        case FirstAidKit:
+            return [SASColour sasGreenFirstAidColour];
+            break;
+            
+        case FireHydrant:
+            return [SASColour sasYellowFireHydrantColur];
+            break;
+            
+        case All:
+            return [[UIColor alloc] init];
+            
+        default:
+            break;
+    }
 }
+
+
 
 @end

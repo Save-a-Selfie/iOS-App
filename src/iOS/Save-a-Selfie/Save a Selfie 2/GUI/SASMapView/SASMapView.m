@@ -334,7 +334,6 @@
         return nil;
     }
     else {
-        
         annotationView.image = [SASDevice getDeviceMapAnnotationImageForDeviceType:annotation.device.type];
         annotationView.annotation = annotation;
         annotationView.enabled = YES;

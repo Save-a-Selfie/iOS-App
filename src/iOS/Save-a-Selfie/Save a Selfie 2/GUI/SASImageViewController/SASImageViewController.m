@@ -95,7 +95,7 @@
     //  update the UI accordingly.
     
     // Store the type of device shown in the image
-    self.sasDeviceType = annotation.device.type;
+    self.sasDeviceType = self.annotation.device.type;
     printf("%lu", (unsigned long)annotation.device.type);
     
     
@@ -202,12 +202,12 @@
     [self.showDeviceLocationPin setImage:[SASDevice getDeviceMapPinImageForDeviceType:self.sasDeviceType]
                                 forState:UIControlStateNormal];
     
-    self.distanceLabel.textColor = [SASColour getSASColours][self.sasDeviceType];
+    self.distanceLabel.textColor = [SASColour getSASColourForDeviceType: self.sasDeviceType];
     
     // Navigation Bar.
-    [self.navigationController.navigationBar setTintColor:[SASColour getSASColours][self.sasDeviceType]];
+    [self.navigationController.navigationBar setTintColor:[SASColour getSASColourForDeviceType: self.sasDeviceType]];
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName: [UIFont fontWithName:@"AvenirNext-DemiBold" size:15.0f],
-                                                                      NSForegroundColorAttributeName : [SASColour getSASColours][self.sasDeviceType],
+                                                                      NSForegroundColorAttributeName : [SASColour getSASColourForDeviceType: self.sasDeviceType],
                                                                       }];
     
 }

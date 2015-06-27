@@ -23,10 +23,9 @@
         // Caption associated with the device.
         _caption = [info objectAtIndex:1];
         
-        // Type of device. The int value will translate to
-        // a enum of type DeviceType.
-        _type = [[info objectAtIndex:2] intValue];
-		
+        // Sets _type with the correct type of device with the `identifier/value`
+        // retrieved from the server.
+        [self setTypeWithIdentifierFromServer:[[info objectAtIndex:2] intValue]];
         
         // Longitude and Latitude.
         NSNumber *latitude = [info objectAtIndex:3];
@@ -45,6 +44,40 @@
 
 
 
+// @Disscussion:
+//  Currently when retrieved from the server each SASDevice.type has a corresponding
+//  value:
+//      - Defibrillator: 0
+//      - LifeRing: 1
+//      - FirstAidKit: 2
+//      - FireHyrdant: 3
+// This value will translate into a SASDeviceType, which is recognised across the app.
+// this method sets the SASDeviceType for SASDevice.type with the `identifier/ value` retrieved from the server.
+- (void) setTypeWithIdentifierFromServer:(int) indentifier {
+    switch (indentifier) {
+        case 0:
+            _type = Defibrillator;
+            break;
+            
+        case 1:
+            _type = LifeRing;
+            break;
+            
+        case 2:
+            _type = FirstAidKit;
+            break;
+            
+        case 3:
+            _type = FireHydrant;
+            break;
+            
+        default:
+            break;
+    }
+}
+
+
+
 // @Discussion:
 //  Currently this is quite a verbose way of returning the correct object
 //  for the SASDeviceType, however it is more safe than just returning an array of objects.
@@ -56,26 +89,22 @@
 //
 
 + (NSString*) getDeviceNameForDeviceType:(SASDeviceType) deviceType {
+    
     switch (deviceType) {
         case Defibrillator:
             return @"Defibrillator";
-            break;
             
         case LifeRing:
             return @"Life Ring";
-            break;
             
         case FirstAidKit:
             return @"First Aid Kit";
-            break;
             
         case FireHydrant:
             return @"Fire Hydrant";
-            break;
             
         case All:
             return @"All";
-            break;
             
         default:
             break;
@@ -83,30 +112,17 @@
 }
 
 + (UIImage*) getDeviceImageForDeviceType:(SASDeviceType) deviceType {
-    switch (deviceType) {
-            
-        case Defibrillator:
-            return [UIImage imageNamed:@"Defibrillator"];
-            break;
-            
-        case LifeRing:
-            return [UIImage imageNamed:@"LifeRing"];
-            break;
-            
-        case FirstAidKit:
-            return [UIImage imageNamed:@"FirstAidKit"];
-            break;
-            
-            
-        case FireHydrant:
-            return [UIImage imageNamed:@"FireHydrant"];
-            break;
-            
-        case All:
-            return [[UIImage alloc] init];
-            
-        default:
-            break;
+    
+    if(deviceType == Defibrillator) {
+        return [UIImage imageNamed:@"Defibrillator"];
+    } else if (deviceType == LifeRing) {
+        return [UIImage imageNamed:@"Defibrillator"];
+    } else if (deviceType == FirstAidKit) {
+        return [UIImage imageNamed:@"Defibrillator"];
+    } else if (deviceType == FireHydrant) {
+        return [UIImage imageNamed:@"Defibrillator"];
+    } else {
+        return [[UIImage alloc] init];
     }
 }
 
