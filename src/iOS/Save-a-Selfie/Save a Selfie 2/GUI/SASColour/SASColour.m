@@ -44,9 +44,9 @@
 
 
 + (UIColor *)sasYellowFireHydrantColur {
-    return [UIColor colorWithRed:1.0
-                           green:0.95
-                            blue:0.352
+    return [UIColor colorWithRed:0.874
+                           green:0.756
+                            blue:0.011
                            alpha:1.0];
 }
 

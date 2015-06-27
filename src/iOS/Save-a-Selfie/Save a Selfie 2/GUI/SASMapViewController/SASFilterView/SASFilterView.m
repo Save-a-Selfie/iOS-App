@@ -29,6 +29,14 @@
 @synthesize delegate;
 @synthesize selectedDevice;
 
+SASDeviceType availableDevicesToFilter[5] = {
+    All,
+    Defibrillator,
+    LifeRing,
+    FirstAidKit,
+    FireHydrant
+};
+
 
 #pragma Object Life Cycle.
 - (instancetype)init {
@@ -40,6 +48,7 @@
                 owner:self
                 options:nil]
                firstObject];
+        
         
         [UIFont increaseCharacterSpacingForLabel:self.filterLabel byAmount:2.3];
         self.layer.cornerRadius = 8.0;
@@ -61,17 +70,15 @@
 
 #pragma UITableViewDelegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 5;
+    return sizeof(availableDevicesToFilter) / sizeof(NSInteger);
 }
 
 
 - (void)tableView:(UITableView *)aTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    
     SASFilterViewCell *selectedCell = (SASFilterViewCell*)[aTableView cellForRowAtIndexPath:indexPath];
     [selectedCell updateSelectionStatus];
-    
-    self.selectedDevice = selectedCell.associatedDevice.type;
+    self.selectedDevice = selectedCell.associatedDeviceType;
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
@@ -82,11 +89,46 @@
     
     SASFilterViewCell *sasFilterViewCell = (SASFilterViewCell*)[self.tableView dequeueReusableCellWithIdentifier:@"sasFilterViewCell"];
     
-    sasFilterViewCell.deviceNameLabel.text = [SASDevice getDeviceNameForDeviceType:indexPath.row];
+    SASDeviceType deviceTypeForCell = [self getDeviceForCellWithIndexPath:indexPath];
     
-    sasFilterViewCell.imageView.image = [SASDevice getDeviceImageForDeviceType:indexPath.row];
+    sasFilterViewCell.deviceNameLabel.text = [SASDevice getDeviceNameForDeviceType:deviceTypeForCell];
+    sasFilterViewCell.imageView.image = [SASDevice getDeviceImageForDeviceType:deviceTypeForCell];
+    sasFilterViewCell.associatedDeviceType = deviceTypeForCell;
     
     return sasFilterViewCell;
+}
+
+
+- (SASDeviceType) getDeviceForCellWithIndexPath:(NSIndexPath*) indexPath {
+    
+    SASDeviceType deviceTypeForCell = All;
+    
+    switch (indexPath.row) {
+        case 0:
+            deviceTypeForCell = All;
+            break;
+            
+        case 1:
+            deviceTypeForCell = Defibrillator;
+            break;
+            
+        case 2:
+            deviceTypeForCell = LifeRing;
+            break;
+            
+        case 3:
+            deviceTypeForCell = FirstAidKit;
+            break;
+            
+        case 4:
+            deviceTypeForCell = FireHydrant;
+            break;
+            
+        default:
+            break;
+    }
+    
+    return deviceTypeForCell;
 }
 
 

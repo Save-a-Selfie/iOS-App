@@ -11,7 +11,8 @@
 @interface SASFilterViewCell : UITableViewCell
 
 @property (strong, nonatomic) IBOutlet UILabel *deviceNameLabel;
-@property (assign, nonatomic) SASDevice* associatedDevice;
+@property (assign, nonatomic) SASDeviceType associatedDeviceType;
 
 - (void) updateSelectionStatus;
+
 @end

@@ -22,12 +22,13 @@
 
 
 @interface SASMapView() <SASMapAnnotationRetrieverDelegate, SASLocationDelegate> {
-    // This variable is gotten from the SASLocationDelegate method
-    //  locationDidUpdate:
-    CLLocationCoordinate2D currentLocation;
     BOOL userAlreadyLocated;
 }
 
+
+// This property is gotten from the SASLocationDelegate method
+//  -locationDidUpdate:
+@property(assign, nonatomic) CLLocationCoordinate2D currentLocation;
 
 @property(strong, nonatomic) SASLocation* sasLocation;
 
@@ -46,6 +47,7 @@
 
 @implementation SASMapView
 
+@synthesize currentLocation;
 @synthesize sasLocation;
 @synthesize sasAnnotationRetriever;
 @synthesize notificationReceiver;
@@ -111,7 +113,7 @@
 - (void) locateUser {
     
     if([self.sasLocation checkLocationPermissions]) {
-        [self zoomToCoordinates:currentLocation animated:YES];
+        [self zoomToCoordinates:self.currentLocation animated:YES];
     }
     else {
         plog(@"SASMapView could not access location services.");
@@ -142,29 +144,30 @@
     
     switch (type) {
         case All:
-            annotationTypeToShow = All;
+            self.annotationTypeToShow = All;
             break;
             
         case Defibrillator:
-            annotationTypeToShow = Defibrillator;
+            self.annotationTypeToShow = Defibrillator;
             break;
             
         case LifeRing:
-            annotationTypeToShow = LifeRing;
+            self.annotationTypeToShow = LifeRing;
             break;
             
         case FirstAidKit:
-            annotationTypeToShow = FirstAidKit;
+            self.annotationTypeToShow = FirstAidKit;
             break;
             
         case FireHydrant:
-            annotationTypeToShow = FireHydrant;
+            self.annotationTypeToShow = FireHydrant;
             break;
             
         default:
             break;
     }
     
+    printf("%lu", self.annotationTypeToShow);
     [self reloadAnnotations];
 }
 
@@ -210,7 +213,7 @@
 #pragma SASLocation delegate method
 - (void) locationDidUpdate:(CLLocationCoordinate2D)location {
    
-    currentLocation = location;
+    self.currentLocation = location;
     
     if(zoomToUsersLocationInitially) {
         // We only want the map to zoom the user
@@ -350,10 +353,10 @@
 // then the annoatations shown are custom, therefore we must check the
 // appropriate return.
 - (BOOL) returnForAnnotationDeviceType:(SASDeviceType) deviceType {
-    if (annotationTypeToShow == deviceType) {
+    if (self.annotationTypeToShow == deviceType) {
         return YES;
     }
-    else if(annotationTypeToShow == All) {
+    else if(self.annotationTypeToShow == All) {
         return YES;
     }
     else {

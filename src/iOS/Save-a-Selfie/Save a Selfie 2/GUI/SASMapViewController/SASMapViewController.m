@@ -127,13 +127,11 @@ NSString *permissionsProblemTwo = @"Please enable location services on your phon
 #pragma SASFilterViewDelegate
 - (void)sasFilterView:(SASFilterView *)view doneButtonWasPressedWithSelectedDeviceType:(SASDeviceType)device {
     [self.sasMapView filterAnnotationsForDeviceType:device];
-    printf("%lu", (unsigned long)device);
     [self.sasFilterView animateOutOfView:self.view];
 }
 
 
 - (void)sasFilterView:(SASFilterView *)view isVisibleInViewHierarhy:(BOOL)visibility {
-    
     self.showFilterViewButton.hidden = visibility;
     self.locateUserButton.hidden = visibility;
     self.uploadNewImageToServerButton.hidden = visibility;

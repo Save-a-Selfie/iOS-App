@@ -9,6 +9,8 @@
 
 @implementation SASDevice
 
+@synthesize type;
+
 
 - (id) initDeviceWithInformationFromString: (NSString *)infoString {
 
@@ -52,29 +54,30 @@
 //      - FirstAidKit: 2
 //      - FireHyrdant: 3
 // This value will translate into a SASDeviceType, which is recognised across the app.
-// this method sets the SASDeviceType for SASDevice.type with the `identifier/ value` retrieved from the server.
+// This method sets the SASDeviceType for SASDevice.type with the `identifier/ value` retrieved from the server.
 - (void) setTypeWithIdentifierFromServer:(int) indentifier {
     switch (indentifier) {
         case 0:
-            _type = Defibrillator;
+            self.type = Defibrillator;
             break;
             
         case 1:
-            _type = LifeRing;
+            self.type = LifeRing;
             break;
             
         case 2:
-            _type = FirstAidKit;
+            self.type = FirstAidKit;
             break;
             
         case 3:
-            _type = FireHydrant;
+            self.type = FireHydrant;
             break;
             
         default:
             break;
     }
 }
+
 
 
 
@@ -113,16 +116,28 @@
 
 + (UIImage*) getDeviceImageForDeviceType:(SASDeviceType) deviceType {
     
-    if(deviceType == Defibrillator) {
-        return [UIImage imageNamed:@"Defibrillator"];
-    } else if (deviceType == LifeRing) {
-        return [UIImage imageNamed:@"Defibrillator"];
-    } else if (deviceType == FirstAidKit) {
-        return [UIImage imageNamed:@"Defibrillator"];
-    } else if (deviceType == FireHydrant) {
-        return [UIImage imageNamed:@"Defibrillator"];
-    } else {
-        return [[UIImage alloc] init];
+    switch (deviceType) {
+        case Defibrillator:
+            return [UIImage imageNamed:@"Defibrillator"];
+            break;
+            
+        case LifeRing:
+            return [UIImage imageNamed:@"LifeRing"];
+            break;
+            
+        case FirstAidKit:
+            return [UIImage imageNamed:@"FirstAidKit"];
+            break;
+            
+        case FireHydrant:
+            return [UIImage imageNamed:@"FireHydrant"];
+            break;
+            
+        case All:
+            return [UIImage new];
+            
+        default:
+            break;
     }
 }
 

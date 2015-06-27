@@ -19,7 +19,7 @@
 @synthesize deviceNameLabel;
 @synthesize selectionStatusImageView;
 @synthesize selectionStatus;
-@synthesize associatedDevice;
+@synthesize associatedDeviceType;
 
 
 - (id)initWithCoder:(NSCoder *)aDecoder {

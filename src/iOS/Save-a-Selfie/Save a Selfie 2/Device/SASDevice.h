@@ -7,11 +7,11 @@
 
 
 // Device types:
-// 0 - Defibrillator
-// 1 - Life Ring
-// 2 - First Aid Kit
-// 3 - Fire Hydrant
-// 4 - All - All Devices
+// All - All Devices
+// Defibrillator
+// Life Ring
+// First Aid Kit
+// Fire Hydrant
 typedef NS_ENUM(NSInteger, SASDeviceType) {
     All = 0,
     Defibrillator = 1,
@@ -23,6 +23,7 @@ typedef NS_ENUM(NSInteger, SASDeviceType) {
 
 
 @interface SASDevice : NSObject;
+
 
 
 // @return Device name for specified SASDeviceType.
@@ -38,7 +39,7 @@ typedef NS_ENUM(NSInteger, SASDeviceType) {
 + (UIImage*) getDeviceMapPinImageForDeviceType:(SASDeviceType) deviceType;
 
 
-@property (nonatomic, assign, readonly) SASDeviceType type;
+@property (nonatomic, assign) SASDeviceType type;
 @property (nonatomic, strong, readonly) NSString *imageStandardRes;
 @property (nonatomic, strong, readonly) NSString *caption;
 @property (nonatomic, strong, readonly) NSString *thumb;
