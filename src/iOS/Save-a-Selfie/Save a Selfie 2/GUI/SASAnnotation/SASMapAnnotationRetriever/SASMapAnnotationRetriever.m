@@ -44,15 +44,18 @@
 {
     if(self = [super init]) {
         [self setUrl: [NSURL URLWithString: @"http://www.saveaselfie.org/wp/wp-content/themes/magazine-child/getMapData.php"]];
-        
         self.request = [NSURLRequest requestWithURL:self.url];
-        
-        self.connection = [[NSURLConnection alloc] initWithRequest:self.request delegate:self];
-        
         self.responseData = [[NSMutableData alloc] init];
-    
     }
     return self;
+}
+
+
+- (void) fetchSASAnnotationsFromServer {
+    
+    self.connection = [[NSURLConnection alloc] initWithRequest:self.request
+                                                      delegate:self];
+    
 }
 
 

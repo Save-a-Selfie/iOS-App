@@ -78,10 +78,10 @@ NSString *permissionsProblemTwo = @"Please enable location services on your phon
     // See SASMapView's: @protocol SASMapViewNotifications
     // for all available botifications.
     self.sasMapView.notificationReceiver = self;
-    self.sasMapView.showAnnotations = YES;
     self.sasMapView.showsUserLocation = YES;
     self.sasMapView.zoomToUsersLocationInitially = YES;
-    self.sasMapView.sasAnnotationImage = DevicePin;
+    self.sasMapView.sasAnnotationImage = DeviceAnnotationImage;
+    [self.sasMapView loadSASAnnotationsToMap];
 }
 
 

@@ -33,5 +33,10 @@
 
 @property(nonatomic, weak) id<SASMapAnnotationRetrieverDelegate> delegate;
 
+// @Discussion:
+//  Fetches all the annotations from the server.
+//  The annotations a passed via the `SASMapAnnotationRetrieverDelegate` method
+//  -sasAnnotationsRetrieved:
+- (void) fetchSASAnnotationsFromServer;
 
 @end

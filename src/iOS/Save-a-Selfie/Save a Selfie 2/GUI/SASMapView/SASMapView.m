@@ -36,7 +36,7 @@
 @property(strong, nonatomic) SASMapAnnotationRetriever *sasAnnotationRetriever;
 
 // The annotation type for the map to show.
-@property(assign, nonatomic) SASDeviceType annotationTypeToShow;
+@property(assign, nonatomic) SASDeviceType annotationsToShow;
 
 @property(strong, nonatomic) NSMutableArray *annotationInfoFromServer;
 
@@ -53,7 +53,7 @@
 @synthesize notificationReceiver;
 @synthesize annotationInfoFromServer;
 @synthesize sasAnnotationImage;
-@synthesize annotationTypeToShow;
+@synthesize annotationsToShow;
 @synthesize showAnnotations;
 @synthesize zoomToUsersLocationInitially;
 
@@ -88,9 +88,12 @@
 // Sets up the SASMapView with the appropriate properties.
 - (void) setupMapView {
     
+    self.zoomToUsersLocationInitially = NO;
+    
     userAlreadyLocated = NO;
-    sasAnnotationImage = Default;
-    annotationTypeToShow = All;
+    sasAnnotationImage = DeviceAnnotationImage;
+    
+    annotationsToShow = All;
     
     self.mapType = MKMapTypeSatellite;
     
@@ -101,12 +104,15 @@
     self.sasLocation = [[SASLocation alloc] init];
     self.sasLocation.delegate = self;
     
+    
+}
+
+- (void)loadSASAnnotationsToMap {
     // Our annotationRetriever Object
     self.sasAnnotationRetriever = [[SASMapAnnotationRetriever alloc] init];
     self.sasAnnotationRetriever.delegate = self;
+    [self.sasAnnotationRetriever fetchSASAnnotationsFromServer];
 }
-
-
 
 // Locates the user's current location and
 // zooms to that location.
@@ -144,30 +150,28 @@
     
     switch (type) {
         case All:
-            self.annotationTypeToShow = All;
+            self.annotationsToShow = All;
             break;
             
         case Defibrillator:
-            self.annotationTypeToShow = Defibrillator;
+            self.annotationsToShow = Defibrillator;
             break;
             
         case LifeRing:
-            self.annotationTypeToShow = LifeRing;
+            self.annotationsToShow = LifeRing;
             break;
             
         case FirstAidKit:
-            self.annotationTypeToShow = FirstAidKit;
+            self.annotationsToShow = FirstAidKit;
             break;
             
         case FireHydrant:
-            self.annotationTypeToShow = FireHydrant;
+            self.annotationsToShow = FireHydrant;
             break;
             
         default:
             break;
     }
-    
-    printf("%lu", self.annotationTypeToShow);
     [self reloadAnnotations];
 }
 
@@ -326,14 +330,12 @@
     }
     
     if ([annotation isKindOfClass:MKUserLocation.class]) {
-        mapView.showsUserLocation = YES;
-        mapView.userLocation.title = @"You are here";
         return nil;
     }
     
     
     // If we're to show the default image for the annotation
-    if(sasAnnotationImage == Default) {
+    if(sasAnnotationImage == DefaultAnnotationImage) {
         return nil;
     }
     else {
@@ -353,10 +355,10 @@
 // then the annoatations shown are custom, therefore we must check the
 // appropriate return.
 - (BOOL) returnForAnnotationDeviceType:(SASDeviceType) deviceType {
-    if (self.annotationTypeToShow == deviceType) {
+    if (self.annotationsToShow == deviceType) {
         return YES;
     }
-    else if(self.annotationTypeToShow == All) {
+    else if(self.annotationsToShow == All) {
         return YES;
     }
     else {

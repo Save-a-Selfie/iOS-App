@@ -96,7 +96,6 @@
     
     // Store the type of device shown in the image
     self.sasDeviceType = self.annotation.device.type;
-    printf("%lu", (unsigned long)annotation.device.type);
     
     
     self.scrollView.delegate = self;
@@ -110,13 +109,12 @@
     
     // The sasMapView property should show the location
     // of where the device is located.
-    self.sasMapView.showAnnotations = YES;
+    self.sasMapView.sasAnnotationImage = DefaultAnnotationImage;
     self.sasMapView.notificationReceiver = self;
     self.sasMapView.userInteractionEnabled = YES;
-    self.sasMapView.zoomToUsersLocationInitially = NO;
-    self.sasMapView.showsUserLocation = NO;
+    self.sasMapView.showsUserLocation = YES;
     [self.sasMapView setMapType:MKMapTypeHybrid];
-    [self showDeviceLocation:nil];
+    [self showDeviceLocation];
     
     
     
@@ -188,10 +186,9 @@
 
 
 // Shows the location of the device on the map.
-- (IBAction)showDeviceLocation:(id)sender {
+- (IBAction)showDeviceLocation {
     [self.sasMapView showAnnotation:self.annotation andZoom:YES animated:YES];
 }
-
 
 
 

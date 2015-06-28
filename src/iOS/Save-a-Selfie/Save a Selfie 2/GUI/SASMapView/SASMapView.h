@@ -14,8 +14,8 @@
 
 // Annotation type for the MapView.
 typedef enum: NSUInteger {
-    Default, // Default MapView Pin
-    DevicePin // Annotation with the corresponding device image.
+    DefaultAnnotationImage, // Default MapView Pin
+    DeviceAnnotationImage // Annotation with the corresponding device image.
 }SASAnnotationImage;
 
 
@@ -46,12 +46,17 @@ typedef enum: NSUInteger {
 
 
 // Shows the annotations on the map according to their coordinates.
+// Default is YES.
 @property(nonatomic, assign) BOOL showAnnotations;
 
 // Will zoom to the users location SASMapView object is instansiated first.
+// Default is NO.
 @property(nonatomic, assign) BOOL zoomToUsersLocationInitially;
 
-
+// The type of image to show for the annotations on the map.
+// By default this property is DeviceAnnotationImage which shows the
+// corresponding annotation image for the type of device.
+// DefaultAnnotationImage is the standard image Apple provides for annotations.
 @property(nonatomic, assign) SASAnnotationImage sasAnnotationImage;
 
 
@@ -59,9 +64,13 @@ typedef enum: NSUInteger {
 - (void) locateUser;
 
 
+// Calling this method will load all the SASMapAnnotations
+// from the server onto the SASMApView.
+- (void) loadSASAnnotationsToMap;
+
 
 // This can be changed to show specific annotation for the map view.
-// If this is isn't called all annotations will be shown.
+// If this isn't called all annotations will be shown by default.
 // Calling this to show a specific type of annotation e.g. Defibrillator etc...
 // will result in the map view only showing that type of annotation.
 // Calling with DeviceType All will show all the annotations again.
