@@ -8,6 +8,7 @@
 
 #import "SASUploadImageViewController.h"
 #import "SASImageView.h"
+#import "SASUtilities.h"
 
 @interface SASUploadImageViewController ()
 
@@ -19,12 +20,21 @@
 
 @synthesize imageView;
 @synthesize sasUploadImage;
+@synthesize blurredImageView;
 
 
 
 - (void)viewWillAppear:(BOOL)animated {
     
     self.imageView.image = self.sasUploadImage;
+    self.blurredImageView.image = self.sasUploadImage;
+    self.blurredImageView.contentMode = UIViewContentModeScaleToFill;
+    [SASUtilities addSASBlurToView:self.blurredImageView];
+    self.navigationController.navigationBar.topItem.title = @"Upload";
+    
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:
+                                                                          [UIFont fontWithName:@"AvenirNext-DemiBold" size:17.0f] }];
+    
 }
 
 

@@ -261,8 +261,6 @@ NSString *permissionsProblemTwo = @"Please enable location services on your phon
     
     [self.sasUploadImageViewController setSasUploadImage:image];
     [self.navigationController presentViewController:self.uploadImageNavigationController animated:YES completion:nil];
-
-
 }
 
 

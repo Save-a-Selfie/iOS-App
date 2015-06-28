@@ -8,9 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "SASUploadImage.h"
+#import "SASMapView.h"
 
 @interface SASUploadImageViewController : UIViewController
 
 @property(nonatomic, strong) SASUploadImage *sasUploadImage;
+@property (weak, nonatomic) IBOutlet SASMapView *sasMapView;
+@property (weak, nonatomic) IBOutlet UIImageView *blurredImageView;
+
 
 @end

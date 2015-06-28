@@ -77,7 +77,8 @@
 }
 
 
-- (void)viewDidLayoutSubviews {
+
+- (void)viewWillLayoutSubviews {
     CGSize sizeThatFitsTextView = [self.photoDescription sizeThatFits:CGSizeMake(self.photoDescription.frame.size.width, MAXFLOAT)];
     photoDesriptionHeightContraint.constant = sizeThatFitsTextView.height;
 }
@@ -206,18 +207,12 @@
     
     // Navigation Bar.
     [self.navigationController.navigationBar setTintColor:[SASColour getSASColourForDeviceType: self.sasDeviceType]];
-    [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName: [UIFont fontWithName:@"AvenirNext-DemiBold" size:15.0f],
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName: [UIFont fontWithName:@"AvenirNext-DemiBold" size:17.0f],
                                                                       NSForegroundColorAttributeName : [SASColour getSASColourForDeviceType: self.sasDeviceType],
                                                                       }];
     
-    
-    
 }
 
-
-- (void) back {
-    [self.navigationController popViewControllerAnimated:YES];
-}
 
 // Gets the image associated with the device from
 // the annotation selected on the map.

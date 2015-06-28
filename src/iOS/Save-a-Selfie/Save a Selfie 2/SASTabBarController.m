@@ -6,17 +6,17 @@
 //  GNU General Public License
 //
 
-#import "TabBarController.h"
+#import "SASTabBarController.h"
 #import "WebsiteViewController.h"
 #import "UploadPictureViewController.h"
 #import "AppDelegate.h"
 #import "SASColour.h"
 
-@interface TabBarController ()
+@interface SASTabBarController ()
 
 @end
 
-@implementation TabBarController
+@implementation SASTabBarController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

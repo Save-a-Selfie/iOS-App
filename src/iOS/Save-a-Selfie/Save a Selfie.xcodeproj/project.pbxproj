@@ -79,7 +79,7 @@
 		D756A29D19F175230089EF80 /* UIImage+RoundedCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = D756A29A19F175230089EF80 /* UIImage+RoundedCorner.m */; };
 		D756A29F19F1D4F10089EF80 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D756A29E19F1D4F10089EF80 /* AssetsLibrary.framework */; };
 		D756A2A119F1D5D50089EF80 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D756A2A019F1D5D50089EF80 /* ImageIO.framework */; };
-		D756A2A919F309690089EF80 /* TabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = D756A2A819F309690089EF80 /* TabBarController.m */; };
+		D756A2A919F309690089EF80 /* SASTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = D756A2A819F309690089EF80 /* SASTabBarController.m */; };
 		D759B32D1A7D3DC6009EA131 /* default (1).gpx in Resources */ = {isa = PBXBuildFile; fileRef = D759B32C1A7D3DC5009EA131 /* default (1).gpx */; };
 		D786E1731A4823B500A20FDD /* trade-gothic-no-18-condensed-1361519964.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D786E1721A4823B500A20FDD /* trade-gothic-no-18-condensed-1361519964.ttf */; };
 		D786E1751A4827D300A20FDD /* trade-gothic-lt-1361519976.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D786E1741A4827D300A20FDD /* trade-gothic-lt-1361519976.ttf */; };
@@ -202,8 +202,8 @@
 		D756A29A19F175230089EF80 /* UIImage+RoundedCorner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+RoundedCorner.m"; sourceTree = "<group>"; };
 		D756A29E19F1D4F10089EF80 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		D756A2A019F1D5D50089EF80 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
-		D756A2A719F309690089EF80 /* TabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabBarController.h; sourceTree = "<group>"; };
-		D756A2A819F309690089EF80 /* TabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabBarController.m; sourceTree = "<group>"; };
+		D756A2A719F309690089EF80 /* SASTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASTabBarController.h; sourceTree = "<group>"; };
+		D756A2A819F309690089EF80 /* SASTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASTabBarController.m; sourceTree = "<group>"; };
 		D759B32C1A7D3DC5009EA131 /* default (1).gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "default (1).gpx"; sourceTree = "<group>"; };
 		D786E1721A4823B500A20FDD /* trade-gothic-no-18-condensed-1361519964.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "trade-gothic-no-18-condensed-1361519964.ttf"; sourceTree = "<group>"; };
 		D786E1741A4827D300A20FDD /* trade-gothic-lt-1361519976.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "trade-gothic-lt-1361519976.ttf"; sourceTree = "<group>"; };
@@ -277,6 +277,16 @@
 			path = SASImageView;
 			sourceTree = "<group>";
 		};
+		18372AA71B3F7EE600BD61D9 /* SASTabBarController */ = {
+			isa = PBXGroup;
+			children = (
+				D756A2A719F309690089EF80 /* SASTabBarController.h */,
+				D756A2A819F309690089EF80 /* SASTabBarController.m */,
+			);
+			name = SASTabBarController;
+			path = ..;
+			sourceTree = "<group>";
+		};
 		1845C4E71B2091C800E3D7BC /* SASActivityIndicator */ = {
 			isa = PBXGroup;
 			children = (
@@ -346,6 +356,7 @@
 				185A39B91B1FD7C500699D31 /* SASColour */,
 				1845C4E71B2091C800E3D7BC /* SASActivityIndicator */,
 				1810C90B1B28904A009063E5 /* SASNormalizeImage */,
+				18372AA71B3F7EE600BD61D9 /* SASTabBarController */,
 				188CAEEE1B21008B006A90EB /* Screen */,
 			);
 			path = GUI;
@@ -584,8 +595,6 @@
 				D786E24D1A50AB1500A20FDD /* PopupImage.xib */,
 				18DDE50A1B3D7F0F00AB0CB3 /* Launch Screen.xib */,
 				D72E1DB019EE841E005DD8A5 /* Supporting Files */,
-				D756A2A719F309690089EF80 /* TabBarController.h */,
-				D756A2A819F309690089EF80 /* TabBarController.m */,
 				D72E1E4419F019DF005DD8A5 /* ThirdViewController.h */,
 				D72E1E4719F01A2D005DD8A5 /* ThirdViewController.m */,
 				D715E4951A0936010026D91F /* UIButton+VerticalLayout.h */,
@@ -729,7 +738,7 @@
 				18EBF9801B2741F600EDA48B /* SASUploadImageViewController.m in Sources */,
 				18F46A4B1B2B9F1F0062BD05 /* SASFilterView.m in Sources */,
 				181D1E5D1B2359EA00FB5928 /* SASImageInspectorView.m in Sources */,
-				D756A2A919F309690089EF80 /* TabBarController.m in Sources */,
+				D756A2A919F309690089EF80 /* SASTabBarController.m in Sources */,
 				1810C90A1B289044009063E5 /* UIImage+SASNormalizeImage.m in Sources */,
 				D73550A41A84DBF500F9093C /* UIView+Alert.m in Sources */,
 				188CAEE51B20EA59006A90EB /* SASSocial.m in Sources */,
