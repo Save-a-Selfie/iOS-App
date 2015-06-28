@@ -20,6 +20,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *filterLabel;
 @property (assign, nonatomic) SASDeviceType selectedDevice;
 
+@property (strong, nonatomic) NSMutableArray *cells;
+
 @end
 
 @implementation SASFilterView
@@ -28,6 +30,7 @@
 @synthesize filterLabel;
 @synthesize delegate;
 @synthesize selectedDevice;
+@synthesize cells;
 
 SASDeviceType availableDevicesToFilter[5] = {
     All,
@@ -76,27 +79,57 @@ SASDeviceType availableDevicesToFilter[5] = {
 
 - (void)tableView:(UITableView *)aTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
+    for (SASFilterViewCell *sasFilterViewCell in cells) {
+        [self untickCell:sasFilterViewCell];
+    }
+    
     SASFilterViewCell *selectedCell = (SASFilterViewCell*)[aTableView cellForRowAtIndexPath:indexPath];
-    [selectedCell updateSelectionStatus];
+    [self tickCell:selectedCell];
     self.selectedDevice = selectedCell.associatedDeviceType;
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 
+
+- (void) untickCell:(SASFilterViewCell*) cell {
+    [cell setCellWithGreenTick:NO];
+}
+
+
+- (void) tickCell: (SASFilterViewCell*) cell {
+    [cell setCellWithGreenTick:YES];
+}
+
+
+
+
 #pragma UITableViewDataSource
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    SASFilterViewCell *sasFilterViewCell = (SASFilterViewCell*)[self.tableView dequeueReusableCellWithIdentifier:@"sasFilterViewCell"];
-    
     SASDeviceType deviceTypeForCell = [self getDeviceForCellWithIndexPath:indexPath];
     
+    if(self.cells == nil) {
+        self.cells = [[NSMutableArray alloc] init];
+    }
+    
+    SASFilterViewCell *sasFilterViewCell = (SASFilterViewCell*)[self.tableView dequeueReusableCellWithIdentifier:@"sasFilterViewCell"];
     sasFilterViewCell.deviceNameLabel.text = [SASDevice getDeviceNameForDeviceType:deviceTypeForCell];
     sasFilterViewCell.imageView.image = [SASDevice getDeviceImageForDeviceType:deviceTypeForCell];
     sasFilterViewCell.associatedDeviceType = deviceTypeForCell;
     
+    // This should be by default the cell which is selected i.e
+    // has green tick.
+    if(deviceTypeForCell == All) {
+        [self tickCell:sasFilterViewCell];
+    }
+    
+    // Keep reference to each cell.
+    [self.cells addObject:sasFilterViewCell];
+    
     return sasFilterViewCell;
 }
+
 
 
 - (SASDeviceType) getDeviceForCellWithIndexPath:(NSIndexPath*) indexPath {
@@ -133,11 +166,17 @@ SASDeviceType availableDevicesToFilter[5] = {
 
 
 
-// TODO: Add logic for what cells can be selected together etc.
 // Forwards selected cells associatedDevice to delegate.
 - (IBAction)doneButtonPressed:(id)sender {
     if(delegate != nil && [delegate respondsToSelector:@selector(sasFilterView:doneButtonWasPressedWithSelectedDeviceType:)]) {
         [self.delegate sasFilterView:self doneButtonWasPressedWithSelectedDeviceType:self.selectedDevice];
+    }
+}
+
+
+- (void) updateDelegateOnViewVisibility:(BOOL) visibility {
+    if (self.delegate != nil && [self.delegate respondsToSelector:@selector(sasFilterView:isVisibleInViewHierarhy:)]) {
+        [self.delegate sasFilterView:self isVisibleInViewHierarhy:visibility];
     }
 }
 
@@ -175,11 +214,7 @@ SASDeviceType availableDevicesToFilter[5] = {
 }
 
 
-- (void) updateDelegateOnViewVisibility:(BOOL) visibility {
-    if (self.delegate != nil && [self.delegate respondsToSelector:@selector(sasFilterView:isVisibleInViewHierarhy:)]) {
-        [self.delegate sasFilterView:self isVisibleInViewHierarhy:visibility];
-    }
-}
+
 
 
 @end

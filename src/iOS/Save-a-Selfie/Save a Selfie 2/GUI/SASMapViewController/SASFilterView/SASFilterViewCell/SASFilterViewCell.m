@@ -24,7 +24,7 @@
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
     if (self = [super initWithCoder:aDecoder]) {
-        self.selectionStatus = NO;
+        [self setCellWithGreenTick:NO];
     }
     return self;
 }
@@ -34,8 +34,8 @@
 }
 
 
-- (void)updateSelectionStatus {
-    if (self.selectionStatus == NO) {
+- (void) setCellWithGreenTick: (BOOL) status {
+    if (status == YES) {
         self.selectionStatusImageView.image = [UIImage imageNamed:@"SelectedCell"];
         self.selectionStatus = YES;
     }

@@ -13,6 +13,10 @@
 @property (strong, nonatomic) IBOutlet UILabel *deviceNameLabel;
 @property (assign, nonatomic) SASDeviceType associatedDeviceType;
 
-- (void) updateSelectionStatus;
+
+// @param BOOL:
+//  YES: Sets the tick to green.
+//  NO:  Sets the tick to grey.
+- (void)setCellWithGreenTick: (BOOL) status;
 
 @end
