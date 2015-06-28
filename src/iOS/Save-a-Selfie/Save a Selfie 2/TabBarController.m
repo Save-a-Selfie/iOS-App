@@ -10,6 +10,7 @@
 #import "WebsiteViewController.h"
 #import "UploadPictureViewController.h"
 #import "AppDelegate.h"
+#import "SASColour.h"
 
 @interface TabBarController ()
 
@@ -19,6 +20,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [[UIBarButtonItem appearanceWhenContainedIn:[UINavigationBar class], nil] setTitleTextAttributes:
+     @{NSFontAttributeName:[UIFont fontWithName:@"AvenirNext-DemiBold" size:15.0f]
+       }forState:UIControlStateNormal];
 }
 
 - (void)viewDidAppear:(BOOL)animated {

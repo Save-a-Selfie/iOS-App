@@ -21,21 +21,23 @@
     BOOL imageLoaded;
 }
 
+@property (nonatomic, assign) SASDeviceType sasDeviceType;
+
 
 @property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, weak) IBOutlet UIView *contentView;
 
-@property (nonatomic, assign) SASDeviceType sasDeviceType;
 @property (nonatomic, weak) IBOutlet UITextView *photoDescription;
+
 @property (nonatomic, strong) UIImage *sasImage;
 @property (nonatomic, weak) IBOutlet SASImageView *sasImageView;
 @property (strong, nonatomic) IBOutlet SASImageView *blurredImageView;
+
 @property (nonatomic, strong) SASActivityIndicator *sasActivityIndicator;
 
 @property (nonatomic, strong) IBOutlet SASMapView *sasMapView;
 
 @property (nonatomic, weak) IBOutlet UIImageView *deviceImageView;
-
 @property (nonatomic, weak) IBOutlet UILabel *distanceLabel;
 
 @property (nonatomic, weak) IBOutlet UIButton *showDeviceLocationPin;
@@ -63,6 +65,7 @@
 @synthesize distanceLabel;
 @synthesize showDeviceLocationPin;
 @synthesize photoDesriptionHeightContraint;
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -207,9 +210,14 @@
                                                                       NSForegroundColorAttributeName : [SASColour getSASColourForDeviceType: self.sasDeviceType],
                                                                       }];
     
+    
+    
 }
 
 
+- (void) back {
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
 // Gets the image associated with the device from
 // the annotation selected on the map.
