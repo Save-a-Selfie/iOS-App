@@ -10,8 +10,13 @@
 
 @implementation UIFont (SASFont)
 
-+ (UIFont *)sasFontForNavBar {
++ (UIFont *)sasFontForNavBarTitle {
     return [UIFont fontWithName:@"AvenirNext-Bold" size:0.0f];
+}
+
+
++ (UIFont *) sasFontWithSize:(float) size {
+    return [UIFont fontWithName:@"Avenir Next" size:size];
 }
 
 
@@ -23,4 +28,6 @@
     
     label.attributedText = attributedString;
 }
+
+
 @end

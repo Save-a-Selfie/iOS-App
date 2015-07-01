@@ -7,16 +7,13 @@
 //
 
 #import "SASImagePickerViewController.h"
-#import "SASLocation.h"
+
 #import "SASUtilities.h"
-#import "SASUploadImage.h"
 
-@interface SASImagePickerViewController() <UINavigationControllerDelegate, UIImagePickerControllerDelegate> {
-    CLLocationCoordinate2D currentLocationCoordinates;
-}
 
-@property(nonatomic, strong) SASLocation *sasLocation;
-@property(nonatomic, strong) SASUploadImage *sasUploadImage;
+@interface SASImagePickerViewController() <UINavigationControllerDelegate, UIImagePickerControllerDelegate>
+
+@property(nonatomic, strong) UIImage* imageTakenFromCamera;
 
 
 @end
@@ -24,25 +21,16 @@
 
 @implementation SASImagePickerViewController
 
-@synthesize sasLocation;
-@synthesize sasUploadImage;
+@synthesize imageTakenFromCamera;
 @synthesize sasImagePickerDelegate;
 
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    if(sasLocation == nil) {
-        self.sasLocation = [[SASLocation alloc] init];
-    }
-    
     self.delegate = self;
-    
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-}
 
 
 
@@ -56,44 +44,23 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     
 
-    // @Discussion:
-    //  Image taken with camera => no GPS info available, use location SASLocation -currentUserLocation:
-    //  Once iOS 8 is widely adopted, would be better to use PHPhotoLibrary to fetch the last image
-    //  see: http://stackoverflow.com/questions/
-    
-    
     if([info objectForKey:UIImagePickerControllerOriginalImage]) {
-        
-        UIImage *image = info[UIImagePickerControllerOriginalImage];
-        
-        self.sasUploadImage = [[SASUploadImage alloc] initWithImage:image];
-        
-        // Set the timestamp for the image.
-        self.sasUploadImage.timeStamp = [SASUtilities getCurrentTimeStamp];
-        
-        // Get the user's current location.
-        currentLocationCoordinates = [sasLocation currentUserLocation];
-        
-        image = nil;
+        self.imageTakenFromCamera = info[UIImagePickerControllerOriginalImage];
     }
     
     
-    
-#pragma TODO: Get this WORKING!!
-   
-    
     // Send the image to delegate.
-    if(self.sasImagePickerDelegate != nil) {
-        [self.sasImagePickerDelegate sasImagePickerController:self didFinishWithImage:self.sasUploadImage];
+    if(self.sasImagePickerDelegate != nil && [self.sasImagePickerDelegate respondsToSelector:@selector(sasImagePickerController:didFinishWithImage:)]) {
+        
+        [self.sasImagePickerDelegate sasImagePickerController:self
+                                           didFinishWithImage:self.imageTakenFromCamera];
     }
 }
 
 
 
 - (void) imagePickerControllerDidCancel:(UIImagePickerController *)picker {
-    
-    [self removeFromParentViewController];
-    self.sasLocation = nil;
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

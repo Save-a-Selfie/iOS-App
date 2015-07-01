@@ -103,7 +103,7 @@
     // Our location object.
     self.sasLocation = [[SASLocation alloc] init];
     self.sasLocation.delegate = self;
-    
+    [self.sasLocation startUpdatingUsersLocation];
     
 }
 
@@ -113,6 +113,7 @@
     self.sasAnnotationRetriever.delegate = self;
     [self.sasAnnotationRetriever fetchSASAnnotationsFromServer];
 }
+
 
 // Locates the user's current location and
 // zooms to that location.
@@ -124,6 +125,11 @@
     else {
         plog(@"SASMapView could not access location services.");
     }
+}
+
+
+- (CLLocationCoordinate2D) currentUserLocation {
+    return self.currentLocation;
 }
 
 
@@ -216,7 +222,6 @@
 
 #pragma SASLocation delegate method
 - (void) locationDidUpdate:(CLLocationCoordinate2D)location {
-   
     self.currentLocation = location;
     
     if(zoomToUsersLocationInitially) {

@@ -10,7 +10,10 @@
 
 @interface UIFont (SASFont)
 
-+ (UIFont*) sasFontForNavBar;
++ (UIFont*) sasFontForNavBarTitle;
+
++ (UIFont*)sasFontWithSize:(float) size;
 
 + (void) increaseCharacterSpacingForLabel:(UILabel*) label byAmount:(float) amount;
+
 @end

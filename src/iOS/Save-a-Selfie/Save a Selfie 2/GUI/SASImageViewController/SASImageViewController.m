@@ -79,8 +79,9 @@
 
 
 - (void)viewWillLayoutSubviews {
-    CGSize sizeThatFitsTextView = [self.photoDescription sizeThatFits:CGSizeMake(self.photoDescription.frame.size.width, MAXFLOAT)];
-    photoDesriptionHeightContraint.constant = sizeThatFitsTextView.height;
+    self.photoDescription.translatesAutoresizingMaskIntoConstraints = NO;
+    //CGSize sizeThatFitsTextView = [self.photoDescription sizeThatFits:CGSizeMake(self.photoDescription.frame.size.width, MAXFLOAT)];
+    self.photoDesriptionHeightContraint.constant = self.photoDescription.contentSize.height;
 }
 
 

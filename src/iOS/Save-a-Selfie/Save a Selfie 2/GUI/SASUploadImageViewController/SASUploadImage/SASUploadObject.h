@@ -11,12 +11,14 @@
 
 @class SASDevice;
 
-@interface SASUploadImage : UIImage
+@interface SASUploadObject : NSObject
 
-@property(nonatomic, weak) NSString *timeStamp;
-@property(nonatomic, weak) SASDevice *associatedDevice;
+@property(nonatomic, strong) NSString *timeStamp;
+@property(nonatomic, strong) SASDevice *associatedDevice;
 @property(nonatomic, assign) CLLocationCoordinate2D coordinates;
+@property(nonatomic, strong) UIImage *image;
+@property(nonatomic, strong) NSString *description;
 
-- (instancetype) initWithImage:(UIImage*) image;
+- (instancetype) initWithImage:(UIImage*) imageToUpload;
 
 @end

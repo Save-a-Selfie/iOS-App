@@ -69,6 +69,10 @@ typedef enum: NSUInteger {
 - (void) loadSASAnnotationsToMap;
 
 
+// @return Thre location of the user.
+- (CLLocationCoordinate2D) currentUserLocation;
+
+
 // This can be changed to show specific annotation for the map view.
 // If this isn't called all annotations will be shown by default.
 // Calling this to show a specific type of annotation e.g. Defibrillator etc...

@@ -2,13 +2,12 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x",
-      "filename" : "Defibrillator@1x.png"
+      "scale" : "1x"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "Defibrillator@2x.png"
+      "filename" : "DefibrillatorUnselected.png"
     },
     {
       "idiom" : "universal",

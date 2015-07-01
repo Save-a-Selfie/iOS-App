@@ -262,34 +262,43 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hRP-EK-fmD">
-                                <rect key="frame" x="96" y="304" width="60" height="60"/>
+                                <rect key="frame" x="164" y="304" width="60" height="60"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="4Y3-KO-0lo"/>
-                                    <constraint firstAttribute="width" constant="60" id="YxP-NC-CMv"/>
+                                    <constraint firstAttribute="width" constant="60" id="cYP-Ez-SGg"/>
+                                    <constraint firstAttribute="height" constant="60" id="pwy-8H-IyO"/>
                                 </constraints>
-                                <state key="normal" image="FirstAidKit">
+                                <state key="normal" image="FirstAidKitUnselected">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="deviceSelected:" destination="DJJ-KF-v3U" eventType="touchUpInside" id="25k-x0-wBq"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gz1-ER-JpS">
                                 <rect key="frame" x="28" y="304" width="60" height="60"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="DNk-A0-PxJ"/>
-                                    <constraint firstAttribute="width" constant="60" id="NI6-Fb-Pyn"/>
+                                    <constraint firstAttribute="height" constant="60" id="anu-JF-5SC"/>
+                                    <constraint firstAttribute="width" constant="60" id="uJE-3e-1yV"/>
                                 </constraints>
-                                <state key="normal" image="Defibrillator">
+                                <state key="normal" image="DefibrillatorUnselected">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="deviceSelected:" destination="DJJ-KF-v3U" eventType="touchUpInside" id="QbD-f0-Ktw"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sro-m6-M9g">
-                                <rect key="frame" x="232" y="304" width="60" height="60"/>
+                                <rect key="frame" x="96" y="304" width="60" height="60"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="7HZ-l4-9wZ"/>
-                                    <constraint firstAttribute="width" constant="60" id="er0-C3-i0G"/>
+                                    <constraint firstAttribute="width" constant="60" id="eqL-RT-Aiy"/>
+                                    <constraint firstAttribute="height" constant="60" id="lbG-6X-iFj"/>
                                 </constraints>
-                                <state key="normal" image="LifeRing">
+                                <state key="normal" image="LifeRingUnselected">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="deviceSelected:" destination="DJJ-KF-v3U" eventType="touchUpInside" id="XFf-my-Gge"/>
+                                </connections>
                             </button>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="MJY-qg-MTp" customClass="SASMapView">
                                 <rect key="frame" x="0.0" y="372" width="320" height="80"/>
@@ -308,11 +317,17 @@
                                     <color key="titleColor" red="0.97603815513523917" green="0.99270645774038235" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="nextButtonPress:" destination="DJJ-KF-v3U" eventType="touchUpInside" id="UwY-q1-ibm"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SELECT DEVICE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gyw-so-Gq1">
                                 <rect key="frame" x="89" y="272" width="143" height="24"/>
-                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="24" id="YG3-XY-a5W"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="13"/>
+                                <color key="textColor" red="0.40660511363636365" green="0.40660511363636365" blue="0.40660511363636365" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Jqu-qb-fxd" customClass="SASImageView">
@@ -328,48 +343,73 @@
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YFb-TA-ZBH">
-                                <rect key="frame" x="164" y="304" width="60" height="60"/>
+                                <rect key="frame" x="232" y="304" width="60" height="60"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="sCU-Uh-Kr1"/>
-                                    <constraint firstAttribute="width" constant="60" id="vvX-E6-2hZ"/>
+                                    <constraint firstAttribute="height" constant="60" id="L3Q-sS-YTl"/>
+                                    <constraint firstAttribute="width" constant="60" id="asv-A8-YIf"/>
                                 </constraints>
-                                <state key="normal" image="FireHydrant">
+                                <state key="normal" image="FireHydrantUnselected">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="deviceSelected:" destination="DJJ-KF-v3U" eventType="touchUpInside" id="9VN-7Z-swh"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="37o-U7-74U">
+                                <rect key="frame" x="0.0" y="518" width="50" height="54"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="VGi-u9-zfE"/>
+                                    <constraint firstAttribute="height" constant="54" id="dEP-c3-lAv"/>
+                                </constraints>
+                                <state key="normal" image="BackArrow">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="backButtonPress:" destination="DJJ-KF-v3U" eventType="touchUpInside" id="dHy-45-Cy8"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Gyw-so-Gq1" firstAttribute="leading" secondItem="eKH-EA-0ll" secondAttribute="leadingMargin" constant="73" id="5Jt-kf-lo5"/>
-                            <constraint firstItem="hRP-EK-fmD" firstAttribute="top" secondItem="Gyw-so-Gq1" secondAttribute="bottom" constant="8" id="6Cm-Aq-CSt"/>
-                            <constraint firstItem="YFb-TA-ZBH" firstAttribute="leading" secondItem="hRP-EK-fmD" secondAttribute="trailing" constant="8" id="7AZ-We-DBr"/>
-                            <constraint firstItem="YFb-TA-ZBH" firstAttribute="top" secondItem="Gyw-so-Gq1" secondAttribute="bottom" constant="8" id="7q2-Nm-0nq"/>
+                            <constraint firstItem="Sro-m6-M9g" firstAttribute="leading" secondItem="gz1-ER-JpS" secondAttribute="trailing" constant="8" id="1W7-BF-OB0"/>
+                            <constraint firstItem="hRP-EK-fmD" firstAttribute="leading" secondItem="Sro-m6-M9g" secondAttribute="trailing" constant="8" id="63d-eX-9Ei"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="YFb-TA-ZBH" secondAttribute="trailing" constant="12" id="8wz-Fp-xe3"/>
+                            <constraint firstItem="Sro-m6-M9g" firstAttribute="top" secondItem="Gyw-so-Gq1" secondAttribute="bottom" constant="8" id="Ctd-GU-qhy"/>
+                            <constraint firstItem="hRP-EK-fmD" firstAttribute="top" secondItem="Gyw-so-Gq1" secondAttribute="bottom" constant="8" id="EES-aK-vqB"/>
                             <constraint firstItem="afK-H1-q78" firstAttribute="leading" secondItem="eKH-EA-0ll" secondAttribute="leadingMargin" constant="-16" id="EJP-m5-pfC"/>
-                            <constraint firstItem="MJY-qg-MTp" firstAttribute="top" secondItem="Sro-m6-M9g" secondAttribute="bottom" constant="8" id="HXN-RJ-jRp"/>
-                            <constraint firstItem="Sro-m6-M9g" firstAttribute="leading" secondItem="YFb-TA-ZBH" secondAttribute="trailing" constant="8" id="HbX-1U-LQx"/>
-                            <constraint firstItem="gz1-ER-JpS" firstAttribute="top" secondItem="afK-H1-q78" secondAttribute="bottom" constant="43" id="IiL-eP-Lr2"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Gyw-so-Gq1" secondAttribute="trailing" constant="72" id="H2f-EO-4h9"/>
                             <constraint firstItem="Jqu-qb-fxd" firstAttribute="leading" secondItem="eKH-EA-0ll" secondAttribute="leadingMargin" constant="-16" id="ItA-bv-moq"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Jqu-qb-fxd" secondAttribute="trailing" constant="-16" id="JS0-F8-pf3"/>
-                            <constraint firstItem="Sro-m6-M9g" firstAttribute="top" secondItem="afK-H1-q78" secondAttribute="bottom" constant="43" id="M7h-TJ-jcm"/>
-                            <constraint firstItem="gz1-ER-JpS" firstAttribute="leading" secondItem="eKH-EA-0ll" secondAttribute="leadingMargin" constant="12" id="PfN-rK-Vk2"/>
+                            <constraint firstItem="Gyw-so-Gq1" firstAttribute="top" secondItem="afK-H1-q78" secondAttribute="bottom" constant="11" id="KVa-8g-D5p"/>
+                            <constraint firstItem="YFb-TA-ZBH" firstAttribute="top" secondItem="afK-H1-q78" secondAttribute="bottom" constant="43" id="Ndg-s8-Pxs"/>
+                            <constraint firstItem="37o-U7-74U" firstAttribute="leading" secondItem="eKH-EA-0ll" secondAttribute="leadingMargin" constant="-16" id="ONr-TI-VLJ"/>
                             <constraint firstAttribute="trailingMargin" secondItem="MJY-qg-MTp" secondAttribute="trailing" constant="-16" id="RM0-7s-VUF"/>
                             <constraint firstItem="Jqu-qb-fxd" firstAttribute="top" secondItem="F97-b0-KWO" secondAttribute="bottom" constant="-20" id="Vjr-Mb-h4e"/>
                             <constraint firstItem="MJY-qg-MTp" firstAttribute="leading" secondItem="eKH-EA-0ll" secondAttribute="leadingMargin" constant="-16" id="Xqf-mH-az9"/>
+                            <constraint firstItem="Gyw-so-Gq1" firstAttribute="leading" secondItem="eKH-EA-0ll" secondAttribute="leadingMargin" constant="73" id="YIR-es-ct0"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="37o-U7-74U" secondAttribute="bottom" constant="-4" id="YIT-Ee-1gx"/>
                             <constraint firstAttribute="trailingMargin" secondItem="isd-II-BZu" secondAttribute="trailing" constant="-16" id="cSE-ql-wxp"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="Gyw-so-Gq1" secondAttribute="trailing" constant="72" id="fRz-pi-MZc"/>
                             <constraint firstItem="afK-H1-q78" firstAttribute="top" secondItem="F97-b0-KWO" secondAttribute="bottom" constant="-20" id="gKU-gG-BIm"/>
+                            <constraint firstItem="YFb-TA-ZBH" firstAttribute="leading" secondItem="hRP-EK-fmD" secondAttribute="trailing" constant="8" id="gQ2-EW-jf4"/>
                             <constraint firstAttribute="trailingMargin" secondItem="afK-H1-q78" secondAttribute="trailing" constant="-16" id="idT-Uf-IBa"/>
-                            <constraint firstItem="hRP-EK-fmD" firstAttribute="leading" secondItem="gz1-ER-JpS" secondAttribute="trailing" constant="8" id="nTd-40-tgl"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="Sro-m6-M9g" secondAttribute="trailing" constant="12" id="qgH-uW-KXY"/>
+                            <constraint firstItem="gz1-ER-JpS" firstAttribute="top" secondItem="afK-H1-q78" secondAttribute="bottom" constant="43" id="ncg-tf-HTU"/>
                             <constraint firstItem="isd-II-BZu" firstAttribute="leading" secondItem="eKH-EA-0ll" secondAttribute="leadingMargin" constant="-16" id="sab-1c-2jj"/>
                             <constraint firstItem="lv6-9s-1fh" firstAttribute="top" secondItem="isd-II-BZu" secondAttribute="bottom" id="tI5-7d-qA1"/>
-                            <constraint firstItem="Gyw-so-Gq1" firstAttribute="top" secondItem="afK-H1-q78" secondAttribute="bottom" constant="11" id="ybs-j7-EmQ"/>
+                            <constraint firstItem="MJY-qg-MTp" firstAttribute="top" secondItem="Sro-m6-M9g" secondAttribute="bottom" constant="8" id="tfH-qO-Wfu"/>
+                            <constraint firstItem="gz1-ER-JpS" firstAttribute="leading" secondItem="eKH-EA-0ll" secondAttribute="leadingMargin" constant="12" id="xg5-Cc-iSE"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="backArrowButton" destination="37o-U7-74U" id="6Dz-54-WsR"/>
                         <outlet property="blurredImageView" destination="Jqu-qb-fxd" id="YrC-nx-wLo"/>
-                        <outlet property="imageView" destination="afK-H1-q78" id="POa-1Y-Bgm"/>
+                        <outlet property="defibrillatorButton" destination="gz1-ER-JpS" id="6xy-rZ-pK7"/>
+                        <outlet property="fireHydrantButton" destination="YFb-TA-ZBH" id="Yx5-4o-ZQ9"/>
+                        <outlet property="firstAidKitButton" destination="hRP-EK-fmD" id="tjE-7p-LvR"/>
+                        <outlet property="lifeRingButton" destination="Sro-m6-M9g" id="eCb-kA-K6y"/>
+                        <outlet property="nextButton" destination="isd-II-BZu" id="Hyg-Zb-Uil"/>
+                        <outlet property="sasImageView" destination="afK-H1-q78" id="RvA-Mq-WU6"/>
                         <outlet property="sasMapView" destination="MJY-qg-MTp" id="kBI-fn-tc9"/>
+                        <outlet property="selectDeviceLabel" destination="Gyw-so-Gq1" id="ubi-VY-efJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kh4-HO-sd5" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -499,11 +539,12 @@
         </scene>
     </scenes>
     <resources>
+        <image name="BackArrow" width="40" height="40"/>
         <image name="Code for ireland logo transparent" width="100" height="53"/>
-        <image name="Defibrillator" width="175" height="175"/>
-        <image name="FireHydrant" width="175" height="175"/>
-        <image name="FirstAidKit" width="87" height="87"/>
-        <image name="LifeRing" width="175" height="175"/>
+        <image name="DefibrillatorUnselected" width="175" height="175"/>
+        <image name="FireHydrantUnselected" width="175" height="175"/>
+        <image name="FirstAidKitUnselected" width="175" height="175"/>
+        <image name="LifeRingUnselected" width="175" height="175"/>
         <image name="Locate" width="118" height="43"/>
         <image name="NewImage" width="122" height="43"/>
         <image name="Order of Malta 300" width="300" height="108"/>
