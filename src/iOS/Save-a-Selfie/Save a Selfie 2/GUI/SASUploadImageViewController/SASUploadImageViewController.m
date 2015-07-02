@@ -13,31 +13,26 @@
 #import "UIFont+SASFont.h"
 #import "Screen.h"
 #import "SASBarButtonItem.h"
+#import "SASAlertView.h"
+#import "SASUploader.h"
 
 
 @interface SASUploadImageViewController () <UITextViewDelegate>
 
 @property (strong, nonatomic) IBOutlet SASImageView *sasImageView;
+@property (weak, nonatomic) IBOutlet SASMapView *sasMapView;
 @property (strong, nonatomic) SASAnnotation *sasAnnotation;
 
-// Buttons
 @property (weak, nonatomic) IBOutlet UIButton *defibrillatorButton;
 @property (weak, nonatomic) IBOutlet UIButton *lifeRingButton;
 @property (weak, nonatomic) IBOutlet UIButton *firstAidKitButton;
 @property (weak, nonatomic) IBOutlet UIButton *fireHydrantButton;
 @property (weak, nonatomic) IBOutlet UILabel *selectDeviceLabel;
+@property (weak, nonatomic) IBOutlet UIButton *doneButton;
+@property(strong, nonatomic) IBOutlet UITextView *deviceDescriptionTextView;
 
 @property (strong, nonatomic) NSMutableArray *deviceButtonsArray;
-@property (weak, nonatomic) IBOutlet UIButton *nextButton;
-
-@property (weak, nonatomic) IBOutlet UIButton *backArrowButton;
-@property(strong, nonatomic) UITextView *deviceDescription;
-
-@property(nonatomic, assign) BOOL canSlideLeft;
-@property(nonatomic, assign) BOOL canSlideRight;
-
-
-@property(nonatomic, strong) SASBarButtonItem *dismissKeyBoardBarButtonItem;
+@property (nonatomic, assign) BOOL deviceHasBeenSelected;
 
 
 @end
@@ -46,7 +41,6 @@
 
 @synthesize sasImageView;
 @synthesize sasUploadObject;
-@synthesize blurredImageView;
 @synthesize sasMapView;
 @synthesize sasAnnotation;
 
@@ -56,12 +50,14 @@
 @synthesize fireHydrantButton;
 @synthesize deviceButtonsArray;
 @synthesize selectDeviceLabel;
-@synthesize nextButton;
-@synthesize backArrowButton;
-@synthesize dismissKeyBoardBarButtonItem;
+@synthesize doneButton;
+@synthesize deviceHasBeenSelected;
 
-@synthesize canSlideLeft;
-@synthesize canSlideRight;
+
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    [self dismissKeyboard];
+}
 
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -71,7 +67,7 @@
         self.sasAnnotation = [[SASAnnotation alloc] init];
     }
     
-    self.sasAnnotation.coordinate = [sasMapView currentUserLocation];
+    self.sasAnnotation.coordinate = self.sasUploadObject.coordinates;
     
     self.sasMapView.sasAnnotationImage = DefaultAnnotationImage;
     [self.sasMapView showAnnotation:self.sasAnnotation andZoom:YES animated:YES];
@@ -83,19 +79,14 @@
     [super viewWillAppear:animated];
     
 
-    
-    self.nextButton.hidden = YES;
-    self.backArrowButton.hidden = YES;
+    self.doneButton.hidden = YES;
     self.sasImageView.image = self.sasUploadObject.image;
-    self.blurredImageView.image = self.sasUploadObject.image;
     
-    self.blurredImageView.contentMode = UIViewContentModeScaleToFill;
-    [SASUtilities addSASBlurToView:self.blurredImageView];
-    
-
     [UIFont increaseCharacterSpacingForLabel:self.selectDeviceLabel byAmount:2.0];
-    [UIFont increaseCharacterSpacingForLabel:self.nextButton.titleLabel byAmount:1.0];
+    [UIFont increaseCharacterSpacingForLabel:self.doneButton.titleLabel byAmount:1.0];
     
+    
+    self.deviceDescriptionTextView.delegate = self;
     
     SASBarButtonItem *cancelBarButtonItem = [[SASBarButtonItem alloc] initWithTitle:@"Cancel"
                                                                               style:UIBarButtonItemStylePlain
@@ -113,129 +104,88 @@
                                    fireHydrantButton,
                                    nil];
     }
-    
-    
-    
-    if(self.deviceDescription == nil) {
-        self.deviceDescription = [[UITextView alloc] initWithFrame:CGRectMake([Screen width], 64, [Screen width], [Screen height] - 111)];
-        self.deviceDescription.font = [UIFont sasFontWithSize:15];
-        self.deviceDescription.delegate = self;
-        self.deviceDescription.layer.cornerRadius = 8.0;
-        self.deviceDescription.backgroundColor = [UIColor colorWithRed:0.913 green:0.913 blue:0.913 alpha:1.0];
-        self.deviceDescription.text = @"Add text";
-        [self.view addSubview:self.deviceDescription];
-    }
-    
-    
-    
 }
+
 
 - (IBAction)deviceSelected:(UIButton*)sender {
     
-    
-    for (UIButton *deviceButton in self.deviceButtonsArray) {
-        deviceButton.selected = NO;
-    }
-
     if (sender == self.defibrillatorButton) {
         [self.defibrillatorButton setImage:[UIImage imageNamed:@"DefibrillatorSelected"] forState:UIControlStateNormal];
-        sender.selected = YES;
+        self.deviceHasBeenSelected = YES;
     }
     else if (sender == self.lifeRingButton) {
         [self.lifeRingButton setImage: [UIImage imageNamed:@"LifeRingSelected"] forState:UIControlStateNormal];
-        sender.selected = YES;
+        self.deviceHasBeenSelected = YES;
     }
     else if (sender == self.firstAidKitButton) {
         [self.firstAidKitButton setImage: [UIImage imageNamed:@"FirstAidKitSelected"] forState:UIControlStateNormal];
-        sender.selected = YES;
+        self.deviceHasBeenSelected = YES;
     }
     else if (sender == self.fireHydrantButton) {
         [self.fireHydrantButton setImage: [UIImage imageNamed:@"FireHydrantSelected"] forState:UIControlStateNormal];
-        sender.selected = YES;
+        self.deviceHasBeenSelected = YES;
     }
     
-    self.nextButton.hidden = NO;
-    self.canSlideLeft = YES;
-
+    self.doneButton.hidden = NO;
 }
 
 
 
-- (IBAction)nextButtonPress:(id)sender {
-    [self slideLeft:nil];
-}
-
-- (IBAction)backButtonPress:(id)sender {
-    [self slideRight:nil];
-}
-
-
-
-- (void) slideLeft:(void(^)(BOOL finished)) completion {
-    
-    if(self.canSlideLeft ) {
+- (BOOL) makeAppropriateChecksBeforeUploading {
+    if ([self.deviceDescriptionTextView.text isEqualToString:@"Add Location Information"] ||
+        [self.deviceDescriptionTextView.text isEqualToString:@""]) {
         
-        self.canSlideLeft = NO;
         
-        for (UIView* subview in self.view.subviews) {
-            
-            if (subview != self.nextButton) {
-                [UIView animateWithDuration:1.0
-                                      delay:0.1
-                     usingSpringWithDamping:0.5
-                      initialSpringVelocity:0.3
-                                    options:UIViewAnimationOptionCurveEaseInOut
-                                 animations:^{subview.frame = CGRectOffset(subview.frame,-[Screen width] , 0);}
-                                 completion:nil];
-            }
-        }
-        [self.nextButton setTitle:@"DONE" forState:UIControlStateNormal];
-        self.backArrowButton.hidden = NO;
+        SASAlertView *sasAlertView = [[SASAlertView alloc] initWithTitle:@"ALERT"
+                                                                 message:@"Please add description for this upload."
+                                                          andButtonTitle:@"Ok"
+                                                              Withtarget:self
+                                                                  action:nil];
+        [sasAlertView animateIntoView:self.view];
+        return NO;
+    } else if (!deviceHasBeenSelected) {
+        return NO;
     }
-    
-}
-
-- (void) slideRight:(void(^)(BOOL finished)) completion {
-    
-    for(UIView* subview in self.view.subviews) {
-        if(subview != self.nextButton) {
-            [UIView animateWithDuration:1.0
-                                  delay:0.1
-                 usingSpringWithDamping:0.5
-                  initialSpringVelocity:0.3
-                                options:UIViewAnimationOptionCurveEaseInOut
-                             animations:^{subview.frame = CGRectOffset(subview.frame,subview.frame.origin.x * 2 , 0);}
-                             completion:nil];
-        }
+    else {
+        return  YES;
     }
-    [self.nextButton setTitle:@"NEXT" forState:UIControlStateNormal];
-    self.backArrowButton.hidden = YES;
 }
 
 
 
+
+
+#pragma mark Upload Routine
+- (IBAction)beginUploadRoutine:(id)sender {
+    
+    [self.sasUploadObject setTimeStamp: [SASUtilities getCurrentTimeStamp]];
+    
+    if([self makeAppropriateChecksBeforeUploading]) {
+        SASUploader *sasUploader = [[SASUploader alloc] init];
+        
+        [sasUploader uploadObject:self.sasUploadObject];
+    }
+}
 
 
 - (void) dismissKeyboard {
-    [self.deviceDescription resignFirstResponder];
-    self.dismissKeyBoardBarButtonItem = nil;
-    self.navigationItem.rightBarButtonItem = nil;
+    [self.deviceDescriptionTextView resignFirstResponder];
 }
 
 
-
-
 #pragma mark UITextViewDelegate
-- (void)textViewDidBeginEditing:(UITextView *)textView {
 
-    self.dismissKeyBoardBarButtonItem = [[SASBarButtonItem alloc] initWithTitle:@"Hide Keyboard" style:UIBarButtonItemStylePlain target:self action:@selector(dismissKeyboard)];
-    
-    self.navigationItem.rightBarButtonItem = self.dismissKeyBoardBarButtonItem;
+
+- (void)textViewDidBeginEditing:(UITextView *)textView {
+    if([self.deviceDescriptionTextView.text isEqualToString:@"Add Location Information"]) {
+        self.deviceDescriptionTextView.text = @"";
+    }
 }
 
 
 - (void)textViewDidEndEditing:(UITextView *)textView {
     self.sasUploadObject.description = textView.text;
+    NSLog(@"%@", self.sasUploadObject.description);
 }
 
 

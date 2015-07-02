@@ -17,4 +17,7 @@
 
 @property (strong, nonatomic) SASUploadObject *sasUploadObject;
 
+
+// Uploads an SasUploadObject to the server.
+- (void) uploadObject:(SASUploadObject*) object;
 @end

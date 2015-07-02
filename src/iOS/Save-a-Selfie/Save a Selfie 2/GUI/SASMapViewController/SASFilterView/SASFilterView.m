@@ -41,6 +41,7 @@ SASDeviceType availableDevicesToFilter[5] = {
 };
 
 
+
 #pragma mark Object Life Cycle.
 - (instancetype)init {
     
@@ -71,6 +72,7 @@ SASDeviceType availableDevicesToFilter[5] = {
 
 
 
+
 #pragma mark UITableViewDelegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return sizeof(availableDevicesToFilter) / sizeof(NSInteger);
@@ -89,6 +91,7 @@ SASDeviceType availableDevicesToFilter[5] = {
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
+
 
 
 

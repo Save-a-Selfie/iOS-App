@@ -20,9 +20,9 @@
 
 
 + (UIColor *)sasRedAEDColour {
-    return [UIColor colorWithRed:0.956
-                           green:0.372
-                            blue:0.372
+    return [UIColor colorWithRed:0.788
+                           green:0.003
+                            blue:0.0
                            alpha:1.0];
 }
 
@@ -37,8 +37,8 @@
 
 + (UIColor *)sasGreenFirstAidColour {
     return [UIColor colorWithRed:0.055
-                           green:0.545
-                            blue:0.482
+                           green:0.611
+                            blue:0.188
                            alpha:1.0];
 }
 

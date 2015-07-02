@@ -236,12 +236,14 @@ NSString *permissionsProblemTwo = @"Please enable location services on your phon
     SASUploadObject *sasUploadObject = [[SASUploadObject alloc] initWithImage:image];
     
     
+    
     // Dismiss the SASImagePickerViewController and pass
     // the image onto SASUploadImageViewController via
     //
     //  -presentSASUploadImageViewControllerWithImage:
     //
-    [self.sasImagePickerController dismissViewControllerAnimated:YES completion:^(){
+    [self.sasImagePickerController dismissViewControllerAnimated:YES
+                                                      completion:^() {
         [self presentSASUploadImageViewControllerWithUploadObject:sasUploadObject];
         self.sasImagePickerController = nil;
     }];
@@ -253,9 +255,19 @@ NSString *permissionsProblemTwo = @"Please enable location services on your phon
 // Presents a SASUploadImageViewController via
 - (void) presentSASUploadImageViewControllerWithUploadObject:(SASUploadObject*) sasUploadObject {
     
+    // @Discussion:
+    //  The user location will be got here, now it may
+    //  seem like it should be gotten just before the user
+    //  actually decides to upload the image/device, however,
+    //  it is possible the user may take the picture and move
+    //  from the location an upload moments later.
+    //  So for now we will set the coordinates here.
+    sasUploadObject.coordinates = [self.sasMapView currentUserLocation];
+
+    
     if(self.sasUploadImageViewController == nil) {
         self.sasUploadImageViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SASUploadImageViewController"];
-
+        [self.sasUploadImageViewController setSasUploadObject:sasUploadObject];
     }
     
     
@@ -263,11 +275,6 @@ NSString *permissionsProblemTwo = @"Please enable location services on your phon
         self.uploadImageNavigationController = [[UINavigationController alloc] initWithRootViewController:self.sasUploadImageViewController];
     }
     
-    
-    self.sasUploadImageViewController.sasUploadObject.coordinates = [self.sasMapView currentUserLocation];
-    
-    
-    [self.sasUploadImageViewController.sasUploadObject setImage:sasUploadObject.image];
 
     [self.navigationController presentViewController:self.uploadImageNavigationController animated:YES completion:nil];
 }

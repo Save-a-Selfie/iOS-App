@@ -13,8 +13,6 @@
 @interface SASUploadImageViewController : UIViewController
 
 @property(nonatomic, strong) SASUploadObject *sasUploadObject;
-@property (weak, nonatomic) IBOutlet SASMapView *sasMapView;
-@property (weak, nonatomic) IBOutlet UIImageView *blurredImageView;
 
 
 @end

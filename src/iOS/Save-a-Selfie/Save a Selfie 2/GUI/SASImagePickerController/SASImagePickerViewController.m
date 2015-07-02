@@ -54,6 +54,7 @@
         
         [self.sasImagePickerDelegate sasImagePickerController:self
                                            didFinishWithImage:self.imageTakenFromCamera];
+        
     }
 }
 
