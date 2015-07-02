@@ -12,7 +12,7 @@
 @implementation SASUtilities
 
 
-#pragma Haversine Formula
+#pragma mark Haversine Formula
 // This method uses the Haversine Formula for finding distances
 // between two locations on earth.
 // Taken from http://rosettacode.org/wiki/Haversine_formula#Objective-C
@@ -33,7 +33,7 @@
 
 
 
-#pragma Current Timestamp
+#pragma mark Current Timestamp
 // From here: http://stackoverflow.com/questions/22359090/get-current-time-in-timestamp-format-ios
 
 + (NSString *)getCurrentTimeStamp {

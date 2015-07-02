@@ -34,7 +34,7 @@
 
 
 
-#pragma UIImagePickerControllerDelegate
+#pragma mark UIImagePickerControllerDelegate
 
 // @Discussion:
 // As of this version 1.1 Save a Selfie does not support

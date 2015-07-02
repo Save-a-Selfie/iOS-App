@@ -225,7 +225,7 @@
 
 
 
-#pragma UITextViewDelegate
+#pragma mark UITextViewDelegate
 - (void)textViewDidBeginEditing:(UITextView *)textView {
 
     self.dismissKeyBoardBarButtonItem = [[SASBarButtonItem alloc] initWithTitle:@"Hide Keyboard" style:UIBarButtonItemStylePlain target:self action:@selector(dismissKeyboard)];
@@ -241,7 +241,7 @@
 
 
 
-#pragma Cancel upload
+#pragma mark Cancel upload
 - (void) dismissSASUploadImageViewController {
     [self dismissViewControllerAnimated:YES completion:nil];
 }

@@ -41,7 +41,7 @@ SASDeviceType availableDevicesToFilter[5] = {
 };
 
 
-#pragma Object Life Cycle.
+#pragma mark Object Life Cycle.
 - (instancetype)init {
     
     if(self = [super init]) {
@@ -71,7 +71,7 @@ SASDeviceType availableDevicesToFilter[5] = {
 
 
 
-#pragma UITableViewDelegate
+#pragma mark UITableViewDelegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return sizeof(availableDevicesToFilter) / sizeof(NSInteger);
 }
@@ -104,7 +104,7 @@ SASDeviceType availableDevicesToFilter[5] = {
 
 
 
-#pragma UITableViewDataSource
+#pragma mark UITableViewDataSource
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     SASDeviceType deviceTypeForCell = [self getDeviceForCellWithIndexPath:indexPath];
@@ -182,7 +182,7 @@ SASDeviceType availableDevicesToFilter[5] = {
 
 
 
-#pragma Animations
+#pragma mark Animations
 // Animates into the views center.
 - (void) animateIntoView:(UIView*) view {
     

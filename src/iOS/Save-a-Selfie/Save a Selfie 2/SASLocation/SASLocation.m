@@ -124,7 +124,7 @@
 
 
 
-#pragma LocationManager delegate methods.
+#pragma mark LocationManagerDelegate methods.
 -(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
     
     CLLocation *location = [locations lastObject];

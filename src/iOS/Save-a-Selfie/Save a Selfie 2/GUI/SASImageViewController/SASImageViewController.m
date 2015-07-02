@@ -91,7 +91,7 @@
     [self.navigationController setNavigationBarHidden:NO animated:YES];
     
 
-#pragma Setup of the UI Elements.
+#pragma mark Setup of the UI Elements.
     
     // @Discussion:
     //  It is possible sone properties of annotation
@@ -123,7 +123,7 @@
     
     
     
-#pragma self.annotation.device nil checking
+#pragma mark self.annotation.device nil checking
     if (self.annotation.device != nil) {
         
         // Set the image for deviceImageView associated with the device
@@ -136,7 +136,7 @@
     }
         
     
-#pragma self.annotation.device.imageStandardRes nil checking. (Image)
+#pragma mark self.annotation.device.imageStandardRes nil checking. (Image)
     if(self.annotation.device.imageStandardRes != nil && !imageLoaded) {
         
         // Begin animation of sasActivityIndicator until image is loaded.
@@ -176,7 +176,7 @@
     
     
     
-#pragma self.annotation.device.caption nil checking
+#pragma mark self.annotation.device.caption nil checking
     if(self.annotation.device.caption != nil) {
         // Set the text description of the photo.
         self.photoDescription.text = [NSString stringWithFormat:@"%@", annotation.device.caption];
@@ -236,7 +236,7 @@
 
 
 
-#pragma SASNotificationReceiver
+#pragma mark SASNotificationReceiver
 - (void)sasMapViewUsersLocationHasUpdated:(CLLocationCoordinate2D)coordinate {
     double distance = [SASUtilities distanceBetween:self.annotation.coordinate and:coordinate];
     
@@ -245,7 +245,7 @@
 }
 
 
-#pragma Share to Social Media
+#pragma mark Share to Social Media
 - (IBAction)shareToSocialMedia:(id)sender {
     if(annotation != nil) {
         [SASSocial shareToSocialMedia:self.annotation.device.caption andImage:self.sasImage target:self];

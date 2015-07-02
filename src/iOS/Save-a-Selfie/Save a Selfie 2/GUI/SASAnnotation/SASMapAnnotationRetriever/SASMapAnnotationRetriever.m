@@ -29,7 +29,7 @@
 @synthesize delegate;
 @synthesize devices;
 
-#pragma Objects for creating up URL request.
+#pragma mark Objects for creating up URL request.
 @synthesize url;
 @synthesize request;
 @synthesize connection;
@@ -38,7 +38,7 @@
 
 
 
-#pragma Object Life Cycle
+#pragma mark Object Life Cycle
 // Set up all connection & data objects here
 - (instancetype)init
 {
@@ -60,7 +60,7 @@
 
 
 
-#pragma NSURLConnectionDataDelegate methods
+#pragma mark NSURLConnectionDataDelegate methods
 - (void) connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
     [self.responseData setLength: 0];
 }
@@ -73,7 +73,7 @@
 
 
 
-#pragma NSURLConnectionDelegate methods
+#pragma mark NSURLConnectionDelegate methods
 - (void) connectionDidFinishLoading:(NSURLConnection *)connection {
     
     NSString *data = [[NSString alloc] initWithData:self.responseData

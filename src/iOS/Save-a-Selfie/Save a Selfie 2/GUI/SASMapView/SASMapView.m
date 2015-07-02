@@ -58,7 +58,7 @@
 @synthesize zoomToUsersLocationInitially;
 
 
-#pragma Object Life Cycle
+#pragma mark Object Life Cycle
 - (instancetype) initWithFrame:(CGRect)frame {
     
     if(self == [super initWithFrame:frame]) {
@@ -220,7 +220,7 @@
 
 
 
-#pragma SASLocation delegate method
+#pragma mark SASLocation delegate method
 - (void) locationDidUpdate:(CLLocationCoordinate2D)location {
     self.currentLocation = location;
     
@@ -259,7 +259,7 @@
 
 
 
-#pragma SASMapAnnotationRetrieverDelegate method
+#pragma mark SASMapAnnotationRetrieverDelegate method
 - (void) sasAnnotationsRetrieved:(NSMutableArray *)devices {
     
     if(self.annotationInfoFromServer == nil) {
@@ -300,7 +300,7 @@
 
 
 
-#pragma MKMapViewDelegate
+#pragma mark MKMapViewDelegate
 // @Discussion:
 //  Here we are going to forward on the SASAnnotation which was tapped to any object conforming to SASMapViewNotifications
 //  and who references notificationReceiver.
@@ -323,7 +323,7 @@
 
 
 
-#pragma viewForAnnotation
+#pragma mark viewForAnnotation
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(SASAnnotation*)annotation {
     
     static NSString *annotationViewID = @"MyLocation";

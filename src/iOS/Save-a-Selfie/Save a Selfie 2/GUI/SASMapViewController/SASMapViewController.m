@@ -124,7 +124,7 @@ NSString *permissionsProblemTwo = @"Please enable location services on your phon
 }
 
 
-#pragma SASFilterViewDelegate
+#pragma mark SASFilterViewDelegate
 - (void)sasFilterView:(SASFilterView *)view doneButtonWasPressedWithSelectedDeviceType:(SASDeviceType)device {
     [self.sasMapView filterAnnotationsForDeviceType:device];
     [self.sasFilterView animateOutOfView:self.view];
@@ -139,7 +139,7 @@ NSString *permissionsProblemTwo = @"Please enable location services on your phon
 
 
 
-#pragma SASMapViewNotifications methods.
+#pragma mark SASMapViewNotifications methods.
 - (void)sasMapViewAnnotationTapped:(SASAnnotation*)annotation {
     
     // Present the SASImageviewController to display the image associated
@@ -198,7 +198,7 @@ NSString *permissionsProblemTwo = @"Please enable location services on your phon
 
 
 
-#pragma Begin Upload Routine.
+#pragma mark Begin Upload Routine.
 
 // @Discussion:
 //  The upload routine involves the following steps:
@@ -229,7 +229,7 @@ NSString *permissionsProblemTwo = @"Please enable location services on your phon
 }
 
 
-#pragma SASImageDelegate Method -didFinishWithImage:(SASUploadImage*):
+#pragma mark SASImageDelegate Method -didFinishWithImage:(SASUploadImage*):
 - (void)sasImagePickerController:(SASImagePickerViewController *)sasImagePicker didFinishWithImage:(UIImage *)image {
     
     // Create an upload object and set the image.

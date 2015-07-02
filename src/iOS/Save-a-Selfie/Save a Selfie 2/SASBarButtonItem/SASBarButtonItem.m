@@ -7,7 +7,7 @@
 //
 
 #import "SASBarButtonItem.h"
-#import "SASFont/UIFont+SASFont.h"
+#import "UIFont+SASFont.h"
 
 @implementation SASBarButtonItem
 
