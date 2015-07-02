@@ -310,7 +310,9 @@
     
     SASAnnotation* selectedAnnotation = view.annotation;
     
-    if(self.notificationReceiver != nil) {
+    if(self.notificationReceiver != nil &&
+       ![selectedAnnotation isKindOfClass:MKUserLocation.class] &&
+       [self.notificationReceiver respondsToSelector:@selector(sasMapViewAnnotationTapped:)]) {
         [self.notificationReceiver sasMapViewAnnotationTapped:selectedAnnotation];
     }
     

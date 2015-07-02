@@ -78,10 +78,12 @@
 
 
 
-- (void)viewWillLayoutSubviews {
+- (void)viewDidLayoutSubviews {
     self.photoDescription.translatesAutoresizingMaskIntoConstraints = NO;
-    //CGSize sizeThatFitsTextView = [self.photoDescription sizeThatFits:CGSizeMake(self.photoDescription.frame.size.width, MAXFLOAT)];
-    self.photoDesriptionHeightContraint.constant = self.photoDescription.contentSize.height;
+    CGSize sizeThatFitsTextView = [self.photoDescription sizeThatFits:CGSizeMake(self.photoDescription.frame.size.width, MAXFLOAT)];
+    self.photoDesriptionHeightContraint.constant = sizeThatFitsTextView.height;
+    
+    [self.scrollView setContentSize:CGSizeMake(self.contentView.frame.size.width, self.contentView.frame.size.height + sizeThatFitsTextView.height)];
 }
 
 
