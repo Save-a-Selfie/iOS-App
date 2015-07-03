@@ -20,7 +20,6 @@
 @property (strong, nonatomic) NSData *largeImageData;
 @property (strong, nonatomic) NSData *thumbnailImageData;
 
-
 @property (strong, nonatomic) NSMutableData* responseData;
 
  

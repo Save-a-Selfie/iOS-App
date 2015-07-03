@@ -10,13 +10,29 @@
 #import <UIKit/UIKit.h>
 #import "SASUploadObject.h"
 
+@class SASUploader;
+
+@protocol SASUploaderDelegate <NSObject>
+
+@optional
+
+// The SASUpload Object uploaded to the server successfully.
+- (void) sasUploader:(SASUploader*) sasUploaderDidFinishUploadWithSuccess;
+
+
+// Upload failed.
+- (void) sasUploader:(SASUploader*) sasUploader didFailWithError:(NSError*) error;
+
+@end
+
+
 // @Discussion:
 //  Use this class for uploading a SASUploadObject to the server.
-
 @interface SASUploader : NSObject
 
 @property (weak, nonatomic) SASUploadObject *sasUploadObject;
 
+@property (weak, nonatomic) id <SASUploaderDelegate> delegate;
 
 - (instancetype)initWithSASUploadObject: (SASUploadObject*) object;
 

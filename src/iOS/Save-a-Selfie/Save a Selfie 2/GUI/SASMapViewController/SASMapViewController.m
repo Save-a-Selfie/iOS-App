@@ -206,8 +206,9 @@ NSString *permissionsProblemTwo = @"Please enable location services on your phon
 //  1. Present sasImagePickerController: Here the user can take a photo
 //     of the desired device.
 //
-//  2. Wait for delegate method - (void)sasImagePickerController didFinishWithImage:(SASUploadImage *)image to be called.
-//     This will give this object SASMapViewController, the image taken by the user.
+//  2. Wait for delegate method - (void)sasImagePickerController didFinishWithImage:(UIImage *)image to be called.
+//     This will give us the image taken by the user.
+//     The image is then used to initialise a SASUploadObject.
 //
 //
 //  3. Then the image is handed to sasUploadImageViewController, which will handle all
@@ -272,11 +273,14 @@ NSString *permissionsProblemTwo = @"Please enable location services on your phon
     
     
     if(self.uploadImageNavigationController == nil) {
-        self.uploadImageNavigationController = [[UINavigationController alloc] initWithRootViewController:self.sasUploadImageViewController];
+        self.uploadImageNavigationController = [[UINavigationController alloc]
+                                                initWithRootViewController:self.sasUploadImageViewController];
     }
     
 
-    [self.navigationController presentViewController:self.uploadImageNavigationController animated:YES completion:nil];
+    [self.navigationController presentViewController:self.uploadImageNavigationController
+                                            animated:YES
+                                          completion:nil];
 }
 
 

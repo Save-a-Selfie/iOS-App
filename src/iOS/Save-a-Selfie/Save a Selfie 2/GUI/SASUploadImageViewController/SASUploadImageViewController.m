@@ -19,7 +19,7 @@
 #import "SASUploadObjectValidator.h"
 
 
-@interface SASUploadImageViewController () <UITextViewDelegate>
+@interface SASUploadImageViewController () <UITextViewDelegate, SASUploaderDelegate>
 
 @property (strong, nonatomic) IBOutlet SASImageView *sasImageView;
 @property (weak, nonatomic) IBOutlet SASMapView *sasMapView;
@@ -35,6 +35,8 @@
 
 @property (strong, nonatomic) NSMutableArray *deviceButtonsArray;
 @property (nonatomic, assign) BOOL deviceHasBeenSelected;
+
+@property (strong, nonatomic) SASUploader *sasUploader;
 
 @end
 
@@ -54,11 +56,19 @@
 @synthesize doneButton;
 @synthesize deviceHasBeenSelected;
 
+@synthesize sasUploader;
+
 
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     [self dismissKeyboard];
 }
+
+
+- (void) dismissKeyboard {
+    [self.deviceDescriptionTextView resignFirstResponder];
+}
+
 
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -79,7 +89,6 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-
     self.doneButton.hidden = YES;
     self.sasImageView.image = self.sasUploadObject.image;
     
@@ -154,17 +163,24 @@
     NSLog(@"%ld", (long)self.sasUploadObject.associatedDevice.type);
     NSLog(@"%@", self.sasUploadObject.description);
     
-    SASUploader *sasUploader = [[SASUploader alloc] initWithSASUploadObject:self.sasUploadObject];
-    [sasUploader upload];
+    self.sasUploader = [[SASUploader alloc] initWithSASUploadObject:self.sasUploadObject];
+    self.sasUploader.delegate = self;
+    [self.sasUploader upload];
 }
 
 
 
+#pragma mark SASUploaderDelegate
+- (void)sasUploader:(SASUploader *)sasUploaderDidFinishUploadWithSuccess {
 
-
-- (void) dismissKeyboard {
-    [self.deviceDescriptionTextView resignFirstResponder];
 }
+
+
+- (void)sasUploader:(SASUploader *)sasUploader didFailWithError:(NSError *)error {
+    
+}
+
+
 
 
 #pragma mark UITextViewDelegate
@@ -183,7 +199,10 @@
 
 
 
-#pragma mark Cancel upload
+
+
+
+
 - (void) dismissSASUploadImageViewController {
     [self dismissViewControllerAnimated:YES completion:nil];
 }

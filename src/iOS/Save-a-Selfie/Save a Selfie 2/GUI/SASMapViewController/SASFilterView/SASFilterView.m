@@ -201,6 +201,7 @@ SASDeviceType availableDevicesToFilter[5] = {
 }
 
 
+
 - (void) animateOutOfView:(UIView*) view {
     
     [UIView animateWithDuration:0.4

@@ -13,17 +13,16 @@
 // First Aid Kit
 // Fire Hydrant
 typedef NS_ENUM(int, SASDeviceType) {
-    All = 0,
-    Defibrillator = 1,
-    LifeRing = 2,
-    FirstAidKit = 3,
-    FireHydrant = 4
+    Defibrillator,
+    LifeRing,
+    FirstAidKit,
+    FireHydrant,
+    All,
 };
 
 
 
 @interface SASDevice : NSObject;
-
 
 
 // @return Device name for specified SASDeviceType.
