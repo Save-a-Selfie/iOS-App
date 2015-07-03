@@ -10,11 +10,12 @@
 
 @interface SASAlertView : UIView
 
-@property (weak, nonatomic) IBOutlet UILabel *alertTitle;
-@property (weak, nonatomic) IBOutlet UITextView *alertMessage;
-@property (weak, nonatomic) IBOutlet UIButton *alertButton;
+@property (weak, nonatomic) NSString *title;
+@property (weak, nonatomic) NSString *message;
+@property (weak, nonatomic) NSString* buttonTitle;
 
-- initWithTitle:(NSString*) title message:(NSString*) message andButtonTitle:(NSString*) buttonTitle Withtarget:(id) target action:(SEL) action;
+
+- (instancetype)initWithTarget:(id) target andAction:(SEL) action;
 
 
 - (void) animateIntoView:(UIView*) view;

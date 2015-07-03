@@ -7,7 +7,7 @@
 //
 
 #import "SASUploadObject.h"
-#import "UIImage+SASNormalizeImage.h"
+#import "UIImage+SASImage.h"
 
 @implementation SASUploadObject
 
@@ -25,9 +25,13 @@
         // for reason on why we need to normalize
         // the image property.
         self.image = [imageToUpload normalizedImage];
+        
+        self.associatedDevice = [[SASDevice alloc] init];
     }
     return self;
 }
+
+
 
 
 

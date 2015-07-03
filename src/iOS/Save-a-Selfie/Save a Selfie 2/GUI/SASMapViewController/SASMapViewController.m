@@ -263,7 +263,7 @@ NSString *permissionsProblemTwo = @"Please enable location services on your phon
     //  from the location an upload moments later.
     //  So for now we will set the coordinates here.
     sasUploadObject.coordinates = [self.sasMapView currentUserLocation];
-
+    
     
     if(self.sasUploadImageViewController == nil) {
         self.sasUploadImageViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SASUploadImageViewController"];

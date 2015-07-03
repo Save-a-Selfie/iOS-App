@@ -242,7 +242,7 @@
 - (void)sasMapViewUsersLocationHasUpdated:(CLLocationCoordinate2D)coordinate {
     double distance = [SASUtilities distanceBetween:self.annotation.coordinate and:coordinate];
     
-    __weak NSString *distanceString = [NSString stringWithFormat:@"%.0fKM Approx", distance];
+    __weak NSString *distanceString = [NSString stringWithFormat:@"%.2fKM Approx", distance];
     self.distanceLabel.text = distanceString;
 }
 

@@ -11,12 +11,6 @@
 
 @implementation SASColour
 
-// Device types:
-// 0 - Defibrillator
-// 1 - Life Ring
-// 2 - First Aid Kit
-// 3 - Fire Hydrant
-
 
 
 + (UIColor *)sasRedAEDColour {
@@ -36,9 +30,9 @@
 
 
 + (UIColor *)sasGreenFirstAidColour {
-    return [UIColor colorWithRed:0.055
-                           green:0.611
-                            blue:0.188
+    return [UIColor colorWithRed:0.062
+                           green:0.541
+                            blue:0.482
                            alpha:1.0];
 }
 

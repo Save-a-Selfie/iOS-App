@@ -8,8 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
-
-@class SASDevice;
+#import "SASDevice.h"
 
 @interface SASUploadObject : NSObject
 
@@ -18,6 +17,7 @@
 @property(nonatomic, assign) CLLocationCoordinate2D coordinates;
 @property(nonatomic, strong) UIImage *image;
 @property(nonatomic, strong) NSString *description;
+ 
 
 - (instancetype) initWithImage:(UIImage*) imageToUpload;
 

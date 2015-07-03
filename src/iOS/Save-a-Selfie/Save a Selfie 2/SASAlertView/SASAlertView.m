@@ -13,46 +13,79 @@
 @interface SASAlertView()
 
 @property(strong, nonatomic) UIView* greyView;
+
 @property(assign, nonatomic) SEL alertAction;
+
+@property (weak, nonatomic) IBOutlet UIButton *alertButton;
+@property (weak, nonatomic) IBOutlet UILabel *alertTitleLabel;
+@property (weak, nonatomic) IBOutlet UITextView *alertMessageTextView;
+
 @end
 
 @implementation SASAlertView
 
-@synthesize alertTitle;
-@synthesize alertMessage;
-@synthesize alertButton;
-@synthesize greyView;
 
+// IBOutlets
+@synthesize alertTitleLabel;
+@synthesize alertMessageTextView;
+@synthesize alertButton;
+
+// NSStrings.
+@synthesize title;
+@synthesize message;
+@synthesize buttonTitle;
+
+// Action
 @synthesize alertAction;
 
 
+// Grey view background
+@synthesize greyView;
 
-- initWithTitle:(NSString*) title message:(NSString*) message andButtonTitle:(NSString*) buttonTitle Withtarget:(id) target action:(SEL) action {
+
+- (instancetype)initWithTarget:(id)target andAction:(SEL)action {
     if(self = [super init]) {
         
         self = [[[NSBundle mainBundle]
-                         loadNibNamed:@"SASAlertView"
-                         owner:self
-                         options:nil]
-                        firstObject];
+                 loadNibNamed:@"SASAlertView"
+                 owner:self
+                 options:nil]
+                firstObject];
         
-        
-        self.alertTitle.text = title;
-        [UIFont increaseCharacterSpacingForLabel:self.alertTitle byAmount:2.0];
-        
-        self.alertMessage.text = message;
-        self.alertMessage.font = [UIFont sasFontWithSize:18.0];
-        
-        [self.alertButton setTitle:buttonTitle forState:UIControlStateNormal];
-        [self.alertButton addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
+        self.layer.cornerRadius = 8.0;
         self.alertButton.layer.cornerRadius = 5.0;
+        
         
         self.alertAction = action;
         
-        self.layer.cornerRadius = 8.0;
+        [self.alertButton addTarget:target
+                             action:action
+                   forControlEvents:UIControlEventTouchUpInside];
+        
+        
+        [UIFont increaseCharacterSpacingForLabel:self.alertTitleLabel byAmount:2.0];
+        self.alertMessageTextView.font = [UIFont sasFontWithSize:18.0];
     }
     return self;
 }
+
+
+
+
+#pragma mark Mutator Methods.
+- (void)setTitle:(NSString *)aTitle {
+    [self.alertTitleLabel setText:aTitle];
+}
+
+- (void)setMessage:(NSString *)aMessage {
+    [self.alertMessageTextView setText:aMessage];
+}
+
+- (void)setButtonTitle:(NSString *)aTitle {
+    [self.alertButton setTitle:aTitle forState:UIControlStateNormal];
+}
+
+
 
 
 
@@ -87,6 +120,7 @@
 - (void)animateOutOfView:(UIView *)view {
     [self removeFromSuperview];
 }
+
 
 
 - (IBAction)doneButtonPress:(id)sender {

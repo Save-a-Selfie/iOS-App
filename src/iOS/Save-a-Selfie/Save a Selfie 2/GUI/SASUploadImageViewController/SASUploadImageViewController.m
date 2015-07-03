@@ -15,6 +15,8 @@
 #import "SASBarButtonItem.h"
 #import "SASAlertView.h"
 #import "SASUploader.h"
+#import "SASDeviceButton.h"
+#import "SASUploadObjectValidator.h"
 
 
 @interface SASUploadImageViewController () <UITextViewDelegate>
@@ -23,17 +25,16 @@
 @property (weak, nonatomic) IBOutlet SASMapView *sasMapView;
 @property (strong, nonatomic) SASAnnotation *sasAnnotation;
 
-@property (weak, nonatomic) IBOutlet UIButton *defibrillatorButton;
-@property (weak, nonatomic) IBOutlet UIButton *lifeRingButton;
-@property (weak, nonatomic) IBOutlet UIButton *firstAidKitButton;
-@property (weak, nonatomic) IBOutlet UIButton *fireHydrantButton;
+@property (weak, nonatomic) IBOutlet SASDeviceButton *defibrillatorButton;
+@property (weak, nonatomic) IBOutlet SASDeviceButton *lifeRingButton;
+@property (weak, nonatomic) IBOutlet SASDeviceButton *firstAidKitButton;
+@property (weak, nonatomic) IBOutlet SASDeviceButton *fireHydrantButton;
 @property (weak, nonatomic) IBOutlet UILabel *selectDeviceLabel;
 @property (weak, nonatomic) IBOutlet UIButton *doneButton;
 @property(strong, nonatomic) IBOutlet UITextView *deviceDescriptionTextView;
 
 @property (strong, nonatomic) NSMutableArray *deviceButtonsArray;
 @property (nonatomic, assign) BOOL deviceHasBeenSelected;
-
 
 @end
 
@@ -104,51 +105,39 @@
                                    fireHydrantButton,
                                    nil];
     }
+    
+    self.defibrillatorButton.selectedImage = [UIImage imageNamed:@"DefibrillatorSelected"];
+    self.defibrillatorButton.deviceType = Defibrillator;
+    
+    self.lifeRingButton.selectedImage = [UIImage imageNamed:@"LifeRingSelected"];
+    self.lifeRingButton.deviceType = LifeRing;
+    
+    self.firstAidKitButton.selectedImage = [UIImage imageNamed:@"FirstAidKitSelected"];
+    self.firstAidKitButton.deviceType = FirstAidKit;
+    
+    self.fireHydrantButton.selectedImage = [UIImage imageNamed:@"FireHydrantSelected"];
+    self.fireHydrantButton.deviceType = FireHydrant;
+    
+    self.defibrillatorButton.unselectedImage = [UIImage imageNamed:@"DefibrillatorUnselected"];
+    self.lifeRingButton.unselectedImage = [UIImage imageNamed:@"LifeRingUnselected"];
+    self.firstAidKitButton.unselectedImage = [UIImage imageNamed:@"FirstAidKitUnselected"];
+    self.fireHydrantButton.unselectedImage = [UIImage imageNamed:@"FireHydrantUnselected"];
+    
 }
 
 
-- (IBAction)deviceSelected:(UIButton*)sender {
+
+- (IBAction)deviceSelected:(SASDeviceButton*) sender {
     
-    if (sender == self.defibrillatorButton) {
-        [self.defibrillatorButton setImage:[UIImage imageNamed:@"DefibrillatorSelected"] forState:UIControlStateNormal];
-        self.deviceHasBeenSelected = YES;
-    }
-    else if (sender == self.lifeRingButton) {
-        [self.lifeRingButton setImage: [UIImage imageNamed:@"LifeRingSelected"] forState:UIControlStateNormal];
-        self.deviceHasBeenSelected = YES;
-    }
-    else if (sender == self.firstAidKitButton) {
-        [self.firstAidKitButton setImage: [UIImage imageNamed:@"FirstAidKitSelected"] forState:UIControlStateNormal];
-        self.deviceHasBeenSelected = YES;
-    }
-    else if (sender == self.fireHydrantButton) {
-        [self.fireHydrantButton setImage: [UIImage imageNamed:@"FireHydrantSelected"] forState:UIControlStateNormal];
-        self.deviceHasBeenSelected = YES;
+    for(SASDeviceButton* button in self.deviceButtonsArray) {
+        [button deselect];
     }
     
+    [sender select];
+#pragma mark SASUploadObject associated Device. set here.
+    self.sasUploadObject.associatedDevice.type = sender.deviceType;
+
     self.doneButton.hidden = NO;
-}
-
-
-
-- (BOOL) makeAppropriateChecksBeforeUploading {
-    if ([self.deviceDescriptionTextView.text isEqualToString:@"Add Location Information"] ||
-        [self.deviceDescriptionTextView.text isEqualToString:@""]) {
-        
-        
-        SASAlertView *sasAlertView = [[SASAlertView alloc] initWithTitle:@"ALERT"
-                                                                 message:@"Please add description for this upload."
-                                                          andButtonTitle:@"Ok"
-                                                              Withtarget:self
-                                                                  action:nil];
-        [sasAlertView animateIntoView:self.view];
-        return NO;
-    } else if (!deviceHasBeenSelected) {
-        return NO;
-    }
-    else {
-        return  YES;
-    }
 }
 
 
@@ -158,14 +147,19 @@
 #pragma mark Upload Routine
 - (IBAction)beginUploadRoutine:(id)sender {
     
+    
+#pragma mark SASUploadObject timestamp set here.
     [self.sasUploadObject setTimeStamp: [SASUtilities getCurrentTimeStamp]];
     
-    if([self makeAppropriateChecksBeforeUploading]) {
-        SASUploader *sasUploader = [[SASUploader alloc] init];
-        
-        [sasUploader uploadObject:self.sasUploadObject];
-    }
+    NSLog(@"%ld", (long)self.sasUploadObject.associatedDevice.type);
+    NSLog(@"%@", self.sasUploadObject.description);
+    
+    SASUploader *sasUploader = [[SASUploader alloc] initWithSASUploadObject:self.sasUploadObject];
+    [sasUploader upload];
 }
+
+
+
 
 
 - (void) dismissKeyboard {
@@ -174,8 +168,6 @@
 
 
 #pragma mark UITextViewDelegate
-
-
 - (void)textViewDidBeginEditing:(UITextView *)textView {
     if([self.deviceDescriptionTextView.text isEqualToString:@"Add Location Information"]) {
         self.deviceDescriptionTextView.text = @"";
@@ -184,8 +176,8 @@
 
 
 - (void)textViewDidEndEditing:(UITextView *)textView {
+#pragma mark SASUploadObject.description set here.
     self.sasUploadObject.description = textView.text;
-    NSLog(@"%@", self.sasUploadObject.description);
 }
 
 

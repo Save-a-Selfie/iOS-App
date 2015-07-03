@@ -12,7 +12,7 @@
 // Life Ring
 // First Aid Kit
 // Fire Hydrant
-typedef NS_ENUM(NSInteger, SASDeviceType) {
+typedef NS_ENUM(int, SASDeviceType) {
     All = 0,
     Defibrillator = 1,
     LifeRing = 2,

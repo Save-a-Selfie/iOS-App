@@ -58,8 +58,8 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="alertButton" destination="rFZ-6k-VAR" id="PQU-2C-DVC"/>
-                <outlet property="alertMessage" destination="c4R-1Y-ttd" id="kg4-ZO-loW"/>
-                <outlet property="alertTitle" destination="u9d-bg-nwz" id="gl8-AK-NgK"/>
+                <outlet property="alertMessageTextView" destination="c4R-1Y-ttd" id="WXn-eZ-Omc"/>
+                <outlet property="alertTitleLabel" destination="u9d-bg-nwz" id="R9F-Rq-b4x"/>
             </connections>
             <point key="canvasLocation" x="437" y="362"/>
         </view>

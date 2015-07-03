@@ -75,7 +75,7 @@ SASDeviceType availableDevicesToFilter[5] = {
 
 #pragma mark UITableViewDelegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return sizeof(availableDevicesToFilter) / sizeof(NSInteger);
+    return sizeof(availableDevicesToFilter) / sizeof(int);
 }
 
 

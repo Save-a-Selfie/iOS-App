@@ -544,12 +544,21 @@ extern UIFont *customFont, *customFontSmaller;
     // first, resize image
     UIImage *image = _imageView.image;
     plog(@"resizing...");
+    
     float maxWidth = 400, thumbSize = 150;
     float ratio = maxWidth / image.size.width;
     float height, width, minDim, tWidth, tHeight;
-    if (ratio >= 1.0) { width = image.size.width; height = image.size.height; }
-    else { width = maxWidth; height = image.size.height * ratio; }
+    
+    if (ratio >= 1.0) {
+        width = image.size.width;
+        height = image.size.height;
+    }
+    else { width = maxWidth;
+        height = image.size.height * ratio;
+    }
+    
     plog(@"resizing to %f, %f (%f, %f, %f)", width, height, ratio, image.size.width, image.size.height);
+    
     largerImage = [image resizedImage:CGSizeMake(width, height) interpolationQuality:kCGInterpolationHigh];
     
     // generate thumbnail
@@ -575,7 +584,16 @@ extern UIFont *customFont, *customFontSmaller;
     NSString *imageStrTh = [imageDataTh base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength]; // the thumbnail image converted to a base-64 string
     caption = [self encodeToPercentEscapeString:caption]; // the caption for the image – as entered by the user
     plog(@"caption is %@", caption);
-    NSString *parameters = [ NSString stringWithFormat:@"id=%@&typeOfObject=%d&latitude=%f&longitude=%f&location=%@&user=%@&caption=%@&image=%@&thumbnail=%@", photoID, chosenObject, photoLocation.coordinate.latitude, photoLocation.coordinate.longitude, @"", @"", caption, imageStr, imageStrTh];
+    NSString *parameters = [ NSString stringWithFormat:@"id=%@&typeOfObject=%d&latitude=%f&longitude=%f&location=%@&user=%@&caption=%@&image=%@&thumbnail=%@",
+                            photoID,
+                            chosenObject,
+                            photoLocation.coordinate.latitude,
+                            photoLocation.coordinate.longitude,
+                            @"",
+                            @"",
+                            caption,
+                            imageStr,
+                            imageStrTh];
     
     NSString *postLength = [NSString stringWithFormat:@"%lu", (unsigned long)[parameters length]];
     [request setHTTPBody:[parameters dataUsingEncoding:NSUTF8StringEncoding]];

@@ -11,13 +11,17 @@
 #import "SASUploadObject.h"
 
 // @Discussion:
-//  Use this class for uploading a SASUpload object to the server.
+//  Use this class for uploading a SASUploadObject to the server.
 
 @interface SASUploader : NSObject
 
-@property (strong, nonatomic) SASUploadObject *sasUploadObject;
+@property (weak, nonatomic) SASUploadObject *sasUploadObject;
 
 
-// Uploads an SasUploadObject to the server.
-- (void) uploadObject:(SASUploadObject*) object;
+- (instancetype)initWithSASUploadObject: (SASUploadObject*) object;
+
+
+// Uploads the SASUploadObject initialized with this class.
+- (void) upload;
+
 @end
