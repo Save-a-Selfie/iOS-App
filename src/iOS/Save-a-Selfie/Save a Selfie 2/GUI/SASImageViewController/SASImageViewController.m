@@ -155,7 +155,7 @@
         // NOTE: The URLString is contained inside the device.standard_resolution property.
         dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             
-            UIImage* imageFromURL = [self getSASImageWithURLFromString:annotation.device.imageStandardRes];
+            UIImage* imageFromURL = [SASMapAnnotationRetriever getImageFromURLWithString:self.annotation.device.imageStandardRes];
             
             dispatch_async( dispatch_get_main_queue(), ^{
                 
@@ -224,17 +224,6 @@
 }
 
 
-
-// Gets the image for the view from the URL
-- (UIImage*) getSASImageWithURLFromString: (NSString *) string {
-    
-    NSData *data = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:string]];
-    
-    // Hold reference to the image.
-    self.sasImage = [UIImage imageWithData:data];
-    
-    return sasImage;
-}
 
 
 

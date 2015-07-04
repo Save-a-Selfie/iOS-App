@@ -39,4 +39,8 @@
 //  -sasAnnotationsRetrieved:
 - (void) fetchSASAnnotationsFromServer;
 
+
+// Returns a `UIImage` from a URL
++ (UIImage*) getImageFromURLWithString: (NSString *) string;
+
 @end

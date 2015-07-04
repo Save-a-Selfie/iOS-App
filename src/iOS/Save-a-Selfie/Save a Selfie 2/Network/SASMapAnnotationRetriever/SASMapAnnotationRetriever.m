@@ -36,8 +36,6 @@
 
 
 
-
-
 #pragma mark Object Life Cycle
 // Set up all connection & data objects here
 - (instancetype)init
@@ -56,6 +54,14 @@
     self.connection = [[NSURLConnection alloc] initWithRequest:self.request
                                                       delegate:self];
     
+}
+
+
++ (UIImage*) getImageFromURLWithString: (NSString *) string {
+    NSLog(@"%@", string);
+    NSData *data = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:string]];
+
+    return [UIImage imageWithData:data];
 }
 
 

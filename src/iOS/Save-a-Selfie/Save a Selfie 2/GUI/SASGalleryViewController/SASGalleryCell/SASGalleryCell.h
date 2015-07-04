@@ -12,6 +12,6 @@
 @interface SASGalleryCell : UICollectionViewCell
 
 
-@property(nonatomic, strong) SASAnnotation *sasAnnotation;
+@property(nonatomic, strong) SASDevice* sasDevice;
 
 @end

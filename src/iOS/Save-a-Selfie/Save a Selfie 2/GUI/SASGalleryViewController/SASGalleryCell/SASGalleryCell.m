@@ -7,30 +7,30 @@
 //
 
 #import "SASGalleryCell.h"
+#import "SASMapAnnotationRetriever.h"
 
 @interface SASGalleryCell()
 
 
-@property(nonatomic, strong) UIImageView* imageView;
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
 
 @end
 
 
 @implementation SASGalleryCell
 
-@synthesize sasAnnotation;
+@synthesize sasDevice;
 @synthesize imageView;
 
 
-- (id)initWithCoder:(NSCoder *)aDecoder {
-    if (self = [super initWithCoder:aDecoder]) {
-
-    }
-    return self;
-}
 
 
-- (void)setSasAnnotation:(SASAnnotation *)sasAnnotation {
+- (void)setSasDevice:(SASDevice *)aSasDevice {
+    
+    UIImage *image = [SASMapAnnotationRetriever getImageFromURLWithString:sasDevice.imageStandardRes];
+    self.imageView.image = image;
+    
+
 }
 
 @end

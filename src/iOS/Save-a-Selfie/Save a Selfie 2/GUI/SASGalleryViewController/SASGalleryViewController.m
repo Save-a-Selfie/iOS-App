@@ -15,12 +15,14 @@
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
-
 @property (nonatomic, strong) SASMapAnnotationRetriever *sasMapAnnotationRetriever;
-@property (nonatomic, weak) NSMutableArray *sasAnnotationsArray;
+@property (nonatomic, weak) NSMutableArray *sasDevicesArray;
+
+@property (nonatomic, strong) NSString *reuseIdentifier;
 
 // Flag to determine whether or not data has been retrieved.
 @property (nonatomic, assign) BOOL sasAnnotationsRetrieved;
+
 
 @end
 
@@ -30,56 +32,72 @@
 @synthesize collectionView;
 
 @synthesize sasMapAnnotationRetriever;
-@synthesize sasAnnotationsArray;
+@synthesize sasDevicesArray;
 @synthesize sasAnnotationsRetrieved;
+
+@synthesize reuseIdentifier;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
 }
 
-
 - (void)viewWillAppear:(BOOL)animated {
-    self.sasMapAnnotationRetriever = [[SASMapAnnotationRetriever alloc] init];
-    [self.sasMapAnnotationRetriever fetchSASAnnotationsFromServer];
+    [super viewWillAppear:animated];
     
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
     
-    [self.collectionView reloadData];
-}
-
-
-
-#pragma SASMapAnnotationRetrieverDelegate
-- (void)sasAnnotationsRetrieved:(NSMutableArray *)devices {
-    self.sasAnnotationsArray = devices;
     
-    self.sasAnnotationsRetrieved = YES;
+
+    self.sasMapAnnotationRetriever = [[SASMapAnnotationRetriever alloc] init];
+    self.sasMapAnnotationRetriever.delegate = self;
+    [self.sasMapAnnotationRetriever fetchSASAnnotationsFromServer];
+    
+    self.reuseIdentifier = @"cell";
+    
+    [self.collectionView registerNib:[UINib nibWithNibName:@"SASGalleryCell" bundle:nil]
+          forCellWithReuseIdentifier:self.reuseIdentifier];
 }
 
 
-#pragma mark UICollectionViewDelegate
+- (void)sasAnnotationsRetrieved:(NSMutableArray *)devices {
+
+    self.sasDevicesArray = devices;
+    self.sasAnnotationsRetrieved = YES;
+    
+    [self.collectionView reloadData];
+    printf("Reloaded");
+}
+
+
+#pragma mark UICollectionViewDataSource
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     
     if (self.sasAnnotationsRetrieved) {
-        return [self.sasAnnotationsArray count];
+        NSLog(@"NumberOfItemsInSection count = %lu", (unsigned long)[self.sasDevicesArray count]);
+        return [self.sasDevicesArray count];
+        
     }
     else {
         return 0;
-        // TODO: Add something here to signify problem.
     }
 }
 
 
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+
+
+- (SASGalleryCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    if(self.sasAnnotationsRetrieved) {
-        return [SASGalleryCell new];
-    } else {
-        return [SASGalleryCell new];
+    SASGalleryCell *sasGalleryCell = [self.collectionView dequeueReusableCellWithReuseIdentifier:self.reuseIdentifier forIndexPath:indexPath];
+    
+    if (self.sasAnnotationsRetrieved) {
+        
+        [sasGalleryCell setSasDevice:[self.sasDevicesArray objectAtIndex:indexPath.row]];
+        return sasGalleryCell;
+    }
+    else {
+        return sasGalleryCell;
     }
 }
-
-
 
 @end
