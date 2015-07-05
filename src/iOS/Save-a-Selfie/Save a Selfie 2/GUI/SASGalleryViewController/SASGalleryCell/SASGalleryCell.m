@@ -8,11 +8,13 @@
 
 #import "SASGalleryCell.h"
 #import "SASMapAnnotationRetriever.h"
+#import "SASActivityIndicator.h"
+
 
 @interface SASGalleryCell()
 
+@property(nonatomic, strong) SASActivityIndicator *sasActivityIndicator;
 
-@property (weak, nonatomic) IBOutlet UIImageView *imageView;
 
 @end
 
@@ -21,16 +23,40 @@
 
 @synthesize sasDevice;
 @synthesize imageView;
+@synthesize sasActivityIndicator;
 
+- (instancetype)initWithCoder:(NSCoder *)coder
+{
+    self = [super initWithCoder:coder];
+    if (self) {
+        
+        self.sasActivityIndicator = [[SASActivityIndicator alloc] init];
+        //[self addSubview:sasActivityIndicator];
+        //[self.sasActivityIndicator startAnimating];
+        
+        [self.imageView addObserver:self
+                         forKeyPath:@"image"
+                            options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
+                            context:nil];
 
-
-
-- (void)setSasDevice:(SASDevice *)aSasDevice {
-    
-    UIImage *image = [SASMapAnnotationRetriever getImageFromURLWithString:sasDevice.imageStandardRes];
-    self.imageView.image = image;
-    
-
+    }
+    return self;
 }
+
+
+- (void) observeValueForKeyPath:(NSString *)path ofObject:(id) object change:(NSDictionary *) change context:(void *)context
+{
+    // this method is used for all observations, so you need to make sure
+    // you are responding to the right one.
+    if (object == imageView && [path isEqualToString:@"image"])
+    {
+        UIImage *newImage = [change objectForKey:NSKeyValueChangeNewKey];
+        
+        if(newImage != nil) {
+            [self.sasActivityIndicator stopAnimating];
+        }
+    }
+}
+
 
 @end

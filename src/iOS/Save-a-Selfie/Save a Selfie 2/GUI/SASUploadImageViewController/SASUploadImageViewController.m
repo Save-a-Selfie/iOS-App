@@ -143,6 +143,7 @@
     }
     
     [sender select];
+    
 #pragma mark SASUploadObject associated Device. set here.
     self.sasUploadObject.associatedDevice.type = sender.deviceType;
 
@@ -161,18 +162,22 @@
     [self.sasUploadObject setTimeStamp: [SASUtilities getCurrentTimeStamp]];
     
     NSLog(@"%ld", (long)self.sasUploadObject.associatedDevice.type);
-    NSLog(@"%@", self.sasUploadObject.description);
+    NSLog(@"%@", self.sasUploadObject.caption);
+    
     
     self.sasUploader = [[SASUploader alloc] initWithSASUploadObject:self.sasUploadObject];
     self.sasUploader.delegate = self;
+    
+    // Upload the object to the server.
     [self.sasUploader upload];
 }
 
 
 
 #pragma mark SASUploaderDelegate
-- (void)sasUploader:(SASUploader *)sasUploaderDidFinishUploadWithSuccess {
-
+- (void)sasUploaderDidFinishUploadWithSuccess:(SASUploader *)sasUploader {
+    printf("Called");
+    [self dismissSASUploadImageViewController];
 }
 
 
@@ -193,12 +198,8 @@
 
 - (void)textViewDidEndEditing:(UITextView *)textView {
 #pragma mark SASUploadObject.description set here.
-    self.sasUploadObject.description = textView.text;
+    self.sasUploadObject.caption = textView.text;
 }
-
-
-
-
 
 
 

@@ -3,7 +3,7 @@
 //  Save a Selfie
 //
 //  Created by Stephen Fox on 01/07/2015.
-//  Copyright (c) 2015 Stephen Fox. All rights reserved.
+//  Copyright (c) 2015 Stephen Fox & Peter FitzGerald. All rights reserved.
 //
 
 
@@ -14,14 +14,14 @@
 
 @protocol SASUploaderDelegate <NSObject>
 
-@optional
 
 // The SASUpload Object uploaded to the server successfully.
-- (void) sasUploader:(SASUploader*) sasUploaderDidFinishUploadWithSuccess;
+- (void) sasUploaderDidFinishUploadWithSuccess:(SASUploader*) sasUploader;
 
 
 // Upload failed.
 - (void) sasUploader:(SASUploader*) sasUploader didFailWithError:(NSError*) error;
+
 
 @end
 

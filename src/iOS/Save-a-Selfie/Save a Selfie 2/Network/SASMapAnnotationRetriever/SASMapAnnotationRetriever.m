@@ -57,11 +57,13 @@
 }
 
 
-+ (UIImage*) getImageFromURLWithString: (NSString *) string {
-    NSLog(@"%@", string);
+- (UIImage*) getImageFromURLWithString: (NSString *) string {
+    
     NSData *data = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:string]];
+    UIImage *image = [UIImage imageWithData:data];
+    
+    return image;
 
-    return [UIImage imageWithData:data];
 }
 
 

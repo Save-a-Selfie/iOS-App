@@ -15,7 +15,7 @@
 @synthesize associatedDevice;
 @synthesize coordinates;
 @synthesize image;
-@synthesize description;
+@synthesize caption;
 
 - (instancetype)initWithImage:(UIImage *)imageToUpload {
     

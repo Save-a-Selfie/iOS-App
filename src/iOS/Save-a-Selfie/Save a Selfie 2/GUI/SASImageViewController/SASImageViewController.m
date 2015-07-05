@@ -15,6 +15,7 @@
 #import "SASSocial.h"
 #import "SASImageView.h"
 #import "ILTranslucentView.h"
+#import "SASMapAnnotationRetriever.h"
 
 
 @interface SASImageViewController () <SASMapViewNotifications ,UIScrollViewDelegate> {
@@ -42,6 +43,8 @@
 
 @property (nonatomic, weak) IBOutlet UIButton *showDeviceLocationPin;
 
+@property (nonatomic, strong) SASMapAnnotationRetriever *s;
+
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *photoDesriptionHeightContraint;
 @end
 
@@ -65,6 +68,8 @@
 @synthesize distanceLabel;
 @synthesize showDeviceLocationPin;
 @synthesize photoDesriptionHeightContraint;
+
+@synthesize s;
 
 
 - (void)viewDidLoad {
@@ -155,7 +160,8 @@
         // NOTE: The URLString is contained inside the device.standard_resolution property.
         dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             
-            UIImage* imageFromURL = [SASMapAnnotationRetriever getImageFromURLWithString:self.annotation.device.imageStandardRes];
+            self.s = [[SASMapAnnotationRetriever alloc]init];
+            UIImage* imageFromURL = [self.s getImageFromURLWithString:self.annotation.device.imageStandardRes];
             
             dispatch_async( dispatch_get_main_queue(), ^{
                 

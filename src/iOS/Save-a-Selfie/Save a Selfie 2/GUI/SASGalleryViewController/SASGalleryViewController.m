@@ -41,12 +41,29 @@
     [super viewDidLoad];
 }
 
+
+
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
+    self.navigationController.navigationBarHidden = NO;
+    
+    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+    
+    CGSize size = self.collectionView.bounds.size;
+    
+    layout.itemSize = CGSizeMake(size.width, size.height);
+    
+    [layout setScrollDirection:UICollectionViewScrollDirectionVertical];
+    
+    layout.minimumLineSpacing = 0;
+    
+    layout.headerReferenceSize = CGSizeMake(0.0, 0);
+
+    
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
-    
     
 
     self.sasMapAnnotationRetriever = [[SASMapAnnotationRetriever alloc] init];
@@ -60,21 +77,22 @@
 }
 
 
+#pragma mark SASMapAnnotationRetriever Delegate
 - (void)sasAnnotationsRetrieved:(NSMutableArray *)devices {
 
     self.sasDevicesArray = devices;
     self.sasAnnotationsRetrieved = YES;
     
     [self.collectionView reloadData];
-    printf("Reloaded");
 }
+
+
 
 
 #pragma mark UICollectionViewDataSource
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     
     if (self.sasAnnotationsRetrieved) {
-        NSLog(@"NumberOfItemsInSection count = %lu", (unsigned long)[self.sasDevicesArray count]);
         return [self.sasDevicesArray count];
         
     }
@@ -84,20 +102,48 @@
 }
 
 
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
+    return 2;
+}
+
+
 
 
 - (SASGalleryCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
     SASGalleryCell *sasGalleryCell = [self.collectionView dequeueReusableCellWithReuseIdentifier:self.reuseIdentifier forIndexPath:indexPath];
     
+    
     if (self.sasAnnotationsRetrieved) {
         
-        [sasGalleryCell setSasDevice:[self.sasDevicesArray objectAtIndex:indexPath.row]];
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+           
+            SASDevice* deviceFromIndex = [self.sasDevicesArray objectAtIndex:indexPath.row];
+            NSString* deviceImageURLSring = deviceFromIndex.imageStandardRes;
+            
+            
+            
+            UIImage* imageObjectFromURL = [self.sasMapAnnotationRetriever getImageFromURLWithString:deviceImageURLSring];
+           
+           dispatch_async(dispatch_get_main_queue(), ^{
+               sasGalleryCell.sasDevice = deviceFromIndex;
+               
+               sasGalleryCell.imageView.image = imageObjectFromURL;
+           
+           });
+        
+       });
         return sasGalleryCell;
     }
     else {
         return sasGalleryCell;
     }
+}
+
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionView *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
+{
+    return 10; // This is the minimum inter item spacing, can be more
 }
 
 @end

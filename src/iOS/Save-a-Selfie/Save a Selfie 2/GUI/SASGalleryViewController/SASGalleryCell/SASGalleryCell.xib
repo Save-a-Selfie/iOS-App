@@ -8,24 +8,30 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="wZM-yN-YHa" customClass="SASGalleryCell">
-            <rect key="frame" x="0.0" y="0.0" width="147" height="147"/>
+            <rect key="frame" x="0.0" y="0.0" width="365" height="343"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="147" height="147"/>
+                <rect key="frame" x="0.0" y="0.0" width="365" height="343"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2Bt-Qw-CpY">
-                        <rect key="frame" x="0.0" y="0.0" width="98" height="98"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2Bt-Qw-CpY">
+                        <rect key="frame" x="0.0" y="0.0" width="365" height="343"/>
                     </imageView>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
-            <color key="backgroundColor" red="1" green="0.31803101226168107" blue="0.49851263457496098" alpha="1" colorSpace="calibratedRGB"/>
-            <size key="customSize" width="147" height="147"/>
+            <color key="backgroundColor" red="0.91344181402111746" green="0.89838027785922536" blue="0.91396385732323226" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="2Bt-Qw-CpY" secondAttribute="bottom" id="41W-9C-WZc"/>
+                <constraint firstItem="2Bt-Qw-CpY" firstAttribute="top" secondItem="wZM-yN-YHa" secondAttribute="top" id="Gqz-i6-PqA"/>
+                <constraint firstAttribute="trailing" secondItem="2Bt-Qw-CpY" secondAttribute="trailing" id="MHb-gX-eLD"/>
+                <constraint firstItem="2Bt-Qw-CpY" firstAttribute="leading" secondItem="wZM-yN-YHa" secondAttribute="leading" id="gtd-0M-JtS"/>
+            </constraints>
+            <size key="customSize" width="365" height="343"/>
             <connections>
                 <outlet property="imageView" destination="2Bt-Qw-CpY" id="nHN-A0-XEX"/>
             </connections>
-            <point key="canvasLocation" x="539.5" y="435.5"/>
+            <point key="canvasLocation" x="648.5" y="533.5"/>
         </collectionViewCell>
     </objects>
 </document>

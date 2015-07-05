@@ -13,5 +13,5 @@
 
 
 @property(nonatomic, strong) SASDevice* sasDevice;
-
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @end

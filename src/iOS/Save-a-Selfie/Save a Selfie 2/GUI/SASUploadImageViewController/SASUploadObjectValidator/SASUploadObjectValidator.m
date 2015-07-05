@@ -28,7 +28,7 @@
     else if (object.image == nil) {
         return SASUploadObjectImageIsNil;
     }
-    else if (object.description == nil || [object.description isEqualToString:@""] || [object.description isEqualToString:@"Add Location Info"]) {
+    else if (object.caption == nil || [object.caption isEqualToString:@""] || [object.caption isEqualToString:@"Add Location Info"]) {
         return SASUploadObjectDescriptionInvalid;
     }
     else {

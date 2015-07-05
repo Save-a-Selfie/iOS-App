@@ -26,6 +26,7 @@
                  owner:self
                  options:nil]
                 firstObject];
+        
         self.layer.cornerRadius = 8.0;
         self.backgroundColor = [UIColor grayColor];
         self.layer.opacity = 0.8;

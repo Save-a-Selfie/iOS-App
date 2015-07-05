@@ -669,7 +669,7 @@ extern UIFont *customFont, *customFontSmaller;
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
     // The request has failed for some reason!
-    plog(error.description);
+    //plog(error.caption);
 }
 
 -(void) connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response{

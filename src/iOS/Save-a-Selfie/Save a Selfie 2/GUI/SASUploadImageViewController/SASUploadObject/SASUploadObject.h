@@ -16,7 +16,7 @@
 @property(nonatomic, strong) SASDevice *associatedDevice;
 @property(nonatomic, assign) CLLocationCoordinate2D coordinates;
 @property(nonatomic, strong) UIImage *image;
-@property(nonatomic, strong) NSString *description;
+@property(nonatomic, strong) NSString *caption;
  
 
 - (instancetype) initWithImage:(UIImage*) imageToUpload;

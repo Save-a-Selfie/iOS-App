@@ -40,7 +40,10 @@
 - (void) fetchSASAnnotationsFromServer;
 
 
-// Returns a `UIImage` from a URL
-+ (UIImage*) getImageFromURLWithString: (NSString *) string;
+// @Abstract:
+//  This method gets the images from the URL off the main thread.
+//  It is called inside `dispatch_async` on the global_queue.
+// @return UIImage from the `URL`
+- (UIImage*) getImageFromURLWithString: (NSString *) string;
 
 @end

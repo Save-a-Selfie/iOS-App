@@ -3,12 +3,13 @@
 //  Save a Selfie
 //
 //  Created by Stephen Fox on 01/07/2015.
-//  Copyright (c) 2015 Stephen Fox. All rights reserved.
+//  Copyright (c) 2015 Stephen Fox & Peter FitzGerald. All rights reserved.
 //
 
 #import "SASUploader.h"
 #import "UIImage+Resize.h"
 #import "UIImage+SASImage.h"
+#import "SASNetworkUtilities.h"
 
 
 @interface SASUploader() <NSURLConnectionDelegate, NSURLConnectionDataDelegate>
@@ -17,29 +18,25 @@
 @property (strong, nonatomic) UIImage* largeImage;
 @property (strong, nonatomic) UIImage* thumbnailImage;
 
-@property (strong, nonatomic) NSData *largeImageData;
-@property (strong, nonatomic) NSData *thumbnailImageData;
-
 @property (strong, nonatomic) NSMutableData* responseData;
 
- 
+// Boolean flag that will be set to YES, when uploading occurs.
+// When uploading finishes or hasn't began this property will be set to NO.
+@property(nonatomic, assign) BOOL uploading;
 
 @end
 
-
-
-
 @implementation SASUploader
+
+@synthesize delegate;
+
+@synthesize sasUploadObject;
 
 @synthesize largeImage;
 @synthesize thumbnailImage;
 
-@synthesize largeImageData;
-@synthesize thumbnailImageData;
-
 @synthesize responseData;
-
-@synthesize sasUploadObject;
+@synthesize uploading;
 
 
 
@@ -57,19 +54,11 @@
 - (void)upload {
     
     [self setImagesToCorrectSize];
+
     
-    
-    if(self.largeImageData == nil) {
-        self.largeImageData = UIImageJPEGRepresentation(self.largeImage, 0.9);
-    }
-    if(self.thumbnailImage == nil) {
-        self.largeImageData = UIImageJPEGRepresentation(self.thumbnailImage, 0.9);
-    }
-    
-    
-    // construct information for uploading
-    NSData *imageData = UIImageJPEGRepresentation(self.largeImage, 0.9);
-    NSData *imageDataTh = UIImageJPEGRepresentation(self.thumbnailImage, 0.9);
+    // Construct information for uploading
+    NSData *standardImageData = UIImageJPEGRepresentation(self.largeImage, 0.9);
+    NSData *thumbnailImageData = UIImageJPEGRepresentation(self.thumbnailImage, 0.9);
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     [request setHTTPMethod:@"POST"];
@@ -79,10 +68,10 @@
     [request setURL:[NSURL URLWithString:URL]];
     [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
     
-    NSString *imageStr = [imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength]; // the large (i.e., not thumbnail) image converted to a base-64 string
-    NSString *imageStrTh = [imageDataTh base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength]; // the thumbnail image converted to a base-64 string
+    NSString *standardImageString = [standardImageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength]; // the large (i.e., not thumbnail) image converted to a base-64 string
+    NSString *thumbnailImageString = [thumbnailImageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength]; // the thumbnail image converted to a base-64 string
     
-    self.sasUploadObject.description = [self encodeToPercentEscapeString:self.sasUploadObject.description]; // the caption for the image – as entered by the user
+    self.sasUploadObject.caption = [SASNetworkUtilities encodeToPercentEscapeString:self.sasUploadObject.caption]; // The caption for the image – as entered by the user
     
     NSString *parameters = [ NSString stringWithFormat:@"id=%@&typeOfObject=%d&latitude=%f&longitude=%f&location=%@&user=%@&caption=%@&image=%@&thumbnail=%@",
                             self.sasUploadObject.timeStamp,
@@ -91,23 +80,27 @@
                             self.sasUploadObject.coordinates.longitude,
                             @"",
                             @"",
-                            self.sasUploadObject.description,
-                            imageStr,
-                            imageStrTh];
+                            self.sasUploadObject.caption,
+                            standardImageString,
+                            thumbnailImageString];
+    
     
     NSString *postLength = [NSString stringWithFormat:@"%lu", (unsigned long)[parameters length]];
     [request setHTTPBody:[parameters dataUsingEncoding:NSUTF8StringEncoding]];
     [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
     
-    NSLog(@"URL: %@?%@", URL, parameters);
     
    
-    responseData = [[NSMutableData alloc] init];
-    [responseData setLength:0];
+    self.responseData = [[NSMutableData alloc] init];
+    [self.responseData setLength:0];
     
     NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
     
-    
+    if(!connection) {
+        // TODO: ERROR has happened.
+    } else {
+        // Maybe ignore another press to upload.
+    }
 }
 
 
@@ -151,13 +144,16 @@
                                      andY2:height - 70
                                   strength:1.0];
     
-
-    
 }
+
 
 #pragma mark NSURLConnectionDelegate
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
-    NSLog(@"Failed! %@", error.description);
+    NSLog(@"Failed! %@", error);
+    
+    if(self.delegate != nil && [self.delegate respondsToSelector:@selector(sasUploader:didFailWithError:)]) {
+        [self.delegate sasUploader:self didFailWithError:error];
+    }
 }
 
 
@@ -169,36 +165,17 @@
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
     NSLog(@"data received - length %lu", (unsigned long)data.length);
+    
+    [self.responseData appendData:data];
 }
 
 
 - (void) connectionDidFinishLoading:(NSURLConnection *)connection {
     NSLog(@"finished uploading...");
-}
-
-
-
-
-
-
-// Encode a string to embed in an URL. See http://cybersam.com/ios-dev/proper-url-percent-encoding-in-ios
--(NSString*) encodeToPercentEscapeString:(NSString *)string {
-    return (NSString *)
-    CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(NULL,
-                                                              (CFStringRef) string,
-                                                              NULL,
-                                                              (CFStringRef) @"!*'();:@&=+$,/?%#[]",
-                                                              kCFStringEncodingUTF8));
-}
-
-
-// Decode a percent escape encoded string. See http://cybersam.com/ios-dev/proper-url-percent-encoding-in-ios
--(NSString*) decodeFromPercentEscapeString:(NSString *)string {
-    return (NSString *)
-    CFBridgingRelease(CFURLCreateStringByReplacingPercentEscapesUsingEncoding(NULL,
-                                                                              (CFStringRef) string,
-                                                                              CFSTR(""),
-                                                                              kCFStringEncodingUTF8));
+    
+    if (self.delegate != nil && [self.delegate respondsToSelector:@selector(sasUploaderDidFinishUploadWithSuccess:)]) {
+        [self.delegate sasUploaderDidFinishUploadWithSuccess:self];
+    }
 }
 
 @end
