@@ -9,10 +9,10 @@
 #import "SASAlertView.h"
 #import "Screen.h"
 #import "UIFont+SASFont.h"
+#import "SASGreyView.h"
 
 @interface SASAlertView()
 
-@property(strong, nonatomic) UIView* greyView;
 
 @property(assign, nonatomic) SEL alertAction;
 
@@ -20,6 +20,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *alertTitleLabel;
 @property (weak, nonatomic) IBOutlet UITextView *alertMessageTextView;
 
+@property (strong, nonatomic) SASGreyView *greyView;
 @end
 
 @implementation SASAlertView
@@ -94,10 +95,8 @@
 - (void)animateIntoView:(UIView *)view {
     
     if(self.greyView == nil) {
-        self.greyView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, [Screen width], [Screen height])];
-        
+        self.greyView = [[SASGreyView alloc]initWithFrame:CGRectMake(0, 0, [Screen width], [Screen height])];
     }
-    self.greyView.backgroundColor = [UIColor colorWithWhite:0.2 alpha:0.2];
     
     [view addSubview:greyView];
     [view addSubview:self];
@@ -130,7 +129,6 @@
     } else {
         // TODO: Call custom target.
     }
-    
 }
 
 

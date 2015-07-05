@@ -17,6 +17,7 @@
 #import "SASUploader.h"
 #import "SASDeviceButton.h"
 #import "SASUploadObjectValidator.h"
+#import "SASGreyView.h"
 
 
 @interface SASUploadImageViewController () <UITextViewDelegate, SASUploaderDelegate>
@@ -31,7 +32,8 @@
 @property (weak, nonatomic) IBOutlet SASDeviceButton *fireHydrantButton;
 @property (weak, nonatomic) IBOutlet UILabel *selectDeviceLabel;
 @property (weak, nonatomic) IBOutlet UIButton *doneButton;
-@property(strong, nonatomic) IBOutlet UITextView *deviceDescriptionTextView;
+@property(strong, nonatomic) IBOutlet UITextView *deviceCaptionTextView;
+@property(strong, nonatomic) SASGreyView *sasGreyView;
 
 @property (strong, nonatomic) NSMutableArray *deviceButtonsArray;
 @property (nonatomic, assign) BOOL deviceHasBeenSelected;
@@ -46,6 +48,7 @@
 @synthesize sasUploadObject;
 @synthesize sasMapView;
 @synthesize sasAnnotation;
+@synthesize sasGreyView;
 
 @synthesize defibrillatorButton;
 @synthesize lifeRingButton;
@@ -66,7 +69,7 @@
 
 
 - (void) dismissKeyboard {
-    [self.deviceDescriptionTextView resignFirstResponder];
+    [self.deviceCaptionTextView resignFirstResponder];
 }
 
 
@@ -96,7 +99,8 @@
     [UIFont increaseCharacterSpacingForLabel:self.doneButton.titleLabel byAmount:1.0];
     
     
-    self.deviceDescriptionTextView.delegate = self;
+    self.deviceCaptionTextView.delegate = self;
+    self.deviceCaptionTextView.layer.cornerRadius = 2.0;
     
     SASBarButtonItem *cancelBarButtonItem = [[SASBarButtonItem alloc] initWithTitle:@"Cancel"
                                                                               style:UIBarButtonItemStylePlain
@@ -182,7 +186,7 @@
 
 
 - (void)sasUploader:(SASUploader *)sasUploader didFailWithError:(NSError *)error {
-    
+// TODO: Add error message.
 }
 
 
@@ -190,22 +194,48 @@
 
 #pragma mark UITextViewDelegate
 - (void)textViewDidBeginEditing:(UITextView *)textView {
-    if([self.deviceDescriptionTextView.text isEqualToString:@"Add Location Information"]) {
-        self.deviceDescriptionTextView.text = @"";
+    if([self.deviceCaptionTextView.text isEqualToString:@"Add Location Information"]) {
+        self.deviceCaptionTextView.text = @"";
     }
+    
+    [self addGreyView];
 }
 
 
 - (void)textViewDidEndEditing:(UITextView *)textView {
+    
+    if([self.deviceCaptionTextView.text isEqualToString:@""]) {
+        self.deviceCaptionTextView.text = @"Add Location Information";
+    }
+    
 #pragma mark SASUploadObject.description set here.
     self.sasUploadObject.caption = textView.text;
+    
+
+    
+    [self removeGreyView];
 }
 
 
+// Adds a SASGrey view which dims the background apart from `deviceCaptionTextView` &
+// `sasImageView`.
+- (void) addGreyView {
+    if (self.sasGreyView == nil) {
+        self.sasGreyView = [[SASGreyView alloc] initWithFrame:CGRectMake(0, 0, [Screen width], [Screen height])];
+    }
+    [self.sasGreyView animateIntoView:self.view];
+    [self.view bringSubviewToFront:self.sasImageView];
+    [self.view bringSubviewToFront:self.deviceCaptionTextView];
+    
+}
 
+- (void) removeGreyView {
+    [self.sasGreyView animateOutOfParentView];
+}
 
 - (void) dismissSASUploadImageViewController {
     [self dismissViewControllerAnimated:YES completion:nil];
+
 }
 
 @end

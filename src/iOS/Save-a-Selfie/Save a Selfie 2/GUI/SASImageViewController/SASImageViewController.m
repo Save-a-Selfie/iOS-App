@@ -147,7 +147,7 @@
     if(self.annotation.device.imageStandardRes != nil && !imageLoaded) {
         
         // Begin animation of sasActivityIndicator until image is loaded.
-        self.sasActivityIndicator = [[SASActivityIndicator alloc] init];
+        self.sasActivityIndicator = [[SASActivityIndicator alloc] initWithMessage:@"Loading..."];
         [self.sasImageView addSubview:sasActivityIndicator];
         self.sasActivityIndicator.center = self.sasImageView.center;
         self.sasActivityIndicator.backgroundColor = [UIColor clearColor];
@@ -237,14 +237,14 @@
 - (void)sasMapViewUsersLocationHasUpdated:(CLLocationCoordinate2D)coordinate {
     double distance = [SASUtilities distanceBetween:self.annotation.coordinate and:coordinate];
     
-    __weak NSString *distanceString = [NSString stringWithFormat:@"%.2fKM Approx", distance];
+    __weak NSString *distanceString = [NSString stringWithFormat:@"%.1fKM Approx", distance];
     self.distanceLabel.text = distanceString;
 }
 
 
 #pragma mark Share to Social Media
 - (IBAction)shareToSocialMedia:(id)sender {
-    if(annotation != nil) {
+    if(self.annotation != nil) {
         [SASSocial shareToSocialMedia:self.annotation.device.caption andImage:self.sasImage target:self];
     }
 }

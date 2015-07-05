@@ -10,7 +10,13 @@
 
 @interface SASActivityIndicator : UIView
 
+@property (weak, nonatomic) IBOutlet UILabel *message;
+
 - (void) startAnimating;
 - (void) stopAnimating;
+
+
+// initWIthImage sets the message that will acompany the spinner.
+- (instancetype)initWithMessage:(NSString*) aMessage;
 
 @end

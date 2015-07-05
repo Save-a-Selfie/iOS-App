@@ -15,6 +15,7 @@
 		1845C4EC1B20920300E3D7BC /* SASActivityIndicatorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1845C4EB1B20920300E3D7BC /* SASActivityIndicatorView.xib */; };
 		1845C4EF1B209E6C00E3D7BC /* SASUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 1845C4EE1B209E6C00E3D7BC /* SASUtilities.m */; };
 		184D99B31B49B02F005ECE33 /* SASNetworkUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 184D99B21B49B02F005ECE33 /* SASNetworkUtilities.m */; };
+		184D99B71B49C24A005ECE33 /* SASGreyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 184D99B61B49C24A005ECE33 /* SASGreyView.m */; };
 		185A39B81B1FD7B900699D31 /* SASColour.m in Sources */ = {isa = PBXBuildFile; fileRef = 185A39B71B1FD7B900699D31 /* SASColour.m */; };
 		1864FEAC1B27A39900EA564A /* UIFont+SASFont.m in Sources */ = {isa = PBXBuildFile; fileRef = 1864FEAB1B27A39900EA564A /* UIFont+SASFont.m */; };
 		186A39A21B3C933E00F38EDB /* SASFilterViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 186A39A11B3C933E00F38EDB /* SASFilterViewCell.xib */; };
@@ -113,8 +114,10 @@
 		1845C4EB1B20920300E3D7BC /* SASActivityIndicatorView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SASActivityIndicatorView.xib; path = ../../../../../../../../Developer/SASActivityIndicator/SASActivityIndicatorView.xib; sourceTree = "<group>"; };
 		1845C4ED1B209E6C00E3D7BC /* SASUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASUtilities.h; sourceTree = "<group>"; };
 		1845C4EE1B209E6C00E3D7BC /* SASUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASUtilities.m; sourceTree = "<group>"; };
-		184D99B11B49B02F005ECE33 /* SASNetworkUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SASNetworkUtilities.h; path = "Save a Selfie 2/Network/SASNetworkUtilities/SASNetworkUtilities.h"; sourceTree = SOURCE_ROOT; };
-		184D99B21B49B02F005ECE33 /* SASNetworkUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SASNetworkUtilities.m; path = "Save a Selfie 2/Network/SASNetworkUtilities/SASNetworkUtilities.m"; sourceTree = SOURCE_ROOT; };
+		184D99B11B49B02F005ECE33 /* SASNetworkUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASNetworkUtilities.h; sourceTree = "<group>"; };
+		184D99B21B49B02F005ECE33 /* SASNetworkUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASNetworkUtilities.m; sourceTree = "<group>"; };
+		184D99B51B49C24A005ECE33 /* SASGreyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SASGreyView.h; path = "Save a Selfie 2/GUI/SASGreyView.h"; sourceTree = SOURCE_ROOT; };
+		184D99B61B49C24A005ECE33 /* SASGreyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SASGreyView.m; path = "Save a Selfie 2/GUI/SASGreyView.m"; sourceTree = SOURCE_ROOT; };
 		185A39B61B1FD7B900699D31 /* SASColour.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASColour.h; sourceTree = "<group>"; };
 		185A39B71B1FD7B900699D31 /* SASColour.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASColour.m; sourceTree = "<group>"; };
 		1864FEAA1B27A39900EA564A /* UIFont+SASFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+SASFont.h"; sourceTree = "<group>"; };
@@ -337,8 +340,17 @@
 				184D99B11B49B02F005ECE33 /* SASNetworkUtilities.h */,
 				184D99B21B49B02F005ECE33 /* SASNetworkUtilities.m */,
 			);
-			name = SASNetworkUtilities;
-			path = ../GUI/SASUploadImageViewController;
+			path = SASNetworkUtilities;
+			sourceTree = "<group>";
+		};
+		184D99B81B49C24E005ECE33 /* SASGreyView */ = {
+			isa = PBXGroup;
+			children = (
+				184D99B51B49C24A005ECE33 /* SASGreyView.h */,
+				184D99B61B49C24A005ECE33 /* SASGreyView.m */,
+			);
+			name = SASGreyView;
+			path = SASUploadImageViewController;
 			sourceTree = "<group>";
 		};
 		185A39B91B1FD7C500699D31 /* SASColour */ = {
@@ -391,6 +403,7 @@
 				18EBF9781B272B3700EDA48B /* SASImagePickerController */,
 				18A524FC1B166C2700E8F8F6 /* SASMapView */,
 				185A39B91B1FD7C500699D31 /* SASColour */,
+				184D99B81B49C24E005ECE33 /* SASGreyView */,
 				1845C4E71B2091C800E3D7BC /* SASActivityIndicator */,
 				1810C90B1B28904A009063E5 /* SASImage */,
 				18372AA71B3F7EE600BD61D9 /* SASTabBarController */,
@@ -834,6 +847,7 @@
 			files = (
 				18C323991B1E2F1E0027BDEA /* SASImageViewController.m in Sources */,
 				D700239919F52E8800E45408 /* UIButton+Maker.m in Sources */,
+				184D99B71B49C24A005ECE33 /* SASGreyView.m in Sources */,
 				18DAE8571B46CC4900CAEF2D /* SASUploadObjectValidator.m in Sources */,
 				18EBF97B1B273A6600EDA48B /* SASUploadObject.m in Sources */,
 				18A525081B16708400E8F8F6 /* SASMapViewController.m in Sources */,
