@@ -52,13 +52,9 @@
 
 - (void) animateOutOfParentView {
     [UIView animateWithDuration:0.2
-                     animations:^{
-                         self.alpha = 0.0;
-                         [self removeFromSuperview];
-                     }
-     ];
+                     animations:^{self.alpha = 0.0;}
+                     completion:^(BOOL f){[self removeFromSuperview];}];
     
-
 }
 
 
