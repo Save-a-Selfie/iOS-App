@@ -16,8 +16,9 @@
 #import "SASAlertView.h"
 #import "SASUploader.h"
 #import "SASDeviceButton.h"
-#import "SASUploadObjectValidator.h"
 #import "SASGreyView.h"
+#import "EULA.h"
+#import "SASActivityIndicator.h"
 
 
 @interface SASUploadImageViewController () <UITextViewDelegate, SASUploaderDelegate>
@@ -32,13 +33,15 @@
 @property (weak, nonatomic) IBOutlet SASDeviceButton *fireHydrantButton;
 @property (weak, nonatomic) IBOutlet UILabel *selectDeviceLabel;
 @property (weak, nonatomic) IBOutlet UIButton *doneButton;
-@property(strong, nonatomic) IBOutlet UITextView *deviceCaptionTextView;
-@property(strong, nonatomic) SASGreyView *sasGreyView;
+@property (weak, nonatomic) IBOutlet UITextView *deviceCaptionTextView;
+@property (strong, nonatomic) SASGreyView *sasGreyView;
+@property (strong, nonatomic) SASActivityIndicator *sasActivityIndicator;
 
 @property (strong, nonatomic) NSMutableArray *deviceButtonsArray;
 @property (nonatomic, assign) BOOL deviceHasBeenSelected;
 
 @property (strong, nonatomic) SASUploader *sasUploader;
+
 
 @end
 
@@ -49,6 +52,7 @@
 @synthesize sasMapView;
 @synthesize sasAnnotation;
 @synthesize sasGreyView;
+@synthesize sasActivityIndicator;
 
 @synthesize defibrillatorButton;
 @synthesize lifeRingButton;
@@ -60,7 +64,6 @@
 @synthesize deviceHasBeenSelected;
 
 @synthesize sasUploader;
-
 
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -142,9 +145,7 @@
 
 - (IBAction)deviceSelected:(SASDeviceButton*) sender {
     
-    for(SASDeviceButton* button in self.deviceButtonsArray) {
-        [button deselect];
-    }
+    [self deselectDeviceButtons];
     
     [sender select];
     
@@ -157,36 +158,86 @@
 
 
 
+// 'Deselects' a button by putting the image of the button back
+// to the default image when the button was not selected;
+- (void) deselectDeviceButtons {
+    for (SASDeviceButton* button in self.deviceButtonsArray) {
+        [button deselect];
+    }
+}
+
+
+- (void) selectDeviceButton:(SASDeviceButton *) button {
+    [button select];
+}
+
+
+
+
 
 #pragma mark Upload Routine
 - (IBAction)beginUploadRoutine:(id)sender {
     
-    
-#pragma mark SASUploadObject timestamp set here.
+    #pragma mark SASUploadObject timestamp set here.
     [self.sasUploadObject setTimeStamp: [SASUtilities getCurrentTimeStamp]];
-    
-    NSLog(@"%ld", (long)self.sasUploadObject.associatedDevice.type);
-    NSLog(@"%@", self.sasUploadObject.caption);
     
     
     self.sasUploader = [[SASUploader alloc] initWithSASUploadObject:self.sasUploadObject];
     self.sasUploader.delegate = self;
-    
-    // Upload the object to the server.
     [self.sasUploader upload];
+    
+    // Activity Indicator
+    self.sasActivityIndicator = [[SASActivityIndicator alloc] initWithMessage:@"Posting"];
+    [self.view addSubview:self.sasActivityIndicator];
+    self.sasActivityIndicator.center = self.view.center;
+    [self.sasActivityIndicator startAnimating];
 }
 
 
 
 #pragma mark SASUploaderDelegate
 - (void)sasUploaderDidFinishUploadWithSuccess:(SASUploader *)sasUploader {
-    printf("Called");
     [self dismissSASUploadImageViewController];
+    
+    [self.sasActivityIndicator removeFromSuperview];
+    [self.sasActivityIndicator stopAnimating];
+    
 }
 
 
+
 - (void)sasUploader:(SASUploader *)sasUploader didFailWithError:(NSError *)error {
-// TODO: Add error message.
+    
+    SASAlertView *uploadErrorAlert = [[SASAlertView alloc] initWithTarget:self andAction:nil];
+    uploadErrorAlert.title = @"Ooops!";
+    uploadErrorAlert.message = @"There seemed to be a problem posting!\n Please try again";
+    uploadErrorAlert.buttonTitle = @"Ok";
+    
+    [self.sasActivityIndicator removeFromSuperview];
+    [self.sasActivityIndicator stopAnimating];
+    
+    [uploadErrorAlert animateIntoView:self.view];
+    
+}
+
+
+
+- (void) sasUploadObject:(SASUploadObject *)object invalidObjectWithResponse:(SASUploadInvalidatedResponse) response {
+    
+    SASAlertView *alertView = [[SASAlertView alloc] initWithTarget:self andAction:nil];
+    
+    switch (response) {
+        
+        case SASUploadObjectInvalidCaption:
+            alertView.title = @"Ooops!";
+            alertView.message = @"Please add a description for this post!";
+            alertView.buttonTitle = @"Ok";
+            [alertView animateIntoView:self.view];
+            break;
+            
+        default:
+            break;
+    }
 }
 
 
@@ -208,13 +259,17 @@
         self.deviceCaptionTextView.text = @"Add Location Information";
     }
     
+    
+    
+    
 #pragma mark SASUploadObject.description set here.
     self.sasUploadObject.caption = textView.text;
     
-
-    
     [self removeGreyView];
 }
+
+
+
 
 
 // Adds a SASGrey view which dims the background apart from `deviceCaptionTextView` &
@@ -233,9 +288,62 @@
     [self.sasGreyView animateOutOfParentView];
 }
 
+
 - (void) dismissSASUploadImageViewController {
     [self dismissViewControllerAnimated:YES completion:nil];
+    
+    [self deselectDeviceButtons];
+    
+    
+    // Call delegate.
+    if (self.delegate != nil && [self.delegate respondsToSelector:@selector(sasUploadImageViewControllerDidFinishUploading:withObject:)]) {
+        [self.delegate sasUploadImageViewControllerDidFinishUploading:self withObject:self.sasUploadObject];
+    }
 
 }
+
+
+
+
+
+
+#pragma Check the user has agreed to the End User Licence Agreement
+- (void) checkEULAAcepted {
+    
+    BOOL EULAAccepted = [[[NSUserDefaults standardUserDefaults] valueForKey:@"EULAAccepted"] isEqualToString:@"yes"];
+    
+    if (!EULAAccepted) {
+        SASAlertView *sasAlertView = [[SASAlertView alloc] initWithTarget:self andAction:@selector(showEULA)];
+        sasAlertView.title = @"Notice";
+        sasAlertView.message = @"Before posting, we need you to agree to the terms of use.";
+        sasAlertView.title = @"Show me";
+        
+        [sasAlertView animateIntoView:self.view];
+    } else {
+        return;
+    }
+}
+
+- (void) showEULA {
+
+    EULA *EULAView = [[EULA alloc] init];
+    [EULAView EULALoaded];
+
+    [self.view addSubview:EULAView];
+    
+    [[NSNotificationCenter defaultCenter]
+     addObserver:self
+     selector:@selector(EULAAccepted)
+     name:@"EULAAccepted"
+     object:nil];
+
+    [[NSNotificationCenter defaultCenter]
+     addObserver:self
+     selector:@selector(EULADeclined)
+     name:@"EULADeclined"
+     object:nil];
+}
+
+
 
 @end

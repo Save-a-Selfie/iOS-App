@@ -16,6 +16,7 @@
 #import "SASImageView.h"
 #import "ILTranslucentView.h"
 #import "SASMapAnnotationRetriever.h"
+#import "SASBarButtonItem.h"
 
 
 @interface SASImageViewController () <SASMapViewNotifications ,UIScrollViewDelegate> {
@@ -97,7 +98,11 @@
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:NO animated:YES];
     
-
+    SASBarButtonItem *reportButton = [[SASBarButtonItem alloc] initWithTitle:@"Report"
+                                                                       style:UIBarButtonItemStylePlain
+                                                                      target:self
+                                                                      action:@selector(reportUser)];
+    self.navigationItem.rightBarButtonItem = reportButton;
 #pragma mark Setup of the UI Elements.
     
     // @Discussion:
@@ -247,6 +252,11 @@
     if(self.annotation != nil) {
         [SASSocial shareToSocialMedia:self.annotation.device.caption andImage:self.sasImage target:self];
     }
+}
+
+
+- (void) reportUser {
+    
 }
 
 

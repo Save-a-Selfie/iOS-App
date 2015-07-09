@@ -40,7 +40,7 @@
 
 
 
-- (instancetype)initWithSASUploadObject: (SASUploadObject*) object {
+- (instancetype)initWithSASUploadObject: (SASUploadObject <SASVerifiedUploadObject>*) object {
     
     if (self == [super init]) {
         self.sasUploadObject = object;
@@ -53,53 +53,81 @@
 #pragma mark UploadObject
 - (void)upload {
     
-    [self setImagesToCorrectSize];
+    // Make sure we have a valid object
+    // to upload.
+    BOOL proceedToUpload = [self validateSASUploadObject];
+    NSLog(@"%d", proceedToUpload);
+    
+    
+    if(proceedToUpload) {
+        
+        [self setImagesToCorrectSize];
+        
+        
+        // Construct information for uploading
+        NSData *standardImageData = UIImageJPEGRepresentation(self.largeImage, 0.9);
+        NSData *thumbnailImageData = UIImageJPEGRepresentation(self.thumbnailImage, 0.9);
+        
+        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+        [request setHTTPMethod:@"POST"];
+        
+        NSString *URL = @"http://www.saveaselfie.org/wp/wp-content/themes/magazine-child/iPhone.php";
+        
+        [request setURL:[NSURL URLWithString:URL]];
+        [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+        
+        NSString *standardImageString = [standardImageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength]; // the large (i.e., not thumbnail) image converted to a base-64 string
+        NSString *thumbnailImageString = [thumbnailImageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength]; // the thumbnail image converted to a base-64 string
+        
+        self.sasUploadObject.caption = [SASNetworkUtilities encodeToPercentEscapeString:self.sasUploadObject.caption]; // The caption for the image – as entered by the user
+        
+        NSString *parameters = [ NSString stringWithFormat:@"id=%@&typeOfObject=%d&latitude=%f&longitude=%f&location=%@&user=%@&caption=%@&image=%@&thumbnail=%@",
+                                self.sasUploadObject.timeStamp,
+                                self.sasUploadObject.associatedDevice.type,
+                                self.sasUploadObject.coordinates.latitude,
+                                self.sasUploadObject.coordinates.longitude,
+                                @"",
+                                @"",
+                                self.sasUploadObject.caption,
+                                standardImageString,
+                                thumbnailImageString];
+        
+        
+        NSString *postLength = [NSString stringWithFormat:@"%lu", (unsigned long)[parameters length]];
+        [request setHTTPBody:[parameters dataUsingEncoding:NSUTF8StringEncoding]];
+        [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+        
+        
+        
+        self.responseData = [[NSMutableData alloc] init];
+        [self.responseData setLength:0];
+        
+        NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+        
+        if(!connection) {
+            // TODO: ERROR has happened.
+        } else {
+            // Maybe ignore another press to upload.
+        }
+    }
+}
 
+
+// @return YES: If the object is ready to be uploaded.
+// @return NO: IF the object is not ready to be uploaded.
+- (BOOL) validateSASUploadObject {
     
-    // Construct information for uploading
-    NSData *standardImageData = UIImageJPEGRepresentation(self.largeImage, 0.9);
-    NSData *thumbnailImageData = UIImageJPEGRepresentation(self.thumbnailImage, 0.9);
-    
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-    [request setHTTPMethod:@"POST"];
-    
-    NSString *URL = @"http://www.saveaselfie.org/wp/wp-content/themes/magazine-child/iPhone.php";
-    
-    [request setURL:[NSURL URLWithString:URL]];
-    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-    
-    NSString *standardImageString = [standardImageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength]; // the large (i.e., not thumbnail) image converted to a base-64 string
-    NSString *thumbnailImageString = [thumbnailImageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength]; // the thumbnail image converted to a base-64 string
-    
-    self.sasUploadObject.caption = [SASNetworkUtilities encodeToPercentEscapeString:self.sasUploadObject.caption]; // The caption for the image – as entered by the user
-    
-    NSString *parameters = [ NSString stringWithFormat:@"id=%@&typeOfObject=%d&latitude=%f&longitude=%f&location=%@&user=%@&caption=%@&image=%@&thumbnail=%@",
-                            self.sasUploadObject.timeStamp,
-                            self.sasUploadObject.associatedDevice.type,
-                            self.sasUploadObject.coordinates.latitude,
-                            self.sasUploadObject.coordinates.longitude,
-                            @"",
-                            @"",
-                            self.sasUploadObject.caption,
-                            standardImageString,
-                            thumbnailImageString];
-    
-    
-    NSString *postLength = [NSString stringWithFormat:@"%lu", (unsigned long)[parameters length]];
-    [request setHTTPBody:[parameters dataUsingEncoding:NSUTF8StringEncoding]];
-    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
-    
-    
-   
-    self.responseData = [[NSMutableData alloc] init];
-    [self.responseData setLength:0];
-    
-    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
-    
-    if(!connection) {
-        // TODO: ERROR has happened.
-    } else {
-        // Maybe ignore another press to upload.
+    if([self.sasUploadObject captionHasBeenSet] == false) {
+
+        printf("Not set");
+        
+        if(self.delegate != nil && [self.delegate respondsToSelector:@selector(sasUploadObject:invalidObjectWithResponse:)]) {
+            [self.delegate sasUploadObject:self.sasUploadObject invalidObjectWithResponse:SASUploadObjectInvalidCaption];
+        }
+        return NO;
+    }
+    else {
+        return YES;
     }
 }
 

@@ -62,6 +62,10 @@
 
 - (void) imagePickerControllerDidCancel:(UIImagePickerController *)picker {
     [self dismissViewControllerAnimated:YES completion:nil];
+    
+    if(self.sasImagePickerDelegate != nil && [self.sasImagePickerDelegate respondsToSelector:@selector(sasImagePickerControllerDidCancel:)]) {
+        [self.sasImagePickerDelegate sasImagePickerControllerDidCancel:self];
+    }
 }
 
 @end

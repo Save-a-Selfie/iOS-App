@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1807AF3F1B4EE8F2006E1B28 /* StorageSystem.m in Sources */ = {isa = PBXBuildFile; fileRef = 1807AF3E1B4EE8F2006E1B28 /* StorageSystem.m */; };
+		1807AF441B4EE946006E1B28 /* EULA.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1807AF411B4EE946006E1B28 /* EULA.xib */; };
+		1807AF451B4EE946006E1B28 /* EULA.m in Sources */ = {isa = PBXBuildFile; fileRef = 1807AF431B4EE946006E1B28 /* EULA.m */; };
+		1807AF491B4EED3E006E1B28 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 1807AF471B4EED3E006E1B28 /* MBProgressHUD.m */; };
+		1807AF4D1B4EEE79006E1B28 /* NSString+PDRegex.m in Sources */ = {isa = PBXBuildFile; fileRef = 1807AF4C1B4EEE79006E1B28 /* NSString+PDRegex.m */; };
 		1810C90A1B289044009063E5 /* UIImage+SASImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 1810C9091B289044009063E5 /* UIImage+SASImage.m */; };
 		1810C9141B28ABE3009063E5 /* ILTranslucentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1810C9131B28ABE3009063E5 /* ILTranslucentView.m */; };
 		181D1E5D1B2359EA00FB5928 /* SASImageInspectorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 181D1E5C1B2359EA00FB5928 /* SASImageInspectorView.m */; };
@@ -33,7 +38,6 @@
 		18B7C34E1B4586AB00017170 /* SASAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18B7C34D1B4586AB00017170 /* SASAlertView.xib */; };
 		18C323991B1E2F1E0027BDEA /* SASImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C323981B1E2F1E0027BDEA /* SASImageViewController.m */; };
 		18DAE8531B46BA6400CAEF2D /* SASDeviceButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 18DAE8521B46BA6400CAEF2D /* SASDeviceButton.m */; };
-		18DAE8571B46CC4900CAEF2D /* SASUploadObjectValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 18DAE8561B46CC4900CAEF2D /* SASUploadObjectValidator.m */; };
 		18DAE85B1B47158B00CAEF2D /* SASGalleryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18DAE85A1B47158B00CAEF2D /* SASGalleryViewController.m */; };
 		18DAE85F1B47170F00CAEF2D /* SASGalleryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18DAE85E1B47170F00CAEF2D /* SASGalleryCell.m */; };
 		18DDE50B1B3D7F0F00AB0CB3 /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18DDE50A1B3D7F0F00AB0CB3 /* Launch Screen.xib */; };
@@ -101,6 +105,16 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1807AF3D1B4EE8F2006E1B28 /* StorageSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StorageSystem.h; sourceTree = "<group>"; };
+		1807AF3E1B4EE8F2006E1B28 /* StorageSystem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StorageSystem.m; sourceTree = "<group>"; };
+		1807AF411B4EE946006E1B28 /* EULA.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EULA.xib; sourceTree = "<group>"; };
+		1807AF421B4EE946006E1B28 /* EULA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EULA.h; sourceTree = "<group>"; };
+		1807AF431B4EE946006E1B28 /* EULA.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EULA.m; sourceTree = "<group>"; };
+		1807AF471B4EED3E006E1B28 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		1807AF481B4EED3E006E1B28 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		1807AF4B1B4EEE79006E1B28 /* NSString+PDRegex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+PDRegex.h"; sourceTree = "<group>"; };
+		1807AF4C1B4EEE79006E1B28 /* NSString+PDRegex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+PDRegex.m"; sourceTree = "<group>"; };
+		1807AF511B4F175C006E1B28 /* SASVerifiedUploadObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASVerifiedUploadObject.h; sourceTree = "<group>"; };
 		1810C9081B289044009063E5 /* UIImage+SASImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+SASImage.h"; sourceTree = "<group>"; };
 		1810C9091B289044009063E5 /* UIImage+SASImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+SASImage.m"; sourceTree = "<group>"; };
 		1810C9121B28ABE3009063E5 /* ILTranslucentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ILTranslucentView.h; sourceTree = "<group>"; };
@@ -149,8 +163,6 @@
 		18C323981B1E2F1E0027BDEA /* SASImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASImageViewController.m; sourceTree = "<group>"; };
 		18DAE8511B46BA6400CAEF2D /* SASDeviceButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASDeviceButton.h; sourceTree = "<group>"; };
 		18DAE8521B46BA6400CAEF2D /* SASDeviceButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASDeviceButton.m; sourceTree = "<group>"; };
-		18DAE8551B46CC4900CAEF2D /* SASUploadObjectValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASUploadObjectValidator.h; sourceTree = "<group>"; };
-		18DAE8561B46CC4900CAEF2D /* SASUploadObjectValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASUploadObjectValidator.m; sourceTree = "<group>"; };
 		18DAE8591B47158B00CAEF2D /* SASGalleryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASGalleryViewController.h; sourceTree = "<group>"; };
 		18DAE85A1B47158B00CAEF2D /* SASGalleryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASGalleryViewController.m; sourceTree = "<group>"; };
 		18DAE85D1B47170F00CAEF2D /* SASGalleryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASGalleryCell.h; sourceTree = "<group>"; };
@@ -269,6 +281,52 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1807AF401B4EE8F8006E1B28 /* StorageSystem */ = {
+			isa = PBXGroup;
+			children = (
+				1807AF3D1B4EE8F2006E1B28 /* StorageSystem.h */,
+				1807AF3E1B4EE8F2006E1B28 /* StorageSystem.m */,
+			);
+			name = StorageSystem;
+			sourceTree = "<group>";
+		};
+		1807AF461B4EE94B006E1B28 /* EULA */ = {
+			isa = PBXGroup;
+			children = (
+				1807AF411B4EE946006E1B28 /* EULA.xib */,
+				1807AF421B4EE946006E1B28 /* EULA.h */,
+				1807AF431B4EE946006E1B28 /* EULA.m */,
+			);
+			name = EULA;
+			sourceTree = "<group>";
+		};
+		1807AF4A1B4EED42006E1B28 /* MBProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				1807AF471B4EED3E006E1B28 /* MBProgressHUD.m */,
+				1807AF481B4EED3E006E1B28 /* MBProgressHUD.h */,
+			);
+			name = MBProgressHUD;
+			sourceTree = "<group>";
+		};
+		1807AF4E1B4EEE7C006E1B28 /* NSString+PDRegex */ = {
+			isa = PBXGroup;
+			children = (
+				1807AF4B1B4EEE79006E1B28 /* NSString+PDRegex.h */,
+				1807AF4C1B4EEE79006E1B28 /* NSString+PDRegex.m */,
+			);
+			name = "NSString+PDRegex";
+			sourceTree = "<group>";
+		};
+		1807AF501B4F169F006E1B28 /* SASVerifiedUploadObject */ = {
+			isa = PBXGroup;
+			children = (
+				1807AF511B4F175C006E1B28 /* SASVerifiedUploadObject.h */,
+			);
+			name = SASVerifiedUploadObject;
+			path = ../..;
+			sourceTree = "<group>";
+		};
 		1810C90B1B28904A009063E5 /* SASImage */ = {
 			isa = PBXGroup;
 			children = (
@@ -544,15 +602,6 @@
 			path = Network;
 			sourceTree = "<group>";
 		};
-		18DAE8581B46D26500CAEF2D /* SASUploadObjectValidator */ = {
-			isa = PBXGroup;
-			children = (
-				18DAE8551B46CC4900CAEF2D /* SASUploadObjectValidator.h */,
-				18DAE8561B46CC4900CAEF2D /* SASUploadObjectValidator.m */,
-			);
-			path = SASUploadObjectValidator;
-			sourceTree = "<group>";
-		};
 		18DAE85C1B47159B00CAEF2D /* SASGalleryViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -596,8 +645,8 @@
 			children = (
 				18EBF97E1B2741F600EDA48B /* SASUploadImageViewController.h */,
 				18EBF97F1B2741F600EDA48B /* SASUploadImageViewController.m */,
-				18DAE8581B46D26500CAEF2D /* SASUploadObjectValidator */,
 				18EBF97C1B273A6900EDA48B /* SASUploadObject */,
+				1807AF501B4F169F006E1B28 /* SASVerifiedUploadObject */,
 				18DAE8501B46BA2D00CAEF2D /* SASDeviceButton */,
 			);
 			path = SASUploadImageViewController;
@@ -704,6 +753,10 @@
 		D72E1DAF19EE841E005DD8A5 /* Save a Selfie 2 */ = {
 			isa = PBXGroup;
 			children = (
+				1807AF4E1B4EEE7C006E1B28 /* NSString+PDRegex */,
+				1807AF4A1B4EED42006E1B28 /* MBProgressHUD */,
+				1807AF461B4EE94B006E1B28 /* EULA */,
+				1807AF401B4EE8F8006E1B28 /* StorageSystem */,
 				18A525051B166E0D00E8F8F6 /* SASDevice */,
 				18C3239A1B1E33140027BDEA /* AppDelegate */,
 				1845C4F01B209E7C00E3D7BC /* SASUtlities */,
@@ -833,6 +886,7 @@
 				D72D02CE1A9BDFC2008C2597 /* testMapping.js in Resources */,
 				D72D02D41A9BDFC2008C2597 /* float.js in Resources */,
 				D786E1751A4827D300A20FDD /* trade-gothic-lt-1361519976.ttf in Resources */,
+				1807AF441B4EE946006E1B28 /* EULA.xib in Resources */,
 				D72D02CD1A9BDFC2008C2597 /* galleryAndMaps.php in Resources */,
 				D72D02CF1A9BDFC2008C2597 /* page.php in Resources */,
 			);
@@ -848,7 +902,6 @@
 				18C323991B1E2F1E0027BDEA /* SASImageViewController.m in Sources */,
 				D700239919F52E8800E45408 /* UIButton+Maker.m in Sources */,
 				184D99B71B49C24A005ECE33 /* SASGreyView.m in Sources */,
-				18DAE8571B46CC4900CAEF2D /* SASUploadObjectValidator.m in Sources */,
 				18EBF97B1B273A6600EDA48B /* SASUploadObject.m in Sources */,
 				18A525081B16708400E8F8F6 /* SASMapViewController.m in Sources */,
 				D786E1781A48C02900A20FDD /* SASDevice.m in Sources */,
@@ -871,6 +924,7 @@
 				181D1E5D1B2359EA00FB5928 /* SASImageInspectorView.m in Sources */,
 				D756A2A919F309690089EF80 /* SASTabBarController.m in Sources */,
 				1810C90A1B289044009063E5 /* UIImage+SASImage.m in Sources */,
+				1807AF3F1B4EE8F2006E1B28 /* StorageSystem.m in Sources */,
 				D73550A41A84DBF500F9093C /* UIView+Alert.m in Sources */,
 				18DAE85B1B47158B00CAEF2D /* SASGalleryViewController.m in Sources */,
 				188CAEE51B20EA59006A90EB /* SASSocial.m in Sources */,
@@ -879,8 +933,10 @@
 				D715E4861A05A5480026D91F /* ThirdViewController.m in Sources */,
 				D756A29D19F175230089EF80 /* UIImage+RoundedCorner.m in Sources */,
 				D72E1E4B19F06AE7005DD8A5 /* UploadPictureViewController.m in Sources */,
+				1807AF491B4EED3E006E1B28 /* MBProgressHUD.m in Sources */,
 				D72E1DB319EE841E005DD8A5 /* main.m in Sources */,
 				184D99B31B49B02F005ECE33 /* SASNetworkUtilities.m in Sources */,
+				1807AF451B4EE946006E1B28 /* EULA.m in Sources */,
 				18EBF9771B272B3400EDA48B /* SASImagePickerViewController.m in Sources */,
 				D700239519F5253C00E45408 /* AlertBox.m in Sources */,
 				D715E4971A0936010026D91F /* UIButton+VerticalLayout.m in Sources */,
@@ -892,6 +948,7 @@
 				18B7C3481B4585FE00017170 /* SASAlertView.m in Sources */,
 				D786E2511A50AC7F00A20FDD /* PopupImage.m in Sources */,
 				1891E3D31B1743C8008CC10C /* SASMapView.m in Sources */,
+				1807AF4D1B4EEE79006E1B28 /* NSString+PDRegex.m in Sources */,
 				185A39B81B1FD7B900699D31 /* SASColour.m in Sources */,
 				D70023B419FBC5A600E45408 /* UIView+WidthXY.m in Sources */,
 			);

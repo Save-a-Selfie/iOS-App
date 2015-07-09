@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
 #import "SASDevice.h"
+#import "SASVerifiedUploadObject.h"
 
-@interface SASUploadObject : NSObject
+@interface SASUploadObject : NSObject <SASVerifiedUploadObject>
 
 @property(nonatomic, strong) NSString *timeStamp;
 @property(nonatomic, strong) SASDevice *associatedDevice;

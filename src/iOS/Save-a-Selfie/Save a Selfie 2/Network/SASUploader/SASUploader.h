@@ -12,7 +12,23 @@
 
 @class SASUploader;
 
+
+typedef NS_ENUM(NSInteger, SASUploadInvalidatedResponse) {
+    // Invalid caption for the SASUploadObject.
+    SASUploadObjectInvalidCaption
+};
+
+
+
 @protocol SASUploaderDelegate <NSObject>
+
+// @Discussion:
+//  As any object that wants to be uploaded must conform to
+//  `SASVerifiedUploadObject` protocol, it is possible the object may not be ready for
+//   upload or in other words considered 'invalid'.
+//   If the object initialise with this class is invalid, the delegate will be sent this
+//   message containing the reason.
+- (void) sasUploadObject:(SASUploadObject *) object invalidObjectWithResponse:(SASUploadInvalidatedResponse) response;
 
 
 // The SASUpload Object uploaded to the server successfully.
@@ -26,6 +42,8 @@
 @end
 
 
+
+
 // @Discussion:
 //  Use this class for uploading a SASUploadObject to the server.
 @interface SASUploader : NSObject
@@ -34,7 +52,7 @@
 
 @property (weak, nonatomic) id <SASUploaderDelegate> delegate;
 
-- (instancetype)initWithSASUploadObject: (SASUploadObject*) object;
+- (instancetype)initWithSASUploadObject: (SASUploadObject <SASVerifiedUploadObject>*) object;
 
 
 // Uploads the SASUploadObject initialized with this class.

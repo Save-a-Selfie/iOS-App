@@ -17,7 +17,7 @@
 #import "UIFont+SASFont.h"
 #import "SASFilterView.h"
 
-@interface SASMapViewController () <SASImagePickerDelegate, SASFilterViewDelegate>
+@interface SASMapViewController () <SASImagePickerDelegate, SASFilterViewDelegate, SASUploadImageViewControllerDelegate>
 
 @property(nonatomic, strong) IBOutlet SASMapView* sasMapView;
 
@@ -217,7 +217,8 @@ NSString *permissionsProblemTwo = @"Please enable location services on your phon
 
 - (IBAction)uploadNewNewDevice:(id)sender {
     
-    if(sasImagePickerController == nil) {
+    if (sasImagePickerController == nil) {
+        NSLog(@"ImagePicker nil\n");
         sasImagePickerController = [[SASImagePickerViewController alloc] init];
         sasImagePickerController.sasImagePickerDelegate = self;
     }
@@ -253,6 +254,11 @@ NSString *permissionsProblemTwo = @"Please enable location services on your phon
 }
 
 
+- (void)sasImagePickerControllerDidCancel:(SASImagePickerViewController *)sasImagePickerController {
+    self.sasImagePickerController = nil;
+}
+
+
 // Presents a SASUploadImageViewController via
 - (void) presentSASUploadImageViewControllerWithUploadObject:(SASUploadObject*) sasUploadObject {
     
@@ -267,9 +273,12 @@ NSString *permissionsProblemTwo = @"Please enable location services on your phon
     
     
     if(self.sasUploadImageViewController == nil) {
+        
         self.sasUploadImageViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SASUploadImageViewController"];
+        self.sasUploadImageViewController.delegate = self;
         [self.sasUploadImageViewController setSasUploadObject:sasUploadObject];
     }
+
     
     
     if(self.uploadImageNavigationController == nil) {
@@ -284,7 +293,16 @@ NSString *permissionsProblemTwo = @"Please enable location services on your phon
 }
 
 
-
+#pragma mark SASUploadImageViewController Delegate
+- (void)sasUploadImageViewControllerDidFinishUploading:(UIViewController *)viewController withObject:(SASUploadObject *) sasUploadObject {
+    printf("Called");
+    self.sasUploadImageViewController = nil;
+    
+    sasUploadObject = nil;
+    
+    NSLog(@"%@ \n %@", self.sasUploadImageViewController, sasUploadObject);
+    
+}
 
 
 @end

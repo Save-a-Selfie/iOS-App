@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="49e-Tb-3d3">
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -261,45 +262,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hRP-EK-fmD" customClass="SASDeviceButton">
-                                <rect key="frame" x="164" y="209" width="60" height="60"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="60" id="Tm5-Op-VnL"/>
-                                    <constraint firstAttribute="height" constant="60" id="YRR-N4-EGT"/>
-                                </constraints>
-                                <state key="normal" image="FirstAidKitUnselected">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="deviceSelected:" destination="DJJ-KF-v3U" eventType="touchUpInside" id="25k-x0-wBq"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gz1-ER-JpS" customClass="SASDeviceButton">
-                                <rect key="frame" x="28" y="209" width="60" height="60"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="60" id="6NV-fY-Nd4"/>
-                                    <constraint firstAttribute="height" constant="60" id="SxF-go-ekn"/>
-                                </constraints>
-                                <state key="normal" image="DefibrillatorUnselected">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="deviceSelected:" destination="DJJ-KF-v3U" eventType="touchUpInside" id="QbD-f0-Ktw"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sro-m6-M9g" customClass="SASDeviceButton">
-                                <rect key="frame" x="96" y="209" width="60" height="60"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="60" id="VeQ-Jj-Qrn"/>
-                                    <constraint firstAttribute="height" constant="60" id="f9p-vz-sXW"/>
-                                </constraints>
-                                <state key="normal" image="LifeRingUnselected">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="deviceSelected:" destination="DJJ-KF-v3U" eventType="touchUpInside" id="XFf-my-Gge"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SELECT DEVICE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gyw-so-Gq1">
                                 <rect key="frame" x="89" y="177" width="143" height="24"/>
                                 <constraints>
@@ -312,8 +274,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YFb-TA-ZBH" customClass="SASDeviceButton">
                                 <rect key="frame" x="232" y="209" width="60" height="60"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="60" id="BLp-pI-SD1"/>
-                                    <constraint firstAttribute="height" constant="60" id="PEm-BU-wVh"/>
+                                    <constraint firstAttribute="width" constant="60" id="eKS-Z8-zh6"/>
                                 </constraints>
                                 <state key="normal" image="FireHydrantUnselected">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -351,7 +312,7 @@
                                     <constraint firstAttribute="height" constant="47" id="saL-sm-2Xv"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="21"/>
-                                <state key="normal" title="UPLOAD">
+                                <state key="normal" title="POST">
                                     <color key="titleColor" red="0.97603815513523917" green="0.99270645774038235" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -359,33 +320,73 @@
                                     <action selector="beginUploadRoutine:" destination="DJJ-KF-v3U" eventType="touchUpInside" id="5km-zt-Mjw"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hRP-EK-fmD" customClass="SASDeviceButton">
+                                <rect key="frame" x="164" y="209" width="60" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="Pif-cz-pSu"/>
+                                    <constraint firstAttribute="width" constant="60" id="Qim-dG-ErN"/>
+                                </constraints>
+                                <state key="normal" image="FirstAidKitUnselected">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="deviceSelected:" destination="DJJ-KF-v3U" eventType="touchUpInside" id="25k-x0-wBq"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gz1-ER-JpS" customClass="SASDeviceButton">
+                                <rect key="frame" x="28" y="209" width="60" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="fwo-Kp-Cp8"/>
+                                    <constraint firstAttribute="height" constant="60" id="jWO-uH-Krs"/>
+                                </constraints>
+                                <state key="normal" image="DefibrillatorUnselected">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="deviceSelected:" destination="DJJ-KF-v3U" eventType="touchUpInside" id="QbD-f0-Ktw"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sro-m6-M9g" customClass="SASDeviceButton">
+                                <rect key="frame" x="96" y="209" width="60" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="RCN-Y0-cBK"/>
+                                    <constraint firstAttribute="width" constant="60" id="zj1-Fx-jN6"/>
+                                </constraints>
+                                <state key="normal" image="LifeRingUnselected">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="deviceSelected:" destination="DJJ-KF-v3U" eventType="touchUpInside" id="XFf-my-Gge"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="MJY-qg-MTp" firstAttribute="top" secondItem="Sro-m6-M9g" secondAttribute="bottom" constant="8" id="35e-UD-c4c"/>
                             <constraint firstItem="MJY-qg-MTp" firstAttribute="leading" secondItem="eKH-EA-0ll" secondAttribute="leadingMargin" constant="-16" id="3K4-Rq-7Cw"/>
-                            <constraint firstAttribute="trailing" secondItem="YFb-TA-ZBH" secondAttribute="trailing" constant="28" id="DjQ-Vi-Q12"/>
-                            <constraint firstItem="gz1-ER-JpS" firstAttribute="leading" secondItem="eKH-EA-0ll" secondAttribute="leadingMargin" constant="12" id="JWY-Nv-Yyt"/>
+                            <constraint firstItem="YFb-TA-ZBH" firstAttribute="leading" secondItem="hRP-EK-fmD" secondAttribute="trailing" constant="8" id="7aD-ZK-7EU"/>
+                            <constraint firstItem="MJY-qg-MTp" firstAttribute="top" secondItem="YFb-TA-ZBH" secondAttribute="bottom" constant="8" id="7et-mh-UhO"/>
+                            <constraint firstItem="gz1-ER-JpS" firstAttribute="leading" secondItem="eKH-EA-0ll" secondAttribute="leadingMargin" constant="12" id="9aM-di-mhl"/>
                             <constraint firstItem="isd-II-BZu" firstAttribute="leading" secondItem="eKH-EA-0ll" secondAttribute="leading" id="LnX-UU-uXg"/>
-                            <constraint firstItem="gz1-ER-JpS" firstAttribute="top" secondItem="afK-H1-q78" secondAttribute="bottom" constant="107" id="Q2N-Jz-hVg"/>
+                            <constraint firstItem="MJY-qg-MTp" firstAttribute="top" secondItem="gz1-ER-JpS" secondAttribute="bottom" constant="8" id="Oa8-Fp-wBp"/>
+                            <constraint firstItem="Sro-m6-M9g" firstAttribute="leading" secondItem="gz1-ER-JpS" secondAttribute="trailing" constant="8" id="PRb-MC-cjL"/>
                             <constraint firstItem="afK-H1-q78" firstAttribute="top" secondItem="F97-b0-KWO" secondAttribute="bottom" constant="8" id="Qnb-IO-SpH"/>
-                            <constraint firstItem="YFb-TA-ZBH" firstAttribute="top" secondItem="uIr-b8-EMK" secondAttribute="bottom" constant="40" id="S71-SG-mOy"/>
                             <constraint firstAttribute="trailing" secondItem="isd-II-BZu" secondAttribute="trailing" id="SkT-NY-fho"/>
                             <constraint firstItem="lv6-9s-1fh" firstAttribute="top" secondItem="isd-II-BZu" secondAttribute="bottom" id="VO9-WG-Dsg"/>
-                            <constraint firstItem="Sro-m6-M9g" firstAttribute="leading" secondItem="gz1-ER-JpS" secondAttribute="trailing" constant="8" id="WBp-4J-hhD"/>
-                            <constraint firstItem="YFb-TA-ZBH" firstAttribute="leading" secondItem="hRP-EK-fmD" secondAttribute="trailing" constant="8" id="XUG-ms-ZSe"/>
-                            <constraint firstItem="hRP-EK-fmD" firstAttribute="leading" secondItem="Sro-m6-M9g" secondAttribute="trailing" constant="8" id="XtP-7a-JN2"/>
+                            <constraint firstItem="hRP-EK-fmD" firstAttribute="top" secondItem="Gyw-so-Gq1" secondAttribute="bottom" constant="8" id="WOO-L0-rad"/>
                             <constraint firstItem="Gyw-so-Gq1" firstAttribute="top" secondItem="uIr-b8-EMK" secondAttribute="bottom" constant="8" id="YXQ-F4-tzV"/>
-                            <constraint firstItem="MJY-qg-MTp" firstAttribute="top" secondItem="YFb-TA-ZBH" secondAttribute="bottom" constant="8" id="ams-la-71I"/>
-                            <constraint firstItem="hRP-EK-fmD" firstAttribute="top" secondItem="Gyw-so-Gq1" secondAttribute="bottom" constant="8" id="bui-eo-Hhz"/>
+                            <constraint firstItem="MJY-qg-MTp" firstAttribute="top" secondItem="hRP-EK-fmD" secondAttribute="bottom" constant="8" id="aDJ-Vs-fRI"/>
                             <constraint firstItem="uIr-b8-EMK" firstAttribute="trailing" secondItem="eKH-EA-0ll" secondAttribute="trailingMargin" id="f6V-ZK-YVh"/>
+                            <constraint firstItem="Sro-m6-M9g" firstAttribute="top" secondItem="Gyw-so-Gq1" secondAttribute="bottom" constant="8" id="g5X-sR-VDF"/>
+                            <constraint firstItem="MJY-qg-MTp" firstAttribute="top" secondItem="Sro-m6-M9g" secondAttribute="bottom" constant="8" id="g9N-1l-Lg6"/>
+                            <constraint firstItem="gz1-ER-JpS" firstAttribute="top" secondItem="Gyw-so-Gq1" secondAttribute="bottom" constant="8" id="hfT-1A-tZX"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Gyw-so-Gq1" secondAttribute="trailing" constant="72" id="jRU-kX-57z"/>
                             <constraint firstItem="uIr-b8-EMK" firstAttribute="leading" secondItem="afK-H1-q78" secondAttribute="trailing" constant="8" id="nQV-Tl-Wuc"/>
                             <constraint firstItem="Gyw-so-Gq1" firstAttribute="leading" secondItem="eKH-EA-0ll" secondAttribute="leadingMargin" constant="73" id="pf7-B1-ccU"/>
                             <constraint firstItem="uIr-b8-EMK" firstAttribute="top" secondItem="F97-b0-KWO" secondAttribute="bottom" constant="8" id="pgs-MR-eHJ"/>
                             <constraint firstAttribute="trailingMargin" secondItem="MJY-qg-MTp" secondAttribute="trailing" constant="-16" id="s0z-AA-2iJ"/>
-                            <constraint firstItem="Sro-m6-M9g" firstAttribute="top" secondItem="Gyw-so-Gq1" secondAttribute="bottom" constant="8" id="sIN-nq-HX9"/>
                             <constraint firstItem="afK-H1-q78" firstAttribute="leading" secondItem="eKH-EA-0ll" secondAttribute="leadingMargin" id="t9Q-i1-w9w"/>
+                            <constraint firstItem="YFb-TA-ZBH" firstAttribute="top" secondItem="Gyw-so-Gq1" secondAttribute="bottom" constant="8" id="tV4-Qm-x5u"/>
+                            <constraint firstItem="hRP-EK-fmD" firstAttribute="leading" secondItem="Sro-m6-M9g" secondAttribute="trailing" constant="8" id="yG3-ma-b9b"/>
                         </constraints>
                     </view>
                     <connections>

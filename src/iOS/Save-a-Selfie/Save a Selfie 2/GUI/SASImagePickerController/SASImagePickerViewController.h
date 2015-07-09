@@ -17,6 +17,10 @@
 // Currently Save A Selfie only supports images taken with the camera.
 - (void) sasImagePickerController:(SASImagePickerViewController*) sasImagePicker didFinishWithImage:(UIImage*) image;
 
+@optional
+// Called when the user pressed the cancel button.
+- (void) sasImagePickerControllerDidCancel:(SASImagePickerViewController *) sasImagePickerController;
+
 @end
 
 

@@ -65,7 +65,7 @@
         
         
         [UIFont increaseCharacterSpacingForLabel:self.alertTitleLabel byAmount:2.0];
-        self.alertMessageTextView.font = [UIFont sasFontWithSize:18.0];
+        //self.alertMessageTextView.font = [UIFont sasFontWithSize:18.0];
     }
     return self;
 }
@@ -94,22 +94,22 @@
 #pragma mark Animations
 - (void)animateIntoView:(UIView *)view {
     
-    if(self.greyView == nil) {
-        self.greyView = [[SASGreyView alloc]initWithFrame:CGRectMake(0, 0, [Screen width], [Screen height])];
-    }
+
+    self.greyView = [[SASGreyView alloc]initWithFrame:CGRectMake(0, 0, [Screen width], [Screen height])];
+
     
     [view addSubview:greyView];
     [view addSubview:self];
     
-    self.frame = CGRectOffset(self.frame, 0, -50);
+    self.center = view.center;
+    self.alpha = 0.0;
     
-    
-    [UIView animateWithDuration:1.0
-                          delay:0.2
+    [UIView animateWithDuration:0.5
+                          delay:0.1
          usingSpringWithDamping:0.4
-          initialSpringVelocity:0.2
+          initialSpringVelocity:0.4
                         options:UIViewAnimationOptionCurveLinear
-                     animations:^{self.center = view.center;}
+                     animations:^{self.alpha = 1.0;}
                      completion:nil];
 }
 
@@ -124,10 +124,16 @@
 
 - (IBAction)doneButtonPress:(id)sender {
     if(self.alertAction == nil) {
+        
         [self removeFromSuperview];
         [self.greyView removeFromSuperview];
+        
     } else {
-        // TODO: Call custom target.
+        
+        [self performSelector:self.alertAction withObject:nil afterDelay:0.0];
+        
+        [self removeFromSuperview];
+        [self.greyView removeFromSuperview];
     }
 }
 

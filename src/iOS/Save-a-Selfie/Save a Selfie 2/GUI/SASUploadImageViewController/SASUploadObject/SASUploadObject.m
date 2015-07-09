@@ -35,4 +35,18 @@
 
 
 
+#pragma mark SASVerifiedUploadObject Protocol
+- (BOOL)captionHasBeenSet {
+    if ([self.caption isEqualToString:@""] ||
+        [self.caption isEqualToString:@"Add Location Information"] ||
+        [self.caption isEqual:nil]) {
+        
+        return NO;
+    } else {
+        return YES;
+    }
+}
+
+
+
 @end
