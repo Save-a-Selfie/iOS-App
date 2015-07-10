@@ -13,6 +13,7 @@
 
 @interface SASUploadObject : NSObject <SASVerifiedUploadObject>
 
+@property(nonatomic, strong) NSString *identifier;
 @property(nonatomic, strong) NSString *timeStamp;
 @property(nonatomic, strong) SASDevice *associatedDevice;
 @property(nonatomic, assign) CLLocationCoordinate2D coordinates;

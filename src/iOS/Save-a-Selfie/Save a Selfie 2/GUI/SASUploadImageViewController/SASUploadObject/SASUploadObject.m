@@ -16,6 +16,7 @@
 @synthesize coordinates;
 @synthesize image;
 @synthesize caption;
+@synthesize identifier;
 
 - (instancetype)initWithImage:(UIImage *)imageToUpload {
     

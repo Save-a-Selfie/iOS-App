@@ -27,4 +27,8 @@
 // Changes the view to a blurview.
 + (void) blurForView:(UIView*) view;
 
+
+// Generates a random string of a specified length.
++ (NSString *) generateRandomString: (NSInteger) length;
+
 @end

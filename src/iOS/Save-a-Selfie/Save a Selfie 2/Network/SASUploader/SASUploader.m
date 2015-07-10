@@ -10,6 +10,7 @@
 #import "UIImage+Resize.h"
 #import "UIImage+SASImage.h"
 #import "SASNetworkUtilities.h"
+#import "SASUtilities.h"
 
 
 @interface SASUploader() <NSURLConnectionDelegate, NSURLConnectionDataDelegate>
@@ -81,8 +82,11 @@
         
         self.sasUploadObject.caption = [SASNetworkUtilities encodeToPercentEscapeString:self.sasUploadObject.caption]; // The caption for the image – as entered by the user
         
-        NSString *parameters = [ NSString stringWithFormat:@"id=%@&typeOfObject=%d&latitude=%f&longitude=%f&location=%@&user=%@&caption=%@&image=%@&thumbnail=%@",
-                                self.sasUploadObject.timeStamp,
+        
+        self.sasUploadObject.identifier = [NSString stringWithFormat:@"%@%@", self.sasUploadObject.timeStamp, [SASUtilities generateRandomString:4]];
+        
+        NSString *parameters = [NSString stringWithFormat:@"id=%@&typeOfObject=%d&latitude=%f&longitude=%f&location=%@&user=%@&caption=%@&image=%@&thumbnail=%@",
+                                self.sasUploadObject.identifier,
                                 self.sasUploadObject.associatedDevice.type,
                                 self.sasUploadObject.coordinates.latitude,
                                 self.sasUploadObject.coordinates.longitude,

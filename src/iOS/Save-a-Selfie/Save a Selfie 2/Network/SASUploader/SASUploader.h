@@ -23,7 +23,7 @@ typedef NS_ENUM(NSInteger, SASUploadInvalidatedResponse) {
 @protocol SASUploaderDelegate <NSObject>
 
 // @Discussion:
-//  As any object that wants to be uploaded must conform to
+//  As any object that wants to be upqloaded must conform to
 //  `SASVerifiedUploadObject` protocol, it is possible the object may not be ready for
 //   upload or in other words considered 'invalid'.
 //   If the object initialise with this class is invalid, the delegate will be sent this

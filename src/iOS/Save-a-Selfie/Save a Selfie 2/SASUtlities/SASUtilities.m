@@ -90,5 +90,17 @@
 }
 
 
+// http://stackoverflow.com/questions/2633801/generate-a-random-alphanumeric-string-in-cocoa
++ (NSString *) generateRandomString: (NSInteger) length {
+    NSMutableString* string = [NSMutableString stringWithCapacity:length];
+    
+    for (int i = 0; i < length; i++) {
+        [string appendFormat:@"%C", (unichar)('a' + arc4random_uniform(25))];
+    }
+    return string;
+
+}
+
+
 
 @end

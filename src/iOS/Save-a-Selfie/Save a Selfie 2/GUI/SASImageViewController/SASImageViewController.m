@@ -101,9 +101,9 @@
     SASBarButtonItem *reportButton = [[SASBarButtonItem alloc] initWithTitle:@"Report"
                                                                        style:UIBarButtonItemStylePlain
                                                                       target:self
-                                                                      action:@selector(reportUser)];
+                                                                      action:@selector(reportImage)];
     self.navigationItem.rightBarButtonItem = reportButton;
-#pragma mark Setup of the UI Elements.
+
     
     // @Discussion:
     //  It is possible sone properties of annotation
@@ -135,7 +135,6 @@
     
     
     
-#pragma mark self.annotation.device nil checking
     if (self.annotation.device != nil) {
         
         // Set the image for deviceImageView associated with the device
@@ -148,7 +147,7 @@
     }
         
     
-#pragma mark self.annotation.device.imageStandardRes nil checking. (Image)
+
     if(self.annotation.device.imageStandardRes != nil && !imageLoaded) {
         
         // Begin animation of sasActivityIndicator until image is loaded.
@@ -189,7 +188,7 @@
     
     
     
-#pragma mark self.annotation.device.caption nil checking
+
     if(self.annotation.device.caption != nil) {
         // Set the text description of the photo.
         self.photoDescription.text = [NSString stringWithFormat:@"%@", annotation.device.caption];
@@ -255,7 +254,7 @@
 }
 
 
-- (void) reportUser {
+- (void) reportImage {
     
 }
 
