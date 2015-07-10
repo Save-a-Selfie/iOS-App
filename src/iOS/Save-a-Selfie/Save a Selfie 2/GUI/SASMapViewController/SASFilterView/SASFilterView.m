@@ -189,7 +189,6 @@ SASDeviceType availableDevicesToFilter[5] = {
 // Animates into the views center.
 - (void) animateIntoView:(UIView*) view {
     
-    
     [UIView animateWithDuration:0.3
                           delay:0.1
          usingSpringWithDamping:0.6

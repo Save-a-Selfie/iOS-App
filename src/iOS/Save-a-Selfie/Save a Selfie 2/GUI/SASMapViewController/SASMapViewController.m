@@ -16,8 +16,14 @@
 #import "SASUploadImageViewController.h"
 #import "UIFont+SASFont.h"
 #import "SASFilterView.h"
+#import "SASNotificationView.h"
+#import "UIView+Animations.h"
 
-@interface SASMapViewController () <SASImagePickerDelegate, SASFilterViewDelegate, SASUploadImageViewControllerDelegate>
+@interface SASMapViewController () <SASImagePickerDelegate, SASFilterViewDelegate, SASUploadImageViewControllerDelegate> {
+    CGPoint filterButtonBeforeAnimation;
+    CGPoint locateUserButtonBeforeAnimtation;
+    CGPoint uploadToServerButtonBeforeAnimation;
+}
 
 @property(nonatomic, strong) IBOutlet SASMapView* sasMapView;
 
@@ -132,9 +138,22 @@ NSString *permissionsProblemTwo = @"Please enable location services on your phon
 
 
 - (void)sasFilterView:(SASFilterView *)view isVisibleInViewHierarhy:(BOOL)visibility {
-    self.showFilterViewButton.hidden = visibility;
-    self.locateUserButton.hidden = visibility;
-    self.uploadNewImageToServerButton.hidden = visibility;
+    
+    if(visibility) {
+        
+        filterButtonBeforeAnimation = self.showFilterViewButton.frame.origin;
+        locateUserButtonBeforeAnimtation = self.locateUserButton.frame.origin;
+        uploadToServerButtonBeforeAnimation = self.uploadNewImageToServerButton.frame.origin;
+        
+        [UIView animateView:self.showFilterViewButton offScreenInDirection:SASAnimationDirectionRight];
+        [UIView animateView:self.locateUserButton offScreenInDirection:SASAnimationDirectionDown];
+        [UIView animateView:self.uploadNewImageToServerButton offScreenInDirection:SASAnimationDirectionDown];
+    } else {
+        [UIView animateView:self.showFilterViewButton toPoint:filterButtonBeforeAnimation];
+        [UIView animateView:self.locateUserButton toPoint:locateUserButtonBeforeAnimtation];
+        [UIView animateView:self.uploadNewImageToServerButton toPoint:uploadToServerButtonBeforeAnimation];
+    }
+
 }
 
 
@@ -295,12 +314,16 @@ NSString *permissionsProblemTwo = @"Please enable location services on your phon
 
 #pragma mark SASUploadImageViewController Delegate
 - (void)sasUploadImageViewControllerDidFinishUploading:(UIViewController *)viewController withObject:(SASUploadObject *) sasUploadObject {
-    printf("Called");
-    self.sasUploadImageViewController = nil;
     
+    NSLog(@"Called");
+    self.sasUploadImageViewController = nil;
+    self.uploadImageNavigationController = nil;
     sasUploadObject = nil;
     
-    NSLog(@"%@ \n %@", self.sasUploadImageViewController, sasUploadObject);
+    SASNotificationView *n = [[SASNotificationView alloc] init];
+    n.title = @"POSTED";
+    n.image = [UIImage imageNamed:@"DoneImage"];
+    [n animateIntoView:self.view];
     
 }
 

@@ -57,7 +57,6 @@
     // Make sure we have a valid object
     // to upload.
     BOOL proceedToUpload = [self validateSASUploadObject];
-    NSLog(@"%d", proceedToUpload);
     
     
     if(proceedToUpload) {
@@ -102,28 +101,33 @@
         [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
         
         
-        
-        self.responseData = [[NSMutableData alloc] init];
-        [self.responseData setLength:0];
-        
         NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
         
-        if(!connection) {
-            // TODO: ERROR has happened.
-        } else {
-            // Maybe ignore another press to upload.
+        
+        if(connection) {
+            
+            self.responseData = [[NSMutableData alloc] init];
+            [self.responseData setLength:0];
+            
+            // Message the delegate that we have our connection and have begun uploading.
+            if (self.delegate != nil && [self.delegate respondsToSelector:@selector(sasUploadDidBeginUploading:)]) {
+                [self.delegate sasUploadDidBeginUploading:self];
+            }
+            
         }
+        
     }
 }
 
 
+
 // @return YES: If the object is ready to be uploaded.
 // @return NO: IF the object is not ready to be uploaded.
+
+// This method will also call the delegate.
 - (BOOL) validateSASUploadObject {
     
-    if([self.sasUploadObject captionHasBeenSet] == false) {
-
-        printf("Not set");
+    if(![self.sasUploadObject captionHasBeenSet]) {
         
         if(self.delegate != nil && [self.delegate respondsToSelector:@selector(sasUploadObject:invalidObjectWithResponse:)]) {
             [self.delegate sasUploadObject:self.sasUploadObject invalidObjectWithResponse:SASUploadObjectInvalidCaption];

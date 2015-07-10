@@ -405,6 +405,44 @@
             </objects>
             <point key="canvasLocation" x="205" y="1300"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="vMx-Hn-uvY">
+            <objects>
+                <viewController storyboardIdentifier="EULAViewController" id="2Ow-h0-8ov" customClass="EULAViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="BqP-T5-Xwr"/>
+                        <viewControllerLayoutGuide type="bottom" id="QmR-jo-Cxm"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="MFs-ai-JI5">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9qy-V0-cl9">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="509"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </webView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="wsN-xK-hWM">
+                                <rect key="frame" x="99" y="520" width="119" height="29"/>
+                                <segments>
+                                    <segment title="Accept"/>
+                                    <segment title="Decline"/>
+                                </segments>
+                                <connections>
+                                    <action selector="agreeDeclineAction:" destination="2Ow-h0-8ov" eventType="valueChanged" id="Q9a-09-fj9"/>
+                                </connections>
+                            </segmentedControl>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="agreeDecline" destination="wsN-xK-hWM" id="wHf-Ny-xol"/>
+                        <outlet property="webView" destination="9qy-V0-cl9" id="HYv-ph-8aQ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Vxl-WB-zb0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="603" y="1300"/>
+        </scene>
         <!--Item-->
         <scene sceneID="reD-cr-q7t">
             <objects>

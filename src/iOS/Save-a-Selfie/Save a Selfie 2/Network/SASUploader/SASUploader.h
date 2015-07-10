@@ -22,6 +22,8 @@ typedef NS_ENUM(NSInteger, SASUploadInvalidatedResponse) {
 
 @protocol SASUploaderDelegate <NSObject>
 
+@optional
+
 // @Discussion:
 //  As any object that wants to be upqloaded must conform to
 //  `SASVerifiedUploadObject` protocol, it is possible the object may not be ready for
@@ -30,6 +32,8 @@ typedef NS_ENUM(NSInteger, SASUploadInvalidatedResponse) {
 //   message containing the reason.
 - (void) sasUploadObject:(SASUploadObject *) object invalidObjectWithResponse:(SASUploadInvalidatedResponse) response;
 
+
+- (void) sasUploadDidBeginUploading:(SASUploader *) sasUploader;
 
 // The SASUpload Object uploaded to the server successfully.
 - (void) sasUploaderDidFinishUploadWithSuccess:(SASUploader*) sasUploader;

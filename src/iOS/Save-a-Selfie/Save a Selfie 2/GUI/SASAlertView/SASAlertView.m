@@ -10,6 +10,7 @@
 #import "Screen.h"
 #import "UIFont+SASFont.h"
 #import "SASGreyView.h"
+#import "UIView+NibInitializer.h"
 
 @interface SASAlertView()
 
@@ -21,6 +22,8 @@
 @property (weak, nonatomic) IBOutlet UITextView *alertMessageTextView;
 
 @property (strong, nonatomic) SASGreyView *greyView;
+
+@property (strong, nonatomic) id alertTarget;
 @end
 
 @implementation SASAlertView
@@ -38,6 +41,7 @@
 
 // Action
 @synthesize alertAction;
+@synthesize alertTarget;
 
 
 // Grey view background
@@ -45,27 +49,25 @@
 
 
 - (instancetype)initWithTarget:(id)target andAction:(SEL)action {
+    
     if(self = [super init]) {
         
-        self = [[[NSBundle mainBundle]
-                 loadNibNamed:@"SASAlertView"
-                 owner:self
-                 options:nil]
-                firstObject];
+        self = [self initWithNibNamed:@"SASAlertView"];
         
         self.layer.cornerRadius = 8.0;
         self.alertButton.layer.cornerRadius = 5.0;
         
         
         self.alertAction = action;
+        self.alertTarget = target;
         
         [self.alertButton addTarget:target
                              action:action
                    forControlEvents:UIControlEventTouchUpInside];
         
         
-        [UIFont increaseCharacterSpacingForLabel:self.alertTitleLabel byAmount:2.0];
-        //self.alertMessageTextView.font = [UIFont sasFontWithSize:18.0];
+        //[UIFont increaseCharacterSpacingForLabel:self.alertTitleLabel byAmount:5];
+        self.alertMessageTextView.font = [UIFont sasFontWithSize:18.0];
     }
     return self;
 }
@@ -123,6 +125,7 @@
 
 
 - (IBAction)doneButtonPress:(id)sender {
+    printf("Called");
     if(self.alertAction == nil) {
         
         [self removeFromSuperview];
@@ -130,7 +133,7 @@
         
     } else {
         
-        [self performSelector:self.alertAction withObject:nil afterDelay:0.0];
+        [self.alertTarget performSelector:self.alertAction withObject:nil afterDelay:0.0];
         
         [self removeFromSuperview];
         [self.greyView removeFromSuperview];

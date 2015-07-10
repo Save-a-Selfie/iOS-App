@@ -38,11 +38,14 @@
 
 #pragma mark SASVerifiedUploadObject Protocol
 - (BOOL)captionHasBeenSet {
+    
+    NSLog(@"%@", self.caption);
     if ([self.caption isEqualToString:@""] ||
         [self.caption isEqualToString:@"Add Location Information"] ||
-        [self.caption isEqual:nil]) {
+        self.caption == nil) {
         
         return NO;
+        
     } else {
         return YES;
     }

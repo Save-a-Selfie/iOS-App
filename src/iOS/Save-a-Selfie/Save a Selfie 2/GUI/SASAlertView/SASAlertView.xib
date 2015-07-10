@@ -11,27 +11,12 @@
             <rect key="frame" x="0.0" y="0.0" width="254" height="268"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TITLE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u9d-bg-nwz">
-                    <rect key="frame" x="37" y="18" width="180" height="24"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="24" id="AC0-hJ-iij"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="17"/>
-                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="MESSAGE" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c4R-1Y-ttd">
-                    <rect key="frame" x="17" y="50" width="220" height="167"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="167" id="KuP-Ng-d8E"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" name="AvenirNext-Heavy" family="Avenir Next" pointSize="14"/>
-                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                </textView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rFZ-6k-VAR">
                     <rect key="frame" x="17" y="219" width="220" height="41"/>
                     <color key="backgroundColor" red="0.14901960784313725" green="0.58039215686274515" blue="0.21176470588235294" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="41" id="s5N-gT-BEw"/>
+                    </constraints>
                     <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="15"/>
                     <state key="normal" title="Button">
                         <color key="titleColor" red="0.97603815510000003" green="0.99270645769999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -41,25 +26,41 @@
                         <action selector="doneButtonPress:" destination="hri-fE-U1V" eventType="touchUpInside" id="LD7-Ai-vtc"/>
                     </connections>
                 </button>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TRq-sY-IAl">
+                    <rect key="frame" x="8" y="50" width="238" height="161"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                    <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                </textView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lpC-hY-wz8">
+                    <rect key="frame" x="8" y="8" width="238" height="34"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="34" id="CzG-dT-CRs"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="c4R-1Y-ttd" firstAttribute="top" secondItem="u9d-bg-nwz" secondAttribute="bottom" constant="8" id="8sW-dO-NuU"/>
-                <constraint firstItem="rFZ-6k-VAR" firstAttribute="leading" secondItem="hri-fE-U1V" secondAttribute="leading" constant="17" id="F7u-3j-UXO"/>
-                <constraint firstAttribute="trailing" secondItem="c4R-1Y-ttd" secondAttribute="trailing" constant="17" id="FJs-oi-fOq"/>
-                <constraint firstItem="rFZ-6k-VAR" firstAttribute="top" secondItem="c4R-1Y-ttd" secondAttribute="bottom" constant="2" id="HZe-oS-Cnl"/>
-                <constraint firstItem="u9d-bg-nwz" firstAttribute="leading" secondItem="hri-fE-U1V" secondAttribute="leading" constant="37" id="Kqx-7y-6SY"/>
-                <constraint firstAttribute="trailing" secondItem="u9d-bg-nwz" secondAttribute="trailing" constant="37" id="TwD-6F-Qhk"/>
-                <constraint firstAttribute="bottom" secondItem="rFZ-6k-VAR" secondAttribute="bottom" constant="8" id="gV9-Fk-oN7"/>
-                <constraint firstAttribute="trailing" secondItem="rFZ-6k-VAR" secondAttribute="trailing" constant="17" id="kdJ-dk-rdx"/>
-                <constraint firstItem="c4R-1Y-ttd" firstAttribute="leading" secondItem="hri-fE-U1V" secondAttribute="leading" constant="17" id="ro8-WA-NLJ"/>
-                <constraint firstItem="u9d-bg-nwz" firstAttribute="top" secondItem="hri-fE-U1V" secondAttribute="top" constant="18" id="vxH-dA-53z"/>
+                <constraint firstAttribute="trailing" secondItem="rFZ-6k-VAR" secondAttribute="trailing" constant="17" id="CTl-ay-Ouk"/>
+                <constraint firstItem="rFZ-6k-VAR" firstAttribute="top" secondItem="TRq-sY-IAl" secondAttribute="bottom" constant="8" id="Da3-7j-Zpg"/>
+                <constraint firstItem="lpC-hY-wz8" firstAttribute="top" secondItem="hri-fE-U1V" secondAttribute="top" constant="8" id="O2O-eL-6MC"/>
+                <constraint firstItem="TRq-sY-IAl" firstAttribute="leading" secondItem="hri-fE-U1V" secondAttribute="leading" constant="8" id="QTd-pD-zns"/>
+                <constraint firstAttribute="trailing" secondItem="lpC-hY-wz8" secondAttribute="trailing" constant="8" id="Voe-6Z-9gz"/>
+                <constraint firstItem="rFZ-6k-VAR" firstAttribute="leading" secondItem="hri-fE-U1V" secondAttribute="leading" constant="17" id="WO3-bW-SUs"/>
+                <constraint firstAttribute="bottom" secondItem="rFZ-6k-VAR" secondAttribute="bottom" constant="8" id="WXo-oe-cHz"/>
+                <constraint firstItem="TRq-sY-IAl" firstAttribute="top" secondItem="lpC-hY-wz8" secondAttribute="bottom" constant="8" id="fyS-rw-LJk"/>
+                <constraint firstItem="lpC-hY-wz8" firstAttribute="leading" secondItem="hri-fE-U1V" secondAttribute="leading" constant="8" id="hf4-Dh-wND"/>
+                <constraint firstAttribute="trailing" secondItem="TRq-sY-IAl" secondAttribute="trailing" constant="8" id="zuR-GJ-q6y"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="alertButton" destination="rFZ-6k-VAR" id="PQU-2C-DVC"/>
-                <outlet property="alertMessageTextView" destination="c4R-1Y-ttd" id="WXn-eZ-Omc"/>
-                <outlet property="alertTitleLabel" destination="u9d-bg-nwz" id="R9F-Rq-b4x"/>
+                <outlet property="alertMessageTextView" destination="TRq-sY-IAl" id="pWU-8Y-Dfo"/>
+                <outlet property="alertTitleLabel" destination="lpC-hY-wz8" id="HTt-aT-6kt"/>
             </connections>
             <point key="canvasLocation" x="437" y="362"/>
         </view>

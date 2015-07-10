@@ -14,6 +14,7 @@
     if (!nibNameOrNil) {
         nibNameOrNil = NSStringFromClass([self class]);
     }
+    
     NSArray *viewsInNib = [[NSBundle mainBundle] loadNibNamed:nibNameOrNil
                                                         owner:self
                                                       options:nil];

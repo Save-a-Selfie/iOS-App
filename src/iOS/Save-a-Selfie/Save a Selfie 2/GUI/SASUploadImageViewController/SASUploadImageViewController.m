@@ -17,11 +17,13 @@
 #import "SASUploader.h"
 #import "SASDeviceButton.h"
 #import "SASGreyView.h"
-#import "EULA.h"
+#import "EULAViewController.h"
 #import "SASActivityIndicator.h"
+#import "ExtendNSLogFunctionality.h"
+#import "UIView+NibInitializer.h"
 
 
-@interface SASUploadImageViewController () <UITextViewDelegate, SASUploaderDelegate>
+@interface SASUploadImageViewController () <UITextViewDelegate, SASUploaderDelegate, EULADelegate>
 
 @property (strong, nonatomic) IBOutlet SASImageView *sasImageView;
 @property (weak, nonatomic) IBOutlet SASMapView *sasMapView;
@@ -31,9 +33,11 @@
 @property (weak, nonatomic) IBOutlet SASDeviceButton *lifeRingButton;
 @property (weak, nonatomic) IBOutlet SASDeviceButton *firstAidKitButton;
 @property (weak, nonatomic) IBOutlet SASDeviceButton *fireHydrantButton;
+
 @property (weak, nonatomic) IBOutlet UILabel *selectDeviceLabel;
 @property (weak, nonatomic) IBOutlet UIButton *doneButton;
 @property (weak, nonatomic) IBOutlet UITextView *deviceCaptionTextView;
+
 @property (strong, nonatomic) SASGreyView *sasGreyView;
 @property (strong, nonatomic) SASActivityIndicator *sasActivityIndicator;
 
@@ -41,6 +45,8 @@
 @property (nonatomic, assign) BOOL deviceHasBeenSelected;
 
 @property (strong, nonatomic) SASUploader *sasUploader;
+@property (strong, nonatomic) EULAViewController * eulaViewController;
+
 
 
 @end
@@ -64,6 +70,7 @@
 @synthesize deviceHasBeenSelected;
 
 @synthesize sasUploader;
+@synthesize eulaViewController;
 
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -149,7 +156,7 @@
     
     [sender select];
     
-#pragma mark SASUploadObject associated Device. set here.
+    #pragma mark SASUploadObject associated Device. set here.
     self.sasUploadObject.associatedDevice.type = sender.deviceType;
 
     self.doneButton.hidden = NO;
@@ -178,6 +185,7 @@
 #pragma mark Upload Routine
 - (IBAction)beginUploadRoutine:(id)sender {
     
+    [self checkEULAAcepted];
     #pragma mark SASUploadObject timestamp set here.
     [self.sasUploadObject setTimeStamp: [SASUtilities getCurrentTimeStamp]];
     
@@ -186,16 +194,23 @@
     self.sasUploader.delegate = self;
     [self.sasUploader upload];
     
-    // Activity Indicator
-    self.sasActivityIndicator = [[SASActivityIndicator alloc] initWithMessage:@"Posting"];
-    [self.view addSubview:self.sasActivityIndicator];
-    self.sasActivityIndicator.center = self.view.center;
-    [self.sasActivityIndicator startAnimating];
 }
 
 
 
 #pragma mark SASUploaderDelegate
+- (void) sasUploadDidBeginUploading:(SASUploader *)sasUploader {
+    
+    // Activity Indicator
+    self.sasActivityIndicator = [[SASActivityIndicator alloc] initWithMessage:@"Posting"];
+    self.sasActivityIndicator.backgroundColor = [UIColor colorWithWhite:1.0 alpha:1.0];
+    [self.view addSubview:self.sasActivityIndicator];
+    self.sasActivityIndicator.center = self.view.center;
+    [self.sasActivityIndicator startAnimating];
+    
+}
+
+
 - (void)sasUploaderDidFinishUploadWithSuccess:(SASUploader *)sasUploader {
     [self dismissSASUploadImageViewController];
     
@@ -203,7 +218,6 @@
     [self.sasActivityIndicator stopAnimating];
     
 }
-
 
 
 - (void)sasUploader:(SASUploader *)sasUploader didFailWithError:(NSError *)error {
@@ -260,9 +274,7 @@
     }
     
     
-    
-    
-#pragma mark SASUploadObject.description set here.
+    #pragma mark SASUploadObject.description set here.
     self.sasUploadObject.caption = textView.text;
     
     [self removeGreyView];
@@ -305,18 +317,16 @@
 
 
 
-
-
 #pragma Check the user has agreed to the End User Licence Agreement
 - (void) checkEULAAcepted {
     
     BOOL EULAAccepted = [[[NSUserDefaults standardUserDefaults] valueForKey:@"EULAAccepted"] isEqualToString:@"yes"];
     
     if (!EULAAccepted) {
-        SASAlertView *sasAlertView = [[SASAlertView alloc] initWithTarget:self andAction:@selector(showEULA)];
+        SASAlertView *sasAlertView = [[SASAlertView alloc] initWithTarget:self andAction:@selector(presentEULAViewController)];
         sasAlertView.title = @"Notice";
         sasAlertView.message = @"Before posting, we need you to agree to the terms of use.";
-        sasAlertView.title = @"Show me";
+        sasAlertView.buttonTitle = @"Show me";
         
         [sasAlertView animateIntoView:self.view];
     } else {
@@ -324,25 +334,64 @@
     }
 }
 
-- (void) showEULA {
 
-    EULA *EULAView = [[EULA alloc] init];
-    [EULAView EULALoaded];
+- (void) presentEULAViewController {
 
-    [self.view addSubview:EULAView];
+    self.eulaViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"EULAViewController"];
+    self.eulaViewController.delegate = self;
     
-    [[NSNotificationCenter defaultCenter]
-     addObserver:self
-     selector:@selector(EULAAccepted)
-     name:@"EULAAccepted"
-     object:nil];
+    
+    [self presentViewController:eulaViewController animated:NO completion:nil];
+    [eulaViewController EULALoaded];
 
-    [[NSNotificationCenter defaultCenter]
-     addObserver:self
-     selector:@selector(EULADeclined)
-     name:@"EULADeclined"
-     object:nil];
 }
+
+
+- (void)eula:(EULAViewController *)eula didReceiveResponseFromUser:(EULAUserRespose)response {
+    
+    
+    if (response == EULAAccepted) {
+        [self updateEULATable];
+        [self.eulaViewController dismissViewControllerAnimated:NO completion:nil];
+    }
+    else {
+        
+        [self.eulaViewController dismissViewControllerAnimated:NO completion:nil];
+        
+        SASAlertView *eulaDeclinedAlertView = [[SASAlertView alloc] initWithTarget:self andAction:nil];
+        eulaDeclinedAlertView.title = @"NOTE";
+        eulaDeclinedAlertView.message = @"You will only be able to upload if you accept the End User License Agreement.";
+        eulaDeclinedAlertView.buttonTitle = @"Ok";
+        
+        [eulaDeclinedAlertView animateIntoView:self.view];
+    }
+    
+}
+
+
+-(void)updateEULATable {
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    [request setHTTPMethod:@"POST"];
+    
+    NSString *URL = @"http://www.saveaselfie.org/wp/wp-content/themes/magazine-child/updateEULA.php";
+    [request setURL:[NSURL URLWithString:URL]];
+    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    
+    NSString *parameters = [ NSString stringWithFormat:@"deviceID=%@&EULAType=EULA", [[[UIDevice currentDevice] identifierForVendor] UUIDString]];
+    NSString *postLength = [NSString stringWithFormat:@"%lu", (unsigned long)[parameters length]];
+    
+    [request setHTTPBody:[parameters dataUsingEncoding:NSUTF8StringEncoding]];
+    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+    
+    plog(@"EULA URL: %@?%@", URL, parameters);
+    
+    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    
+}
+
+
+
 
 
 
