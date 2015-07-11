@@ -60,9 +60,11 @@ NSString *permissionsProblemTwo = @"Please enable location services on your phon
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
+    [super viewDidAppear:animated];
     [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
@@ -169,7 +171,6 @@ NSString *permissionsProblemTwo = @"Please enable location services on your phon
     
     [self.navigationController pushViewController:sasImageViewController animated:YES];
 
-    
 }
 
 
@@ -245,7 +246,7 @@ NSString *permissionsProblemTwo = @"Please enable location services on your phon
     
     if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         [sasImagePickerController setSourceType:UIImagePickerControllerSourceTypeCamera];
-        [self presentViewController:sasImagePickerController animated:YES completion:nil];
+        [self.navigationController presentViewController:self.sasImagePickerController animated:YES completion:nil];
     }
 }
 
@@ -263,12 +264,10 @@ NSString *permissionsProblemTwo = @"Please enable location services on your phon
     //
     //  -presentSASUploadImageViewControllerWithImage:
     //
-    [self.sasImagePickerController dismissViewControllerAnimated:YES
-                                                      completion:^() {
-        [self presentSASUploadImageViewControllerWithUploadObject:sasUploadObject];
-        self.sasImagePickerController = nil;
+    [self.sasImagePickerController dismissViewControllerAnimated:YES completion:^() {
+                                                          [self performSelector:@selector(presentSASUploadImageViewControllerWithUploadObject:)withObject:sasUploadObject afterDelay:0.0];
     }];
-    
+
 
 }
 
@@ -306,9 +305,8 @@ NSString *permissionsProblemTwo = @"Please enable location services on your phon
     }
     
 
-    [self.navigationController presentViewController:self.uploadImageNavigationController
-                                            animated:YES
-                                          completion:nil];
+    [self presentViewController:self.uploadImageNavigationController animated:YES completion:nil];
+    
 }
 
 
@@ -323,7 +321,7 @@ NSString *permissionsProblemTwo = @"Please enable location services on your phon
     SASNotificationView *n = [[SASNotificationView alloc] init];
     n.title = @"POSTED";
     n.image = [UIImage imageNamed:@"DoneImage"];
-    [n animateIntoView:self.view];
+    //[n animateIntoView:self.view];
     
 }
 

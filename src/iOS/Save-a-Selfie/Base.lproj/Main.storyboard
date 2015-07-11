@@ -443,42 +443,6 @@
             </objects>
             <point key="canvasLocation" x="603" y="1300"/>
         </scene>
-        <!--Item-->
-        <scene sceneID="reD-cr-q7t">
-            <objects>
-                <viewController id="z7L-76-xa6" customClass="SASGalleryViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="KXa-aR-IWs"/>
-                        <viewControllerLayoutGuide type="bottom" id="h3e-Cp-PcN"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="dkf-1I-axP">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="eJl-S0-SFA">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <collectionViewLayout key="collectionViewLayout" id="JAw-3Y-bqr" customClass="UICollectionViewFlowLayout"/>
-                                <cells/>
-                            </collectionView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="eJl-S0-SFA" firstAttribute="leading" secondItem="dkf-1I-axP" secondAttribute="leading" id="15q-it-Imu"/>
-                            <constraint firstItem="h3e-Cp-PcN" firstAttribute="top" secondItem="eJl-S0-SFA" secondAttribute="bottom" id="USH-VC-lhI"/>
-                            <constraint firstAttribute="trailing" secondItem="eJl-S0-SFA" secondAttribute="trailing" id="nbg-0r-WkA"/>
-                            <constraint firstItem="eJl-S0-SFA" firstAttribute="top" secondItem="KXa-aR-IWs" secondAttribute="bottom" constant="-20" id="wwO-Rp-0vP"/>
-                        </constraints>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="RYu-4c-fbt"/>
-                    <connections>
-                        <outlet property="collectionView" destination="eJl-S0-SFA" id="jVS-3E-QJo"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="hKi-ve-PYD" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-125" y="-190"/>
-        </scene>
         <!--Info-->
         <scene sceneID="Smb-hj-4hT">
             <objects>
@@ -574,7 +538,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="Kpf-8A-JuO" kind="relationship" relationship="viewControllers" id="wHb-nl-hvQ"/>
-                        <segue destination="z7L-76-xa6" kind="relationship" relationship="viewControllers" id="3SC-qp-ttL"/>
+                        <segue destination="bic-gW-INU" kind="relationship" relationship="viewControllers" id="TYH-yb-efl"/>
                         <segue destination="LKF-Xc-SHc" kind="relationship" relationship="viewControllers" id="yyW-6A-ew7"/>
                     </connections>
                 </tabBarController>
@@ -582,11 +546,54 @@
             </objects>
             <point key="canvasLocation" x="-521" y="-190"/>
         </scene>
+        <!--Gallery Collection View Controller-->
+        <scene sceneID="slW-Pl-d4h">
+            <objects>
+                <collectionViewController storyboardIdentifier="SASGalleryCollectionViewController" id="zCS-A5-9Es" customClass="SASGalleryCollectionViewController" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="MhA-pN-3ba">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="xHU-Xa-2YW">
+                            <size key="itemSize" width="80" height="80"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="1jy-o8-krr" customClass="SASGalleryCell">
+                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2E0-TX-zjO">
+                                            <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
+                                        </imageView>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <connections>
+                                    <outlet property="imageView" destination="2E0-TX-zjO" id="HXh-K8-1oC"/>
+                                </connections>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="zCS-A5-9Es" id="Lm8-BG-czT"/>
+                            <outlet property="delegate" destination="zCS-A5-9Es" id="tOC-8c-6mp"/>
+                        </connections>
+                    </collectionView>
+                    <navigationItem key="navigationItem" id="SzW-yR-cA3"/>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uCz-OY-qbe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="485" y="-190"/>
+        </scene>
         <!--Map-->
         <scene sceneID="rYn-Ii-qk3">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Kpf-8A-JuO" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Map" image="TabBarLocationPin" id="4lX-aT-Siu"/>
+                    <tabBarItem key="tabBarItem" title="Map" image="globe" id="4lX-aT-Siu"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="U8Q-ra-ZAG">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -600,6 +607,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="87L-YY-EfW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-605" y="594"/>
+        </scene>
+        <!--Gallery-->
+        <scene sceneID="0g2-vF-1Tb">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="bic-gW-INU" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Gallery" id="Q4W-8x-VSg"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="9g0-BK-i0v">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="zCS-A5-9Es" kind="relationship" relationship="rootViewController" id="qXn-3a-Tb5"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nsn-Pg-oGe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-47" y="-190"/>
         </scene>
     </scenes>
     <resources>
@@ -615,8 +641,8 @@
         <image name="SAS vertical 280" width="280" height="262"/>
         <image name="SAS_75" width="75" height="75"/>
         <image name="SmallMapPin" width="47" height="47"/>
-        <image name="TabBarLocationPin" width="21" height="34"/>
         <image name="dublin fire brigade 300" width="300" height="300"/>
+        <image name="globe" width="24" height="24"/>
         <image name="info_24" width="24" height="24"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

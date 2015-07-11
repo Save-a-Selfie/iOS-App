@@ -243,7 +243,6 @@
 
 #pragma mark Share to Social Media
 - (IBAction)shareToSocialMedia:(id)sender {
-    
     if (self.annotation.device.caption == nil || self.sasImageView.image == nil) {
         
         SASAlertView *couldNotShareAlert = [[SASAlertView alloc] initWithTarget:self andAction:nil];

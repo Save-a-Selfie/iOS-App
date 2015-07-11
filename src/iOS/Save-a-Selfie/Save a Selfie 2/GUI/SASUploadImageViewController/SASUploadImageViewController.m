@@ -185,7 +185,7 @@
 #pragma mark Upload Routine
 - (IBAction)beginUploadRoutine:(id)sender {
     
-    [self checkEULAAcepted];
+    //[self checkEULAAcepted];
     #pragma mark SASUploadObject timestamp set here.
     [self.sasUploadObject setTimeStamp: [SASUtilities getCurrentTimeStamp]];
     
@@ -340,8 +340,8 @@
     self.eulaViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"EULAViewController"];
     self.eulaViewController.delegate = self;
     
-    
     [self presentViewController:eulaViewController animated:NO completion:nil];
+
     [eulaViewController EULALoaded];
 
 }
@@ -387,7 +387,7 @@
     plog(@"EULA URL: %@?%@", URL, parameters);
     
     NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
-    
+    if(connection) {/* Silence the annoying unused variable warning :)*/ }
 }
 
 

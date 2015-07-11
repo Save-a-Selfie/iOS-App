@@ -170,15 +170,10 @@
     self.thumbnailImage = [self.largeImage resizedImage:CGSizeMake(tWidth, tHeight) interpolationQuality:kCGInterpolationHigh];
     
     // Add watermarks.
-    self.largeImage = [UIImage doubleMerge:self.largeImage
-                                 withImage:[UIImage imageNamed:@"Order of Malta 70px high"]
-                                       atX:20
-                                      andY:20
-                              withStrength:1.0
-                                  andImage:[UIImage imageNamed:@"Code for ireland logo transparent85rounded"]
-                                      atX2:width - 105
-                                     andY2:height - 70
-                                  strength:1.0];
+    
+    __weak UIImage *bottomRight = [UIImage imageNamed:@"bottomRightLogo.png"];
+    
+    self.largeImage = [UIImage doubleMerge:largeImage withImage:[UIImage imageNamed:@"topLeftLogo.png"] atX:20 andY:20 withStrength:1.0 andImage:bottomRight atX2:width - bottomRight.size.width - 20 andY2:height - bottomRight.size.height - 20 strength:1.0];
     
 }
 
