@@ -13,7 +13,6 @@
 #import "PopupImage.h"
 
 #import "UIView+NibInitializer.h"
-#import "UIView+WidthXY.h"
 #import "UIView+Alert.h"
 #import "UIImage+Resize.h"
 

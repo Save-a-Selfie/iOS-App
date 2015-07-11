@@ -14,7 +14,7 @@
 @implementation AlertBox
 
 @synthesize messageLabel, button1, button2, backgroundBox;
-extern BOOL NSLogOn;
+
 extern UIFont *customFont, *customFontSmaller;
 
 - (id)initWithFrame:(CGRect)frame

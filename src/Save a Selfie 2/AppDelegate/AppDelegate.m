@@ -9,7 +9,6 @@
 #import "AppDelegate.h"
 #import "ExtendNSLogFunctionality.h"
 
-#import "UploadPictureViewController.h"
 #import "SASUtilities.h"
 
 @interface AppDelegate ()
@@ -18,20 +17,14 @@
 
 @implementation AppDelegate
 
-int chosenObject;
-BOOL FBLoggedIn = NO;
-BOOL FBVCDisplayed = NO; // will change to YES if FacebookVC gets to finish displaying
-NSString *const objectChosen = @"object chosen"; // will be used in EmergencyObjects.m
-NSString *const userSkippedLogin = @"user skipped login";
-NSString *const applicationWillEnterForeground = @"application returned to foreground"; // may have left to sort out permissions issues
+
 UIFont *customFont, *customFontSmaller;
 
 BOOL NSLogOn = NO; // YES to show logs, NO if not
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-    plog(@"Launching");
-        return YES;
+    return YES;
 }
 
 
@@ -44,7 +37,6 @@ BOOL NSLogOn = NO; // YES to show logs, NO if not
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     plog(@"entering foreground");
-    [[NSNotificationCenter defaultCenter] postNotificationName:applicationWillEnterForeground object:nil];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {

@@ -7,8 +7,6 @@
 //
 
 #import "SASTabBarController.h"
-#import "WebsiteViewController.h"
-#import "UploadPictureViewController.h"
 #import "AppDelegate.h"
 #import "SASColour.h"
 
