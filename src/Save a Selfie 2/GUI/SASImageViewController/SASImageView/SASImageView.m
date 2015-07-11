@@ -10,21 +10,37 @@
 #import "SASImageInspectorView.h"
 
 
-// @Discussion:
-// Currently for this class we will not support a tapping
-// gesture to enlarge the photo with a SASImageInspectorView.
-// Version 1.1.
 @implementation SASImageView
+
+@synthesize selectable = _selectable;
 
 
 - (instancetype)initWithCoder:(NSCoder *)coder {
 
     if (self = [super initWithCoder:coder]) {
         
+        self.userInteractionEnabled = YES;
+        _selectable = NO;
         self.contentMode = UIViewContentModeScaleAspectFit;
+        
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(handleTap)];
+        [self addGestureRecognizer:tap];
     }
     return self;
 }
+
+
+
+
+- (void) handleTap {
+    
+    SASImageInspectorView *sasImageInspectorView = [[SASImageInspectorView alloc] initWithImage:self.image];
+    [sasImageInspectorView animateImageIntoView:[self superview]];
+    
+    
+}
+
+
 
 
 

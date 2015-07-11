@@ -10,4 +10,6 @@
 
 @interface SASImageView : UIImageView
 
+@property (nonatomic, assign) BOOL selectable;
+
 @end

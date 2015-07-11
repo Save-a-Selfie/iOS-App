@@ -12,20 +12,20 @@
 
 @implementation SASAnnotation
 
-@synthesize name;
-@synthesize coordinate;
-@synthesize image;
-@synthesize device;
-@synthesize index;
+@synthesize name = _name;
+@synthesize coordinate = _coordinate;
+@synthesize image = _image;
+@synthesize device = _device;
+@synthesize index = _index;
 
 - (instancetype) initAnnotationWithDevice:(SASDevice*) aDevice index:(int) deviceNumber {
     if (self = [super init]) {
         
-        self.name = [SASDevice getDeviceNameForDeviceType:aDevice.type];
-        self.coordinate= aDevice.deviceLocation;
-        self.image = (UIImage*)[SASDevice getDeviceMapAnnotationImageForDeviceType:aDevice.type];
-        self.device = aDevice;
-        self.index = deviceNumber;
+        _name = [SASDevice getDeviceNameForDeviceType:aDevice.type];
+        _coordinate= aDevice.deviceLocation;
+        _image = (UIImage*)[SASDevice getDeviceMapAnnotationImageForDeviceType:aDevice.type];
+        _device = aDevice;
+        _index = deviceNumber;
 
     }
     return self;

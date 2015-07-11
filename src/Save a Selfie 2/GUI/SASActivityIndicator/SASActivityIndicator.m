@@ -8,6 +8,7 @@
 
 #import "SASActivityIndicator.h"
 #import "SASColour.h"
+#import "UIView+NibInitializer.h"
 
 @interface SASActivityIndicator()
 
@@ -17,18 +18,15 @@
 
 @implementation SASActivityIndicator
 
-@synthesize message;
+@synthesize message = _message;
 @synthesize activityIndicator;
 
 - (instancetype)initWithMessage:(NSString*) aMessage {
     if (self = [super init]) {
-        self = [[[NSBundle mainBundle]
-                 loadNibNamed:@"SASActivityIndicatorView"
-                 owner:self
-                 options:nil]
-                firstObject];
         
-        self.message.text = aMessage;
+        self = [self initWithNibNamed:@"SASActivityIndicatorView"];
+        
+        _message.text = aMessage;
         self.layer.cornerRadius = 8.0;
         self.backgroundColor = [UIColor grayColor];
         self.layer.opacity = 0.8;

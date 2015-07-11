@@ -17,32 +17,36 @@
 
 @implementation SASImageInspectorView
 
-@synthesize imageView;
+@synthesize imageView = _imageView;
 
+- (instancetype)initWithImage:(UIImage *)image {
+    if(self = [super init]) {
+        
+        self.frame = CGRectMake(0, 0, [Screen width], [Screen height]);
+        self.backgroundColor = [UIColor orangeColor];
 
-- (instancetype)initWithImage:(UIImage*)image {
-    if(self = [super initWithFrame: CGRectMake(0, 0, [Screen width], [Screen height])]) {
-        self.backgroundColor = [UIColor blackColor];
-        self.imageView.userInteractionEnabled = YES;
+        _imageView.frame = CGRectMake(0, 0, [Screen width], [Screen height]);
+        _imageView.image = [image copy];
+        _imageView.contentMode = UIViewContentModeScaleAspectFit;
+        _imageView.center = self.center;
+        [self addSubview:_imageView];
         
-        // Set up the imageView property.
-        self.imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, [Screen width], [Screen height])];
-        self.imageView.image = [image copy];
-        self.imageView.contentMode = UIViewContentModeScaleAspectFit;
-        [self addSubview:imageView];
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(handleTap)];
+        [self addGestureRecognizer:tap];
         
-        
-        UIGestureRecognizer *oneTap = [[UIGestureRecognizer alloc] initWithTarget:self.imageView action:@selector(handleGesture)];
-        [self.imageView addGestureRecognizer:oneTap];
     }
     return self;
 }
 
 
-- (void) handleGesture {
-    [self removeFromSuperview];
-    printf("Tapped");
-    self.imageView = nil;
+- (void) handleTap {
+    // TODO: Forward to delegate
 }
 
+- (void)animateImageIntoView:(UIView *)view {
+
+    [UIView animateWithDuration:1.0
+                     animations:^{[view addSubview:self];}
+                     completion:nil];
+}
 @end

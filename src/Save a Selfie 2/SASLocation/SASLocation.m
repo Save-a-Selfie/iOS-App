@@ -22,15 +22,13 @@
 
 @implementation SASLocation
 
-@synthesize locationManager;
+@synthesize locationManager = _locationManager;
 @synthesize delegate;
 
 
 - (instancetype) init {
     if(self == [super init]) {
-        if (self.locationManager == nil) {
-            [self setUpLocationManager];
-        }
+        [self setUpLocationManager];
     }
     return self;
 }
@@ -51,7 +49,7 @@
 //      If the user's current location has been found, then this will return
 // the last location the devices has located the user at.
 - (CLLocationCoordinate2D)currentUserLocation {
-    [locationManager startUpdatingLocation];
+    [self.locationManager startUpdatingLocation];
     return currentLocationCoordinates;
 }
 
@@ -59,7 +57,7 @@
 
 - (void) startUpdatingUsersLocation {
     if([self canStartLocating]) {
-        [locationManager startUpdatingLocation];
+        [self.locationManager startUpdatingLocation];
     } else {
         plog(@"Cannot update users location");
     }

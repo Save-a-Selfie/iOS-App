@@ -28,10 +28,11 @@
 
 @synthesize delegate;
 @synthesize devices;
+@synthesize responseData = _responseData;
 
 #pragma mark Objects for creating up URL request.
-@synthesize url;
-@synthesize request;
+@synthesize url = _url;
+@synthesize request = _request;
 @synthesize connection;
 
 
@@ -41,9 +42,9 @@
 - (instancetype)init
 {
     if(self = [super init]) {
-        [self setUrl: [NSURL URLWithString: @"http://www.saveaselfie.org/wp/wp-content/themes/magazine-child/getMapData.php"]];
-        self.request = [NSURLRequest requestWithURL:self.url];
-        self.responseData = [[NSMutableData alloc] init];
+        _url = [NSURL URLWithString: @"http://www.saveaselfie.org/wp/wp-content/themes/magazine-child/getMapData.php"];
+        _request = [NSURLRequest requestWithURL:self.url];
+        _responseData = [[NSMutableData alloc] init];
     }
     return self;
 }

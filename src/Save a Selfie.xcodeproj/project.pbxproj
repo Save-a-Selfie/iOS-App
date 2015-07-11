@@ -373,7 +373,8 @@
 				181D1E5B1B2359EA00FB5928 /* SASImageInspectorView.h */,
 				181D1E5C1B2359EA00FB5928 /* SASImageInspectorView.m */,
 			);
-			path = SASImageInspectorView;
+			name = SASImageInspectorView;
+			path = ../SASImageInspectorView;
 			sourceTree = "<group>";
 		};
 		181D1E631B235D1C00FB5928 /* SASImageView */ = {
@@ -381,6 +382,7 @@
 			children = (
 				181D1E601B235CF900FB5928 /* SASImageView.h */,
 				181D1E611B235CF900FB5928 /* SASImageView.m */,
+				181D1E5E1B2359EF00FB5928 /* SASImageInspectorView */,
 			);
 			path = SASImageView;
 			sourceTree = "<group>";
@@ -600,7 +602,6 @@
 			children = (
 				18C323971B1E2F1E0027BDEA /* SASImageViewController.h */,
 				18C323981B1E2F1E0027BDEA /* SASImageViewController.m */,
-				181D1E5E1B2359EF00FB5928 /* SASImageInspectorView */,
 				181D1E631B235D1C00FB5928 /* SASImageView */,
 			);
 			path = SASImageViewController;

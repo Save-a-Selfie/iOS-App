@@ -55,6 +55,7 @@
 
 - (void)sasAnnotationsRetrieved:(NSMutableArray *)devices {
     self.dataForCells = devices;
+    NSLog(@"%ld", devices.count);
     [self.collectionView reloadData];
 }
 
@@ -76,15 +77,20 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
         NSData *data = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:imageURL]];
-        [self.cellImages addObject:[UIImage imageWithData:data]];
-        NSLog(@"%ld", (long)indexPath.row);
+        UIImage *image = [UIImage imageWithData:data];
+        if (image != nil) {
+            //[self.cellImages addObject:image];
+        }
 
-
+        NSLog(@"%lu", (unsigned long) self.cellImages.count);
+        if(cellImages.count == 28) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                cell.imageView.image = [self.cellImages objectAtIndex:indexPath.row];
+                cell.device = [self.dataForCells objectAtIndex:indexPath.row];
+            });
+        }
+        ;
         
-        NSLog(@"%@", self.cellImages);
-            
-            //cell.imageView.image = [self.cellImages objectAtIndex:indexPath.row];
-            //cell.device = [self.dataForCells objectAtIndex:indexPath.row];
 
     });
     
@@ -99,7 +105,7 @@
 
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return self.dataForCells.count;
+    return 28;
 }
 
 - (UIEdgeInsets)collectionView:(UICollectionView*)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {

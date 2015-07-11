@@ -10,7 +10,7 @@
 
 @implementation SASGreyView
 
-
+#pragma mark Object Life Cycle
 - (instancetype)init {
     if(self = [super init]) {
         [self setupGreyView];

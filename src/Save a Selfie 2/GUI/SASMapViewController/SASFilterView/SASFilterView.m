@@ -26,10 +26,10 @@
 
 @implementation SASFilterView
 
-@synthesize tableView;
+@synthesize tableView = _tableView;
 @synthesize filterLabel;
 @synthesize delegate;
-@synthesize selectedDevice;
+@synthesize selectedDevice = _selectedDevice;
 @synthesize cells;
 
 SASDeviceType availableDevicesToFilter[5] = {
@@ -57,15 +57,17 @@ SASDeviceType availableDevicesToFilter[5] = {
         [UIFont increaseCharacterSpacingForLabel:self.filterLabel byAmount:2.3];
         self.layer.cornerRadius = 8.0;
         
-        self.tableView.delegate = self;
-        self.tableView.dataSource = self;
-        self.tableView.layer.cornerRadius = 8.0;
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
+        _tableView.layer.cornerRadius = 8.0;
         
         // Register SASFilterViewCell.
-        [self.tableView registerNib:[UINib nibWithNibName:@"SASFilterViewCell" bundle:nil]
+        [_tableView registerNib:[UINib nibWithNibName:@"SASFilterViewCell" bundle:nil]
              forCellReuseIdentifier:@"sasFilterViewCell"];
         
-        self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+        _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+        
+        _selectedDevice = All;
     }
     return self;
 }
@@ -89,7 +91,7 @@ SASDeviceType availableDevicesToFilter[5] = {
     [self tickCell:selectedCell];
     self.selectedDevice = selectedCell.associatedDeviceType;
     
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 

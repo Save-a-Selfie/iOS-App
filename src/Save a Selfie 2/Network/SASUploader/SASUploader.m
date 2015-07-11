@@ -31,7 +31,7 @@
 
 @synthesize delegate;
 
-@synthesize sasUploadObject;
+@synthesize sasUploadObject = _sasUploadObject;
 
 @synthesize largeImage;
 @synthesize thumbnailImage;
@@ -40,11 +40,11 @@
 @synthesize uploading;
 
 
-
+#pragma Object Life Cycle
 - (instancetype)initWithSASUploadObject: (SASUploadObject <SASVerifiedUploadObject>*) object {
     
     if (self == [super init]) {
-        self.sasUploadObject = object;
+        _sasUploadObject = object;
     }
     return self;
 }

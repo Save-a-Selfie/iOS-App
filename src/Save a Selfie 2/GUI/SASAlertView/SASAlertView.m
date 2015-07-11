@@ -31,8 +31,8 @@
 
 // IBOutlets
 @synthesize alertTitleLabel;
-@synthesize alertMessageTextView;
-@synthesize alertButton;
+@synthesize alertMessageTextView = _alertMessageTextView;
+@synthesize alertButton = _alertButton;
 
 // NSStrings.
 @synthesize title;
@@ -40,8 +40,8 @@
 @synthesize buttonTitle;
 
 // Action
-@synthesize alertAction;
-@synthesize alertTarget;
+@synthesize alertAction = _alertAction;
+@synthesize alertTarget = _alertTarget;
 
 
 // Grey view background
@@ -55,19 +55,19 @@
         self = [self initWithNibNamed:@"SASAlertView"];
         
         self.layer.cornerRadius = 8.0;
-        self.alertButton.layer.cornerRadius = 5.0;
         
+        _alertButton.layer.cornerRadius = 5.0;
         
-        self.alertAction = action;
-        self.alertTarget = target;
+        _alertAction = action;
+        _alertTarget = target;
         
-        [self.alertButton addTarget:target
+        [_alertButton addTarget:target
                              action:action
                    forControlEvents:UIControlEventTouchUpInside];
         
         
         //[UIFont increaseCharacterSpacingForLabel:self.alertTitleLabel byAmount:5];
-        self.alertMessageTextView.font = [UIFont sasFontWithSize:18.0];
+        _alertMessageTextView.font = [UIFont sasFontWithSize:18.0];
     }
     return self;
 }

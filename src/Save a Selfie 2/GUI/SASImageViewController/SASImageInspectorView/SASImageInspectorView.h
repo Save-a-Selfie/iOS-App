@@ -13,4 +13,6 @@
 
 - (instancetype)initWithImage:(UIImage*)image;
 
+- (void) animateImageIntoView:(UIView *)view;
+
 @end

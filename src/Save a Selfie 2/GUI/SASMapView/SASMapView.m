@@ -106,6 +106,7 @@
     
 }
 
+
 - (void)loadSASAnnotationsToMap {
     // Our annotationRetriever Object
     self.sasAnnotationRetriever = [[SASMapAnnotationRetriever alloc] init];
