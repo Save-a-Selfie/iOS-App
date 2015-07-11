@@ -191,8 +191,8 @@ SASDeviceType availableDevicesToFilter[5] = {
     
     [UIView animateWithDuration:0.3
                           delay:0.1
-         usingSpringWithDamping:0.6
-          initialSpringVelocity:.2
+         usingSpringWithDamping:0.8
+          initialSpringVelocity:0.2
                         options:UIViewAnimationOptionCurveEaseIn
                      animations:^(){ self.center = view.center;}
                      completion:^(BOOL visible){[self updateDelegateOnViewVisibility:YES];}
@@ -205,8 +205,8 @@ SASDeviceType availableDevicesToFilter[5] = {
     
     [UIView animateWithDuration:0.4
                           delay:0.1
-         usingSpringWithDamping:0.6
-          initialSpringVelocity:.2
+         usingSpringWithDamping:0.8
+          initialSpringVelocity:0.2
                         options:UIViewAnimationOptionCurveEaseIn
                      animations:^(){ self.frame = CGRectOffset(self.frame,
                                                                self.frame.origin.x,

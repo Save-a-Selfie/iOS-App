@@ -19,22 +19,22 @@ CGFloat delay = 0.0;
 + (void) animateView:(UIView *) view offScreenInDirection:(SASAnimationDirection) direction {
     
    if (direction == SASAnimationDirectionUp) {
-        [self animateWithDuration:duration delay:delay options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        [self animateWithDuration:duration delay:delay options:UIViewAnimationOptionCurveEaseInOut | !UIViewAnimationOptionAllowUserInteraction animations:^{
             view.frame = CGRectOffset(view.frame, 0, -view.frame.size.height);
         } completion:nil];
     }
     else if(direction == SASAnimationDirectionDown) {
-        [self animateWithDuration:duration delay: delay options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        [self animateWithDuration:duration delay: delay options:UIViewAnimationOptionCurveEaseInOut | !UIViewAnimationOptionAllowUserInteraction animations:^{
             view.frame = CGRectOffset(view.frame, 0, [Screen height]);
         } completion:nil];
     }
     else if (direction == SASAnimationDirectionLeft) {
-        [self animateWithDuration:duration delay:delay options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        [self animateWithDuration:duration delay:delay options:UIViewAnimationOptionCurveEaseInOut | !UIViewAnimationOptionAllowUserInteraction animations:^{
             view.frame = CGRectOffset(view.frame, 0, -view.frame.size.width);
         } completion:nil];
     }
     else {
-        [self animateWithDuration:duration delay:delay options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        [self animateWithDuration:duration delay:delay options:UIViewAnimationOptionCurveEaseInOut | !UIViewAnimationOptionAllowUserInteraction animations:^{
             view.frame = CGRectOffset(view.frame, [Screen width], 0);
         } completion:nil];
     }

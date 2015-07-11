@@ -29,4 +29,5 @@ typedef NS_ENUM(NSInteger, SASAnimationDirection) {
 
 // Animates a view to a specific point in the coordinate system.
 + (void) animateView:(UIView *) view toPoint:(CGPoint) point;
+
 @end

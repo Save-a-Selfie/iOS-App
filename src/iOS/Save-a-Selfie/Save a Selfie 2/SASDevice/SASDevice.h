@@ -7,11 +7,11 @@
 
 
 // Device types:
-// All - All Devices
 // Defibrillator
 // Life Ring
 // First Aid Kit
 // Fire Hydrant
+// All,
 typedef NS_ENUM(int, SASDeviceType) {
     Defibrillator,
     LifeRing,
@@ -46,6 +46,8 @@ typedef NS_ENUM(int, SASDeviceType) {
 @property (nonatomic, assign, readonly) CLLocationCoordinate2D deviceLocation;
 
 
+// Initialises a SASDevice object with information from a string typically
+// gotten in SASAnnotationRetriever.
 - (id) initDeviceWithInformationFromString: (NSString *)infoString;
 
 @end
