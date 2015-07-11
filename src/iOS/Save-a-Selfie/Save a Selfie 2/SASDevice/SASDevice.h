@@ -39,7 +39,7 @@ typedef NS_ENUM(int, SASDeviceType) {
 
 
 @property (nonatomic, assign) SASDeviceType type;
-@property (nonatomic, strong, readonly) NSString *imageStandardRes;
+@property (nonatomic, strong, readonly) NSString *imageURL;
 @property (nonatomic, strong, readonly) NSString *caption;
 @property (nonatomic, strong, readonly) NSString *thumb;
 @property (nonatomic, strong, readonly) NSString *app;

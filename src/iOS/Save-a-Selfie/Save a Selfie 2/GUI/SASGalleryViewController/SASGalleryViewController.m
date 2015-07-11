@@ -119,7 +119,7 @@
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
            
             SASDevice* deviceFromIndex = [self.sasDevicesArray objectAtIndex:indexPath.row];
-            NSString* deviceImageURLSring = deviceFromIndex.imageStandardRes;
+            NSString* deviceImageURLSring = deviceFromIndex.imageURL;
             
             
             

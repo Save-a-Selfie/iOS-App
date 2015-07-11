@@ -179,15 +179,15 @@ extern NSString *permissionsProblem2;
     if ([view.annotation isKindOfClass:MKUserLocation.class]) { return; } // user's own location
 
     SASAnnotation *annotation = view.annotation;
-    plog(@"annotation: %@", annotation.device.imageStandardRes);
+    plog(@"annotation: %@", annotation.device.imageURL);
     [view bounceObject:15];
     // using solution at http://stackoverflow.com/questions/15241340/how-to-add-custom-view-in-maps-annotations-callouts
     dispatch_async(dispatch_get_global_queue(0,0), ^{
         plog(@"dispatch_async 1");
-        NSData * data = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString:annotation.device.imageStandardRes]];
+        NSData * data = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString:annotation.device.imageURL]];
         dispatch_sync(dispatch_get_main_queue(), ^{
             plog(@"dispatch_async 2");
-            if ( data == nil ) { plog(@"nil for %@ (%@)", view, annotation.device.imageStandardRes); return; }
+            if ( data == nil ) { plog(@"nil for %@ (%@)", view, annotation.device.imageURL); return; }
             UIImage *image = [UIImage imageWithData:data];
             CGRect screenRect = [[UIScreen mainScreen] bounds];
             /*

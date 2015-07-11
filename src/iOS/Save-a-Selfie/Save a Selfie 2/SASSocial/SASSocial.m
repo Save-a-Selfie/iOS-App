@@ -12,7 +12,6 @@
 @implementation SASSocial
 
 
-
 + (void) shareToSocialMedia:(NSString*)textToShare andImage:(UIImage*)image target:(id) target {
     
     // Items to share.

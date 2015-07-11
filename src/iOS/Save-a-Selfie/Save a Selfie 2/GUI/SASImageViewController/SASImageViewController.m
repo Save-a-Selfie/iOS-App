@@ -17,6 +17,7 @@
 #import "ILTranslucentView.h"
 #import "SASMapAnnotationRetriever.h"
 #import "SASBarButtonItem.h"
+#import "SASAlertView.h"
 
 
 @interface SASImageViewController () <SASMapViewNotifications ,UIScrollViewDelegate> {
@@ -31,7 +32,6 @@
 
 @property (nonatomic, weak) IBOutlet UITextView *photoDescription;
 
-@property (nonatomic, strong) UIImage *sasImage;
 @property (nonatomic, weak) IBOutlet SASImageView *sasImageView;
 @property (strong, nonatomic) IBOutlet SASImageView *blurredImageView;
 
@@ -54,10 +54,6 @@
 @synthesize annotation;
 @synthesize scrollView;
 @synthesize sasDeviceType;
-
-// This property is the image which has been fetched from
-// the server getSASImageWithURLFromString:
-@synthesize sasImage;
 
 @synthesize sasImageView;
 @synthesize blurredImageView;
@@ -147,7 +143,7 @@
         
     
 
-    if(self.annotation.device.imageStandardRes != nil && !imageLoaded) {
+    if(self.annotation.device.imageURL != nil && !imageLoaded) {
         
         // Begin animation of sasActivityIndicator until image is loaded.
         self.sasActivityIndicator = [[SASActivityIndicator alloc] initWithMessage:@"Loading..."];
@@ -160,11 +156,10 @@
         
         // Set the image from the URLString contained within the device property
         // of the annotation passed to this object.
-        // NOTE: The URLString is contained inside the device.standard_resolution property.
         dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             
             self.s = [[SASMapAnnotationRetriever alloc]init];
-            UIImage* imageFromURL = [self.s getImageFromURLWithString:self.annotation.device.imageStandardRes];
+            UIImage* imageFromURL = [self.s getImageFromURLWithString:self.annotation.device.imageURL];
             
             dispatch_async( dispatch_get_main_queue(), ^{
                 
@@ -241,22 +236,33 @@
     double distance = [SASUtilities distanceBetween:self.annotation.coordinate and:coordinate];
     
     __weak NSString *distanceString = [NSString stringWithFormat:@"%.1fKM Approx", distance];
+    
     self.distanceLabel.text = distanceString;
 }
 
 
 #pragma mark Share to Social Media
 - (IBAction)shareToSocialMedia:(id)sender {
-    if(self.annotation != nil) {
-        [SASSocial shareToSocialMedia:self.annotation.device.caption andImage:self.sasImage target:self];
+    
+    if (self.annotation.device.caption == nil || self.sasImageView.image == nil) {
+        
+        SASAlertView *couldNotShareAlert = [[SASAlertView alloc] initWithTarget:self andAction:nil];
+        couldNotShareAlert.title = @"Oops";
+        couldNotShareAlert.message = @"There seemed to be a problem trying to share the image. Please try again.";
+        couldNotShareAlert.buttonTitle = @"Ok";
+        [couldNotShareAlert animateIntoView:self.view];
+    }
+    else {
+        [SASSocial shareToSocialMedia:self.annotation.device.caption
+                             andImage:self.sasImageView.image target:self];
     }
 }
 
-
+#pragma Report Device
 - (void) reportImage {
     [[UIApplication sharedApplication]
      openURL:[NSURL URLWithString:
-              [NSString stringWithFormat:@"http://saveaselfie.org/problem-with-an-image/?imageURL=%@", self.annotation.device.imageStandardRes]]];
+              [NSString stringWithFormat:@"http://saveaselfie.org/problem-with-an-image/?imageURL=%@", self.annotation.device.imageURL]]];
 }
 
 

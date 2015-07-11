@@ -19,7 +19,7 @@
         NSArray *info = [infoString componentsSeparatedByString:@"\t"];
         
         // URL for the image.
-        _imageStandardRes = [info objectAtIndex:0];
+        _imageURL = [info objectAtIndex:0];
         
         // Caption associated with the device.
         _caption = [info objectAtIndex:1];
