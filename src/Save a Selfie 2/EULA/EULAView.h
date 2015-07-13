@@ -8,7 +8,7 @@
 
 
 
-@class EULAViewController;
+@class EULAView;
 
 typedef NS_ENUM(NSInteger, EULAUserRespose) {
     EULAAccepted,
@@ -17,11 +17,11 @@ typedef NS_ENUM(NSInteger, EULAUserRespose) {
 
 @protocol EULADelegate <NSObject>
 
-- (void) eula:(EULAViewController *) eula didReceiveResponseFromUser:(EULAUserRespose) response;
+- (void) eula:(EULAView *) eula didReceiveResponseFromUser:(EULAUserRespose) response;
 
 @end
 
-@interface EULAViewController : UIViewController
+@interface EULAView : UIView
 
 @property (weak, nonatomic) id <EULADelegate> delegate;
 
@@ -30,6 +30,7 @@ typedef NS_ENUM(NSInteger, EULAUserRespose) {
 - (void)EULALoaded;
 
 @property (weak, nonatomic) IBOutlet UISegmentedControl *agreeDecline;
+
 
 - (IBAction)agreeDeclineAction:(id)sender;
 

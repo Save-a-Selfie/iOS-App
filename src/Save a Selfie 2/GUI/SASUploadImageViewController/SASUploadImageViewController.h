@@ -10,17 +10,17 @@
 #import "SASUploadObject.h"
 #import "SASMapView.h"
 
+typedef NS_ENUM(NSInteger, SASUploadControllerResponse) {
+    SASUploadControllerResponseUploaded,
+    SASUploadControllerResponseCancelled
+};
 
 
 @protocol SASUploadImageViewControllerDelegate <NSObject>
 
-// @Discussion:
-//  This method will be called once SASUploadImageViewController is dismissed and remove
-//  from its super view. It is possible the user may have clicked `cancel` and decided
-//  to cancel the upload. This method will still be called.
-//  It is important to note once the user is finished with an SASImageViewController instance
-//  this method is called.
-- (void)sasUploadImageViewControllerDidFinishUploading:(UIViewController *)viewController withObject:(SASUploadObject *) sasUploadObject;
+/// Called when SASImageViewController is dismissed.
+/// An SASUploadControllerResponse is paassed to the delegate.
+- (void)sasUploadImageViewControllerDidFinishUploading:(UIViewController *)viewController withResponse:(SASUploadControllerResponse) response withObject:(SASUploadObject *) sasUploadObject;
 
 @end
 

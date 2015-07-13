@@ -408,7 +408,7 @@
         <!--View Controller-->
         <scene sceneID="vMx-Hn-uvY">
             <objects>
-                <viewController storyboardIdentifier="EULAViewController" id="2Ow-h0-8ov" customClass="EULAViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EULAViewController" id="2Ow-h0-8ov" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="BqP-T5-Xwr"/>
                         <viewControllerLayoutGuide type="bottom" id="QmR-jo-Cxm"/>

@@ -3,20 +3,24 @@
 //  Save a Selfie
 //
 
-#import "EULAViewController.h"
+#import "EULAView.h"
 #import "StorageSystem.h"
 #import "AppDelegate.h"
 #import "ExtendNSLogFunctionality.h"
 #define DATAFILE @"EULA.html"
 #define ROOT @"http://www.saveaselfie.org/SASDocs/"
 
-@interface EULAViewController ()
+@interface EULAView ()
+@property (weak, nonatomic) IBOutlet UIButton *acceptButton;
+@property (weak, nonatomic) IBOutlet UIButton *declineButton;
 
 @end
 
-@implementation EULAViewController
+@implementation EULAView
 
 @synthesize delegate;
+@synthesize acceptButton;
+@synthesize declineButton;
 
 - (void)viewWillAppear:(BOOL)animated {
     [self EULALoaded];
@@ -56,11 +60,10 @@
 }
 
 
-- (IBAction)agreeDeclineAction:(UISegmentedControl *)segmentedControl {
+- (IBAction)userHasChosenOption:(UIButton *)sender {
+    EULAUserRespose response;
     
-    EULAUserRespose response = -1;
-    
-    if (segmentedControl.selectedSegmentIndex == 0) {
+    if(sender == acceptButton) {
         [[NSUserDefaults standardUserDefaults] setValue:@"yes" forKey:@"EULAAccepted"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         
@@ -73,7 +76,6 @@
         
         printf("Declined");
         response = EULADeclined;
-
     }
     
     if(self.delegate != nil && [self.delegate respondsToSelector:@selector(eula:didReceiveResponseFromUser:)]) {

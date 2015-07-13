@@ -17,7 +17,7 @@
 #import "SASUploader.h"
 #import "SASDeviceButton.h"
 #import "SASGreyView.h"
-#import "EULAViewController.h"
+#import "EULAView.h"
 #import "SASActivityIndicator.h"
 #import "ExtendNSLogFunctionality.h"
 #import "UIView+NibInitializer.h"
@@ -45,7 +45,7 @@
 @property (nonatomic, assign) BOOL deviceHasBeenSelected;
 
 @property (strong, nonatomic) SASUploader *sasUploader;
-@property (strong, nonatomic) EULAViewController * eulaViewController;
+@property (strong, nonatomic) EULAView * eulaView;
 
 
 
@@ -70,7 +70,7 @@
 @synthesize deviceHasBeenSelected;
 
 @synthesize sasUploader;
-@synthesize eulaViewController;
+@synthesize eulaView;
 
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -115,7 +115,7 @@
     SASBarButtonItem *cancelBarButtonItem = [[SASBarButtonItem alloc] initWithTitle:@"Cancel"
                                                                               style:UIBarButtonItemStylePlain
                                                                              target:self
-                                                                             action:@selector(dismissSASUploadImageViewController)];
+                                                                             action:@selector(cancel)];
     self.navigationItem.leftBarButtonItem = cancelBarButtonItem;
     self.navigationController.navigationBar.topItem.title = @"Upload";
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName: [UIFont fontWithName:@"AvenirNext-DemiBold" size:17.0f] }];
@@ -148,7 +148,9 @@
     
 }
 
-
+- (void) cancel {
+    [self dismissSASUploadImageViewControllerWithResponse:SASUploadControllerResponseCancelled];
+}
 
 - (IBAction)deviceSelected:(SASDeviceButton*) sender {
     
@@ -212,7 +214,7 @@
 
 
 - (void)sasUploaderDidFinishUploadWithSuccess:(SASUploader *)sasUploader {
-    [self dismissSASUploadImageViewController];
+    [self dismissSASUploadImageViewControllerWithResponse:SASUploadControllerResponseUploaded];
     
     [self.sasActivityIndicator removeFromSuperview];
     [self.sasActivityIndicator stopAnimating];
@@ -301,15 +303,23 @@
 }
 
 
-- (void) dismissSASUploadImageViewController {
+- (void) dismissSASUploadImageViewControllerWithResponse:(SASUploadControllerResponse) response {
+    
+    if (response) {
+        // Call delegate.
+        if (self.delegate != nil && [self.delegate respondsToSelector:@selector(sasUploadImageViewControllerDidFinishUploading:withResponse:withObject:)]) {
+            [self.delegate sasUploadImageViewControllerDidFinishUploading:self
+                                                             withResponse:response
+                                                               withObject:self.sasUploadObject];
+            
+        }
+        
     [self dismissViewControllerAnimated:YES completion:nil];
     
     [self deselectDeviceButtons];
     
     
-    // Call delegate.
-    if (self.delegate != nil && [self.delegate respondsToSelector:@selector(sasUploadImageViewControllerDidFinishUploading:withObject:)]) {
-        [self.delegate sasUploadImageViewControllerDidFinishUploading:self withObject:self.sasUploadObject];
+    
     }
 
 }
@@ -337,19 +347,19 @@
 
 - (void) presentEULAViewController {
 
-    self.eulaViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"EULAViewController"];
-    self.eulaViewController.delegate = self;
+    self.eulaView = [[EULAView alloc] initWithNibNamed:@"EULAView"];
+    self.eulaView.delegate = self;
     
-    [self presentViewController:eulaViewController animated:NO completion:nil];
+    [self.view addSubview:eulaView];
 
-    [eulaViewController EULALoaded];
+    [eulaView EULALoaded];
 
 }
 
 
-- (void)eula:(EULAViewController *)eula didReceiveResponseFromUser:(EULAUserRespose)response {
+- (void)eula:(EULAView *)eula didReceiveResponseFromUser:(EULAUserRespose)response {
     
-    if (self.eulaViewController == nil) {
+    if (self.eulaView == nil) {
         printf("Nil bitch");
     } else {
         printf("Not nil");
@@ -357,12 +367,12 @@
     
     if (response == EULAAccepted) {
         [self updateEULATable];
-        [self.eulaViewController removeFromParentViewController];
-        [self.eulaViewController dismissViewControllerAnimated:NO completion:nil];
+        [self.eulaView removeFromSuperview];
+        NSLog(@"%@", self.eulaView.superview);
     }
     else {
         
-        [self.eulaViewController dismissViewControllerAnimated:NO completion:nil];
+        [self.eulaView removeFromSuperview];
         
         SASAlertView *eulaDeclinedAlertView = [[SASAlertView alloc] initWithTarget:self andAction:nil];
         eulaDeclinedAlertView.title = @"NOTE";

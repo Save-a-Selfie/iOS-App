@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		15AA30A63C377FEBFED40422 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DD50A6FBD23D090F1506F00 /* libPods.a */; };
 		1807AF3F1B4EE8F2006E1B28 /* StorageSystem.m in Sources */ = {isa = PBXBuildFile; fileRef = 1807AF3E1B4EE8F2006E1B28 /* StorageSystem.m */; };
-		1807AF451B4EE946006E1B28 /* EULAViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1807AF431B4EE946006E1B28 /* EULAViewController.m */; };
+		1807AF451B4EE946006E1B28 /* EULAView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1807AF431B4EE946006E1B28 /* EULAView.m */; };
 		1807AF4D1B4EEE79006E1B28 /* NSString+PDRegex.m in Sources */ = {isa = PBXBuildFile; fileRef = 1807AF4C1B4EEE79006E1B28 /* NSString+PDRegex.m */; };
 		1810C90A1B289044009063E5 /* UIImage+SASImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 1810C9091B289044009063E5 /* UIImage+SASImage.m */; };
 		1810C9141B28ABE3009063E5 /* ILTranslucentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1810C9131B28ABE3009063E5 /* ILTranslucentView.m */; };
@@ -106,8 +106,8 @@
 /* Begin PBXFileReference section */
 		1807AF3D1B4EE8F2006E1B28 /* StorageSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StorageSystem.h; sourceTree = "<group>"; };
 		1807AF3E1B4EE8F2006E1B28 /* StorageSystem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StorageSystem.m; sourceTree = "<group>"; };
-		1807AF421B4EE946006E1B28 /* EULAViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EULAViewController.h; sourceTree = "<group>"; };
-		1807AF431B4EE946006E1B28 /* EULAViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EULAViewController.m; sourceTree = "<group>"; };
+		1807AF421B4EE946006E1B28 /* EULAView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EULAView.h; sourceTree = "<group>"; };
+		1807AF431B4EE946006E1B28 /* EULAView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EULAView.m; sourceTree = "<group>"; };
 		1807AF4B1B4EEE79006E1B28 /* NSString+PDRegex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+PDRegex.h"; sourceTree = "<group>"; };
 		1807AF4C1B4EEE79006E1B28 /* NSString+PDRegex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+PDRegex.m"; sourceTree = "<group>"; };
 		1807AF511B4F175C006E1B28 /* SASVerifiedUploadObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASVerifiedUploadObject.h; sourceTree = "<group>"; };
@@ -291,8 +291,8 @@
 			children = (
 				1818AFC21B501926004FF998 /* EULA.html */,
 				181A02C81B542D56009048FE /* EULAView.xib */,
-				1807AF421B4EE946006E1B28 /* EULAViewController.h */,
-				1807AF431B4EE946006E1B28 /* EULAViewController.m */,
+				1807AF421B4EE946006E1B28 /* EULAView.h */,
+				1807AF431B4EE946006E1B28 /* EULAView.m */,
 			);
 			path = EULA;
 			sourceTree = "<group>";
@@ -993,7 +993,7 @@
 				D756A29D19F175230089EF80 /* UIImage+RoundedCorner.m in Sources */,
 				D72E1DB319EE841E005DD8A5 /* main.m in Sources */,
 				184D99B31B49B02F005ECE33 /* SASNetworkUtilities.m in Sources */,
-				1807AF451B4EE946006E1B28 /* EULAViewController.m in Sources */,
+				1807AF451B4EE946006E1B28 /* EULAView.m in Sources */,
 				18EBF9771B272B3400EDA48B /* SASImagePickerViewController.m in Sources */,
 				D700239519F5253C00E45408 /* AlertBox.m in Sources */,
 				186A39A91B3C93E600F38EDB /* SASFilterViewCell.m in Sources */,

@@ -311,17 +311,21 @@ NSString *permissionsProblemTwo = @"Please enable location services on your phon
 
 
 #pragma mark SASUploadImageViewController Delegate
-- (void)sasUploadImageViewControllerDidFinishUploading:(UIViewController *)viewController withObject:(SASUploadObject *) sasUploadObject {
+- (void)sasUploadImageViewControllerDidFinishUploading:(UIViewController *)viewController withResponse:(SASUploadControllerResponse)response withObject:(SASUploadObject *)sasUploadObject {
     
 
+    // Alert the user if it was succes.
+    if(response == SASUploadControllerResponseUploaded) {
+        SASNotificationView *n = [[SASNotificationView alloc] init];
+        n.title = @"POSTED";
+        n.image = [UIImage imageNamed:@"DoneImage"];
+        [n animateIntoView:self.view];
+    }
+
+    sasUploadObject = nil;
     self.sasUploadImageViewController = nil;
     self.uploadImageNavigationController = nil;
-    sasUploadObject = nil;
     
-    SASNotificationView *n = [[SASNotificationView alloc] init];
-    n.title = @"POSTED";
-    n.image = [UIImage imageNamed:@"DoneImage"];
-    [n animateIntoView:self.view];
     
 }
 
