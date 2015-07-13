@@ -185,14 +185,14 @@
 #pragma mark Upload Routine
 - (IBAction)beginUploadRoutine:(id)sender {
     
-    //[self checkEULAAcepted];
+    [self checkEULAAcepted];
     #pragma mark SASUploadObject timestamp set here.
     [self.sasUploadObject setTimeStamp: [SASUtilities getCurrentTimeStamp]];
     
     
     self.sasUploader = [[SASUploader alloc] initWithSASUploadObject:self.sasUploadObject];
     self.sasUploader.delegate = self;
-    [self.sasUploader upload];
+    //[self.sasUploader upload];
     
 }
 
@@ -349,9 +349,15 @@
 
 - (void)eula:(EULAViewController *)eula didReceiveResponseFromUser:(EULAUserRespose)response {
     
+    if (self.eulaViewController == nil) {
+        printf("Nil bitch");
+    } else {
+        printf("Not nil");
+    }
     
     if (response == EULAAccepted) {
         [self updateEULATable];
+        [self.eulaViewController removeFromParentViewController];
         [self.eulaViewController dismissViewControllerAnimated:NO completion:nil];
     }
     else {

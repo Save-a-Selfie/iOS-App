@@ -18,6 +18,10 @@
 
 @synthesize delegate;
 
+- (void)viewWillAppear:(BOOL)animated {
+    [self EULALoaded];
+}
+
 - (void)EULALoaded {
     plog(@"EULALoaded entered");
     [self getLocalPage:DATAFILE andNavCon:nil];

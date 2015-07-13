@@ -538,7 +538,6 @@
                     </tabBar>
                     <connections>
                         <segue destination="Kpf-8A-JuO" kind="relationship" relationship="viewControllers" id="wHb-nl-hvQ"/>
-                        <segue destination="bic-gW-INU" kind="relationship" relationship="viewControllers" id="TYH-yb-efl"/>
                         <segue destination="LKF-Xc-SHc" kind="relationship" relationship="viewControllers" id="yyW-6A-ew7"/>
                     </connections>
                 </tabBarController>

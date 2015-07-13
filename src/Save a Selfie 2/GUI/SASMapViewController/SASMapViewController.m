@@ -305,7 +305,7 @@ NSString *permissionsProblemTwo = @"Please enable location services on your phon
     }
     
 
-    [self presentViewController:self.uploadImageNavigationController animated:YES completion:nil];
+    [self.navigationController presentViewController:self.uploadImageNavigationController animated:YES completion:nil];
     
 }
 
@@ -313,7 +313,7 @@ NSString *permissionsProblemTwo = @"Please enable location services on your phon
 #pragma mark SASUploadImageViewController Delegate
 - (void)sasUploadImageViewControllerDidFinishUploading:(UIViewController *)viewController withObject:(SASUploadObject *) sasUploadObject {
     
-    NSLog(@"Called");
+
     self.sasUploadImageViewController = nil;
     self.uploadImageNavigationController = nil;
     sasUploadObject = nil;
@@ -321,7 +321,7 @@ NSString *permissionsProblemTwo = @"Please enable location services on your phon
     SASNotificationView *n = [[SASNotificationView alloc] init];
     n.title = @"POSTED";
     n.image = [UIImage imageNamed:@"DoneImage"];
-    //[n animateIntoView:self.view];
+    [n animateIntoView:self.view];
     
 }
 

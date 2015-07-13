@@ -291,7 +291,7 @@
         // Checks whether or not that particular annotation
         // should be shown on the map. This could be due to the
         // user filtering specific annotations.
-        if ([self returnForAnnotationDeviceType:d.type]) {
+        if ([self isAnnotationDeviceTypeFiltered:d.type]) {
             [self addAnnotation:annotation];
         }
     }
@@ -361,7 +361,7 @@
 // an MkAnnotationView. If SASMapView's -filterAnnotationsForType: has been called,
 // then the annoatations shown are custom, therefore we must check the
 // appropriate return.
-- (BOOL) returnForAnnotationDeviceType:(SASDeviceType) deviceType {
+- (BOOL) isAnnotationDeviceTypeFiltered:(SASDeviceType) deviceType {
     if (self.annotationsToShow == deviceType) {
         return YES;
     }
