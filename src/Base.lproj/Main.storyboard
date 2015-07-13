@@ -635,8 +635,8 @@
         <image name="FireHydrantUnselected" width="175" height="175"/>
         <image name="FirstAidKitUnselected" width="175" height="175"/>
         <image name="LifeRingUnselected" width="175" height="175"/>
-        <image name="Locate" width="118" height="43"/>
-        <image name="NewImage" width="122" height="43"/>
+        <image name="Locate" width="213" height="77"/>
+        <image name="NewImage" width="214" height="77"/>
         <image name="Order of Malta 300" width="300" height="108"/>
         <image name="SAS vertical 280" width="280" height="262"/>
         <image name="SAS_75" width="75" height="75"/>

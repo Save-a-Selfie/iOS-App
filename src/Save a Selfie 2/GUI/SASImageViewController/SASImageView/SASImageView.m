@@ -23,8 +23,8 @@
         _selectable = NO;
         self.contentMode = UIViewContentModeScaleAspectFit;
         
-        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(handleTap)];
-        [self addGestureRecognizer:tap];
+        //UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(handleTap)];
+        //[self addGestureRecognizer:tap];
     }
     return self;
 }

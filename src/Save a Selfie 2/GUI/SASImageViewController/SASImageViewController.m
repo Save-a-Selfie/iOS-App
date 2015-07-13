@@ -109,9 +109,7 @@
     // Store the type of device shown in the image
     self.sasDeviceType = self.annotation.device.type;
     
-    
     self.scrollView.delegate = self;
-    self.scrollView.backgroundColor = [UIColor clearColor];
 
     // Get the appropriate device name.
     NSString *deviceName = [SASDevice getDeviceNameForDeviceType:self.sasDeviceType];
