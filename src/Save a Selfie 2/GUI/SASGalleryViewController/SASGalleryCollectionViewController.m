@@ -79,7 +79,7 @@
         NSData *data = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:imageURL]];
         UIImage *image = [UIImage imageWithData:data];
         if (image != nil) {
-            //[self.cellImages addObject:image];
+            [self.cellImages addObject:image];
         }
 
         NSLog(@"%lu", (unsigned long) self.cellImages.count);
@@ -88,10 +88,7 @@
                 cell.imageView.image = [self.cellImages objectAtIndex:indexPath.row];
                 cell.device = [self.dataForCells objectAtIndex:indexPath.row];
             });
-        }
-        ;
-        
-
+        };
     });
     
     return cell;

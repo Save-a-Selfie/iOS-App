@@ -14,13 +14,13 @@
 
 // Annotation type for the MapView.
 typedef enum: NSUInteger {
-    DefaultAnnotationImage, // Default MapView Pin
+    DefaultAnnotationImage, // Default MapView Pin provided by Apple.
     DeviceAnnotationImage // Annotation with the corresponding device image.
 }SASAnnotationImage;
 
 
 
-// To receive noitification from SASMapView, please reference the notificationReceiver property.
+// To receive notification from SASMapView, please reference the notificationReceiver property.
 @protocol SASMapViewNotifications <NSObject>
 
 @optional
@@ -69,7 +69,7 @@ typedef enum: NSUInteger {
 - (void) loadSASAnnotationsToMap;
 
 
-// @return Thre location of the user.
+// @return The location of the user.
 - (CLLocationCoordinate2D) currentUserLocation;
 
 

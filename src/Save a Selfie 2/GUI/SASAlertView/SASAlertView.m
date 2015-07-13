@@ -30,7 +30,7 @@
 
 
 // IBOutlets
-@synthesize alertTitleLabel;
+@synthesize alertTitleLabel = _alertTitleLabel;
 @synthesize alertMessageTextView = _alertMessageTextView;
 @synthesize alertButton = _alertButton;
 
@@ -66,7 +66,7 @@
                    forControlEvents:UIControlEventTouchUpInside];
         
         
-        //[UIFont increaseCharacterSpacingForLabel:self.alertTitleLabel byAmount:5];
+        [UIFont increaseCharacterSpacingForLabel:_alertTitleLabel byAmount:5];
         _alertMessageTextView.font = [UIFont sasFontWithSize:18.0];
     }
     return self;
