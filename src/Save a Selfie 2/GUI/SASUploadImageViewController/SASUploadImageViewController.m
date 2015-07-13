@@ -269,6 +269,8 @@
 }
 
 
+
+
 - (void)textViewDidEndEditing:(UITextView *)textView {
     
     if([self.deviceCaptionTextView.text isEqualToString:@""]) {
@@ -298,6 +300,8 @@
     
 }
 
+
+
 - (void) removeGreyView {
     [self.sasGreyView animateOutOfParentView];
 }
@@ -305,22 +309,15 @@
 
 - (void) dismissSASUploadImageViewControllerWithResponse:(SASUploadControllerResponse) response {
     
-    if (response) {
-        // Call delegate.
-        if (self.delegate != nil && [self.delegate respondsToSelector:@selector(sasUploadImageViewControllerDidFinishUploading:withResponse:withObject:)]) {
-            [self.delegate sasUploadImageViewControllerDidFinishUploading:self
-                                                             withResponse:response
-                                                               withObject:self.sasUploadObject];
+    // Call delegate.
+    if (self.delegate != nil && [self.delegate respondsToSelector:@selector(sasUploadImageViewControllerDidFinishUploading:withResponse:withObject:)]) {
+        [self.delegate sasUploadImageViewControllerDidFinishUploading:self
+                                                         withResponse:response
+                                                           withObject:self.sasUploadObject];
             
-        }
+    }
         
     [self dismissViewControllerAnimated:YES completion:nil];
-    
-    [self deselectDeviceButtons];
-    
-    
-    
-    }
 
 }
 

@@ -482,23 +482,6 @@
                                     <action selector="buttonTapped:" destination="LKF-Xc-SHc" eventType="touchUpInside" id="o6F-7D-4jQ"/>
                                 </connections>
                             </button>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" alpha="0.80000001192092896" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gXb-fi-H8P">
-                                <rect key="frame" x="16" y="323" width="294" height="100"/>
-                                <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7GL-mp-O2W">
-                                <rect key="frame" x="23" y="329" width="280" height="88"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="SAS_75" translatesAutoresizingMaskIntoConstraints="NO" id="hDv-oj-CD0">
-                                <rect key="frame" x="203" y="336" width="75" height="75"/>
-                            </imageView>
                             <button opaque="NO" tag="3" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Xg-Um-u1g">
                                 <rect key="frame" x="187" y="152" width="150" height="128"/>
                                 <state key="normal" image="Code for ireland logo transparent">
@@ -517,14 +500,11 @@
                         <outlet property="button2" destination="JzE-qh-yUP" id="0JN-jw-FRn"/>
                         <outlet property="button3" destination="KAK-eD-hkX" id="usf-FL-adh"/>
                         <outlet property="button4" destination="6Xg-Um-u1g" id="KnT-A3-kuy"/>
-                        <outlet property="littleGuy" destination="hDv-oj-CD0" id="Kua-MA-mNE"/>
-                        <outlet property="multilabelBackground" destination="gXb-fi-H8P" id="R2o-ZW-3gQ"/>
-                        <outlet property="multipurposeLabel" destination="7GL-mp-O2W" id="Lf7-fm-QMb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vur-sD-egv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="424" y="607"/>
+            <point key="canvasLocation" x="-967" y="-151"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">
@@ -538,7 +518,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="Kpf-8A-JuO" kind="relationship" relationship="viewControllers" id="wHb-nl-hvQ"/>
-                        <segue destination="LKF-Xc-SHc" kind="relationship" relationship="viewControllers" id="yyW-6A-ew7"/>
+                        <segue destination="LKF-Xc-SHc" kind="relationship" relationship="viewControllers" id="gD0-59-hju"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
@@ -638,7 +618,6 @@
         <image name="NewImage" width="214" height="77"/>
         <image name="Order of Malta 300" width="300" height="108"/>
         <image name="SAS vertical 280" width="280" height="262"/>
-        <image name="SAS_75" width="75" height="75"/>
         <image name="SmallMapPin" width="47" height="47"/>
         <image name="dublin fire brigade 300" width="300" height="300"/>
         <image name="globe" width="24" height="24"/>
