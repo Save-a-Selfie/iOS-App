@@ -34,12 +34,6 @@
 
 
 #pragma mark UIImagePickerControllerDelegate
-
-// @Discussion:
-// As of this version 1.1 Save a Selfie does not support
-// adding images from camera roll.
-// The only support for contributing images is to
-// take the image directly.
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     
 
@@ -53,7 +47,6 @@
         
         [self.sasImagePickerDelegate sasImagePickerController:self
                                            didFinishWithImage:self.imageTakenFromCamera];
-        
     }
 }
 

@@ -119,13 +119,14 @@
 
 // TODO: Add animation for this.
 - (void)animateOutOfView:(UIView *)view {
+    self.greyView = nil;
     [self removeFromSuperview];
 }
 
 
 
 - (IBAction)doneButtonPress:(id)sender {
-    printf("Called");
+
     if(self.alertAction == nil) {
         
         [self removeFromSuperview];
@@ -133,7 +134,9 @@
         
     } else {
         
-        [self.alertTarget performSelector:self.alertAction withObject:nil afterDelay:0.0];
+        [self.alertTarget performSelector:self.alertAction
+                               withObject:nil
+                               afterDelay:0.0];
         
         [self removeFromSuperview];
         [self.greyView removeFromSuperview];

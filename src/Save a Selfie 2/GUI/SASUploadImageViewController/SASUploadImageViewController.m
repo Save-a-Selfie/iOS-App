@@ -17,7 +17,7 @@
 #import "SASUploader.h"
 #import "SASDeviceButton.h"
 #import "SASGreyView.h"
-#import "EULAView.h"
+#import "EULAViewController.h"
 #import "SASActivityIndicator.h"
 #import "ExtendNSLogFunctionality.h"
 #import "UIView+NibInitializer.h"
@@ -45,7 +45,9 @@
 @property (nonatomic, assign) BOOL deviceHasBeenSelected;
 
 @property (strong, nonatomic) SASUploader *sasUploader;
-@property (strong, nonatomic) EULAView * eulaView;
+@property (strong, nonatomic) EULAViewController * eulaViewController;
+
+@property (strong, nonatomic) SASBarButtonItem *doneBarButtonItem;
 
 
 
@@ -68,9 +70,10 @@
 @synthesize selectDeviceLabel;
 @synthesize doneButton;
 @synthesize deviceHasBeenSelected;
+@synthesize doneBarButtonItem;
 
 @synthesize sasUploader;
-@synthesize eulaView;
+@synthesize eulaViewController;
 
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -261,13 +264,21 @@
 
 #pragma mark UITextViewDelegate
 - (void)textViewDidBeginEditing:(UITextView *)textView {
+    
+    if (self.doneBarButtonItem == nil) {
+        self.doneBarButtonItem = [[SASBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(dismissKeyboard)];
+        self.navigationItem.rightBarButtonItem = self.doneBarButtonItem;
+    }
+    
+    
     if([self.deviceCaptionTextView.text isEqualToString:@"Add Location Information"]) {
         self.deviceCaptionTextView.text = @"";
     }
     
     [self addGreyView];
-}
+    
 
+}
 
 
 
@@ -282,7 +293,12 @@
     self.sasUploadObject.caption = textView.text;
     
     [self removeGreyView];
+    
+    self.doneBarButtonItem = nil;
+    self.navigationItem.rightBarButtonItem = nil;
 }
+
+
 
 
 
@@ -344,33 +360,23 @@
 
 - (void) presentEULAViewController {
 
-    self.eulaView = [[EULAView alloc] initWithNibNamed:@"EULAView"];
-    self.eulaView.delegate = self;
-    
-    [self.view addSubview:eulaView];
-
-    [eulaView EULALoaded];
-
+    self.eulaViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"EULAViewController"];
+    self.eulaViewController.delegate = self;
+    [self presentViewController:self.eulaViewController animated:NO completion:nil];
 }
 
 
-- (void)eula:(EULAView *)eula didReceiveResponseFromUser:(EULAUserRespose)response {
+- (void)eulaView:(EULAViewController *)view userHasRespondedWithResponse:(EULAResponse)response {
     
-    if (self.eulaView == nil) {
-        printf("Nil bitch");
-    } else {
-        printf("Not nil");
-    }
+    [self.eulaViewController dismissViewControllerAnimated:NO completion:nil];
+
+
     
-    if (response == EULAAccepted) {
-        [self updateEULATable];
-        [self.eulaView removeFromSuperview];
-        NSLog(@"%@", self.eulaView.superview);
+    if (response == EULAResponseAccepted) {
+        [self.eulaViewController updateEULATable];
     }
     else {
-        
-        [self.eulaView removeFromSuperview];
-        
+                
         SASAlertView *eulaDeclinedAlertView = [[SASAlertView alloc] initWithTarget:self andAction:nil];
         eulaDeclinedAlertView.title = @"NOTE";
         eulaDeclinedAlertView.message = @"You will only be able to upload if you accept the End User License Agreement.";
@@ -378,30 +384,9 @@
         
         [eulaDeclinedAlertView animateIntoView:self.view];
     }
-    
 }
 
 
--(void)updateEULATable {
-    
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-    [request setHTTPMethod:@"POST"];
-    
-    NSString *URL = @"http://www.saveaselfie.org/wp/wp-content/themes/magazine-child/updateEULA.php";
-    [request setURL:[NSURL URLWithString:URL]];
-    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-    
-    NSString *parameters = [ NSString stringWithFormat:@"deviceID=%@&EULAType=EULA", [[[UIDevice currentDevice] identifierForVendor] UUIDString]];
-    NSString *postLength = [NSString stringWithFormat:@"%lu", (unsigned long)[parameters length]];
-    
-    [request setHTTPBody:[parameters dataUsingEncoding:NSUTF8StringEncoding]];
-    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
-    
-    plog(@"EULA URL: %@?%@", URL, parameters);
-    
-    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
-    if(connection) {/* Silence the annoying unused variable warning :)*/ }
-}
 
 
 

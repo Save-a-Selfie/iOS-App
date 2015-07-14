@@ -87,7 +87,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IA3-XG-E4V" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-220" y="594"/>
+            <point key="canvasLocation" x="-182" y="594"/>
         </scene>
         <!--Image View Controller-->
         <scene sceneID="bXq-ar-DQy">
@@ -405,48 +405,10 @@
             </objects>
             <point key="canvasLocation" x="205" y="1300"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="vMx-Hn-uvY">
-            <objects>
-                <viewController storyboardIdentifier="EULAViewController" id="2Ow-h0-8ov" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="BqP-T5-Xwr"/>
-                        <viewControllerLayoutGuide type="bottom" id="QmR-jo-Cxm"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="MFs-ai-JI5">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9qy-V0-cl9">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="509"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </webView>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="wsN-xK-hWM">
-                                <rect key="frame" x="99" y="520" width="119" height="29"/>
-                                <segments>
-                                    <segment title="Accept"/>
-                                    <segment title="Decline"/>
-                                </segments>
-                                <connections>
-                                    <action selector="agreeDeclineAction:" destination="2Ow-h0-8ov" eventType="valueChanged" id="Q9a-09-fj9"/>
-                                </connections>
-                            </segmentedControl>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <connections>
-                        <outlet property="agreeDecline" destination="wsN-xK-hWM" id="wHf-Ny-xol"/>
-                        <outlet property="webView" destination="9qy-V0-cl9" id="HYv-ph-8aQ"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Vxl-WB-zb0" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="603" y="1300"/>
-        </scene>
         <!--Info-->
         <scene sceneID="Smb-hj-4hT">
             <objects>
-                <viewController id="LKF-Xc-SHc" customClass="ThirdViewController" sceneMemberID="viewController">
+                <viewController id="LKF-Xc-SHc" customClass="SASInformationViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="u9K-cB-Yjj"/>
                         <viewControllerLayoutGuide type="bottom" id="YVl-xy-kfz"/>
@@ -504,7 +466,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vur-sD-egv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-967" y="-151"/>
+            <point key="canvasLocation" x="-1053" y="603"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">
@@ -567,6 +529,44 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uCz-OY-qbe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="485" y="-190"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="JHu-Zm-t29">
+            <objects>
+                <viewController storyboardIdentifier="EULAViewController" id="Z1s-lL-GEo" customClass="EULAViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="thh-y4-iLX"/>
+                        <viewControllerLayoutGuide type="bottom" id="z6P-os-37u"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="0rT-Gw-d59">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="527-WU-omJ">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="521"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </webView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="ufN-VF-3U1">
+                                <rect key="frame" x="99" y="529" width="119" height="29"/>
+                                <segments>
+                                    <segment title="Accept"/>
+                                    <segment title="Decline"/>
+                                </segments>
+                                <connections>
+                                    <action selector="agreeDeclineAction:" destination="Z1s-lL-GEo" eventType="valueChanged" id="Rwd-sk-65U"/>
+                                </connections>
+                            </segmentedControl>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="segmentedControl" destination="ufN-VF-3U1" id="gfz-cF-SBz"/>
+                        <outlet property="webView" destination="527-WU-omJ" id="Wkv-tV-Abl"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aGH-g9-p16" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="846" y="-190"/>
         </scene>
         <!--Map-->
         <scene sceneID="rYn-Ii-qk3">

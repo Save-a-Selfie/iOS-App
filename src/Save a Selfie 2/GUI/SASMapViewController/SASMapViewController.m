@@ -18,35 +18,40 @@
 #import "SASFilterView.h"
 #import "SASNotificationView.h"
 #import "UIView+Animations.h"
+#import "SASMapWarningAlert.h"
+#import "EULAViewController.h"
+#import "SASNoticeView.h"
+#import "SASAlertView.h"
 
-@interface SASMapViewController () <SASImagePickerDelegate, SASFilterViewDelegate, SASUploadImageViewControllerDelegate> {
+@interface SASMapViewController () <SASImagePickerDelegate, SASFilterViewDelegate, SASUploadImageViewControllerDelegate, UIAlertViewDelegate> {
     CGPoint filterButtonBeforeAnimation;
     CGPoint locateUserButtonBeforeAnimtation;
     CGPoint uploadToServerButtonBeforeAnimation;
 }
 
-@property(nonatomic, strong) IBOutlet SASMapView* sasMapView;
+@property (nonatomic, strong) IBOutlet SASMapView* sasMapView;
 
-@property(nonatomic, strong) SASImagePickerViewController *sasImagePickerController;
-@property(nonatomic, strong) SASUploadImageViewController *sasUploadImageViewController;
-@property(nonatomic, strong) UINavigationController *uploadImageNavigationController;
+@property (nonatomic, strong) SASImagePickerViewController *sasImagePickerController;
+@property (nonatomic, strong) SASUploadImageViewController *sasUploadImageViewController;
+@property (nonatomic, strong) UINavigationController *uploadImageNavigationController;
 
-@property(strong, nonatomic) AlertBox* permissionsBox;
+@property (strong, nonatomic) SASNoticeView* sasNoticeView;
 
-@property(strong, nonatomic) SASFilterView *sasFilterView;
+@property (strong, nonatomic) SASFilterView *sasFilterView;
 @property (weak, nonatomic) IBOutlet UIButton *showFilterViewButton;
 @property (strong, nonatomic) IBOutlet UIButton *uploadNewImageToServerButton;
 @property (strong, nonatomic) IBOutlet UIButton *locateUserButton;
+
+@property (strong, nonatomic) SASMapWarningAlert *sasMapWarningAlert;
+@property (assign, nonatomic) BOOL canPresent;
 
 @end
 
 @implementation SASMapViewController
 
 NSString *permissionsProblemOne = @"Please enable location services for this app. Launch the iPhone Settings app to do this. Go to Privacy > Location Services > Save a Selfie > While Using the App. You have to go out of this app, using the 'Home' button.";
-NSString *permissionsProblemTwo = @"Please enable location services on your phone. Launch the iPhone Settings app to do this. Go to Privacy > Location Services > On. You have to go out of this app, using the 'Home' button.";
 
 @synthesize sasMapView;
-@synthesize permissionsBox;
 @synthesize sasImagePickerController;
 @synthesize sasUploadImageViewController;
 @synthesize uploadImageNavigationController;
@@ -56,21 +61,20 @@ NSString *permissionsProblemTwo = @"Please enable location services on your phon
 @synthesize uploadNewImageToServerButton;
 @synthesize locateUserButton;
 
+@synthesize sasMapWarningAlert;
+@synthesize sasNoticeView;
 
+@synthesize canPresent;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    
 }
 
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
-    return UIStatusBarStyleLightContent;
+    return UIStatusBarStyleLightContent  ;
 }
 
 
@@ -101,17 +105,24 @@ NSString *permissionsProblemTwo = @"Please enable location services on your phon
 
 
 
--(void)showPermissionsProblem:(NSString *)text {
-    [self clearPermissionsBox];
-    permissionsBox = [self.view permissionsProblem:text];
+-(void)showPermissionsNotice:(NSString *) text {
+    [self clearSASNotice];
+    
+    if(self.sasNoticeView == nil) {
+        self.sasNoticeView = [[SASNoticeView alloc] init];
+        [self.sasNoticeView setNotice:text];
+        [self.sasNoticeView setTitle:@"Note"];
+    }
+    [self.sasNoticeView animateIntoView:self.view];
+    
 }
 
 
 
--(void)clearPermissionsBox { // called when returning from outside app
-    if (permissionsBox) {
-        [permissionsBox removeFromSuperview];
-        permissionsBox = nil;
+-(void)clearSASNotice { // called when returning from outside app
+    if (sasNoticeView) {
+        [sasNoticeView animateOutOfView];
+        sasNoticeView = nil;
     }
 }
 
@@ -175,11 +186,13 @@ NSString *permissionsProblemTwo = @"Please enable location services on your phon
 
 
 
-
+// This method will be called anythime permissions for lacation is changed.
 - (void) authorizationStatusHasChanged:(CLAuthorizationStatus)status {
     
-    if (permissionsBox) {
-        [permissionsBox removeFromSuperview]; // get rid of any existing permissions box blocking access to camera etc.
+    BOOL makeCheckForMapWarning = NO;
+    
+    if (sasNoticeView) {
+        [sasNoticeView animateOutOfView]; // get rid of any existing permissions box blocking access to camera etc.
     }
     
     if([CLLocationManager locationServicesEnabled]){
@@ -192,11 +205,12 @@ NSString *permissionsProblemTwo = @"Please enable location services on your phon
                 
             case kCLAuthorizationStatusAuthorizedWhenInUse:
                 NSLog(@"We have access to location services");
+                makeCheckForMapWarning = YES;
                 break;
                 
             case kCLAuthorizationStatusDenied:
                 NSLog(@"Location services denied by user");
-                [self showPermissionsProblem:permissionsProblemOne];
+                [self showPermissionsNotice:permissionsProblemOne];
                 break;
                 
             case kCLAuthorizationStatusRestricted:
@@ -210,8 +224,62 @@ NSString *permissionsProblemTwo = @"Please enable location services on your phon
     }
     else {
         NSLog(@"Location Services Are Disabled");
-        [self showPermissionsProblem:permissionsProblemTwo];
+        [self showPermissionsNotice:permissionsProblemOne];
     }
+    
+    
+    if (makeCheckForMapWarning) {
+        [self makeCheckForMapWarning];
+    }
+    
+
+}
+
+#pragma Map Warning
+- (void) makeCheckForMapWarning {
+    BOOL mapWarningHasBeenAccepted = [[[NSUserDefaults standardUserDefaults] valueForKey:@"mapWarningAccepted"] isEqualToString:@"yes"];
+    
+
+    if (!mapWarningHasBeenAccepted) {
+        self.sasMapWarningAlert = [[SASMapWarningAlert alloc] initWithTitle:@"Warning!" andMessage:@"The information here is correct to the best of our knowledge, but its use is at your risk and discretion, with no liability to Save a Selfie, the developers or Apple."];
+        
+        self.sasMapWarningAlert.leftButtonTitle = @"Accept";
+        [self.sasMapWarningAlert addActionForLeftButton:@selector(acceptMapWarning) target:self];
+        
+        self.sasMapWarningAlert.rightButtonTitle = @"Decline";
+        [self.sasMapWarningAlert addActionforRightButton:@selector(declineMapWarning) target:self];
+        
+        [self.sasMapWarningAlert animateIntoView:self.view];
+    }
+    
+}
+
+- (void) acceptMapWarning {
+    
+    [[NSUserDefaults standardUserDefaults] setValue:@"yes" forKey:@"mapWarningAccepted"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    EULAViewController *eulaVC = [EULAViewController new];
+    [eulaVC updateEULATable];
+    
+    printf("Accepted");
+    [self.sasMapWarningAlert animateOutOfView];
+}
+
+
+- (void) declineMapWarning {
+    
+    // Disabled user interaction for user until they accept the map warning.
+    self.sasMapView.userInteractionEnabled = NO;
+    
+    [self.sasMapWarningAlert animateOutOfView];
+    
+    SASAlertView *showDisclaimerAgain = [[SASAlertView alloc] initWithTarget:self andAction:@selector(makeCheckForMapWarning)];
+    showDisclaimerAgain.buttonTitle = @"Show me";
+    showDisclaimerAgain.message = @"To use this app you must accept the disclaimer.";
+    showDisclaimerAgain.title = @"Note";
+    [showDisclaimerAgain animateIntoView:self.view];
+
 }
 
 
@@ -237,8 +305,8 @@ NSString *permissionsProblemTwo = @"Please enable location services on your phon
 
 - (IBAction)uploadNewNewDevice:(id)sender {
     
-    if (sasImagePickerController == nil) {
-        NSLog(@"ImagePicker nil\n");
+    
+if (sasImagePickerController == nil) {
         sasImagePickerController = [[SASImagePickerViewController alloc] init];
         sasImagePickerController.sasImagePickerDelegate = self;
     }
@@ -246,7 +314,7 @@ NSString *permissionsProblemTwo = @"Please enable location services on your phon
     
     if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         [sasImagePickerController setSourceType:UIImagePickerControllerSourceTypeCamera];
-        [self.navigationController presentViewController:self.sasImagePickerController animated:YES completion:nil];
+        [self.tabBarController presentViewController:self.sasImagePickerController animated:YES completion:nil];
     }
 }
 
@@ -264,11 +332,8 @@ NSString *permissionsProblemTwo = @"Please enable location services on your phon
     //
     //  -presentSASUploadImageViewControllerWithImage:
     //
-    [self.sasImagePickerController dismissViewControllerAnimated:YES completion:^() {
-                                                          [self performSelector:@selector(presentSASUploadImageViewControllerWithUploadObject:)withObject:sasUploadObject afterDelay:0.0];
-    }];
-
-
+    [self.sasImagePickerController dismissViewControllerAnimated:NO completion:nil];
+    [self performSelector:@selector(presentSASUploadImageViewControllerWithUploadObject:)withObject:sasUploadObject afterDelay:0.0];
 }
 
 
@@ -292,7 +357,7 @@ NSString *permissionsProblemTwo = @"Please enable location services on your phon
     
     if(self.sasUploadImageViewController == nil) {
         
-        self.sasUploadImageViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SASUploadImageViewController"];
+        self.sasUploadImageViewController = (SASUploadImageViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"SASUploadImageViewController"];
         self.sasUploadImageViewController.delegate = self;
         [self.sasUploadImageViewController setSasUploadObject:sasUploadObject];
     }
@@ -305,7 +370,7 @@ NSString *permissionsProblemTwo = @"Please enable location services on your phon
     }
     
 
-    [self.navigationController presentViewController:self.uploadImageNavigationController animated:YES completion:nil];
+    [self presentViewController:self.uploadImageNavigationController animated:YES completion:nil];
     
 }
 

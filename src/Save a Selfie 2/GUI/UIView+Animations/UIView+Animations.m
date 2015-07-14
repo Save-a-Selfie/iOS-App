@@ -8,6 +8,7 @@
 
 #import "UIView+Animations.h"
 #import "Screen.h"
+#import "SASGreyView.h"
 
 
 @implementation UIView (Animations)
@@ -41,10 +42,4 @@ CGFloat delay = 0.0;
 }
 
 
-+ (void) animateView:(UIView *) view toPoint:(CGPoint) point {
-    [self animateWithDuration:duration delay:delay options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        view.frame = CGRectMake(point.x, point.y, view.frame.size.width, view.frame.size.height);
-    } completion:nil];
-    
-}
 @end
