@@ -11,7 +11,7 @@
             <rect key="frame" x="0.0" y="0.0" width="254" height="268"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ack-xQ-ixB">
+                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ack-xQ-ixB">
                     <rect key="frame" x="8" y="219" width="111" height="41"/>
                     <color key="backgroundColor" red="0.14901960780000001" green="0.58039215690000001" blue="0.21176470589999999" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="15"/>
@@ -20,13 +20,15 @@
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                 </button>
-                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pR3-qd-Dsu">
-                    <rect key="frame" x="8" y="50" width="238" height="161"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                    <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="14"/>
-                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                </textView>
+                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cvz-Cr-Fjn">
+                    <rect key="frame" x="133" y="219" width="113" height="41"/>
+                    <color key="backgroundColor" red="0.14901960780000001" green="0.58039215690000001" blue="0.21176470589999999" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="15"/>
+                    <state key="normal" title="Button">
+                        <color key="titleColor" red="0.97603815510000003" green="0.99270645769999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GbO-EP-V6s">
                     <rect key="frame" x="8" y="8" width="238" height="34"/>
                     <constraints>
@@ -36,24 +38,33 @@
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cvz-Cr-Fjn">
-                    <rect key="frame" x="133" y="219" width="113" height="41"/>
-                    <color key="backgroundColor" red="0.14901960780000001" green="0.58039215690000001" blue="0.21176470589999999" alpha="1" colorSpace="calibratedRGB"/>
-                    <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="15"/>
-                    <state key="normal" title="Button">
-                        <color key="titleColor" red="0.97603815510000003" green="0.99270645769999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                </button>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pR3-qd-Dsu">
+                    <rect key="frame" x="8" y="50" width="238" height="161"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="238" id="V1g-M2-Z3y"/>
+                        <constraint firstAttribute="height" constant="161" id="sTI-4y-LOP"/>
+                    </constraints>
+                    <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                    <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                </textView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="pR3-qd-Dsu" secondAttribute="trailing" constant="8" id="2N7-Lk-iyJ"/>
-                <constraint firstItem="pR3-qd-Dsu" firstAttribute="top" secondItem="GbO-EP-V6s" secondAttribute="bottom" constant="8" id="C0H-D4-hms"/>
+                <constraint firstAttribute="bottom" secondItem="cvz-Cr-Fjn" secondAttribute="bottom" constant="8" id="4Av-7S-Yjn"/>
+                <constraint firstItem="cvz-Cr-Fjn" firstAttribute="top" secondItem="pR3-qd-Dsu" secondAttribute="bottom" constant="8" id="E7r-a8-oEi"/>
                 <constraint firstItem="GbO-EP-V6s" firstAttribute="top" secondItem="TCv-Nz-mSH" secondAttribute="top" constant="8" id="HWr-Xc-NfN"/>
+                <constraint firstItem="ack-xQ-ixB" firstAttribute="top" secondItem="pR3-qd-Dsu" secondAttribute="bottom" constant="8" id="Jw2-1B-fK2"/>
+                <constraint firstAttribute="bottom" secondItem="ack-xQ-ixB" secondAttribute="bottom" constant="8" id="M5K-cX-oNa"/>
+                <constraint firstAttribute="trailing" secondItem="cvz-Cr-Fjn" secondAttribute="trailing" constant="8" id="OpX-uy-wtb"/>
                 <constraint firstAttribute="trailing" secondItem="GbO-EP-V6s" secondAttribute="trailing" constant="8" id="PlB-pP-xbf"/>
+                <constraint firstItem="pR3-qd-Dsu" firstAttribute="leading" secondItem="TCv-Nz-mSH" secondAttribute="leading" constant="8" id="PsY-00-Xkg"/>
                 <constraint firstItem="GbO-EP-V6s" firstAttribute="leading" secondItem="TCv-Nz-mSH" secondAttribute="leading" constant="8" id="XSh-h8-xYu"/>
-                <constraint firstItem="pR3-qd-Dsu" firstAttribute="leading" secondItem="TCv-Nz-mSH" secondAttribute="leading" constant="8" id="vDm-pu-EbW"/>
+                <constraint firstAttribute="trailing" secondItem="pR3-qd-Dsu" secondAttribute="trailing" constant="8" id="dHP-x5-GGh"/>
+                <constraint firstItem="pR3-qd-Dsu" firstAttribute="top" secondItem="GbO-EP-V6s" secondAttribute="bottom" constant="8" id="gTb-Ij-ODU"/>
+                <constraint firstItem="cvz-Cr-Fjn" firstAttribute="leading" secondItem="ack-xQ-ixB" secondAttribute="trailing" constant="14" id="l8q-kK-aNf"/>
+                <constraint firstItem="ack-xQ-ixB" firstAttribute="leading" secondItem="TCv-Nz-mSH" secondAttribute="leading" constant="8" id="sDG-bZ-SZd"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>

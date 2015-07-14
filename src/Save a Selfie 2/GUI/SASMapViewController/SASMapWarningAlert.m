@@ -18,6 +18,11 @@
 @property (weak, nonatomic) IBOutlet UIButton *leftButton;
 @property (weak, nonatomic) IBOutlet UIButton *rightButton;
 
+@property (weak, nonatomic) id leftButtonTarget;
+@property (assign, nonatomic) SEL leftButtonAction;
+@property (weak, nonatomic) id rightButtonTarget;
+@property (assign, nonatomic) SEL rightButtonAction;
+
 @property (strong, nonatomic) SASGreyView *greyView;
 
 
@@ -33,6 +38,11 @@
 @synthesize rightButtonTitle;
 @synthesize greyView;
 
+@synthesize leftButtonAction;
+@synthesize leftButtonTarget;
+@synthesize rightButtonAction;
+@synthesize rightButtonTarget;
+
 
 
 #pragma mark Object Life Cycle
@@ -47,6 +57,7 @@
         
         _titleLabel.text = title;
         _messageTextView.text = message;
+        
     }
     return self;
 }
@@ -66,20 +77,32 @@
 
 #pragma mark Actions for buttons.
 - (void)addActionForLeftButton:(SEL)action target:(id)target {
-    [self.leftButton addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
+    
+    self.leftButtonAction = action;
+    self.leftButtonTarget = target;
+    
+    [self.leftButton addTarget:self action:@selector(animateOutOfView:) forControlEvents:UIControlEventTouchUpInside];
     
 }
 
 - (void)addActionforRightButton:(SEL)action target:(id)target {
-    [self.rightButton addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
+    
+    self.rightButtonAction = action;
+    self.rightButtonTarget = target;
+    
+    [self.rightButton addTarget:self action:@selector(animateOutOfView:) forControlEvents:UIControlEventTouchUpInside];
 }
+
 
 
 
 #pragma Animations 
 - (void) animateIntoView:(UIView *) view {
     
-    self.greyView = [[SASGreyView alloc]initWithFrame:CGRectMake(0, 0, [Screen width], [Screen height])];
+    if (self.greyView == nil) {
+        self.greyView = [[SASGreyView alloc]initWithFrame:CGRectMake(0, 0, [Screen width], [Screen height])];
+    }
+
     
     
     [view addSubview:greyView];
@@ -99,7 +122,22 @@
 }
 
 
-- (void) animateOutOfView {
+- (void) animateOutOfView:(id) sender {
+    
+    if(sender == self.leftButton) {
+        printf("Left Button");
+        [self.leftButtonTarget performSelector:self.leftButtonAction
+                               withObject:nil
+                               afterDelay:0.0];
+    }
+    else {
+        printf("Right button");
+        [self.rightButtonTarget performSelector:self.rightButtonAction
+                                     withObject:nil
+                                     afterDelay:0.0];
+    }
+    
+    
     [self.greyView removeFromSuperview];
     [self removeFromSuperview];
 }

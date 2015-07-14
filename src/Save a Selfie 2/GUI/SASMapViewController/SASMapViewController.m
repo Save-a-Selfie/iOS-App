@@ -237,17 +237,20 @@ NSString *permissionsProblemOne = @"Please enable location services for this app
 
 #pragma Map Warning
 - (void) makeCheckForMapWarning {
-    BOOL mapWarningHasBeenAccepted = [[[NSUserDefaults standardUserDefaults] valueForKey:@"mapWarningAccepted"] isEqualToString:@"yes"];
+    BOOL hasMapWarningHasBeenAccepted = [[[NSUserDefaults standardUserDefaults] valueForKey:@"mapWarningAccepted"] isEqualToString:@"yes"];
     
 
-    if (!mapWarningHasBeenAccepted) {
-        self.sasMapWarningAlert = [[SASMapWarningAlert alloc] initWithTitle:@"Warning!" andMessage:@"The information here is correct to the best of our knowledge, but its use is at your risk and discretion, with no liability to Save a Selfie, the developers or Apple."];
+    if (!hasMapWarningHasBeenAccepted) {
+        if(sasMapWarningAlert == nil) {
+            self.sasMapWarningAlert = [[SASMapWarningAlert alloc] initWithTitle:@"Warning!" andMessage:@"The information here is correct to the best of our knowledge, but its use is at your risk and discretion, with no liability to Save a Selfie, the developers or Apple."];
+            
+            self.sasMapWarningAlert.leftButtonTitle = @"Accept";
+            [self.sasMapWarningAlert addActionForLeftButton:@selector(acceptMapWarning) target:self];
+            
+            self.sasMapWarningAlert.rightButtonTitle = @"Decline";
+            [self.sasMapWarningAlert addActionforRightButton:@selector(declineMapWarning) target:self];
+        }
         
-        self.sasMapWarningAlert.leftButtonTitle = @"Accept";
-        [self.sasMapWarningAlert addActionForLeftButton:@selector(acceptMapWarning) target:self];
-        
-        self.sasMapWarningAlert.rightButtonTitle = @"Decline";
-        [self.sasMapWarningAlert addActionforRightButton:@selector(declineMapWarning) target:self];
         
         [self.sasMapWarningAlert animateIntoView:self.view];
     }
@@ -262,8 +265,7 @@ NSString *permissionsProblemOne = @"Please enable location services for this app
     EULAViewController *eulaVC = [EULAViewController new];
     [eulaVC updateEULATable];
     
-    printf("Accepted");
-    [self.sasMapWarningAlert animateOutOfView];
+    self.sasMapView.userInteractionEnabled = YES;
 }
 
 
@@ -271,8 +273,6 @@ NSString *permissionsProblemOne = @"Please enable location services for this app
     
     // Disabled user interaction for user until they accept the map warning.
     self.sasMapView.userInteractionEnabled = NO;
-    
-    [self.sasMapWarningAlert animateOutOfView];
     
     SASAlertView *showDisclaimerAgain = [[SASAlertView alloc] initWithTarget:self andAction:@selector(makeCheckForMapWarning)];
     showDisclaimerAgain.buttonTitle = @"Show me";

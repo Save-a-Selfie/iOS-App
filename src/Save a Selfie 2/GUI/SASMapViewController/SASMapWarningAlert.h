@@ -23,5 +23,5 @@
 
 
 - (void) animateIntoView:(UIView *) view;
-- (void) animateOutOfView;
+
 @end

@@ -96,8 +96,10 @@
 #pragma mark Animations
 - (void)animateIntoView:(UIView *)view {
     
+    if (self.greyView == nil) {
+        self.greyView = [[SASGreyView alloc]initWithFrame:CGRectMake(0, 0, [Screen width], [Screen height])];
+    }
 
-    self.greyView = [[SASGreyView alloc]initWithFrame:CGRectMake(0, 0, [Screen width], [Screen height])];
 
     
     [view addSubview:greyView];
