@@ -78,7 +78,7 @@
     
     // 0: Accepted
     // 1: Declined
-    printf("PRESSED INDEX: %ld\n\n\n\'n", sender.selectedSegmentIndex);
+    
     
     EULAResponse response;
     

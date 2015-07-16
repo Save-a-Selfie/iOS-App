@@ -30,10 +30,10 @@ typedef NS_ENUM(NSInteger, SASUploadInvalidatedResponse) {
 //   upload or in other words considered 'invalid'.
 //   If the object initialise with this class is invalid, the delegate will be sent this
 //   message containing the reason.
-- (void) sasUploadObject:(SASUploadObject *) object invalidObjectWithResponse:(SASUploadInvalidatedResponse) response;
+- (void) sasUploader:(SASUploadObject *) object invalidObjectWithResponse:(SASUploadInvalidatedResponse) response;
 
 
-- (void) sasUploadDidBeginUploading:(SASUploader *) sasUploader;
+- (void) sasUploaderDidBeginUploading:(SASUploader *) sasUploader;
 
 // The SASUpload Object uploaded to the server successfully.
 - (void) sasUploaderDidFinishUploadWithSuccess:(SASUploader*) sasUploader;

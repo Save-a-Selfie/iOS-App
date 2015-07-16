@@ -110,8 +110,8 @@
             [self.responseData setLength:0];
             
             // Message the delegate that we have our connection and have begun uploading.
-            if (self.delegate != nil && [self.delegate respondsToSelector:@selector(sasUploadDidBeginUploading:)]) {
-                [self.delegate sasUploadDidBeginUploading:self];
+            if (self.delegate != nil && [self.delegate respondsToSelector:@selector(sasUploaderDidBeginUploading:)]) {
+                [self.delegate sasUploaderDidBeginUploading:self];
             }
             
         }
@@ -129,8 +129,8 @@
     
     if(![self.sasUploadObject captionHasBeenSet]) {
         
-        if(self.delegate != nil && [self.delegate respondsToSelector:@selector(sasUploadObject:invalidObjectWithResponse:)]) {
-            [self.delegate sasUploadObject:self.sasUploadObject invalidObjectWithResponse:SASUploadObjectInvalidCaption];
+        if(self.delegate != nil && [self.delegate respondsToSelector:@selector(sasUploader:invalidObjectWithResponse:)]) {
+            [self.delegate sasUploader: self.sasUploadObject invalidObjectWithResponse:SASUploadObjectInvalidCaption];
         }
         return NO;
     }

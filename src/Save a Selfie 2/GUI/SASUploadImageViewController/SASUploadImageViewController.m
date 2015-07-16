@@ -224,7 +224,7 @@
 
 
 #pragma mark SASUploaderDelegate
-- (void) sasUploadDidBeginUploading:(SASUploader *)sasUploader {
+- (void)sasUploaderDidBeginUploading:(SASUploader *)sasUploader {
     
     // Activity Indicator
     self.sasActivityIndicator = [[SASActivityIndicator alloc] initWithMessage:@"Posting"];
@@ -235,14 +235,12 @@
     
 
     self.doneButton.enabled = NO;
-    
-
+    self.view.userInteractionEnabled = NO;
 }
 
 
 - (void)sasUploaderDidFinishUploadWithSuccess:(SASUploader *)sasUploader {
     [self dismissSASUploadImageViewControllerWithResponse:SASUploadControllerResponseUploaded];
-    
     [self.sasActivityIndicator removeFromSuperview];
     [self.sasActivityIndicator stopAnimating];
     
@@ -265,7 +263,7 @@
 
 
 
-- (void) sasUploadObject:(SASUploadObject *)object invalidObjectWithResponse:(SASUploadInvalidatedResponse) response {
+- (void)sasUploader:(SASUploadObject *)object invalidObjectWithResponse:(SASUploadInvalidatedResponse)response {
     
     SASAlertView *alertView = [[SASAlertView alloc] initWithTarget:self andAction:nil];
     
