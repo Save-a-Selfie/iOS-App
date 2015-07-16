@@ -17,10 +17,18 @@
 #import "SASUploader.h"
 #import "SASDeviceButton.h"
 #import "SASGreyView.h"
+
+#import "SASActivityIndicator.h"
+#import "ExtendNSLogFunctionality.h"
+#import "UIView+NibInitializer.h"
+#import "EULAViewController.h"
+#import "SystemVersion.h"
+
 #import "EULAViewController.h"
 #import "SASActivityIndicator.h"
 #import "ExtendNSLogFunctionality.h"
 #import "UIView+NibInitializer.h"
+
 
 
 @interface SASUploadImageViewController () <UITextViewDelegate, SASUploaderDelegate, EULADelegate>
@@ -72,6 +80,10 @@
 @synthesize deviceHasBeenSelected;
 @synthesize doneBarButtonItem;
 
+
+
+
+
 @synthesize sasUploader;
 @synthesize eulaViewController;
 
@@ -106,6 +118,8 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
+
+
     self.doneButton.hidden = YES;
     self.sasImageView.image = self.sasUploadObject.image;
     
@@ -156,6 +170,10 @@
     [self dismissSASUploadImageViewControllerWithResponse:SASUploadControllerResponseCancelled];
 }
 
+
+
+
+
 - (IBAction)deviceSelected:(SASDeviceButton*) sender {
     
     [self deselectDeviceButtons];
@@ -167,8 +185,6 @@
 
     self.doneButton.hidden = NO;
 }
-
-
 
 
 // 'Deselects' a button by putting the image of the button back
@@ -191,15 +207,18 @@
 #pragma mark Upload Routine
 - (IBAction)beginUploadRoutine:(id)sender {
     
-    [self checkEULAAcepted];
-    #pragma mark SASUploadObject timestamp set here.
-    [self.sasUploadObject setTimeStamp: [SASUtilities getCurrentTimeStamp]];
-    
-    
-    self.sasUploader = [[SASUploader alloc] initWithSASUploadObject:self.sasUploadObject];
-    self.sasUploader.delegate = self;
-    //[self.sasUploader upload];
-    
+    if (![self hasEULABeenAcepted]) {
+        [self showAlertForEULAToBeAccepted];
+    }
+    else {
+        
+        #pragma mark SASUploadObject timestamp set here.
+        [self.sasUploadObject setTimeStamp: [SASUtilities getCurrentTimeStamp]];
+        
+        self.sasUploader = [[SASUploader alloc] initWithSASUploadObject:self.sasUploadObject];
+        self.sasUploader.delegate = self;
+        [self.sasUploader upload];
+    }
 }
 
 
@@ -214,6 +233,10 @@
     self.sasActivityIndicator.center = self.view.center;
     [self.sasActivityIndicator startAnimating];
     
+
+    self.doneButton.enabled = NO;
+    
+
 }
 
 
@@ -303,7 +326,6 @@
 
 
 
-
 // Adds a SASGrey view which dims the background apart from `deviceCaptionTextView` &
 // `sasImageView`.
 - (void) addGreyView {
@@ -318,9 +340,11 @@
 
 
 
+
 - (void) removeGreyView {
     [self.sasGreyView animateOutOfParentView];
 }
+
 
 
 - (void) dismissSASUploadImageViewControllerWithResponse:(SASUploadControllerResponse) response {
@@ -341,41 +365,68 @@
 
 
 #pragma Check the user has agreed to the End User Licence Agreement
-- (void) checkEULAAcepted {
+- (BOOL) hasEULABeenAcepted {
     
     BOOL EULAAccepted = [[[NSUserDefaults standardUserDefaults] valueForKey:@"EULAAccepted"] isEqualToString:@"yes"];
-    
-    if (!EULAAccepted) {
-        SASAlertView *sasAlertView = [[SASAlertView alloc] initWithTarget:self andAction:@selector(presentEULAViewController)];
-        sasAlertView.title = @"Notice";
-        sasAlertView.message = @"Before posting, we need you to agree to the terms of use.";
-        sasAlertView.buttonTitle = @"Show me";
-        
-        [sasAlertView animateIntoView:self.view];
+
+   if (EULAAccepted) {
+        return YES;
     } else {
-        return;
+        return NO;
+    }
+}
+
+// TODO: The alerts for this notice should be SASAlertView, however, due to some weird
+// issue with the view hierarcy, this will do for the moment.
+- (void) showAlertForEULAToBeAccepted {
+    
+    if(SYSTEM_VERSION_LESS_THAN_OR_EQUAL_TO(@"7.1")) {
+        UIAlertView *eulaAlertView = [[UIAlertView alloc] initWithTitle:@"Note"
+                                                                message:@"Before posting, we need you to agree to the terms of use."
+                                                               delegate:self
+                                                      cancelButtonTitle:nil
+                                                      otherButtonTitles:@"Show Me", nil];
+        
+        [eulaAlertView show];
+    }
+    else {
+        UIAlertController *eulaAlertController = [UIAlertController alertControllerWithTitle:@"Note"
+                                                                                     message:@"Before posting, we need you to agree to the terms of use."
+                                                                              preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction *showMeAction = [UIAlertAction actionWithTitle:@"Show Me"
+                                                               style:UIAlertActionStyleDefault
+                                                             handler:^(UIAlertAction* acceptAction){
+                                                                 [self presentEULAViewController];
+                                                             }];
+        [eulaAlertController addAction:showMeAction];
+        [self presentViewController:eulaAlertController animated:YES completion:nil];
     }
 }
 
 
 - (void) presentEULAViewController {
-
+    
     self.eulaViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"EULAViewController"];
+    
+    [self presentViewController:self.eulaViewController animated:YES completion:nil];
     self.eulaViewController.delegate = self;
-    [self presentViewController:self.eulaViewController animated:NO completion:nil];
 }
 
 
+
+#pragma EULADelegate
 - (void)eulaView:(EULAViewController *)view userHasRespondedWithResponse:(EULAResponse)response {
     
-    [self.eulaViewController dismissViewControllerAnimated:NO completion:nil];
 
+    [self.eulaViewController dismissViewControllerAnimated:YES completion:nil];
 
     if (response == EULAResponseAccepted) {
         [self.eulaViewController updateEULATable];
+        // If its been accepted go ahead and upload.
+        [self beginUploadRoutine:nil];
     }
     else {
-                
         SASAlertView *eulaDeclinedAlertView = [[SASAlertView alloc] initWithTarget:self andAction:nil];
         eulaDeclinedAlertView.title = @"NOTE";
         eulaDeclinedAlertView.message = @"You will only be able to upload if you accept the End User License Agreement.";
@@ -383,13 +434,8 @@
         
         [eulaDeclinedAlertView animateIntoView:self.view];
     }
+
 }
-
-
-
-
-
-
 
 
 @end

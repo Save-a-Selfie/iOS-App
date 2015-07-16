@@ -35,6 +35,10 @@
 @property (nonatomic, strong) SASImagePickerViewController *sasImagePickerController;
 @property (nonatomic, strong) SASUploadImageViewController *sasUploadImageViewController;
 
+@property (nonatomic, strong) UINavigationController *uploadImageNavigationController;
+
+
+
 @property (strong, nonatomic) SASNoticeView* sasNoticeView;
 
 @property (strong, nonatomic) SASFilterView *sasFilterView;
@@ -54,6 +58,10 @@ NSString *permissionsProblemOne = @"Please enable location services for this app
 @synthesize sasMapView;
 @synthesize sasImagePickerController;
 @synthesize sasUploadImageViewController;
+
+
+
+
 
 
 // Buttons
@@ -304,9 +312,14 @@ NSString *permissionsProblemOne = @"Please enable location services for this app
 
 - (IBAction)uploadNewNewDevice:(id)sender {
     
+
+    if(self.sasImagePickerController == nil) {
+        self.sasImagePickerController = [[SASImagePickerViewController alloc] init];
+        self.sasImagePickerController.sasImagePickerDelegate = self;
+    }
+
     self.sasImagePickerController = [[SASImagePickerViewController alloc] init];
     self.sasImagePickerController.sasImagePickerDelegate = self;
-    
     
     
     if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
@@ -330,10 +343,14 @@ NSString *permissionsProblemOne = @"Please enable location services for this app
     //
     //  -presentSASUploadImageViewControllerWithImage:
     //
-    [self.sasImagePickerController dismissViewControllerAnimated:NO completion:^{self.sasImagePickerController = nil;
+
+    [self.sasImagePickerController dismissViewControllerAnimated:YES completion:^{self.sasImagePickerController = nil;
+
+
     [self performSelector:@selector(presentSASUploadImageViewControllerWithUploadObject:) withObject:sasUploadObject afterDelay:1.0];}];
     
 }
+
 
 
 - (void)sasImagePickerControllerDidCancel:(SASImagePickerViewController *)sasImagePickerController {
@@ -341,10 +358,14 @@ NSString *permissionsProblemOne = @"Please enable location services for this app
 }
 
 
+
+
+
 // Presents a SASUploadImageViewController via
 - (void) presentSASUploadImageViewControllerWithUploadObject:(SASUploadObject*) sasUploadObject {
     
     printf("should be 2");
+
     // @Discussion:
     //  The user location will be got here, now it may
     //  seem like it should be gotten just before the user
@@ -362,25 +383,33 @@ NSString *permissionsProblemOne = @"Please enable location services for this app
     }
 
     
-    [self.navigationController pushViewController:self.sasUploadImageViewController animated:YES];
+    if (self.uploadImageNavigationController == nil) {
+        self.uploadImageNavigationController = [[UINavigationController alloc] initWithRootViewController:self.sasUploadImageViewController];
+    }
+    
+    [self presentViewController:self.uploadImageNavigationController animated:YES completion:nil];
+    
+
     
 }
-
-
 #pragma mark SASUploadImageViewController Delegate
 - (void)sasUploadImageViewControllerDidFinishUploading:(UIViewController *)viewController withResponse:(SASUploadControllerResponse)response withObject:(SASUploadObject *)sasUploadObject {
     
 
     // Alert the user if it was succes.
     if(response == SASUploadControllerResponseUploaded) {
-        SASNotificationView *n = [[SASNotificationView alloc] init];
-        n.title = @"POSTED";
-        n.image = [UIImage imageNamed:@"DoneImage"];
-        [n animateIntoView:self.view];
+        SASNotificationView *sasNotificationView = [[SASNotificationView alloc] init];
+        sasNotificationView.title = @"POSTED";
+        sasNotificationView.image = [UIImage imageNamed:@"DoneImage"];
+        [sasNotificationView animateIntoView:self.view];
     }
+    
+
 
     sasUploadObject = nil;
     self.sasUploadImageViewController = nil;
+    self.uploadImageNavigationController = nil;
+
     
 }
 
