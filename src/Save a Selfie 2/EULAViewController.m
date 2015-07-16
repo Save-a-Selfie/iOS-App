@@ -8,92 +8,81 @@
 #import "UIView+NibInitializer.h"
 #import "ExtendNSLogFunctionality.h"
 
-@interface EULAViewController()
 
-@property (weak, nonatomic) NSString* dataFile;
-@property (weak, nonatomic) NSString* root;
+#define DATAFILE @"EULA.html"
+#define ROOT @"http://www.saveaselfie.org/SASDocs/"
 
-@end
 
 @implementation EULAViewController
-@synthesize delegate;
 
-@synthesize webView;
+@synthesize delegate;
+@synthesize webView = _webView;
 @synthesize segmentedControl;
 
-@synthesize dataFile = _dataFile;
-@synthesize root = _root;
-
-#pragma mark Object Life Cycle
-- (id) initWithCoder:(NSCoder *)aDecoder {
-    if(self = [super initWithCoder:aDecoder]) {
-        _dataFile = [NSString stringWithFormat:@"EULA.html"];
-        _root = [NSString stringWithFormat:@"http://www.saveaselfie.org/SASDocs/"];
-    }
-    return self;
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [self EULALoaded];
 }
 
-
-
-
-- (void) loadEULAData {
-    [self getLocalPage:self.dataFile];
+- (void)EULALoaded {
+    
+    [self getLocalPage:DATAFILE andNavCon:nil];
 }
 
-
-// Gets the cached EULA document.
-- (void)getLocalPage:(NSString *)file {
-    NSString *responseString = [self getPage:self.root file:file withEncoding:0];
+- (void)getLocalPage:(NSString *)file andNavCon:(UINavigationController *)navCon {
+    NSString *responseString = [self getPage:ROOT file:file navCon:nil encoding:0]; // pulls file from storage - either own cache or bundle
     
-    [self.webView loadHTMLString:responseString baseURL:nil];
-    
+    [_webView loadHTMLString:responseString baseURL:nil];
+    // now try and download and save file
     StorageSystem *storage = [[StorageSystem alloc] init];
     storage.saveDataToDefaultManager = file;
-    storage.webView = self.webView;
+    storage.webView = _webView;
     storage.HUDView = nil;
     storage.showTitleNavCon = nil;
     storage.notificationString = file;
     storage.dataFile = NO;
-    storage.textEncoding = 0;
+    storage.textEncoding = 0; // * ! *
     storage.indicateOldNew = NO;
-    [storage loadURL:file withRoot:self.root];
     
-    
+    [storage loadURL:file withRoot:ROOT];
 }
 
-
-- (NSString *) getPage: (NSString *) root file:(NSString *) file withEncoding:(int) encoding {
-    
-    // Also need to pull the file from bundle if it is there, while new version is (possibly) downloading.
+- (NSString *)getPage: (NSString *)root file:(NSString *)file navCon:(UINavigationController *)navCon encoding:(int)encoding
+{
+    // also need to pull file from bundle if it is there, while new version is (possibly) downloading
     StorageSystem *tempStorage = [[StorageSystem alloc] init];
     tempStorage.textEncoding = encoding;
     return [tempStorage loadFileFromDefaultManagerOrBundle:file];
-    
 }
 
 
-- (void)updateEULATable {
+- (void) updateEULATable {
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     [request setHTTPMethod:@"POST"];
     NSString *URL = @"http://www.saveaselfie.org/wp/wp-content/themes/magazine-child/updateEULA.php";
     [request setURL:[NSURL URLWithString:URL]];
     [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-    NSString *parameters = [NSString stringWithFormat:@"deviceID=%@&EULAType=EULA", [[[UIDevice currentDevice] identifierForVendor] UUIDString]];
+    NSString *parameters = [ NSString stringWithFormat:@"deviceID=%@&EULAType=EULA", [[[UIDevice currentDevice] identifierForVendor] UUIDString]];
     NSString *postLength = [NSString stringWithFormat:@"%lu", (unsigned long)[parameters length]];
     [request setHTTPBody:[parameters dataUsingEncoding:NSUTF8StringEncoding]];
     [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
     
     
-    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
-    if(connection) {/* To get rid of the annoing 'unused variable' warning*/}
+    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self]; // don't need result of this
+    if(connection){/*Get rid of the unused variable warning*/}
 }
 
 
 - (IBAction)agreeDeclineAction:(UISegmentedControl *) sender {
     
+    // 0: Accepted
+    // 1: Declined
+    printf("PRESSED INDEX: %ld\n\n\n\'n", sender.selectedSegmentIndex);
+    
     EULAResponse response;
     
-    if (sender.selectedSegmentIndex == 1) {
+    if (sender.selectedSegmentIndex == 0) {
         
         response = EULAResponseAccepted;
         [[NSUserDefaults standardUserDefaults] setValue:@"yes" forKey:@"EULAAccepted"];
@@ -104,7 +93,6 @@
         [[NSUserDefaults standardUserDefaults] setValue:@"no" forKey:@"EULAAccepted"];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
-    
     
     // Forward to delegate
     if(self.delegate != nil && [self.delegate respondsToSelector:@selector(eulaView:userHasRespondedWithResponse:)]) {

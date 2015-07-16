@@ -67,7 +67,7 @@
         
         
         [UIFont increaseCharacterSpacingForLabel:_alertTitleLabel byAmount:5];
-        _alertMessageTextView.font = [UIFont sasFontWithSize:18.0];
+        _alertMessageTextView.font = [UIFont sasFontWithSize:15.0];
     }
     return self;
 }

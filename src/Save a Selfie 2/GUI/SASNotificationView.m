@@ -57,13 +57,12 @@
     self.center = view.center;
     [view addSubview:self];
     
-    [UIView animateWithDuration:0.5
-                          delay:0.1
-         usingSpringWithDamping:0.4
-          initialSpringVelocity:0.4
-                        options:UIViewAnimationOptionCurveLinear
-                     animations:^{self.alpha = 1.0;}
-                     completion:nil];
+    [UIView animateWithDuration:1.0
+                     animations:^{self.alpha = 1.0f;}
+                     completion:^(BOOL completed){
+                         [UIView animateWithDuration:2.0
+                                          animations:^{self.alpha = 0.0f;}
+                                          completion:nil];}];
     
     
 }

@@ -344,10 +344,10 @@ NSString *permissionsProblemOne = @"Please enable location services for this app
     //  -presentSASUploadImageViewControllerWithImage:
     //
 
-    [self.sasImagePickerController dismissViewControllerAnimated:YES completion:^{self.sasImagePickerController = nil;
-
-
-    [self performSelector:@selector(presentSASUploadImageViewControllerWithUploadObject:) withObject:sasUploadObject afterDelay:1.0];}];
+    [self.sasImagePickerController dismissViewControllerAnimated:YES completion:^{
+        self.sasImagePickerController = nil;
+        [self presentSASUploadImageViewControllerWithUploadObject:sasUploadObject];
+    }];
     
 }
 
@@ -364,7 +364,7 @@ NSString *permissionsProblemOne = @"Please enable location services for this app
 // Presents a SASUploadImageViewController via
 - (void) presentSASUploadImageViewControllerWithUploadObject:(SASUploadObject*) sasUploadObject {
     
-    printf("should be 2");
+
 
     // @Discussion:
     //  The user location will be got here, now it may
@@ -410,7 +410,6 @@ NSString *permissionsProblemOne = @"Please enable location services for this app
     self.sasUploadImageViewController = nil;
     self.uploadImageNavigationController = nil;
 
-    
 }
 
 
