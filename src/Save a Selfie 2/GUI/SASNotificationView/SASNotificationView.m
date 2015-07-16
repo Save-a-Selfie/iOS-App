@@ -31,6 +31,8 @@
     if(self = [super init]) {
         self = [self initWithNibNamed:@"SASNotificationView"];
         self.layer.cornerRadius = 8.0;
+        
+
     }
     return self;
 }

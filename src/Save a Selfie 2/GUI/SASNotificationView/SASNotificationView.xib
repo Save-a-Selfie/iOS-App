@@ -11,17 +11,30 @@
             <rect key="frame" x="0.0" y="0.0" width="140" height="140"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eGU-d6-c5c">
-                    <rect key="frame" x="8" y="8" width="124" height="21"/>
-                    <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="P03-B0-5MM">
+                    <rect key="frame" x="25" y="8" width="90" height="90"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="90" id="VqG-Y4-IZf"/>
+                        <constraint firstAttribute="height" constant="90" id="bBK-9O-NB4"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eGU-d6-c5c">
+                    <rect key="frame" x="8" y="106" width="124" height="21"/>
+                    <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="17"/>
+                    <color key="textColor" red="0.20916193181818177" green="0.20916193181818177" blue="0.20916193181818177" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="P03-B0-5MM">
-                    <rect key="frame" x="25" y="37" width="90" height="90"/>
-                </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="P03-B0-5MM" secondAttribute="trailing" constant="25" id="2g3-wP-CCC"/>
+                <constraint firstItem="eGU-d6-c5c" firstAttribute="top" secondItem="P03-B0-5MM" secondAttribute="bottom" constant="8" id="FB2-lu-KNH"/>
+                <constraint firstAttribute="trailing" secondItem="eGU-d6-c5c" secondAttribute="trailing" constant="8" id="GeZ-wB-alW"/>
+                <constraint firstItem="P03-B0-5MM" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="25" id="NbR-yv-MbJ"/>
+                <constraint firstAttribute="bottom" secondItem="eGU-d6-c5c" secondAttribute="bottom" constant="13" id="cwH-ky-wUC"/>
+                <constraint firstItem="P03-B0-5MM" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="kc8-pf-qFI"/>
+                <constraint firstItem="eGU-d6-c5c" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="sNh-D7-cj9"/>
+            </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="imageView" destination="P03-B0-5MM" id="Nx8-bj-ZRA"/>
