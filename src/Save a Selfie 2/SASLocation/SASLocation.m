@@ -131,7 +131,7 @@
     currentLocationCoordinates = location.coordinate;
     
     // Call locationDidUpdate from SASLocationDelegate for any conforming object.
-    if(delegate != nil) {
+    if(self.delegate != nil && [self.delegate respondsToSelector:@selector(locationDidUpdate:)]) {
         [self.delegate locationDidUpdate:currentLocationCoordinates];
     }
 }
@@ -141,7 +141,7 @@
 // Forward permissions changes to any object referencing
 // 'id<SASLocationDelegate> delegate'.
 - (void) locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
-    if(delegate != nil) {
+    if(self.delegate != nil && [self.delegate respondsToSelector:@selector(locationPermissionsHaveChanged:)]) {
         [delegate locationPermissionsHaveChanged:status];
     }
 }

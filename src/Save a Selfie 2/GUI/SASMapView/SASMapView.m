@@ -107,12 +107,15 @@
 }
 
 
+
 - (void)loadSASAnnotationsToMap {
     // Our annotationRetriever Object
     self.sasAnnotationRetriever = [[SASMapAnnotationRetriever alloc] init];
     self.sasAnnotationRetriever.delegate = self;
     [self.sasAnnotationRetriever fetchSASAnnotationsFromServer];
 }
+
+
 
 
 // Locates the user's current location and

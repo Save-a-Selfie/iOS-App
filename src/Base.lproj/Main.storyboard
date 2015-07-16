@@ -452,8 +452,17 @@
                                     <action selector="buttonTapped:" destination="LKF-Xc-SHc" eventType="touchUpInside" id="1s4-a5-jG1"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ga0-Sx-Hbd">
+                                <rect key="frame" x="35" y="288" width="119" height="119"/>
+                                <state key="normal" image="AdamsGift">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="openAdamsGift:" destination="LKF-Xc-SHc" eventType="touchUpInside" id="lFG-G2-pE2"/>
+                                </connections>
+                            </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.97953344666946585" green="0.97829060216019625" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Info" image="info_24" id="Dcc-4p-yO1"/>
                     <connections>
@@ -607,6 +616,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="AdamsGift" width="146" height="146"/>
         <image name="Code for ireland logo transparent" width="100" height="53"/>
         <image name="DefibrillatorUnselected" width="175" height="175"/>
         <image name="FilterDevicesIcon" width="47" height="47"/>

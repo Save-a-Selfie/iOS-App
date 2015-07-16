@@ -12,7 +12,7 @@
 
 // This protocol provides a wrapper for CLLocationManagerDelegate, and enables us to retreive
 // the appropriate location information needed.
-@protocol SASLocationDelegate
+@protocol SASLocationDelegate <NSObject>
 
 - (void) locationDidUpdate: (CLLocationCoordinate2D) location;
 

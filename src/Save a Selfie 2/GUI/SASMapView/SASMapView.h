@@ -49,7 +49,7 @@ typedef enum: NSUInteger {
 // Default is YES.
 @property(nonatomic, assign) BOOL showAnnotations;
 
-// Will zoom to the users location SASMapView object is instansiated first.
+// Will zoom to the users location when an SASMapView object is instansiated first.
 // Default is NO.
 @property(nonatomic, assign) BOOL zoomToUsersLocationInitially;
 

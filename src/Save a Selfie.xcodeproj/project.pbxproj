@@ -312,13 +312,13 @@
 			path = SASVerifiedUploadObject;
 			sourceTree = "<group>";
 		};
-		180E295E1B5464C6003548FA /* EULAView */ = {
+		180E295E1B5464C6003548FA /* EULAViewController */ = {
 			isa = PBXGroup;
 			children = (
 				180E295B1B5464C1003548FA /* EULAViewController.h */,
 				180E295C1B5464C1003548FA /* EULAViewController.m */,
 			);
-			name = EULAView;
+			name = EULAViewController;
 			path = ../EULAView;
 			sourceTree = "<group>";
 		};
@@ -502,7 +502,7 @@
 				18EE44DF1B556A2400F8F93B /* SASNotificationView */,
 				18EE44E31B556A5700F8F93B /* SASNoticeView */,
 				18B7C3491B45860900017170 /* SASAlertView */,
-				180E295E1B5464C6003548FA /* EULAView */,
+				180E295E1B5464C6003548FA /* EULAViewController */,
 				1864FEA91B27A27F00EA564A /* SASFont */,
 				18A524FC1B166C2700E8F8F6 /* SASMapView */,
 				185A39B91B1FD7C500699D31 /* SASColour */,
@@ -1158,7 +1158,7 @@
 			baseConfigurationReference = CEC3A1E290F274AEC4E4510F /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_WARN_UNKNOWN_PRAGMAS = NO;
@@ -1176,7 +1176,7 @@
 			baseConfigurationReference = 6FAEC062F47D183CE9855B1C /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_WARN_UNKNOWN_PRAGMAS = NO;

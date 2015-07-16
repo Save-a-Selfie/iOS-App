@@ -204,7 +204,7 @@ NSString *permissionsProblemOne = @"Please enable location services for this app
     
     if([CLLocationManager locationServicesEnabled]){
         
-        switch([CLLocationManager authorizationStatus]){
+        switch(status){
                 
             case kCLAuthorizationStatusAuthorizedAlways:
                 NSLog(@"We have access to location services");
