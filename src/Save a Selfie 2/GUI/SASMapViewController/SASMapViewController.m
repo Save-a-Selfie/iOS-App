@@ -23,6 +23,7 @@
 #import "SASNoticeView.h"
 #import "SASAlertView.h"
 
+
 @interface SASMapViewController () <SASImagePickerDelegate, SASFilterViewDelegate, SASUploadImageViewControllerDelegate, UIAlertViewDelegate> {
     CGPoint filterButtonBeforeAnimation;
     CGPoint locateUserButtonBeforeAnimtation;
@@ -33,7 +34,6 @@
 
 @property (nonatomic, strong) SASImagePickerViewController *sasImagePickerController;
 @property (nonatomic, strong) SASUploadImageViewController *sasUploadImageViewController;
-@property (nonatomic, strong) UINavigationController *uploadImageNavigationController;
 
 @property (strong, nonatomic) SASNoticeView* sasNoticeView;
 
@@ -54,7 +54,7 @@ NSString *permissionsProblemOne = @"Please enable location services for this app
 @synthesize sasMapView;
 @synthesize sasImagePickerController;
 @synthesize sasUploadImageViewController;
-@synthesize uploadImageNavigationController;
+
 
 // Buttons
 @synthesize showFilterViewButton;
@@ -95,7 +95,6 @@ NSString *permissionsProblemOne = @"Please enable location services for this app
     self.sasMapView.sasAnnotationImage = DeviceAnnotationImage;
     [self.sasMapView loadSASAnnotationsToMap];
 }
-
 
 
 
@@ -305,35 +304,35 @@ NSString *permissionsProblemOne = @"Please enable location services for this app
 
 - (IBAction)uploadNewNewDevice:(id)sender {
     
+    self.sasImagePickerController = [[SASImagePickerViewController alloc] init];
+    self.sasImagePickerController.sasImagePickerDelegate = self;
     
-if (sasImagePickerController == nil) {
-        sasImagePickerController = [[SASImagePickerViewController alloc] init];
-        sasImagePickerController.sasImagePickerDelegate = self;
-    }
     
     
     if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         [sasImagePickerController setSourceType:UIImagePickerControllerSourceTypeCamera];
-        [self.tabBarController presentViewController:self.sasImagePickerController animated:YES completion:nil];
+        [self presentViewController:self.sasImagePickerController animated:YES completion:nil];
     }
 }
 
 
-#pragma mark SASImageDelegate Method -didFinishWithImage:(SASUploadImage*):
+#pragma mark SASImagePickerDelegate Method
 - (void)sasImagePickerController:(SASImagePickerViewController *)sasImagePicker didFinishWithImage:(UIImage *)image {
     
+
     // Create an upload object and set the image.
     SASUploadObject *sasUploadObject = [[SASUploadObject alloc] initWithImage:image];
     
-    
+
     
     // Dismiss the SASImagePickerViewController and pass
     // the image onto SASUploadImageViewController via
     //
     //  -presentSASUploadImageViewControllerWithImage:
     //
-    [self.sasImagePickerController dismissViewControllerAnimated:NO completion:nil];
-    [self performSelector:@selector(presentSASUploadImageViewControllerWithUploadObject:)withObject:sasUploadObject afterDelay:0.0];
+    [self.sasImagePickerController dismissViewControllerAnimated:NO completion:^{self.sasImagePickerController = nil;
+    [self performSelector:@selector(presentSASUploadImageViewControllerWithUploadObject:) withObject:sasUploadObject afterDelay:1.0];}];
+    
 }
 
 
@@ -345,6 +344,7 @@ if (sasImagePickerController == nil) {
 // Presents a SASUploadImageViewController via
 - (void) presentSASUploadImageViewControllerWithUploadObject:(SASUploadObject*) sasUploadObject {
     
+    printf("should be 2");
     // @Discussion:
     //  The user location will be got here, now it may
     //  seem like it should be gotten just before the user
@@ -356,21 +356,13 @@ if (sasImagePickerController == nil) {
     
     
     if(self.sasUploadImageViewController == nil) {
-        
         self.sasUploadImageViewController = (SASUploadImageViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"SASUploadImageViewController"];
         self.sasUploadImageViewController.delegate = self;
         [self.sasUploadImageViewController setSasUploadObject:sasUploadObject];
     }
 
     
-    
-    if(self.uploadImageNavigationController == nil) {
-        self.uploadImageNavigationController = [[UINavigationController alloc]
-                                                initWithRootViewController:self.sasUploadImageViewController];
-    }
-    
-
-    [self presentViewController:self.uploadImageNavigationController animated:YES completion:nil];
+    [self.navigationController pushViewController:self.sasUploadImageViewController animated:YES];
     
 }
 
@@ -389,8 +381,6 @@ if (sasImagePickerController == nil) {
 
     sasUploadObject = nil;
     self.sasUploadImageViewController = nil;
-    self.uploadImageNavigationController = nil;
-    
     
 }
 

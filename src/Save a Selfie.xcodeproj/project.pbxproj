@@ -45,7 +45,6 @@
 		18EBF9771B272B3400EDA48B /* SASImagePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EBF9761B272B3400EDA48B /* SASImagePickerViewController.m */; };
 		18EBF97B1B273A6600EDA48B /* SASUploadObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EBF97A1B273A6600EDA48B /* SASUploadObject.m */; };
 		18EBF9801B2741F600EDA48B /* SASUploadImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EBF97F1B2741F600EDA48B /* SASUploadImageViewController.m */; };
-		18EE44CE1B55447D00F8F93B /* TestVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EE44CD1B55447D00F8F93B /* TestVC.m */; };
 		18EE44D11B554F3B00F8F93B /* SystemVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EE44D01B554F3B00F8F93B /* SystemVersion.m */; };
 		18EE44D51B55542100F8F93B /* SASMapWarningAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EE44D41B55542100F8F93B /* SASMapWarningAlert.m */; };
 		18EE44D81B55545500F8F93B /* SASMapWarningAlert.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18EE44D71B55545500F8F93B /* SASMapWarningAlert.xib */; };
@@ -178,8 +177,6 @@
 		18EBF97A1B273A6600EDA48B /* SASUploadObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASUploadObject.m; sourceTree = "<group>"; };
 		18EBF97E1B2741F600EDA48B /* SASUploadImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASUploadImageViewController.h; sourceTree = "<group>"; };
 		18EBF97F1B2741F600EDA48B /* SASUploadImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASUploadImageViewController.m; sourceTree = "<group>"; };
-		18EE44CC1B55447D00F8F93B /* TestVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TestVC.h; path = "Save a Selfie 2/GUI/TestVC.h"; sourceTree = SOURCE_ROOT; };
-		18EE44CD1B55447D00F8F93B /* TestVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TestVC.m; path = "Save a Selfie 2/GUI/TestVC.m"; sourceTree = SOURCE_ROOT; };
 		18EE44CF1B554F3B00F8F93B /* SystemVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SystemVersion.h; path = "Save a Selfie 2/GUI/SystemVersion.h"; sourceTree = SOURCE_ROOT; };
 		18EE44D01B554F3B00F8F93B /* SystemVersion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SystemVersion.m; path = "Save a Selfie 2/GUI/SystemVersion.m"; sourceTree = SOURCE_ROOT; };
 		18EE44D31B55542100F8F93B /* SASMapWarningAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASMapWarningAlert.h; sourceTree = "<group>"; };
@@ -831,8 +828,6 @@
 		D72E1DAF19EE841E005DD8A5 /* Save a Selfie 2 */ = {
 			isa = PBXGroup;
 			children = (
-				18EE44CC1B55447D00F8F93B /* TestVC.h */,
-				18EE44CD1B55447D00F8F93B /* TestVC.m */,
 				180E295E1B5464C6003548FA /* EULAView */,
 				1807AF4E1B4EEE7C006E1B28 /* NSString+PDRegex */,
 				1807AF401B4EE8F8006E1B28 /* StorageSystem */,
@@ -1048,7 +1043,6 @@
 				18EBF9771B272B3400EDA48B /* SASImagePickerViewController.m in Sources */,
 				D700239519F5253C00E45408 /* AlertBox.m in Sources */,
 				186A39A91B3C93E600F38EDB /* SASFilterViewCell.m in Sources */,
-				18EE44CE1B55447D00F8F93B /* TestVC.m in Sources */,
 				18592E051B51854C004DDFD8 /* UIView+WidthXY.m in Sources */,
 				18EE44D11B554F3B00F8F93B /* SystemVersion.m in Sources */,
 				D700239D19F52EB700E45408 /* ExtendNSLogFunctionality.m in Sources */,

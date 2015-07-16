@@ -21,6 +21,10 @@
 // Called when the user pressed the cancel button.
 - (void) sasImagePickerControllerDidCancel:(SASImagePickerViewController *) sasImagePickerController;
 
+// Due to the way this app presents it's view for uploading an image
+// we need to know when sasImagePicker has been removed from the view hierarchy.
+- (void) sasImagePickerControllerDidDissapear:(SASImagePickerViewController *) sasImagePicker;
+
 @end
 
 

@@ -81,6 +81,7 @@
 }
 
 
+
 - (void) dismissKeyboard {
     [self.deviceCaptionTextView resignFirstResponder];
 }
@@ -303,7 +304,6 @@
 
 
 
-
 // Adds a SASGrey view which dims the background apart from `deviceCaptionTextView` &
 // `sasImageView`.
 - (void) addGreyView {
@@ -371,7 +371,6 @@
     [self.eulaViewController dismissViewControllerAnimated:NO completion:nil];
 
 
-    
     if (response == EULAResponseAccepted) {
         [self.eulaViewController updateEULATable];
     }

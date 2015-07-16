@@ -73,7 +73,6 @@
                             <constraint firstItem="WI1-wW-Rnp" firstAttribute="top" secondItem="f2t-3C-hgn" secondAttribute="bottom" constant="10" id="VeB-fo-DoV"/>
                             <constraint firstItem="ZSL-vM-Epo" firstAttribute="trailing" secondItem="XjZ-Ty-pLe" secondAttribute="trailingMargin" id="hGo-IO-5xk"/>
                             <constraint firstAttribute="trailing" secondItem="uvr-bw-CUg" secondAttribute="trailing" id="tlg-t5-GCh"/>
-                            <constraint firstItem="gKB-VO-JHZ" firstAttribute="leading" secondItem="XjZ-Ty-pLe" secondAttribute="leadingMargin" constant="251" id="x5G-xB-RWz"/>
                             <constraint firstItem="uvr-bw-CUg" firstAttribute="leading" secondItem="XjZ-Ty-pLe" secondAttribute="leading" id="yPr-Vm-Mry"/>
                         </constraints>
                     </view>

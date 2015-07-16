@@ -28,10 +28,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.delegate = self;
+
 }
 
-
-
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:YES];
+}
 
 #pragma mark UIImagePickerControllerDelegate
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
@@ -53,11 +55,12 @@
 
 
 - (void) imagePickerControllerDidCancel:(UIImagePickerController *)picker {
-    [self dismissViewControllerAnimated:YES completion:nil];
+
     
     if(self.sasImagePickerDelegate != nil && [self.sasImagePickerDelegate respondsToSelector:@selector(sasImagePickerControllerDidCancel:)]) {
         [self.sasImagePickerDelegate sasImagePickerControllerDidCancel:self];
     }
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end
