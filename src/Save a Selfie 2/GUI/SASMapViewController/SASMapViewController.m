@@ -244,20 +244,22 @@ NSString *permissionsProblemOne = @"Please enable location services for this app
 
 #pragma Map Warning
 - (void) makeCheckForMapWarning {
-    BOOL hasMapWarningHasBeenAccepted = [[[NSUserDefaults standardUserDefaults] valueForKey:@"mapWarningAccepted"] isEqualToString:@"yes"];
+    
+    BOOL hasMapWarningHasBeenAccepted = [[[NSUserDefaults standardUserDefaults]
+                                          valueForKey:@"mapWarningAccepted"]
+                                         isEqualToString:@"yes"];
     
 
     if (!hasMapWarningHasBeenAccepted) {
         if(sasMapWarningAlert == nil) {
             self.sasMapWarningAlert = [[SASMapWarningAlert alloc] initWithTitle:@"Warning!" andMessage:@"The information here is correct to the best of our knowledge, but its use is at your risk and discretion, with no liability to Save a Selfie, the developers or Apple."];
             
-            self.sasMapWarningAlert.leftButtonTitle = @"Accept";
-            [self.sasMapWarningAlert addActionForLeftButton:@selector(acceptMapWarning) target:self];
+            self.sasMapWarningAlert.rightButtonTitle = @"Accept";
+            [self.sasMapWarningAlert addActionforRightButton:@selector(acceptMapWarning) target:self];
             
-            self.sasMapWarningAlert.rightButtonTitle = @"Decline";
-            [self.sasMapWarningAlert addActionforRightButton:@selector(declineMapWarning) target:self];
+            self.sasMapWarningAlert.leftButtonTitle = @"Decline";
+            [self.sasMapWarningAlert addActionForLeftButton: @selector(declineMapWarning) target:self];
         }
-        
         
         [self.sasMapWarningAlert animateIntoView:self.view];
     }

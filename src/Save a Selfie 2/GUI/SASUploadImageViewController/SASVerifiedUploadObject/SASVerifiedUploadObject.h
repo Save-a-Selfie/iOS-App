@@ -17,4 +17,6 @@
 
 - (BOOL) captionHasBeenSet;
 
+- (BOOL) deviceHasBeenSet;
+
 @end

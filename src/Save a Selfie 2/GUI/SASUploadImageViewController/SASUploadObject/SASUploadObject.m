@@ -9,6 +9,14 @@
 #import "SASUploadObject.h"
 #import "UIImage+SASImage.h"
 
+
+@interface SASUploadObject()
+
+
+@property (assign, nonatomic) BOOL deviceHasBeenSet;
+
+@end
+
 @implementation SASUploadObject
 
 @synthesize timeStamp;
@@ -29,18 +37,20 @@
         _image = [imageToUpload normalizedImage];
         
         _associatedDevice = [[SASDevice alloc] init];
+        
+        // This will be set to All as we need to check
+        // if its been set. If .type is not All
+        // then we know it has been set.
+        _associatedDevice.type = All;
     }
     return self;
 }
 
 
 
-
-
 #pragma mark SASVerifiedUploadObject Protocol
 - (BOOL)captionHasBeenSet {
     
-    NSLog(@"%@", self.caption);
     if ([self.caption isEqualToString:@""] ||
         [self.caption isEqualToString:@"Add Location Information"] ||
         self.caption == nil) {
@@ -49,6 +59,15 @@
         
     } else {
         return YES;
+    }
+}
+
+
+- (BOOL)deviceHasBeenSet {
+    if (self.associatedDevice.type != All) {
+        return YES;
+    } else {
+        return NO;
     }
 }
 

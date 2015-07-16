@@ -122,7 +122,13 @@
     if(![self.sasUploadObject captionHasBeenSet]) {
         
         if(self.delegate != nil && [self.delegate respondsToSelector:@selector(sasUploader:invalidObjectWithResponse:)]) {
-            [self.delegate sasUploader: self.sasUploadObject invalidObjectWithResponse:SASUploadObjectInvalidCaption];
+            [self.delegate sasUploader: self.sasUploadObject invalidObjectWithResponse:SASUploadInvalidObjectCaption];
+        }
+        return NO;
+    }
+    if (![self.sasUploadObject deviceHasBeenSet]) {
+        if(self.delegate != nil && [self.delegate respondsToSelector:@selector(sasUploader:invalidObjectWithResponse:)]) {
+            [self.delegate sasUploader:self.sasUploadObject invalidObjectWithResponse:SASUploadInvalidObjectDeviceType];
         }
         return NO;
     }

@@ -120,7 +120,7 @@
     
 
 
-    self.doneButton.hidden = YES;
+//    self.doneButton.hidden = YES;
     self.sasImageView.image = self.sasUploadObject.image;
     
     [UIFont increaseCharacterSpacingForLabel:self.selectDeviceLabel byAmount:2.0];
@@ -176,6 +176,7 @@
 
 - (IBAction)deviceSelected:(SASDeviceButton*) sender {
     
+
     [self deselectDeviceButtons];
     
     [sender select];
@@ -266,18 +267,25 @@
 
 
 
-- (void)sasUploader:(SASUploadObject *)object invalidObjectWithResponse:(SASUploadInvalidatedResponse)response {
+- (void)sasUploader:(SASUploadObject *)object invalidObjectWithResponse:(SASUploadInvalidObject)response {
     
     SASAlertView *alertView = [[SASAlertView alloc] initWithTarget:self andAction:nil];
      
     switch (response) {
         
-        case SASUploadObjectInvalidCaption:
+        case SASUploadInvalidObjectCaption:
             alertView.title = @"Ooops!";
             alertView.message = @"Please add a description for this post!";
             alertView.buttonTitle = @"Ok";
             [alertView animateIntoView:self.view];
             break;
+            
+            
+        case SASUploadInvalidObjectDeviceType:
+            alertView.title = @"Ooops!";
+            alertView.message = @"Please select a device for this post!";
+            alertView.buttonTitle = @"Ok";
+            [alertView animateIntoView:self.view];
             
         default:
             break;
