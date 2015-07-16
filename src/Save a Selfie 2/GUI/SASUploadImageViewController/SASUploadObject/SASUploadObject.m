@@ -12,11 +12,12 @@
 @implementation SASUploadObject
 
 @synthesize timeStamp;
-@synthesize associatedDevice;
+@synthesize associatedDevice = _associatedDevice;
 @synthesize coordinates;
-@synthesize image;
+@synthesize image = _image;
 @synthesize caption;
 @synthesize identifier;
+@synthesize UUID;
 
 - (instancetype)initWithImage:(UIImage *)imageToUpload {
     
@@ -25,9 +26,9 @@
         // See UIImage+SASNormalizeImage.h
         // for reason on why we need to normalize
         // the image property.
-        self.image = [imageToUpload normalizedImage];
+        _image = [imageToUpload normalizedImage];
         
-        self.associatedDevice = [[SASDevice alloc] init];
+        _associatedDevice = [[SASDevice alloc] init];
     }
     return self;
 }

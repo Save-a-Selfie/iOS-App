@@ -19,6 +19,7 @@
 @property(nonatomic, assign) CLLocationCoordinate2D coordinates;
 @property(nonatomic, strong) UIImage *image;
 @property(nonatomic, strong) NSString *caption;
+@property(nonatomic, strong) NSString* UUID;
  
 
 - (instancetype) initWithImage:(UIImage*) imageToUpload;

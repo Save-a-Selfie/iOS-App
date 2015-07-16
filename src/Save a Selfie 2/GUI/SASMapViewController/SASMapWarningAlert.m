@@ -125,21 +125,22 @@
 - (void) animateOutOfView:(id) sender {
     
     if(sender == self.leftButton) {
-        printf("Left Button");
+
         [self.leftButtonTarget performSelector:self.leftButtonAction
                                withObject:nil
                                afterDelay:0.0];
     }
     else {
-        printf("Right button");
+
         [self.rightButtonTarget performSelector:self.rightButtonAction
                                      withObject:nil
                                      afterDelay:0.0];
     }
     
-    
     [self.greyView removeFromSuperview];
     [self removeFromSuperview];
+    
+    self.greyView = nil;
 }
 
 @end

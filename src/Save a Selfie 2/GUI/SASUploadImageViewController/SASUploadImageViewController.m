@@ -213,7 +213,10 @@
     else {
         
         #pragma mark SASUploadObject timestamp set here.
-        [self.sasUploadObject setTimeStamp: [SASUtilities getCurrentTimeStamp]];
+        self.sasUploadObject.timeStamp = [SASUtilities getCurrentTimeStamp];
+        
+        #pragma mark UUID set here.
+        self.sasUploadObject.UUID = [NSUUID UUID].UUIDString;
         
         self.sasUploader = [[SASUploader alloc] initWithSASUploadObject:self.sasUploadObject];
         self.sasUploader.delegate = self;
@@ -266,7 +269,7 @@
 - (void)sasUploader:(SASUploadObject *)object invalidObjectWithResponse:(SASUploadInvalidatedResponse)response {
     
     SASAlertView *alertView = [[SASAlertView alloc] initWithTarget:self andAction:nil];
-    
+     
     switch (response) {
         
         case SASUploadObjectInvalidCaption:

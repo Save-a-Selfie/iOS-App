@@ -84,16 +84,8 @@
         
         self.sasUploadObject.identifier = [NSString stringWithFormat:@"%@%@", self.sasUploadObject.timeStamp, [SASUtilities generateRandomString:4]];
         
-        NSString *parameters = [NSString stringWithFormat:@"id=%@&typeOfObject=%d&latitude=%f&longitude=%f&location=%@&user=%@&caption=%@&image=%@&thumbnail=%@",
-                                self.sasUploadObject.identifier,
-                                self.sasUploadObject.associatedDevice.type,
-                                self.sasUploadObject.coordinates.latitude,
-                                self.sasUploadObject.coordinates.longitude,
-                                @"",
-                                @"",
-                                self.sasUploadObject.caption,
-                                standardImageString,
-                                thumbnailImageString];
+        
+        NSString *parameters = [ NSString stringWithFormat:@"id=%@&typeOfObject=%d&latitude=%f&longitude=%f&location=%@&user=%@&caption=%@&image=%@&thumbnail=%@&deviceID=%@&devType=iOS", self.sasUploadObject.identifier, self.sasUploadObject.associatedDevice.type, self.sasUploadObject.coordinates.latitude, self.sasUploadObject.coordinates.longitude, @"", @"", self.sasUploadObject.caption, standardImageString, thumbnailImageString, self.sasUploadObject.UUID];
         
         
         NSString *postLength = [NSString stringWithFormat:@"%lu", (unsigned long)[parameters length]];

@@ -18,6 +18,7 @@
 		1818AFDA1B5153A5004FF998 /* SASGalleryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1818AFD91B5153A5004FF998 /* SASGalleryCell.m */; };
 		181D1E5D1B2359EA00FB5928 /* SASImageInspectorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 181D1E5C1B2359EA00FB5928 /* SASImageInspectorView.m */; };
 		181D1E621B235CF900FB5928 /* SASImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 181D1E611B235CF900FB5928 /* SASImageView.m */; };
+		18453A511B584DD20055A004 /* SASNotificationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18453A501B584DD20055A004 /* SASNotificationView.xib */; };
 		1845C4EA1B2091F600E3D7BC /* SASActivityIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 1845C4E91B2091F600E3D7BC /* SASActivityIndicator.m */; };
 		1845C4EC1B20920300E3D7BC /* SASActivityIndicatorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1845C4EB1B20920300E3D7BC /* SASActivityIndicatorView.xib */; };
 		1845C4EF1B209E6C00E3D7BC /* SASUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 1845C4EE1B209E6C00E3D7BC /* SASUtilities.m */; };
@@ -127,6 +128,7 @@
 		181D1E5C1B2359EA00FB5928 /* SASImageInspectorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASImageInspectorView.m; sourceTree = "<group>"; };
 		181D1E601B235CF900FB5928 /* SASImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASImageView.h; sourceTree = "<group>"; };
 		181D1E611B235CF900FB5928 /* SASImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASImageView.m; sourceTree = "<group>"; };
+		18453A501B584DD20055A004 /* SASNotificationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SASNotificationView.xib; sourceTree = "<group>"; };
 		1845C4E81B2091F600E3D7BC /* SASActivityIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASActivityIndicator.h; sourceTree = "<group>"; };
 		1845C4E91B2091F600E3D7BC /* SASActivityIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASActivityIndicator.m; sourceTree = "<group>"; };
 		1845C4EB1B20920300E3D7BC /* SASActivityIndicatorView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SASActivityIndicatorView.xib; sourceTree = "<group>"; };
@@ -700,6 +702,7 @@
 		18EE44DF1B556A2400F8F93B /* SASNotificationView */ = {
 			isa = PBXGroup;
 			children = (
+				18453A501B584DD20055A004 /* SASNotificationView.xib */,
 				18EE44DC1B556A1F00F8F93B /* SASNotificationView.h */,
 				18EE44DD1B556A1F00F8F93B /* SASNotificationView.m */,
 			);
@@ -946,6 +949,7 @@
 				1845C4EC1B20920300E3D7BC /* SASActivityIndicatorView.xib in Resources */,
 				18F46A4E1B2B9F370062BD05 /* SASFilterView.xib in Resources */,
 				D72D02D21A9BDFC2008C2597 /* testGallery.php in Resources */,
+				18453A511B584DD20055A004 /* SASNotificationView.xib in Resources */,
 				D72D02D01A9BDFC2008C2597 /* getMapData.php in Resources */,
 				18B7C34E1B4586AB00017170 /* SASAlertView.xib in Resources */,
 				186A39A21B3C933E00F38EDB /* SASFilterViewCell.xib in Resources */,
