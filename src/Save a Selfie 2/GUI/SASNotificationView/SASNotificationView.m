@@ -64,7 +64,10 @@
                      completion:^(BOOL completed){
                          [UIView animateWithDuration:2.0
                                           animations:^{self.alpha = 0.0f;}
-                                          completion:nil];}];
+                                          completion:^(BOOL completed){[self removeFromSuperview];}
+                          ];
+                     }
+     ];
     
     
 }

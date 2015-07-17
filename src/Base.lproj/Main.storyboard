@@ -10,7 +10,7 @@
         <!--Map View Controller-->
         <scene sceneID="Tku-EJ-KZ6">
             <objects>
-                <viewController id="wxp-4h-T6p" customClass="SASMapViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SASMapView" id="wxp-4h-T6p" customClass="SASMapViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="VOt-Ui-pgj"/>
                         <viewControllerLayoutGuide type="bottom" id="WI1-wW-Rnp"/>
@@ -607,7 +607,7 @@
         <!--Gallery-->
         <scene sceneID="0g2-vF-1Tb">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="bic-gW-INU" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="SASGalleryCollectionViewControllerNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="bic-gW-INU" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Gallery" id="Q4W-8x-VSg"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="9g0-BK-i0v">

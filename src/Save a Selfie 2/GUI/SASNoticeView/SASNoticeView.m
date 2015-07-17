@@ -79,6 +79,7 @@
 
 - (void) animateOutOfView {
     [self removeFromSuperview];
+    [self.greyView removeFromSuperview];
     self.greyView = nil;
 }
 

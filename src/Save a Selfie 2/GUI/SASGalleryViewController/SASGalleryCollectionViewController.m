@@ -13,16 +13,17 @@
 #import "SASUtilities.h"
 #import <SDWebImageDownloader.h>
 
-#define CELL_LIMIT 10
+#define CELL_LIMIT 100
 
 @interface SASGalleryCollectionViewController() <SASMapAnnotationRetrieverDelegate, SASGalleryCellDelegate>
 
 @property(strong, nonatomic) SASMapAnnotationRetriever *sasAnnotationRetriever;
 @property(strong, nonatomic) NSMutableArray *dataForCells;
-@property(strong, atomic) __block NSMutableArray *cellImages;
+@property(strong, nonatomic) __block NSMutableArray *cellImages;
 @property (strong, nonatomic) SDWebImageDownloader *imageDownloader;
 
 @property (assign, nonatomic) BOOL readyToLoad;
+@property (assign, nonatomic) BOOL imageBatchDownloaded;
 
 @end
 
@@ -34,11 +35,13 @@
 @synthesize cellImages;
 @synthesize imageDownloader;
 @synthesize readyToLoad;
+@synthesize imageBatchDownloaded;
 
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
+    printf("CC");
     self.navigationController.navigationBar.topItem.title = @"Gallery";
     
     self.collectionView.backgroundColor = [UIColor whiteColor];
@@ -62,36 +65,34 @@
 - (void)sasAnnotationsRetrieved:(NSMutableArray *)devices {
     self.dataForCells = devices;
 
-    
-    for (int i; i < CELL_LIMIT; i++) {
-        
-        
-        // Get the image for the cell.
-        SASDevice *deviceAtIndex = [self.dataForCells objectAtIndex:i];
-        
-        NSString *imageURL = deviceAtIndex.imageURL;
-        
-        NSURL *url = [NSURL URLWithString:imageURL];
-        
-        [SDWebImageDownloader.sharedDownloader downloadImageWithURL:url options:0 progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+    if(!self.imageBatchDownloaded) {
+        for (int i; i < CELL_LIMIT; i++) {
             
-        }
-                                                          completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished)
-         {
-             if (image && finished) {
-                 [self.cellImages addObject:image];
-                 NSLog(@"%@", image);
-                 NSLog(@"Cell image count: %lu", (unsigned long)self.cellImages.count);
-                 
-                 if (self.cellImages.count == CELL_LIMIT ) {
-                     self.readyToLoad = YES;
-                     printf("READY TO LOAD ******");
-                     [self.collectionView reloadData];
+            
+            // Get the image for the cell.
+            SASDevice *deviceAtIndex = [self.dataForCells objectAtIndex:i];
+            
+            NSString *imageURL = deviceAtIndex.imageURL;
+            
+            NSURL *url = [NSURL URLWithString:imageURL];
+            
+            [SDWebImageDownloader.sharedDownloader downloadImageWithURL:url options:0 progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+                
+            }
+                                                              completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished)
+             {
+                 if (image && finished) {
+                     [self.cellImages addObject:image];
+                     NSLog(@"%@", self.cellImages);
+                     if (self.cellImages.count == CELL_LIMIT ) {
+                         
+                         self.readyToLoad = YES;
+                         [self.collectionView reloadData];
+                     }
                  }
-             }
-         }];
-        
-       
+             }];
+        }
+        self.imageBatchDownloaded = YES;
     }
     
 }
@@ -106,9 +107,8 @@
     cell.delegate = self;
     
     if (self.readyToLoad) {
-        if (self.cellImages[indexPath.row] != nil) {
-            cell.imageView.image = self.cellImages[indexPath.row];
-        }
+        cell.imageView.image = self.cellImages[indexPath.row];
+        //cell.device = self.dataForCells[indexPath.row];
     }
 
     return cell;

@@ -121,8 +121,9 @@
 
 // TODO: Add animation for this.
 - (void)animateOutOfView:(UIView *)view {
-    self.greyView = nil;
+    [self.greyView removeFromSuperview];
     [self removeFromSuperview];
+    self.greyView = nil;
 }
 
 

@@ -112,7 +112,7 @@ NSString *permissionsProblemOne = @"Please enable location services for this app
 
 
 
--(void)showPermissionsNotice:(NSString *) text {
+-(void)LocationServicesDisabledNotice:(NSString *) text {
     [self clearSASNotice];
     
     if(self.sasNoticeView == nil) {
@@ -217,7 +217,7 @@ NSString *permissionsProblemOne = @"Please enable location services for this app
                 
             case kCLAuthorizationStatusDenied:
                 NSLog(@"Location services denied by user");
-                [self showPermissionsNotice:permissionsProblemOne];
+                [self LocationServicesDisabledNotice:permissionsProblemOne];
                 break;
                 
             case kCLAuthorizationStatusRestricted:
@@ -231,7 +231,7 @@ NSString *permissionsProblemOne = @"Please enable location services for this app
     }
     else {
         NSLog(@"Location Services Are Disabled");
-        [self showPermissionsNotice:permissionsProblemOne];
+        [self LocationServicesDisabledNotice:permissionsProblemOne];
     }
     
     
@@ -268,17 +268,21 @@ NSString *permissionsProblemOne = @"Please enable location services for this app
 
 - (void) acceptMapWarning {
     
+    printf("Accepted");
+    self.sasMapView.userInteractionEnabled = YES;
+    
     [[NSUserDefaults standardUserDefaults] setValue:@"yes" forKey:@"mapWarningAccepted"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
     EULAViewController *eulaVC = [EULAViewController new];
     [eulaVC updateEULATable];
     
-    self.sasMapView.userInteractionEnabled = YES;
+   
 }
 
 
 - (void) declineMapWarning {
+    printf("Declined");
     
     // Disabled user interaction for user until they accept the map warning.
     self.sasMapView.userInteractionEnabled = NO;
@@ -405,7 +409,7 @@ NSString *permissionsProblemOne = @"Please enable location services for this app
     }
     
 
-
+    printf("Calleeeeeehufguhgrhugruhgr");
     sasUploadObject = nil;
     self.sasUploadImageViewController = nil;
     self.uploadImageNavigationController = nil;

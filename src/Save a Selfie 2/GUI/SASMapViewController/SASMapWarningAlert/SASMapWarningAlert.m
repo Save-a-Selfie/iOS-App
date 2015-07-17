@@ -36,7 +36,6 @@
 @synthesize messageTextView = _messageTextView;
 @synthesize leftButtonTitle;
 @synthesize rightButtonTitle;
-@synthesize greyView;
 
 @synthesize leftButtonAction;
 @synthesize leftButtonTarget;
@@ -105,7 +104,7 @@
 
     
     
-    [view addSubview:greyView];
+
     [view addSubview:self];
     
     self.center = view.center;
@@ -137,10 +136,8 @@
                                      afterDelay:0.0];
     }
     
-    [self.greyView removeFromSuperview];
     [self removeFromSuperview];
     
-    self.greyView = nil;
 }
 
 @end

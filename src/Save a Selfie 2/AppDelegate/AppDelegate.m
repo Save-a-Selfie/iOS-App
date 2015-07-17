@@ -19,7 +19,7 @@
 
 UIFont *customFont, *customFontSmaller;
 
-BOOL NSLogOn = YES; // YES to show logs, NO if not
+BOOL NSLogOn = NO; // YES to show logs, NO if not
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
