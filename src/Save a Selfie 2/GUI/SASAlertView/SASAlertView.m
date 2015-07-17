@@ -99,8 +99,6 @@
     if (self.greyView == nil) {
         self.greyView = [[SASGreyView alloc]initWithFrame:CGRectMake(0, 0, [Screen width], [Screen height])];
     }
-
-
     
     [view addSubview:greyView];
     [view addSubview:self];
@@ -129,7 +127,7 @@
 
 
 - (IBAction)doneButtonPress:(id)sender {
-
+    printf("Done button pressed");
     if(self.alertAction == nil) {
         
         [self removeFromSuperview];

@@ -243,6 +243,7 @@
 }
 
 
+
 - (void)sasUploaderDidFinishUploadWithSuccess:(SASUploader *)sasUploader {
     [self dismissSASUploadImageViewControllerWithResponse:SASUploadControllerResponseUploaded];
     [self.sasActivityIndicator removeFromSuperview];
@@ -252,17 +253,19 @@
 
 
 - (void)sasUploader:(SASUploader *)sasUploader didFailWithError:(NSError *)error {
+
+    self.view.userInteractionEnabled = YES;
+    self.doneButton.enabled = YES;
     
     SASAlertView *uploadErrorAlert = [[SASAlertView alloc] initWithTarget:self andAction:nil];
     uploadErrorAlert.title = @"Ooops!";
-    uploadErrorAlert.message = @"There seemed to be a problem posting!\n Please try again";
+    uploadErrorAlert.message = @"There seemed to be a problem posting! Please check you're connected to Wifi/ Network and try again.";
     uploadErrorAlert.buttonTitle = @"Ok";
-    
-    [self.sasActivityIndicator removeFromSuperview];
-    [self.sasActivityIndicator stopAnimating];
     
     [uploadErrorAlert animateIntoView:self.view];
     
+    [self.sasActivityIndicator removeFromSuperview];
+    [self.sasActivityIndicator stopAnimating];
 }
 
 

@@ -268,7 +268,6 @@ NSString *permissionsProblemOne = @"Please enable location services for this app
 
 - (void) acceptMapWarning {
     
-    printf("Accepted");
     self.sasMapView.userInteractionEnabled = YES;
     
     [[NSUserDefaults standardUserDefaults] setValue:@"yes" forKey:@"mapWarningAccepted"];
@@ -282,7 +281,6 @@ NSString *permissionsProblemOne = @"Please enable location services for this app
 
 
 - (void) declineMapWarning {
-    printf("Declined");
     
     // Disabled user interaction for user until they accept the map warning.
     self.sasMapView.userInteractionEnabled = NO;
@@ -409,7 +407,6 @@ NSString *permissionsProblemOne = @"Please enable location services for this app
     }
     
 
-    printf("Calleeeeeehufguhgrhugruhgr");
     sasUploadObject = nil;
     self.sasUploadImageViewController = nil;
     self.uploadImageNavigationController = nil;
