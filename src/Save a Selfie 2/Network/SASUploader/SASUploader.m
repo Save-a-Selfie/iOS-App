@@ -65,7 +65,7 @@
         
         
         // Construct information for uploading
-        NSData *standardImageData = UIImageJPEGRepresentation(self.largeImage, 0.9);
+        NSData *standardImageData = UIImageJPEGRepresentation(self.largeImage, 1.0);
         NSData *thumbnailImageData = UIImageJPEGRepresentation(self.thumbnailImage, 1.0);
         
         NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
