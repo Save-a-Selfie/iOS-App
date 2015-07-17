@@ -287,8 +287,7 @@
     
     for (SASDevice *d in devices) {
         
-        SASAnnotation *annotation = [[SASAnnotation alloc] initAnnotationWithDevice:d
-                                                                            index:deviceNumber];
+        SASAnnotation *annotation = [[SASAnnotation alloc] initAnnotationWithDevice:d index:deviceNumber];
         deviceNumber++;
         
         // Checks whether or not that particular annotation

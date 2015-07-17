@@ -301,7 +301,7 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="MJY-qg-MTp" customClass="SASMapView">
                                 <rect key="frame" x="0.0" y="277" width="320" height="99"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="99" id="mgs-V2-1Gn"/>
+                                    <constraint firstAttribute="height" constant="99" id="8ik-VF-VNA"/>
                                 </constraints>
                             </mapView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="isd-II-BZu">
@@ -361,30 +361,30 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="MJY-qg-MTp" firstAttribute="leading" secondItem="eKH-EA-0ll" secondAttribute="leadingMargin" constant="-16" id="3K4-Rq-7Cw"/>
                             <constraint firstItem="YFb-TA-ZBH" firstAttribute="leading" secondItem="hRP-EK-fmD" secondAttribute="trailing" constant="8" id="7aD-ZK-7EU"/>
-                            <constraint firstItem="MJY-qg-MTp" firstAttribute="top" secondItem="YFb-TA-ZBH" secondAttribute="bottom" constant="8" id="7et-mh-UhO"/>
                             <constraint firstItem="gz1-ER-JpS" firstAttribute="leading" secondItem="eKH-EA-0ll" secondAttribute="leadingMargin" constant="12" id="9aM-di-mhl"/>
+                            <constraint firstItem="MJY-qg-MTp" firstAttribute="top" secondItem="hRP-EK-fmD" secondAttribute="bottom" constant="8" id="HJb-Kd-G52"/>
                             <constraint firstItem="isd-II-BZu" firstAttribute="leading" secondItem="eKH-EA-0ll" secondAttribute="leading" id="LnX-UU-uXg"/>
-                            <constraint firstItem="MJY-qg-MTp" firstAttribute="top" secondItem="gz1-ER-JpS" secondAttribute="bottom" constant="8" id="Oa8-Fp-wBp"/>
                             <constraint firstItem="Sro-m6-M9g" firstAttribute="leading" secondItem="gz1-ER-JpS" secondAttribute="trailing" constant="8" id="PRb-MC-cjL"/>
                             <constraint firstItem="afK-H1-q78" firstAttribute="top" secondItem="F97-b0-KWO" secondAttribute="bottom" constant="8" id="Qnb-IO-SpH"/>
                             <constraint firstAttribute="trailing" secondItem="isd-II-BZu" secondAttribute="trailing" id="SkT-NY-fho"/>
                             <constraint firstItem="lv6-9s-1fh" firstAttribute="top" secondItem="isd-II-BZu" secondAttribute="bottom" id="VO9-WG-Dsg"/>
+                            <constraint firstItem="MJY-qg-MTp" firstAttribute="top" secondItem="gz1-ER-JpS" secondAttribute="bottom" constant="8" id="VnF-GK-IoU"/>
                             <constraint firstItem="hRP-EK-fmD" firstAttribute="top" secondItem="Gyw-so-Gq1" secondAttribute="bottom" constant="8" id="WOO-L0-rad"/>
                             <constraint firstItem="Gyw-so-Gq1" firstAttribute="top" secondItem="uIr-b8-EMK" secondAttribute="bottom" constant="8" id="YXQ-F4-tzV"/>
-                            <constraint firstItem="MJY-qg-MTp" firstAttribute="top" secondItem="hRP-EK-fmD" secondAttribute="bottom" constant="8" id="aDJ-Vs-fRI"/>
+                            <constraint firstAttribute="trailing" secondItem="MJY-qg-MTp" secondAttribute="trailing" id="edf-Ph-ZjU"/>
                             <constraint firstItem="uIr-b8-EMK" firstAttribute="trailing" secondItem="eKH-EA-0ll" secondAttribute="trailingMargin" id="f6V-ZK-YVh"/>
                             <constraint firstItem="Sro-m6-M9g" firstAttribute="top" secondItem="Gyw-so-Gq1" secondAttribute="bottom" constant="8" id="g5X-sR-VDF"/>
-                            <constraint firstItem="MJY-qg-MTp" firstAttribute="top" secondItem="Sro-m6-M9g" secondAttribute="bottom" constant="8" id="g9N-1l-Lg6"/>
                             <constraint firstItem="gz1-ER-JpS" firstAttribute="top" secondItem="Gyw-so-Gq1" secondAttribute="bottom" constant="8" id="hfT-1A-tZX"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Gyw-so-Gq1" secondAttribute="trailing" constant="72" id="jRU-kX-57z"/>
+                            <constraint firstItem="MJY-qg-MTp" firstAttribute="top" secondItem="YFb-TA-ZBH" secondAttribute="bottom" constant="8" id="kFE-kk-Vw6"/>
                             <constraint firstItem="uIr-b8-EMK" firstAttribute="leading" secondItem="afK-H1-q78" secondAttribute="trailing" constant="8" id="nQV-Tl-Wuc"/>
                             <constraint firstItem="Gyw-so-Gq1" firstAttribute="leading" secondItem="eKH-EA-0ll" secondAttribute="leadingMargin" constant="73" id="pf7-B1-ccU"/>
                             <constraint firstItem="uIr-b8-EMK" firstAttribute="top" secondItem="F97-b0-KWO" secondAttribute="bottom" constant="8" id="pgs-MR-eHJ"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="MJY-qg-MTp" secondAttribute="trailing" constant="-16" id="s0z-AA-2iJ"/>
+                            <constraint firstItem="MJY-qg-MTp" firstAttribute="top" secondItem="Sro-m6-M9g" secondAttribute="bottom" constant="8" id="shb-nL-K06"/>
                             <constraint firstItem="afK-H1-q78" firstAttribute="leading" secondItem="eKH-EA-0ll" secondAttribute="leadingMargin" id="t9Q-i1-w9w"/>
                             <constraint firstItem="YFb-TA-ZBH" firstAttribute="top" secondItem="Gyw-so-Gq1" secondAttribute="bottom" constant="8" id="tV4-Qm-x5u"/>
+                            <constraint firstItem="MJY-qg-MTp" firstAttribute="leading" secondItem="eKH-EA-0ll" secondAttribute="leading" id="xv2-Xf-ET5"/>
                             <constraint firstItem="hRP-EK-fmD" firstAttribute="leading" secondItem="Sro-m6-M9g" secondAttribute="trailing" constant="8" id="yG3-ma-b9b"/>
                         </constraints>
                     </view>
@@ -550,11 +550,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="527-WU-omJ">
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="527-WU-omJ">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="521"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </webView>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="ufN-VF-3U1">
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="ufN-VF-3U1">
                                 <rect key="frame" x="99" y="529" width="119" height="29"/>
                                 <segments>
                                     <segment title="Accept"/>
@@ -566,6 +566,15 @@
                             </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ufN-VF-3U1" firstAttribute="leading" secondItem="0rT-Gw-d59" secondAttribute="leadingMargin" constant="83" id="30I-jj-GxM"/>
+                            <constraint firstItem="z6P-os-37u" firstAttribute="top" secondItem="ufN-VF-3U1" secondAttribute="bottom" constant="11" id="6Rg-Ho-hMe"/>
+                            <constraint firstItem="527-WU-omJ" firstAttribute="leading" secondItem="0rT-Gw-d59" secondAttribute="leading" id="I7r-k1-AlW"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ufN-VF-3U1" secondAttribute="trailing" constant="86" id="a3n-I8-KAl"/>
+                            <constraint firstItem="ufN-VF-3U1" firstAttribute="top" secondItem="527-WU-omJ" secondAttribute="bottom" constant="8" id="kLH-Nu-tqi"/>
+                            <constraint firstItem="527-WU-omJ" firstAttribute="top" secondItem="0rT-Gw-d59" secondAttribute="top" id="mA5-xB-P8V"/>
+                            <constraint firstAttribute="trailing" secondItem="527-WU-omJ" secondAttribute="trailing" id="pr1-MH-59b"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="segmentedControl" destination="ufN-VF-3U1" id="gfz-cF-SBz"/>

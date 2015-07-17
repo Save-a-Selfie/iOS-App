@@ -11,14 +11,18 @@
 #import "SASMapAnnotationRetriever.h"
 #import "SASImageViewController.h"
 #import "SASUtilities.h"
+#import <SDWebImageDownloader.h>
 
-#define CELL_LIMIT 30
+#define CELL_LIMIT 10
 
 @interface SASGalleryCollectionViewController() <SASMapAnnotationRetrieverDelegate, SASGalleryCellDelegate>
 
 @property(strong, nonatomic) SASMapAnnotationRetriever *sasAnnotationRetriever;
 @property(strong, nonatomic) NSMutableArray *dataForCells;
 @property(strong, atomic) __block NSMutableArray *cellImages;
+@property (strong, nonatomic) SDWebImageDownloader *imageDownloader;
+
+@property (assign, nonatomic) BOOL readyToLoad;
 
 @end
 
@@ -28,6 +32,8 @@
 @synthesize sasAnnotationRetriever;
 @synthesize dataForCells;
 @synthesize cellImages;
+@synthesize imageDownloader;
+@synthesize readyToLoad;
 
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -55,8 +61,39 @@
 
 - (void)sasAnnotationsRetrieved:(NSMutableArray *)devices {
     self.dataForCells = devices;
-    NSLog(@"%ld", devices.count);
-    [self.collectionView reloadData];
+
+    
+    for (int i; i < CELL_LIMIT; i++) {
+        
+        
+        // Get the image for the cell.
+        SASDevice *deviceAtIndex = [self.dataForCells objectAtIndex:i];
+        
+        NSString *imageURL = deviceAtIndex.imageURL;
+        
+        NSURL *url = [NSURL URLWithString:imageURL];
+        
+        [SDWebImageDownloader.sharedDownloader downloadImageWithURL:url options:0 progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+            
+        }
+                                                          completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished)
+         {
+             if (image && finished) {
+                 [self.cellImages addObject:image];
+                 NSLog(@"%@", image);
+                 NSLog(@"Cell image count: %lu", (unsigned long)self.cellImages.count);
+                 
+                 if (self.cellImages.count == CELL_LIMIT ) {
+                     self.readyToLoad = YES;
+                     printf("READY TO LOAD ******");
+                     [self.collectionView reloadData];
+                 }
+             }
+         }];
+        
+       
+    }
+    
 }
 
 
@@ -64,45 +101,28 @@
 #pragma mark CollectionView Data source
 - (SASGalleryCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    // Get the image for the cell.
-    __weak SASDevice *deviceAtIndex = [self.dataForCells objectAtIndex:indexPath.row];
     
-    __weak NSString *imageURL = deviceAtIndex.imageURL;
-    
-    
-    __block SASGalleryCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
+    SASGalleryCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
     cell.delegate = self;
-
     
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        
-        NSData *data = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:imageURL]];
-        UIImage *image = [UIImage imageWithData:data];
-        if (image != nil) {
-            [self.cellImages addObject:image];
+    if (self.readyToLoad) {
+        if (self.cellImages[indexPath.row] != nil) {
+            cell.imageView.image = self.cellImages[indexPath.row];
         }
+    }
 
-        NSLog(@"%lu", (unsigned long) self.cellImages.count);
-        if(cellImages.count == 28) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                cell.imageView.image = [self.cellImages objectAtIndex:indexPath.row];
-                cell.device = [self.dataForCells objectAtIndex:indexPath.row];
-            });
-        };
-    });
-    
     return cell;
     
 }
 
 
 - (void) setCells {
-             
+    
 }
 
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return 28;
+    return CELL_LIMIT;
 }
 
 - (UIEdgeInsets)collectionView:(UICollectionView*)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
