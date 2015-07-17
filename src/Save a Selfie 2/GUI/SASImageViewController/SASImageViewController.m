@@ -142,14 +142,15 @@
 
     if(self.annotation.device.imageURL != nil && !imageLoaded) {
         
-        // Begin animation of sasActivityIndicator until image is loaded.
-        self.sasActivityIndicator = [[SASActivityIndicator alloc] initWithMessage:@"Loading..."];
+        if (self.sasActivityIndicator == nil) {
+            // Begin animation of sasActivityIndicator until image is loaded.
+            self.sasActivityIndicator = [[SASActivityIndicator alloc] initWithMessage:@"Loading..."];
+        }
+        
         [self.sasImageView addSubview:sasActivityIndicator];
-        self.sasActivityIndicator.center = self.sasImageView.center;
         self.sasActivityIndicator.backgroundColor = [UIColor clearColor];
+        self.sasActivityIndicator.center = self.sasImageView.center;
         [self.sasActivityIndicator startAnimating];
-        
-        
         
         // Set the image from the URLString contained within the device property
         // of the annotation passed to this object.
@@ -228,7 +229,7 @@
 
 
 
-#pragma mark SASNotificationReceiver
+#pragma mark SASMapNotificationReceiver
 - (void)sasMapViewUsersLocationHasUpdated:(CLLocationCoordinate2D)coordinate {
     double distance = [SASUtilities distanceBetween:self.annotation.coordinate and:coordinate];
     

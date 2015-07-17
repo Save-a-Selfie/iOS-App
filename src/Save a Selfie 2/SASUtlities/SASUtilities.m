@@ -71,6 +71,7 @@
     blur.translucentAlpha = 0.999;
     
     [view addSubview:blur];
+
 }
 
 // Changes the view to a blurview.

@@ -8,8 +8,7 @@
 
 #import "AppDelegate.h"
 #import "ExtendNSLogFunctionality.h"
-
-#import "SASUtilities.h"
+#import "Screen.h"
 
 @interface AppDelegate ()
 
@@ -20,9 +19,10 @@
 
 UIFont *customFont, *customFontSmaller;
 
-BOOL NSLogOn = NO; // YES to show logs, NO if not
+BOOL NSLogOn = YES; // YES to show logs, NO if not
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
     return YES;
 }
 
