@@ -15,7 +15,7 @@
 #import "SASSocial.h"
 #import "SASImageView.h"
 #import "ILTranslucentView.h"
-#import "SASMapAnnotationRetriever.h"
+#import "SASObjectDownloader.h"
 #import "SASBarButtonItem.h"
 #import "SASAlertView.h"
 
@@ -44,7 +44,7 @@
 
 @property (nonatomic, weak) IBOutlet UIButton *showDeviceLocationPin;
 
-@property (nonatomic, strong) SASMapAnnotationRetriever *s;
+@property (nonatomic, strong) SASObjectDownloader *s;
 
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *photoDesriptionHeightContraint;
 @end
@@ -156,7 +156,7 @@
         // of the annotation passed to this object.
         dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             
-            self.s = [[SASMapAnnotationRetriever alloc]init];
+            self.s = [[SASObjectDownloader alloc]init];
             UIImage* imageFromURL = [self.s getImageFromURLWithString:self.annotation.device.imageURL];
             
             dispatch_async( dispatch_get_main_queue(), ^{

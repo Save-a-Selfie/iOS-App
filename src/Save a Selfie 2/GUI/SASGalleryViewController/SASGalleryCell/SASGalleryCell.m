@@ -36,7 +36,7 @@
 
 - (void) forwardTapToDelegate {
     
-    SASAnnotation *annotation = [[SASAnnotation alloc] initAnnotationWithDevice:self.device
+    SASAnnotation *annotation = [[SASAnnotation alloc] initAnnotationWithObject:self.device
                                                                           index:0];
     
     if(self.delegate != nil && [self.delegate respondsToSelector:@selector(sasGalleryCellDelegate:wasTappedWithObject:)]) {

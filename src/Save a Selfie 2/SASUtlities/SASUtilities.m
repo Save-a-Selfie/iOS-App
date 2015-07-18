@@ -35,7 +35,6 @@
 
 #pragma mark Current Timestamp
 // From here: http://stackoverflow.com/questions/22359090/get-current-time-in-timestamp-format-ios
-
 + (NSString *)getCurrentTimeStamp {
     NSDateFormatter *objDateformat = [[NSDateFormatter alloc] init];
     [objDateformat setDateFormat:@"yyyyMMddHHmmss"];

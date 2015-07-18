@@ -18,7 +18,7 @@
 @synthesize device = _device;
 @synthesize index = _index;
 
-- (instancetype) initAnnotationWithDevice:(SASDevice*) aDevice index:(int) deviceNumber {
+- (instancetype) initAnnotationWithObject:(SASDevice*) aDevice index:(int) deviceNumber {
     if (self = [super init]) {
         
         _name = [SASDevice getDeviceNameForDeviceType:aDevice.type];

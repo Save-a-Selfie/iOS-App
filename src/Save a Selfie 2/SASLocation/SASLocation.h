@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
-#import "SASMapAnnotationRetriever.h"
+#import "SASObjectDownloader.h"
 
 // This protocol provides a wrapper for CLLocationManagerDelegate, and enables us to retreive
 // the appropriate location information needed.

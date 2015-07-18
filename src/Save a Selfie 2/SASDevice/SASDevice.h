@@ -46,8 +46,7 @@ typedef NS_ENUM(int, SASDeviceType) {
 @property (nonatomic, assign, readonly) CLLocationCoordinate2D deviceLocation;
 
 
-// Initialises a SASDevice object with information from a string typically
-// gotten in SASAnnotationRetriever.
+// Initialises a SASDevice object with device information from a string.
 - (id) initDeviceWithInformationFromString: (NSString *)infoString;
 
 @end

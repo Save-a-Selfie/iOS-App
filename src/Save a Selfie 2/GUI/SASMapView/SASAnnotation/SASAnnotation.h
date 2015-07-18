@@ -18,7 +18,7 @@
 @property (nonatomic, assign) int index;
 
 
-- (instancetype) initAnnotationWithDevice:(SASDevice*) device index:(int) deviceNumber;
+- (instancetype) initAnnotationWithObject:(SASDevice*) device index:(int) deviceNumber;
 
 
 @end

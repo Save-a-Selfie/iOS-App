@@ -1,21 +1,21 @@
 //
-//  SASMapAnnotationRetriever.m
+//  SASObjectDownloader.m
 //  Save a Selfie
 //
 //  Created by Stephen Fox on 28/05/2015.
 //  Copyright (c) 2015 Stephen Fox & Peter FitzGerald. All rights reserved.
 //
 
-#import "SASMapAnnotationRetriever.h"
+#import "SASObjectDownloader.h"
 #import "PopupImage.h"
 #import "SASDevice.h"
 #import "AppDelegate.h"
 #import "ExtendNSLogFunctionality.h"
 
-@interface SASMapAnnotationRetriever() <NSURLConnectionDataDelegate, NSURLConnectionDelegate>
+@interface SASObjectDownloader() <NSURLConnectionDataDelegate, NSURLConnectionDelegate>
 
 @property(strong, nonatomic) NSMutableData *responseData;
-@property(strong, nonatomic) NSMutableArray *devices;
+@property(strong, nonatomic) NSMutableArray *dowloadedObjects;
 
 @property(strong, nonatomic) NSURL *url;
 @property(strong, nonatomic) NSURLRequest *request;
@@ -24,10 +24,10 @@
 @end
 
 
-@implementation SASMapAnnotationRetriever
+@implementation SASObjectDownloader
 
 @synthesize delegate;
-@synthesize devices;
+@synthesize dowloadedObjects;
 @synthesize responseData = _responseData;
 
 #pragma mark Objects for creating up URL request.
@@ -50,7 +50,7 @@
 }
 
 
-- (void) fetchSASAnnotationsFromServer {
+- (void) downloadObjectsFromServer {
     
     self.connection = [[NSURLConnection alloc] initWithRequest:self.request
                                                       delegate:self];
@@ -88,25 +88,24 @@
     NSString *data = [[NSString alloc] initWithData:self.responseData
                                            encoding:NSUTF8StringEncoding];
     
-    NSArray *deviceData = [data componentsSeparatedByString:@"\n"];
+    NSArray *objectData = [data componentsSeparatedByString:@"\n"];
     
     
-    self.devices = [[NSMutableArray alloc] init];
+    self.dowloadedObjects = [[NSMutableArray alloc] init];
     
     
-    for(int i = 0; i < [deviceData count]; i++) {
-        if([deviceData[i] length] != 0) {
+    for(int i = 0; i < [objectData count]; i++) {
+        if([objectData[i] length] != 0) {
             
-            SASDevice *device = [[SASDevice alloc] initDeviceWithInformationFromString:[deviceData objectAtIndex:i]];
-            [self.devices insertObject:device atIndex:i];
+            SASDevice *device = [[SASDevice alloc] initDeviceWithInformationFromString:[objectData objectAtIndex:i]];
+            [self.dowloadedObjects insertObject:device atIndex:i];
         }
     }
     
     
-    // Pass on the device data to any conforming object.
-    if(delegate != nil && [delegate respondsToSelector:@selector(sasAnnotationsRetrieved:)]) {
-        plog(@"Passing on annotations");
-        [delegate sasAnnotationsRetrieved:self.devices];
+    // Pass on the downloaded information to the delegate.
+    if (self.delegate != nil && [self.delegate respondsToSelector:@selector(sasObjectDownloader:didDownloadObjects:)]) {
+        [self.delegate sasObjectDownloader:self didDownloadObjects:self.dowloadedObjects];
     }
 }
 

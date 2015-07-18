@@ -9,7 +9,7 @@
 #import "SASMapView.h"
 #import "SASLocation.h"
 #import "SASAnnotation.h"
-#import "SASMapAnnotationRetriever.h"
+#import "SASObjectDownloader.h"
 #import "PopupImage.h"
 
 #import "UIView+NibInitializer.h"
@@ -20,7 +20,7 @@
 #import "ExtendNSLogFunctionality.h"
 
 
-@interface SASMapView() <SASMapAnnotationRetrieverDelegate, SASLocationDelegate> {
+@interface SASMapView() <SASObjectDownloaderDelegate, SASLocationDelegate> {
     BOOL userAlreadyLocated;
 }
 
@@ -32,12 +32,12 @@
 @property(strong, nonatomic) SASLocation* sasLocation;
 
 // Object to retrieve annotations from the server.
-@property(strong, nonatomic) SASMapAnnotationRetriever *sasAnnotationRetriever;
+@property(strong, nonatomic) SASObjectDownloader *sasObjectDownloader;
 
 // The annotation type for the map to show.
 @property(assign, nonatomic) SASDeviceType annotationsToShow;
 
-@property(strong, nonatomic) NSMutableArray *annotationInfoFromServer;
+@property(strong, nonatomic) NSMutableArray *objectInfoFromServer;
 
 @end
 
@@ -48,9 +48,9 @@
 
 @synthesize currentLocation;
 @synthesize sasLocation;
-@synthesize sasAnnotationRetriever;
+@synthesize sasObjectDownloader;
 @synthesize notificationReceiver;
-@synthesize annotationInfoFromServer;
+@synthesize objectInfoFromServer;
 @synthesize sasAnnotationImage;
 @synthesize annotationsToShow;
 @synthesize showAnnotations;
@@ -109,10 +109,10 @@
 
 
 - (void)loadSASAnnotationsToMap {
-    // Our annotationRetriever Object
-    self.sasAnnotationRetriever = [[SASMapAnnotationRetriever alloc] init];
-    self.sasAnnotationRetriever.delegate = self;
-    [self.sasAnnotationRetriever fetchSASAnnotationsFromServer];
+    // Our sasObjectDownloader Object
+    self.sasObjectDownloader = [[SASObjectDownloader alloc] init];
+    self.sasObjectDownloader.delegate = self;
+    [self.sasObjectDownloader downloadObjectsFromServer];
 }
 
 
@@ -210,7 +210,7 @@
     // Call plotAnnotationsWithDeviceInformation:
     // which will do the checking on whether or not
     // that annotation should be shown on the map.
-    [self plotAnnotationsWithDeviceInformation:annotationInfoFromServer];
+    [self plotAnnotationsWithObjectInformation:objectInfoFromServer];
 }
 
 
@@ -262,24 +262,25 @@
 
 
 
-#pragma mark SASMapAnnotationRetrieverDelegate method
-- (void) sasAnnotationsRetrieved:(NSMutableArray *)devices {
+#pragma SASObjectDownloaderDelegate
+- (void)sasObjectDownloader:(SASObjectDownloader *)downloader didDownloadObjects:(NSMutableArray *)objects {
     
-    if(self.annotationInfoFromServer == nil) {
-        self.annotationInfoFromServer = [[NSMutableArray alloc] initWithArray:devices];
+    if(self.objectInfoFromServer == nil) {
+        self.objectInfoFromServer = [[NSMutableArray alloc] initWithArray:objects];
     }
     
     if(self.showAnnotations) {
-        [self plotAnnotationsWithDeviceInformation:devices];
+        [self plotAnnotationsWithObjectInformation:objects];
     }
 }
 
 
 
+
 // @Discussion
-// Plots the annotations according to each device retreived from
-// SASMapAnnotationRetrieverDelegate's method sasAnnotationsRetrieved:
-- (void) plotAnnotationsWithDeviceInformation: (NSMutableArray*) devices {
+// Plots the annotations according to each object data retreived from
+// SASObjectDownloaderDelegate method -sasObjectDownloader: didDownloadObjects:
+- (void) plotAnnotationsWithObjectInformation: (NSMutableArray*) devices {
     
     [self removeExistingAnnotationsFromMapView];
     
@@ -287,7 +288,7 @@
     
     for (SASDevice *d in devices) {
         
-        SASAnnotation *annotation = [[SASAnnotation alloc] initAnnotationWithDevice:d index:deviceNumber];
+        SASAnnotation *annotation = [[SASAnnotation alloc] initAnnotationWithObject:d index:deviceNumber];
         deviceNumber++;
         
         // Checks whether or not that particular annotation

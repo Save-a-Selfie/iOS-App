@@ -1,5 +1,5 @@
 //
-//  SASMapAnnotationRetriever.h
+//  SASObjectDownloader.h
 //  Save a Selfie
 //
 //  Created by Stephen Fox on 28/05/2015.
@@ -9,16 +9,19 @@
 #import <UIKit/UIKit.h>
 
 
+@class SASObjectDownloader;
 
-@protocol SASMapAnnotationRetrieverDelegate <NSObject>
+
+@protocol SASObjectDownloaderDelegate <NSObject>
 
 
 // @Discussion
 //  This method will pass
-//  a NSMutableArray with information regarding an annotation.
+//  a NSMutableArray with information regarding all the devices
+//  that have been uploaded.
 //
 //  @param device: NSMutable array which contains device information.
-- (void) sasAnnotationsRetrieved: (NSMutableArray*) devices;
+- (void) sasObjectDownloader:(SASObjectDownloader *) downloader didDownloadObjects: (NSMutableArray*) objects;
 
 @end
 
@@ -28,16 +31,16 @@
 // This app uses Device.h/.m to wrap up extra information about the device
 // i.e image, location etc...
 // For more information refer to Device.h.
-@interface SASMapAnnotationRetriever : NSObject
+@interface SASObjectDownloader : NSObject
 
 
-@property(nonatomic, weak) id<SASMapAnnotationRetrieverDelegate> delegate;
+@property(nonatomic, weak) id<SASObjectDownloaderDelegate> delegate;
 
 // @Discussion:
-//  Fetches all the annotations from the server.
-//  The annotations a passed via the `SASMapAnnotationRetrieverDelegate` method
-//  -sasAnnotationsRetrieved:
-- (void) fetchSASAnnotationsFromServer;
+//  Fetches and downloader all the object information
+//  from the server again. The downloaded data is then
+//  passed via the delegate -sasObjectDownloader: didDowloadObjects:
+- (void) downloadObjectsFromServer;
 
 
 // @Abstract:
