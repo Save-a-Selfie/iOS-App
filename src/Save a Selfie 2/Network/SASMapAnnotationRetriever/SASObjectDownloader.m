@@ -26,7 +26,7 @@
 
 @implementation SASObjectDownloader
 
-@synthesize delegate;
+@synthesize delegate = _delegate;
 @synthesize dowloadedObjects;
 @synthesize responseData = _responseData;
 
@@ -38,22 +38,36 @@
 
 
 #pragma mark Object Life Cycle
-// Set up all connection & data objects here
-- (instancetype)init
-{
+- (instancetype)init {
     if(self = [super init]) {
-        _url = [NSURL URLWithString: @"http://www.saveaselfie.org/wp/wp-content/themes/magazine-child/getMapData.php"];
-        _request = [NSURLRequest requestWithURL:self.url];
-        _responseData = [[NSMutableData alloc] init];
+        [self setup];
     }
     return self;
 }
 
 
+- (instancetype) initWithDelegate:(id) delegate {
+    if (self = [super init]) {
+        _delegate = delegate;
+        [self setup];
+    }
+    return self;
+}
+
+
+
+// Set up all connection & data objects here
+- (void) setup {
+    _url = [NSURL URLWithString: @"http://www.saveaselfie.org/wp/wp-content/themes/magazine-child/getMapData.php"];
+    _request = [NSURLRequest requestWithURL:self.url];
+    _responseData = [[NSMutableData alloc] init];
+}
+
+
+
 - (void) downloadObjectsFromServer {
     
-    self.connection = [[NSURLConnection alloc] initWithRequest:self.request
-                                                      delegate:self];
+    self.connection = [[NSURLConnection alloc] initWithRequest:self.request delegate:self];
     
 }
 

@@ -30,7 +30,6 @@
 		1864FEAC1B27A39900EA564A /* UIFont+SASFont.m in Sources */ = {isa = PBXBuildFile; fileRef = 1864FEAB1B27A39900EA564A /* UIFont+SASFont.m */; };
 		186A39A21B3C933E00F38EDB /* SASFilterViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 186A39A11B3C933E00F38EDB /* SASFilterViewCell.xib */; };
 		186A39A91B3C93E600F38EDB /* SASFilterViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 186A39A81B3C93E600F38EDB /* SASFilterViewCell.m */; };
-		187C2C9D1B5A817200887B10 /* SASGalleryDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 187C2C9C1B5A817200887B10 /* SASGalleryDataSource.m */; };
 		188CAEE51B20EA59006A90EB /* SASSocial.m in Sources */ = {isa = PBXBuildFile; fileRef = 188CAEE41B20EA59006A90EB /* SASSocial.m */; };
 		188CAEED1B21006C006A90EB /* Screen.m in Sources */ = {isa = PBXBuildFile; fileRef = 188CAEEC1B21006C006A90EB /* Screen.m */; };
 		1891E3D31B1743C8008CC10C /* SASMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1891E3D21B1743C8008CC10C /* SASMapView.m */; };
@@ -150,8 +149,6 @@
 		186A39A11B3C933E00F38EDB /* SASFilterViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SASFilterViewCell.xib; sourceTree = "<group>"; };
 		186A39A71B3C93E600F38EDB /* SASFilterViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASFilterViewCell.h; sourceTree = "<group>"; };
 		186A39A81B3C93E600F38EDB /* SASFilterViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASFilterViewCell.m; sourceTree = "<group>"; };
-		187C2C9B1B5A817200887B10 /* SASGalleryDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASGalleryDataSource.h; sourceTree = "<group>"; };
-		187C2C9C1B5A817200887B10 /* SASGalleryDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASGalleryDataSource.m; sourceTree = "<group>"; };
 		188CAEE31B20EA59006A90EB /* SASSocial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASSocial.h; sourceTree = "<group>"; };
 		188CAEE41B20EA59006A90EB /* SASSocial.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASSocial.m; sourceTree = "<group>"; };
 		188CAEEB1B21006C006A90EB /* Screen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Screen.h; sourceTree = "<group>"; };
@@ -357,7 +354,6 @@
 			children = (
 				1818AFD41B515249004FF998 /* SASGalleryCollectionViewController.h */,
 				1818AFD51B515249004FF998 /* SASGalleryCollectionViewController.m */,
-				187C2C9E1B5A817F00887B10 /* Datasource */,
 				1818AFDB1B5153A9004FF998 /* SASGalleryCell */,
 			);
 			path = SASGalleryViewController;
@@ -482,15 +478,6 @@
 				186A39A11B3C933E00F38EDB /* SASFilterViewCell.xib */,
 			);
 			path = SASFilterViewCell;
-			sourceTree = "<group>";
-		};
-		187C2C9E1B5A817F00887B10 /* Datasource */ = {
-			isa = PBXGroup;
-			children = (
-				187C2C9B1B5A817200887B10 /* SASGalleryDataSource.h */,
-				187C2C9C1B5A817200887B10 /* SASGalleryDataSource.m */,
-			);
-			name = Datasource;
 			sourceTree = "<group>";
 		};
 		188CAEE61B20EA5D006A90EB /* SASSocial */ = {
@@ -1049,7 +1036,6 @@
 				1807AF3F1B4EE8F2006E1B28 /* StorageSystem.m in Sources */,
 				D73550A41A84DBF500F9093C /* UIView+Alert.m in Sources */,
 				188CAEE51B20EA59006A90EB /* SASSocial.m in Sources */,
-				187C2C9D1B5A817200887B10 /* SASGalleryDataSource.m in Sources */,
 				18B7C3401B44885B00017170 /* SASBarButtonItem.m in Sources */,
 				1818AFC61B50435B004FF998 /* UIView+Animations.m in Sources */,
 				1818AFD61B515249004FF998 /* SASGalleryCollectionViewController.m in Sources */,

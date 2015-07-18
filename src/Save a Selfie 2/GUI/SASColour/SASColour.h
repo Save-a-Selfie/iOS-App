@@ -16,7 +16,7 @@
 + (UIColor*) sasGreenFirstAidColour;
 + (UIColor*) sasRedAEDColour;
 
-// @return the colour assocatioed with the device.
+// @return the colour assocatied with the device.
 + (UIColor*) getSASColourForDeviceType:(SASDeviceType) deviceType;
 
 @end

@@ -13,54 +13,117 @@
 #import "SASUtilities.h"
 #import <SDWebImageDownloader.h>
 
-#define CELL_LIMIT 100
-
-@interface SASGalleryCollectionViewController() <SASGalleryCellDelegate>
 
 
+@interface SASGalleryCollectionViewController() <SASGalleryCellDelegate, UICollectionViewDataSource, UICollectionViewDelegate, SASObjectDownloaderDelegate>
 
+@property (strong, nonatomic) SASObjectDownloader *sasObjectDownloader;
+@property (weak, nonatomic) NSMutableArray *objectsForCells;
+@property (strong, nonatomic) NSMutableArray* imagesForCell;
+
+@property (assign, nonatomic) __block BOOL readyToSetImageToCells;
 
 
 @end
 
 
+
 @implementation SASGalleryCollectionViewController
 
-
+@synthesize sasObjectDownloader;
+@synthesize objectsForCells;
+@synthesize imagesForCell;
+@synthesize readyToSetImageToCells;
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-
-    self.navigationController.navigationBar.topItem.title = @"Gallery";
+    self.readyToSetImageToCells = NO;
     
+    if (self.sasObjectDownloader == nil) {
+        self.sasObjectDownloader = [[SASObjectDownloader alloc] initWithDelegate:self];
+    }
+    
+    self.navigationController.navigationBar.topItem.title = @"Gallery";
     self.collectionView.backgroundColor = [UIColor whiteColor];
 
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
     
+    [self.sasObjectDownloader downloadObjectsFromServer];
 }
 
 
+#pragma mark SASObjectDownloader Delegate
+- (void)sasObjectDownloader:(SASObjectDownloader *)downloader didDownloadObjects:(NSMutableArray *)objects {
+    self.objectsForCells = objects;
+    
+    [self beginFetchingImagesFromObjectData:objectsForCells];
+}
 
 
-//#pragma mark CollectionView Data source
-//- (SASGalleryCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-//    
-//    
-//    SASGalleryCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
-//    cell.delegate = self;
-//    
-//    if (self.readyToLoad) {
-//        cell.imageView.image = self.cellImages[indexPath.row];
-//        //cell.device = self.dataForCells[indexPath.row];
-//    }
-//
-//    return cell;
-//    
-//}
+- (void) beginFetchingImagesFromObjectData:(__weak NSMutableArray*) objects {
+    
+    __block int imageCount = 0;
+    printf("Object count: %lu", (unsigned long)objects.count);
+    
+    if (self.imagesForCell == nil) {
+        self.imagesForCell = [[NSMutableArray alloc] init];
+    }
+    
+    // Loop through all the objects and initliase
+    // an SASDevice from each object at index.
+    // Create a URL from the devices imageURL string.
+    // Then download the image.
+    for (int i = 0; i < objects.count; i++) {
+        
+        
+        
+        SASDevice *device = objects[i];
+        
+        NSURL *url = [NSURL URLWithString:device.imageURL];
+        
+        [SDWebImageDownloader.sharedDownloader downloadImageWithURL:url
+                                                            options:0
+                                                           progress:nil
+                                                          completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished){
+                                                              
+                                                              if(image && finished) {
+                                                                  [self.imagesForCell addObject:image];
+                                                                  imageCount++;
+                                                                  printf("%d\n", imageCount);
+                                                              }
+                                                              
+                                                              if (imageCount == objects.count) {
+                                                                  self.readyToSetImageToCells = YES;
+                                                                  [self.collectionView reloadData];
+                                                              }
+                                                          }];
+
+    }
+}
 
 
+#pragma mark CollectionView Data source
+- (SASGalleryCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    SASGalleryCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
+    
+    if (self.readyToSetImageToCells) {
+        cell.imageView.image = self.imagesForCell[indexPath.row];
+        cell.device = (SASDevice *)self.objectsForCells;
+    }
+    return cell;
+
+}
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    if(self.readyToSetImageToCells) {
+        return self.imagesForCell.count;
+    } else {
+        return 0;
+    }
+}
 
 
 - (UIEdgeInsets)collectionView:(UICollectionView*)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {

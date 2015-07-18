@@ -528,10 +528,6 @@
                                 </connections>
                             </collectionViewCell>
                         </cells>
-                        <connections>
-                            <outlet property="dataSource" destination="zCS-A5-9Es" id="Lm8-BG-czT"/>
-                            <outlet property="delegate" destination="zCS-A5-9Es" id="tOC-8c-6mp"/>
-                        </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" id="SzW-yR-cA3"/>
                 </collectionViewController>

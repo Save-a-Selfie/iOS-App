@@ -18,7 +18,9 @@
 // @Discussion
 //  This method will pass
 //  a NSMutableArray with information regarding all the devices
-//  that have been uploaded.
+//  that have been uploaded. This method is called when the
+//  objects have been fully downloaded, therefore it is save to assume
+//  that the connection has finished when this method is called.
 //
 //  @param device: NSMutable array which contains device information.
 - (void) sasObjectDownloader:(SASObjectDownloader *) downloader didDownloadObjects: (NSMutableArray*) objects;
@@ -33,6 +35,7 @@
 // For more information refer to Device.h.
 @interface SASObjectDownloader : NSObject
 
+- (instancetype) initWithDelegate:(id) delegate;
 
 @property(nonatomic, weak) id<SASObjectDownloaderDelegate> delegate;
 
