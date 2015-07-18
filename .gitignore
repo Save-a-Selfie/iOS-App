@@ -20,4 +20,8 @@
 *.out
 *.app
 
+
+# Annoying Files
+*.DS_Store
+
 *xcuserdata*
