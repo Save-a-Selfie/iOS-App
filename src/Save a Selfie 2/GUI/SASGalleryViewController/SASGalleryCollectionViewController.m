@@ -12,7 +12,9 @@
 #import "SASImageViewController.h"
 #import "SASUtilities.h"
 #import <SDWebImageDownloader.h>
+#import "SASActivityIndicator.h"
 
+#define CELL_COUNT 30
 
 
 @interface SASGalleryCollectionViewController() <SASGalleryCellDelegate, UICollectionViewDataSource, UICollectionViewDelegate, SASObjectDownloaderDelegate>
@@ -22,6 +24,7 @@
 @property (strong, nonatomic) NSMutableArray* imagesForCell;
 
 @property (assign, nonatomic) __block BOOL readyToSetImageToCells;
+@property (strong, nonatomic) __block SASActivityIndicator *sasActivityIndicator;
 
 
 @end
@@ -34,11 +37,22 @@
 @synthesize objectsForCells;
 @synthesize imagesForCell;
 @synthesize readyToSetImageToCells;
+@synthesize sasActivityIndicator;
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
     self.readyToSetImageToCells = NO;
+    
+    
+    if(self.sasActivityIndicator == nil) {
+        self.sasActivityIndicator = [[SASActivityIndicator alloc] initWithMessage:@"Loading..."];
+        [self.collectionView addSubview:self.sasActivityIndicator];
+        self.sasActivityIndicator.center = self.collectionView.center;
+        self.sasActivityIndicator.backgroundColor = [UIColor whiteColor];
+        [self.sasActivityIndicator startAnimating];
+
+    }
     
     if (self.sasObjectDownloader == nil) {
         self.sasObjectDownloader = [[SASObjectDownloader alloc] initWithDelegate:self];
@@ -75,7 +89,7 @@
     // an SASDevice from each object at index.
     // Create a URL from the devices imageURL string.
     // Then download the image.
-    for (int i = 0; i < objects.count; i++) {
+    for (int i = 0; i < CELL_COUNT; i++) {
         
         
         
@@ -94,8 +108,10 @@
                                                                   printf("%d\n", imageCount);
                                                               }
                                                               
-                                                              if (imageCount == objects.count) {
+                                                              if (imageCount == CELL_COUNT) {
                                                                   self.readyToSetImageToCells = YES;
+                                                                  [self.sasActivityIndicator stopAnimating];
+                                                                  [self.sasActivityIndicator removeFromSuperview];
                                                                   [self.collectionView reloadData];
                                                               }
                                                           }];
@@ -111,7 +127,7 @@
     
     if (self.readyToSetImageToCells) {
         cell.imageView.image = self.imagesForCell[indexPath.row];
-        cell.device = (SASDevice *)self.objectsForCells;
+//        cell.device = (SASDevice *)self.objectsForCells[indexPath.row];
     }
     return cell;
 
@@ -119,7 +135,7 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     if(self.readyToSetImageToCells) {
-        return self.imagesForCell.count;
+        return CELL_COUNT;
     } else {
         return 0;
     }
@@ -136,7 +152,7 @@
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
-    return 0.0;
+    return 1.0;
 }
 
 
