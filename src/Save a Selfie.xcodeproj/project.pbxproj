@@ -34,6 +34,7 @@
 		188CAEED1B21006C006A90EB /* Screen.m in Sources */ = {isa = PBXBuildFile; fileRef = 188CAEEC1B21006C006A90EB /* Screen.m */; };
 		1891E3D31B1743C8008CC10C /* SASMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1891E3D21B1743C8008CC10C /* SASMapView.m */; };
 		1891E3D91B176E9B008CC10C /* SASObjectDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 1891E3D81B176E9B008CC10C /* SASObjectDownloader.m */; };
+		189D4F311B5AC95F005E709C /* SASVisualEffectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 189D4F301B5AC95F005E709C /* SASVisualEffectView.m */; };
 		18A524F71B166BAB00E8F8F6 /* SASLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A524F61B166BAB00E8F8F6 /* SASLocation.m */; };
 		18A525081B16708400E8F8F6 /* SASMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A525071B16708400E8F8F6 /* SASMapViewController.m */; };
 		18B7C3401B44885B00017170 /* SASBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B7C33F1B44885B00017170 /* SASBarButtonItem.m */; };
@@ -157,6 +158,8 @@
 		1891E3D21B1743C8008CC10C /* SASMapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASMapView.m; sourceTree = "<group>"; };
 		1891E3D71B176E9B008CC10C /* SASObjectDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASObjectDownloader.h; sourceTree = "<group>"; };
 		1891E3D81B176E9B008CC10C /* SASObjectDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASObjectDownloader.m; sourceTree = "<group>"; };
+		189D4F2F1B5AC95F005E709C /* SASVisualEffectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SASVisualEffectView.h; path = "Save a Selfie 2/GUI/SASVisualEffectView.h"; sourceTree = SOURCE_ROOT; };
+		189D4F301B5AC95F005E709C /* SASVisualEffectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SASVisualEffectView.m; path = "Save a Selfie 2/GUI/SASVisualEffectView.m"; sourceTree = SOURCE_ROOT; };
 		18A524F51B166BAB00E8F8F6 /* SASLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASLocation.h; sourceTree = "<group>"; };
 		18A524F61B166BAB00E8F8F6 /* SASLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASLocation.m; sourceTree = "<group>"; };
 		18A525061B16708400E8F8F6 /* SASMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASMapViewController.h; sourceTree = "<group>"; };
@@ -492,6 +495,7 @@
 		188CAEE71B20FE46006A90EB /* GUI */ = {
 			isa = PBXGroup;
 			children = (
+				189D4F321B5AC96D005E709C /* SASVisualEffectView */,
 				18EBF9781B272B3700EDA48B /* SASImagePickerController */,
 				18592DFF1B5182F4004DDFD8 /* UIView+NibInitializer */,
 				1818AFD71B515255004FF998 /* SASGalleryViewController */,
@@ -533,6 +537,15 @@
 				1891E3D81B176E9B008CC10C /* SASObjectDownloader.m */,
 			);
 			path = SASMapAnnotationRetriever;
+			sourceTree = "<group>";
+		};
+		189D4F321B5AC96D005E709C /* SASVisualEffectView */ = {
+			isa = PBXGroup;
+			children = (
+				189D4F2F1B5AC95F005E709C /* SASVisualEffectView.h */,
+				189D4F301B5AC95F005E709C /* SASVisualEffectView.m */,
+			);
+			name = SASVisualEffectView;
 			sourceTree = "<group>";
 		};
 		18A524F81B166BAF00E8F8F6 /* SASLocation */ = {
@@ -1051,6 +1064,7 @@
 				D756A28C19F1735E0089EF80 /* UIImage+Resize.m in Sources */,
 				181D1E621B235CF900FB5928 /* SASImageView.m in Sources */,
 				18B7C3441B44A74500017170 /* SASUploader.m in Sources */,
+				189D4F311B5AC95F005E709C /* SASVisualEffectView.m in Sources */,
 				18B7C3481B4585FE00017170 /* SASAlertView.m in Sources */,
 				D786E2511A50AC7F00A20FDD /* PopupImage.m in Sources */,
 				180E295D1B5464C1003548FA /* EULAViewController.m in Sources */,
