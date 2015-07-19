@@ -104,14 +104,17 @@
     [view addSubview:self];
     
     self.center = view.center;
-    self.alpha = 0.0;
+//    self.alpha = 0.0;
     
     [UIView animateWithDuration:0.5
                           delay:0.1
-         usingSpringWithDamping:0.4
-          initialSpringVelocity:0.4
+         usingSpringWithDamping:0.2
+          initialSpringVelocity:0.6
                         options:UIViewAnimationOptionCurveLinear
-                     animations:^{self.alpha = 1.0;}
+                     animations:^{CGAffineTransform transform = CGAffineTransformMakeScale(1.02, 1.02);
+                         self.transform = transform;
+
+                     }
                      completion:nil];
 }
 
@@ -127,7 +130,7 @@
 
 
 - (IBAction)doneButtonPress:(id)sender {
-    printf("Done button pressed");
+
     if(self.alertAction == nil) {
         
         [self removeFromSuperview];

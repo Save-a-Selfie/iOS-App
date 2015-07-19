@@ -80,7 +80,7 @@
     // Must be called for ios 8
     if([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
         [self.locationManager requestWhenInUseAuthorization];
-        printf("CALLLED\n\n\n\n");
+        
         // Finally check if we have the correct permissions for location services.
         return [self checkLocationPermissions];
     }

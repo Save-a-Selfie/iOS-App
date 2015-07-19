@@ -22,9 +22,10 @@
 #import "EULAViewController.h"
 #import "SASNoticeView.h"
 #import "SASAlertView.h"
+#import "SASTabBarController.h"
 
 
-@interface SASMapViewController () <SASImagePickerDelegate, SASFilterViewDelegate, SASUploadImageViewControllerDelegate, UIAlertViewDelegate> {
+@interface SASMapViewController () <SASImagePickerDelegate, SASFilterViewDelegate, SASUploadImageViewControllerDelegate, UIAlertViewDelegate, MKMapViewDelegate> {
     CGPoint filterButtonBeforeAnimation;
     CGPoint locateUserButtonBeforeAnimtation;
     CGPoint uploadToServerButtonBeforeAnimation;
@@ -47,7 +48,6 @@
 @property (strong, nonatomic) IBOutlet UIButton *locateUserButton;
 
 @property (strong, nonatomic) SASMapWarningAlert *sasMapWarningAlert;
-@property (assign, nonatomic) BOOL canPresent;
 
 @end
 
@@ -61,9 +61,6 @@ NSString *permissionsProblemOne = @"Please enable location services for this app
 
 
 
-
-
-
 // Buttons
 @synthesize showFilterViewButton;
 @synthesize uploadNewImageToServerButton;
@@ -72,19 +69,12 @@ NSString *permissionsProblemOne = @"Please enable location services for this app
 @synthesize sasMapWarningAlert;
 @synthesize sasNoticeView;
 
-@synthesize canPresent;
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
-    
-}
 
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
-    return UIStatusBarStyleLightContent  ;
+    return UIStatusBarStyleLightContent;
 }
-
 
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -98,7 +88,6 @@ NSString *permissionsProblemOne = @"Please enable location services for this app
     // See SASMapView's: @protocol SASMapViewNotifications
     // for all available botifications.
     self.sasMapView.notificationReceiver = self;
-
     self.sasMapView.zoomToUsersLocationInitially = YES;
     self.sasMapView.sasAnnotationImage = DeviceAnnotationImage;
     [self.sasMapView loadSASAnnotationsToMap];
@@ -112,7 +101,7 @@ NSString *permissionsProblemOne = @"Please enable location services for this app
 
 
 
--(void)LocationServicesDisabledNotice:(NSString *) text {
+-(void) locationServicesDisabledNotice:(NSString *) text {
     [self clearSASNotice];
     
     if(self.sasNoticeView == nil) {
@@ -126,7 +115,7 @@ NSString *permissionsProblemOne = @"Please enable location services for this app
 
 
 
--(void)clearSASNotice { // called when returning from outside app
+-(void) clearSASNotice { // called when returning from outside app
     if (sasNoticeView) {
         [sasNoticeView animateOutOfView];
         sasNoticeView = nil;
@@ -135,15 +124,11 @@ NSString *permissionsProblemOne = @"Please enable location services for this app
 
 
 
-- (IBAction)showSASFilterView:(id)sender {
+- (IBAction) showSASFilterView:(id)sender {
     if(self.sasFilterView == nil) {
         self.sasFilterView = [[SASFilterView alloc] init];
         self.sasFilterView.delegate = self;
         [self.sasMapView addSubview:self.sasFilterView];
-        self.sasFilterView.frame = CGRectMake(self.view.frame.origin.x,
-                                              self.view.frame.origin.y -400,
-                                              self.sasFilterView.frame.size.width,
-                                              self.sasFilterView.frame.size.height);
     }
     
     [self.sasFilterView animateIntoView:self.sasMapView];
@@ -151,13 +136,13 @@ NSString *permissionsProblemOne = @"Please enable location services for this app
 
 
 #pragma mark SASFilterViewDelegate
-- (void)sasFilterView:(SASFilterView *)view doneButtonWasPressedWithSelectedDeviceType:(SASDeviceType)device {
+- (void) sasFilterView:(SASFilterView *)view doneButtonWasPressedWithSelectedDeviceType:(SASDeviceType)device {
     [self.sasMapView filterAnnotationsForDeviceType:device];
     [self.sasFilterView animateOutOfView:self.view];
 }
 
 
-- (void)sasFilterView:(SASFilterView *)view isVisibleInViewHierarhy:(BOOL)visibility {
+- (void) sasFilterView:(SASFilterView *)view isVisibleInViewHierarhy:(BOOL)visibility {
     
     if(visibility) {
         
@@ -193,6 +178,15 @@ NSString *permissionsProblemOne = @"Please enable location services for this app
 
 
 
+#pragma mark
+- (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated {
+    printf("called");
+    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+    NSLog(@"%@", appDelegate.window.rootViewController);
+    
+}
+
+
 // This method will be called anythime permissions for lacation is changed.
 - (void) authorizationStatusHasChanged:(CLAuthorizationStatus)status {
     
@@ -221,7 +215,7 @@ NSString *permissionsProblemOne = @"Please enable location services for this app
                 
             case kCLAuthorizationStatusDenied:
                 NSLog(@"Location services denied by user");
-                [self LocationServicesDisabledNotice:permissionsProblemOne];
+                [self locationServicesDisabledNotice:permissionsProblemOne];
                 break;
                 
             case kCLAuthorizationStatusRestricted:
@@ -235,7 +229,7 @@ NSString *permissionsProblemOne = @"Please enable location services for this app
     }
     else {
         NSLog(@"Location Services Are Disabled");
-        [self LocationServicesDisabledNotice:permissionsProblemOne];
+        [self locationServicesDisabledNotice:permissionsProblemOne];
     }
     
     
