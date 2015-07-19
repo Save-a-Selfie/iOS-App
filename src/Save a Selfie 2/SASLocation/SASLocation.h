@@ -29,28 +29,59 @@
 
 @property(assign) id<SASLocationDelegate> delegate;
 
-// Returns the last known location of the user.
+/**
+ Returns the last updated location of the user.
+ 
+ @return currentUserLocation
+         The last updated location of the user.
+         It is possible that this could return invalid
+         coordinates as the user's location may not be
+         known. It would be advised to check for the validity
+         of this property using -CLLocationCoordinate2DIsValid:
+         for this reason.
+ 
+ */
 - (CLLocationCoordinate2D) currentUserLocation;
 
 
-// Call this to begin receiving updates on the user's location.
+/**
+ This method will begin updating the user's location (if it can).
+ The location is passed via SASLocationDelegate callback
+ */
 - (void) startUpdatingUsersLocation;
 
 
-// Call this to stop receiving updates on the user's location.
+/**
+ Terminates updates on the user's location via
+ SASLocation delegate callback.
+ */
 - (void) stopUpdatingUsersLocation;
 
-// Call this method to check what persmissions we have in terms of location services.
-//  @return NO : We don't have permission to location services on the user's device.
-//               This could be due to the user not allowing this app to use the location
-//               or having location services turned off altogether.
-//  @return YES: We have acceses to location services.
+
+/**
+ This method will check the current status of location permissions
+ for the user's device.
+ 
+ @return NO
+         We don't have permission to location services.
+         This could be due to the user not allowing this app to use the location
+         or having location services turned off altogether.
+ 
+         YES
+         We have access to location services.
+ */
 - (BOOL) checkLocationPermissions;
 
 
-// Call this method to check if we can begin updating the user's location.
-// As of iOS 8 we must call CLLocationManager requestWhenInUseAuthorization: or requestAlwaysAuthorization:
-// this method call makes sure these methods are called before we begin updating users location.
+/**
+ Checks to see if we can begin location the user.
+ 
+ @return YES
+         Locating can begin.
+ 
+         NO
+         Locating cannot begin.
+ */
 - (BOOL) canStartLocating;
 
 @end

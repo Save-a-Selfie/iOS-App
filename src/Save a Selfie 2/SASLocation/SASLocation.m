@@ -11,12 +11,10 @@
 #import "ExtendNSLogFunctionality.h"
 
 
-@interface SASLocation() <CLLocationManagerDelegate> {
-    CLLocationCoordinate2D currentLocationCoordinates;
-}
+@interface SASLocation() <CLLocationManagerDelegate>
 
-@property(nonatomic, strong) CLLocationManager *locationManager;
-
+@property (nonatomic, strong) CLLocationManager *locationManager;
+@property (assign, nonatomic) CLLocationCoordinate2D currentUserLocationCoordinates;
 
 @end
 
@@ -24,6 +22,7 @@
 
 @synthesize locationManager = _locationManager;
 @synthesize delegate;
+@synthesize currentUserLocationCoordinates = _currentUserLocationCoordinates;
 
 
 - (instancetype) init {
@@ -36,6 +35,9 @@
 
 
 - (void) setUpLocationManager {
+    
+    _currentUserLocationCoordinates = kCLLocationCoordinate2DInvalid;
+    
     self.locationManager = [[CLLocationManager alloc] init];
     self.locationManager.delegate = self;
     self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
@@ -50,7 +52,7 @@
 // the last location the devices has located the user at.
 - (CLLocationCoordinate2D)currentUserLocation {
     [self.locationManager startUpdatingLocation];
-    return currentLocationCoordinates;
+    return self.currentUserLocationCoordinates;
 }
 
 
@@ -71,13 +73,14 @@
 
 
 
-
+// As of iOS 8 we must call CLLocationManager requestWhenInUseAuthorization: or requestAlwaysAuthorization:
+// this method call makes sure these methods are called before we begin updating users location.
 - (BOOL) canStartLocating {
     
     // Must be called for ios 8
-    if([self.locationManager respondsToSelector:NSSelectorFromString(@"requestWhenInUseAuthorization")]) {
+    if([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
         [self.locationManager requestWhenInUseAuthorization];
-        
+        printf("CALLLED\n\n\n\n");
         // Finally check if we have the correct permissions for location services.
         return [self checkLocationPermissions];
     }
@@ -128,10 +131,10 @@
     CLLocation *location = [locations lastObject];
     
     // Assign the current user location to the CurrentUserLocations.
-    currentLocationCoordinates = location.coordinate;
+    self.currentUserLocationCoordinates = location.coordinate;
     
     if (self.delegate != nil && [self.delegate respondsToSelector:@selector(sasLocation:locationDidUpdate:)]) {
-        [self.delegate sasLocation:self locationDidUpdate:currentLocationCoordinates];
+        [self.delegate sasLocation:self locationDidUpdate:self.currentUserLocationCoordinates];
     }
 }
 

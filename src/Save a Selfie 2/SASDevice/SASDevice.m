@@ -44,7 +44,6 @@
 }
 
 
-
 // @Disscussion:
 //  Currently when retrieved from the server each SASDevice.type has a corresponding
 //  value:
@@ -77,18 +76,6 @@
     }
 }
 
-
-
-
-// @Discussion:
-//  Currently this is quite a verbose way of returning the correct object
-//  for the SASDeviceType, however it is more safe than just returning an array of objects.
-//  Ideally an NSDictionary with key/value pair would be ideal for this and would make this slightly
-//  cleaner. However, as DeviceType is a NS_ENUM we cannot used it as a key in an NSDictionary as
-//  key/values must be objects(id).
-//
-// TODO: Provide an object wrapper for SASDeviceType so we can use NSDictionary for key/value pairs.
-//
 
 + (NSString*) getDeviceNameForDeviceType:(SASDeviceType) deviceType {
     

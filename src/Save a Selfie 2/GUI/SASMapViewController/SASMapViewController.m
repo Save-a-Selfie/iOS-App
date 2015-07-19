@@ -98,7 +98,7 @@ NSString *permissionsProblemOne = @"Please enable location services for this app
     // See SASMapView's: @protocol SASMapViewNotifications
     // for all available botifications.
     self.sasMapView.notificationReceiver = self;
-    self.sasMapView.showsUserLocation = YES;
+
     self.sasMapView.zoomToUsersLocationInitially = YES;
     self.sasMapView.sasAnnotationImage = DeviceAnnotationImage;
     [self.sasMapView loadSASAnnotationsToMap];
@@ -212,7 +212,11 @@ NSString *permissionsProblemOne = @"Please enable location services for this app
                 
             case kCLAuthorizationStatusAuthorizedWhenInUse:
                 NSLog(@"We have access to location services");
+                
                 makeCheckForMapWarning = YES;
+                // Only when we have access to location
+                // can this be set to YES.
+                self.sasMapView.showsUserLocation = YES;
                 break;
                 
             case kCLAuthorizationStatusDenied:

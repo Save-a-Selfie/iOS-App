@@ -10,12 +10,6 @@
 #import "SASLocation.h"
 #import "SASAnnotation.h"
 #import "SASObjectDownloader.h"
-#import "PopupImage.h"
-
-#import "UIView+NibInitializer.h"
-#import "UIView+Alert.h"
-#import "UIImage+Resize.h"
-
 #import "AppDelegate.h"
 #import "ExtendNSLogFunctionality.h"
 
@@ -59,7 +53,6 @@
 
 #pragma mark Object Life Cycle
 - (instancetype) initWithFrame:(CGRect)frame {
-    
     if(self == [super initWithFrame:frame]) {
         [self setupMapView];
     }
@@ -278,7 +271,6 @@
         [self plotAnnotationsWithObjectInformation:objects];
     }
 }
-
 
 
 

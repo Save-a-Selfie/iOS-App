@@ -24,6 +24,14 @@ typedef NS_ENUM(int, SASDeviceType) {
 
 @interface SASDevice : NSObject;
 
+@property (nonatomic, assign) SASDeviceType type;
+@property (nonatomic, strong, readonly) NSString *imageURL;
+@property (nonatomic, strong, readonly) NSString *caption;
+@property (nonatomic, strong, readonly) NSString *thumb;
+@property (nonatomic, strong, readonly) NSString *app;
+@property (nonatomic, assign, readonly) CLLocationCoordinate2D deviceLocation;
+
+
 // @return Device name for specified SASDeviceType.
 + (NSString*) getDeviceNameForDeviceType:(SASDeviceType) deviceType;
 
@@ -37,12 +45,7 @@ typedef NS_ENUM(int, SASDeviceType) {
 + (UIImage*) getDeviceMapPinImageForDeviceType:(SASDeviceType) deviceType;
 
 
-@property (nonatomic, assign) SASDeviceType type;
-@property (nonatomic, strong, readonly) NSString *imageURL;
-@property (nonatomic, strong, readonly) NSString *caption;
-@property (nonatomic, strong, readonly) NSString *thumb;
-@property (nonatomic, strong, readonly) NSString *app;
-@property (nonatomic, assign, readonly) CLLocationCoordinate2D deviceLocation;
+
 
 
 /**
