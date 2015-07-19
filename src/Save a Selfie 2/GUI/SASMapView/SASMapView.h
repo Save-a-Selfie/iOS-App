@@ -64,31 +64,55 @@ typedef enum: NSUInteger {
 - (void) locateUser;
 
 
-// Calling this method will load all the SASMapAnnotations
-// from the server onto the SASMApView.
+/**
+ This method will load all the annotations from the server
+ to the mapView
+ */
 - (void) loadSASAnnotationsToMap;
 
 
-// @return The location of the user.
+/**
+ Returns the last updated location of the user.
+ 
+ @return currentUserLocation
+         The last updated location of the user.
+         It is possible that this could return invalid
+         coordinates as the user's location may not be
+         known. It would be advised to check for the validity
+         of this property using -CLLocationCoordinate2DIsValid:
+         for this reason.
+ 
+ */
 - (CLLocationCoordinate2D) currentUserLocation;
 
 
-// This can be changed to show specific annotation for the map view.
-// If this isn't called all annotations will be shown by default.
-// Calling this to show a specific type of annotation e.g. Defibrillator etc...
-// will result in the map view only showing that type of annotation.
-// Calling with DeviceType All will show all the annotations again.
+/**
+ This method will filter the map and show a single type of 
+ of SASAnnotation for a specific device type.
+ 
+ @param type
+        The type of device for which the map should filter.
+ */
 - (void) filterAnnotationsForDeviceType:(SASDeviceType) type;
 
 
-// Call this to show a single annotation on the SASMapView.
-// Calling this method will set showsCurrentUserLocation to NO;
-// All other annotations except for the one passed within this
-// method call will be shown.
-//
-// @param: annotation: The annotation to show on the map.
-// @param: andZoom: Zoom the coordinate of the annotation.
-// @param: animated: Animate when zooming to region/ location.
+/**
+ This method will show a single annotation on the map view.
+ This method does alter some other behaviour of the map view.
+ 
+ - The user's location will no longer appear on the map view.
+ - Only the annotation passed will be shown on the map.
+ 
+ @param annotation
+        The annotation to appear on the map.
+ 
+ @param andZoom
+        YES: Will zoom or move the map to the location of the annotation passed.
+        NO: Will not zoom or move the map to the location of the annotation passed.
+ 
+ @param animated
+        If YES to zoom the zooming will be animated.
+ */
 - (void) showAnnotation:(SASAnnotation*) annotation andZoom:(BOOL) zoom animated:(BOOL) animated;
 
 

@@ -46,7 +46,7 @@
 
 @implementation SASMapView
 
-@synthesize currentLocation;
+@synthesize currentLocation = _currentLocation;
 @synthesize sasLocation;
 @synthesize sasObjectDownloader;
 @synthesize notificationReceiver;
@@ -88,6 +88,11 @@
 - (void) setupMapView {
     
     self.zoomToUsersLocationInitially = NO;
+    
+    // This is neccessary as performing check
+    // for the validity of this property requires
+    // us to initialise it to kCLLocationCoordinate2DInvalid.
+    _currentLocation = kCLLocationCoordinate2DInvalid;
     
     userAlreadyLocated = NO;
     sasAnnotationImage = DeviceAnnotationImage;
