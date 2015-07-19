@@ -10,14 +10,16 @@
 #import <CoreLocation/CoreLocation.h>
 #import "SASObjectDownloader.h"
 
+@class SASLocation;
+
 // This protocol provides a wrapper for CLLocationManagerDelegate, and enables us to retreive
 // the appropriate location information needed.
 @protocol SASLocationDelegate <NSObject>
 
-- (void) locationDidUpdate: (CLLocationCoordinate2D) location;
+- (void) sasLocation:(SASLocation *) sasLocation locationDidUpdate: (CLLocationCoordinate2D) location;
 
 @optional
-- (void) locationPermissionsHaveChanged: (CLAuthorizationStatus) status;
+- (void) sasLocation:(SASLocation *) sasLocation locationPermissionsHaveChanged: (CLAuthorizationStatus) status;
 
 @end
 

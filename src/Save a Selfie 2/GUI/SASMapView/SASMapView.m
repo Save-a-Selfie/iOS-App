@@ -222,9 +222,8 @@
 }
 
 
-
 #pragma mark SASLocation delegate method
-- (void) locationDidUpdate:(CLLocationCoordinate2D)location {
+- (void)sasLocation:(SASLocation *)sasLocation locationDidUpdate:(CLLocationCoordinate2D)location {
     self.currentLocation = location;
     
     if(zoomToUsersLocationInitially) {
@@ -254,9 +253,10 @@
 //  an update from SASLocation about authorization changes for location services, we simply forward them onto
 //  any object who wants to receive said notifications. This makes a nice object that updates, adoptees of location
 //  and map changes.
-- (void) locationPermissionsHaveChanged:(CLAuthorizationStatus)status {
-    if(notificationReceiver != nil && [notificationReceiver respondsToSelector:@selector(authorizationStatusHasChanged:)]) {
-        [notificationReceiver authorizationStatusHasChanged:status];
+
+- (void)sasLocation:(SASLocation *)sasLocation locationPermissionsHaveChanged:(CLAuthorizationStatus)status {
+    if(self.notificationReceiver != nil && [self.notificationReceiver respondsToSelector:@selector(authorizationStatusHasChanged:)]) {
+        [self.notificationReceiver authorizationStatusHasChanged:status];
     }
 }
 

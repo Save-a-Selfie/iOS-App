@@ -20,15 +20,27 @@
 
 + (NSString*) getCurrentTimeStamp;
 
-// Adds a ILTranlucentView tas a subview to a desired view.
-// @param: view: View to which a blurred view is added as a subview.
+/**
+ Adds an ILTranslucentView to a view using -addSubview:
+ 
+ @param view
+        The view to which the ILTranslucentView object will be
+        added to.
+ */
 + (void) addSASBlurToView:(UIView*) view;
 
-// Changes the view to a blurview.
-+ (void) blurForView:(UIView*) view;
 
 
-// Generates a random string of a specified length.
+
+/**
+ Creates a random string of a specified length.
+ 
+ @param length
+        The length of the string.
+ 
+ @return NSString
+        A random string of characters of the specified length.
+ */
 + (NSString *) generateRandomString: (NSInteger) length;
 
 @end

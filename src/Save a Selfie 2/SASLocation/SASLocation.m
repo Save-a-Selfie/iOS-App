@@ -11,7 +11,7 @@
 #import "ExtendNSLogFunctionality.h"
 
 
-@interface SASLocation() {
+@interface SASLocation() <CLLocationManagerDelegate> {
     CLLocationCoordinate2D currentLocationCoordinates;
 }
 
@@ -37,7 +37,7 @@
 
 - (void) setUpLocationManager {
     self.locationManager = [[CLLocationManager alloc] init];
-    self.locationManager.delegate = (id<CLLocationManagerDelegate>)self;
+    self.locationManager.delegate = self;
     self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
     self.locationManager.distanceFilter = kCLDistanceFilterNone;
 }
@@ -130,9 +130,8 @@
     // Assign the current user location to the CurrentUserLocations.
     currentLocationCoordinates = location.coordinate;
     
-    // Call locationDidUpdate from SASLocationDelegate for any conforming object.
-    if(self.delegate != nil && [self.delegate respondsToSelector:@selector(locationDidUpdate:)]) {
-        [self.delegate locationDidUpdate:currentLocationCoordinates];
+    if (self.delegate != nil && [self.delegate respondsToSelector:@selector(sasLocation:locationDidUpdate:)]) {
+        [self.delegate sasLocation:self locationDidUpdate:currentLocationCoordinates];
     }
 }
 
@@ -141,8 +140,9 @@
 // Forward permissions changes to any object referencing
 // 'id<SASLocationDelegate> delegate'.
 - (void) locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
-    if(self.delegate != nil && [self.delegate respondsToSelector:@selector(locationPermissionsHaveChanged:)]) {
-        [delegate locationPermissionsHaveChanged:status];
+    
+    if(self.delegate != nil && [self.delegate respondsToSelector:@selector(sasLocation:locationPermissionsHaveChanged:)]) {
+        [self.delegate sasLocation:self locationPermissionsHaveChanged:status];
     }
 }
 
