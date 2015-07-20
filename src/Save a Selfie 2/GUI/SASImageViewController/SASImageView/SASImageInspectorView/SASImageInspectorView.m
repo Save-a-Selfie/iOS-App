@@ -62,12 +62,25 @@
 
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-    if (self.center.y > self.superview.center.y) {
-        [UIView animateView:self offScreenInDirection:SASAnimationDirectionUp];
-    } else if(self.center.y < self.superview.center.y) {
-        [UIView animateView:self offScreenInDirection:SASAnimationDirectionDown];
+    if (self.center.y < self.superview.center.y) {
+        
+        [UIView animateView:self
+       offScreenInDirection:SASAnimationDirectionUp
+                 completion:^(BOOL completed) {
+                     [self removeFromSuperview];
+                 }];
+        
+    } else if(self.center.y > self.superview.center.y) {
+        
+        [UIView animateView:self
+       offScreenInDirection:SASAnimationDirectionDown
+                 completion:^(BOOL completed) {
+            [self removeFromSuperview];
+        }];
     }
 }
+
+
 
 - (void) handleTap {
     if (self.shouldFinishInspectingImage == YES) {

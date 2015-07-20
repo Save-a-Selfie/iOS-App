@@ -24,7 +24,7 @@ typedef NS_ENUM(NSInteger, SASAnimationDirection) {
 //      delay:0.2
 //      options:UIViewAnimationOptionCurveEaseInOut
 //  The animation block is the offset of the view itself.
-+ (void) animateView:(UIView *) view offScreenInDirection:(SASAnimationDirection) direction;
++ (void) animateView:(UIView *) view offScreenInDirection:(SASAnimationDirection) direction completion:(void (^)(BOOL completed)) completed;
 
 
 // Animates a view to a specific point in the coordinate system.

@@ -149,9 +149,9 @@ NSString *permissionsProblemOne = @"Please enable location services for this app
         locateUserButtonBeforeAnimtation = self.locateUserButton.frame.origin;
         uploadToServerButtonBeforeAnimation = self.uploadNewImageToServerButton.frame.origin;
         
-        [UIView animateView:self.showFilterViewButton offScreenInDirection:SASAnimationDirectionRight];
-        [UIView animateView:self.locateUserButton offScreenInDirection:SASAnimationDirectionDown];
-        [UIView animateView:self.uploadNewImageToServerButton offScreenInDirection:SASAnimationDirectionDown];
+        [UIView animateView:self.showFilterViewButton offScreenInDirection:SASAnimationDirectionRight completion:nil];
+        [UIView animateView:self.locateUserButton offScreenInDirection:SASAnimationDirectionDown completion:nil];
+        [UIView animateView:self.uploadNewImageToServerButton offScreenInDirection:SASAnimationDirectionDown completion:nil];
     } else {
         [UIView animateView:self.showFilterViewButton toPoint:filterButtonBeforeAnimation];
         [UIView animateView:self.locateUserButton toPoint:locateUserButtonBeforeAnimtation];
