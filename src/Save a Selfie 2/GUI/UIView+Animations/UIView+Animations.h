@@ -17,13 +17,20 @@ typedef NS_ENUM(NSInteger, SASAnimationDirection) {
 
 @interface UIView (Animations)
 
-// @Discussion:
-//  Animates a view offscreen in the direction specified.
-//  The animation for this method call uses the following parameters:
-//      animateWithDuration:0.5
-//      delay:0.2
-//      options:UIViewAnimationOptionCurveEaseInOut
-//  The animation block is the offset of the view itself.
+
+/**
+ Animates a viewe offscreen in the direction specified.
+ 
+ @param view
+        The view to animate.
+ 
+        direction
+        A SASAnimationDirection which determines the direction
+        view should go offscreen.
+ 
+        complted
+        Compltetion block. Called when the animation has finished.
+ */
 + (void) animateView:(UIView *) view offScreenInDirection:(SASAnimationDirection) direction completion:(void (^)(BOOL completed)) completed;
 
 

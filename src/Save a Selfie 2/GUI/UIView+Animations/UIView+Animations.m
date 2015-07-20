@@ -20,44 +20,59 @@ CGFloat delay = 0.0;
 + (void) animateView:(UIView *) view offScreenInDirection:(SASAnimationDirection) direction completion:(void (^)(BOOL completed)) complete{
     
    if (direction == SASAnimationDirectionUp) {
-        [self animateWithDuration:duration delay:delay options:UIViewAnimationOptionCurveEaseInOut | !UIViewAnimationOptionAllowUserInteraction animations:^{
-            view.frame = CGRectMake(view.frame.origin.x, -view.frame.size.height, view.frame.size.width, view.frame.size.height);
-        } completion:^(BOOL completed) {
-            complete(completed);
-        }];
+        [self animateWithDuration:duration
+                            delay:delay options:UIViewAnimationOptionCurveEaseInOut | !UIViewAnimationOptionAllowUserInteraction
+                       animations:^{
+                           view.frame = CGRectMake(view.frame.origin.x, -view.frame.size.height, view.frame.size.width, view.frame.size.height);
+                       }
+                       completion:^(BOOL completed) {
+                           if (complete != nil) {
+                               complete(completed);
+                           }
+                       }
+         ];
     }
     else if(direction == SASAnimationDirectionDown) {
         [self animateWithDuration:duration
-                            delay: delay
+                            delay:delay
                           options:UIViewAnimationOptionCurveEaseInOut | !UIViewAnimationOptionAllowUserInteraction
                        animations:^{
-                            view.frame = CGRectOffset(view.frame, 0, [Screen height]);
-        }
+                           view.frame = CGRectMake(view.frame.origin.x, [Screen height], view.frame.size.width, view.frame.size.height);
+                       }
                        completion:^(BOOL completed) {
-                           complete(completed);
-        }];
+                           if (complete != nil) {
+                               complete(completed);
+                           }
+                       }
+         ];
     }
     else if (direction == SASAnimationDirectionLeft) {
         [self animateWithDuration:duration
                             delay:delay
                           options:UIViewAnimationOptionCurveEaseInOut | !UIViewAnimationOptionAllowUserInteraction
                        animations:^{
-                           view.frame = CGRectOffset(view.frame, 0, -view.frame.size.width);
-        }
+                           view.frame = CGRectMake(-[Screen width], view.frame.origin.y, view.frame.size.width, view.frame.size.height);
+                       }
                        completion:^(BOOL completed) {
-                           complete(completed);
-        }];
+                           if (complete != nil) {
+                               complete(completed);
+                           }
+                       }
+         ];
     }
-    else {
+    else if (direction == SASAnimationDirectionRight) {
         [self animateWithDuration:duration
                             delay:delay
                           options:UIViewAnimationOptionCurveEaseInOut | !UIViewAnimationOptionAllowUserInteraction
                        animations:^{
-                           view.frame = CGRectOffset(view.frame, [Screen width], 0);
-        }
-                       completion:^(BOOL completed) {
-                           complete(completed);
-        }];
+                           view.frame = CGRectMake([Screen width], view.frame.origin.y, view.frame.size.width, view.frame.size.height);
+                       }
+                       completion:^(BOOL completed){
+                           if (complete != nil) {
+                               complete(completed);
+                           }
+                       }
+         ];
     }
 }
 

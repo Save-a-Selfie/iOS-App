@@ -10,7 +10,10 @@
 #import "Screen.h"
 #import "UIView+Animations.h"
 
-@interface SASImageInspectorView()
+@interface SASImageInspectorView() {
+    CGPoint lastPosition;
+    CGPoint position;
+}
 
 @property (nonatomic, strong) UIImageView *imageView;
 
@@ -52,11 +55,29 @@
     
 }
 
+#pragma Touch updates.
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    [super touchesMoved:touches withEvent:event];
+    
+    lastPosition = [[touches anyObject] locationInView:self.superview];
+    
+    [UIView animateWithDuration:0.2 animations:^{self.backgroundColor = [UIColor clearColor];}];
+}
+
+
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
     [super touchesMoved:touches withEvent:event];
     
-    CGPoint usersFingerPoint = [[touches anyObject] locationInView:self.superview];
-    self.center = usersFingerPoint;
+    position = [[touches anyObject] locationInView:self.superview];
+    
+    CGFloat xDisplacement = position.x - lastPosition.x;
+    CGFloat yDisplacement = position.y - lastPosition.y;
+    
+    CGRect frame = self.frame;
+    frame.origin.x += xDisplacement;
+    frame.origin.y += yDisplacement;
+    self.frame = frame;
+    lastPosition = position;
     
 }
 
@@ -87,6 +108,7 @@
         [self removeFromSuperview];
     }
 }
+
 
 #pragma Animations.
 - (void)animateImageIntoView:(UIView *)view {

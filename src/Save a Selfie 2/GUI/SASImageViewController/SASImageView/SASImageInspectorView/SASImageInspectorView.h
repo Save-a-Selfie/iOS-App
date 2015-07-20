@@ -8,8 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SASImageInspectorView : UIView
+@class SASImageInspectorView;
 
+@protocol SASImageInspectorDelegate <NSObject>
+
+- (void) sasImageInspector:(SASImageInspectorView *) imageInspector userDidBeginMovingImage:(UIImage *) image withEvent:(UIEvent *) event;
+
+@end
+
+@interface SASImageInspectorView : UIView
 
 - (instancetype)initWithImage:(UIImage*)image;
 
