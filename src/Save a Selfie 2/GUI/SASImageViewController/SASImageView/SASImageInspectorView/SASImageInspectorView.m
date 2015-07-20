@@ -8,6 +8,7 @@
 
 #import "SASImageInspectorView.h"
 #import "Screen.h"
+#import "UIView+Animations.h"
 
 @interface SASImageInspectorView()
 
@@ -29,7 +30,7 @@
         
         self.frame = CGRectMake(0, 0, [Screen width], [Screen height]);
         self.backgroundColor = [UIColor blackColor];
-        
+
         _imageView = [[UIImageView alloc]initWithImage:image];
         _imageView.frame = self.frame;
         _shouldFinishInspectingImage = YES;
@@ -51,7 +52,22 @@
     
 }
 
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
+    [super touchesMoved:touches withEvent:event];
+    
+    CGPoint usersFingerPoint = [[touches anyObject] locationInView:self.superview];
+    self.center = usersFingerPoint;
+    
+}
 
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    if (self.center.y > self.superview.center.y) {
+        [UIView animateView:self offScreenInDirection:SASAnimationDirectionUp];
+    } else if(self.center.y < self.superview.center.y) {
+        [UIView animateView:self offScreenInDirection:SASAnimationDirectionDown];
+    }
+}
 
 - (void) handleTap {
     if (self.shouldFinishInspectingImage == YES) {
