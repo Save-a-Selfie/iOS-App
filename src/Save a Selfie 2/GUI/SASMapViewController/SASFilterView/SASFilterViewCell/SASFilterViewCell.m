@@ -25,13 +25,12 @@
 - (id)initWithCoder:(NSCoder *)aDecoder {
     if (self = [super initWithCoder:aDecoder]) {
         [self setCellWithGreenTick:NO];
+        self.backgroundColor = [UIColor clearColor];
     }
     return self;
 }
 
 
-- (void)awakeFromNib {
-}
 
 
 - (void) setCellWithGreenTick: (BOOL) status {

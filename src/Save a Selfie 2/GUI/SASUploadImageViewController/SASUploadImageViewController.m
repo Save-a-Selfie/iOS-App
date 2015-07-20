@@ -101,6 +101,7 @@
                          frame.origin = CGPointMake(0, 0);
                          
                          self.sasMapView.frame = frame;
+                         [self.view bringSubviewToFront:self.sasMapView];
                      }
                      completion:nil];
 }

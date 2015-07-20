@@ -56,10 +56,14 @@ SASDeviceType availableDevicesToFilter[5] = {
         
         [UIFont increaseCharacterSpacingForLabel:self.filterLabel byAmount:2.3];
         self.layer.cornerRadius = 8.0;
+        self.layer.masksToBounds = YES;
+
         
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.layer.cornerRadius = 8.0;
+
+        
         
         // Register SASFilterViewCell.
         [_tableView registerNib:[UINib nibWithNibName:@"SASFilterViewCell" bundle:nil]

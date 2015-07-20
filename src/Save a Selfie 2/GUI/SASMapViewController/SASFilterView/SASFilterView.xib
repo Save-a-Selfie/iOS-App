@@ -11,6 +11,14 @@
             <rect key="frame" x="0.0" y="-1" width="300" height="317"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5uv-FE-oii">
+                    <rect key="frame" x="0.0" y="1" width="300" height="316"/>
+                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="1Fl-dl-fL1">
+                        <rect key="frame" x="0.0" y="0.0" width="300" height="316"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    </view>
+                    <blurEffect style="dark"/>
+                </visualEffectView>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Qxa-bo-JtT">
                     <rect key="frame" x="0.0" y="40" width="300" height="216"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -33,6 +41,11 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <variation key="default">
+                <mask key="subviews">
+                    <exclude reference="5uv-FE-oii"/>
+                </mask>
+            </variation>
             <connections>
                 <outlet property="filterLabel" destination="cOj-2H-LuT" id="RvF-hd-m1B"/>
                 <outlet property="tableView" destination="Qxa-bo-JtT" id="fag-Fn-35P"/>
