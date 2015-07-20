@@ -190,32 +190,33 @@ SASDeviceType availableDevicesToFilter[5] = {
 #pragma mark Animations
 // Animates into the views center.
 - (void) animateIntoView:(UIView*) view {
+    [view addSubview:self];
     
-    [UIView animateWithDuration:0.3
+    self.center = view.center;
+    
+    [UIView animateWithDuration:0.5
                           delay:0.1
-         usingSpringWithDamping:0.8
-          initialSpringVelocity:0.2
-                        options:UIViewAnimationOptionCurveEaseIn
-                     animations:^(){ self.center = view.center;}
-                     completion:^(BOOL visible){[self updateDelegateOnViewVisibility:YES];}
-     ];
+         usingSpringWithDamping:0.2
+          initialSpringVelocity:0.6
+                        options:UIViewAnimationOptionCurveLinear
+                     animations:^{CGAffineTransform transform = CGAffineTransformMakeScale(1.02, 1.02);
+                         self.transform = transform;
+                         
+                     }
+                     completion:^(BOOL visible){[self updateDelegateOnViewVisibility:YES];}];
+    
+
 }
 
 
 
-- (void) animateOutOfView:(UIView*) view {
+- (void) animateOutOfView {
+    [self removeFromSuperview];
+    [self updateDelegateOnViewVisibility:NO];
     
-    [UIView animateWithDuration:0.4
-                          delay:0.1
-         usingSpringWithDamping:0.8
-          initialSpringVelocity:0.2
-                        options:UIViewAnimationOptionCurveEaseIn
-                     animations:^(){ self.frame = CGRectOffset(self.frame,
-                                                               self.frame.origin.x,
-                                                               -700);
-                     }
-                     completion:^(BOOL visible){[self updateDelegateOnViewVisibility:NO];}
-     ];
+    // Change the scale back to 1.
+    self.transform = CGAffineTransformMakeScale(1, 1);
+    
 }
 
 

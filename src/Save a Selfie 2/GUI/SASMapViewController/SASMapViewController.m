@@ -128,7 +128,6 @@ NSString *permissionsProblemOne = @"Please enable location services for this app
     if(self.sasFilterView == nil) {
         self.sasFilterView = [[SASFilterView alloc] init];
         self.sasFilterView.delegate = self;
-        [self.sasMapView addSubview:self.sasFilterView];
     }
     
     [self.sasFilterView animateIntoView:self.sasMapView];
@@ -138,7 +137,7 @@ NSString *permissionsProblemOne = @"Please enable location services for this app
 #pragma mark SASFilterViewDelegate
 - (void) sasFilterView:(SASFilterView *)view doneButtonWasPressedWithSelectedDeviceType:(SASDeviceType)device {
     [self.sasMapView filterAnnotationsForDeviceType:device];
-    [self.sasFilterView animateOutOfView:self.view];
+    [self.sasFilterView animateOutOfView];
 }
 
 
@@ -178,13 +177,6 @@ NSString *permissionsProblemOne = @"Please enable location services for this app
 
 
 
-#pragma mark
-- (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated {
-    printf("called");
-    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
-    NSLog(@"%@", appDelegate.window.rootViewController);
-    
-}
 
 
 // This method will be called anythime permissions for lacation is changed.
@@ -310,8 +302,6 @@ NSString *permissionsProblemOne = @"Please enable location services for this app
 //
 //  3. Then the image is handed to sasUploadImageViewController, which will handle all
 //     of the uploading.
-
-
 - (IBAction)uploadNewNewDevice:(id)sender {
     
 

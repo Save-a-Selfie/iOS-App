@@ -11,16 +11,12 @@
             <rect key="frame" x="0.0" y="-1" width="300" height="317"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Qxa-bo-JtT">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Qxa-bo-JtT">
                     <rect key="frame" x="0.0" y="40" width="300" height="216"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </tableView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ux6-uo-jWA">
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ux6-uo-jWA">
                     <rect key="frame" x="52" y="264" width="196" height="45"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="45" id="69X-a6-gNc"/>
-                        <constraint firstAttribute="width" constant="196" id="Dfh-J8-5Sp"/>
-                    </constraints>
                     <state key="normal" image="DoneButton">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -28,30 +24,14 @@
                         <action selector="doneButtonPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="eUe-xe-0Xf"/>
                     </connections>
                 </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FILTER DEVICES" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cOj-2H-LuT">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="FILTER DEVICES" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cOj-2H-LuT">
                     <rect key="frame" x="60" y="8" width="180" height="24"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="180" id="T5O-rV-m0Y"/>
-                        <constraint firstAttribute="height" constant="24" id="dIX-ef-WGP"/>
-                    </constraints>
                     <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="17"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-            <constraints>
-                <constraint firstAttribute="trailing" secondItem="cOj-2H-LuT" secondAttribute="trailing" constant="60" id="07X-6p-UUW"/>
-                <constraint firstAttribute="trailing" secondItem="Qxa-bo-JtT" secondAttribute="trailing" id="3cn-ZR-kJJ"/>
-                <constraint firstAttribute="trailing" secondItem="ux6-uo-jWA" secondAttribute="trailing" constant="52" id="H73-Ch-feE"/>
-                <constraint firstAttribute="bottom" secondItem="ux6-uo-jWA" secondAttribute="bottom" constant="8" id="NYC-qq-QmA"/>
-                <constraint firstItem="ux6-uo-jWA" firstAttribute="top" secondItem="Qxa-bo-JtT" secondAttribute="bottom" constant="8" id="Yov-Wb-TuR"/>
-                <constraint firstItem="Qxa-bo-JtT" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="fQV-gL-edY"/>
-                <constraint firstItem="ux6-uo-jWA" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="52" id="gGo-ta-IjR"/>
-                <constraint firstItem="Qxa-bo-JtT" firstAttribute="top" secondItem="cOj-2H-LuT" secondAttribute="bottom" constant="8" id="vAc-0c-AqC"/>
-                <constraint firstItem="cOj-2H-LuT" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="yOU-o7-DvS"/>
-                <constraint firstItem="cOj-2H-LuT" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="60" id="ysq-Ai-YzV"/>
-            </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="filterLabel" destination="cOj-2H-LuT" id="RvF-hd-m1B"/>

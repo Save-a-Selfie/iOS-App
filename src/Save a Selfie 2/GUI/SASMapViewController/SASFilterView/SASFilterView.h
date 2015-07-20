@@ -29,10 +29,10 @@
 
 @property(nonatomic, weak) id<SASFilterViewDelegate> delegate;
 
-// Animates with a custom animation into the view of the reciever.
+// Animates with a custom animation into view.
 - (void) animateIntoView:(UIView*) view;
 
-// Animates with a custom animation out of the view of the reciever.
-- (void) animateOutOfView:(UIView*) view;
+// Animates with a custom animation out of view.
+- (void) animateOutOfView;
 
 @end
