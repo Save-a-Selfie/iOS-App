@@ -242,6 +242,7 @@
                         <outlet property="sasImageView" destination="Tjv-A9-dsb" id="F7X-zF-K2s"/>
                         <outlet property="sasMapView" destination="mWk-T9-tVE" id="ZyS-RR-PhW"/>
                         <outlet property="scrollView" destination="eub-ih-yoo" id="2Lw-ez-RYn"/>
+                        <outlet property="separator" destination="C7l-vi-VCg" id="vAb-H4-ecG"/>
                         <outlet property="showDeviceLocationPin" destination="6qR-hW-QA1" id="6BG-sb-gsb"/>
                     </connections>
                 </viewController>

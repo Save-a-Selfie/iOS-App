@@ -31,6 +31,7 @@
 @property (nonatomic, weak) IBOutlet UIView *contentView;
 
 @property (nonatomic, weak) IBOutlet UITextView *photoDescription;
+@property (weak, nonatomic) IBOutlet UIView *separator;
 
 @property (nonatomic, weak) IBOutlet SASImageView *sasImageView;
 @property (strong, nonatomic) IBOutlet SASImageView *blurredImageView;
@@ -44,7 +45,7 @@
 
 @property (nonatomic, weak) IBOutlet UIButton *showDeviceLocationPin;
 
-@property (nonatomic, strong) SASObjectDownloader *s;
+@property (nonatomic, strong) SASObjectDownloader *sasObjectDownloader;
 
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *photoDesriptionHeightContraint;
 @end
@@ -61,12 +62,13 @@
 @synthesize photoDescription;
 @synthesize deviceImageView;
 @synthesize contentView;
+@synthesize separator;
 @synthesize sasActivityIndicator;
 @synthesize distanceLabel;
 @synthesize showDeviceLocationPin;
 @synthesize photoDesriptionHeightContraint;
 
-@synthesize s;
+@synthesize sasObjectDownloader;
 
 
 - (void)viewDidLoad {
@@ -80,6 +82,9 @@
 
 
 - (void)viewDidLayoutSubviews {
+    
+    
+    
     self.photoDescription.translatesAutoresizingMaskIntoConstraints = NO;
     CGSize sizeThatFitsTextView = [self.photoDescription sizeThatFits:CGSizeMake(self.photoDescription.frame.size.width, MAXFLOAT)];
     self.photoDesriptionHeightContraint.constant = sizeThatFitsTextView.height;
@@ -89,9 +94,13 @@
 
 
 - (void)viewWillAppear:(BOOL)animated {
-    
     [super viewWillAppear:animated];
+    
     [self.navigationController setNavigationBarHidden:NO animated:YES];
+    
+    CGRect frame = self.separator.frame;
+    frame.size.height = 0.5;
+    self.separator.frame = frame;
     
     SASBarButtonItem *reportButton = [[SASBarButtonItem alloc] initWithTitle:@"Report"
                                                                        style:UIBarButtonItemStylePlain
@@ -156,8 +165,8 @@
         // of the annotation passed to this object.
         dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             
-            self.s = [[SASObjectDownloader alloc]init];
-            UIImage* imageFromURL = [self.s getImageFromURLWithString:self.annotation.device.imageURL];
+            self.sasObjectDownloader = [[SASObjectDownloader alloc]init];
+            UIImage* imageFromURL = [self.sasObjectDownloader getImageFromURLWithString:self.annotation.device.imageURL];
             
             dispatch_async( dispatch_get_main_queue(), ^{
                 

@@ -86,40 +86,6 @@
 @synthesize sasUploader;
 @synthesize eulaViewController;
 
-- (IBAction)expandMapView:(id)sender {
-    
-    [UIView animateWithDuration:0.4
-                          delay:0.0
-         usingSpringWithDamping:0.7
-          initialSpringVelocity:0.4
-                        options:UIViewAnimationOptionCurveLinear
-                     animations:^{
-                         
-                         CGRect frame;
-                         frame.size.width = [Screen width];
-                         frame.size.height = [Screen height];
-                         frame.origin = CGPointMake(0, 0);
-                         
-                         self.sasMapView.frame = frame;
-                         [self.view bringSubviewToFront:self.sasMapView];
-                     }
-                     completion:nil];
-}
-
-
-- (void) putAnnotationToView {
-    if(self.longPress.state != UIGestureRecognizerStateBegan) {
-        return;
-    }
-    
-    CGPoint touchPoint = [self.longPress locationInView:self.sasMapView];
-    CLLocationCoordinate2D location = [self.sasMapView convertPoint:touchPoint toCoordinateFromView:self.sasMapView];
-    
-    self.sasAnnotation.coordinate = location;
-    [self.sasMapView showAnnotation:self.sasAnnotation andZoom:NO animated:NO];
-    printf("touched");
-    
-}
 
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -159,9 +125,9 @@
     
 
 
-//    self.doneButton.hidden = YES;
+
     self.sasImageView.image = self.sasUploadObject.image;
-    
+
     [UIFont increaseCharacterSpacingForLabel:self.selectDeviceLabel byAmount:2.0];
     [UIFont increaseCharacterSpacingForLabel:self.doneButton.titleLabel byAmount:1.0];
     
@@ -214,7 +180,6 @@
 
 
 - (IBAction)deviceSelected:(SASDeviceButton*) sender {
-    
 
     [self deselectDeviceButtons];
     
@@ -239,6 +204,47 @@
 - (void) selectDeviceButton:(SASDeviceButton *) button {
     [button select];
 }
+
+
+
+
+#pragma Touch to change location of device.
+- (IBAction)expandMapView:(id)sender {
+    
+    [UIView animateWithDuration:0.4
+                          delay:0.0
+         usingSpringWithDamping:0.7
+          initialSpringVelocity:0.4
+                        options:UIViewAnimationOptionCurveLinear
+                     animations:^{
+                         
+                         CGRect frame;
+                         frame.size.width = [Screen width];
+                         frame.size.height = [Screen height];
+                         frame.origin = CGPointMake(0, 0);
+                         
+                         self.sasMapView.frame = frame;
+                         [self.view bringSubviewToFront:self.sasMapView];
+                     }
+                     completion:nil];
+}
+
+
+
+
+- (void) putAnnotationToView {
+    if(self.longPress.state != UIGestureRecognizerStateBegan) {
+        return;
+    }
+    
+    CGPoint touchPoint = [self.longPress locationInView:self.sasMapView];
+    CLLocationCoordinate2D location = [self.sasMapView convertPoint:touchPoint toCoordinateFromView:self.sasMapView];
+    
+    self.sasAnnotation.coordinate = location;
+    [self.sasMapView showAnnotation:self.sasAnnotation andZoom:NO animated:NO];
+    
+}
+
 
 
 

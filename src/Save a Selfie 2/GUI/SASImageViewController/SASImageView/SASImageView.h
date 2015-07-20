@@ -8,8 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+/// A custom image view, that can be selected and will be expanded to
+/// for a larger preview.
 @interface SASImageView : UIImageView
 
-@property (nonatomic, assign) BOOL selectable;
+// Default is YES
+// When tapped will expand to a larger preview.
+// To remove this functionality set this property to NO.
+@property (nonatomic, assign) BOOL canShowFullSizePreview;
 
 @end
