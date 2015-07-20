@@ -41,19 +41,12 @@
         _imageView.contentMode = UIViewContentModeScaleAspectFit;
         
         [self addSubview:_imageView];
-        
-        [self addTapGesture];
+
         
     }
     return self;
 }
 
-
-- (void) addTapGesture {
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap)];
-    [self addGestureRecognizer:tap];
-    
-}
 
 #pragma Touch updates.
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -83,31 +76,53 @@
 
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-    if (self.center.y < self.superview.center.y) {
+    
+    
+
+    
+    
+    float distanceFromCenter = self.superview.center.y - self.center.y;
+    
+
+    if (self.center.y < self.superview.center.y && distanceFromCenter > 50) {
         
         [UIView animateView:self
        offScreenInDirection:SASAnimationDirectionUp
                  completion:^(BOOL completed) {
                      [self removeFromSuperview];
-                 }];
+                     self.imageView = nil;
+                     NSLog(@"%@", self.imageView);
+                 }
+         ];
         
-    } else if(self.center.y > self.superview.center.y) {
+    }
+    else if(self.center.y > self.superview.center.y && distanceFromCenter < -50) {
         
         [UIView animateView:self
        offScreenInDirection:SASAnimationDirectionDown
                  completion:^(BOOL completed) {
-            [self removeFromSuperview];
-        }];
+                     [self removeFromSuperview];
+                     self.imageView = nil;
+                     NSLog(@"%@", self.imageView);
+                 }
+         ];
+        
     }
+    else {
+        [UIView animateWithDuration:0.2
+                         animations:^{
+                             self.center = self.superview.center;
+                             self.backgroundColor = [UIColor blackColor];
+                         }
+         ];
+    }
+    
+
 }
 
 
 
-- (void) handleTap {
-    if (self.shouldFinishInspectingImage == YES) {
-        [self removeFromSuperview];
-    }
-}
+
 
 
 #pragma Animations.
