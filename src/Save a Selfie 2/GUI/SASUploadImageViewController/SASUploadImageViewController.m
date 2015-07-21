@@ -94,7 +94,6 @@
 }
 
 
-
 - (void) dismissKeyboard {
     [self.deviceCaptionTextView resignFirstResponder];
 }
@@ -104,6 +103,8 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
+;
+    
     if (self.sasAnnotation == nil) {
         self.sasAnnotation = [[SASAnnotation alloc] init];
     }
@@ -111,7 +112,7 @@
     self.longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(putAnnotationToView)];
     [self.sasMapView addGestureRecognizer:self.longPress];
     
-    
+
     self.sasAnnotation.coordinate = self.sasUploadObject.coordinates;
     
     self.sasMapView.sasAnnotationImage = DefaultAnnotationImage;
@@ -123,9 +124,8 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-
-
-
+    self.sasImageView.canShowFullSizePreview = NO;
+    self.sasImageView.contentMode = UIViewContentModeScaleToFill;
     self.sasImageView.image = self.sasUploadObject.image;
 
     [UIFont increaseCharacterSpacingForLabel:self.selectDeviceLabel byAmount:2.0];

@@ -212,6 +212,7 @@
 // is dependant on the device being shown in the image.
 - (void) setColourForColouredUIElements:(SASDevice*) device {
     
+    
     [self.showDeviceLocationPin setImage:[SASDevice getDeviceMapPinImageForDeviceType:self.sasDeviceType]
                                 forState:UIControlStateNormal];
     
