@@ -91,7 +91,6 @@
                  completion:^(BOOL completed) {
                      [self removeFromSuperview];
                      self.imageView = nil;
-                     NSLog(@"%@", self.imageView);
                  }
          ];
         
@@ -103,7 +102,6 @@
                  completion:^(BOOL completed) {
                      [self removeFromSuperview];
                      self.imageView = nil;
-                     NSLog(@"%@", self.imageView);
                  }
          ];
         

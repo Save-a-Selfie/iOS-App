@@ -43,6 +43,8 @@
 		18B7C34E1B4586AB00017170 /* SASAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18B7C34D1B4586AB00017170 /* SASAlertView.xib */; };
 		18C323991B1E2F1E0027BDEA /* SASImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C323981B1E2F1E0027BDEA /* SASImageViewController.m */; };
 		18DAE8531B46BA6400CAEF2D /* SASDeviceButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 18DAE8521B46BA6400CAEF2D /* SASDeviceButton.m */; };
+		18DB372D1B5D75380037245E /* SASBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18DB372C1B5D75380037245E /* SASBannerView.m */; };
+		18DB37301B5D75B70037245E /* SASBannerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18DB372F1B5D75B70037245E /* SASBannerView.xib */; };
 		18DDE50B1B3D7F0F00AB0CB3 /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18DDE50A1B3D7F0F00AB0CB3 /* Launch Screen.xib */; };
 		18EBF9771B272B3400EDA48B /* SASImagePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EBF9761B272B3400EDA48B /* SASImagePickerViewController.m */; };
 		18EBF97B1B273A6600EDA48B /* SASUploadObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EBF97A1B273A6600EDA48B /* SASUploadObject.m */; };
@@ -168,6 +170,9 @@
 		18C323981B1E2F1E0027BDEA /* SASImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASImageViewController.m; sourceTree = "<group>"; };
 		18DAE8511B46BA6400CAEF2D /* SASDeviceButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASDeviceButton.h; sourceTree = "<group>"; };
 		18DAE8521B46BA6400CAEF2D /* SASDeviceButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASDeviceButton.m; sourceTree = "<group>"; };
+		18DB372B1B5D75380037245E /* SASBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASBannerView.h; sourceTree = "<group>"; };
+		18DB372C1B5D75380037245E /* SASBannerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASBannerView.m; sourceTree = "<group>"; };
+		18DB372F1B5D75B70037245E /* SASBannerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SASBannerView.xib; sourceTree = "<group>"; };
 		18DDE50A1B3D7F0F00AB0CB3 /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Launch Screen.xib"; sourceTree = "<group>"; };
 		18EBF9751B272B3400EDA48B /* SASImagePickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASImagePickerViewController.h; sourceTree = "<group>"; };
 		18EBF9761B272B3400EDA48B /* SASImagePickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASImagePickerViewController.m; sourceTree = "<group>"; };
@@ -651,6 +656,16 @@
 			path = Network;
 			sourceTree = "<group>";
 		};
+		18DB372E1B5D753C0037245E /* SASBannerView */ = {
+			isa = PBXGroup;
+			children = (
+				18DB372F1B5D75B70037245E /* SASBannerView.xib */,
+				18DB372B1B5D75380037245E /* SASBannerView.h */,
+				18DB372C1B5D75380037245E /* SASBannerView.m */,
+			);
+			name = SASBannerView;
+			sourceTree = "<group>";
+		};
 		18EBF9781B272B3700EDA48B /* SASImagePickerController */ = {
 			isa = PBXGroup;
 			children = (
@@ -812,6 +827,7 @@
 		D72E1DAF19EE841E005DD8A5 /* Save a Selfie 2 */ = {
 			isa = PBXGroup;
 			children = (
+				18DB372E1B5D753C0037245E /* SASBannerView */,
 				1807AF4E1B4EEE7C006E1B28 /* NSString+PDRegex */,
 				1807AF401B4EE8F8006E1B28 /* StorageSystem */,
 				18A525051B166E0D00E8F8F6 /* SASDevice */,
@@ -940,6 +956,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D786E24E1A50AB1500A20FDD /* PopupImage.xib in Resources */,
+				18DB37301B5D75B70037245E /* SASBannerView.xib in Resources */,
 				18EE44D81B55545500F8F93B /* SASMapWarningAlert.xib in Resources */,
 				18EE44E51B556A7100F8F93B /* SASNoticeView.xib in Resources */,
 				18DDE50B1B3D7F0F00AB0CB3 /* Launch Screen.xib in Resources */,
@@ -1008,6 +1025,7 @@
 				D700239919F52E8800E45408 /* UIButton+Maker.m in Sources */,
 				184D99B71B49C24A005ECE33 /* SASGreyView.m in Sources */,
 				18EBF97B1B273A6600EDA48B /* SASUploadObject.m in Sources */,
+				18DB372D1B5D75380037245E /* SASBannerView.m in Sources */,
 				18A525081B16708400E8F8F6 /* SASMapViewController.m in Sources */,
 				D786E1781A48C02900A20FDD /* SASDevice.m in Sources */,
 				18A524F71B166BAB00E8F8F6 /* SASLocation.m in Sources */,
@@ -1247,6 +1265,7 @@
 				189D4F461B5C49BF005E709C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D72E1DA819EE841E005DD8A5 /* Build configuration list for PBXProject "Save a Selfie" */ = {
 			isa = XCConfigurationList;

@@ -83,8 +83,6 @@
 
 - (void)viewDidLayoutSubviews {
     
-    
-    
     self.photoDescription.translatesAutoresizingMaskIntoConstraints = NO;
     CGSize sizeThatFitsTextView = [self.photoDescription sizeThatFits:CGSizeMake(self.photoDescription.frame.size.width, MAXFLOAT)];
     self.photoDesriptionHeightContraint.constant = sizeThatFitsTextView.height;
@@ -270,6 +268,7 @@
      openURL:[NSURL URLWithString:
               [NSString stringWithFormat:@"http://saveaselfie.org/problem-with-an-image/?imageURL=%@", self.annotation.device.imageURL]]];
 }
+
 
 
 @end
