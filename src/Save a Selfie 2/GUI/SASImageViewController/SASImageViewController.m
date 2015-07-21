@@ -238,9 +238,12 @@
 
 #pragma mark SASMapNotificationReceiver
 - (void)sasMapViewUsersLocationHasUpdated:(CLLocationCoordinate2D)coordinate {
-    double distance = [SASUtilities distanceBetween:self.annotation.coordinate and:coordinate];
     
-    __weak NSString *distanceString = [NSString stringWithFormat:@"%.1fKM Approx", distance];
+    CLLocation *usersLocation = [[CLLocation alloc] initWithLatitude:self.annotation.coordinate.latitude longitude:self.annotation.coordinate.longitude];
+    CLLocation *deviceLocation = [[CLLocation alloc] initWithLatitude:coordinate.latitude longitude:coordinate.longitude];
+    CLLocationDistance distance = [usersLocation distanceFromLocation:deviceLocation];
+    
+    NSString *distanceString = [NSString stringWithFormat:@"%.1fKM Approx", distance/1000];
     
     self.distanceLabel.text = distanceString;
 }

@@ -12,10 +12,6 @@
 
 @interface SASUtilities : NSObject
 
-// This method uses the Haversine Formula for finding distances
-// between two locations on earth.
-// Taken from http://rosettacode.org/wiki/Haversine_formula#Objective-C
-+ (double) distanceBetween:(CLLocationCoordinate2D) pointA and: (CLLocationCoordinate2D) pointB;
 
 
 + (NSString*) getCurrentTimeStamp;
