@@ -9,6 +9,6 @@ The Code for Ireland initiative (http://www.codeforireland.com/) brought the dev
 Project status
 ==============
 
-iOS App: the iOS is up and running. It allows user's to upload picture wtih descriptions of the AED's and other emergency equipment. User's can also see all the devices on an interactive map and share these emergency devices.
+iOS App: the iOS is up and running. It allows user's to upload picture wtih descriptions of the AED's and other emergency equipment. User's can also see all the emergency devices on an interactive map and share these emergency devices.
 
 
