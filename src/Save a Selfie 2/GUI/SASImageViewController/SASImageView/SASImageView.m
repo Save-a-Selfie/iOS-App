@@ -23,7 +23,7 @@
         
         self.userInteractionEnabled = YES;
         _canShowFullSizePreview = YES;
-        self.contentMode = UIViewContentModeScaleAspectFill;
+        self.contentMode = UIViewContentModeScaleAspectFit;
         
         if (_canShowFullSizePreview) {
             UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(handleTap)];

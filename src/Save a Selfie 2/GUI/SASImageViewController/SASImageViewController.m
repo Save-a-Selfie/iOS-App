@@ -18,6 +18,8 @@
 #import "SASObjectDownloader.h"
 #import "SASBarButtonItem.h"
 #import "SASAlertView.h"
+#import "UIFont+SASFont.h"
+#import "SASMapExpanderView.h"
 
 
 @interface SASImageViewController () <SASMapViewNotifications ,UIScrollViewDelegate> {
@@ -32,6 +34,7 @@
 
 @property (nonatomic, weak) IBOutlet UITextView *photoDescription;
 @property (weak, nonatomic) IBOutlet UIView *separator;
+@property (weak, nonatomic) IBOutlet UIButton *shareButton;
 
 @property (nonatomic, weak) IBOutlet SASImageView *sasImageView;
 @property (strong, nonatomic) IBOutlet SASImageView *blurredImageView;
@@ -67,7 +70,6 @@
 @synthesize distanceLabel;
 @synthesize showDeviceLocationPin;
 @synthesize photoDesriptionHeightContraint;
-
 @synthesize sasObjectDownloader;
 
 
@@ -97,9 +99,9 @@
     [self.navigationController setNavigationBarHidden:NO animated:YES];
     
     CGRect frame = self.separator.frame;
-    frame.size.height = 0.5;
+    frame.size.height = 0.2;
     self.separator.frame = frame;
-    
+
     SASBarButtonItem *reportButton = [[SASBarButtonItem alloc] initWithTitle:@"Report"
                                                                        style:UIBarButtonItemStylePlain
                                                                       target:self
@@ -126,7 +128,7 @@
     
     // The sasMapView property should show the location
     // of where the device is located.
-    self.sasMapView.sasAnnotationImage = DefaultAnnotationImage;
+    self.sasMapView.sasAnnotationImage = SASAnnotationImageDefault;
     self.sasMapView.notificationReceiver = self;
     self.sasMapView.userInteractionEnabled = YES;
     self.sasMapView.showsUserLocation = YES;
@@ -266,7 +268,7 @@
     }
 }
 
-#pragma Report Device
+#pragma mark Report Device
 - (void) reportImage {
     [[UIApplication sharedApplication]
      openURL:[NSURL URLWithString:
@@ -274,5 +276,12 @@
 }
 
 
+#pragma mark Expands MapView
+- (IBAction)expandMapView:(id)sender {
+    SASMapExpanderView *sasMapExpanderView = [[SASMapExpanderView alloc] initWithMap:self.sasMapView];
+    
+    [self.contentView bringSubviewToFront:sasMapExpanderView];
+    [sasMapExpanderView animateIntoView:self.contentView];
+}
 
 @end

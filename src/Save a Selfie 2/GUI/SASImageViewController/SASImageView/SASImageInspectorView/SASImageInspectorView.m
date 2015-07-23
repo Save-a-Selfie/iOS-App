@@ -77,10 +77,6 @@
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
     
-    
-
-    
-    
     float distanceFromCenter = self.superview.center.y - self.center.y;
     
 

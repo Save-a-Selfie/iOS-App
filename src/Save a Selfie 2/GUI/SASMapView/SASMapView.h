@@ -13,10 +13,10 @@
 #import "SASDevice.h"
 
 // Annotation type for the MapView.
-typedef enum: NSUInteger {
-    DefaultAnnotationImage, // Default MapView Pin provided by Apple.
-    DeviceAnnotationImage // Annotation with the corresponding device image.
-}SASAnnotationImage;
+typedef NS_ENUM(NSUInteger, SASAnnotationImage) {
+    SASAnnotationImageDefault, // Annotation with the corresponding device image.
+    SASAnnotationImageCustom // Default MapView Pin provided by Apple.
+};
 
 
 
@@ -37,7 +37,7 @@ typedef enum: NSUInteger {
 
 
 
-@interface SASMapView : MKMapView <MKMapViewDelegate>
+@interface SASMapView : MKMapView <MKMapViewDelegate, NSCopying>
 
 
 // Reference this object to receive appropriate method calls for
@@ -54,9 +54,10 @@ typedef enum: NSUInteger {
 @property(nonatomic, assign) BOOL zoomToUsersLocationInitially;
 
 // The type of image to show for the annotations on the map.
-// By default this property is DeviceAnnotationImage which shows the
-// corresponding annotation image for the type of device.
-// DefaultAnnotationImage is the standard image Apple provides for annotations.
+// By default this property is SASAnnotationImageDefault which shows the default
+// image provided by Apple for annotation.
+// SASAnnotationImageCustom is the custom images for the annotations that correspond
+// to the device the annotation represents.
 @property(nonatomic, assign) SASAnnotationImage sasAnnotationImage;
 
 

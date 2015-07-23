@@ -89,7 +89,7 @@ NSString *permissionsProblemOne = @"Please enable location services for this app
     // for all available botifications.
     self.sasMapView.notificationReceiver = self;
     self.sasMapView.zoomToUsersLocationInitially = YES;
-    self.sasMapView.sasAnnotationImage = DeviceAnnotationImage;
+    self.sasMapView.sasAnnotationImage = SASAnnotationImageCustom;
     [self.sasMapView loadSASAnnotationsToMap];
 }
 

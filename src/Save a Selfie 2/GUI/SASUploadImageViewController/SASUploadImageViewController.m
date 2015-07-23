@@ -115,7 +115,7 @@
 
     self.sasAnnotation.coordinate = self.sasUploadObject.coordinates;
     
-    self.sasMapView.sasAnnotationImage = DefaultAnnotationImage;
+    self.sasMapView.sasAnnotationImage = SASAnnotationImageDefault;
     [self.sasMapView showAnnotation:self.sasAnnotation andZoom:YES animated:YES];
 }
 
@@ -211,23 +211,16 @@
 #pragma Touch to change location of device.
 - (IBAction)expandMapView:(id)sender {
     
-    [UIView animateWithDuration:0.4
-                          delay:0.0
-         usingSpringWithDamping:0.7
-          initialSpringVelocity:0.4
-                        options:UIViewAnimationOptionCurveLinear
-                     animations:^{
-                         
-                         CGRect frame;
-                         frame.size.width = [Screen width];
-                         frame.size.height = [Screen height];
-                         frame.origin = CGPointMake(0, 0);
-                         
-                         self.sasMapView.frame = frame;
-                         [self.view bringSubviewToFront:self.sasMapView];
-                     }
-                     completion:nil];
+    UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+    UIVisualEffectView *visualEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+    visualEffectView.frame = CGRectMake(0, [Screen height] - 50, [Screen width], 50);
+    
+    [UIView animateWithDuration:0.3 animations:^{
+        self.sasMapView.frame = CGRectMake(0, 0, [Screen width], [Screen height]);}
+     ];
+    
 }
+
 
 
 
@@ -400,6 +393,7 @@
 
 - (void) removeGreyView {
     [self.sasGreyView animateOutOfParentView];
+    [self.view bringSubviewToFront:self.sasMapView];
 }
 
 

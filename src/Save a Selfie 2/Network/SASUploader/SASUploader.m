@@ -168,7 +168,7 @@
     self.thumbnailImage = [self.largeImage resizedImage:CGSizeMake(tWidth, tHeight) interpolationQuality:kCGInterpolationHigh];
     
     // Add watermarks.
-    __weak UIImage *watermark = [UIImage imageNamed:@"Watermark"];
+    UIImage *watermark = [UIImage imageNamed:@"Watermark"];
     
     self.largeImage = [UIImage doubleMerge:largeImage withImage:nil atX:20 andY:20 withStrength:1.0 andImage:watermark atX2:width - watermark.size.width - 20 andY2:height - watermark.size.height - 20 strength:1.0];
     
