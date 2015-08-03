@@ -37,7 +37,7 @@ typedef NS_ENUM(NSUInteger, SASAnnotationImage) {
 
 
 
-@interface SASMapView : MKMapView <MKMapViewDelegate, NSCopying>
+@interface SASMapView : MKMapView <MKMapViewDelegate>
 
 
 // Reference this object to receive appropriate method calls for

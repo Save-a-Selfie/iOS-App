@@ -76,19 +76,6 @@
 }
 
 
-#pragma mark Copy
-- (id)copyWithZone:(NSZone *)zone {
-    
-    SASMapView *copy = [[[self class] allocWithZone:zone] init];
-    copy.currentLocation = self.currentLocation;
-    
-    for (id<MKAnnotation> annotation in self.annotations) {
-        [copy addAnnotation:annotation];
-    }
-    
-    return copy;
-}
-
 
 // Sets up the SASMapView with the appropriate properties.
 - (void) setupMapView {

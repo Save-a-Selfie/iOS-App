@@ -19,7 +19,7 @@
 #import "SASBarButtonItem.h"
 #import "SASAlertView.h"
 #import "UIFont+SASFont.h"
-#import "SASMapExpanderView.h"
+
 
 
 @interface SASImageViewController () <SASMapViewNotifications ,UIScrollViewDelegate> {
@@ -71,6 +71,12 @@
 @synthesize showDeviceLocationPin;
 @synthesize photoDesriptionHeightContraint;
 @synthesize sasObjectDownloader;
+
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    self.sasMapView = nil;
+}
 
 
 - (void)viewDidLoad {
@@ -273,15 +279,11 @@
     [[UIApplication sharedApplication]
      openURL:[NSURL URLWithString:
               [NSString stringWithFormat:@"http://saveaselfie.org/problem-with-an-image/?imageURL=%@", self.annotation.device.imageURL]]];
-}
-
-
-#pragma mark Expands MapView
-- (IBAction)expandMapView:(id)sender {
-    SASMapExpanderView *sasMapExpanderView = [[SASMapExpanderView alloc] initWithMap:self.sasMapView];
     
-    [self.contentView bringSubviewToFront:sasMapExpanderView];
-    [sasMapExpanderView animateIntoView:self.contentView];
+
 }
+
+
+
 
 @end

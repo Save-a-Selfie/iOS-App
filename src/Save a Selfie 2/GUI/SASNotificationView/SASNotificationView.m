@@ -41,9 +41,6 @@
 
 - (void)setTitle:(NSString *) aTitle {
     self.titleLabel.text = aTitle;
-    [UIFont increaseCharacterSpacingForLabel:self.titleLabel byAmount:2.0];
-
-    
 }
 
 - (void)setImage:(UIImage *)aImage {
@@ -62,7 +59,7 @@
     [UIView animateWithDuration:1.0
                      animations:^{self.alpha = 1.0f;}
                      completion:^(BOOL completed){
-                         [UIView animateWithDuration:2.0
+                         [UIView animateWithDuration:4.0
                                           animations:^{self.alpha = 0.0f;}
                                           completion:^(BOOL completed){[self removeFromSuperview];}
                           ];

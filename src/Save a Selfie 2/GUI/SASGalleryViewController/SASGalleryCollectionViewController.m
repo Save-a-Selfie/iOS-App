@@ -92,7 +92,7 @@
     // an SASDevice from each object at index.
     // Create a URL from the devices imageURL string.
     // Then download the image.
-    for (int i; i < 1; i++) {
+    for (int i; i < 100; i++) {
         
         
         // Get the image for the cell.
@@ -124,7 +124,7 @@
     NSLog(@"%@", self.imagesForCell);
     if (indexPath.row == self.imagesForCell.count) {
         cell.imageView.image = [UIImage imageNamed:@"Watermark"];
-        //printf("UIImage New: Index: %ld.\n", (long)indexPath.row);
+        printf("UIImage New: Index: %ld.\n", (long)indexPath.row);
     } else {
         cell.imageView.image = self.imagesForCell[indexPath.row];
         //printf("Image set correctly: Index: %ld.\n", (long)indexPath.row);

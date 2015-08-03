@@ -90,7 +90,9 @@ NSString *permissionsProblemOne = @"Please enable location services for this app
     self.sasMapView.notificationReceiver = self;
     self.sasMapView.zoomToUsersLocationInitially = YES;
     self.sasMapView.sasAnnotationImage = SASAnnotationImageCustom;
+    self.sasMapView.mapType = MKMapTypeHybrid;
     [self.sasMapView loadSASAnnotationsToMap];
+
 }
 
 
@@ -389,7 +391,7 @@ NSString *permissionsProblemOne = @"Please enable location services for this app
     // Alert the user if it was succes.
     if(response == SASUploadControllerResponseUploaded) {
         SASNotificationView *sasNotificationView = [[SASNotificationView alloc] init];
-        sasNotificationView.title = @"POSTED";
+        sasNotificationView.title = @"THANK YOU!";
         sasNotificationView.image = [UIImage imageNamed:@"DoneImage"];
         [sasNotificationView animateIntoView:self.view];
     }
