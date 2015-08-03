@@ -178,7 +178,7 @@
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
                                         </subviews>
-                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstItem="C7l-vi-VCg" firstAttribute="leading" secondItem="57Q-FF-DiC" secondAttribute="leading" constant="9" id="0EF-Uy-pSU"/>
                                             <constraint firstItem="Tjv-A9-dsb" firstAttribute="leading" secondItem="57Q-FF-DiC" secondAttribute="leading" id="1CW-VC-xNB"/>
@@ -214,6 +214,7 @@
                                         </constraints>
                                     </view>
                                 </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="57Q-FF-DiC" secondAttribute="bottom" id="7FW-8p-IuM"/>
                                     <constraint firstItem="57Q-FF-DiC" firstAttribute="leading" secondItem="eub-ih-yoo" secondAttribute="leading" id="EBK-ue-dUb"/>
