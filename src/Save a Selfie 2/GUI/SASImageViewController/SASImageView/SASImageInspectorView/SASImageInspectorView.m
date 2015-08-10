@@ -22,8 +22,7 @@
 
 @implementation SASImageInspectorView
 
-@synthesize imageView = _imageView;
-@synthesize shouldFinishInspectingImage = _shouldFinishInspectingImage;
+
 
 
 

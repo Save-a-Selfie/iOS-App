@@ -14,7 +14,6 @@
 
 @implementation SASImageView
 
-@synthesize canShowFullSizePreview = _canShowFullSizePreview;
 
 
 - (instancetype)initWithCoder:(NSCoder *)coder {

@@ -26,14 +26,6 @@
 
 @implementation SASObjectDownloader
 
-@synthesize delegate = _delegate;
-@synthesize dowloadedObjects;
-@synthesize responseData = _responseData;
-
-#pragma mark Objects for creating up URL request.
-@synthesize url = _url;
-@synthesize request = _request;
-@synthesize connection;
 
 
 

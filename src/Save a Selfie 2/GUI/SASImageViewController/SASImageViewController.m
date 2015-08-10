@@ -55,22 +55,6 @@
 
 @implementation SASImageViewController
 
-@synthesize annotation;
-@synthesize scrollView;
-@synthesize sasDeviceType;
-
-@synthesize sasImageView;
-@synthesize blurredImageView;
-@synthesize sasMapView;
-@synthesize photoDescription;
-@synthesize deviceImageView;
-@synthesize contentView;
-@synthesize separator;
-@synthesize sasActivityIndicator;
-@synthesize distanceLabel;
-@synthesize showDeviceLocationPin;
-@synthesize photoDesriptionHeightContraint;
-@synthesize sasObjectDownloader;
 
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -162,7 +146,7 @@
             self.sasActivityIndicator = [[SASActivityIndicator alloc] initWithMessage:@"Loading..."];
         }
         
-        [self.sasImageView addSubview:sasActivityIndicator];
+        [self.sasImageView addSubview:self.sasActivityIndicator];
         self.sasActivityIndicator.backgroundColor = [UIColor clearColor];
         self.sasActivityIndicator.center = self.sasImageView.center;
         [self.sasActivityIndicator startAnimating];
@@ -198,7 +182,7 @@
 
     if(self.annotation.device.caption != nil) {
         // Set the text description of the photo.
-        self.photoDescription.text = [NSString stringWithFormat:@"%@", annotation.device.caption];
+        self.photoDescription.text = [NSString stringWithFormat:@"%@", self.annotation.device.caption];
         [self.photoDescription setFont:[UIFont fontWithName:@"Avenir Next" size:18]];
         [self.photoDescription sizeToFit];
         [self.photoDescription.layer setBorderWidth:0.0];

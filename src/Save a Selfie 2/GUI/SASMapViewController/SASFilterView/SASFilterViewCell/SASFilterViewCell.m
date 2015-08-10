@@ -16,10 +16,7 @@
 
 @implementation SASFilterViewCell
 
-@synthesize deviceNameLabel;
-@synthesize selectionStatusImageView;
-@synthesize selectionStatus;
-@synthesize associatedDeviceType;
+
 
 
 - (id)initWithCoder:(NSCoder *)aDecoder {

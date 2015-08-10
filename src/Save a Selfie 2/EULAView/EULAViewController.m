@@ -15,9 +15,7 @@
 
 @implementation EULAViewController
 
-@synthesize delegate;
-@synthesize webView = _webView;
-@synthesize segmentedControl;
+
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];

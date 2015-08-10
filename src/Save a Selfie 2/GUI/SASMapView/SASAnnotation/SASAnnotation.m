@@ -12,11 +12,7 @@
 
 @implementation SASAnnotation
 
-@synthesize name = _name;
-@synthesize coordinate = _coordinate;
-@synthesize image = _image;
-@synthesize device = _device;
-@synthesize index = _index;
+
 
 - (instancetype) initAnnotationWithObject:(SASDevice*) aDevice index:(int) deviceNumber {
     if (self = [super init]) {

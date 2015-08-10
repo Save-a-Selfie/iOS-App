@@ -19,13 +19,6 @@
 
 @implementation SASUploadObject
 
-@synthesize timeStamp;
-@synthesize associatedDevice = _associatedDevice;
-@synthesize coordinates;
-@synthesize image = _image;
-@synthesize caption;
-@synthesize identifier;
-@synthesize UUID;
 
 - (instancetype)initWithImage:(UIImage *)imageToUpload {
     

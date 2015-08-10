@@ -64,27 +64,6 @@
 
 @implementation SASUploadImageViewController
 
-@synthesize sasImageView;
-@synthesize sasUploadObject;
-@synthesize sasMapView;
-@synthesize sasAnnotation;
-@synthesize sasGreyView;
-@synthesize sasActivityIndicator;
-
-@synthesize defibrillatorButton;
-@synthesize lifeRingButton;
-@synthesize firstAidKitButton;
-@synthesize fireHydrantButton;
-@synthesize deviceButtonsArray;
-@synthesize selectDeviceLabel;
-@synthesize doneButton;
-@synthesize deviceHasBeenSelected;
-@synthesize doneBarButtonItem;
-
-@synthesize longPress;
-
-@synthesize sasUploader;
-@synthesize eulaViewController;
 
 
 
@@ -145,10 +124,10 @@
     
     
     if (self.deviceButtonsArray == nil) {
-        self.deviceButtonsArray = [[NSMutableArray alloc] initWithObjects:defibrillatorButton,
-                                   lifeRingButton,
-                                   firstAidKitButton,
-                                   fireHydrantButton,
+        self.deviceButtonsArray = [[NSMutableArray alloc] initWithObjects:self.defibrillatorButton,
+                                   self.lifeRingButton,
+                                   self.firstAidKitButton,
+                                   self.fireHydrantButton,
                                    nil];
     }
     

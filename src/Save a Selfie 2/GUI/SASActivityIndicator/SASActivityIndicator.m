@@ -18,8 +18,7 @@
 
 @implementation SASActivityIndicator
 
-@synthesize message = _message;
-@synthesize activityIndicator;
+
 
 - (instancetype)initWithMessage:(NSString*) aMessage {
     if (self = [super init]) {

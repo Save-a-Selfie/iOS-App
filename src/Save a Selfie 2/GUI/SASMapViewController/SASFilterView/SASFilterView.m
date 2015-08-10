@@ -26,11 +26,6 @@
 
 @implementation SASFilterView
 
-@synthesize tableView = _tableView;
-@synthesize filterLabel;
-@synthesize delegate;
-@synthesize selectedDevice = _selectedDevice;
-@synthesize cells;
 
 SASDeviceType availableDevicesToFilter[5] = {
     All,
@@ -87,7 +82,7 @@ SASDeviceType availableDevicesToFilter[5] = {
 
 - (void)tableView:(UITableView *)aTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    for (SASFilterViewCell *sasFilterViewCell in cells) {
+    for (SASFilterViewCell *sasFilterViewCell in self.cells) {
         [self untickCell:sasFilterViewCell];
     }
     
@@ -177,7 +172,7 @@ SASDeviceType availableDevicesToFilter[5] = {
 
 // Forwards selected cells associatedDevice to delegate.
 - (IBAction)doneButtonPressed:(id)sender {
-    if(delegate != nil && [delegate respondsToSelector:@selector(sasFilterView:doneButtonWasPressedWithSelectedDeviceType:)]) {
+    if(self.delegate != nil && [self.delegate respondsToSelector:@selector(sasFilterView:doneButtonWasPressedWithSelectedDeviceType:)]) {
         [self.delegate sasFilterView:self doneButtonWasPressedWithSelectedDeviceType:self.selectedDevice];
     }
 }

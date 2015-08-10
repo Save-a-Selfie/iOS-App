@@ -55,20 +55,6 @@
 
 NSString *permissionsProblemOne = @"Please enable location services for this app. Launch the iPhone Settings app to do this. Go to Privacy > Location Services > Save a Selfie > While Using the App. You have to go out of this app, using the 'Home' button.";
 
-@synthesize sasMapView;
-@synthesize sasImagePickerController;
-@synthesize sasUploadImageViewController;
-
-
-
-// Buttons
-@synthesize showFilterViewButton;
-@synthesize uploadNewImageToServerButton;
-@synthesize locateUserButton;
-
-@synthesize sasMapWarningAlert;
-@synthesize sasNoticeView;
-
 
 
 
@@ -118,9 +104,9 @@ NSString *permissionsProblemOne = @"Please enable location services for this app
 
 
 -(void) clearSASNotice { // called when returning from outside app
-    if (sasNoticeView) {
-        [sasNoticeView animateOutOfView];
-        sasNoticeView = nil;
+    if (self.sasNoticeView) {
+        [self.sasNoticeView animateOutOfView];
+        self.sasNoticeView = nil;
     }
 }
 
@@ -186,8 +172,8 @@ NSString *permissionsProblemOne = @"Please enable location services for this app
     
     BOOL makeCheckForMapWarning = NO;
     
-    if (sasNoticeView) {
-        [sasNoticeView animateOutOfView]; // get rid of any existing permissions box blocking access to camera etc.
+    if (self.sasNoticeView) {
+        [self.sasNoticeView animateOutOfView]; // get rid of any existing permissions box blocking access to camera etc.
     }
     
     if([CLLocationManager locationServicesEnabled]){
@@ -243,7 +229,7 @@ NSString *permissionsProblemOne = @"Please enable location services for this app
     
 
     if (!hasMapWarningHasBeenAccepted) {
-        if(sasMapWarningAlert == nil) {
+        if(self.sasMapWarningAlert == nil) {
             self.sasMapWarningAlert = [[SASMapWarningAlert alloc] initWithTitle:@"Warning!" andMessage:@"The information here is correct to the best of our knowledge, but its use is at your risk and discretion, with no liability to Save a Selfie, the developers or Apple."];
             
             self.sasMapWarningAlert.rightButtonTitle = @"Accept";
@@ -315,7 +301,7 @@ NSString *permissionsProblemOne = @"Please enable location services for this app
     
     
     if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-        [sasImagePickerController setSourceType:UIImagePickerControllerSourceTypeCamera];
+        [self.sasImagePickerController setSourceType:UIImagePickerControllerSourceTypeCamera];
         [self presentViewController:self.sasImagePickerController animated:YES completion:nil];
     }
 }

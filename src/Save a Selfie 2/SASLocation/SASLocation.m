@@ -20,9 +20,6 @@
 
 @implementation SASLocation
 
-@synthesize locationManager = _locationManager;
-@synthesize delegate;
-@synthesize currentUserLocationCoordinates = _currentUserLocationCoordinates;
 
 
 - (instancetype) init {

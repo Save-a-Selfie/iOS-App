@@ -41,6 +41,7 @@
 		18B7C3441B44A74500017170 /* SASUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B7C3431B44A74500017170 /* SASUploader.m */; };
 		18B7C3481B4585FE00017170 /* SASAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B7C3471B4585FE00017170 /* SASAlertView.m */; };
 		18B7C34E1B4586AB00017170 /* SASAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18B7C34D1B4586AB00017170 /* SASAlertView.xib */; };
+		18C104861B714C5900B4731D /* SASGalleryContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C104851B714C5900B4731D /* SASGalleryContainer.m */; };
 		18C323991B1E2F1E0027BDEA /* SASImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C323981B1E2F1E0027BDEA /* SASImageViewController.m */; };
 		18DAE8531B46BA6400CAEF2D /* SASDeviceButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 18DAE8521B46BA6400CAEF2D /* SASDeviceButton.m */; };
 		18DDE50B1B3D7F0F00AB0CB3 /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18DDE50A1B3D7F0F00AB0CB3 /* Launch Screen.xib */; };
@@ -164,6 +165,8 @@
 		18B7C3461B4585FE00017170 /* SASAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASAlertView.h; sourceTree = "<group>"; };
 		18B7C3471B4585FE00017170 /* SASAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASAlertView.m; sourceTree = "<group>"; };
 		18B7C34D1B4586AB00017170 /* SASAlertView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SASAlertView.xib; sourceTree = "<group>"; };
+		18C104841B714C5900B4731D /* SASGalleryContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASGalleryContainer.h; sourceTree = "<group>"; };
+		18C104851B714C5900B4731D /* SASGalleryContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASGalleryContainer.m; sourceTree = "<group>"; };
 		18C323971B1E2F1E0027BDEA /* SASImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASImageViewController.h; sourceTree = "<group>"; };
 		18C323981B1E2F1E0027BDEA /* SASImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASImageViewController.m; sourceTree = "<group>"; };
 		18DAE8511B46BA6400CAEF2D /* SASDeviceButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASDeviceButton.h; sourceTree = "<group>"; };
@@ -339,6 +342,8 @@
 			children = (
 				1818AFD41B515249004FF998 /* SASGalleryCollectionViewController.h */,
 				1818AFD51B515249004FF998 /* SASGalleryCollectionViewController.m */,
+				18C104841B714C5900B4731D /* SASGalleryContainer.h */,
+				18C104851B714C5900B4731D /* SASGalleryContainer.m */,
 				1818AFDB1B5153A9004FF998 /* SASGalleryCell */,
 			);
 			path = SASGalleryViewController;
@@ -511,12 +516,13 @@
 			path = Screen;
 			sourceTree = "<group>";
 		};
-		1891E3DA1B176E9F008CC10C /* SASMapAnnotationRetriever */ = {
+		1891E3DA1B176E9F008CC10C /* SASObjectDownloader */ = {
 			isa = PBXGroup;
 			children = (
 				1891E3D71B176E9B008CC10C /* SASObjectDownloader.h */,
 				1891E3D81B176E9B008CC10C /* SASObjectDownloader.m */,
 			);
+			name = SASObjectDownloader;
 			path = SASMapAnnotationRetriever;
 			sourceTree = "<group>";
 		};
@@ -645,7 +651,7 @@
 			isa = PBXGroup;
 			children = (
 				184D99B41B49B036005ECE33 /* SASNetworkUtilities */,
-				1891E3DA1B176E9F008CC10C /* SASMapAnnotationRetriever */,
+				1891E3DA1B176E9F008CC10C /* SASObjectDownloader */,
 				18B7C3451B44A75D00017170 /* SASUploader */,
 			);
 			path = Network;
@@ -1013,6 +1019,7 @@
 				18A524F71B166BAB00E8F8F6 /* SASLocation.m in Sources */,
 				D756A29C19F175230089EF80 /* UIImage+Alpha.m in Sources */,
 				18EE44E21B556A5300F8F93B /* SASNoticeView.m in Sources */,
+				18C104861B714C5900B4731D /* SASGalleryContainer.m in Sources */,
 				1891E3D91B176E9B008CC10C /* SASObjectDownloader.m in Sources */,
 				1810C9141B28ABE3009063E5 /* ILTranslucentView.m in Sources */,
 				D786E1811A48C10500A20FDD /* SASAnnotation.m in Sources */,

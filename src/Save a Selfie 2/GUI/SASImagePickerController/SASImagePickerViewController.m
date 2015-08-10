@@ -21,9 +21,6 @@
 
 @implementation SASImagePickerViewController
 
-@synthesize imageTakenFromCamera;
-@synthesize sasImagePickerDelegate;
-
 
 - (void)viewDidLoad {
     [super viewDidLoad];

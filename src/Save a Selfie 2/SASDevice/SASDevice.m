@@ -9,7 +9,7 @@
 
 @implementation SASDevice
 
-@synthesize type;
+
 
 
 - (id) initDeviceWithInformationFromString: (NSString *)infoString {

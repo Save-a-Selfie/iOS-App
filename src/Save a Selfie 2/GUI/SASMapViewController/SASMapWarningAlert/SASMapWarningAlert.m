@@ -30,17 +30,6 @@
 
 @implementation SASMapWarningAlert
 
-@synthesize leftButton = _leftButton;
-@synthesize rightButton = _rightButton;
-@synthesize titleLabel = _titleLabel;
-@synthesize messageTextView = _messageTextView;
-@synthesize leftButtonTitle;
-@synthesize rightButtonTitle;
-
-@synthesize leftButtonAction;
-@synthesize leftButtonTarget;
-@synthesize rightButtonAction;
-@synthesize rightButtonTarget;
 
 
 

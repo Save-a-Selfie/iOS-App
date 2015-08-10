@@ -19,13 +19,6 @@
 
 @implementation SASNotificationView
 
-@synthesize title;
-@synthesize image;
-
-// IBOutlets
-@synthesize titleLabel;
-@synthesize imageView;
-
 
 - (instancetype)init {
     if(self = [super init]) {

@@ -23,9 +23,6 @@
 
 @implementation SASNoticeView
 
-@synthesize greyView;
-@synthesize textView = _textView;
-@synthesize titleLabel;
 
 #pragma Object Life Cycle
 - (instancetype)init {
@@ -59,7 +56,7 @@
     self.greyView = [[SASGreyView alloc]initWithFrame:CGRectMake(0, 0, [Screen width], [Screen height])];
     
     
-    [view addSubview:greyView];
+    [view addSubview:self.greyView];
     [view addSubview:self];
     [view  bringSubviewToFront:self];
 

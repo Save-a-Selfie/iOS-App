@@ -29,17 +29,6 @@
 
 @implementation SASUploader
 
-@synthesize delegate;
-
-@synthesize sasUploadObject = _sasUploadObject;
-
-@synthesize largeImage;
-@synthesize thumbnailImage;
-
-@synthesize responseData;
-@synthesize uploading;
-
-
 #pragma Object Life Cycle
 - (instancetype)initWithSASUploadObject: (SASUploadObject <SASVerifiedUploadObject>*) object {
     
@@ -170,7 +159,7 @@
     // Add watermarks.
     UIImage *watermark = [UIImage imageNamed:@"Watermark"];
     
-    self.largeImage = [UIImage doubleMerge:largeImage withImage:nil atX:20 andY:20 withStrength:1.0 andImage:watermark atX2:width - watermark.size.width - 20 andY2:height - watermark.size.height - 20 strength:1.0];
+    self.largeImage = [UIImage doubleMerge:_largeImage withImage:nil atX:20 andY:20 withStrength:1.0 andImage:watermark atX2:width - watermark.size.width - 20 andY2:height - watermark.size.height - 20 strength:1.0];
     
 }
 

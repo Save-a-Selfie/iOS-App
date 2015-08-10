@@ -29,25 +29,6 @@
 @implementation SASAlertView
 
 
-// IBOutlets
-@synthesize alertTitleLabel = _alertTitleLabel;
-@synthesize alertMessageTextView = _alertMessageTextView;
-@synthesize alertButton = _alertButton;
-
-// NSStrings.
-@synthesize title;
-@synthesize message;
-@synthesize buttonTitle;
-
-// Action
-@synthesize alertAction = _alertAction;
-@synthesize alertTarget = _alertTarget;
-
-
-// Grey view background
-@synthesize greyView;
-
-
 - (instancetype)initWithTarget:(id)target andAction:(SEL)action {
     
     if(self = [super init]) {
@@ -100,7 +81,7 @@
         self.greyView = [[SASGreyView alloc]initWithFrame:CGRectMake(0, 0, [Screen width], [Screen height])];
     }
     
-    [view addSubview:greyView];
+    [view addSubview:self.greyView];
     [view addSubview:self];
     
     self.center = view.center;

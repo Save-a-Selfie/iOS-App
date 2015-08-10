@@ -40,15 +40,7 @@
 
 @implementation SASMapView
 
-@synthesize currentLocation = _currentLocation;
-@synthesize sasLocation;
-@synthesize sasObjectDownloader;
-@synthesize notificationReceiver;
-@synthesize objectInfoFromServer;
-@synthesize sasAnnotationImage;
-@synthesize annotationsToShow;
-@synthesize showAnnotations;
-@synthesize zoomToUsersLocationInitially;
+
 
 
 #pragma mark Object Life Cycle
@@ -88,9 +80,9 @@
     _currentLocation = kCLLocationCoordinate2DInvalid;
     
     userAlreadyLocated = NO;
-    sasAnnotationImage = SASAnnotationImageDefault;
+    self.sasAnnotationImage = SASAnnotationImageDefault;
     
-    annotationsToShow = All;
+    self.annotationsToShow = All;
     
     self.mapType = MKMapTypeSatellite;
     
@@ -137,7 +129,7 @@
 
 // Displays a single annotation on the map.
 - (void) showAnnotation:(SASAnnotation*) annotation andZoom:(BOOL) zoom animated:(BOOL) animated{
-    if(showAnnotations) {
+    if(self.showAnnotations) {
         [self removeExistingAnnotationsFromMapView];
         self.showsUserLocation = NO;
     
@@ -208,7 +200,7 @@
     // Call plotAnnotationsWithDeviceInformation:
     // which will do the checking on whether or not
     // that annotation should be shown on the map.
-    [self plotAnnotationsWithObjectInformation:objectInfoFromServer];
+    [self plotAnnotationsWithObjectInformation:self.objectInfoFromServer];
 }
 
 
@@ -224,7 +216,7 @@
 - (void)sasLocation:(SASLocation *)sasLocation locationDidUpdate:(CLLocationCoordinate2D)location {
     self.currentLocation = location;
     
-    if(zoomToUsersLocationInitially) {
+    if(self.zoomToUsersLocationInitially) {
         // We only want the map to zoom the user
         // when it is first opened. We check `userAlreadyLocated`
         // so the map does no keep zooming every time the user's
@@ -237,7 +229,7 @@
     
     // As the map view is providing a wrapper for the location object
     // pass on the location update of the user.
-    if (notificationReceiver != nil && [notificationReceiver respondsToSelector:@selector(sasMapViewUsersLocationHasUpdated:)]) {
+    if (self.notificationReceiver != nil && [self.notificationReceiver respondsToSelector:@selector(sasMapViewUsersLocationHasUpdated:)]) {
         [self.notificationReceiver sasMapViewUsersLocationHasUpdated:location];
     }
 }
@@ -342,7 +334,7 @@
     
     
     // If we're to show the default image for the annotation
-    if(sasAnnotationImage == SASAnnotationImageDefault) {
+    if(self.sasAnnotationImage == SASAnnotationImageDefault) {
         return nil;
     }
     else {
