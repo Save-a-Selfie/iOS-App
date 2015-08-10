@@ -6,17 +6,15 @@
 //  Copyright (c) 2015 Stephen Fox. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @interface SASGalleryContainer : NSObject
 
 
-- (NSArray *) currentData;
-// For KVC compliance, publicly declared for readability
-- (void)insertObject:(id)object inDataAtIndex:(NSUInteger)index;
-- (void)removeObjectFromDataAtIndex:(NSUInteger)index;
-- (id)objectInDataAtIndex:(NSUInteger)index;
-- (NSArray *)dataAtIndexes:(NSIndexSet *)indexes;
-- (NSUInteger)countOfData;
+@property (weak, nonatomic) NSArray *images;
+
+- (void) addImage: (UIImage *) image;
+
+- (NSInteger) imageCount;
 
 @end

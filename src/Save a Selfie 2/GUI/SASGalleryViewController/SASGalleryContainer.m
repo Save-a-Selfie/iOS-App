@@ -16,58 +16,29 @@
 
 @implementation SASGalleryContainer
 
-@synthesize data = _data;
+
 
 #pragma Object Life Cycle
-//  We'll use automatic notifications for this example
-+ (BOOL)automaticallyNotifiesObserversForKey:(NSString *)key
-{
-    if ([key isEqualToString:@"data"]) {
-        return YES;
-    }
-    return [super automaticallyNotifiesObserversForKey:key];
-}
-
-- (id)init
-{
-    self = [super init];
-    if (self) {
-        // This is the ivar which provides storage
-        _data = [NSMutableArray array];
+- (instancetype)init {
+    
+    if (self = [super init]) {
+        _data = [[NSMutableArray alloc] init];
     }
     return self;
 }
 
-//  Just a convenience method
-- (NSArray *)currentData
-{
-    return [self dataAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, [self countOfData])]];
+
+
+- (void )addImage:(UIImage *)image {
+    [self.data addObject:image];
 }
 
-//  These methods enable KVC compliance
-- (void)insertObject:(id)object inDataAtIndex:(NSUInteger)index
-{
-    self.data[index] = object;
-}
-
-- (void)removeObjectFromDataAtIndex:(NSUInteger)index
-{
-    [self.data removeObjectAtIndex:index];
-}
-
-- (id)objectInDataAtIndex:(NSUInteger)index
-{
-    return self.data[index];
-}
-
-- (NSArray *)dataAtIndexes:(NSIndexSet *)indexes
-{
-    return [self.data objectsAtIndexes:indexes];
-}
-
-- (NSUInteger)countOfData
-{
+- (NSInteger) imageCount {
     return [self.data count];
+}
+
+- (NSArray *)images {
+    return self.data;
 }
 
 

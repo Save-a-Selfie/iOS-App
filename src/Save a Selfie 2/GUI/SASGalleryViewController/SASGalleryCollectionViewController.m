@@ -13,16 +13,19 @@
 #import "SASUtilities.h"
 #import <SDWebImageDownloader.h>
 #import "SASActivityIndicator.h"
+#import "SASGalleryContainer.h"
 
 
 
 
-@interface SASGalleryCollectionViewController() <SASGalleryCellDelegate, UICollectionViewDataSource, UICollectionViewDelegate, SASObjectDownloaderDelegate>
+@interface SASGalleryCollectionViewController() <SASGalleryCellDelegate,
+UICollectionViewDataSource,
+UICollectionViewDelegate,
+SASObjectDownloaderDelegate>
 
 @property (strong, nonatomic) SASObjectDownloader *sasObjectDownloader;
-@property (strong, nonatomic) __block NSMutableArray *objectsForCells;
-@property (strong, nonatomic) __block NSMutableArray* imagesForCell;
 
+@property (strong, nonatomic) __block SASGalleryContainer *images;
 
 @property (strong, nonatomic) __block SASActivityIndicator *sasActivityIndicator;
 
@@ -37,32 +40,15 @@
 @implementation SASGalleryCollectionViewController
 
 
-@synthesize sasObjectDownloader;
-@synthesize objectsForCells;
-@synthesize imagesForCell;
-@synthesize imageToLoad;
-@synthesize sasActivityIndicator;
 
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
     self.imageToLoad = 0;
-    [[NSNotificationCenter defaultCenter] addObserver:self.imagesForCell
-                                             selector:@selector(reloadCollectionView)
-                                                 name:@"arrayUpdated"
-                                               object:nil];
     
-//    if(self.sasActivityIndicator == nil) {
-//        self.sasActivityIndicator = [[SASActivityIndicator alloc] initWithMessage:@"Loading..."];
-//        [self.collectionView addSubview:self.sasActivityIndicator];
-//        self.sasActivityIndicator.center = self.collectionView.center;
-//        self.sasActivityIndicator.backgroundColor = [UIColor whiteColor];
-//        [self.sasActivityIndicator startAnimating];
-//
-//    }
     
-    if (self.sasObjectDownloader == nil) {
+    if (!self.sasObjectDownloader) {
         self.sasObjectDownloader = [[SASObjectDownloader alloc] initWithDelegate:self];
     }
     
@@ -71,43 +57,36 @@
 
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
-    
-    [self.sasObjectDownloader downloadObjectsFromServer];
+    [_sasObjectDownloader downloadObjectsFromServer];
 }
 
 - (void) reloadCollectionView {
-    
     [self.collectionView reloadData];
-    self.imageToLoad++;
-    printf("Called");
 }
+
 
 #pragma mark SASObjectDownloader Delegate
 - (void)sasObjectDownloader:(SASObjectDownloader *)downloader didDownloadObjects:(NSMutableArray *)objects {
-    self.objectsForCells = objects;
-    
-    [self beginFetchingImagesFromObjectData:objectsForCells];
+    [self beginFetchingImagesFromObjectData:objects];
 }
 
 
 - (void) beginFetchingImagesFromObjectData:(NSMutableArray *) objects {
     
-    
-    if (self.imagesForCell == nil) {
-        self.imagesForCell = [[NSMutableArray alloc] init];
+    if(!self.images) {
+        self.images = [[SASGalleryContainer alloc] init];
     }
-    
 
     
     // Loop through all the objects and initliase
     // an SASDevice from each object at index.
     // Create a URL from the devices imageURL string.
     // Then download the image.
-    for (int i; i < 100; i++) {
+    for (int i; i < 20; i++) {
         
         
         // Get the image for the cell.
-        SASDevice *deviceAtIndex = [objectsForCells objectAtIndex:i];
+        SASDevice *deviceAtIndex = [objects objectAtIndex:i];
         
         NSString *imageURL = deviceAtIndex.imageURL;
         
@@ -118,12 +97,12 @@
                                                            progress:nil
                                                           completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished) {
                                                               if (image && finished) {
-                                                                  [self.imagesForCell addObject:image];
-                                                                  printf("dd");
-                                                                  [[NSNotificationCenter defaultCenter] postNotificationName:@"arrayUpdated" object:nil];
+                                                                  [self.images addImage:image];
+                                                                  NSLog(@"%ld", [self.images imageCount]);
                                                               }
                                                           }];
     }
+    [self reloadCollectionView];
     
     
 }
@@ -133,30 +112,19 @@
 - (SASGalleryCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
     SASGalleryCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
-    
-    
+    cell.imageView.image = [self.images images][indexPath.row];
     
     return cell;
 
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return 10;
+    NSLog(@"%ld", [self.images imageCount]);
+    return [self.images imageCount];
 }
 
 
-- (UIEdgeInsets)collectionView:(UICollectionView*)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
-    return UIEdgeInsetsMake(0, 0, 0, 0);
-}
 
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
-    
-    return 0.0;
-}
-
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
-    return 0.0;
-}
 
 
 
