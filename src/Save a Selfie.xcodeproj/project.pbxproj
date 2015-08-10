@@ -14,11 +14,10 @@
 		1810C90A1B289044009063E5 /* UIImage+SASImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 1810C9091B289044009063E5 /* UIImage+SASImage.m */; };
 		1810C9141B28ABE3009063E5 /* ILTranslucentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1810C9131B28ABE3009063E5 /* ILTranslucentView.m */; };
 		1818AFC61B50435B004FF998 /* UIView+Animations.m in Sources */ = {isa = PBXBuildFile; fileRef = 1818AFC51B50435B004FF998 /* UIView+Animations.m */; };
-		1818AFD61B515249004FF998 /* SASGalleryCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1818AFD51B515249004FF998 /* SASGalleryCollectionViewController.m */; };
 		1818AFDA1B5153A5004FF998 /* SASGalleryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1818AFD91B5153A5004FF998 /* SASGalleryCell.m */; };
 		181D1E5D1B2359EA00FB5928 /* SASImageInspectorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 181D1E5C1B2359EA00FB5928 /* SASImageInspectorView.m */; };
 		181D1E621B235CF900FB5928 /* SASImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 181D1E611B235CF900FB5928 /* SASImageView.m */; };
-		1835D2791B78F7D100A62B7F /* SASGalleryCollectionViewControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1835D2781B78F7D100A62B7F /* SASGalleryCollectionViewControllerTest.m */; };
+		1835D2791B78F7D100A62B7F /* SASGalleryCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1835D2781B78F7D100A62B7F /* SASGalleryCollectionViewController.m */; };
 		18453A511B584DD20055A004 /* SASNotificationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18453A501B584DD20055A004 /* SASNotificationView.xib */; };
 		1845C4EA1B2091F600E3D7BC /* SASActivityIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 1845C4E91B2091F600E3D7BC /* SASActivityIndicator.m */; };
 		1845C4EC1B20920300E3D7BC /* SASActivityIndicatorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1845C4EB1B20920300E3D7BC /* SASActivityIndicatorView.xib */; };
@@ -115,16 +114,14 @@
 		1810C9131B28ABE3009063E5 /* ILTranslucentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ILTranslucentView.m; sourceTree = "<group>"; };
 		1818AFC41B50435B004FF998 /* UIView+Animations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Animations.h"; sourceTree = "<group>"; };
 		1818AFC51B50435B004FF998 /* UIView+Animations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Animations.m"; sourceTree = "<group>"; };
-		1818AFD41B515249004FF998 /* SASGalleryCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASGalleryCollectionViewController.h; sourceTree = "<group>"; };
-		1818AFD51B515249004FF998 /* SASGalleryCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASGalleryCollectionViewController.m; sourceTree = "<group>"; };
 		1818AFD81B5153A5004FF998 /* SASGalleryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASGalleryCell.h; sourceTree = "<group>"; };
 		1818AFD91B5153A5004FF998 /* SASGalleryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASGalleryCell.m; sourceTree = "<group>"; };
 		181D1E5B1B2359EA00FB5928 /* SASImageInspectorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASImageInspectorView.h; sourceTree = "<group>"; };
 		181D1E5C1B2359EA00FB5928 /* SASImageInspectorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASImageInspectorView.m; sourceTree = "<group>"; };
 		181D1E601B235CF900FB5928 /* SASImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASImageView.h; sourceTree = "<group>"; };
 		181D1E611B235CF900FB5928 /* SASImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASImageView.m; sourceTree = "<group>"; };
-		1835D2771B78F7D100A62B7F /* SASGalleryCollectionViewControllerTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASGalleryCollectionViewControllerTest.h; sourceTree = "<group>"; };
-		1835D2781B78F7D100A62B7F /* SASGalleryCollectionViewControllerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASGalleryCollectionViewControllerTest.m; sourceTree = "<group>"; };
+		1835D2771B78F7D100A62B7F /* SASGalleryCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASGalleryCollectionViewController.h; sourceTree = "<group>"; };
+		1835D2781B78F7D100A62B7F /* SASGalleryCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASGalleryCollectionViewController.m; sourceTree = "<group>"; };
 		18453A501B584DD20055A004 /* SASNotificationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SASNotificationView.xib; sourceTree = "<group>"; };
 		1845C4E81B2091F600E3D7BC /* SASActivityIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASActivityIndicator.h; sourceTree = "<group>"; };
 		1845C4E91B2091F600E3D7BC /* SASActivityIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASActivityIndicator.m; sourceTree = "<group>"; };
@@ -342,10 +339,8 @@
 		1818AFD71B515255004FF998 /* SASGalleryViewController */ = {
 			isa = PBXGroup;
 			children = (
-				1818AFD41B515249004FF998 /* SASGalleryCollectionViewController.h */,
-				1818AFD51B515249004FF998 /* SASGalleryCollectionViewController.m */,
-				1835D2771B78F7D100A62B7F /* SASGalleryCollectionViewControllerTest.h */,
-				1835D2781B78F7D100A62B7F /* SASGalleryCollectionViewControllerTest.m */,
+				1835D2771B78F7D100A62B7F /* SASGalleryCollectionViewController.h */,
+				1835D2781B78F7D100A62B7F /* SASGalleryCollectionViewController.m */,
 				189E26371B78F4D100C7B84F /* SASGalleryContainer */,
 				1818AFDB1B5153A9004FF998 /* SASGalleryCell */,
 			);
@@ -1047,7 +1042,7 @@
 				18F46A4B1B2B9F1F0062BD05 /* SASFilterView.m in Sources */,
 				181D1E5D1B2359EA00FB5928 /* SASImageInspectorView.m in Sources */,
 				D756A2A919F309690089EF80 /* SASTabBarController.m in Sources */,
-				1835D2791B78F7D100A62B7F /* SASGalleryCollectionViewControllerTest.m in Sources */,
+				1835D2791B78F7D100A62B7F /* SASGalleryCollectionViewController.m in Sources */,
 				18EE44DE1B556A1F00F8F93B /* SASNotificationView.m in Sources */,
 				1810C90A1B289044009063E5 /* UIImage+SASImage.m in Sources */,
 				1807AF3F1B4EE8F2006E1B28 /* StorageSystem.m in Sources */,
@@ -1055,7 +1050,6 @@
 				188CAEE51B20EA59006A90EB /* SASSocial.m in Sources */,
 				18B7C3401B44885B00017170 /* SASBarButtonItem.m in Sources */,
 				1818AFC61B50435B004FF998 /* UIView+Animations.m in Sources */,
-				1818AFD61B515249004FF998 /* SASGalleryCollectionViewController.m in Sources */,
 				D756A29D19F175230089EF80 /* UIImage+RoundedCorner.m in Sources */,
 				D72E1DB319EE841E005DD8A5 /* main.m in Sources */,
 				184D99B31B49B02F005ECE33 /* SASNetworkUtilities.m in Sources */,

@@ -14,7 +14,7 @@
 
 @protocol SASGalleryCellDelegate <NSObject>
 
-- (void) sasGalleryCellDelegate:(SASGalleryCell *) cell wasTappedWithObject:(SASAnnotation*) object;
+- (void) sasGalleryCellDelegate:(SASGalleryCell *) cell wasTappedWithObject:(SASAnnotation*) annotation;
 
 @end
 

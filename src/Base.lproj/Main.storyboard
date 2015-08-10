@@ -507,10 +507,10 @@
             </objects>
             <point key="canvasLocation" x="-521" y="-190"/>
         </scene>
-        <!--Gallery Collection View Controller Test-->
+        <!--Gallery Collection View Controller-->
         <scene sceneID="slW-Pl-d4h">
             <objects>
-                <collectionViewController storyboardIdentifier="SASGalleryCollectionViewController" id="zCS-A5-9Es" customClass="SASGalleryCollectionViewControllerTest" sceneMemberID="viewController">
+                <collectionViewController storyboardIdentifier="SASGalleryCollectionViewController" id="zCS-A5-9Es" customClass="SASGalleryCollectionViewController" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="MhA-pN-3ba">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

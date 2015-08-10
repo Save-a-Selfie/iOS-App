@@ -12,11 +12,6 @@
 
 @implementation SASGalleryCell
 
-@synthesize delegate;
-
-@synthesize device;
-@synthesize imageView;
-
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
     if ([super initWithCoder:aDecoder]) {
@@ -41,7 +36,6 @@
     
     if(self.delegate != nil && [self.delegate respondsToSelector:@selector(sasGalleryCellDelegate:wasTappedWithObject:)]) {
         [self.delegate sasGalleryCellDelegate:self wasTappedWithObject:annotation];
-
     }
 }
 @end
