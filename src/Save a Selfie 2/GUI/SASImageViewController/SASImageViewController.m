@@ -27,7 +27,7 @@
 }
 
 @property (nonatomic, assign) SASDeviceType sasDeviceType;
-
+@property (nonatomic, strong) SASAnnotation *annotation;
 
 @property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, weak) IBOutlet UIView *contentView;
@@ -88,9 +88,8 @@
     
     [self.navigationController setNavigationBarHidden:NO animated:YES];
     
-    CGRect frame = self.separator.frame;
-    frame.size.height = 0.2;
-    self.separator.frame = frame;
+  
+
 
     SASBarButtonItem *reportButton = [[SASBarButtonItem alloc] initWithTitle:@"Report"
                                                                        style:UIBarButtonItemStylePlain
@@ -106,7 +105,9 @@
     //  update the UI accordingly.
     
     // Store the type of device shown in the image
-    self.sasDeviceType = self.annotation.device.type;
+    self.sasDeviceType = self.device.type;
+    
+    self.annotation = [[SASAnnotation alloc] initAnnotationWithObject:self.device index:0];
     
     self.scrollView.delegate = self;
 
@@ -230,7 +231,7 @@
 
 
 #pragma mark SASMapNotificationReceiver
-- (void)sasMapViewUsersLocationHasUpdated:(CLLocationCoordinate2D)coordinate {
+- (void)sasMapView:(SASMapView *)mapView usersLocationHasUpdated:(CLLocationCoordinate2D)coordinate {
     
     CLLocation *usersLocation = [[CLLocation alloc] initWithLatitude:self.annotation.coordinate.latitude longitude:self.annotation.coordinate.longitude];
     CLLocation *deviceLocation = [[CLLocation alloc] initWithLatitude:coordinate.latitude longitude:coordinate.longitude];

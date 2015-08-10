@@ -14,7 +14,7 @@
 
 @protocol SASGalleryCellDelegate <NSObject>
 
-- (void) sasGalleryCellDelegate:(SASGalleryCell *) cell wasTappedWithObject:(SASAnnotation*) annotation;
+- (void) sasGalleryCellDelegate:(SASGalleryCell *) cell wasTappedWithObject:(SASDevice*) device;
 
 @end
 
@@ -22,7 +22,7 @@
 
 @property (nonatomic, weak) id<SASGalleryCellDelegate> delegate;
 
-@property (weak, nonatomic) SASDevice *device;
+@property (strong, nonatomic) SASDevice *device;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 
 @end

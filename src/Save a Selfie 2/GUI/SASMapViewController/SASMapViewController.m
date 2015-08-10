@@ -150,14 +150,14 @@ NSString *permissionsProblemOne = @"Please enable location services for this app
 
 
 
-#pragma mark SASMapViewNotifications methods.
-- (void)sasMapViewAnnotationTapped:(SASAnnotation*)annotation {
+#pragma mark <SASMapViewNotifications>
+- (void)sasMapView:(SASMapView *)mapView annotationWasTapped:(SASAnnotation *) annotation {
     
     // Present the SASImageviewController to display the image associated
     // with the annotation selected.
     SASImageViewController *sasImageViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SASImageViewController"];
     
-    [sasImageViewController setAnnotation:annotation];
+    sasImageViewController.device = annotation.device;
     
     [self.navigationController pushViewController:sasImageViewController animated:YES];
 
@@ -168,7 +168,7 @@ NSString *permissionsProblemOne = @"Please enable location services for this app
 
 
 // This method will be called anythime permissions for lacation is changed.
-- (void) authorizationStatusHasChanged:(CLAuthorizationStatus)status {
+- (void)sasMapView:(SASMapView *)mapView authorizationStatusHasChanged:(CLAuthorizationStatus)status {
     
     BOOL makeCheckForMapWarning = NO;
     

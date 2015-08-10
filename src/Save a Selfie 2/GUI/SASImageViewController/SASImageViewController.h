@@ -12,11 +12,14 @@
 @interface SASImageViewController : UIViewController
 
 
-// @Discussion
-//  This property should be set before this ViewController
-//  is presented, so the correct image can be displayed and
-//  appropriate map location.
-@property(strong, nonatomic) SASAnnotation* annotation;
+/**
+ This property should be set before presenting
+ an instance of this class. It is needed so the
+ image, map and description can be set correctly.
+ Not setting this property will lead to all the aforementioned 
+ not being set.
+ */
+@property(strong, nonatomic) SASDevice* device;
 
 
 @end

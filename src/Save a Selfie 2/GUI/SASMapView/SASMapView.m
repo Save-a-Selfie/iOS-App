@@ -229,8 +229,8 @@
     
     // As the map view is providing a wrapper for the location object
     // pass on the location update of the user.
-    if (self.notificationReceiver != nil && [self.notificationReceiver respondsToSelector:@selector(sasMapViewUsersLocationHasUpdated:)]) {
-        [self.notificationReceiver sasMapViewUsersLocationHasUpdated:location];
+    if (self.notificationReceiver != nil && [self.notificationReceiver respondsToSelector:@selector(sasMapView:usersLocationHasUpdated:)]) {
+        [self.notificationReceiver sasMapView:self usersLocationHasUpdated:location];
     }
 }
 
@@ -245,8 +245,8 @@
 //  and map changes.
 
 - (void)sasLocation:(SASLocation *)sasLocation locationPermissionsHaveChanged:(CLAuthorizationStatus)status {
-    if(self.notificationReceiver != nil && [self.notificationReceiver respondsToSelector:@selector(authorizationStatusHasChanged:)]) {
-        [self.notificationReceiver authorizationStatusHasChanged:status];
+    if(self.notificationReceiver != nil && [self.notificationReceiver respondsToSelector:@selector(sasMapView:authorizationStatusHasChanged:)]) {
+        [self.notificationReceiver sasMapView:self authorizationStatusHasChanged:status];
     }
 }
 
@@ -304,8 +304,8 @@
     
     if(self.notificationReceiver != nil &&
        ![selectedAnnotation isKindOfClass:MKUserLocation.class] &&
-       [self.notificationReceiver respondsToSelector:@selector(sasMapViewAnnotationTapped:)]) {
-        [self.notificationReceiver sasMapViewAnnotationTapped:selectedAnnotation];
+       [self.notificationReceiver respondsToSelector:@selector(sasMapView:annotationWasTapped:)]) {
+        [self.notificationReceiver sasMapView:self annotationWasTapped:selectedAnnotation];
     }
     
     // When -didSelectAnnotationView is fired, the annotation will always be marked

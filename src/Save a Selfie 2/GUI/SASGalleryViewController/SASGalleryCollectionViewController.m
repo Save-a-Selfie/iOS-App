@@ -34,6 +34,12 @@ static NSString * const reuseIdentifier = @"cell";
     
     self.navigationController.navigationBar.topItem.title = @"Gallery";
     self.collectionView.backgroundColor = [UIColor whiteColor];
+    
+    if (!self.sasObjectDownloader) {
+        self.sasObjectDownloader = [[SASObjectDownloader alloc] initWithDelegate:self];
+    }
+    
+    [self.sasObjectDownloader downloadObjectsFromServer];
 }
 
 
@@ -44,12 +50,6 @@ static NSString * const reuseIdentifier = @"cell";
     
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
-    
-    if (!self.sasObjectDownloader) {
-        self.sasObjectDownloader = [[SASObjectDownloader alloc] initWithDelegate:self];
-    }
-    
-    [self.sasObjectDownloader downloadObjectsFromServer];
 }
 
 
@@ -136,13 +136,15 @@ static NSString * const reuseIdentifier = @"cell";
 
 
 #pragma mark <SASgalleryCellDelegate>
-- (void)sasGalleryCellDelegate:(SASGalleryCell *)cell wasTappedWithObject:(SASAnnotation *)annotation {
+- (void)sasGalleryCellDelegate:(SASGalleryCell *)cell wasTappedWithObject:(SASDevice *)device {
     
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     SASImageViewController *sasImageViewController = [storyboard instantiateViewControllerWithIdentifier:@"SASImageViewController"];
     
-    sasImageViewController.annotation = annotation;
+    sasImageViewController.device = device;
     [self.navigationController pushViewController:sasImageViewController animated:YES];
+    
+    
 }
 
 

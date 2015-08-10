@@ -12,6 +12,8 @@
 #import "SASAnnotation.h"
 #import "SASDevice.h"
 
+@class SASMapView;
+
 // Annotation type for the MapView.
 typedef NS_ENUM(NSUInteger, SASAnnotationImage) {
     SASAnnotationImageDefault, // Annotation with the corresponding device image.
@@ -24,13 +26,13 @@ typedef NS_ENUM(NSUInteger, SASAnnotationImage) {
 @protocol SASMapViewNotifications <NSObject>
 
 @optional
-- (void) authorizationStatusHasChanged: (CLAuthorizationStatus) status;
+- (void) sasMapView:(SASMapView *) mapView authorizationStatusHasChanged: (CLAuthorizationStatus) status;
 
 
-- (void) sasMapViewAnnotationTapped: (SASAnnotation*) annotation;
+- (void) sasMapView:(SASMapView *) mapView annotationWasTapped: (SASAnnotation*) annotation;
 
 
-- (void) sasMapViewUsersLocationHasUpdated: (CLLocationCoordinate2D) coordinate;
+- (void) sasMapView:(SASMapView *) mapView usersLocationHasUpdated: (CLLocationCoordinate2D) coordinate;
 
 @end
 
