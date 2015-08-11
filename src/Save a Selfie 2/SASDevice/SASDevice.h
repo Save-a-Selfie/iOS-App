@@ -22,7 +22,7 @@ typedef NS_ENUM(int, SASDeviceType) {
 
 
 
-@interface SASDevice : NSObject;
+@interface SASDevice : NSObject <NSCopying>;
 
 @property (nonatomic, assign) SASDeviceType type;
 @property (nonatomic, strong, readonly) NSString *imageURL;

@@ -88,7 +88,7 @@
         self.sasAnnotation = [[SASAnnotation alloc] init];
     }
     
-    self.longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(putAnnotationToView)];
+    self.longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(updateAnnotationOnMapView)];
     [self.sasMapView addGestureRecognizer:self.longPress];
     
 
@@ -190,13 +190,16 @@
 #pragma Touch to change location of device.
 - (IBAction)expandMapView:(id)sender {
     
-    UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
-    UIVisualEffectView *visualEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
-    visualEffectView.frame = CGRectMake(0, [Screen height] - 50, [Screen width], 50);
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
+    [self.sasMapView addSubview:label];
+    label.text = @"Tap";
+    label.textColor = [UIColor whiteColor];
     
-    [UIView animateWithDuration:0.3 animations:^{
-        self.sasMapView.frame = CGRectMake(0, 0, [Screen width], [Screen height]);}
-     ];
+    
+       
+    //    self.sasMapView.frame = CGRectMake(0, 0, [Screen width], [Screen height]);
+
+    
     
 }
 
@@ -204,7 +207,7 @@
 
 
 
-- (void) putAnnotationToView {
+- (void) updateAnnotationOnMapView {
     if(self.longPress.state != UIGestureRecognizerStateBegan) {
         return;
     }

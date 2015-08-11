@@ -10,9 +10,11 @@
 
 @class SASUploadObject;
 
-// Objects that will be uploaded to the server must conform to this protocol
-// and implement the methods. This allows for correct checks to be made before
-// uploading.
+/** 
+ Objects that will be uploaded to the server must conform to this protocol
+ and implement the methods. This allows for correct checks to be made before
+ uploading.
+ */
 @protocol SASVerifiedUploadObject <NSObject>
 
 - (BOOL) captionHasBeenSet;

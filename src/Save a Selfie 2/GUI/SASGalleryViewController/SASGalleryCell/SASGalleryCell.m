@@ -14,7 +14,7 @@
 
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
-    if ([super initWithCoder:aDecoder]) {
+    if (self = [super initWithCoder:aDecoder]) {
         [self addTapGestureRecognizer];
     }
     return self;

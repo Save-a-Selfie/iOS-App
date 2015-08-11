@@ -45,7 +45,7 @@
 
 #pragma mark Object Life Cycle
 - (instancetype) initWithFrame:(CGRect)frame {
-    if(self == [super initWithFrame:frame]) {
+    if(self = [super initWithFrame:frame]) {
         [self setupMapView];
     }
     return self;

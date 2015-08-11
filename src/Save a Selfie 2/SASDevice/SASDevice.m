@@ -6,42 +6,54 @@
 #import "ExtendNSLogFunctionality.h"
 #import "AppDelegate.h"
 
+@interface SASDevice()
+
+@property(strong, nonatomic) NSString *infoString;
+
+@end
 
 @implementation SASDevice
 
 
-
-
-- (id) initDeviceWithInformationFromString: (NSString *)infoString {
+- (id) initDeviceWithInformationFromString: (NSString *) aInfoString {
 
 	if (self = [super init]) {
         
-        NSArray *info = [infoString componentsSeparatedByString:@"\t"];
+        _infoString = aInfoString;
+        
+        NSArray *infoArray = [aInfoString componentsSeparatedByString:@"\t"];
         
         // URL for the image.
-        _imageURL = [info objectAtIndex:0];
+        _imageURL = [infoArray objectAtIndex:0];
         
         // Caption associated with the device.
-        _caption = [info objectAtIndex:1];
+        _caption = [infoArray objectAtIndex:1];
         
         // Sets _type with the correct type of device with the `identifier/value`
         // retrieved from the server.
-        [self setTypeWithIdentifierFromServer:[[info objectAtIndex:2] intValue]];
+        [self setTypeWithIdentifierFromServer:[[infoArray objectAtIndex:2] intValue]];
         
         // Longitude and Latitude.
-        NSNumber *latitude = [info objectAtIndex:3];
-		NSNumber *longitude = [info objectAtIndex:4];
+        NSNumber *latitude = [infoArray objectAtIndex:3];
+		NSNumber *longitude = [infoArray objectAtIndex:4];
 		
         _deviceLocation.latitude = latitude.doubleValue;
 		_deviceLocation.longitude = longitude.doubleValue;
         
         
-        _thumb = [info objectAtIndex:5];
-        _app = [info objectAtIndex:6]; // iPhone app / Instagram / Twitter
+        _thumb = [infoArray objectAtIndex:5];
+        _app = [infoArray objectAtIndex:6]; // iPhone app / Instagram / Twitter
 	}
     
 	return self;
 }
+
+
+- (id)copyWithZone:(NSZone *)zone {
+    SASDevice *copy = [[SASDevice alloc] initDeviceWithInformationFromString:self.infoString];
+    return copy;
+}
+
 
 
 // @Disscussion:

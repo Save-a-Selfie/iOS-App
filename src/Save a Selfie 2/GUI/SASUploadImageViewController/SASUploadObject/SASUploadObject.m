@@ -41,7 +41,7 @@
 
 
 
-#pragma mark SASVerifiedUploadObject Protocol
+#pragma mark <SASVerifiedUploadObject>
 - (BOOL)captionHasBeenSet {
     
     if ([self.caption isEqualToString:@""] ||

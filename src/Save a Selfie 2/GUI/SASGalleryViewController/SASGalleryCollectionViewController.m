@@ -15,10 +15,10 @@
 #import "SASImageViewController.h"
 
 @interface SASGalleryCollectionViewController () <SASObjectDownloaderDelegate, UICollectionViewDataSource, UICollectionViewDelegate,
-SASGalleryCellDelegate>
+SASGalleryCellDelegate, UIActionSheetDelegate>
 
 @property (strong, nonatomic) SASObjectDownloader *sasObjectDownloader;
-@property (strong, nonatomic) __block SASGalleryContainer *images;
+@property (strong, nonatomic) __block SASGalleryContainer *galleryContainer;
 @property (strong, nonatomic) NSArray *downloadedObjects;
 
 @end
@@ -31,6 +31,13 @@ static NSString * const reuseIdentifier = @"cell";
 
 -(void)viewDidLoad {
     [super viewDidLoad];
+    
+    
+    UIBarButtonItem *filter = [[UIBarButtonItem alloc] initWithTitle:@"FILTER"
+                                                               style:UIBarButtonItemStylePlain
+                                                              target:self
+                                                              action:@selector(filterGallery)];
+    self.navigationItem.rightBarButtonItem = filter;
     
     self.navigationController.navigationBar.topItem.title = @"Gallery";
     self.collectionView.backgroundColor = [UIColor whiteColor];
@@ -54,14 +61,14 @@ static NSString * const reuseIdentifier = @"cell";
 
 
 
-- (void) beginFetchingImages:(NSArray *) objects {
+- (void) beginFetchingImages:(NSArray *) objects amount:(NSUInteger) amount {
     
-    if (!self.images) {
-        self.images = [[SASGalleryContainer alloc] init];
+    if (!self.galleryContainer) {
+        self.galleryContainer = [[SASGalleryContainer alloc] init];
     }
     
 
-    for (int i = 0; i < 100; i++) {
+    for (int i = 0; i < amount; i++) {
         SASDevice *deviceAtIndex = [objects objectAtIndex:i];
         
         NSString *imageURLString = deviceAtIndex.imageURL;
@@ -70,7 +77,8 @@ static NSString * const reuseIdentifier = @"cell";
         
         [SDWebImageDownloader.sharedDownloader downloadImageWithURL:url options:0 progress:nil completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished) {
             if (image && finished) {
-                [self.images addImage:image];
+                
+                [self.galleryContainer addImage:image forDevice:deviceAtIndex];
                 
                 // This must be called on the main thread.
                 dispatch_async(dispatch_get_main_queue(), ^{
@@ -108,7 +116,7 @@ static NSString * const reuseIdentifier = @"cell";
         self.downloadedObjects = [NSArray new];
     }
     self.downloadedObjects = objects;
-    [self beginFetchingImages:objects];
+    [self beginFetchingImages:objects amount:10];
 }
 
 
@@ -116,7 +124,7 @@ static NSString * const reuseIdentifier = @"cell";
 
 #pragma mark <UICollectionViewDataSource>
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return [self.images imageCount];
+    return [self.galleryContainer deviceCount];
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -124,7 +132,7 @@ static NSString * const reuseIdentifier = @"cell";
     SASGalleryCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     
     // Set the cell's image.
-    cell.imageView.image = [self.images images][indexPath.row];
+    cell.imageView.image = [self.galleryContainer images][indexPath.row];
     
     // Set the cell's device.
     SASDevice *device = self.downloadedObjects[indexPath.row];
@@ -142,11 +150,33 @@ static NSString * const reuseIdentifier = @"cell";
     SASImageViewController *sasImageViewController = [storyboard instantiateViewControllerWithIdentifier:@"SASImageViewController"];
     
     sasImageViewController.device = device;
+    
     [self.navigationController pushViewController:sasImageViewController animated:YES];
     
     
 }
 
+
+#pragma mark Filter Gallery
+- (void) filterGallery {
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Filter"
+                                                             delegate:self
+                                                    cancelButtonTitle:@"Cancel"
+                                               destructiveButtonTitle:nil
+                                                    otherButtonTitles:@"Show Closest", nil];
+    actionSheet.delegate = self;
+    [actionSheet showInView:self.view];
+}
+
+- (void) filterGalleryForClosestImages {
+    
+}
+
+
+#pragma mark <UIActionSheetDelegate>
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    printf("%ld", (long)buttonIndex);
+}
 
 
 @end

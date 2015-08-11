@@ -32,7 +32,7 @@
 #pragma Object Life Cycle
 - (instancetype)initWithSASUploadObject: (SASUploadObject <SASVerifiedUploadObject>*) object {
     
-    if (self == [super init]) {
+    if (self = [super init]) {
         _sasUploadObject = object;
     }
     return self;
