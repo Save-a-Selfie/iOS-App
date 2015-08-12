@@ -21,7 +21,8 @@
     if(self = [super init]) {
         self = [self initWithNibNamed:@"SASSponsorCardView"];
         self.layer.cornerRadius = 4.0;
-        self.layer.masksToBounds = YES;
+        _button.layer.cornerRadius = 4.0;
+        self.layer.masksToBounds = NO;
         self.layer.shadowOffset = CGSizeMake(-2, 5);
         self.layer.shadowRadius = 5;
         self.layer.shadowOpacity = 0.5;

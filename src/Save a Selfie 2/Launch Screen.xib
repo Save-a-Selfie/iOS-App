@@ -36,7 +36,7 @@
         </view>
     </objects>
     <resources>
-        <image name="CPR" width="764" height="514"/>
+        <image name="CPR" width="750" height="500"/>
         <image name="LaunchScreenLogo" width="1421" height="642"/>
     </resources>
 </document>
