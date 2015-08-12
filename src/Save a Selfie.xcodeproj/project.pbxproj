@@ -10,6 +10,8 @@
 		15AA30A63C377FEBFED40422 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DD50A6FBD23D090F1506F00 /* libPods.a */; };
 		1807AF3F1B4EE8F2006E1B28 /* StorageSystem.m in Sources */ = {isa = PBXBuildFile; fileRef = 1807AF3E1B4EE8F2006E1B28 /* StorageSystem.m */; };
 		1807AF4D1B4EEE79006E1B28 /* NSString+PDRegex.m in Sources */ = {isa = PBXBuildFile; fileRef = 1807AF4C1B4EEE79006E1B28 /* NSString+PDRegex.m */; };
+		180E18F51B7AC1DF0077BBEF /* SASSponsorCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 180E18F41B7AC1DF0077BBEF /* SASSponsorCardView.m */; };
+		180E18F81B7AC20D0077BBEF /* SASSponsorCardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 180E18F71B7AC20D0077BBEF /* SASSponsorCardView.xib */; };
 		180E295D1B5464C1003548FA /* EULAViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 180E295C1B5464C1003548FA /* EULAViewController.m */; };
 		1810C90A1B289044009063E5 /* UIImage+SASImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 1810C9091B289044009063E5 /* UIImage+SASImage.m */; };
 		1810C9141B28ABE3009063E5 /* ILTranslucentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1810C9131B28ABE3009063E5 /* ILTranslucentView.m */; };
@@ -106,6 +108,9 @@
 		1807AF4B1B4EEE79006E1B28 /* NSString+PDRegex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+PDRegex.h"; sourceTree = "<group>"; };
 		1807AF4C1B4EEE79006E1B28 /* NSString+PDRegex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+PDRegex.m"; sourceTree = "<group>"; };
 		1807AF511B4F175C006E1B28 /* SASVerifiedUploadObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASVerifiedUploadObject.h; sourceTree = "<group>"; };
+		180E18F31B7AC1DF0077BBEF /* SASSponsorCardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SASSponsorCardView.h; path = "Save a Selfie 2/GUI/SASSponsorCardView.h"; sourceTree = SOURCE_ROOT; };
+		180E18F41B7AC1DF0077BBEF /* SASSponsorCardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SASSponsorCardView.m; path = "Save a Selfie 2/GUI/SASSponsorCardView.m"; sourceTree = SOURCE_ROOT; };
+		180E18F71B7AC20D0077BBEF /* SASSponsorCardView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SASSponsorCardView.xib; path = "Save a Selfie 2/GUI/SASSponsorCardView.xib"; sourceTree = SOURCE_ROOT; };
 		180E295B1B5464C1003548FA /* EULAViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EULAViewController.h; sourceTree = "<group>"; };
 		180E295C1B5464C1003548FA /* EULAViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EULAViewController.m; sourceTree = "<group>"; };
 		1810C9081B289044009063E5 /* UIImage+SASImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+SASImage.h"; sourceTree = "<group>"; };
@@ -300,6 +305,16 @@
 			path = SASVerifiedUploadObject;
 			sourceTree = "<group>";
 		};
+		180E18F61B7AC1EC0077BBEF /* SASSponsorCardView */ = {
+			isa = PBXGroup;
+			children = (
+				180E18F31B7AC1DF0077BBEF /* SASSponsorCardView.h */,
+				180E18F41B7AC1DF0077BBEF /* SASSponsorCardView.m */,
+				180E18F71B7AC20D0077BBEF /* SASSponsorCardView.xib */,
+			);
+			name = SASSponsorCardView;
+			sourceTree = "<group>";
+		};
 		180E295E1B5464C6003548FA /* EULAViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -359,6 +374,7 @@
 		181A02CA1B543EDD009048FE /* SASInformationViewController */ = {
 			isa = PBXGroup;
 			children = (
+				180E18F61B7AC1EC0077BBEF /* SASSponsorCardView */,
 				18592E001B5184E2004DDFD8 /* SASInformationViewController.h */,
 				18592E011B5184E2004DDFD8 /* SASInformationViewController.m */,
 			);
@@ -959,6 +975,7 @@
 				D759B32D1A7D3DC6009EA131 /* default (1).gpx in Resources */,
 				1845C4EC1B20920300E3D7BC /* SASActivityIndicatorView.xib in Resources */,
 				18F46A4E1B2B9F370062BD05 /* SASFilterView.xib in Resources */,
+				180E18F81B7AC20D0077BBEF /* SASSponsorCardView.xib in Resources */,
 				18453A511B584DD20055A004 /* SASNotificationView.xib in Resources */,
 				18B7C34E1B4586AB00017170 /* SASAlertView.xib in Resources */,
 				186A39A21B3C933E00F38EDB /* SASFilterViewCell.xib in Resources */,
@@ -1064,6 +1081,7 @@
 				18B7C3441B44A74500017170 /* SASUploader.m in Sources */,
 				18B7C3481B4585FE00017170 /* SASAlertView.m in Sources */,
 				D786E2511A50AC7F00A20FDD /* PopupImage.m in Sources */,
+				180E18F51B7AC1DF0077BBEF /* SASSponsorCardView.m in Sources */,
 				180E295D1B5464C1003548FA /* EULAViewController.m in Sources */,
 				1891E3D31B1743C8008CC10C /* SASMapView.m in Sources */,
 				1807AF4D1B4EEE79006E1B28 /* NSString+PDRegex.m in Sources */,

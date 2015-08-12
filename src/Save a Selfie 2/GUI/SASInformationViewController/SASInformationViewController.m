@@ -9,15 +9,29 @@
 #import "SASInformationViewController.h"
 #import "ExtendNSLogFunctionality.h"
 #import "AppDelegate.h"
-#import "UIView+WidthXY.h"
+#import "SASSponsorCardView.h"
 
 @interface SASInformationViewController ()
+
+@property (strong, nonatomic) SASSponsorCardView *cardView;
 
 @end
 
 @implementation SASInformationViewController
 
-
+- (void) viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    if(!self.cardView) {
+        self.cardView = [[SASSponsorCardView alloc] init];
+        self.cardView.imageView.image = [UIImage imageNamed:@"AdamsGift"];
+        self.cardView.titleLabel.text = @"Adams Gift";
+        self.cardView.center = self.view.center;
+        [self.view addSubview:self.cardView];
+    }
+    
+    
+}
 
 - (IBAction)buttonTapped:(id)sender {
     plog(@"button tapped: %d", ((UIButton *)sender).tag);

@@ -426,62 +426,9 @@
                     <view key="view" contentMode="scaleToFill" id="zng-Bf-EMx">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JzE-qh-yUP">
-                                <rect key="frame" x="179" y="51" width="104" height="89"/>
-                                <state key="normal" image="SAS vertical 280">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="buttonTapped:" destination="LKF-Xc-SHc" eventType="touchUpInside" id="XxM-JX-LcM"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cwu-c2-Mng">
-                                <rect key="frame" x="35" y="69" width="142" height="54"/>
-                                <state key="normal" image="Order of Malta 300">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="buttonTapped:" destination="LKF-Xc-SHc" eventType="touchUpInside" id="dbW-gT-PjL"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KAK-eD-hkX">
-                                <rect key="frame" x="40" y="148" width="132" height="132"/>
-                                <state key="normal" image="dublin fire brigade 300">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="buttonTapped:" destination="LKF-Xc-SHc" eventType="touchUpInside" id="o6F-7D-4jQ"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" tag="3" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Xg-Um-u1g">
-                                <rect key="frame" x="187" y="152" width="150" height="128"/>
-                                <state key="normal" image="Code for ireland logo transparent">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="buttonTapped:" destination="LKF-Xc-SHc" eventType="touchUpInside" id="1s4-a5-jG1"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ga0-Sx-Hbd">
-                                <rect key="frame" x="35" y="288" width="119" height="119"/>
-                                <state key="normal" image="AdamsGift">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="openAdamsGift:" destination="LKF-Xc-SHc" eventType="touchUpInside" id="lFG-G2-pE2"/>
-                                </connections>
-                            </button>
-                        </subviews>
                         <color key="backgroundColor" red="0.97953344666946585" green="0.97829060216019625" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Info" image="info_24" id="Dcc-4p-yO1"/>
-                    <connections>
-                        <outlet property="button1" destination="cwu-c2-Mng" id="W8i-wm-NCC"/>
-                        <outlet property="button2" destination="JzE-qh-yUP" id="0JN-jw-FRn"/>
-                        <outlet property="button3" destination="KAK-eD-hkX" id="usf-FL-adh"/>
-                        <outlet property="button4" destination="6Xg-Um-u1g" id="KnT-A3-kuy"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vur-sD-egv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -639,8 +586,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="AdamsGift" width="146" height="146"/>
-        <image name="Code for ireland logo transparent" width="100" height="53"/>
         <image name="DefibrillatorUnselected" width="175" height="175"/>
         <image name="FilterDevicesIcon" width="55" height="55"/>
         <image name="FireHydrantUnselected" width="175" height="175"/>
@@ -648,10 +593,7 @@
         <image name="LifeRingUnselected" width="175" height="175"/>
         <image name="Locate" width="213" height="77"/>
         <image name="NewImage" width="214" height="77"/>
-        <image name="Order of Malta 300" width="300" height="108"/>
-        <image name="SAS vertical 280" width="280" height="262"/>
         <image name="SmallMapPin" width="47" height="47"/>
-        <image name="dublin fire brigade 300" width="300" height="300"/>
         <image name="globe" width="24" height="24"/>
         <image name="info_24" width="24" height="24"/>
     </resources>
