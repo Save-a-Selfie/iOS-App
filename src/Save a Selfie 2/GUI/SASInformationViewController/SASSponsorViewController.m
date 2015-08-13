@@ -61,18 +61,13 @@
     view.frame = CGRectOffset(view.frame, [Screen width] * page, 0);
 }
 
-- (IBAction)openAdamsGift:(id)sender {
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://www.facebook.com/pages/Adams-Gift/334232113442348"]];
-}
-
-
-
 
 #pragma mark <UIScrollViewDelegate>
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     CGFloat xOffset = scrollView.contentOffset.x;
     self.pageControl.currentPage = [self determinePageIndex:xOffset];
 }
+
 
 #pragma Helper methods.
 // Determines the page index from the scrollview offset.
