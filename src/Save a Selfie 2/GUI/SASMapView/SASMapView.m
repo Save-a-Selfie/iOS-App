@@ -113,7 +113,12 @@
 - (void) locateUser {
     
     if([self.sasLocation checkLocationPermissions]) {
-        [self zoomToCoordinates:self.currentLocation animated:YES];
+        if(CLLocationCoordinate2DIsValid(self.currentLocation)) {
+            [self zoomToCoordinates:self.currentLocation animated:YES];
+        }
+        else {
+            NSLog(@"Trying to show user's location with invalid coordinates. \n Please make sure the user's coordinates have been set correctly.\n");
+        }
     }
     else {
         plog(@"SASMapView could not access location services.");

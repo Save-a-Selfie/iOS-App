@@ -24,12 +24,12 @@
 
 - (void) viewDidLoad {
     [super viewDidLoad];
-    self.scrollView.contentSize = CGSizeMake([Screen width] * 4, [Screen height]);
+    self.scrollView.contentSize = CGSizeMake([Screen width] * 4, [Screen heightWithOptions:ScreenHeightOptionsWithNavBar | ScreenHeightOptionsWithTabBar]);
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    NSLog(@"%f, %f", self.scrollView.contentSize.width, self.scrollView.contentSize.height);
+    NSLog(@"%f %f", self.scrollView.contentSize.width, self.scrollView.contentSize.height);
     
 }
 

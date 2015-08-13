@@ -430,7 +430,7 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Q1g-3T-GYB">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tbZ-LY-Ipn">
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hfb-H8-Lvx">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
@@ -441,7 +441,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="D54-2q-Tge"/>
                     <connections>
-                        <outlet property="contentView" destination="tbZ-LY-Ipn" id="KZd-Kv-4l6"/>
+                        <outlet property="contentView" destination="Hfb-H8-Lvx" id="Zan-jW-x5p"/>
                         <outlet property="scrollView" destination="Q1g-3T-GYB" id="A7x-kt-uf2"/>
                     </connections>
                 </viewController>
