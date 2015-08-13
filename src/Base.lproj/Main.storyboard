@@ -427,22 +427,22 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Q1g-3T-GYB">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hfb-H8-Lvx">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    </view>
-                                </subviews>
-                            </scrollView>
+                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="Yuz-HD-AHS">
+                                <rect key="frame" x="141" y="482" width="39" height="37"/>
+                                <color key="pageIndicatorTintColor" red="0.12549019607843137" green="0.59999999999999998" blue="0.019607843137254902" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="currentPageIndicatorTintColor" red="0.87058823529411766" green="0.78431372549019607" blue="0.67450980392156867" alpha="1" colorSpace="calibratedRGB"/>
+                            </pageControl>
                         </subviews>
                         <color key="backgroundColor" red="0.97953344666946585" green="0.97829060216019625" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="Yuz-HD-AHS" firstAttribute="leading" secondItem="zng-Bf-EMx" secondAttribute="leadingMargin" constant="125" id="0Uz-bb-enm"/>
+                            <constraint firstItem="YVl-xy-kfz" firstAttribute="top" secondItem="Yuz-HD-AHS" secondAttribute="bottom" id="h2s-BJ-O43"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Yuz-HD-AHS" secondAttribute="trailing" constant="124" id="hmD-LU-q6I"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="D54-2q-Tge"/>
                     <connections>
-                        <outlet property="contentView" destination="Hfb-H8-Lvx" id="Zan-jW-x5p"/>
-                        <outlet property="scrollView" destination="Q1g-3T-GYB" id="A7x-kt-uf2"/>
+                        <outlet property="pageControl" destination="Yuz-HD-AHS" id="9Rv-H3-0iU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vur-sD-egv" userLabel="First Responder" sceneMemberID="firstResponder"/>

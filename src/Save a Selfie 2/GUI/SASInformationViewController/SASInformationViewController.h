@@ -10,11 +10,7 @@
 
 @interface SASInformationViewController : UIViewController <UIWebViewDelegate>
 
-@property (strong, nonatomic) IBOutlet UIButton *button1;
-@property (strong, nonatomic) IBOutlet UIButton *button2;
-@property (strong, nonatomic) IBOutlet UIButton *button3;
-@property (strong, nonatomic) IBOutlet UIButton *button4;
-- (IBAction)buttonTapped:(id)sender;
+
 
 @end
 

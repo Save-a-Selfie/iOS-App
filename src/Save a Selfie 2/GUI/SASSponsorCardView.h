@@ -9,7 +9,11 @@
 #import <UIKit/UIKit.h>
 
 @interface SASSponsorCardView : UIView
+
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UIButton *button;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (strong, nonatomic) NSString *info;
+@property (strong, nonatomic) NSString *website;
+
 @end

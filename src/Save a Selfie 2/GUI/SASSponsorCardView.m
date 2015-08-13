@@ -13,6 +13,8 @@
 @interface SASSponsorCardView()
 
 
+@property (weak, nonatomic) IBOutlet UITextView *infoTextView;
+
 @end
 
 @implementation SASSponsorCardView
@@ -31,5 +33,14 @@
     return self;
 }
 
+
+- (void)setInfo:(NSString *)info {
+    self.infoTextView.text = info;
+}
+
+- (IBAction)moreButtonPress:(id)sender {
+    
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:self.website]];
+}
 
 @end

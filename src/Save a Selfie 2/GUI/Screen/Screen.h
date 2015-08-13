@@ -31,6 +31,6 @@ typedef NS_OPTIONS(NSUInteger, ScreenHeightOptions) {
 
 + (CGFloat) width;
 + (CGFloat) height;
-+ (CGFloat) heightWithOptions: (ScreenHeightOptions) options;
+
 
 @end

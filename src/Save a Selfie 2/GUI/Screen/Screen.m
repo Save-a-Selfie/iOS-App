@@ -19,21 +19,5 @@
     return [[UIScreen mainScreen] bounds].size.height;
 }
 
-+ (CGFloat) heightWithOptions: (ScreenHeightOptions) options {
 
-    printf("Value: %lu.\n", (unsigned long)options);
-    
-    if ((options & ScreenHeightOptionsWithTabBar) == ScreenHeightOptionsWithTabBar) {
-        printf("TAB BAR\n");
-        return [self height] - 49;
-    }
-    else if ((options & ScreenHeightOptionsWithNavBar) == ScreenHeightOptionsWithNavBar) {                printf("NAV BAR\n");
-        return [self height] - 64;
-    }
-    else {
-        printf("BOTH\n");
-        return [self height] - (49 + 64);
-    }
-    
-}
 @end

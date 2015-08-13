@@ -11,75 +11,56 @@
 #import "AppDelegate.h"
 #import "SASSponsorCardView.h"
 #import "Screen.h"
+#import "SASSponsorCardManager.h"
 
 @interface SASInformationViewController ()
 
-@property (strong, nonatomic) NSMutableArray *cardViews;
+@property (strong, nonatomic) UIScrollView *scrollView;
+@property (weak, nonatomic) IBOutlet UIPageControl *pageControl;
+@property (strong, nonatomic) NSArray *cardViews;
 
-@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
-@property (weak, nonatomic) IBOutlet UIView *contentView;
 @end
 
 @implementation SASInformationViewController
 
 - (void) viewDidLoad {
     [super viewDidLoad];
-    self.scrollView.contentSize = CGSizeMake([Screen width] * 4, [Screen heightWithOptions:ScreenHeightOptionsWithNavBar | ScreenHeightOptionsWithTabBar]);
+    
+    self.navigationController.navigationBar.topItem.title = @"Information";
+    self.pageControl.numberOfPages = [SASSponsorCardManager sponsorAmount];
+    
+    self.cardViews = [SASSponsorCardManager allCards];
+    
+    self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, [Screen width], [Screen height])];
+    self.scrollView.contentSize = CGSizeMake([Screen width] * [SASSponsorCardManager sponsorAmount], 300);
+    self.scrollView.pagingEnabled = YES;
+    [self.view addSubview:self.scrollView];
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    NSLog(@"%f %f", self.scrollView.contentSize.width, self.scrollView.contentSize.height);
-    
-}
 
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    self.navigationController.navigationBar.topItem.title = @"Information";
-    
-    
-    SASSponsorCardView *fireBrigade = [[SASSponsorCardView alloc] init];
-    fireBrigade.titleLabel.text = @"Dublin Fire Brigade";
-    fireBrigade.imageView.image = [UIImage imageNamed:@"dublin fire brigade 300"];
-    fireBrigade.button.titleLabel.text = @"More";
-    fireBrigade.center = self.contentView.center;
-    
-    SASSponsorCardView *adamsGift = [[SASSponsorCardView alloc] init];
-    adamsGift.titleLabel.text = @"Adams Gift";
-    adamsGift.imageView.image = [UIImage imageNamed:@"AdamsGift"];
-    adamsGift.button.titleLabel.text = @"More";
-    adamsGift.center = self.contentView.center;
-    adamsGift.frame = CGRectOffset(adamsGift.frame, [Screen width], 0);
-    
-    SASSponsorCardView *codeForIreland = [[SASSponsorCardView alloc] init];
-    codeForIreland.titleLabel.text = @"Code For Ireland";
-    codeForIreland.imageView.image = [UIImage imageNamed:@"Code for ireland logo"];
-    codeForIreland.button.titleLabel.text = @"More";
-    
-    
-    if (!self.cardViews) {
-        self.cardViews = [[NSMutableArray alloc] initWithObjects:fireBrigade, adamsGift, nil, nil];
-    }
-    
+    int counter = 0;
     for (SASSponsorCardView *s in self.cardViews) {
         [self.scrollView addSubview:s];
+        [self addView:s toPage:counter];
+        counter++;
     }
     
 }
 
-- (IBAction)buttonTapped:(id)sender {
-    plog(@"button tapped: %d", ((UIButton *)sender).tag);
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://www.saveaselfie.org/wp/wp-content/themes/magazine-child/infoLink.php?button=%ld", (long)((UIButton *)sender).tag]]];
+// As this scrollView is paged, this method will simply just offset
+// the view passed to a specific page and center it on the scroll
+// view.
+- (void) addView:(UIView *) view toPage:(NSUInteger) page {
+    view.center = self.scrollView.center;
+    view.frame = CGRectOffset(view.frame, [Screen width] * page, 0);
 }
 
 - (IBAction)openAdamsGift:(id)sender {
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://www.facebook.com/pages/Adams-Gift/334232113442348"]];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 @end

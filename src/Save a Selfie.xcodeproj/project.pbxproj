@@ -17,6 +17,7 @@
 		1810C9141B28ABE3009063E5 /* ILTranslucentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1810C9131B28ABE3009063E5 /* ILTranslucentView.m */; };
 		1818AFC61B50435B004FF998 /* UIView+Animations.m in Sources */ = {isa = PBXBuildFile; fileRef = 1818AFC51B50435B004FF998 /* UIView+Animations.m */; };
 		1818AFDA1B5153A5004FF998 /* SASGalleryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1818AFD91B5153A5004FF998 /* SASGalleryCell.m */; };
+		181B9AEA1B7D406800E7FD3E /* SASSponsorCardManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 181B9AE91B7D406800E7FD3E /* SASSponsorCardManager.m */; };
 		181D1E5D1B2359EA00FB5928 /* SASImageInspectorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 181D1E5C1B2359EA00FB5928 /* SASImageInspectorView.m */; };
 		181D1E621B235CF900FB5928 /* SASImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 181D1E611B235CF900FB5928 /* SASImageView.m */; };
 		1835D2791B78F7D100A62B7F /* SASGalleryCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1835D2781B78F7D100A62B7F /* SASGalleryCollectionViewController.m */; };
@@ -121,6 +122,8 @@
 		1818AFC51B50435B004FF998 /* UIView+Animations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Animations.m"; sourceTree = "<group>"; };
 		1818AFD81B5153A5004FF998 /* SASGalleryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASGalleryCell.h; sourceTree = "<group>"; };
 		1818AFD91B5153A5004FF998 /* SASGalleryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASGalleryCell.m; sourceTree = "<group>"; };
+		181B9AE81B7D406800E7FD3E /* SASSponsorCardManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SASSponsorCardManager.h; path = ../SASSponsorCardManager.h; sourceTree = "<group>"; };
+		181B9AE91B7D406800E7FD3E /* SASSponsorCardManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SASSponsorCardManager.m; path = ../SASSponsorCardManager.m; sourceTree = "<group>"; };
 		181D1E5B1B2359EA00FB5928 /* SASImageInspectorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASImageInspectorView.h; sourceTree = "<group>"; };
 		181D1E5C1B2359EA00FB5928 /* SASImageInspectorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASImageInspectorView.m; sourceTree = "<group>"; };
 		181D1E601B235CF900FB5928 /* SASImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASImageView.h; sourceTree = "<group>"; };
@@ -374,11 +377,21 @@
 		181A02CA1B543EDD009048FE /* SASInformationViewController */ = {
 			isa = PBXGroup;
 			children = (
-				180E18F61B7AC1EC0077BBEF /* SASSponsorCardView */,
 				18592E001B5184E2004DDFD8 /* SASInformationViewController.h */,
 				18592E011B5184E2004DDFD8 /* SASInformationViewController.m */,
+				181B9AEB1B7D407000E7FD3E /* SASSponsorCardController */,
+				180E18F61B7AC1EC0077BBEF /* SASSponsorCardView */,
 			);
 			path = SASInformationViewController;
+			sourceTree = "<group>";
+		};
+		181B9AEB1B7D407000E7FD3E /* SASSponsorCardController */ = {
+			isa = PBXGroup;
+			children = (
+				181B9AE81B7D406800E7FD3E /* SASSponsorCardManager.h */,
+				181B9AE91B7D406800E7FD3E /* SASSponsorCardManager.m */,
+			);
+			name = SASSponsorCardController;
 			sourceTree = "<group>";
 		};
 		181D1E5E1B2359EF00FB5928 /* SASImageInspectorView */ = {
@@ -1056,6 +1069,7 @@
 				1864FEAC1B27A39900EA564A /* UIFont+SASFont.m in Sources */,
 				1818AFDA1B5153A5004FF998 /* SASGalleryCell.m in Sources */,
 				18EBF9801B2741F600EDA48B /* SASUploadImageViewController.m in Sources */,
+				181B9AEA1B7D406800E7FD3E /* SASSponsorCardManager.m in Sources */,
 				18F46A4B1B2B9F1F0062BD05 /* SASFilterView.m in Sources */,
 				181D1E5D1B2359EA00FB5928 /* SASImageInspectorView.m in Sources */,
 				D756A2A919F309690089EF80 /* SASTabBarController.m in Sources */,
