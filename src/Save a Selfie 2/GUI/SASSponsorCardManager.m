@@ -22,7 +22,7 @@
     
     SASSponsorCardView *orderOfMalta = [[SASSponsorCardView alloc] init];
     orderOfMalta.titleLabel.text = @"Order of Malta";
-    orderOfMalta.imageView.image = [UIImage imageNamed:@"Order of Malta 70px high"];
+    orderOfMalta.imageView.image = [UIImage imageNamed:@"Order of Malta 300"];
     [orderOfMalta.button setTitle:@"See website" forState:UIControlStateNormal];
     orderOfMalta.info = @"Saving lifes, Touching lifes, Changing lifes!";
     orderOfMalta.website = @"http://www.orderofmaltaireland.org/";

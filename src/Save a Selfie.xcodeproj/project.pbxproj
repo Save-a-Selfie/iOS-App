@@ -27,7 +27,7 @@
 		1845C4EF1B209E6C00E3D7BC /* SASUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 1845C4EE1B209E6C00E3D7BC /* SASUtilities.m */; };
 		184D99B31B49B02F005ECE33 /* SASNetworkUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 184D99B21B49B02F005ECE33 /* SASNetworkUtilities.m */; };
 		184D99B71B49C24A005ECE33 /* SASGreyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 184D99B61B49C24A005ECE33 /* SASGreyView.m */; };
-		18592E021B5184E2004DDFD8 /* SASInformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18592E011B5184E2004DDFD8 /* SASInformationViewController.m */; };
+		18592E021B5184E2004DDFD8 /* SASSponsorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18592E011B5184E2004DDFD8 /* SASSponsorViewController.m */; };
 		18592E051B51854C004DDFD8 /* UIView+WidthXY.m in Sources */ = {isa = PBXBuildFile; fileRef = 18592E041B51854C004DDFD8 /* UIView+WidthXY.m */; };
 		185A39B81B1FD7B900699D31 /* SASColour.m in Sources */ = {isa = PBXBuildFile; fileRef = 185A39B71B1FD7B900699D31 /* SASColour.m */; };
 		1864FEAC1B27A39900EA564A /* UIFont+SASFont.m in Sources */ = {isa = PBXBuildFile; fileRef = 1864FEAB1B27A39900EA564A /* UIFont+SASFont.m */; };
@@ -140,8 +140,8 @@
 		184D99B21B49B02F005ECE33 /* SASNetworkUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASNetworkUtilities.m; sourceTree = "<group>"; };
 		184D99B51B49C24A005ECE33 /* SASGreyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASGreyView.h; sourceTree = "<group>"; };
 		184D99B61B49C24A005ECE33 /* SASGreyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASGreyView.m; sourceTree = "<group>"; };
-		18592E001B5184E2004DDFD8 /* SASInformationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASInformationViewController.h; sourceTree = "<group>"; };
-		18592E011B5184E2004DDFD8 /* SASInformationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASInformationViewController.m; sourceTree = "<group>"; };
+		18592E001B5184E2004DDFD8 /* SASSponsorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASSponsorViewController.h; sourceTree = "<group>"; };
+		18592E011B5184E2004DDFD8 /* SASSponsorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASSponsorViewController.m; sourceTree = "<group>"; };
 		18592E031B51854C004DDFD8 /* UIView+WidthXY.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+WidthXY.h"; sourceTree = "<group>"; };
 		18592E041B51854C004DDFD8 /* UIView+WidthXY.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WidthXY.m"; sourceTree = "<group>"; };
 		185A39B61B1FD7B900699D31 /* SASColour.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASColour.h; sourceTree = "<group>"; };
@@ -377,8 +377,8 @@
 		181A02CA1B543EDD009048FE /* SASInformationViewController */ = {
 			isa = PBXGroup;
 			children = (
-				18592E001B5184E2004DDFD8 /* SASInformationViewController.h */,
-				18592E011B5184E2004DDFD8 /* SASInformationViewController.m */,
+				18592E001B5184E2004DDFD8 /* SASSponsorViewController.h */,
+				18592E011B5184E2004DDFD8 /* SASSponsorViewController.m */,
 				181B9AEB1B7D407000E7FD3E /* SASSponsorCardController */,
 				180E18F61B7AC1EC0077BBEF /* SASSponsorCardView */,
 			);
@@ -1059,7 +1059,7 @@
 				1810C9141B28ABE3009063E5 /* ILTranslucentView.m in Sources */,
 				D786E1811A48C10500A20FDD /* SASAnnotation.m in Sources */,
 				188CAEED1B21006C006A90EB /* Screen.m in Sources */,
-				18592E021B5184E2004DDFD8 /* SASInformationViewController.m in Sources */,
+				18592E021B5184E2004DDFD8 /* SASSponsorViewController.m in Sources */,
 				18EE44D51B55542100F8F93B /* SASMapWarningAlert.m in Sources */,
 				18DAE8531B46BA6400CAEF2D /* SASDeviceButton.m in Sources */,
 				1845C4EA1B2091F600E3D7BC /* SASActivityIndicator.m in Sources */,

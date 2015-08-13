@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Code for Ireland. All rights reserved.
 //
 
-#import "SASInformationViewController.h"
+#import "SASSponsorViewController.h"
 #import "ExtendNSLogFunctionality.h"
 #import "AppDelegate.h"
 #import "SASSponsorCardView.h"
@@ -15,7 +15,7 @@
 
 
 
-@interface SASInformationViewController () <UIScrollViewDelegate>
+@interface SASSponsorViewController () <UIScrollViewDelegate>
 
 @property (strong, nonatomic) UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIPageControl *pageControl;
@@ -23,12 +23,12 @@
 
 @end
 
-@implementation SASInformationViewController
+@implementation SASSponsorViewController
 
 - (void) viewDidLoad {
     [super viewDidLoad];
     
-    self.navigationController.navigationBar.topItem.title = @"Information";
+    self.navigationController.navigationBar.topItem.title = @"Sponsors";
     self.pageControl.numberOfPages = [SASSponsorCardManager sponsorAmount];
     
     self.cardViews = [SASSponsorCardManager allCards];

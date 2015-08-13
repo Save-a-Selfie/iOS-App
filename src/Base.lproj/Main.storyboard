@@ -415,10 +415,10 @@
             </objects>
             <point key="canvasLocation" x="205" y="1300"/>
         </scene>
-        <!--Information View Controller-->
+        <!--Sponsor View Controller-->
         <scene sceneID="Smb-hj-4hT">
             <objects>
-                <viewController id="LKF-Xc-SHc" customClass="SASInformationViewController" sceneMemberID="viewController">
+                <viewController id="LKF-Xc-SHc" customClass="SASSponsorViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="u9K-cB-Yjj"/>
                         <viewControllerLayoutGuide type="bottom" id="YVl-xy-kfz"/>

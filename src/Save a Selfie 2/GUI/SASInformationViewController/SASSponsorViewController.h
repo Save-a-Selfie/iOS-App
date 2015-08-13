@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SASInformationViewController : UIViewController <UIWebViewDelegate>
+@interface SASSponsorViewController : UIViewController <UIWebViewDelegate>
 
 
 
