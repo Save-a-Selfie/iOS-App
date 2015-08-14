@@ -15,7 +15,7 @@
 #import "SASImageViewController.h"
 
 @interface SASGalleryCollectionViewController () <SASObjectDownloaderDelegate, UICollectionViewDataSource, UICollectionViewDelegate,
-SASGalleryCellDelegate, UIActionSheetDelegate>
+SASGalleryCellDelegate>
 
 @property (strong, nonatomic) SASObjectDownloader *sasObjectDownloader;
 @property (strong, nonatomic) __block SASGalleryContainer *galleryContainer;
@@ -32,13 +32,6 @@ static NSString * const reuseIdentifier = @"cell";
 -(void)viewDidLoad {
     [super viewDidLoad];
     
-    
-    UIBarButtonItem *filter = [[UIBarButtonItem alloc] initWithTitle:@"FILTER"
-                                                               style:UIBarButtonItemStylePlain
-                                                              target:self
-                                                              action:@selector(filterGallery)];
-    self.navigationItem.rightBarButtonItem = filter;
-    
     self.navigationController.navigationBar.topItem.title = @"Gallery";
     self.collectionView.backgroundColor = [UIColor whiteColor];
     
@@ -54,10 +47,10 @@ static NSString * const reuseIdentifier = @"cell";
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 
-    
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
 }
+
 
 
 
@@ -78,7 +71,7 @@ static NSString * const reuseIdentifier = @"cell";
         [SDWebImageDownloader.sharedDownloader downloadImageWithURL:url options:0 progress:nil completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished) {
             if (image && finished) {
                 
-                [self.galleryContainer addImage:image forDevice:deviceAtIndex];
+                [self.galleryContainer addImage:image];
                 
                 // This must be called on the main thread.
                 dispatch_async(dispatch_get_main_queue(), ^{
@@ -87,23 +80,6 @@ static NSString * const reuseIdentifier = @"cell";
             }
         }];
     }
-    
-}
-
-
-
-#pragma mark UICollectionViewLayout.
-- (UIEdgeInsets)collectionView:(UICollectionView*)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
-    return UIEdgeInsetsMake(0, 0, 0, 0);
-}
-
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
-    
-    return 0.0;
-}
-
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
-    return 0.0;
 }
 
 
@@ -116,7 +92,7 @@ static NSString * const reuseIdentifier = @"cell";
         self.downloadedObjects = [NSArray new];
     }
     self.downloadedObjects = objects;
-    [self beginFetchingImages:objects amount:10];
+    [self beginFetchingImages:objects amount:100];
 }
 
 
@@ -153,30 +129,22 @@ static NSString * const reuseIdentifier = @"cell";
     
     [self.navigationController pushViewController:sasImageViewController animated:YES];
     
+}
+
+
+
+#pragma mark UICollectionViewLayout.
+- (UIEdgeInsets)collectionView:(UICollectionView*)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
+    return UIEdgeInsetsMake(0, 0, 0, 0);
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
     
+    return 0.0;
 }
 
-
-#pragma mark Filter Gallery
-- (void) filterGallery {
-    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Filter"
-                                                             delegate:self
-                                                    cancelButtonTitle:@"Cancel"
-                                               destructiveButtonTitle:nil
-                                                    otherButtonTitles:@"Show Closest", nil];
-    actionSheet.delegate = self;
-    [actionSheet showInView:self.view];
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
+    return 0.0;
 }
-
-- (void) filterGalleryForClosestImages {
-    
-}
-
-
-#pragma mark <UIActionSheetDelegate>
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
-    printf("%ld", (long)buttonIndex);
-}
-
 
 @end

@@ -461,8 +461,8 @@
                     </tabBar>
                     <connections>
                         <segue destination="Kpf-8A-JuO" kind="relationship" relationship="viewControllers" id="wHb-nl-hvQ"/>
-                        <segue destination="YIQ-2w-oSl" kind="relationship" relationship="viewControllers" id="gD0-59-hju"/>
                         <segue destination="bic-gW-INU" kind="relationship" relationship="viewControllers" id="QZD-k2-pAX"/>
+                        <segue destination="YIQ-2w-oSl" kind="relationship" relationship="viewControllers" id="gD0-59-hju"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>

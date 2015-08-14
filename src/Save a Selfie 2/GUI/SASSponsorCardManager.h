@@ -32,4 +32,5 @@
  The numer of sponsor for the app.
  */
 + (NSUInteger) sponsorAmount;
+
 @end
