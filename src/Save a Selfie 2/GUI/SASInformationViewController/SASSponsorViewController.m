@@ -28,7 +28,9 @@
 - (void) viewDidLoad {
     [super viewDidLoad];
     
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName: [UIFont fontWithName:@"AvenirNext-DemiBold" size:17.0f]}];
     self.navigationController.navigationBar.topItem.title = @"Sponsors";
+    
     self.pageControl.numberOfPages = [SASSponsorCardManager sponsorAmount];
     
     self.cardViews = [SASSponsorCardManager allCards];

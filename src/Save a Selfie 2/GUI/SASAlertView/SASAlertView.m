@@ -36,8 +36,8 @@
         self = [self initWithNibNamed:@"SASAlertView"];
         
         self.layer.cornerRadius = 8.0;
-        
-        _alertButton.layer.cornerRadius = 5.0;
+        _alertMessageTextView.selectable = NO;
+        _alertButton.layer.cornerRadius = 4.0;
         
         _alertAction = action;
         _alertTarget = target;

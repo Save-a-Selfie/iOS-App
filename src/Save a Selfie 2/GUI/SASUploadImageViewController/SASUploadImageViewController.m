@@ -58,14 +58,16 @@
 
 @property (strong, nonatomic) UILongPressGestureRecognizer *longPress;
 
-
-
 @end
 
 @implementation SASUploadImageViewController
 
 
-
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName: [UIFont fontWithName:@"AvenirNext-DemiBold" size:17.0f]}];
+}
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     [super touchesBegan:touches withEvent:event];
