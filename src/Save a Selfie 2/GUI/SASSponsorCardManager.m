@@ -24,7 +24,7 @@
     orderOfMalta.titleLabel.text = @"Order of Malta";
     orderOfMalta.imageView.image = [UIImage imageNamed:@"Order of Malta 300"];
     [orderOfMalta.button setTitle:@"Visit our website" forState:UIControlStateNormal];
-    orderOfMalta.info = @"Saving lifes, Touching lifes, Changing lifes!";
+    orderOfMalta.info = @"Saving lives, Touching lives, Changing lives!";
     orderOfMalta.website = @"http://www.orderofmaltaireland.org/";
     
     
@@ -54,7 +54,7 @@
     emergencyCare.titleLabel.text = @"Emergency Care";
     emergencyCare.imageView.image = [UIImage imageNamed:@"ecplogo"];
     [emergencyCare.button setTitle:@"Visit our website" forState:UIControlStateNormal];
-    emergencyCare.info = @"Providing a high level of customer service and excellent quality products";
+    emergencyCare.info = @"Providing a high level of customer service and excellent quality products.";
     emergencyCare.website = @"www.emergencycare.ie";
     
     
