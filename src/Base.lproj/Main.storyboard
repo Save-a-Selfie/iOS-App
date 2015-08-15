@@ -584,7 +584,7 @@
         <scene sceneID="0g2-vF-1Tb">
             <objects>
                 <navigationController storyboardIdentifier="SASGalleryCollectionViewControllerNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="bic-gW-INU" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Gallery" id="Q4W-8x-VSg"/>
+                    <tabBarItem key="tabBarItem" title="Gallery" image="Stack of Photos-50" id="Q4W-8x-VSg"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="9g0-BK-i0v">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -628,6 +628,7 @@
         <image name="Locate" width="213" height="77"/>
         <image name="NewImage" width="214" height="77"/>
         <image name="SmallMapPin" width="47" height="47"/>
+        <image name="Stack of Photos-50" width="25" height="25"/>
         <image name="globe" width="24" height="24"/>
         <image name="info_24" width="24" height="24"/>
     </resources>
