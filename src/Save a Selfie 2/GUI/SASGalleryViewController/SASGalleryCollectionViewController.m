@@ -15,7 +15,9 @@
 #import "SASImageViewController.h"
 
 @interface SASGalleryCollectionViewController () <SASObjectDownloaderDelegate, UICollectionViewDataSource, UICollectionViewDelegate,
-SASGalleryCellDelegate>
+SASGalleryCellDelegate> {
+    int imagesDownloaded;
+}
 
 @property (strong, nonatomic) SASObjectDownloader *sasObjectDownloader;
 @property (strong, nonatomic) __block SASGalleryContainer *galleryContainer;
@@ -32,7 +34,8 @@ static NSString * const reuseIdentifier = @"cell";
 -(void)viewDidLoad {
     [super viewDidLoad];
     
-    
+    self.collectionView.delegate = self;
+    self.collectionView.dataSource = self;
     self.collectionView.backgroundColor = [UIColor whiteColor];
     
     if (!self.sasObjectDownloader) {
@@ -47,8 +50,6 @@ static NSString * const reuseIdentifier = @"cell";
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.topItem.title = @"Gallery";
-    self.collectionView.delegate = self;
-    self.collectionView.dataSource = self;
 }
 
 
@@ -59,19 +60,27 @@ static NSString * const reuseIdentifier = @"cell";
         self.downloadedObjects = [NSArray new];
     }
     self.downloadedObjects = objects;
-    [self beginFetchingImages:objects amount:100];
-}
-
-
-
-- (void) beginFetchingImages:(NSArray *) objects amount:(NSUInteger) amount {
     
+    // Set up our data store.
     if (!self.galleryContainer) {
         self.galleryContainer = [[SASGalleryContainer alloc] init];
     }
     
+    NSRange range = NSMakeRange(0, 24);
+    imagesDownloaded = (int)range.length;
+    
+    // Download a few images to fill the screen.
+    [self downloadImages:objects withinRange:range];
+}
 
-    for (int i = 0; i < amount; ++i) {
+
+
+
+
+- (void) downloadImages:(NSArray *) objects withinRange:(NSRange) range {
+    
+    for (int i = (int)range.location; i < (int)range.length; ++i) {
+        
         SASDevice *deviceAtIndex = [objects objectAtIndex:i];
         
         NSString *imageURLString = deviceAtIndex.imageURL;
@@ -81,7 +90,7 @@ static NSString * const reuseIdentifier = @"cell";
         [SDWebImageDownloader.sharedDownloader downloadImageWithURL:url options:0 progress:nil completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished) {
             if (image && finished) {
                 
-                NSLog(@"Adding now...%@\n", image);
+                
                 [self.galleryContainer addImage:image forDevice:deviceAtIndex];
                 
                 // This must be called on the main thread.
@@ -112,7 +121,6 @@ static NSString * const reuseIdentifier = @"cell";
     SASDevice *device = self.downloadedObjects[indexPath.row];
     
     cell.imageView.image = [self.galleryContainer imageForDevice:device];
-    NSLog(@"Trying to get object for key: %@.\n", device);
 
     // Set the cell's device.
     cell.device = device;
@@ -146,6 +154,20 @@ static NSString * const reuseIdentifier = @"cell";
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
     return 0.0;
+}
+
+
+#pragma mark UIScrollViewDelegate
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    float bottomEdge = self.collectionView.contentOffset.y + self.collectionView.frame.size.height;
+    if (bottomEdge >= self.collectionView.contentSize.height) {
+        
+        // Download the next 10 images.
+        NSRange range = NSMakeRange(imagesDownloaded, imagesDownloaded + 15);
+        imagesDownloaded = (int)range.length;
+        
+        [self downloadImages:self.downloadedObjects withinRange:range];
+    }
 }
 
 @end
