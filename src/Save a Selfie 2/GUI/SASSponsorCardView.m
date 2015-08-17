@@ -8,13 +8,14 @@
 
 #import "SASSponsorCardView.h"
 #import "UIView+NibInitializer.h"
+#import "UIFont+SASFont.h"
 
 
 @interface SASSponsorCardView()
 
 
 @property (weak, nonatomic) IBOutlet UITextView *infoTextView;
-@property (weak, nonatomic) IBOutlet UIVisualEffectView *visualEffectView;
+
 
 @end
 
@@ -32,6 +33,7 @@
         self.layer.shadowOffset = CGSizeMake(-2, 5);
         self.layer.shadowRadius = 5;
         self.layer.shadowOpacity = 0.5;
+        
     }
     return self;
 }
@@ -40,6 +42,7 @@
 - (void)setInfo:(NSString *)info {
     self.infoTextView.text = info;
 }
+
 
 - (IBAction)moreButtonPress:(id)sender {
     

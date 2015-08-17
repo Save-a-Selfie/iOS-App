@@ -11,7 +11,8 @@
 
 @interface SASGalleryContainer()
 
-@property (nonatomic, strong) NSMutableArray *data;
+@property (nonatomic, strong) NSMutableDictionary *data;
+
 @property (nonatomic, strong) SASLocation *sasLocation;
 @property (nonatomic, assign) CLLocationCoordinate2D userLocation;
 
@@ -25,7 +26,7 @@
 - (instancetype)init {
     
     if (self = [super init]) {
-        _data = [[NSMutableArray alloc] init];
+        _data = [[NSMutableDictionary alloc] init];
 
     }
     return self;
@@ -33,9 +34,8 @@
 
 
 
-- (void)addImage:(UIImage *)image {
-    [self.data addObject:image];
-
+- (void)addImage:(UIImage *)image forDevice:(SASDevice *)device {
+    [self.data setObject:image forKey:device];
 }
 
 
@@ -44,9 +44,13 @@
 }
 
 
-- (NSArray *)images {
-    return self.data;
+- (UIImage *) imageForDevice:(SASDevice *) device {
+    UIImage* image = [self.data objectForKey:device];
+
+    return image;
 }
+
+
 
 
 

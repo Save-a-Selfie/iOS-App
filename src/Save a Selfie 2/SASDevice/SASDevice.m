@@ -50,7 +50,13 @@
 
 
 - (id)copyWithZone:(NSZone *)zone {
-    SASDevice *copy = [[SASDevice alloc] initDeviceWithInformationFromString:self.infoString];
+#warning See comment below:
+    // Pretty sure this violates how you
+    // make a `copy`, however, when using this
+    // object for an NSDictonary an new instance of this copy
+    // does not seem to work when calling `objectForKey:`
+    // TODO: FIX FIX FIX!!
+    SASDevice *copy = self;
     return copy;
 }
 

@@ -14,14 +14,17 @@
 @interface SASGalleryContainer : NSObject
 
 
-- (void) addImage: (UIImage *) image;
-
 /**
- Returns all the images in the correct order according to the `filtertype` property. 
+ Returns an image for the associated device.
  */
-- (NSArray*) images;
+- (UIImage *) imageForDevice:(SASDevice *) device;
+
 
 - (NSInteger) deviceCount;
 
+/**
+ Adds an image with an associated device as a key.
+ */
+- (void) addImage:(UIImage *) image forDevice:(SASDevice *) device;
 
 @end

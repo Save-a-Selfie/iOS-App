@@ -32,7 +32,7 @@ static NSString * const reuseIdentifier = @"cell";
 -(void)viewDidLoad {
     [super viewDidLoad];
     
-    self.navigationController.navigationBar.topItem.title = @"Gallery";
+    
     self.collectionView.backgroundColor = [UIColor whiteColor];
     
     if (!self.sasObjectDownloader) {
@@ -46,43 +46,10 @@ static NSString * const reuseIdentifier = @"cell";
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-
+    self.navigationController.navigationBar.topItem.title = @"Gallery";
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
 }
-
-
-
-
-- (void) beginFetchingImages:(NSArray *) objects amount:(NSUInteger) amount {
-    
-    if (!self.galleryContainer) {
-        self.galleryContainer = [[SASGalleryContainer alloc] init];
-    }
-    
-
-    for (int i = 0; i < amount; i++) {
-        SASDevice *deviceAtIndex = [objects objectAtIndex:i];
-        
-        NSString *imageURLString = deviceAtIndex.imageURL;
-        
-        NSURL *url =[NSURL URLWithString:imageURLString];
-        
-        [SDWebImageDownloader.sharedDownloader downloadImageWithURL:url options:0 progress:nil completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished) {
-            if (image && finished) {
-                
-                [self.galleryContainer addImage:image];
-                
-                // This must be called on the main thread.
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self.collectionView reloadData];
-                });
-            }
-        }];
-    }
-}
-
-
 
 
 #pragma mark <SASObjectDownladerDelegate>
@@ -97,6 +64,41 @@ static NSString * const reuseIdentifier = @"cell";
 
 
 
+- (void) beginFetchingImages:(NSArray *) objects amount:(NSUInteger) amount {
+    
+    if (!self.galleryContainer) {
+        self.galleryContainer = [[SASGalleryContainer alloc] init];
+    }
+    
+
+    for (int i = 0; i < amount; ++i) {
+        SASDevice *deviceAtIndex = [objects objectAtIndex:i];
+        
+        NSString *imageURLString = deviceAtIndex.imageURL;
+        
+        NSURL *url =[NSURL URLWithString:imageURLString];
+        
+        [SDWebImageDownloader.sharedDownloader downloadImageWithURL:url options:0 progress:nil completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished) {
+            if (image && finished) {
+                
+                NSLog(@"Adding now...%@\n", image);
+                [self.galleryContainer addImage:image forDevice:deviceAtIndex];
+                
+                // This must be called on the main thread.
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.collectionView reloadData];
+                });
+            }
+        }];
+    }
+}
+
+
+
+
+
+
+
 
 #pragma mark <UICollectionViewDataSource>
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -104,14 +106,15 @@ static NSString * const reuseIdentifier = @"cell";
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    
     SASGalleryCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     
     // Set the cell's image.
-    cell.imageView.image = [self.galleryContainer images][indexPath.row];
-    
-    // Set the cell's device.
     SASDevice *device = self.downloadedObjects[indexPath.row];
+    
+    cell.imageView.image = [self.galleryContainer imageForDevice:device];
+    NSLog(@"Trying to get object for key: %@.\n", device);
+
+    // Set the cell's device.
     cell.device = device;
     cell.delegate = self;
     
@@ -119,14 +122,13 @@ static NSString * const reuseIdentifier = @"cell";
 }
 
 
-#pragma mark <SASgalleryCellDelegate>
+#pragma mark <SASGalleryCellDelegate>
 - (void)sasGalleryCellDelegate:(SASGalleryCell *)cell wasTappedWithObject:(SASDevice *)device {
     
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     SASImageViewController *sasImageViewController = [storyboard instantiateViewControllerWithIdentifier:@"SASImageViewController"];
     
     sasImageViewController.device = device;
-    
     [self.navigationController pushViewController:sasImageViewController animated:YES];
     
 }
@@ -139,7 +141,6 @@ static NSString * const reuseIdentifier = @"cell";
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
-    
     return 0.0;
 }
 
