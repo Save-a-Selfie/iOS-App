@@ -330,12 +330,13 @@
 			path = EULAViewController;
 			sourceTree = "<group>";
 		};
-		1810C90B1B28904A009063E5 /* SASImage */ = {
+		1810C90B1B28904A009063E5 /* UIImage+SASImage */ = {
 			isa = PBXGroup;
 			children = (
 				1810C9081B289044009063E5 /* UIImage+SASImage.h */,
 				1810C9091B289044009063E5 /* UIImage+SASImage.m */,
 			);
+			name = "UIImage+SASImage";
 			path = SASImage;
 			sourceTree = "<group>";
 		};
@@ -529,7 +530,7 @@
 				185A39B91B1FD7C500699D31 /* SASColour */,
 				184D99B81B49C24E005ECE33 /* SASGreyView */,
 				1845C4E71B2091C800E3D7BC /* SASActivityIndicator */,
-				1810C90B1B28904A009063E5 /* SASImage */,
+				1810C90B1B28904A009063E5 /* UIImage+SASImage */,
 				18372AA71B3F7EE600BD61D9 /* SASTabBarController */,
 				1818AFC71B50435F004FF998 /* UIView+Animations */,
 				188CAEEE1B21008B006A90EB /* Screen */,

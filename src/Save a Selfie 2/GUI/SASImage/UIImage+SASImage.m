@@ -57,7 +57,45 @@
 }
 
 
-
++ (NSArray *) createLargeImageAndThumbnailFromSource:(UIImage *) image {
+    
+    UIImage *standardImage;
+    UIImage *thumbnailImage;
+    
+    // TODO: Clean this up. Ideally all this resizing should be done within
+    // a UIImage caterory.
+    standardImage = image;
+    
+    
+    float maxWidth = 400, thumbSize = 150;
+    float ratio = maxWidth / standardImage.size.width;
+    float height, width, minDim, tWidth, tHeight;
+    
+    if (ratio >= 1.0) {
+        width = standardImage.size.width;
+        height = standardImage.size.height;
+    }
+    else { width = maxWidth;
+        height = standardImage.size.height * ratio;
+    }
+    
+    // Large Image
+    standardImage = [standardImage resizedImage:CGSizeMake(width, height) interpolationQuality:kCGInterpolationHigh];
+    
+    
+    // Thumbnail Image
+    minDim = height < width ? height : width;
+    ratio = thumbSize / minDim; tWidth = width * ratio; tHeight = height * ratio;
+    
+    thumbnailImage = [standardImage resizedImage:CGSizeMake(tWidth, tHeight) interpolationQuality:kCGInterpolationHigh];
+    
+    // Add watermarks.
+    UIImage *watermark = [UIImage imageNamed:@"Watermark"];
+    
+    standardImage = [UIImage doubleMerge:standardImage withImage:nil atX:20 andY:20 withStrength:1.0 andImage:watermark atX2:width - watermark.size.width - 20 andY2:height - watermark.size.height - 20 strength:1.0];
+    
+    return [NSArray arrayWithObjects:standardImage, thumbnailImage, nil];
+}
 
 
 @end

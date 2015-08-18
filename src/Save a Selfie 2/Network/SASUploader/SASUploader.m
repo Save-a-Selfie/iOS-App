@@ -16,9 +16,6 @@
 @interface SASUploader() <NSURLConnectionDelegate, NSURLConnectionDataDelegate>
 
 
-@property (strong, nonatomic) UIImage* largeImage;
-@property (strong, nonatomic) UIImage* thumbnailImage;
-
 @property (strong, nonatomic) NSMutableData* responseData;
 
 // Boolean flag that will be set to YES, when uploading occurs.
@@ -45,17 +42,18 @@
     
     // Make sure we have a valid object
     // to upload.
-    BOOL proceedToUpload = [self validateSASUploadObject];
+    BOOL canProceedToUpload = [self validateSASUploadObject];
     
     
-    if(proceedToUpload) {
+    if(canProceedToUpload) {
         
-        [self setImagesToCorrectSize];
-        
+        NSArray *images = [UIImage createLargeImageAndThumbnailFromSource:self.sasUploadObject.image];
+        UIImage *standardImage = images[0];
+        UIImage *thumbnailImage = images[1];
         
         // Construct information for uploading
-        NSData *standardImageData = UIImageJPEGRepresentation(self.largeImage, 1.0);
-        NSData *thumbnailImageData = UIImageJPEGRepresentation(self.thumbnailImage, 1.0);
+        NSData *standardImageData = UIImageJPEGRepresentation(standardImage, 1.0);
+        NSData *thumbnailImageData = UIImageJPEGRepresentation(thumbnailImage, 1.0);
         
         NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
         [request setHTTPMethod:@"POST"];
@@ -109,7 +107,6 @@
 - (BOOL) validateSASUploadObject {
     
     if(![self.sasUploadObject captionHasBeenSet]) {
-        
         if(self.delegate != nil && [self.delegate respondsToSelector:@selector(sasUploader:invalidObjectWithResponse:)]) {
             [self.delegate sasUploader: self.sasUploadObject invalidObjectWithResponse:SASUploadInvalidObjectCaption];
         }
@@ -124,43 +121,6 @@
     else {
         return YES;
     }
-}
-
-
-- (void) setImagesToCorrectSize {
-    
-    // TODO: Clean this up. Ideally all this resizing should be done within
-    // a UIImage caterory.
-    self.largeImage = self.sasUploadObject.image;
-    
-    
-    float maxWidth = 400, thumbSize = 150;
-    float ratio = maxWidth / self.largeImage.size.width;
-    float height, width, minDim, tWidth, tHeight;
-    
-    if (ratio >= 1.0) {
-        width = self.largeImage.size.width;
-        height = self.largeImage.size.height;
-    }
-    else { width = maxWidth;
-        height = self.largeImage.size.height * ratio;
-    }
-    
-    // Large Image
-    self.largeImage = [self.sasUploadObject.image resizedImage:CGSizeMake(width, height) interpolationQuality:kCGInterpolationHigh];
-    
-    
-    // Thumbnail Image
-    minDim = height < width ? height : width;
-    ratio = thumbSize / minDim; tWidth = width * ratio; tHeight = height * ratio;
-    
-    self.thumbnailImage = [self.largeImage resizedImage:CGSizeMake(tWidth, tHeight) interpolationQuality:kCGInterpolationHigh];
-    
-    // Add watermarks.
-    UIImage *watermark = [UIImage imageNamed:@"Watermark"];
-    
-    self.largeImage = [UIImage doubleMerge:_largeImage withImage:nil atX:20 andY:20 withStrength:1.0 andImage:watermark atX2:width - watermark.size.width - 20 andY2:height - watermark.size.height - 20 strength:1.0];
-    
 }
 
 

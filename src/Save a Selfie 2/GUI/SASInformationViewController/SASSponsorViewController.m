@@ -52,7 +52,6 @@
         [self addView:s toPage:counter];
         counter++;
     }
-    
 }
 
 // As this scrollView is paged, this method will simply just offset
