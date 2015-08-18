@@ -13,7 +13,8 @@
 #import <SDWebImageDownloader.h>
 #import "SASGalleryCell.h"
 #import "SASImageViewController.h"
-#import "SASActivityIndicator.h"
+#import "UIDevice+DeviceName.h"
+
 
 @interface SASGalleryCollectionViewController () <SASObjectDownloaderDelegate, UICollectionViewDataSource, UICollectionViewDelegate,
 SASGalleryCellDelegate> {
@@ -106,6 +107,7 @@ static NSString * const reuseIdentifier = @"cell";
 }
 
 
+
 #pragma mark Download Images.
 - (void) downloadImages:(NSArray *) objects withinRange:(NSRange) range completion:(void(^)(BOOL completed)) completion {
     
@@ -170,19 +172,6 @@ static NSString * const reuseIdentifier = @"cell";
 }
 
 
-#pragma mark <SASGalleryCellDelegate>
-- (void)sasGalleryCellDelegate:(SASGalleryCell *)cell wasTappedWithObject:(SASDevice *)device {
-    
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    SASImageViewController *sasImageViewController = [storyboard instantiateViewControllerWithIdentifier:@"SASImageViewController"];
-    
-    sasImageViewController.device = device;
-    [self.navigationController pushViewController:sasImageViewController animated:YES];
-    
-}
-
-
-
 #pragma mark UICollectionViewLayout.
 - (UIEdgeInsets)collectionView:(UICollectionView*)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
     return UIEdgeInsetsMake(0, 0, 0, 0);
@@ -195,6 +184,32 @@ static NSString * const reuseIdentifier = @"cell";
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
     return 0.0;
 }
+
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    UIDeviceModel model = [UIDevice model];
+    
+    if(!(model == UIDeviceModelIphoneUndefined)) {
+        return CGSizeMake(40, 40);
+    } else {
+        return CGSizeMake(80, 80);
+    }
+}
+
+
+
+
+#pragma mark <SASGalleryCellDelegate>
+- (void)sasGalleryCellDelegate:(SASGalleryCell *)cell wasTappedWithObject:(SASDevice *)device {
+    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    SASImageViewController *sasImageViewController = [storyboard instantiateViewControllerWithIdentifier:@"SASImageViewController"];
+    
+    sasImageViewController.device = device;
+    [self.navigationController pushViewController:sasImageViewController animated:YES];
+    
+}
+
 
 
 #pragma mark <UIScrollViewDelegate>

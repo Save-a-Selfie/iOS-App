@@ -7,7 +7,7 @@
 //
 
 #import "SASGalleryCell.h"
-
+#import "UIDevice+DeviceName.h"
 
 
 @implementation SASGalleryCell
@@ -18,6 +18,10 @@
         [self addTapGestureRecognizer];
     }
     return self;
+}
+
+- (void)drawRect:(CGRect)rect {
+    rect = CGRectMake(0, 0, 20, 20);
 }
 
 
