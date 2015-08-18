@@ -14,7 +14,7 @@
 #import "SASGalleryCell.h"
 #import "SASImageViewController.h"
 #import "UIDevice+DeviceName.h"
-
+#import "Screen.h"
 
 @interface SASGalleryCollectionViewController () <SASObjectDownloaderDelegate, UICollectionViewDataSource, UICollectionViewDelegate,
 SASGalleryCellDelegate> {
@@ -25,6 +25,7 @@ SASGalleryCellDelegate> {
 @property (strong, nonatomic) __block SASGalleryContainer *galleryContainer;
 @property (strong, nonatomic) NSArray *downloadedObjects;
 @property (strong, nonatomic) UIActivityIndicatorView *activityIndicator;
+@property (strong, nonatomic) UIRefreshControl *refreshControl;
 
 @end
 
@@ -41,6 +42,13 @@ static NSString * const reuseIdentifier = @"cell";
     self.collectionView.dataSource = self;
     self.collectionView.backgroundColor = [UIColor whiteColor];
     
+    
+    if(!self.refreshControl) {
+        self.refreshControl = [[UIRefreshControl alloc] init];
+        [self.refreshControl addTarget:self action:@selector(refresh) forControlEvents:UIControlEventValueChanged];
+        [self.collectionView addSubview:self.refreshControl];
+    }
+    
     if (!self.sasObjectDownloader) {
         self.sasObjectDownloader = [[SASObjectDownloader alloc] initWithDelegate:self];
     }
@@ -54,6 +62,14 @@ static NSString * const reuseIdentifier = @"cell";
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.topItem.title = @"Gallery";
+}
+
+
+- (void) refresh {
+    self.collectionView.frame = CGRectMake(0, 0, self.collectionView.frame.size.width, [Screen height]);
+    self.downloadedObjects = nil;
+    [self.refreshControl endRefreshing];
+    [self.sasObjectDownloader downloadObjectsFromServer];
 }
 
 
@@ -76,6 +92,7 @@ static NSString * const reuseIdentifier = @"cell";
     [self.activityIndicator stopAnimating];
     self.navigationItem.rightBarButtonItem = nil;
 }
+
 
 
 
@@ -187,10 +204,11 @@ static NSString * const reuseIdentifier = @"cell";
 
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    
     UIDeviceModel model = [UIDevice model];
     
     if(!(model == UIDeviceModelIphoneUndefined)) {
-        return CGSizeMake(40, 40);
+        return CGSizeMake(80, 80);
     } else {
         return CGSizeMake(80, 80);
     }
