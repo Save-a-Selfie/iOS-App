@@ -10,7 +10,14 @@
 
 @interface UIImage (SASImage)
 
-- (UIImage *)normalizedImage;
+/** 
+ Images taken from the camera seem to show up in landscape.
+ This method adjusts the image so it's in the correct orientation
+ from which the image was taken.
+ */
+- (UIImage *) correctOrientation;
+
+
 
 /** 
  Merges two image together.

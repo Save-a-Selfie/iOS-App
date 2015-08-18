@@ -27,7 +27,7 @@
         // See UIImage+SASNormalizeImage.h
         // for reason on why we need to normalize
         // the image property.
-        _image = [imageToUpload normalizedImage];
+        _image = [imageToUpload correctOrientation];
         
         _associatedDevice = [[SASDevice alloc] init];
         
@@ -64,6 +64,13 @@
     }
 }
 
+
+
+- (BOOL)coordinatesHaveBeenSet {
+    if ([self]) {
+        <#statements#>
+    }
+}
 
 
 @end

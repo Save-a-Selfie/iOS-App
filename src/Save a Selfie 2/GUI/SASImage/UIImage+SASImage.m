@@ -13,12 +13,9 @@
 @implementation UIImage (SASImage)
 
 
-// @Discussion:
-// Images taken from the camera seem to show up in landscape.
-// This method adjusts the image so it's in the correct orientation
-// from which the image was taken.
+
 // Taken From: http://stackoverflow.com/questions/8915630/ios-uiimageview-how-to-handle-uiimage-image-orientation
-- (UIImage *)normalizedImage {
+- (UIImage *)correctOrientation {
     
     if (self.imageOrientation == UIImageOrientationUp) {
         return self;

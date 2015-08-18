@@ -21,4 +21,6 @@
 
 - (BOOL) deviceHasBeenSet;
 
+- (BOOL) coordinatesHaveBeenSet;
+
 @end
