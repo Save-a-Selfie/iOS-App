@@ -23,7 +23,7 @@ SASGalleryCellDelegate> {
 @property (strong, nonatomic) SASObjectDownloader *sasObjectDownloader;
 @property (strong, nonatomic) __block SASGalleryContainer *galleryContainer;
 @property (strong, nonatomic) NSArray *downloadedObjects;
-@property (strong, nonatomic) SASActivityIndicator *activityIndicator;
+@property (strong, nonatomic) UIActivityIndicatorView *activityIndicator;
 
 @end
 
@@ -44,12 +44,6 @@ static NSString * const reuseIdentifier = @"cell";
         self.sasObjectDownloader = [[SASObjectDownloader alloc] initWithDelegate:self];
     }
     
-    if (!self.activityIndicator) {
-        self.activityIndicator = [[SASActivityIndicator alloc] initWithMessage:@"Loading..."];
-        self.activityIndicator.center = self.collectionView.center;
-        [self.activityIndicator startAnimating];
-        [self.collectionView addSubview:self.activityIndicator];
-    }
     
     [self.sasObjectDownloader downloadObjectsFromServer];
 }
@@ -60,6 +54,29 @@ static NSString * const reuseIdentifier = @"cell";
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.topItem.title = @"Gallery";
 }
+
+
+// Convenience method's for Activity Indicator animation
+- (void) showActivityIndicator {
+    if (!self.activityIndicator) {
+        self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+
+    }
+    
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:self.activityIndicator];
+    
+    self.navigationItem.rightBarButtonItem = nil;
+    self.navigationItem.rightBarButtonItem = item;
+    [self.activityIndicator startAnimating];
+}
+
+
+- (void) hideActivityIndicator {
+    [self.activityIndicator stopAnimating];
+    self.navigationItem.rightBarButtonItem = nil;
+}
+
+
 
 
 #pragma mark <SASObjectDownladerDelegate>
@@ -75,17 +92,21 @@ static NSString * const reuseIdentifier = @"cell";
         self.galleryContainer = [[SASGalleryContainer alloc] init];
     }
     
-    NSRange range = NSMakeRange(0, 24);
+    NSRange range = NSMakeRange(0, 25);
     imagesDownloaded = (int)range.length;
     
+    [self showActivityIndicator];
+    
     // Download a few images to fill the screen.
-    [self downloadImages:objects withinRange:range completion:nil];
+    [self downloadImages:objects withinRange:range completion:^(BOOL b){
+        if (b) {
+            [self hideActivityIndicator];
+        }
+    }];
 }
 
 
-
-
-
+#pragma mark Download Images.
 - (void) downloadImages:(NSArray *) objects withinRange:(NSRange) range completion:(void(^)(BOOL completed)) completion {
     
     __block int downloadAmount = (int)range.length - (int)range.location;
@@ -103,18 +124,18 @@ static NSString * const reuseIdentifier = @"cell";
             [SDWebImageDownloader.sharedDownloader downloadImageWithURL:url options:0 progress:nil completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished) {
                 if (image && finished) {
                     
-                    
                     [self.galleryContainer addImage:image forDevice:deviceAtIndex];
                     
                     // This must be called on the main thread.
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [self.collectionView reloadData];
-                        downloadAmount++;
                         count++;
                         
-                        printf("{Count = %d\n Download Amount: %d}\n", count, downloadAmount);
+                        // We've downloaded all images.
                         if (count == downloadAmount) {
-                            
+                            if(completion) {
+                                completion(YES);
+                            }
                         }
                     });
                 }
@@ -122,10 +143,6 @@ static NSString * const reuseIdentifier = @"cell";
         }
     }
 }
-
-
-
-
 
 
 
@@ -139,9 +156,10 @@ static NSString * const reuseIdentifier = @"cell";
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     SASGalleryCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     
-    // Set the cell's image.
+    
     SASDevice *device = self.downloadedObjects[indexPath.row];
     
+    // Set the cell's image.
     cell.imageView.image = [self.galleryContainer imageForDevice:device];
 
     // Set the cell's device.
@@ -182,13 +200,23 @@ static NSString * const reuseIdentifier = @"cell";
 #pragma mark <UIScrollViewDelegate>
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     float bottomEdge = self.collectionView.contentOffset.y + self.collectionView.frame.size.height;
+    
     if (bottomEdge >= self.collectionView.contentSize.height) {
 
         // Download the next 15 images.
         NSRange range = NSMakeRange(imagesDownloaded, imagesDownloaded + 15);
         imagesDownloaded = (int)range.length;
         
-        [self downloadImages:self.downloadedObjects withinRange:range completion:^(BOOL c){printf("gototot");}];
+        [self showActivityIndicator];
+        
+        [self downloadImages:self.downloadedObjects
+                 withinRange:range
+                  completion:^(BOOL c){
+                      if (c) {
+                          [self hideActivityIndicator];
+                      }
+                  }
+         ];
     }
 }
 
