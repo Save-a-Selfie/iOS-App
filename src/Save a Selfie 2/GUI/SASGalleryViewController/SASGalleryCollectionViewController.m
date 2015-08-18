@@ -46,13 +46,15 @@ static NSString * const reuseIdentifier = @"cell";
     if(!self.refreshControl) {
         self.refreshControl = [[UIRefreshControl alloc] init];
         [self.refreshControl addTarget:self action:@selector(refresh) forControlEvents:UIControlEventValueChanged];
+        NSAttributedString *a = [[NSAttributedString alloc] initWithString:@"Pull to refresh"];
+        self.refreshControl.attributedTitle = a;
+
         [self.collectionView addSubview:self.refreshControl];
     }
     
     if (!self.sasObjectDownloader) {
         self.sasObjectDownloader = [[SASObjectDownloader alloc] initWithDelegate:self];
     }
-    
     
     [self.sasObjectDownloader downloadObjectsFromServer];
 }
@@ -175,7 +177,6 @@ static NSString * const reuseIdentifier = @"cell";
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     SASGalleryCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     
-    
     SASDevice *device = self.downloadedObjects[indexPath.row];
     
     // Set the cell's image.
@@ -187,6 +188,7 @@ static NSString * const reuseIdentifier = @"cell";
     
     return cell;
 }
+
 
 
 #pragma mark UICollectionViewLayout.
@@ -224,6 +226,8 @@ static NSString * const reuseIdentifier = @"cell";
     SASImageViewController *sasImageViewController = [storyboard instantiateViewControllerWithIdentifier:@"SASImageViewController"];
     
     sasImageViewController.device = device;
+    sasImageViewController.downloadImage = NO;
+    sasImageViewController.image = [cell.imageView.image copy];
     [self.navigationController pushViewController:sasImageViewController animated:YES];
     
 }

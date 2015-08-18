@@ -22,4 +22,28 @@
 @property(strong, nonatomic) SASDevice* device;
 
 
+/**
+ Use this flag to change whether or not
+ an image will be loadedfrom the url from the device. The default
+ is YES.
+
+ 
+ YES - Image will be downloaded from the server using
+              the devices imageURL property.
+ NO - Image will not be fetched from the server. This is
+      typically assigned when the image is already downloaded
+      and is set via the `image` property. If set to NO and
+      no `image` property is set no image will be displayed.
+ */
+@property(assign, nonatomic) BOOL downloadImage;
+
+
+/**
+ Set this property if the image for the associated device
+ has already been downloaded. The BOOL `downloadImage` must be set
+ to NO aswell as this property being set for the image to be displayed.
+ */
+@property(strong, nonatomic) UIImage *image;
+
+
 @end

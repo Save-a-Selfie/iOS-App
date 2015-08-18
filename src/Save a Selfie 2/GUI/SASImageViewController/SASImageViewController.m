@@ -55,16 +55,48 @@
 
 @implementation SASImageViewController
 
+#pragma Object Life Cycle.
+- (instancetype)init {
+    if (self = [super init]) {
+        [self setup];
+    }
+    return self;
+}
+
+
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    if (self = [super initWithCoder:aDecoder]) {
+        [self setup];
+    }
+    return self;
+}
+
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+    if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
+        [self setup];
+    }
+    return self;
+}
+
+
+#pragma Convenience method for inits.
+- (void) setup {
+    _downloadImage = YES;
+}
+
 
 
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
     self.sasMapView = nil;
+
 }
 
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+   
 }
 
 
@@ -74,6 +106,9 @@
 
 
 - (void)viewDidLayoutSubviews {
+
+    [SASUtilities addSASBlurToView:self.blurredImageView];
+    self.blurredImageView.contentMode = UIViewContentModeScaleToFill;
     
     self.photoDescription.translatesAutoresizingMaskIntoConstraints = NO;
     CGSize sizeThatFitsTextView = [self.photoDescription sizeThatFits:CGSizeMake(self.photoDescription.frame.size.width, MAXFLOAT)];
@@ -82,7 +117,8 @@
     [self.scrollView setContentSize:CGSizeMake(self.contentView.frame.size.width, self.contentView.frame.size.height + sizeThatFitsTextView.height)];
 }
 
-
+// TODO: This method has too much going on. Spread out
+// into more functions.
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
@@ -130,17 +166,22 @@
     
     if (self.annotation.device != nil) {
         
-        // Set the image for deviceImageView associated with the device
+        // Set the image for deviceImageView associated with the device i.e lifeRing, defib etc..
         self.deviceImageView.image = [self deviceImageForAnnotation:self.annotation.device];
         
         // Set the elements of the UI which are coloured to the
         // respective colour associated with the device.
         [self setColourForColouredUIElements:self.annotation.device];
     }
-        
     
-
-    if(self.annotation.device.imageURL != nil && !imageLoaded) {
+    
+    // Assuming we don't need to downlaod the image
+    // self.image should be set.
+    if (!self.downloadImage) {
+        self.sasImageView.image = self.image;
+        self.blurredImageView.image = self.image;
+    }
+    else if(self.annotation.device.imageURL != nil && self.downloadImage && !imageLoaded) {
         
         if (self.sasActivityIndicator == nil) {
             // Begin animation of sasActivityIndicator until image is loaded.
@@ -165,9 +206,8 @@
                 self.sasImageView.image = imageFromURL;
                 
                 // The blurred image background view.
-                self.blurredImageView.contentMode = UIViewContentModeScaleToFill;
                 self.blurredImageView.image = imageFromURL;
-                [SASUtilities addSASBlurToView:self.blurredImageView];
+
                 
                 [self.sasActivityIndicator stopAnimating];
                 [self.sasActivityIndicator removeFromSuperview];

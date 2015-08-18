@@ -512,13 +512,13 @@
 		188CAEE71B20FE46006A90EB /* GUI */ = {
 			isa = PBXGroup;
 			children = (
+				18C323941B1E1FDC0027BDEA /* SASImageViewController */,
 				18EBF9781B272B3700EDA48B /* SASImagePickerController */,
 				18592DFF1B5182F4004DDFD8 /* UIView+NibInitializer */,
 				1818AFD71B515255004FF998 /* SASGalleryViewController */,
 				18EBF97D1B273A7700EDA48B /* SASUploadImageViewController */,
 				18A525091B16708600E8F8F6 /* SASMapViewController */,
 				18A524FC1B166C2700E8F8F6 /* SASMapView */,
-				18C323941B1E1FDC0027BDEA /* SASImageViewController */,
 				18B7C3411B44886000017170 /* SASBarButtonItem */,
 				18EE44DF1B556A2400F8F93B /* SASNotificationView */,
 				18EE44E31B556A5700F8F93B /* SASNoticeView */,

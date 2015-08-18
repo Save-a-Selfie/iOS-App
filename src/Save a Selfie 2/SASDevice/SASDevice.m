@@ -40,7 +40,7 @@
         _deviceLocation.latitude = latitude.doubleValue;
 		_deviceLocation.longitude = longitude.doubleValue;
         
-        
+
         _thumb = [infoArray objectAtIndex:5];
         _app = [infoArray objectAtIndex:6]; // iPhone app / Instagram / Twitter
 	}
@@ -55,6 +55,7 @@
     // make a `copy`, however, when using this
     // object for an NSDictonary an new instance of this copy
     // does not seem to work when calling `objectForKey:`
+    // This works for the time being.
     // TODO: FIX FIX FIX!!
     SASDevice *copy = self;
     return copy;

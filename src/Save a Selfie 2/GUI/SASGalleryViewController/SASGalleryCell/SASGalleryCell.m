@@ -20,10 +20,6 @@
     return self;
 }
 
-- (void)drawRect:(CGRect)rect {
-    rect = CGRectMake(0, 0, 20, 20);
-}
-
 
 - (void) addTapGestureRecognizer {
     
