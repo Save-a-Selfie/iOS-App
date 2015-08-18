@@ -16,7 +16,8 @@ typedef NS_ENUM(NSUInteger, UIDeviceModel) {
     UIDeviceModelIphone5S,
     UIDeviceModelIphone6,
     UIDeviceModelIphone6Plus,
-    UIDeviceModelIphoneUndefined,
+    UIDeviceModelSimulator,
+    UIDeviceModelIphoneUndefined // Non supported device type.
 };
 
 

@@ -34,7 +34,9 @@
         return UIDeviceModelIphone6Plus;
     } else if ([model isEqualToString:@"iPhone7,2"]) {
         return UIDeviceModelIphone6;
-    } else {
+    } else if([model isEqualToString:@"x86_64"] || [model isEqualToString:@"i386"]) {
+        return UIDeviceModelSimulator;
+    }else {
         return UIDeviceModelIphoneUndefined;
     }
     

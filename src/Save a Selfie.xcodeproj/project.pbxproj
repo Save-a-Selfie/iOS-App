@@ -514,6 +514,7 @@
 			children = (
 				18C323941B1E1FDC0027BDEA /* SASImageViewController */,
 				18EBF9781B272B3700EDA48B /* SASImagePickerController */,
+				181A02CA1B543EDD009048FE /* SASInformationViewController */,
 				18592DFF1B5182F4004DDFD8 /* UIView+NibInitializer */,
 				1818AFD71B515255004FF998 /* SASGalleryViewController */,
 				18EBF97D1B273A7700EDA48B /* SASUploadImageViewController */,
@@ -531,7 +532,6 @@
 				1810C90B1B28904A009063E5 /* SASImage */,
 				18372AA71B3F7EE600BD61D9 /* SASTabBarController */,
 				1818AFC71B50435F004FF998 /* UIView+Animations */,
-				181A02CA1B543EDD009048FE /* SASInformationViewController */,
 				188CAEEE1B21008B006A90EB /* Screen */,
 			);
 			path = GUI;

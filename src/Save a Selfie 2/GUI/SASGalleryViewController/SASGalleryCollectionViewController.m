@@ -19,6 +19,7 @@
 @interface SASGalleryCollectionViewController () <SASObjectDownloaderDelegate, UICollectionViewDataSource, UICollectionViewDelegate,
 SASGalleryCellDelegate> {
     int imagesDownloaded;
+    int initialDownalodamount;
 }
 
 @property (strong, nonatomic) SASObjectDownloader *sasObjectDownloader;
@@ -68,9 +69,9 @@ static NSString * const reuseIdentifier = @"cell";
 
 
 - (void) refresh {
-    self.collectionView.frame = CGRectMake(0, 0, self.collectionView.frame.size.width, [Screen height]);
     self.downloadedObjects = nil;
     [self.refreshControl endRefreshing];
+    [self.collectionView sizeToFit];
     [self.sasObjectDownloader downloadObjectsFromServer];
 }
 
@@ -112,7 +113,8 @@ static NSString * const reuseIdentifier = @"cell";
         self.galleryContainer = [[SASGalleryContainer alloc] init];
     }
     
-    NSRange range = NSMakeRange(0, 25);
+
+    NSRange range = NSMakeRange(0, 55);
     imagesDownloaded = (int)range.length;
     
     [self showActivityIndicator];
@@ -201,7 +203,7 @@ static NSString * const reuseIdentifier = @"cell";
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
-    return 0.0;
+    return 1.0;
 }
 
 
@@ -209,10 +211,13 @@ static NSString * const reuseIdentifier = @"cell";
     
     UIDeviceModel model = [UIDevice model];
     
-    if(!(model == UIDeviceModelIphoneUndefined)) {
-        return CGSizeMake(80, 80);
+    if (model == UIDeviceModelIphone6) {
+        return CGSizeMake(62, 62);
+    } else if (model == UIDeviceModelIphone6Plus) {
+        return CGSizeMake(81, 81);
     } else {
-        return CGSizeMake(80, 80);
+        // iPhone 4, 4s, 5 etc..
+        return CGSizeMake(79, 79);
     }
 }
 

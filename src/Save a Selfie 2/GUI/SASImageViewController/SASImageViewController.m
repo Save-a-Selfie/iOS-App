@@ -89,14 +89,11 @@
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
     self.sasMapView = nil;
-
-}
-
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
     
-   
+    if(!self.downloadImage) {
+        self.image = nil;
+    }
+
 }
 
 
@@ -116,6 +113,7 @@
     
     [self.scrollView setContentSize:CGSizeMake(self.contentView.frame.size.width, self.contentView.frame.size.height + sizeThatFitsTextView.height)];
 }
+
 
 // TODO: This method has too much going on. Spread out
 // into more functions.

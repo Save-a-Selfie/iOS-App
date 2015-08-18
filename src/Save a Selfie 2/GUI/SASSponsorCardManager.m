@@ -55,7 +55,8 @@
     emergencyCare.imageView.image = [UIImage imageNamed:@"ecplogo"];
     [emergencyCare.button setTitle:@"Visit our website" forState:UIControlStateNormal];
     emergencyCare.info = @"Providing a high level of customer service and excellent quality products.";
-    emergencyCare.website = @"www.emergencycare.ie";
+    emergencyCare.website = @"http://www.emergencycare.ie";
+
     
     
     NSArray *cardViews = [[NSArray alloc] initWithObjects: saveSelfie,

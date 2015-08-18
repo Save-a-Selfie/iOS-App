@@ -65,7 +65,7 @@
 
 
 #pragma mark <UIScrollViewDelegate>
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+- (void) scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     CGFloat xOffset = scrollView.contentOffset.x;
     self.pageControl.currentPage = [self determinePageIndex:xOffset];
 }
