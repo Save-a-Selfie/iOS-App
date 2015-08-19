@@ -118,6 +118,12 @@
         }
         return NO;
     }
+    if(![self.sasUploadObject coordinatesHaveBeenSet]) {
+        if (self.delegate != nil && [self.delegate respondsToSelector:@selector(sasUploader:invalidObjectWithResponse:)]) {
+            [self.delegate sasUploader:self.sasUploadObject invalidObjectWithResponse:SASUploadInvalidObjectCoordinates];
+        }
+        return NO;
+    }
     else {
         return YES;
     }

@@ -15,7 +15,8 @@
 
 typedef NS_ENUM(NSInteger, SASUploadInvalidObject) {
     SASUploadInvalidObjectCaption,     // Invalid caption for the SASUploadObject.
-    SASUploadInvalidObjectDeviceType // Invalid type for SASDeviceType.
+    SASUploadInvalidObjectDeviceType,  // Invalid type for SASDeviceType.
+    SASUploadInvalidObjectCoordinates // Invalid Coordinates given.
 };
 
 

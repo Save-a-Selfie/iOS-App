@@ -42,7 +42,7 @@
 
 
 #pragma mark <SASVerifiedUploadObject>
-- (BOOL)captionHasBeenSet {
+- (BOOL) captionHasBeenSet {
     
     if ([self.caption isEqualToString:@""] ||
         [self.caption isEqualToString:@"Add Location Information"] ||
@@ -56,7 +56,7 @@
 }
 
 
-- (BOOL)deviceHasBeenSet {
+- (BOOL) deviceHasBeenSet {
     if (self.associatedDevice.type != All) {
         return YES;
     } else {
@@ -66,9 +66,15 @@
 
 
 
-- (BOOL)coordinatesHaveBeenSet {
-    if ([self]) {
-        <#statements#>
+- (BOOL) coordinatesHaveBeenSet {
+    
+    CLLocationCoordinate2D tempCoordinates = kCLLocationCoordinate2DInvalid;
+    tempCoordinates = self.coordinates;
+    
+    if (CLLocationCoordinate2DIsValid(tempCoordinates)) {
+        return YES;
+    } else {
+        return NO;
     }
 }
 

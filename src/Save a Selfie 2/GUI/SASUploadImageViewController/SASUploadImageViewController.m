@@ -240,7 +240,7 @@
         
         #pragma mark UUID set here.
         self.sasUploadObject.UUID = [NSUUID UUID].UUIDString;
-        
+
         self.sasUploader = [[SASUploader alloc] initWithSASUploadObject:self.sasUploadObject];
         self.sasUploader.delegate = self;
         [self.sasUploader upload];
@@ -249,7 +249,7 @@
 
 
 
-#pragma mark SASUploaderDelegate
+#pragma mark <SASUploaderDelegate>
 - (void)sasUploaderDidBeginUploading:(SASUploader *)sasUploader {
     
     // Activity Indicator
@@ -309,6 +309,13 @@
         case SASUploadInvalidObjectDeviceType:
             alertView.title = @"Ooops!";
             alertView.message = @"Please select a device for this post!";
+            alertView.buttonTitle = @"Ok";
+            [alertView animateIntoView:self.view];
+            
+            
+        case SASUploadInvalidObjectCoordinates:
+            alertView.title = @"Ooops!";
+            alertView.message = @"Cannot determine location. Please select the map and touch your correct location.";
             alertView.buttonTitle = @"Ok";
             [alertView animateIntoView:self.view];
             
