@@ -506,6 +506,7 @@
 - (void) removeUpdateView:(id) sender {
     [self.updateView removeFromSuperview];
     self.updateView = nil;
+    [[NSUserDefaults standardUserDefaults] setValue:@"yes" forKey:@"tapMapUpdateHasBeenSeen"];
 }
 
 
