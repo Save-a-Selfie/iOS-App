@@ -17,7 +17,7 @@
 #import "SASUploader.h"
 #import "SASDeviceButton.h"
 #import "SASGreyView.h"
-
+#import "SASUtilities.h"
 #import "SASActivityIndicator.h"
 #import "ExtendNSLogFunctionality.h"
 #import "UIView+NibInitializer.h"
@@ -57,7 +57,7 @@
 @property (strong, nonatomic) SASBarButtonItem *doneBarButtonItem;
 
 @property (strong, nonatomic) UILongPressGestureRecognizer *longPress;
-
+@property (strong, nonatomic) UIView* updateView;
 @end
 
 @implementation SASUploadImageViewController
@@ -67,6 +67,8 @@
     [super viewDidLoad];
     
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName: [UIFont fontWithName:@"AvenirNext-DemiBold" size:17.0f]}];
+    
+    [self displayUpdateInformation];
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -186,24 +188,6 @@
     [button select];
 }
 
-
-
-
-#pragma Touch to change location of device.
-- (IBAction)expandMapView:(id)sender {
-    
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
-    [self.sasMapView addSubview:label];
-    label.text = @"Tap";
-    label.textColor = [UIColor whiteColor];
-    
-    
-       
-    //    self.sasMapView.frame = CGRectMake(0, 0, [Screen width], [Screen height]);
-
-    
-    
-}
 
 
 
@@ -477,6 +461,51 @@
         [eulaDeclinedAlertView animateIntoView:self.view];
     }
 
+}
+
+
+- (void) displayUpdateInformation {
+    if ([[[NSUserDefaults standardUserDefaults] valueForKey:@"tapMapUpdateHasBeenSeen"] isEqualToString:@"yes"]) {
+        return;
+    } else {
+        self.updateView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [Screen width], [Screen height])];
+        self.updateView.alpha = 0.0;
+        [SASUtilities addSASBlurToView:self.updateView];
+        
+        [UIView animateWithDuration:1.5 animations:^(void){
+            self.updateView.alpha = 1.0;
+            
+            UILabel *infoLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 130, [Screen width] - 30, 200)];
+            infoLabel.center = self.updateView.center;
+            infoLabel.frame = CGRectOffset(infoLabel.frame, 0, -30);
+            infoLabel.font = [UIFont fontWithName:@"AvenirNext-DemiBold" size:18];
+            infoLabel.textColor = [UIColor grayColor];
+            infoLabel.numberOfLines = 0;
+            infoLabel.textAlignment = NSTextAlignmentCenter;
+            infoLabel.text = @"Coordinates sometimes may be slightly off. You can tap and hold on the map to change the location.";
+            [self.updateView addSubview:infoLabel];
+            
+            UIImageView *infoImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Megaphone"]];
+            infoImageView.frame = CGRectMake(0, 140, [Screen width], 30);
+            infoImageView.contentMode = UIViewContentModeScaleAspectFit;
+            [self.updateView addSubview:infoImageView];
+            
+            UIButton *exit = [[UIButton alloc] initWithFrame:CGRectMake([Screen width] - 34, 70, 25, 25)];
+            [exit setImage:[UIImage imageNamed:@"Exit"] forState:UIControlStateNormal];
+            [exit addTarget:self action:@selector(removeUpdateView:) forControlEvents:UIControlEventTouchUpInside];
+            [self.updateView addSubview:exit];
+            
+            [self.view addSubview:self.updateView];
+            [self.view bringSubviewToFront:self.sasMapView];
+        }];
+    }
+    
+}
+
+
+- (void) removeUpdateView:(id) sender {
+    [self.updateView removeFromSuperview];
+    self.updateView = nil;
 }
 
 
