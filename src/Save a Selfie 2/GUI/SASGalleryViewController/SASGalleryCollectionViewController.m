@@ -28,6 +28,8 @@ SASGalleryCellDelegate> {
 @property (strong, nonatomic) UIActivityIndicatorView *activityIndicator;
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
 
+@property (assign,nonatomic) __block BOOL canRefresh;
+
 @end
 
 
@@ -69,9 +71,20 @@ static NSString * const reuseIdentifier = @"cell";
 
 
 - (void) refresh {
-    self.downloadedObjects = nil;
-    [self.galleryContainer clear];
-    [self.sasObjectDownloader downloadObjectsFromServer];
+    
+    printf("I want to refresh, the values is: %d\n", self.canRefresh);
+    
+    if (self.canRefresh) {
+        self.canRefresh = NO;
+        
+        self.downloadedObjects = nil;
+        [self.galleryContainer clear];
+    
+        // Calling this reloads the datasource, so no need to
+        // do that here.
+        [self.sasObjectDownloader downloadObjectsFromServer];
+    }
+    
     [self.refreshControl endRefreshing];
 }
 
@@ -120,11 +133,17 @@ static NSString * const reuseIdentifier = @"cell";
     [self showActivityIndicator];
     
     // Download a few images to fill the screen.
-    [self downloadImages:objects withinRange:range completion:^(BOOL b){
-        if (b) {
+    [self downloadImages:objects withinRange:range completion:^(BOOL completed){
+        if (completed) {
             [self hideActivityIndicator];
+            
+            // Initial set of images have been downloaded,
+            // it is okay for the user to ask for a refresh.
+            self.canRefresh = YES;
+            NSLog(@"%d", self.canRefresh);
         }
     }];
+    
 }
 
 
@@ -253,8 +272,8 @@ static NSString * const reuseIdentifier = @"cell";
         
         [self downloadImages:self.downloadedObjects
                  withinRange:range
-                  completion:^(BOOL c){
-                      if (c) {
+                  completion:^(BOOL completed){
+                      if (completed) {
                           [self hideActivityIndicator];
                       }
                   }
