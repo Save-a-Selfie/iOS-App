@@ -25,22 +25,40 @@ typedef NS_ENUM(NSInteger, SASUploadInvalidObject) {
 
 @optional
 
-// @Discussion:
-//  As any object that wants to be upqloaded must conform to
-//  `SASVerifiedUploadObject` protocol, it is possible the object may not be ready for
-//   upload or in other words considered 'invalid'.
-//   If the object initialise with this class is invalid, the delegate will be sent this
-//   message containing the reason.
+/**
+ If the object that is trying to be uploaded doesn't pass correct checks
+ via the SASVerifiedUploadObject protocol this method will pass to the delegate
+ any information regarding problems that have occurred.
+ 
+ @param object      The object attempting to be uploaded.
+ @param response    The problem that has occurred regarding
+                    the appropriate checks being made before upload.
+ */
 - (void) sasUploader:(SASUploadObject *) object invalidObjectWithResponse:(SASUploadInvalidObject) response;
 
 
+/**
+ This method will be called when the upload has begun
+ 
+ @sasUploader The delegator.
+ */
 - (void) sasUploaderDidBeginUploading:(SASUploader *) sasUploader;
 
-// The SASUpload Object uploaded to the server successfully.
+/**
+ When the SASUpload object for the instance been uploaded
+ this method is called.
+ 
+ @param The delegator
+ */
 - (void) sasUploaderDidFinishUploadWithSuccess:(SASUploader*) sasUploader;
 
 
-// Upload failed.
+/**
+ Uploading has failed.
+ 
+ @param sasUploader The delegator.
+ @param error       The error that has occurred.
+ */
 - (void) sasUploader:(SASUploader*) sasUploader didFailWithError:(NSError*) error;
 
 
@@ -49,18 +67,38 @@ typedef NS_ENUM(NSInteger, SASUploadInvalidObject) {
 
 
 
-// @Discussion:
-//  Use this class for uploading a SASUploadObject to the server.
+
+/** 
+ Use this class for uploading a SASUploadObject to the server.
+ */
 @interface SASUploader : NSObject
 
-@property (weak, nonatomic) SASUploadObject *sasUploadObject;
+/**
+ The SASUploadObject that was initiliased with the instance.
+ */
+@property (weak, readonly) SASUploadObject<SASVerifiedUploadObject> *sasUploadObject;
+
 
 @property (weak, nonatomic) id <SASUploaderDelegate> delegate;
 
+
+/**
+ Initialises a new instance with a SASUploadObject.
+ 
+ @param object       An SASUploadObject instance that conforms to SASVerifiedUploadObject
+                     protocol. This protocol allows for specific checks to be made
+                     before the object is uploaded.
+ 
+ @return SASUploader A new instance.
+ */
 - (instancetype)initWithSASUploadObject: (SASUploadObject <SASVerifiedUploadObject>*) object;
 
 
-// Uploads the SASUploadObject initialized with this class.
+/**
+ Uploads the sasUploadObject initialised with the class to the server.
+ The sasUploadObject is uploaded after all checks are made.
+ Callbacks for this method are done through SASUploader delegate.
+ */
 - (void) upload;
 
 @end

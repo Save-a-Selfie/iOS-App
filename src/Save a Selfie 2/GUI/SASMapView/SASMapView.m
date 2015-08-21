@@ -275,7 +275,7 @@
 // Plots the annotations according to each object data retreived from
 // SASObjectDownloaderDelegate method -sasObjectDownloader: didDownloadObjects:
 - (void) plotAnnotationsWithObjectInformation: (NSMutableArray*) objectInfo {
-    NSLog(@"%@", objectInfo);
+    
     [self removeExistingAnnotationsFromMapView];
     
     for (SASDevice *device in objectInfo) {

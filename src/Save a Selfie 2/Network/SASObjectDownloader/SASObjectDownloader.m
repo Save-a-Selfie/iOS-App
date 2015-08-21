@@ -100,7 +100,6 @@
     
     for(int i = 0; i < [objectData count]; i++) {
         if([objectData[i] length] != 0) {
-            
             SASDevice *device = [[SASDevice alloc] initDeviceWithInformationFromString:[objectData objectAtIndex:i]];
             [self.dowloadedObjects insertObject:device atIndex:i];
         }
