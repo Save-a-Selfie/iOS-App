@@ -58,9 +58,7 @@
 
 
 - (void) downloadObjectsFromServer {
-    
     self.connection = [[NSURLConnection alloc] initWithRequest:self.request delegate:self];
-    
 }
 
 
@@ -115,5 +113,10 @@
     }
 }
 
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *) error {
+    if(self.delegate != nil && [self.delegate respondsToSelector:@selector(sasObjectDownloader:didFailWithError:)]) {
+        [self.delegate sasObjectDownloader:self didFailWithError:error];
+    }
+}
 
 @end

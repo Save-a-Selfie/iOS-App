@@ -14,42 +14,61 @@
 
 @protocol SASObjectDownloaderDelegate <NSObject>
 
+/**
+ This method is called when all objects from the server have been downloaded.
+ The term `objects` refers to an array of SASDevices that have been initialised with
+ an info string retrieved from the server. Each device encapsulates information such
+ as the coordinates from where it was taken an image url and more. See SASDevice.h for
+ full info.
+ 
+ @param downloader An instance of SASObjectDownloader responsible for messaging
+                   the delegate.
+ @param  onbjects  An array of SASDevices retrieved from the server.
+ */
+- (void) sasObjectDownloader:(SASObjectDownloader *) downloader didDownloadObjects: (NSArray*) objects;
 
-// @Discussion
-//  This method will pass
-//  a NSMutableArray with information regarding all the devices
-//  that have been uploaded. This method is called when the
-//  objects have been fully downloaded, therefore it is save to assume
-//  that the connection has finished when this method is called.
-//
-//  @param device: NSMutable array which contains device information.
-- (void) sasObjectDownloader:(SASObjectDownloader *) downloader didDownloadObjects: (NSMutableArray*) objects;
+@optional
+/**
+ This method simply passes on the error that occured.
+ */
+- (void) sasObjectDownloader:(SASObjectDownloader *) downloader didFailWithError: (NSError *) error;
 
 @end
 
 
-
-// This class will allow us to fetch/ retrieve MKMapAnnotations.
-// This app uses Device.h/.m to wrap up extra information about the device
-// i.e image, location etc...
-// For more information refer to Device.h.
+/**
+ Use this class to fetch/download objects from the server(SASDevices).
+ */
 @interface SASObjectDownloader : NSObject
 
+/**
+ Initialises a new instance with the delegate set.
+ 
+ @param delegate Sets the delegate.
+ */
 - (instancetype) initWithDelegate:(id) delegate;
 
+
+/**
+ Sets the delegate.
+ */
 @property(nonatomic, weak) id<SASObjectDownloaderDelegate> delegate;
 
-// @Discussion:
-//  Fetches and downloader all the object information
-//  from the server again. The downloaded data is then
-//  passed via the delegate -sasObjectDownloader: didDowloadObjects:
+/**
+ This method downloads all the information from the server 
+ which is then constructed into an NSArray of SASDevice's.
+ Once all the information is downloaded and the SASDevices are
+ constructed they are passed via the SASObjectDownloaderDelegate method:
+    - sasObjectDownloader: didDownloadObjects:
+ */
 - (void) downloadObjectsFromServer;
 
-
-// @Abstract:
-//  This method gets the images from the URL off the main thread.
-//  It is called inside `dispatch_async` on the global_queue.
-// @return UIImage from the `URL`
+/**
+ Returns a UIImage from a string containing a url.
+ Note: This method is not called on the main thread.
+ 
+ @return UIImage The image from the url.
+ */
 - (UIImage*) getImageFromURLWithString: (NSString *) string;
 
 @end

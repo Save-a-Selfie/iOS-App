@@ -46,7 +46,7 @@
 
 /**
  This method will begin updating the user's location (if it can).
- The location is passed via SASLocationDelegate callback
+ The location is passed via SASLocationDelegate -locationDidUpdate callback
  */
 - (void) startUpdatingUsersLocation;
 

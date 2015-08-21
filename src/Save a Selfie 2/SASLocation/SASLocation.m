@@ -69,6 +69,7 @@
 }
 
 
+//TODO: Update this, quite confusing what the difference between this and -checkLocationpermissions do.
 
 // As of iOS 8 we must call CLLocationManager requestWhenInUseAuthorization: or requestAlwaysAuthorization:
 // this method call makes sure these methods are called before we begin updating users location.

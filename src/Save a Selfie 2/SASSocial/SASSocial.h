@@ -10,12 +10,14 @@
 
 @interface SASSocial : NSObject
 
-
-// Presents an UIActivityController with options to share to social media from the calling UIViewController
-//
-// @param textToShare: Text to post.
-// @param image: Image to share.
-// @param target: The UIViewController from where the UIActivityController will be called.
+/**
+ Presents a UIActivityController with options to share to social media.
+ 
+ @param textToShare  Any text you would like to share to social media.
+ @param image:       The image you would like to share.
+ @param target       A UIViewController which is responsible for presnting the 
+                     UIActivityController.
+ */
 + (void) shareToSocialMedia:(NSString*)textToShare andImage:(UIImage*)image target:(UIViewController*) target;
 
 @end
