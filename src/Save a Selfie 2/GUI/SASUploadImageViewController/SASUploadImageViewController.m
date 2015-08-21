@@ -134,16 +134,16 @@
     }
     
     self.defibrillatorButton.selectedImage = [UIImage imageNamed:@"DefibrillatorSelected"];
-    self.defibrillatorButton.deviceType = Defibrillator;
+    self.defibrillatorButton.deviceType = SASDeviceTypeDefibrillator;
     
     self.lifeRingButton.selectedImage = [UIImage imageNamed:@"LifeRingSelected"];
-    self.lifeRingButton.deviceType = LifeRing;
+    self.lifeRingButton.deviceType = SASDeviceTypeLifeRing;
     
     self.firstAidKitButton.selectedImage = [UIImage imageNamed:@"FirstAidKitSelected"];
-    self.firstAidKitButton.deviceType = FirstAidKit;
+    self.firstAidKitButton.deviceType = SASDeviceTypeFirstAidKit;
     
     self.fireHydrantButton.selectedImage = [UIImage imageNamed:@"FireHydrantSelected"];
-    self.fireHydrantButton.deviceType = FireHydrant;
+    self.fireHydrantButton.deviceType = SASDeviceTypeFireHydrant;
     
     self.defibrillatorButton.unselectedImage = [UIImage imageNamed:@"DefibrillatorUnselected"];
     self.lifeRingButton.unselectedImage = [UIImage imageNamed:@"LifeRingUnselected"];

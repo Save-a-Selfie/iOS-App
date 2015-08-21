@@ -75,19 +75,19 @@
 - (void) setTypeWithIdentifierFromServer:(int) indentifier {
     switch (indentifier) {
         case 0:
-            self.type = Defibrillator;
+            self.type = SASDeviceTypeDefibrillator;
             break;
             
         case 1:
-            self.type = LifeRing;
+            self.type = SASDeviceTypeLifeRing;
             break;
             
         case 2:
-            self.type = FirstAidKit;
+            self.type = SASDeviceTypeFirstAidKit;
             break;
             
         case 3:
-            self.type = FireHydrant;
+            self.type = SASDeviceTypeFireHydrant;
             break;
             
         default:
@@ -99,19 +99,19 @@
 + (NSString*) getDeviceNameForDeviceType:(SASDeviceType) deviceType {
     
     switch (deviceType) {
-        case Defibrillator:
+        case SASDeviceTypeDefibrillator:
             return @"Defibrillator";
             
-        case LifeRing:
+        case SASDeviceTypeLifeRing:
             return @"Life Ring";
             
-        case FirstAidKit:
+        case SASDeviceTypeFirstAidKit:
             return @"First Aid Kit";
             
-        case FireHydrant:
+        case SASDeviceTypeFireHydrant:
             return @"Fire Hydrant";
             
-        case All:
+        case SASDeviceTypeAll:
             return @"All";
             
         default:
@@ -122,23 +122,23 @@
 + (UIImage*) getDeviceImageForDeviceType:(SASDeviceType) deviceType {
     
     switch (deviceType) {
-        case Defibrillator:
+        case SASDeviceTypeDefibrillator:
             return [UIImage imageNamed:@"Defibrillator"];
             break;
             
-        case LifeRing:
+        case SASDeviceTypeLifeRing:
             return [UIImage imageNamed:@"LifeRing"];
             break;
             
-        case FirstAidKit:
+        case SASDeviceTypeFirstAidKit:
             return [UIImage imageNamed:@"FirstAidKit"];
             break;
             
-        case FireHydrant:
+        case SASDeviceTypeFireHydrant:
             return [UIImage imageNamed:@"FireHydrant"];
             break;
             
-        case All:
+        case SASDeviceTypeAll:
             return [UIImage new];
             
         default:
@@ -150,23 +150,23 @@
 + (UIImage*) getDeviceMapAnnotationImageForDeviceType:(SASDeviceType) deviceType {
     
     switch (deviceType) {
-        case Defibrillator:
+        case SASDeviceTypeDefibrillator:
             return [UIImage imageNamed:@"AEDAnnotation"];
             break;
             
-        case LifeRing:
+        case SASDeviceTypeLifeRing:
             return [UIImage imageNamed:@"LifeRingAnnotation"];
             break;
             
-        case FirstAidKit:
+        case SASDeviceTypeFirstAidKit:
             return [UIImage imageNamed:@"FAKitAnnotation"];
             break;
             
-        case FireHydrant:
+        case SASDeviceTypeFireHydrant:
             return [UIImage imageNamed:@"FireHydrantAnnotation"];
             break;
             
-        case All:
+        case SASDeviceTypeAll:
             return [[UIImage alloc] init];
             
         default:
@@ -178,23 +178,23 @@
 + (UIImage*) getDeviceMapPinImageForDeviceType:(SASDeviceType) deviceType {
     
     switch (deviceType) {
-        case Defibrillator:
+        case SASDeviceTypeDefibrillator:
             return [UIImage imageNamed:@"MapPinAED"];
             break;
             
-        case LifeRing:
+        case SASDeviceTypeLifeRing:
             return [UIImage imageNamed:@"MapPinLifeRing"];
             break;
             
-        case FirstAidKit:
+        case SASDeviceTypeFirstAidKit:
             return [UIImage imageNamed:@"MapPinFAKit"];
             break;
             
-        case FireHydrant:
+        case SASDeviceTypeFireHydrant:
             return [UIImage imageNamed:@"MapPinFireHydrant"];
             break;
             
-        case All:
+        case SASDeviceTypeAll:
             return [[UIImage alloc] init];
             break;
             

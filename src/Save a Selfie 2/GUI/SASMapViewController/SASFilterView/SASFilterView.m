@@ -28,11 +28,11 @@
 
 
 SASDeviceType availableDevicesToFilter[5] = {
-    All,
-    Defibrillator,
-    LifeRing,
-    FirstAidKit,
-    FireHydrant
+    SASDeviceTypeAll,
+    SASDeviceTypeDefibrillator,
+    SASDeviceTypeLifeRing,
+    SASDeviceTypeFirstAidKit,
+    SASDeviceTypeFireHydrant
 };
 
 
@@ -66,7 +66,7 @@ SASDeviceType availableDevicesToFilter[5] = {
         
         _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
         
-        _selectedDevice = All;
+        _selectedDevice = SASDeviceTypeAll;
     }
     return self;
 }
@@ -124,7 +124,7 @@ SASDeviceType availableDevicesToFilter[5] = {
     
     // This should be by default the cell which is selected i.e
     // has green tick.
-    if(deviceTypeForCell == All) {
+    if(deviceTypeForCell == SASDeviceTypeAll) {
         [self tickCell:sasFilterViewCell];
     }
     
@@ -138,27 +138,27 @@ SASDeviceType availableDevicesToFilter[5] = {
 
 - (SASDeviceType) getDeviceForCellWithIndexPath:(NSIndexPath*) indexPath {
     
-    SASDeviceType deviceTypeForCell = All;
+    SASDeviceType deviceTypeForCell = SASDeviceTypeAll;
     
     switch (indexPath.row) {
         case 0:
-            deviceTypeForCell = All;
+            deviceTypeForCell = SASDeviceTypeAll;
             break;
             
         case 1:
-            deviceTypeForCell = Defibrillator;
+            deviceTypeForCell = SASDeviceTypeDefibrillator;
             break;
             
         case 2:
-            deviceTypeForCell = LifeRing;
+            deviceTypeForCell = SASDeviceTypeLifeRing;
             break;
             
         case 3:
-            deviceTypeForCell = FirstAidKit;
+            deviceTypeForCell = SASDeviceTypeFirstAidKit;
             break;
             
         case 4:
-            deviceTypeForCell = FireHydrant;
+            deviceTypeForCell = SASDeviceTypeFireHydrant;
             break;
             
         default:

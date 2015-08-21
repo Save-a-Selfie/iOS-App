@@ -13,11 +13,11 @@
 // Fire Hydrant
 // All,
 typedef NS_ENUM(int, SASDeviceType) {
-    Defibrillator,
-    LifeRing,
-    FirstAidKit,
-    FireHydrant,
-    All,
+    SASDeviceTypeDefibrillator,
+    SASDeviceTypeLifeRing,
+    SASDeviceTypeFirstAidKit,
+    SASDeviceTypeFireHydrant,
+    SASDeviceTypeAll,
 };
 
 
@@ -31,7 +31,16 @@ typedef NS_ENUM(int, SASDeviceType) {
 @property (nonatomic, strong, readonly) NSString *app;
 @property (nonatomic, assign, readonly) CLLocationCoordinate2D deviceLocation;
 
-
+/**
+ Returns a name for a device type.
+ Possible device names returned from this function are:
+        - Defibrillator
+        - Life Ring
+        - First Aid Kit
+        - Fire Hydrant
+        - All
+ Note All is used in special cases throughout the app.
+ */
 // @return Device name for specified SASDeviceType.
 + (NSString*) getDeviceNameForDeviceType:(SASDeviceType) deviceType;
 
@@ -43,7 +52,6 @@ typedef NS_ENUM(int, SASDeviceType) {
 
 // @return Device map pin image for speified SASDeviceType.
 + (UIImage*) getDeviceMapPinImageForDeviceType:(SASDeviceType) deviceType;
-
 
 
 

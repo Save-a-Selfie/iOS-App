@@ -48,23 +48,23 @@
 + (UIColor*) getSASColourForDeviceType:(SASDeviceType) deviceType {
     
     switch (deviceType) {
-        case Defibrillator:
+        case SASDeviceTypeDefibrillator:
             return [SASColour sasRedAEDColour];
             break;
             
-        case LifeRing:
+        case SASDeviceTypeLifeRing:
             return [SASColour sasOrangeLifeRingColour];
             break;
         
-        case FirstAidKit:
+        case SASDeviceTypeFirstAidKit:
             return [SASColour sasGreenFirstAidColour];
             break;
             
-        case FireHydrant:
+        case SASDeviceTypeFireHydrant:
             return [SASColour sasYellowFireHydrantColur];
             break;
             
-        case All:
+        case SASDeviceTypeAll:
             return [[UIColor alloc] init];
             
         default:

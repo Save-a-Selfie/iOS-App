@@ -23,6 +23,12 @@ typedef NS_ENUM(NSUInteger, UIDeviceModel) {
 
 @interface UIDevice (DeviceName)
 
+/**
+ Returns the model of the user's iPhone.
+ Currently only supports models iPhone 4 and upwards
+ 
+ @return UIDeviceModel Model of thre user's iPhone.
+ */
 + (UIDeviceModel) model;
 
 @end

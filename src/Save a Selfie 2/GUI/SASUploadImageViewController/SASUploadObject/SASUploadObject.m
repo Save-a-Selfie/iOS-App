@@ -34,7 +34,7 @@
         // This will be set to All as we need to check
         // if its been set. If .type is not All
         // then we know it has been set.
-        _associatedDevice.type = All;
+        _associatedDevice.type = SASDeviceTypeAll;
     }
     return self;
 }
@@ -57,7 +57,7 @@
 
 
 - (BOOL) deviceHasBeenSet {
-    if (self.associatedDevice.type != All) {
+    if (self.associatedDevice.type != SASDeviceTypeAll) {
         return YES;
     } else {
         return NO;

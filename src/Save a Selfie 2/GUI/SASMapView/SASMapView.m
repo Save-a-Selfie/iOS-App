@@ -82,7 +82,7 @@
     userAlreadyLocated = NO;
     self.sasAnnotationImage = SASAnnotationImageDefault;
     
-    self.annotationsToShow = All;
+    self.annotationsToShow = SASDeviceTypeAll;
     
     self.mapType = MKMapTypeSatellite;
     
@@ -153,24 +153,24 @@
 - (void)filterAnnotationsForDeviceType:(SASDeviceType)type {
     
     switch (type) {
-        case All:
-            self.annotationsToShow = All;
+        case SASDeviceTypeAll:
+            self.annotationsToShow = SASDeviceTypeAll;
             break;
             
-        case Defibrillator:
-            self.annotationsToShow = Defibrillator;
+        case SASDeviceTypeDefibrillator:
+            self.annotationsToShow = SASDeviceTypeDefibrillator;
             break;
             
-        case LifeRing:
-            self.annotationsToShow = LifeRing;
+        case SASDeviceTypeLifeRing:
+            self.annotationsToShow = SASDeviceTypeLifeRing;
             break;
             
-        case FirstAidKit:
-            self.annotationsToShow = FirstAidKit;
+        case SASDeviceTypeFirstAidKit:
+            self.annotationsToShow = SASDeviceTypeFirstAidKit;
             break;
             
-        case FireHydrant:
-            self.annotationsToShow = FireHydrant;
+        case SASDeviceTypeFireHydrant:
+            self.annotationsToShow = SASDeviceTypeFireHydrant;
             break;
             
         default:
@@ -359,7 +359,7 @@
     if (self.annotationsToShow == deviceType) {
         return YES;
     }
-    else if(self.annotationsToShow == All) {
+    else if(self.annotationsToShow == SASDeviceTypeAll) {
         return YES;
     }
     else {
