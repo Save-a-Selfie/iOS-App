@@ -27,4 +27,8 @@
  */
 - (void) addImage:(UIImage *) image forDevice:(SASDevice *) device;
 
+/**
+ Clears the entire data set.
+ */
+- (void) clear;
 @end

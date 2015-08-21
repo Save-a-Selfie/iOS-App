@@ -16,7 +16,6 @@
 - (id)initWithCoder:(NSCoder *)aDecoder {
     if (self = [super initWithCoder:aDecoder]) {
         [self addTapGestureRecognizer];
-        self.backgroundColor = [UIColor grayColor];
     }
     return self;
 }

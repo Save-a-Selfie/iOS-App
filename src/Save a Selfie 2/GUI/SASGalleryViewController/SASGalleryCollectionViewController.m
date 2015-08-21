@@ -69,11 +69,10 @@ static NSString * const reuseIdentifier = @"cell";
 
 
 - (void) refresh {
-    self.collectionView.contentSize = CGSizeMake([Screen width], [Screen height]);
-    [self.collectionView sizeToFit];
     self.downloadedObjects = nil;
-    [self.refreshControl endRefreshing];
+    [self.galleryContainer clear];
     [self.sasObjectDownloader downloadObjectsFromServer];
+    [self.refreshControl endRefreshing];
 }
 
 

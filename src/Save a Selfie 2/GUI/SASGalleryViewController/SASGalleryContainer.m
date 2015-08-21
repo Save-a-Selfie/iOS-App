@@ -13,8 +13,6 @@
 
 @property (nonatomic, strong) NSMutableDictionary *data;
 
-@property (nonatomic, strong) SASLocation *sasLocation;
-@property (nonatomic, assign) CLLocationCoordinate2D userLocation;
 
 @end
 
@@ -48,6 +46,11 @@
     UIImage* image = [self.data objectForKey:device];
 
     return image;
+}
+
+
+- (void) clear {
+    [self.data removeAllObjects];
 }
 
 
