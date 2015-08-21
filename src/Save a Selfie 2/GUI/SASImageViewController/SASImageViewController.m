@@ -141,7 +141,7 @@
     // Store the type of device shown in the image
     self.sasDeviceType = self.device.type;
     
-    self.annotation = [[SASAnnotation alloc] initAnnotationWithObject:self.device index:0];
+    self.annotation = [[SASAnnotation alloc] initAnnotationWithObject:self.device];
     
     self.scrollView.delegate = self;
 

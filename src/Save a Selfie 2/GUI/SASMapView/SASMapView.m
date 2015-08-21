@@ -278,17 +278,14 @@
     
     [self removeExistingAnnotationsFromMapView];
     
-    int deviceNumber = 0;
-    
-    for (SASDevice *d in devices) {
+    for (SASDevice *device in devices) {
         
-        SASAnnotation *annotation = [[SASAnnotation alloc] initAnnotationWithObject:d index:deviceNumber];
-        deviceNumber++;
+        SASAnnotation *annotation = [[SASAnnotation alloc] initAnnotationWithObject:device];
         
         // Checks whether or not that particular annotation
         // should be shown on the map. This could be due to the
         // user filtering specific annotations.
-        if ([self isAnnotationDeviceTypeFiltered:d.type]) {
+        if ([self isAnnotationDeviceTypeFiltered:device.type]) {
             [self addAnnotation:annotation];
         }
     }

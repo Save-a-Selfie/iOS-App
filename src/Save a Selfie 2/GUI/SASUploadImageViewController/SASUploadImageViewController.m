@@ -86,8 +86,6 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-;
-    
     if (self.sasAnnotation == nil) {
         self.sasAnnotation = [[SASAnnotation alloc] init];
     }
@@ -160,8 +158,6 @@
 
 
 
-
-
 - (IBAction)deviceSelected:(SASDeviceButton*) sender {
 
     [self deselectDeviceButtons];
@@ -173,6 +169,7 @@
 
     self.doneButton.hidden = NO;
 }
+
 
 
 // 'Deselects' a button by putting the image of the button back
@@ -201,7 +198,9 @@
     CGPoint touchPoint = [self.longPress locationInView:self.sasMapView];
     CLLocationCoordinate2D location = [self.sasMapView convertPoint:touchPoint toCoordinateFromView:self.sasMapView];
     
-    self.sasAnnotation.coordinate = location;
+    printf("User has tapped map, old location: %f %f.\n", self.sasAnnotation.coordinate.latitude, self.sasAnnotation.coordinate.longitude);
+    [self.sasAnnotation setCoordinate:location];
+    printf("User has tapped map, new location: %f %f.\n\n", self.sasAnnotation.coordinate.latitude, self.sasAnnotation.coordinate.longitude);
     [self.sasMapView showAnnotation:self.sasAnnotation andZoom:NO animated:NO];
     
 }
