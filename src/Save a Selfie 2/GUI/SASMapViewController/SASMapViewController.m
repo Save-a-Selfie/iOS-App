@@ -24,7 +24,6 @@
 #import "SASAlertView.h"
 #import "SASTabBarController.h"
 
-
 @interface SASMapViewController () <SASImagePickerDelegate, SASFilterViewDelegate, SASUploadImageViewControllerDelegate, UIAlertViewDelegate, MKMapViewDelegate> {
     CGPoint filterButtonBeforeAnimation;
     CGPoint locateUserButtonBeforeAnimtation;
@@ -117,7 +116,7 @@ NSString *permissionsProblemOne = @"Please enable location services for this app
         self.sasFilterView = [[SASFilterView alloc] init];
         self.sasFilterView.delegate = self;
     }
-    
+
     [self.sasFilterView animateIntoView:self.sasMapView];
 }
 

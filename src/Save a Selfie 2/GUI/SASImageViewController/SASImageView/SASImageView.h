@@ -8,13 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
-/// A custom image view, that can be selected and will be expanded to
-/// for a larger preview.
+/**
+ A custom imageView which allows the user
+ to tap on the image to go into a 'preview mode'.
+ */
 @interface SASImageView : UIImageView
 
-// Default is YES
-// When tapped will expand to a larger preview.
-// To remove this functionality set this property to NO.
+/**
+ Use this flag to determine whether the user
+ can tap to show a larger preview of the image.
+ 
+ Default is NO.
+ */
 @property (nonatomic, assign) BOOL canShowFullSizePreview;
 
 @end

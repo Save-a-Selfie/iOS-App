@@ -8,6 +8,8 @@
 
 #import "SASGalleryContainer.h"
 #import "SASLocation.h"
+#import "ExtendNSLogFunctionality.h"
+#import "AppDelegate.h"
 
 @interface SASGalleryContainer()
 
@@ -44,7 +46,6 @@
 
 - (UIImage *) imageForDevice:(SASDevice *) device {
     UIImage* image = [self.data objectForKey:device];
-
     return image;
 }
 

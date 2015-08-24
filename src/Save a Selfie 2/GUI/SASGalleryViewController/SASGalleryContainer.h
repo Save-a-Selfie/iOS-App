@@ -23,9 +23,10 @@
 - (NSInteger) deviceCount;
 
 /**
- Adds an image with an associated device as a key.
+ Adds an image with a device as a key.
  */
 - (void) addImage:(UIImage *) image forDevice:(SASDevice *) device;
+
 
 /**
  Clears the entire data set.

@@ -21,13 +21,12 @@
     if (self = [super initWithCoder:coder]) {
         
         self.userInteractionEnabled = YES;
-        _canShowFullSizePreview = YES;
+        _canShowFullSizePreview = NO;
         self.contentMode = UIViewContentModeScaleAspectFit;
         
-        if (_canShowFullSizePreview) {
-            UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(handleTap)];
-            [self addGestureRecognizer:tap];
-        }
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(handleTap)];
+        [self addGestureRecognizer:tap];
+
         
     }
     return self;
@@ -38,12 +37,11 @@
 
 - (void) handleTap {
     
-    // Only when the image property is set should
-    // we present a SASImageInspectorView.
-    if (self.image) {
+    
+    if (_canShowFullSizePreview && self.image) {
         SASImageInspectorView *sasImageInspectorView = [[SASImageInspectorView alloc] initWithImage:self.image];
         
-        __weak UIViewController *rootViewController = (UIViewController *)[UIApplication sharedApplication].keyWindow.rootViewController;
+        UIViewController *rootViewController = (UIViewController *)[UIApplication sharedApplication].keyWindow.rootViewController;
         
         // It makes sense to animate it into the rootViewController as this
         // view will be clipped to this imageViews bounds and we will

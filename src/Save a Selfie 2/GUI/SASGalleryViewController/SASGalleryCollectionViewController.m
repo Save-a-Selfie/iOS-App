@@ -19,7 +19,6 @@
 @interface SASGalleryCollectionViewController () <SASObjectDownloaderDelegate, UICollectionViewDataSource, UICollectionViewDelegate,
 SASGalleryCellDelegate> {
     int imagesDownloaded;
-    int initialDownalodamount;
 }
 
 @property (strong, nonatomic) SASObjectDownloader *sasObjectDownloader;
@@ -164,6 +163,7 @@ static NSString * const reuseIdentifier = @"cell";
             NSURL *url =[NSURL URLWithString:imageURLString];
             
             [SDWebImageDownloader.sharedDownloader downloadImageWithURL:url options:0 progress:nil completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished) {
+               
                 if (image && finished) {
                     
                     [self.galleryContainer addImage:image forDevice:deviceAtIndex];
@@ -196,13 +196,19 @@ static NSString * const reuseIdentifier = @"cell";
 
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    
     SASGalleryCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     
     SASDevice *device = self.downloadedObjects[indexPath.row];
     
-    // Set the cell's image.
-    cell.imageView.image = [self.galleryContainer imageForDevice:device];
+    NSLog(@"%@", [device description]);
 
+    UIImage *image = [self.galleryContainer imageForDevice:device];
+
+    
+    // Set the cell's image.
+    cell.imageView.image = image;
+    
     // Set the cell's device.
     cell.device = device;
     cell.delegate = self;

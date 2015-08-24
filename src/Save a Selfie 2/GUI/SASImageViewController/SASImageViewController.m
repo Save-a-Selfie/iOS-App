@@ -85,6 +85,10 @@
 }
 
 
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.sasImageView.canShowFullSizePreview = YES;
+}
 
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];

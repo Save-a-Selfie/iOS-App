@@ -49,15 +49,18 @@
 }
 
 
+- (NSString *)description {
+    NSString *description = [NSString stringWithFormat:@"\nImageURL: %@,\nCaption: %@ ,\nType %d,\nCoordinates \n{ latititude: %f, \n longtitude: %f \n}\n",
+            self.imageURL,
+            self.caption,
+            self.type,
+            self.deviceLocation.latitude,
+            self.deviceLocation.longitude];
+    return description;
+}
+
 - (id)copyWithZone:(NSZone *)zone {
-#warning See comment below:
-    // Pretty sure this violates how you
-    // make a `copy`, however, when using this
-    // object for an NSDictonary an new instance of this copy
-    // does not seem to work when calling `objectForKey:`
-    // This works for the time being.
-    // TODO: FIX FIX FIX!!
-    SASDevice *copy = self;
+    SASDevice *copy = [self initDeviceWithInformationFromString:self.infoString];
     return copy;
 }
 
@@ -202,5 +205,7 @@
             break;
     }
 }
+
+
 
 @end
