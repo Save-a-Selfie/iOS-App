@@ -21,7 +21,7 @@
 #import "SASMapWarningAlert.h"
 #import "EULAViewController.h"
 #import "SASNoticeView.h"
-#import "SASAlertView.h"
+#import "FXAlert.h"
 #import "SASTabBarController.h"
 
 @interface SASMapViewController () <SASImagePickerDelegate, SASFilterViewDelegate, SASUploadImageViewControllerDelegate, UIAlertViewDelegate, MKMapViewDelegate> {
@@ -262,11 +262,14 @@ NSString *permissionsProblemOne = @"Please enable location services for this app
     // Disabled user interaction for user until they accept the map warning.
     self.sasMapView.userInteractionEnabled = NO;
     
-    SASAlertView *showDisclaimerAgain = [[SASAlertView alloc] initWithTarget:self andAction:@selector(makeCheckForMapWarning)];
-    showDisclaimerAgain.buttonTitle = @"Show me";
-    showDisclaimerAgain.message = @"To use this app you must accept the disclaimer.";
-    showDisclaimerAgain.title = @"Note";
-    [showDisclaimerAgain animateIntoView:self.view];
+    FXAlertController *disclaimerAlert = [[FXAlertController alloc] initWithTitle:@"DISCLAIMER" message:@"To use this app you must accept the disclaimer."];
+    
+    FXAlertButton *showMeButton = [[FXAlertButton alloc] initWithType:FXAlertButtonTypeStandard];
+    [showMeButton setTitle:@"Show me" forState:UIControlStateNormal];
+    [showMeButton addTarget:self action:@selector(makeCheckForMapWarning) forControlEvents:UIControlEventTouchUpInside];
+    [disclaimerAlert addButton:showMeButton];
+    
+    [self presentViewController:disclaimerAlert animated:YES completion:nil];
 
 }
 
