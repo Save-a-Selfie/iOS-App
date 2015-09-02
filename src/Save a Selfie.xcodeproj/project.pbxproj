@@ -17,9 +17,6 @@
 		1810C9141B28ABE3009063E5 /* ILTranslucentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1810C9131B28ABE3009063E5 /* ILTranslucentView.m */; };
 		1818AFC61B50435B004FF998 /* UIView+Animations.m in Sources */ = {isa = PBXBuildFile; fileRef = 1818AFC51B50435B004FF998 /* UIView+Animations.m */; };
 		1818AFDA1B5153A5004FF998 /* SASGalleryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1818AFD91B5153A5004FF998 /* SASGalleryCell.m */; };
-		181AC4271B96741B00638E8A /* FXAlertButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 181AC41F1B96741B00638E8A /* FXAlertButton.m */; };
-		181AC4281B96741B00638E8A /* FXAlertController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181AC4221B96741B00638E8A /* FXAlertController.m */; };
-		181AC42A1B96741B00638E8A /* FXAlertControllerTransitionAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 181AC4261B96741B00638E8A /* FXAlertControllerTransitionAnimator.m */; };
 		181B9AEA1B7D406800E7FD3E /* SASSponsorCardManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 181B9AE91B7D406800E7FD3E /* SASSponsorCardManager.m */; };
 		181D1E5D1B2359EA00FB5928 /* SASImageInspectorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 181D1E5C1B2359EA00FB5928 /* SASImageInspectorView.m */; };
 		181D1E621B235CF900FB5928 /* SASImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 181D1E611B235CF900FB5928 /* SASImageView.m */; };
@@ -36,6 +33,9 @@
 		1864FEAC1B27A39900EA564A /* UIFont+SASFont.m in Sources */ = {isa = PBXBuildFile; fileRef = 1864FEAB1B27A39900EA564A /* UIFont+SASFont.m */; };
 		186A39A21B3C933E00F38EDB /* SASFilterViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 186A39A11B3C933E00F38EDB /* SASFilterViewCell.xib */; };
 		186A39A91B3C93E600F38EDB /* SASFilterViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 186A39A81B3C93E600F38EDB /* SASFilterViewCell.m */; };
+		186E5F3B1B97857F002A8F83 /* FXAlertButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 186E5F341B97857F002A8F83 /* FXAlertButton.m */; };
+		186E5F3C1B97857F002A8F83 /* FXAlertController.m in Sources */ = {isa = PBXBuildFile; fileRef = 186E5F371B97857F002A8F83 /* FXAlertController.m */; };
+		186E5F3D1B97857F002A8F83 /* FXAlertControllerTransitionAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 186E5F3A1B97857F002A8F83 /* FXAlertControllerTransitionAnimator.m */; };
 		188CAEE51B20EA59006A90EB /* SASSocial.m in Sources */ = {isa = PBXBuildFile; fileRef = 188CAEE41B20EA59006A90EB /* SASSocial.m */; };
 		188CAEED1B21006C006A90EB /* Screen.m in Sources */ = {isa = PBXBuildFile; fileRef = 188CAEEC1B21006C006A90EB /* Screen.m */; };
 		1891E3D31B1743C8008CC10C /* SASMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1891E3D21B1743C8008CC10C /* SASMapView.m */; };
@@ -122,13 +122,6 @@
 		1818AFC51B50435B004FF998 /* UIView+Animations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Animations.m"; sourceTree = "<group>"; };
 		1818AFD81B5153A5004FF998 /* SASGalleryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASGalleryCell.h; sourceTree = "<group>"; };
 		1818AFD91B5153A5004FF998 /* SASGalleryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASGalleryCell.m; sourceTree = "<group>"; };
-		181AC41C1B96741B00638E8A /* FXAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FXAlert.h; sourceTree = "<group>"; };
-		181AC41E1B96741B00638E8A /* FXAlertButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FXAlertButton.h; sourceTree = "<group>"; };
-		181AC41F1B96741B00638E8A /* FXAlertButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FXAlertButton.m; sourceTree = "<group>"; };
-		181AC4211B96741B00638E8A /* FXAlertController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FXAlertController.h; sourceTree = "<group>"; };
-		181AC4221B96741B00638E8A /* FXAlertController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FXAlertController.m; sourceTree = "<group>"; };
-		181AC4251B96741B00638E8A /* FXAlertControllerTransitionAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FXAlertControllerTransitionAnimator.h; sourceTree = "<group>"; };
-		181AC4261B96741B00638E8A /* FXAlertControllerTransitionAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FXAlertControllerTransitionAnimator.m; sourceTree = "<group>"; };
 		181B9AE81B7D406800E7FD3E /* SASSponsorCardManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SASSponsorCardManager.h; path = ../SASSponsorCardManager.h; sourceTree = "<group>"; };
 		181B9AE91B7D406800E7FD3E /* SASSponsorCardManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SASSponsorCardManager.m; path = ../SASSponsorCardManager.m; sourceTree = "<group>"; };
 		181D1E5B1B2359EA00FB5928 /* SASImageInspectorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASImageInspectorView.h; sourceTree = "<group>"; };
@@ -158,6 +151,13 @@
 		186A39A11B3C933E00F38EDB /* SASFilterViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SASFilterViewCell.xib; sourceTree = "<group>"; };
 		186A39A71B3C93E600F38EDB /* SASFilterViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASFilterViewCell.h; sourceTree = "<group>"; };
 		186A39A81B3C93E600F38EDB /* SASFilterViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASFilterViewCell.m; sourceTree = "<group>"; };
+		186E5F311B97857F002A8F83 /* FXAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FXAlert.h; sourceTree = "<group>"; };
+		186E5F331B97857F002A8F83 /* FXAlertButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FXAlertButton.h; sourceTree = "<group>"; };
+		186E5F341B97857F002A8F83 /* FXAlertButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FXAlertButton.m; sourceTree = "<group>"; };
+		186E5F361B97857F002A8F83 /* FXAlertController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FXAlertController.h; sourceTree = "<group>"; };
+		186E5F371B97857F002A8F83 /* FXAlertController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FXAlertController.m; sourceTree = "<group>"; };
+		186E5F391B97857F002A8F83 /* FXAlertControllerTransitionAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FXAlertControllerTransitionAnimator.h; sourceTree = "<group>"; };
+		186E5F3A1B97857F002A8F83 /* FXAlertControllerTransitionAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FXAlertControllerTransitionAnimator.m; sourceTree = "<group>"; };
 		188CAEE31B20EA59006A90EB /* SASSocial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASSocial.h; sourceTree = "<group>"; };
 		188CAEE41B20EA59006A90EB /* SASSocial.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASSocial.m; sourceTree = "<group>"; };
 		188CAEEB1B21006C006A90EB /* Screen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Screen.h; sourceTree = "<group>"; };
@@ -389,45 +389,6 @@
 			path = SASInformationViewController;
 			sourceTree = "<group>";
 		};
-		181AC41B1B96741B00638E8A /* FXAlert */ = {
-			isa = PBXGroup;
-			children = (
-				181AC41C1B96741B00638E8A /* FXAlert.h */,
-				181AC41D1B96741B00638E8A /* FXAlertButton */,
-				181AC4201B96741B00638E8A /* FXAlertController */,
-				181AC4241B96741B00638E8A /* FXAlertViewTransitionAnimator */,
-			);
-			path = FXAlert;
-			sourceTree = "<group>";
-		};
-		181AC41D1B96741B00638E8A /* FXAlertButton */ = {
-			isa = PBXGroup;
-			children = (
-				181AC41E1B96741B00638E8A /* FXAlertButton.h */,
-				181AC41F1B96741B00638E8A /* FXAlertButton.m */,
-			);
-			path = FXAlertButton;
-			sourceTree = "<group>";
-		};
-		181AC4201B96741B00638E8A /* FXAlertController */ = {
-			isa = PBXGroup;
-			children = (
-				181AC4211B96741B00638E8A /* FXAlertController.h */,
-				181AC4221B96741B00638E8A /* FXAlertController.m */,
-			);
-			name = FXAlertController;
-			path = FXAlertView;
-			sourceTree = "<group>";
-		};
-		181AC4241B96741B00638E8A /* FXAlertViewTransitionAnimator */ = {
-			isa = PBXGroup;
-			children = (
-				181AC4251B96741B00638E8A /* FXAlertControllerTransitionAnimator.h */,
-				181AC4261B96741B00638E8A /* FXAlertControllerTransitionAnimator.m */,
-			);
-			path = FXAlertViewTransitionAnimator;
-			sourceTree = "<group>";
-		};
 		181B9AEB1B7D407000E7FD3E /* SASSponsorCardController */ = {
 			isa = PBXGroup;
 			children = (
@@ -538,6 +499,44 @@
 				186A39A11B3C933E00F38EDB /* SASFilterViewCell.xib */,
 			);
 			path = SASFilterViewCell;
+			sourceTree = "<group>";
+		};
+		186E5F301B97857F002A8F83 /* FXAlert */ = {
+			isa = PBXGroup;
+			children = (
+				186E5F311B97857F002A8F83 /* FXAlert.h */,
+				186E5F321B97857F002A8F83 /* FXAlertButton */,
+				186E5F351B97857F002A8F83 /* FXAlertView */,
+				186E5F381B97857F002A8F83 /* FXAlertViewTransitionAnimator */,
+			);
+			path = FXAlert;
+			sourceTree = "<group>";
+		};
+		186E5F321B97857F002A8F83 /* FXAlertButton */ = {
+			isa = PBXGroup;
+			children = (
+				186E5F331B97857F002A8F83 /* FXAlertButton.h */,
+				186E5F341B97857F002A8F83 /* FXAlertButton.m */,
+			);
+			path = FXAlertButton;
+			sourceTree = "<group>";
+		};
+		186E5F351B97857F002A8F83 /* FXAlertView */ = {
+			isa = PBXGroup;
+			children = (
+				186E5F361B97857F002A8F83 /* FXAlertController.h */,
+				186E5F371B97857F002A8F83 /* FXAlertController.m */,
+			);
+			path = FXAlertView;
+			sourceTree = "<group>";
+		};
+		186E5F381B97857F002A8F83 /* FXAlertViewTransitionAnimator */ = {
+			isa = PBXGroup;
+			children = (
+				186E5F391B97857F002A8F83 /* FXAlertControllerTransitionAnimator.h */,
+				186E5F3A1B97857F002A8F83 /* FXAlertControllerTransitionAnimator.m */,
+			);
+			path = FXAlertViewTransitionAnimator;
 			sourceTree = "<group>";
 		};
 		188CAEE61B20EA5D006A90EB /* SASSocial */ = {
@@ -883,7 +882,7 @@
 		D72E1DAF19EE841E005DD8A5 /* Save a Selfie 2 */ = {
 			isa = PBXGroup;
 			children = (
-				181AC41B1B96741B00638E8A /* FXAlert */,
+				186E5F301B97857F002A8F83 /* FXAlert */,
 				18BA4DF71B82C1540047DEC4 /* UIDevice+DeviceName */,
 				1807AF4E1B4EEE7C006E1B28 /* NSString+PDRegex */,
 				1807AF401B4EE8F8006E1B28 /* StorageSystem */,
@@ -1089,14 +1088,15 @@
 				1891E3D91B176E9B008CC10C /* SASObjectDownloader.m in Sources */,
 				1810C9141B28ABE3009063E5 /* ILTranslucentView.m in Sources */,
 				D786E1811A48C10500A20FDD /* SASAnnotation.m in Sources */,
+				186E5F3D1B97857F002A8F83 /* FXAlertControllerTransitionAnimator.m in Sources */,
 				188CAEED1B21006C006A90EB /* Screen.m in Sources */,
 				18592E021B5184E2004DDFD8 /* SASSponsorViewController.m in Sources */,
 				18DAE8531B46BA6400CAEF2D /* SASDeviceButton.m in Sources */,
+				186E5F3C1B97857F002A8F83 /* FXAlertController.m in Sources */,
 				1845C4EA1B2091F600E3D7BC /* SASActivityIndicator.m in Sources */,
 				D72E1DB619EE841E005DD8A5 /* AppDelegate.m in Sources */,
 				D715E48F1A064FDA0026D91F /* UIView+NibInitializer.m in Sources */,
 				1845C4EF1B209E6C00E3D7BC /* SASUtilities.m in Sources */,
-				181AC4271B96741B00638E8A /* FXAlertButton.m in Sources */,
 				1864FEAC1B27A39900EA564A /* UIFont+SASFont.m in Sources */,
 				1818AFDA1B5153A5004FF998 /* SASGalleryCell.m in Sources */,
 				18EBF9801B2741F600EDA48B /* SASUploadImageViewController.m in Sources */,
@@ -1105,6 +1105,7 @@
 				181D1E5D1B2359EA00FB5928 /* SASImageInspectorView.m in Sources */,
 				D756A2A919F309690089EF80 /* SASTabBarController.m in Sources */,
 				1835D2791B78F7D100A62B7F /* SASGalleryCollectionViewController.m in Sources */,
+				186E5F3B1B97857F002A8F83 /* FXAlertButton.m in Sources */,
 				18EE44DE1B556A1F00F8F93B /* SASNotificationView.m in Sources */,
 				1810C90A1B289044009063E5 /* UIImage+SASImage.m in Sources */,
 				1807AF3F1B4EE8F2006E1B28 /* StorageSystem.m in Sources */,
@@ -1119,12 +1120,10 @@
 				18EBF9771B272B3400EDA48B /* SASImagePickerViewController.m in Sources */,
 				D700239519F5253C00E45408 /* AlertBox.m in Sources */,
 				186A39A91B3C93E600F38EDB /* SASFilterViewCell.m in Sources */,
-				181AC4281B96741B00638E8A /* FXAlertController.m in Sources */,
 				18592E051B51854C004DDFD8 /* UIView+WidthXY.m in Sources */,
 				18EE44D11B554F3B00F8F93B /* SystemVersion.m in Sources */,
 				D700239D19F52EB700E45408 /* ExtendNSLogFunctionality.m in Sources */,
 				D756A28C19F1735E0089EF80 /* UIImage+Resize.m in Sources */,
-				181AC42A1B96741B00638E8A /* FXAlertControllerTransitionAnimator.m in Sources */,
 				181D1E621B235CF900FB5928 /* SASImageView.m in Sources */,
 				18B7C3441B44A74500017170 /* SASUploader.m in Sources */,
 				D786E2511A50AC7F00A20FDD /* PopupImage.m in Sources */,
@@ -1288,13 +1287,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Save",
-					a,
-					Selfie,
-					2/FXAlert/FXAlertView,
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_WARN_UNKNOWN_PRAGMAS = NO;
 				INFOPLIST_FILE = "Save a Selfie 2/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -1317,13 +1310,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Save",
-					a,
-					Selfie,
-					2/FXAlert/FXAlertView,
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_WARN_UNKNOWN_PRAGMAS = NO;
 				INFOPLIST_FILE = "Save a Selfie 2/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;

@@ -80,12 +80,6 @@ NSString *const FXCancelButtonKey = @"cancelButton";
     return self;
 }
 
-- (instancetype)init {
-    if (self = [super init]) {
-        self = [self initWithTitle:@"ERROR" message:@""];
-    }
-    return self;
-}
 
 
 - (void) setupAlertView {
