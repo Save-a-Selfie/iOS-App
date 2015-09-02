@@ -64,6 +64,7 @@ NSString *permissionsProblemOne = @"Please enable location services for this app
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
+    
     [self.navigationController setNavigationBarHidden:YES animated:NO];
     self.tabBarController.tabBar.hidden = NO;
     
@@ -308,6 +309,7 @@ NSString *permissionsProblemOne = @"Please enable location services for this app
         [self.sasImagePickerController setSourceType:UIImagePickerControllerSourceTypeCamera];
         [self presentViewController:self.sasImagePickerController animated:YES completion:nil];
     }
+    
 }
 
 
@@ -374,6 +376,7 @@ NSString *permissionsProblemOne = @"Please enable location services for this app
 
     
 }
+
 #pragma mark SASUploadImageViewController Delegate
 - (void)sasUploadImageViewControllerDidFinishUploading:(UIViewController *)viewController withResponse:(SASUploadControllerResponse)response withObject:(SASUploadObject *)sasUploadObject {
     

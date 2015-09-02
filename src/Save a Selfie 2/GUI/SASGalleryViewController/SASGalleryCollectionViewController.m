@@ -15,6 +15,7 @@
 #import "SASImageViewController.h"
 #import "UIDevice+DeviceName.h"
 #import "Screen.h"
+#import "FXAlert.h"
 
 @interface SASGalleryCollectionViewController () <SASObjectDownloaderDelegate, UICollectionViewDataSource, UICollectionViewDelegate,
 SASGalleryCellDelegate> {
@@ -34,7 +35,7 @@ SASGalleryCellDelegate> {
 
 @implementation SASGalleryCollectionViewController
 
-static NSString * const reuseIdentifier = @"cell";
+NSString * const reuseIdentifier = @"cell";
 
 
 -(void)viewDidLoad {
@@ -70,8 +71,6 @@ static NSString * const reuseIdentifier = @"cell";
 
 
 - (void) refresh {
-    
-    printf("I want to refresh, the values is: %d\n", self.canRefresh);
     
     if (self.canRefresh) {
         self.canRefresh = NO;
@@ -146,6 +145,20 @@ static NSString * const reuseIdentifier = @"cell";
 }
 
 
+- (void) sasObjectDownloader:(SASObjectDownloader *)downloader didFailWithError:(NSError *)error {
+    
+    FXAlertController *downloadErrorAlert = [[FXAlertController alloc] initWithTitle:@"ERROR" message:@"There seemed to be a problem trying to retrieve the images. Please check Wifi/ Network is available."];
+    
+    FXAlertButton *cancelButton = [[FXAlertButton alloc] initWithType:FXAlertButtonTypeStandard];
+    [cancelButton setTitle:@"Cancel" forState:UIControlStateNormal];
+    
+    [downloadErrorAlert addButton:cancelButton];
+    
+    [self presentViewController:downloadErrorAlert animated:YES completion:nil];
+    
+}
+
+
 
 #pragma mark Download Images.
 - (void) downloadImages:(NSArray *) objects withinRange:(NSRange) range completion:(void(^)(BOOL completed)) completion {
@@ -201,7 +214,6 @@ static NSString * const reuseIdentifier = @"cell";
     
     SASDevice *device = self.downloadedObjects[indexPath.row];
     
-    NSLog(@"%@", [device description]);
 
     UIImage *image = [self.galleryContainer imageForDevice:device];
 
