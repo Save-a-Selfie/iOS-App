@@ -18,7 +18,6 @@
 #import "SASFilterView.h"
 #import "SASNotificationView.h"
 #import "UIView+Animations.h"
-#import "SASMapWarningAlert.h"
 #import "EULAViewController.h"
 #import "SASNoticeView.h"
 #import "FXAlert.h"
@@ -46,7 +45,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *uploadNewImageToServerButton;
 @property (strong, nonatomic) IBOutlet UIButton *locateUserButton;
 
-@property (strong, nonatomic) SASMapWarningAlert *sasMapWarningAlert;
+
 
 @end
 
@@ -228,19 +227,22 @@ NSString *permissionsProblemOne = @"Please enable location services for this app
     
 
     if (!hasMapWarningHasBeenAccepted) {
-        if(self.sasMapWarningAlert == nil) {
-            self.sasMapWarningAlert = [[SASMapWarningAlert alloc] initWithTitle:@"Warning!" andMessage:@"The information here is correct to the best of our knowledge, but its use is at your risk and discretion, with no liability to Save a Selfie, the developers or Apple."];
             
-            self.sasMapWarningAlert.rightButtonTitle = @"Accept";
-            [self.sasMapWarningAlert addActionforRightButton:@selector(acceptMapWarning) target:self];
+            FXAlertController *disclaimerWarning = [[FXAlertController alloc] initWithTitle:@"WARNING!" message:@"The information here is correct to the best of our knowledge, but use, is at your risk and discretion, with no liability to Save a Selfie, the developers or Apple."];
             
-            self.sasMapWarningAlert.leftButtonTitle = @"Decline";
-            [self.sasMapWarningAlert addActionForLeftButton: @selector(declineMapWarning) target:self];
+            FXAlertButton *acceptButton = [[FXAlertButton alloc] initWithType:FXAlertButtonTypeStandard];
+            [acceptButton setTitle:@"Accept" forState:UIControlStateNormal];
+            [acceptButton addTarget:self action:@selector(acceptMapWarning) forControlEvents:UIControlEventTouchUpInside];
+
+            FXAlertButton *declineButton = [[FXAlertButton alloc] initWithType:FXAlertButtonTypeCancel];
+            [declineButton setTitle:@"Decline" forState:UIControlStateNormal];
+            [declineButton addTarget:self action:@selector(declineMapWarning) forControlEvents:UIControlEventTouchUpInside];
+            
+            [disclaimerWarning addButton:acceptButton];
+            [disclaimerWarning addButton:declineButton];
+            
+            [self presentViewController:disclaimerWarning animated:YES completion:nil];
         }
-        
-        [self.sasMapWarningAlert animateIntoView:self.view];
-    }
-    
 }
 
 - (void) acceptMapWarning {

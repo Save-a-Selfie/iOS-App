@@ -17,8 +17,8 @@
 #import "ILTranslucentView.h"
 #import "SASObjectDownloader.h"
 #import "SASBarButtonItem.h"
-#import "SASAlertView.h"
 #import "UIFont+SASFont.h"
+#import "FXAlert.h"
 
 
 
@@ -289,11 +289,14 @@
 - (IBAction)shareToSocialMedia:(id)sender {
     if (self.annotation.device.caption == nil || self.sasImageView.image == nil) {
         
-        SASAlertView *couldNotShareAlert = [[SASAlertView alloc] initWithTarget:self andAction:nil];
-        couldNotShareAlert.title = @"Oops";
-        couldNotShareAlert.message = @"There seemed to be a problem trying to share the image. Please try again.";
-        couldNotShareAlert.buttonTitle = @"Ok";
-        [couldNotShareAlert animateIntoView:self.view];
+        FXAlertController *couldNotShareAlert = [[FXAlertController alloc] initWithTitle:@"OOOPS" message:@"There seemed to be a problem trying to share the image. Please try again."];
+        
+        FXAlertButton *okButton = [[FXAlertButton alloc] initWithType:FXAlertButtonTypeStandard];
+        [okButton setTitle:@"Cancel" forState:UIControlStateNormal];
+        
+        [couldNotShareAlert addButton:okButton];
+        
+        [self presentViewController:couldNotShareAlert animated:YES completion:nil];
     }
     else {
         [SASSocial shareToSocialMedia:self.annotation.device.caption

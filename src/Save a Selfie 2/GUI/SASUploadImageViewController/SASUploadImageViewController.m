@@ -13,7 +13,7 @@
 #import "UIFont+SASFont.h"
 #import "Screen.h"
 #import "SASBarButtonItem.h"
-#import "SASAlertView.h"
+#import "FXAlert.h"
 #import "SASUploader.h"
 #import "SASDeviceButton.h"
 #import "SASGreyView.h"
@@ -262,12 +262,14 @@
     self.view.userInteractionEnabled = YES;
     self.doneButton.enabled = YES;
     
-    SASAlertView *uploadErrorAlert = [[SASAlertView alloc] initWithTarget:self andAction:nil];
-    uploadErrorAlert.title = @"Ooops!";
-    uploadErrorAlert.message = @"There seemed to be a problem posting! Please check you're connected to Wifi/ Network and try again.";
-    uploadErrorAlert.buttonTitle = @"Ok";
+    FXAlertController *uploadErrorAlert = [[FXAlertController alloc] initWithTitle:@"OOOPS!" message:@"There seemed to be a problem posting! Please check you're connected to Wifi/ Network and try again."];
     
-    [uploadErrorAlert animateIntoView:self.view];
+    FXAlertButton *okButton = [[FXAlertButton alloc] initWithType:FXAlertButtonTypeCancel];
+    [okButton setTitle:@"Ok" forState:UIControlStateNormal];
+    
+    [uploadErrorAlert addButton:okButton];
+    
+    [self presentViewController:uploadErrorAlert animated:YES completion:nil];
     
     [self.sasActivityIndicator removeFromSuperview];
     [self.sasActivityIndicator stopAnimating];
@@ -277,30 +279,39 @@
 
 - (void)sasUploader:(SASUploadObject *)object invalidObjectWithResponse:(SASUploadInvalidObject)response {
     
-    SASAlertView *alertView = [[SASAlertView alloc] initWithTarget:self andAction:nil];
+    FXAlertController *invalidUploadObjectAlert = nil;
+    FXAlertButton *okButton = nil;
+
      
     switch (response) {
         
         case SASUploadInvalidObjectCaption:
-            alertView.title = @"Ooops!";
-            alertView.message = @"Please add a description for this post!";
-            alertView.buttonTitle = @"Ok";
-            [alertView animateIntoView:self.view];
+            invalidUploadObjectAlert = [[FXAlertController alloc] initWithTitle:@"OOOPS!"
+                                                                        message:@"Please add a description for this post!"];
+            okButton = [[FXAlertButton alloc] initWithType:FXAlertButtonTypeStandard];
+            [okButton setTitle:@"Ok" forState:UIControlStateNormal];
+            [invalidUploadObjectAlert addButton:okButton];
+            [self presentViewController:invalidUploadObjectAlert animated:YES completion:nil];
             break;
             
             
         case SASUploadInvalidObjectDeviceType:
-            alertView.title = @"Ooops!";
-            alertView.message = @"Please select a device for this post!";
-            alertView.buttonTitle = @"Ok";
-            [alertView animateIntoView:self.view];
+            invalidUploadObjectAlert = [[FXAlertController alloc] initWithTitle:@"OOOPS!"
+                                                                        message:@"Please select a device for this post!"];
+            okButton = [[FXAlertButton alloc] initWithType:FXAlertButtonTypeStandard];
+            [okButton setTitle:@"Ok" forState:UIControlStateNormal];
+            [invalidUploadObjectAlert addButton:okButton];
+            [self presentViewController:invalidUploadObjectAlert animated:YES completion:nil];
             
             
         case SASUploadInvalidObjectCoordinates:
-            alertView.title = @"Ooops!";
-            alertView.message = @"Cannot determine location. Please select the map and touch your correct location.";
-            alertView.buttonTitle = @"Ok";
-            [alertView animateIntoView:self.view];
+            invalidUploadObjectAlert = [[FXAlertController alloc] initWithTitle:@"OOOPS!"
+                                                                        message:@"Cannot determine location. Please select the map and tap the location of the device"];
+            okButton = [[FXAlertButton alloc] initWithType:FXAlertButtonTypeStandard];
+            [okButton setTitle:@"Ok" forState:UIControlStateNormal];
+            [invalidUploadObjectAlert addButton:okButton];
+            [self presentViewController:invalidUploadObjectAlert animated:YES completion:nil];
+            break;
             
         default:
             break;
@@ -401,33 +412,21 @@
     }
 }
 
-// TODO: The alerts for this notice should be SASAlertView, however, due to some weird
-// issue with the view hierarcy, this will do for the moment.
+
+
 - (void) showAlertForEULAToBeAccepted {
     
-    if(SYSTEM_VERSION_LESS_THAN_OR_EQUAL_TO(@"7.1")) {
-        UIAlertView *eulaAlertView = [[UIAlertView alloc] initWithTitle:@"Note"
-                                                                message:@"Before posting, we need you to agree to the terms of use."
-                                                               delegate:self
-                                                      cancelButtonTitle:nil
-                                                      otherButtonTitles:@"Show Me", nil];
-        
-        [eulaAlertView show];
-    }
-    else {
-        UIAlertController *eulaAlertController = [UIAlertController alertControllerWithTitle:@"Note"
-                                                                                     message:@"Before posting, we need you to agree to the terms of use."
-                                                                              preferredStyle:UIAlertControllerStyleAlert];
-        
-        UIAlertAction *showMeAction = [UIAlertAction actionWithTitle:@"Show Me"
-                                                               style:UIAlertActionStyleDefault
-                                                             handler:^(UIAlertAction* acceptAction){
-                                                                 [self presentEULAViewController];
-                                                             }];
-        [eulaAlertController addAction:showMeAction];
-        [self presentViewController:eulaAlertController animated:YES completion:nil];
-    }
+    FXAlertController *eulaAlertPresent = [[FXAlertController alloc] initWithTitle:@"NOTE" message:@"Before posting, we need you to agree to the terms of use."];
+    
+    FXAlertButton *showMeButton = [[FXAlertButton alloc] initWithType:FXAlertButtonTypeStandard];
+    [showMeButton setTitle:@"Show me" forState:UIControlStateNormal];
+    [showMeButton addTarget:self action:@selector(presentEULAViewController) forControlEvents:UIControlEventTouchUpInside];
+    
+    [eulaAlertPresent addButton:showMeButton];
+    
+    [self presentViewController:eulaAlertPresent animated:YES completion:nil];
 }
+
 
 
 - (void) presentEULAViewController {
@@ -452,12 +451,15 @@
         [self beginUploadRoutine:nil];
     }
     else {
-        SASAlertView *eulaDeclinedAlertView = [[SASAlertView alloc] initWithTarget:self andAction:nil];
-        eulaDeclinedAlertView.title = @"NOTE";
-        eulaDeclinedAlertView.message = @"You will only be able to upload if you accept the End User License Agreement.";
-        eulaDeclinedAlertView.buttonTitle = @"Ok";
         
-        [eulaDeclinedAlertView animateIntoView:self.view];
+        FXAlertController *eulaDeclinedAlert = [[FXAlertController alloc] initWithTitle:@"NOTE" message:@"You must accept the End User License Agreement if you want to post!"];
+        
+        FXAlertButton *okButton = [[FXAlertButton alloc] initWithType:FXAlertButtonTypeStandard];
+        [okButton setTitle:@"Ok" forState:UIControlStateNormal];
+        
+        [eulaDeclinedAlert addButton:okButton];
+        
+        [self presentViewController:eulaDeclinedAlert animated:YES completion:nil];
     }
 
 }
