@@ -20,7 +20,7 @@
     if (self = [super init]) {
         
         _name = [SASDevice getDeviceNameForDeviceType:aDevice.type];
-        _coordinate= aDevice.deviceLocation;
+        _coordinate = aDevice.deviceLocation;
         _image = (UIImage*)[SASDevice getDeviceMapAnnotationImageForDeviceType:aDevice.type];
         _device = aDevice;
     }

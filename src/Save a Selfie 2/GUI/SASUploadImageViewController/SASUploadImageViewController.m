@@ -198,9 +198,10 @@
     CGPoint touchPoint = [self.longPress locationInView:self.sasMapView];
     CLLocationCoordinate2D location = [self.sasMapView convertPoint:touchPoint toCoordinateFromView:self.sasMapView];
     
-    printf("User has tapped map, old location: %f %f.\n", self.sasAnnotation.coordinate.latitude, self.sasAnnotation.coordinate.longitude);
-    [self.sasAnnotation setCoordinate:location];
-    printf("User has tapped map, new location: %f %f.\n\n", self.sasAnnotation.coordinate.latitude, self.sasAnnotation.coordinate.longitude);
+
+    self.sasAnnotation.coordinate = location;
+    self.sasUploadObject.coordinates = self.sasAnnotation.coordinate;
+
     [self.sasMapView showAnnotation:self.sasAnnotation andZoom:NO animated:NO];
     
 }

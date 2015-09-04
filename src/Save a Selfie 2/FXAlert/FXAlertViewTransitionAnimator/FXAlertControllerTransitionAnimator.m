@@ -8,6 +8,7 @@
 
 #import "FXAlertControllerTransitionAnimator.h"
 #import "FXAlertController.h"
+#import <objc/runtime.h>
 
 @implementation FXAlertControllerTransitionAnimator
 
