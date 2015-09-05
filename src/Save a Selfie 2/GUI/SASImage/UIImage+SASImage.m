@@ -59,8 +59,7 @@
     UIImage *standardImage;
     UIImage *thumbnailImage;
     
-    // TODO: Clean this up. Ideally all this resizing should be done within
-    // a UIImage caterory.
+    
     standardImage = image;
     
     

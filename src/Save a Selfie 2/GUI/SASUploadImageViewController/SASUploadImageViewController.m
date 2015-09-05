@@ -28,10 +28,11 @@
 #import "SASActivityIndicator.h"
 #import "ExtendNSLogFunctionality.h"
 #import "UIView+NibInitializer.h"
+#import "CMPopTipView.h"
 
 
 
-@interface SASUploadImageViewController () <UITextViewDelegate, SASUploaderDelegate, EULADelegate>
+@interface SASUploadImageViewController () <UITextViewDelegate, SASUploaderDelegate, EULADelegate, CMPopTipViewDelegate>
 
 @property (strong, nonatomic) IBOutlet SASImageView *sasImageView;
 @property (weak, nonatomic) IBOutlet SASMapView *sasMapView;
@@ -467,47 +468,29 @@
 
 - (void) displayUpdateInformation {
     
-//    if ([[[NSUserDefaults standardUserDefaults] valueForKey:@"tapMapUpdateHasBeenSeen"] isEqualToString:@"yes"]) {
-//        return;
-//    
-//    }
-//    else {
-//        
-//        self.updateView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [Screen width], [Screen height])];
-//        self.updateView.alpha = 0.0;
-//        [SASUtilities addSASBlurToView:self.updateView];
-//        
-////        [UIView animateWithDuration:1.5 animations:^(void){
-////            self.updateView.alpha = 1.0;
-////            
-////            UILabel *infoLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, self.sasMapView.frame.origin.y - 200, [Screen width] - 30, 200)];
-////            infoLabel.center = self.updateView.center;
-////            infoLabel.font = [UIFont fontWithName:@"AvenirNext-DemiBold" size:18];
-////            infoLabel.textColor = [UIColor grayColor];
-////            infoLabel.numberOfLines = 0;
-////            infoLabel.textAlignment = NSTextAlignmentCenter;
-////            infoLabel.text = @"Coordinates sometimes may be slightly off. You can tap and hold on the map to change the location.";
-////            [self.updateView addSubview:infoLabel];
-////            
-////            UIImageView *infoImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Megaphone"]];
-////            infoImageView.frame = CGRectMake(0, 140, [Screen width], 30);
-////            infoImageView.contentMode = UIViewContentModeScaleAspectFit;
-////            [self.updateView addSubview:infoImageView];
-////            
-////            UIButton *exit = [[UIButton alloc] initWithFrame:CGRectMake([Screen width] - 34, 70, 25, 25)];
-////            [exit setImage:[UIImage imageNamed:@"Exit"] forState:UIControlStateNormal];
-////            [exit addTarget:self action:@selector(removeUpdateView:) forControlEvents:UIControlEventTouchUpInside];
-////            [self.updateView addSubview:exit];
-////            
-////            [self.view addSubview:self.updateView];
-////            [self.view bringSubviewToFront:self.sasMapView];
-////        }];
-//    }
-//    
+    if ([[[NSUserDefaults standardUserDefaults] valueForKey:@"tapMapUpdateHasBeenSeen"] isEqualToString:@"yes"]) {
+        return;
+    
+    }
+    else {
+        
+        CMPopTipView *mapUpdateView = [[CMPopTipView alloc] initWithTitle:@"NEW" message:@"You can now tap and hold the map to correct coordinates that may be slightly off."];
+        mapUpdateView.delegate = self;
+        mapUpdateView.hasGradientBackground = NO;
+        mapUpdateView.has3DStyle = NO;
+        mapUpdateView.borderWidth = 0.2;
+        mapUpdateView.backgroundColor = [UIColor whiteColor];
+        mapUpdateView.textFont = [UIFont fontWithName:@"Avenir Next" size:16];
+        mapUpdateView.titleFont = [UIFont fontWithName:@"AvenirNext-DemiBold" size:16];
+        mapUpdateView.titleColor = [UIColor grayColor];
+        mapUpdateView.textColor = [UIColor grayColor];
+        [mapUpdateView presentPointingAtView:self.sasMapView inView:self.view animated:YES];
+    }
+    
 }
 
 
-- (void) removeUpdateView:(id) sender {
+- (void)popTipViewWasDismissedByUser:(CMPopTipView *)popTipView {
     [self.updateView removeFromSuperview];
     self.updateView = nil;
     [[NSUserDefaults standardUserDefaults] setValue:@"yes" forKey:@"tapMapUpdateHasBeenSeen"];

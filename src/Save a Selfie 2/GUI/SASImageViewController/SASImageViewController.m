@@ -124,6 +124,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
+
     [self.navigationController setNavigationBarHidden:NO animated:YES];
     
   
@@ -152,6 +153,7 @@
     // Get the appropriate device name.
     NSString *deviceName = [SASDevice getDeviceNameForDeviceType:self.sasDeviceType];
     self.navigationController.navigationBar.topItem.title = deviceName;
+    self.navigationController.navigationBar.backItem.title = @"Back";
     
     
     
@@ -260,6 +262,7 @@
                                                                       }];
     
 }
+
 
 
 // Gets the image associated with the device from

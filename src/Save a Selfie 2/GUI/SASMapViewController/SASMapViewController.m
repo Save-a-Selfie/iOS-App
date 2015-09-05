@@ -298,18 +298,18 @@ NSString *permissionsProblemOne = @"Please enable location services for this app
 - (IBAction)uploadNewNewDevice:(id)sender {
     
 
-//    if(self.sasImagePickerController == nil) {
-//        self.sasImagePickerController = [[SASImagePickerViewController alloc] init];
-//        self.sasImagePickerController.sasImagePickerDelegate = self;
-//    }
-//
-//    
-//    
-//    if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-//        [self.sasImagePickerController setSourceType:UIImagePickerControllerSourceTypeCamera];
-//        [self presentViewController:self.sasImagePickerController animated:YES completion:nil];
-//    }
-    [self presentSASUploadImageViewControllerWithUploadObject:[SASUploadObject new]];
+    if(self.sasImagePickerController == nil) {
+        self.sasImagePickerController = [[SASImagePickerViewController alloc] init];
+        self.sasImagePickerController.sasImagePickerDelegate = self;
+    }
+
+    
+    
+    if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        [self.sasImagePickerController setSourceType:UIImagePickerControllerSourceTypeCamera];
+        [self presentViewController:self.sasImagePickerController animated:YES completion:nil];
+    }
+    
 }
 
 

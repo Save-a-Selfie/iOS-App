@@ -66,6 +66,7 @@ NSString * const reuseIdentifier = @"cell";
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    printf("Called");
     self.navigationController.navigationBar.topItem.title = @"Gallery";
 }
 
