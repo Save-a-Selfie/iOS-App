@@ -210,7 +210,6 @@
 
 
 
-
 #pragma mark Upload Routine
 - (IBAction)beginUploadRoutine:(id)sender {
     
@@ -467,41 +466,44 @@
 
 
 - (void) displayUpdateInformation {
-    if ([[[NSUserDefaults standardUserDefaults] valueForKey:@"tapMapUpdateHasBeenSeen"] isEqualToString:@"yes"]) {
-        return;
-    } else {
-        self.updateView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [Screen width], [Screen height])];
-        self.updateView.alpha = 0.0;
-        [SASUtilities addSASBlurToView:self.updateView];
-        
-        [UIView animateWithDuration:1.5 animations:^(void){
-            self.updateView.alpha = 1.0;
-            
-            UILabel *infoLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 130, [Screen width] - 30, 200)];
-            infoLabel.center = self.updateView.center;
-            infoLabel.frame = CGRectOffset(infoLabel.frame, 0, -30);
-            infoLabel.font = [UIFont fontWithName:@"AvenirNext-DemiBold" size:18];
-            infoLabel.textColor = [UIColor grayColor];
-            infoLabel.numberOfLines = 0;
-            infoLabel.textAlignment = NSTextAlignmentCenter;
-            infoLabel.text = @"Coordinates sometimes may be slightly off. You can tap and hold on the map to change the location.";
-            [self.updateView addSubview:infoLabel];
-            
-            UIImageView *infoImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Megaphone"]];
-            infoImageView.frame = CGRectMake(0, 140, [Screen width], 30);
-            infoImageView.contentMode = UIViewContentModeScaleAspectFit;
-            [self.updateView addSubview:infoImageView];
-            
-            UIButton *exit = [[UIButton alloc] initWithFrame:CGRectMake([Screen width] - 34, 70, 25, 25)];
-            [exit setImage:[UIImage imageNamed:@"Exit"] forState:UIControlStateNormal];
-            [exit addTarget:self action:@selector(removeUpdateView:) forControlEvents:UIControlEventTouchUpInside];
-            [self.updateView addSubview:exit];
-            
-            [self.view addSubview:self.updateView];
-            [self.view bringSubviewToFront:self.sasMapView];
-        }];
-    }
     
+//    if ([[[NSUserDefaults standardUserDefaults] valueForKey:@"tapMapUpdateHasBeenSeen"] isEqualToString:@"yes"]) {
+//        return;
+//    
+//    }
+//    else {
+//        
+//        self.updateView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [Screen width], [Screen height])];
+//        self.updateView.alpha = 0.0;
+//        [SASUtilities addSASBlurToView:self.updateView];
+//        
+////        [UIView animateWithDuration:1.5 animations:^(void){
+////            self.updateView.alpha = 1.0;
+////            
+////            UILabel *infoLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, self.sasMapView.frame.origin.y - 200, [Screen width] - 30, 200)];
+////            infoLabel.center = self.updateView.center;
+////            infoLabel.font = [UIFont fontWithName:@"AvenirNext-DemiBold" size:18];
+////            infoLabel.textColor = [UIColor grayColor];
+////            infoLabel.numberOfLines = 0;
+////            infoLabel.textAlignment = NSTextAlignmentCenter;
+////            infoLabel.text = @"Coordinates sometimes may be slightly off. You can tap and hold on the map to change the location.";
+////            [self.updateView addSubview:infoLabel];
+////            
+////            UIImageView *infoImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Megaphone"]];
+////            infoImageView.frame = CGRectMake(0, 140, [Screen width], 30);
+////            infoImageView.contentMode = UIViewContentModeScaleAspectFit;
+////            [self.updateView addSubview:infoImageView];
+////            
+////            UIButton *exit = [[UIButton alloc] initWithFrame:CGRectMake([Screen width] - 34, 70, 25, 25)];
+////            [exit setImage:[UIImage imageNamed:@"Exit"] forState:UIControlStateNormal];
+////            [exit addTarget:self action:@selector(removeUpdateView:) forControlEvents:UIControlEventTouchUpInside];
+////            [self.updateView addSubview:exit];
+////            
+////            [self.view addSubview:self.updateView];
+////            [self.view bringSubviewToFront:self.sasMapView];
+////        }];
+//    }
+//    
 }
 
 

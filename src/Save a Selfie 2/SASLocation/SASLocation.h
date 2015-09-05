@@ -33,12 +33,12 @@
  Returns the last updated location of the user.
  
  @return currentUserLocation
-         The last updated location of the user.
-         It is possible that this could return invalid
-         coordinates as the user's location may not be
-         known. It would be advised to check for the validity
-         of this property using -CLLocationCoordinate2DIsValid:
-         for this reason.
+          The last updated location of the user.
+ Warning: It is possible that this could return invalid
+          coordinates as the user's location may not be
+          known. It would be advised to check for the validity
+          of this property using -CLLocationCoordinate2DIsValid:
+          for this reason.
  
  */
 - (CLLocationCoordinate2D) currentUserLocation;

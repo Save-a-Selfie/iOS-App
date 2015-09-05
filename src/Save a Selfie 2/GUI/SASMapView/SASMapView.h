@@ -22,7 +22,6 @@ typedef NS_ENUM(NSUInteger, SASAnnotationImage) {
 
 
 
-// To receive notification from SASMapView, please reference the notificationReceiver property.
 @protocol SASMapViewNotifications <NSObject>
 
 @optional
@@ -47,24 +46,34 @@ typedef NS_ENUM(NSUInteger, SASAnnotationImage) {
 @property (nonatomic, weak) id<SASMapViewNotifications> notificationReceiver;
 
 
-// Shows the annotations on the map according to their coordinates.
-// Default is YES.
+/**
+ Shows the annotations on the map. Default is YES.
+ */
 @property(nonatomic, assign) BOOL showAnnotations;
 
-// Will zoom to the users location when an SASMapView object is instansiated first.
-// Default is NO.
+
+/**
+ Use this flag to determine whether the mapview will zoom the the
+ user's location when it is first presented.
+ */
 @property(nonatomic, assign) BOOL zoomToUsersLocationInitially;
 
-// The type of image to show for the annotations on the map.
-// By default this property is SASAnnotationImageDefault which shows the default
-// image provided by Apple for annotation.
-// SASAnnotationImageCustom is the custom images for the annotations that correspond
-// to the device the annotation represents.
+/**
+ The UI of the image for the annotation on the map.
+ By default this property is SASAnnotationImageDefault which shows
+ the default image provided by Apple.
+ SASAnnotationImageCustom is the custom images for the annotation provided
+ by the Save a Selfie app.
+ */
 @property(nonatomic, assign) SASAnnotationImage sasAnnotationImage;
 
 
-// Calling this will bring you to the current user's location, on the map.
+
+/**
+ Locates the user on the map.
+ */
 - (void) locateUser;
+
 
 
 /**
@@ -89,6 +98,8 @@ typedef NS_ENUM(NSUInteger, SASAnnotationImage) {
 - (CLLocationCoordinate2D) currentUserLocation;
 
 
+
+
 /**
  This method will filter the map and show a single type of 
  of SASAnnotation for a specific device type.
@@ -97,6 +108,8 @@ typedef NS_ENUM(NSUInteger, SASAnnotationImage) {
         The type of device for which the map should filter.
  */
 - (void) filterAnnotationsForDeviceType:(SASDeviceType) type;
+
+
 
 
 /**

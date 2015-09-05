@@ -85,7 +85,7 @@
     else {
         
         // As this is pre iOS 8 we dont need to call either
-        //  requestWhenInUseAuthorization: or requestAlwaysUseAuthorization:
+        // requestWhenInUseAuthorization: or requestAlwaysUseAuthorization:
         // so just check if we have appropriate permssions
         return [self checkLocationPermissions];
     }
@@ -138,8 +138,7 @@
 
 
 
-// Forward permissions changes to any object referencing
-// 'id<SASLocationDelegate> delegate'.
+// Forward permissions changes to delegate.
 - (void) locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
     
     if(self.delegate != nil && [self.delegate respondsToSelector:@selector(sasLocation:locationPermissionsHaveChanged:)]) {
