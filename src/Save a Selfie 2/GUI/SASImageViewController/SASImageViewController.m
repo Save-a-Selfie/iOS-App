@@ -109,14 +109,13 @@
 
 - (void) viewWillLayoutSubviews {
     
-
-    
     self.photoDescription.translatesAutoresizingMaskIntoConstraints = NO;
     CGSize sizeThatFitsTextView = [self.photoDescription sizeThatFits:CGSizeMake(self.photoDescription.frame.size.width, MAXFLOAT)];
     self.photoDesriptionHeightContraint.constant = sizeThatFitsTextView.height;
     
     [self.scrollView setContentSize:CGSizeMake(self.contentView.frame.size.width, self.contentView.frame.size.height + sizeThatFitsTextView.height)];
 }
+
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
@@ -161,16 +160,9 @@
     self.navigationItem.title = deviceName;
     
     
-    
-    // The sasMapView property should show the location
-    // of where the device is located.
-    self.sasMapView.sasAnnotationImage = SASAnnotationImageDefault;
-    self.sasMapView.notificationReceiver = self;
-    self.sasMapView.userInteractionEnabled = YES;
-    self.sasMapView.showsUserLocation = YES;
-    [self.sasMapView setMapType:MKMapTypeHybrid];
-    [self showDeviceLocation];
-    
+    [self setupImageViews];
+    [self setupMapView];
+    [self setupDescriptionForImage];
     
     
     if (self.annotation.device != nil) {
@@ -182,6 +174,26 @@
         // respective colour associated with the device.
         [self setColourForColouredUIElements:self.annotation.device];
     }
+    
+    
+    
+    
+}
+
+
+
+- (void) setupDescriptionForImage {
+    if(self.annotation.device.caption != nil) {
+        // Set the text description of the photo.
+        self.photoDescription.text = [NSString stringWithFormat:@"%@", self.annotation.device.caption];
+        [self.photoDescription setFont:[UIFont fontWithName:@"Avenir Next" size:18]];
+        [self.photoDescription sizeToFit];
+        [self.photoDescription.layer setBorderWidth:0.0];
+    }
+}
+
+
+- (void) setupImageViews {
     
     
     // Assuming we don't need to downlaod the image
@@ -199,7 +211,7 @@
         
         [self.sasImageView addSubview:self.sasActivityIndicator];
         self.sasActivityIndicator.backgroundColor = [UIColor clearColor];
-        self.sasActivityIndicator.center = self.sasImageView.center;
+        self.sasActivityIndicator.center = CGPointMake(self.view.center.x, self.sasImageView.center.y);
         [self.sasActivityIndicator startAnimating];
         
         // Set the image from the URLString contained within the device property
@@ -216,7 +228,7 @@
                 
                 // The blurred image background view.
                 self.blurredImageView.image = imageFromURL;
-
+                
                 
                 [self.sasActivityIndicator stopAnimating];
                 [self.sasActivityIndicator removeFromSuperview];
@@ -227,21 +239,25 @@
         });
     }
     
-    
-    
-
-    if(self.annotation.device.caption != nil) {
-        // Set the text description of the photo.
-        self.photoDescription.text = [NSString stringWithFormat:@"%@", self.annotation.device.caption];
-        [self.photoDescription setFont:[UIFont fontWithName:@"Avenir Next" size:18]];
-        [self.photoDescription sizeToFit];
-        [self.photoDescription.layer setBorderWidth:0.0];
-        
-
-    }
 }
 
 
+- (void) testImageSetup {
+    
+}
+
+- (void) setupMapView {
+    
+    // The sasMapView property should show the location
+    // of where the device is located.
+    self.sasMapView.sasAnnotationImage = SASAnnotationImageDefault;
+    self.sasMapView.notificationReceiver = self;
+    self.sasMapView.userInteractionEnabled = YES;
+    self.sasMapView.showsUserLocation = YES;
+    [self.sasMapView setMapType:MKMapTypeHybrid];
+    [self showDeviceLocation];
+    
+}
 
 // Shows the location of the device on the map.
 - (IBAction)showDeviceLocation {
