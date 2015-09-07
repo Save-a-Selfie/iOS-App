@@ -107,10 +107,9 @@
 }
 
 
-- (void)viewDidLayoutSubviews {
+- (void) viewWillLayoutSubviews {
+    
 
-    [SASUtilities addSASBlurToView:self.blurredImageView];
-    self.blurredImageView.contentMode = UIViewContentModeScaleToFill;
     
     self.photoDescription.translatesAutoresizingMaskIntoConstraints = NO;
     CGSize sizeThatFitsTextView = [self.photoDescription sizeThatFits:CGSizeMake(self.photoDescription.frame.size.width, MAXFLOAT)];
@@ -119,6 +118,12 @@
     [self.scrollView setContentSize:CGSizeMake(self.contentView.frame.size.width, self.contentView.frame.size.height + sizeThatFitsTextView.height)];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    [SASUtilities addSASBlurToView:self.blurredImageView];
+    self.blurredImageView.contentMode = UIViewContentModeScaleToFill;
+}
 
 // TODO: This method has too much going on. Spread out
 // into more functions.
