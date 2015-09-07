@@ -47,6 +47,7 @@
 }
 
 
+
 #pragma Touch updates.
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     [super touchesMoved:touches withEvent:event];
@@ -81,22 +82,28 @@
 
     if (self.center.y < self.superview.center.y && distanceFromCenter > 50) {
         
+        [self imageDismissedMessageDelegate];
+        
         [UIView animateView:self
        offScreenInDirection:SASAnimationDirectionUp
                  completion:^(BOOL completed) {
                      [self removeFromSuperview];
                      self.imageView = nil;
+
                  }
          ];
         
     }
     else if(self.center.y > self.superview.center.y && distanceFromCenter < -50) {
         
+        [self imageDismissedMessageDelegate];
+        
         [UIView animateView:self
        offScreenInDirection:SASAnimationDirectionDown
                  completion:^(BOOL completed) {
                      [self removeFromSuperview];
                      self.imageView = nil;
+
                  }
          ];
         
@@ -115,6 +122,11 @@
 
 
 
+- (void) imageDismissedMessageDelegate {
+    if (self.delegate != nil && [self.delegate respondsToSelector:@selector(sasImageInspectorView:didDismiss:)]) {
+        [self.delegate sasImageInspectorView:self didDismiss:YES];
+    }
+}
 
 
 

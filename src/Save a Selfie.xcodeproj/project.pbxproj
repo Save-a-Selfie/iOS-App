@@ -126,8 +126,8 @@
 		1818AFD91B5153A5004FF998 /* SASGalleryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASGalleryCell.m; sourceTree = "<group>"; };
 		181B9AE81B7D406800E7FD3E /* SASSponsorCardManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SASSponsorCardManager.h; path = ../SASSponsorCardManager.h; sourceTree = "<group>"; };
 		181B9AE91B7D406800E7FD3E /* SASSponsorCardManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SASSponsorCardManager.m; path = ../SASSponsorCardManager.m; sourceTree = "<group>"; };
-		181D1E5B1B2359EA00FB5928 /* SASImageInspectorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASImageInspectorView.h; sourceTree = "<group>"; };
-		181D1E5C1B2359EA00FB5928 /* SASImageInspectorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASImageInspectorView.m; sourceTree = "<group>"; };
+		181D1E5B1B2359EA00FB5928 /* SASImageInspectorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SASImageInspectorView.h; path = SASImageInspectorView/SASImageInspectorView.h; sourceTree = "<group>"; };
+		181D1E5C1B2359EA00FB5928 /* SASImageInspectorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SASImageInspectorView.m; path = SASImageInspectorView/SASImageInspectorView.m; sourceTree = "<group>"; };
 		181D1E601B235CF900FB5928 /* SASImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASImageView.h; sourceTree = "<group>"; };
 		181D1E611B235CF900FB5928 /* SASImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASImageView.m; sourceTree = "<group>"; };
 		1835D2771B78F7D100A62B7F /* SASGalleryCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASGalleryCollectionViewController.h; sourceTree = "<group>"; };
@@ -404,21 +404,13 @@
 			name = SASSponsorCardController;
 			sourceTree = "<group>";
 		};
-		181D1E5E1B2359EF00FB5928 /* SASImageInspectorView */ = {
-			isa = PBXGroup;
-			children = (
-				181D1E5B1B2359EA00FB5928 /* SASImageInspectorView.h */,
-				181D1E5C1B2359EA00FB5928 /* SASImageInspectorView.m */,
-			);
-			path = SASImageInspectorView;
-			sourceTree = "<group>";
-		};
 		181D1E631B235D1C00FB5928 /* SASImageView */ = {
 			isa = PBXGroup;
 			children = (
 				181D1E601B235CF900FB5928 /* SASImageView.h */,
 				181D1E611B235CF900FB5928 /* SASImageView.m */,
-				181D1E5E1B2359EF00FB5928 /* SASImageInspectorView */,
+				181D1E5B1B2359EA00FB5928 /* SASImageInspectorView.h */,
+				181D1E5C1B2359EA00FB5928 /* SASImageInspectorView.m */,
 			);
 			path = SASImageView;
 			sourceTree = "<group>";

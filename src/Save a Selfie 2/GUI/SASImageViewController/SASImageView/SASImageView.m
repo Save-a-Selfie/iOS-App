@@ -10,11 +10,12 @@
 #import "SASImageInspectorView.h"
 #import "AppDelegate.h"
 
+@interface SASImageView() <SASImageInspectorDelegate>
+
+@end
 
 
 @implementation SASImageView
-
-
 
 - (instancetype)initWithCoder:(NSCoder *)coder {
 
@@ -22,6 +23,7 @@
         
         self.userInteractionEnabled = YES;
         _canShowFullSizePreview = NO;
+        _hideOriginalInPreview = NO;
         self.contentMode = UIViewContentModeScaleAspectFit;
         
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(handleTap)];
@@ -39,19 +41,30 @@
     
     
     if (_canShowFullSizePreview && self.image) {
+        
         SASImageInspectorView *sasImageInspectorView = [[SASImageInspectorView alloc] initWithImage:self.image];
+        sasImageInspectorView.delegate = self;
         
         UIViewController *rootViewController = (UIViewController *)[UIApplication sharedApplication].keyWindow.rootViewController;
         
-        // It makes sense to animate it into the rootViewController as this
-        // view will be clipped to this imageViews bounds and we will
-        // not be able to see the whole view.
         [sasImageInspectorView animateImageIntoView:rootViewController.view];
     }
+    
+
+    if (self.hideOriginalInPreview)
+        self.hidden = YES;
     
 }
 
 
+
+#pragma mark <SASImageInspectorView>
+- (void) sasImageInspectorView:(SASImageInspectorView *) inspector didDismiss:(BOOL) dismissed {
+
+    if (dismissed && self.hideOriginalInPreview) {
+        self.hidden = NO;
+    }
+}
 
 
 

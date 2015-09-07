@@ -14,6 +14,7 @@
  */
 @interface SASImageView : UIImageView
 
+
 /**
  Use this flag to determine whether the user
  can tap to show a larger preview of the image.
@@ -21,5 +22,16 @@
  Default is NO.
  */
 @property (nonatomic, assign) BOOL canShowFullSizePreview;
+
+
+
+/**
+ Use this flag to hide the original imageView the user 
+ tapped to get to the preview, when the preview is displaying.
+ 
+ Default is NO.
+ */
+@property (nonatomic, assign) BOOL hideOriginalInPreview;
+
 
 @end
