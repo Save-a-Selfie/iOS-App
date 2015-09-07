@@ -153,8 +153,7 @@
 
     // Get the appropriate device name.
     NSString *deviceName = [SASDevice getDeviceNameForDeviceType:self.sasDeviceType];
-    self.navigationController.navigationBar.topItem.title = deviceName;
-    self.navigationController.navigationBar.backItem.title = @"Back";
+    self.navigationItem.title = deviceName;
     
     
     

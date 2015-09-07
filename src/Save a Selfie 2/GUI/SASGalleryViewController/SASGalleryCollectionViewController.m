@@ -66,8 +66,11 @@ NSString * const reuseIdentifier = @"cell";
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    printf("Called");
-    self.navigationController.navigationBar.topItem.title = @"Gallery";
+    self.navigationItem.title = @"Gallery";
+    
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName: [UIFont fontWithName:@"AvenirNext-DemiBold" size:17.0f],
+                                                                      NSForegroundColorAttributeName : [UIColor blackColor]
+                                                                      }];
 }
 
 
@@ -271,6 +274,8 @@ NSString * const reuseIdentifier = @"cell";
     sasImageViewController.device = device;
     sasImageViewController.downloadImage = NO;
     sasImageViewController.image = [cell.imageView.image copy];
+    
+    
     [self.navigationController pushViewController:sasImageViewController animated:YES];
     
 }

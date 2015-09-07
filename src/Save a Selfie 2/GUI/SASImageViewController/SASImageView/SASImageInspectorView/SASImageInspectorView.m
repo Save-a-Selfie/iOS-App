@@ -80,7 +80,7 @@
     float distanceFromCenter = self.superview.center.y - self.center.y;
     
 
-    if (self.center.y < self.superview.center.y && distanceFromCenter > 50) {
+    if (self.center.y < self.superview.center.y && distanceFromCenter > 60) {
         
         [self imageDismissedMessageDelegate];
         
@@ -89,12 +89,11 @@
                  completion:^(BOOL completed) {
                      [self removeFromSuperview];
                      self.imageView = nil;
-
                  }
          ];
         
     }
-    else if(self.center.y > self.superview.center.y && distanceFromCenter < -50) {
+    else if (self.center.y > self.superview.center.y && distanceFromCenter < -60) {
         
         [self imageDismissedMessageDelegate];
         
@@ -103,7 +102,6 @@
                  completion:^(BOOL completed) {
                      [self removeFromSuperview];
                      self.imageView = nil;
-
                  }
          ];
         
@@ -134,7 +132,6 @@
 - (void)animateImageIntoView:(UIView *)view {
     
     [[UIApplication sharedApplication] setStatusBarHidden:YES];
-    
     [view addSubview:self];
     [view bringSubviewToFront:self];
 }
