@@ -62,16 +62,6 @@
 }
 
 
-- (UIImage*) getImageFromURLWithString: (NSString *) string {
-    
-    NSData *data = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:string]];
-    UIImage *image = [UIImage imageWithData:data];
-    
-    return image;
-
-}
-
-
 
 #pragma mark NSURLConnectionDataDelegate methods
 - (void) connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {

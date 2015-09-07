@@ -63,12 +63,6 @@
  */
 - (void) downloadObjectsFromServer;
 
-/**
- Returns a UIImage from a string containing a url.
- Note: This method is not called on the main thread.
- 
- @return UIImage The image from the url.
- */
-- (UIImage*) getImageFromURLWithString: (NSString *) string;
+
 
 @end

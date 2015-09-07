@@ -24,12 +24,11 @@
 
 /**
  Use this flag to change whether or not
- an image will be loadedfrom the url from the device. The default
- is YES.
+ an image will be loadedfrom the url from the set SASDevice property. 
+ The default is YES.
 
+ YES - Image will be downloaded from the server using the devices imageURL property.
  
- YES - Image will be downloaded from the server using
-              the devices imageURL property.
  NO - Image will not be fetched from the server. This is
       typically assigned when the image is already downloaded
       and is set via the `image` property. If set to NO and

@@ -25,11 +25,13 @@ typedef NS_ENUM(int, SASDeviceType) {
 @interface SASDevice : NSObject <NSCopying>;
 
 @property (nonatomic, assign) SASDeviceType type;
-@property (nonatomic, strong, readonly) NSString *imageURL;
+@property (nonatomic, strong, readonly) NSString *imageURLString;
+@property (nonatomic, strong, readonly) NSURL *imageURL;
 @property (nonatomic, strong, readonly) NSString *caption;
 @property (nonatomic, strong, readonly) NSString *thumb;
 @property (nonatomic, strong, readonly) NSString *app;
 @property (nonatomic, readonly) CLLocationCoordinate2D deviceLocation;
+
 
 /**
  Returns a name for a device type.

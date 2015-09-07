@@ -175,9 +175,9 @@ NSString * const reuseIdentifier = @"cell";
             
             SASDevice *deviceAtIndex = [objects objectAtIndex:i];
             
-            NSString *imageURLString = deviceAtIndex.imageURL;
+            NSString *imageURL = deviceAtIndex.imageURLString;
             
-            NSURL *url =[NSURL URLWithString:imageURLString];
+            NSURL *url =[NSURL URLWithString:imageURL];
             
             [SDWebImageDownloader.sharedDownloader downloadImageWithURL:url options:0 progress:nil completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished) {
                

@@ -24,7 +24,9 @@
         NSArray *infoArray = [aInfoString componentsSeparatedByString:@"\t"];
         
         // URL for the image.
-        _imageURL = [infoArray objectAtIndex:0];
+        _imageURLString = [infoArray objectAtIndex:0];
+        
+        _imageURL = [NSURL URLWithString:_imageURLString];
         
         // Caption associated with the device.
         _caption = [infoArray objectAtIndex:1];
@@ -40,7 +42,6 @@
         _deviceLocation.latitude = latitude.doubleValue;
 		_deviceLocation.longitude = longitude.doubleValue;
         
-
         _thumb = [infoArray objectAtIndex:5];
         _app = [infoArray objectAtIndex:6]; // iPhone app / Instagram / Twitter
 	}
@@ -49,9 +50,10 @@
 }
 
 
+
 - (NSString *)description {
     NSString *description = [NSString stringWithFormat:@"\nImageURL: %@,\nCaption: %@ ,\nType %d,\nCoordinates \n{ latititude: %f, \n longtitude: %f \n}\n",
-            self.imageURL,
+            self.imageURLString,
             self.caption,
             self.type,
             self.deviceLocation.latitude,
@@ -59,9 +61,13 @@
     return description;
 }
 
+
+
+#pragma mark <NSCopying> protocol.
 - (id)copyWithZone:(NSZone *)zone {
     SASDevice *copy = [self initDeviceWithInformationFromString:self.infoString];
     return copy;
+    
 }
 
 

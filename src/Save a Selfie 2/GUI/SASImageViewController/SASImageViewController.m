@@ -14,11 +14,11 @@
 #import "SASUtilities.h"
 #import "SASSocial.h"
 #import "SASImageView.h"
-#import "ILTranslucentView.h"
 #import "SASObjectDownloader.h"
 #import "SASBarButtonItem.h"
 #import "UIFont+SASFont.h"
 #import "FXAlert.h"
+#import "SDWebImageDownloader.h"
 
 
 
@@ -51,7 +51,10 @@
 @property (nonatomic, strong) SASObjectDownloader *sasObjectDownloader;
 
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *photoDesriptionHeightContraint;
+
 @end
+
+
 
 @implementation SASImageViewController
 
@@ -117,6 +120,7 @@
 }
 
 
+
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
@@ -124,29 +128,20 @@
     self.blurredImageView.contentMode = UIViewContentModeScaleToFill;
 }
 
-// TODO: This method has too much going on. Spread out
-// into more functions.
+
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
 
     [self.navigationController setNavigationBarHidden:NO animated:YES];
     
-  
-
-
     SASBarButtonItem *reportButton = [[SASBarButtonItem alloc] initWithTitle:@"Report"
                                                                        style:UIBarButtonItemStylePlain
                                                                       target:self
                                                                       action:@selector(reportImage)];
     self.navigationItem.rightBarButtonItem = reportButton;
 
-    
-    // @Discussion:
-    //  It is possible sone properties of annotation
-    //  may be nil. Check each property
-    //  of annoation for nil and then
-    //  update the UI accordingly.
     
     // Store the type of device shown in the image
     self.sasDeviceType = self.device.type;
@@ -174,10 +169,6 @@
         // respective colour associated with the device.
         [self setColourForColouredUIElements:self.annotation.device];
     }
-    
-    
-    
-    
 }
 
 
@@ -193,58 +184,48 @@
 }
 
 
+
+
 - (void) setupImageViews {
     
+    // Show activity indicator.
+    self.sasActivityIndicator = [[SASActivityIndicator alloc] initWithMessage:@"Loading..."];
+    [self.sasImageView addSubview:self.sasActivityIndicator];
+    self.sasActivityIndicator.backgroundColor = [UIColor clearColor];
+    self.sasActivityIndicator.center = CGPointMake(self.view.center.x, self.sasImageView.center.y);
+    [self.sasActivityIndicator startAnimating];
     
-    // Assuming we don't need to downlaod the image
-    // self.image should be set.
-    if (!self.downloadImage) {
+    
+    if(!self.downloadImage) {
         self.sasImageView.image = self.image;
         self.blurredImageView.image = self.image;
     }
-    else if(self.annotation.device.imageURL != nil && self.downloadImage && !imageLoaded) {
+    else if (self.annotation.device.imageURLString != nil && self.downloadImage && !imageLoaded) {
         
-        if (self.sasActivityIndicator == nil) {
-            // Begin animation of sasActivityIndicator until image is loaded.
-            self.sasActivityIndicator = [[SASActivityIndicator alloc] initWithMessage:@"Loading..."];
-        }
-        
-        [self.sasImageView addSubview:self.sasActivityIndicator];
-        self.sasActivityIndicator.backgroundColor = [UIColor clearColor];
-        self.sasActivityIndicator.center = CGPointMake(self.view.center.x, self.sasImageView.center.y);
-        [self.sasActivityIndicator startAnimating];
-        
-        // Set the image from the URLString contained within the device property
-        // of the annotation passed to this object.
-        dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            
-            self.sasObjectDownloader = [[SASObjectDownloader alloc]init];
-            UIImage* imageFromURL = [self.sasObjectDownloader getImageFromURLWithString:self.annotation.device.imageURL];
-            
-            dispatch_async( dispatch_get_main_queue(), ^{
-                
-                // The image for the view
-                self.sasImageView.image = imageFromURL;
-                
-                // The blurred image background view.
-                self.blurredImageView.image = imageFromURL;
-                
-                
-                [self.sasActivityIndicator stopAnimating];
-                [self.sasActivityIndicator removeFromSuperview];
-                self.sasActivityIndicator = nil;
-                
-                imageLoaded = YES;
-            });
-        });
+        [[SDWebImageDownloader sharedDownloader] downloadImageWithURL:self.annotation.device.imageURL
+                                                              options:0
+                                                             progress:nil
+                                                            completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished) {
+                                                                if (image && finished) {
+                                                                    
+                                                                    dispatch_async(dispatch_get_main_queue(), ^(void){
+                                                                        
+                                                                        self.sasImageView.image = image;
+                                                                        self.blurredImageView.image = image;
+                                                                        
+                                                                        [self.sasActivityIndicator stopAnimating];
+                                                                        [self.sasActivityIndicator removeFromSuperview];
+                                                                        self.sasActivityIndicator = nil;
+                                                                        
+                                                                        imageLoaded = YES;
+                                                                    });
+                                                                }
+                                                            }];
     }
-    
 }
 
 
-- (void) testImageSetup {
-    
-}
+
 
 - (void) setupMapView {
     
@@ -259,10 +240,15 @@
     
 }
 
+
+
+
 // Shows the location of the device on the map.
 - (IBAction)showDeviceLocation {
     [self.sasMapView showAnnotation:self.annotation andZoom:YES animated:YES];
 }
+
+
 
 
 
@@ -283,6 +269,8 @@
                                                                       }];
     
 }
+
+
 
 
 
@@ -309,6 +297,7 @@
 }
 
 
+
 #pragma mark Share to Social Media
 - (IBAction)shareToSocialMedia:(id)sender {
     if (self.annotation.device.caption == nil || self.sasImageView.image == nil) {
@@ -328,11 +317,13 @@
     }
 }
 
+
+
 #pragma mark Report Device
 - (void) reportImage {
     [[UIApplication sharedApplication]
      openURL:[NSURL URLWithString:
-              [NSString stringWithFormat:@"http://saveaselfie.org/problem-with-an-image/?imageURL=%@", self.annotation.device.imageURL]]];
+              [NSString stringWithFormat:@"http://saveaselfie.org/problem-with-an-image/?imageURL=%@", self.annotation.device.imageURLString]]];
     
 
 }
