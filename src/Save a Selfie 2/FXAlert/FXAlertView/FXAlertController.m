@@ -236,8 +236,8 @@ NSString *const FXCancelButtonKey = @"cancelButton";
     return animator;
 }
 
-
 - (UIPresentationController *)presentationControllerForPresentedViewController:(UIViewController *)presented presentingViewController:(UIViewController *)presenting sourceViewController:(UIViewController *)source {
+    
 
     FXPresentationController *fxPresentationController = [[FXPresentationController alloc] initWithPresentedViewController:presented presentingViewController:presenting];
     
@@ -265,6 +265,9 @@ NSString *const FXCancelButtonKey = @"cancelButton";
     
     // Change the alert message font.
     self.alertMessageTextView.font = _font;
+    
+    // Size the alert with the new font changes.
+    [self sizeAlert];
 }
 
 

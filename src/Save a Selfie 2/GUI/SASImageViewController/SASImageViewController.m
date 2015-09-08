@@ -130,10 +130,9 @@
 
 
 
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
-
     [self.navigationController setNavigationBarHidden:NO animated:YES];
     
     SASBarButtonItem *reportButton = [[SASBarButtonItem alloc] initWithTitle:@"Report"
@@ -170,6 +169,7 @@
         [self setColourForColouredUIElements:self.annotation.device];
     }
 }
+
 
 
 

@@ -46,7 +46,7 @@
     SASSponsorCardView *adamsGift = [[SASSponsorCardView alloc] init];
     adamsGift.titleLabel.text = @"Adams Gift";
     adamsGift.imageView.image = [UIImage imageNamed:@"AdamsGift"];
-    [adamsGift.button setTitle:@"Visit our website" forState:UIControlStateNormal];
+    [adamsGift.button setTitle:@"Visit us on Facebook " forState:UIControlStateNormal];
     adamsGift.info = @"Saving lives through awareness and education!";
     adamsGift.website = @"https://www.facebook.com/pages/Adams-Gift/334232113442348?fref=ts";
     

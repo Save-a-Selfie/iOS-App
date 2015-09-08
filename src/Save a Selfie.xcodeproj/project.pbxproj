@@ -30,6 +30,10 @@
 		18592E021B5184E2004DDFD8 /* SASSponsorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18592E011B5184E2004DDFD8 /* SASSponsorViewController.m */; };
 		18592E051B51854C004DDFD8 /* UIView+WidthXY.m in Sources */ = {isa = PBXBuildFile; fileRef = 18592E041B51854C004DDFD8 /* UIView+WidthXY.m */; };
 		185A39B81B1FD7B900699D31 /* SASColour.m in Sources */ = {isa = PBXBuildFile; fileRef = 185A39B71B1FD7B900699D31 /* SASColour.m */; };
+		185F3ED11B9E04FB00345CFB /* FXAlertButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 185F3EC71B9E04FB00345CFB /* FXAlertButton.m */; };
+		185F3ED21B9E04FB00345CFB /* FXAlertController.m in Sources */ = {isa = PBXBuildFile; fileRef = 185F3ECA1B9E04FB00345CFB /* FXAlertController.m */; };
+		185F3ED31B9E04FB00345CFB /* FXAlertControllerTransitionAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 185F3ECD1B9E04FB00345CFB /* FXAlertControllerTransitionAnimator.m */; };
+		185F3ED41B9E04FB00345CFB /* FXPresentationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 185F3ED01B9E04FB00345CFB /* FXPresentationController.m */; };
 		1864FEAC1B27A39900EA564A /* UIFont+SASFont.m in Sources */ = {isa = PBXBuildFile; fileRef = 1864FEAB1B27A39900EA564A /* UIFont+SASFont.m */; };
 		1869E3E01B9B3AC4000E1DA7 /* CMPopTipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1869E3DF1B9B3AC4000E1DA7 /* CMPopTipView.m */; };
 		186A39A21B3C933E00F38EDB /* SASFilterViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 186A39A11B3C933E00F38EDB /* SASFilterViewCell.xib */; };
@@ -53,12 +57,6 @@
 		18EBF9801B2741F600EDA48B /* SASUploadImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EBF97F1B2741F600EDA48B /* SASUploadImageViewController.m */; };
 		18EE44D11B554F3B00F8F93B /* SystemVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EE44D01B554F3B00F8F93B /* SystemVersion.m */; };
 		18EE44DE1B556A1F00F8F93B /* SASNotificationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EE44DD1B556A1F00F8F93B /* SASNotificationView.m */; };
-		18EE44E21B556A5300F8F93B /* SASNoticeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EE44E11B556A5300F8F93B /* SASNoticeView.m */; };
-		18EE44E51B556A7100F8F93B /* SASNoticeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18EE44E41B556A7100F8F93B /* SASNoticeView.xib */; };
-		18F41B7C1B97A1EB002EE186 /* FXAlertButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F41B721B97A1EB002EE186 /* FXAlertButton.m */; };
-		18F41B7D1B97A1EB002EE186 /* FXAlertController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F41B751B97A1EB002EE186 /* FXAlertController.m */; };
-		18F41B7E1B97A1EB002EE186 /* FXAlertControllerTransitionAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F41B781B97A1EB002EE186 /* FXAlertControllerTransitionAnimator.m */; };
-		18F41B7F1B97A1EB002EE186 /* FXPresentationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F41B7B1B97A1EB002EE186 /* FXPresentationController.m */; };
 		18F46A4B1B2B9F1F0062BD05 /* SASFilterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F46A4A1B2B9F1F0062BD05 /* SASFilterView.m */; };
 		18F46A4E1B2B9F370062BD05 /* SASFilterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18F46A4D1B2B9F370062BD05 /* SASFilterView.xib */; };
 		D0EAAC0B1A0FD59B00C0F955 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0EAAC0A1A0FD59B00C0F955 /* Social.framework */; };
@@ -148,6 +146,15 @@
 		18592E041B51854C004DDFD8 /* UIView+WidthXY.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WidthXY.m"; sourceTree = "<group>"; };
 		185A39B61B1FD7B900699D31 /* SASColour.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASColour.h; sourceTree = "<group>"; };
 		185A39B71B1FD7B900699D31 /* SASColour.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASColour.m; sourceTree = "<group>"; };
+		185F3EC41B9E04FB00345CFB /* FXAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FXAlert.h; sourceTree = "<group>"; };
+		185F3EC61B9E04FB00345CFB /* FXAlertButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FXAlertButton.h; sourceTree = "<group>"; };
+		185F3EC71B9E04FB00345CFB /* FXAlertButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FXAlertButton.m; sourceTree = "<group>"; };
+		185F3EC91B9E04FB00345CFB /* FXAlertController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FXAlertController.h; sourceTree = "<group>"; };
+		185F3ECA1B9E04FB00345CFB /* FXAlertController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FXAlertController.m; sourceTree = "<group>"; };
+		185F3ECC1B9E04FB00345CFB /* FXAlertControllerTransitionAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FXAlertControllerTransitionAnimator.h; sourceTree = "<group>"; };
+		185F3ECD1B9E04FB00345CFB /* FXAlertControllerTransitionAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FXAlertControllerTransitionAnimator.m; sourceTree = "<group>"; };
+		185F3ECF1B9E04FB00345CFB /* FXPresentationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FXPresentationController.h; sourceTree = "<group>"; };
+		185F3ED01B9E04FB00345CFB /* FXPresentationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FXPresentationController.m; sourceTree = "<group>"; };
 		1864FEAA1B27A39900EA564A /* UIFont+SASFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+SASFont.h"; sourceTree = "<group>"; };
 		1864FEAB1B27A39900EA564A /* UIFont+SASFont.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+SASFont.m"; sourceTree = "<group>"; };
 		1869E3DE1B9B3AC4000E1DA7 /* CMPopTipView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMPopTipView.h; sourceTree = "<group>"; };
@@ -193,18 +200,6 @@
 		18EE44D01B554F3B00F8F93B /* SystemVersion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemVersion.m; sourceTree = "<group>"; };
 		18EE44DC1B556A1F00F8F93B /* SASNotificationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASNotificationView.h; sourceTree = "<group>"; };
 		18EE44DD1B556A1F00F8F93B /* SASNotificationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASNotificationView.m; sourceTree = "<group>"; };
-		18EE44E01B556A5300F8F93B /* SASNoticeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASNoticeView.h; sourceTree = "<group>"; };
-		18EE44E11B556A5300F8F93B /* SASNoticeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASNoticeView.m; sourceTree = "<group>"; };
-		18EE44E41B556A7100F8F93B /* SASNoticeView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SASNoticeView.xib; sourceTree = "<group>"; };
-		18F41B6F1B97A1EB002EE186 /* FXAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FXAlert.h; sourceTree = "<group>"; };
-		18F41B711B97A1EB002EE186 /* FXAlertButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FXAlertButton.h; sourceTree = "<group>"; };
-		18F41B721B97A1EB002EE186 /* FXAlertButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FXAlertButton.m; sourceTree = "<group>"; };
-		18F41B741B97A1EB002EE186 /* FXAlertController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FXAlertController.h; sourceTree = "<group>"; };
-		18F41B751B97A1EB002EE186 /* FXAlertController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FXAlertController.m; sourceTree = "<group>"; };
-		18F41B771B97A1EB002EE186 /* FXAlertControllerTransitionAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FXAlertControllerTransitionAnimator.h; sourceTree = "<group>"; };
-		18F41B781B97A1EB002EE186 /* FXAlertControllerTransitionAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FXAlertControllerTransitionAnimator.m; sourceTree = "<group>"; };
-		18F41B7A1B97A1EB002EE186 /* FXPresentationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FXPresentationController.h; sourceTree = "<group>"; };
-		18F41B7B1B97A1EB002EE186 /* FXPresentationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FXPresentationController.m; sourceTree = "<group>"; };
 		18F46A491B2B9F1F0062BD05 /* SASFilterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASFilterView.h; sourceTree = "<group>"; };
 		18F46A4A1B2B9F1F0062BD05 /* SASFilterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASFilterView.m; sourceTree = "<group>"; };
 		18F46A4D1B2B9F370062BD05 /* SASFilterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SASFilterView.xib; sourceTree = "<group>"; };
@@ -480,6 +475,54 @@
 			path = SASColour;
 			sourceTree = "<group>";
 		};
+		185F3EC31B9E04FB00345CFB /* FXAlert */ = {
+			isa = PBXGroup;
+			children = (
+				185F3EC41B9E04FB00345CFB /* FXAlert.h */,
+				185F3EC51B9E04FB00345CFB /* FXAlertButton */,
+				185F3EC81B9E04FB00345CFB /* FXAlertView */,
+				185F3ECB1B9E04FB00345CFB /* FXAlertViewTransitionAnimator */,
+				185F3ECE1B9E04FB00345CFB /* FXPresentationController */,
+			);
+			path = FXAlert;
+			sourceTree = "<group>";
+		};
+		185F3EC51B9E04FB00345CFB /* FXAlertButton */ = {
+			isa = PBXGroup;
+			children = (
+				185F3EC61B9E04FB00345CFB /* FXAlertButton.h */,
+				185F3EC71B9E04FB00345CFB /* FXAlertButton.m */,
+			);
+			path = FXAlertButton;
+			sourceTree = "<group>";
+		};
+		185F3EC81B9E04FB00345CFB /* FXAlertView */ = {
+			isa = PBXGroup;
+			children = (
+				185F3EC91B9E04FB00345CFB /* FXAlertController.h */,
+				185F3ECA1B9E04FB00345CFB /* FXAlertController.m */,
+			);
+			path = FXAlertView;
+			sourceTree = "<group>";
+		};
+		185F3ECB1B9E04FB00345CFB /* FXAlertViewTransitionAnimator */ = {
+			isa = PBXGroup;
+			children = (
+				185F3ECC1B9E04FB00345CFB /* FXAlertControllerTransitionAnimator.h */,
+				185F3ECD1B9E04FB00345CFB /* FXAlertControllerTransitionAnimator.m */,
+			);
+			path = FXAlertViewTransitionAnimator;
+			sourceTree = "<group>";
+		};
+		185F3ECE1B9E04FB00345CFB /* FXPresentationController */ = {
+			isa = PBXGroup;
+			children = (
+				185F3ECF1B9E04FB00345CFB /* FXPresentationController.h */,
+				185F3ED01B9E04FB00345CFB /* FXPresentationController.m */,
+			);
+			path = FXPresentationController;
+			sourceTree = "<group>";
+		};
 		1864FEA91B27A27F00EA564A /* SASFont */ = {
 			isa = PBXGroup;
 			children = (
@@ -501,10 +544,10 @@
 		1869E3E11B9B3B08000E1DA7 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				185F3EC31B9E04FB00345CFB /* FXAlert */,
 				1807AF401B4EE8F8006E1B28 /* StorageSystem */,
 				1807AF4E1B4EEE7C006E1B28 /* NSString+PDRegex */,
 				1869E3DD1B9B3AC4000E1DA7 /* CMPopTipView */,
-				18F41B6E1B97A1EB002EE186 /* FXAlert */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -541,7 +584,6 @@
 				18A524FC1B166C2700E8F8F6 /* SASMapView */,
 				18B7C3411B44886000017170 /* SASBarButtonItem */,
 				18EE44DF1B556A2400F8F93B /* SASNotificationView */,
-				18EE44E31B556A5700F8F93B /* SASNoticeView */,
 				180E295E1B5464C6003548FA /* EULAViewController */,
 				1864FEA91B27A27F00EA564A /* SASFont */,
 				185A39B91B1FD7C500699D31 /* SASColour */,
@@ -759,64 +801,6 @@
 				18EE44DD1B556A1F00F8F93B /* SASNotificationView.m */,
 			);
 			path = SASNotificationView;
-			sourceTree = "<group>";
-		};
-		18EE44E31B556A5700F8F93B /* SASNoticeView */ = {
-			isa = PBXGroup;
-			children = (
-				18EE44E41B556A7100F8F93B /* SASNoticeView.xib */,
-				18EE44E01B556A5300F8F93B /* SASNoticeView.h */,
-				18EE44E11B556A5300F8F93B /* SASNoticeView.m */,
-			);
-			path = SASNoticeView;
-			sourceTree = "<group>";
-		};
-		18F41B6E1B97A1EB002EE186 /* FXAlert */ = {
-			isa = PBXGroup;
-			children = (
-				18F41B6F1B97A1EB002EE186 /* FXAlert.h */,
-				18F41B701B97A1EB002EE186 /* FXAlertButton */,
-				18F41B731B97A1EB002EE186 /* FXAlertView */,
-				18F41B761B97A1EB002EE186 /* FXAlertViewTransitionAnimator */,
-				18F41B791B97A1EB002EE186 /* FXPresentationController */,
-			);
-			path = FXAlert;
-			sourceTree = "<group>";
-		};
-		18F41B701B97A1EB002EE186 /* FXAlertButton */ = {
-			isa = PBXGroup;
-			children = (
-				18F41B711B97A1EB002EE186 /* FXAlertButton.h */,
-				18F41B721B97A1EB002EE186 /* FXAlertButton.m */,
-			);
-			path = FXAlertButton;
-			sourceTree = "<group>";
-		};
-		18F41B731B97A1EB002EE186 /* FXAlertView */ = {
-			isa = PBXGroup;
-			children = (
-				18F41B741B97A1EB002EE186 /* FXAlertController.h */,
-				18F41B751B97A1EB002EE186 /* FXAlertController.m */,
-			);
-			path = FXAlertView;
-			sourceTree = "<group>";
-		};
-		18F41B761B97A1EB002EE186 /* FXAlertViewTransitionAnimator */ = {
-			isa = PBXGroup;
-			children = (
-				18F41B771B97A1EB002EE186 /* FXAlertControllerTransitionAnimator.h */,
-				18F41B781B97A1EB002EE186 /* FXAlertControllerTransitionAnimator.m */,
-			);
-			path = FXAlertViewTransitionAnimator;
-			sourceTree = "<group>";
-		};
-		18F41B791B97A1EB002EE186 /* FXPresentationController */ = {
-			isa = PBXGroup;
-			children = (
-				18F41B7A1B97A1EB002EE186 /* FXPresentationController.h */,
-				18F41B7B1B97A1EB002EE186 /* FXPresentationController.m */,
-			);
-			path = FXPresentationController;
 			sourceTree = "<group>";
 		};
 		18F46A4C1B2B9F230062BD05 /* SASFilterView */ = {
@@ -1038,7 +1022,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D786E24E1A50AB1500A20FDD /* PopupImage.xib in Resources */,
-				18EE44E51B556A7100F8F93B /* SASNoticeView.xib in Resources */,
 				18DDE50B1B3D7F0F00AB0CB3 /* Launch Screen.xib in Resources */,
 				D700239619F5253C00E45408 /* AlertBox.xib in Resources */,
 				D72E1DBF19EE841E005DD8A5 /* Main.storyboard in Resources */,
@@ -1109,18 +1092,17 @@
 				D786E1781A48C02900A20FDD /* SASDevice.m in Sources */,
 				18A524F71B166BAB00E8F8F6 /* SASLocation.m in Sources */,
 				D756A29C19F175230089EF80 /* UIImage+Alpha.m in Sources */,
-				18EE44E21B556A5300F8F93B /* SASNoticeView.m in Sources */,
 				18C104861B714C5900B4731D /* SASGalleryContainer.m in Sources */,
 				1891E3D91B176E9B008CC10C /* SASObjectDownloader.m in Sources */,
 				1810C9141B28ABE3009063E5 /* ILTranslucentView.m in Sources */,
 				D786E1811A48C10500A20FDD /* SASAnnotation.m in Sources */,
-				18F41B7E1B97A1EB002EE186 /* FXAlertControllerTransitionAnimator.m in Sources */,
 				188CAEED1B21006C006A90EB /* Screen.m in Sources */,
-				18F41B7F1B97A1EB002EE186 /* FXPresentationController.m in Sources */,
+				185F3ED31B9E04FB00345CFB /* FXAlertControllerTransitionAnimator.m in Sources */,
 				18592E021B5184E2004DDFD8 /* SASSponsorViewController.m in Sources */,
+				185F3ED41B9E04FB00345CFB /* FXPresentationController.m in Sources */,
 				18DAE8531B46BA6400CAEF2D /* SASDeviceButton.m in Sources */,
-				18F41B7D1B97A1EB002EE186 /* FXAlertController.m in Sources */,
 				1845C4EA1B2091F600E3D7BC /* SASActivityIndicator.m in Sources */,
+				185F3ED21B9E04FB00345CFB /* FXAlertController.m in Sources */,
 				D72E1DB619EE841E005DD8A5 /* AppDelegate.m in Sources */,
 				D715E48F1A064FDA0026D91F /* UIView+NibInitializer.m in Sources */,
 				1845C4EF1B209E6C00E3D7BC /* SASUtilities.m in Sources */,
@@ -1132,8 +1114,8 @@
 				181D1E5D1B2359EA00FB5928 /* SASImageInspectorView.m in Sources */,
 				D756A2A919F309690089EF80 /* SASTabBarController.m in Sources */,
 				1835D2791B78F7D100A62B7F /* SASGalleryCollectionViewController.m in Sources */,
-				18F41B7C1B97A1EB002EE186 /* FXAlertButton.m in Sources */,
 				18EE44DE1B556A1F00F8F93B /* SASNotificationView.m in Sources */,
+				185F3ED11B9E04FB00345CFB /* FXAlertButton.m in Sources */,
 				1810C90A1B289044009063E5 /* UIImage+SASImage.m in Sources */,
 				1869E3E01B9B3AC4000E1DA7 /* CMPopTipView.m in Sources */,
 				1807AF3F1B4EE8F2006E1B28 /* StorageSystem.m in Sources */,

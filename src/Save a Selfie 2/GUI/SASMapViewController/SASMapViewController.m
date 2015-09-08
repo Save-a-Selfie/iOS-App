@@ -19,7 +19,7 @@
 #import "SASNotificationView.h"
 #import "UIView+Animations.h"
 #import "EULAViewController.h"
-#import "SASNoticeView.h"
+
 #import "FXAlert.h"
 #import "SASTabBarController.h"
 
@@ -36,9 +36,7 @@
 
 @property (nonatomic, strong) UINavigationController *uploadImageNavigationController;
 
-
-
-@property (strong, nonatomic) SASNoticeView* sasNoticeView;
+@property (strong, nonatomic) FXAlertController* permissionProblemAlert;
 
 @property (strong, nonatomic) SASFilterView *sasFilterView;
 @property (weak, nonatomic) IBOutlet UIButton *showFilterViewButton;
@@ -51,7 +49,7 @@
 
 @implementation SASMapViewController
 
-NSString *permissionsProblemOne = @"Please enable location services for this app. Launch the iPhone Settings app to do this. Go to Privacy > Location Services > Save a Selfie > While Using the App. You have to go out of this app, using the 'Home' button.";
+NSString *permissionsProblemText = @"Please enable location services for this app. Launch the iPhone Settings app to do this.\n\nGo to Privacy > Location Services > Save a Selfie > While Using the App. You have to go out of this app, using the 'Home' button.";
 
 
 
@@ -88,24 +86,38 @@ NSString *permissionsProblemOne = @"Please enable location services for this app
 
 
 
--(void) locationServicesDisabledNotice:(NSString *) text {
-    [self clearSASNotice];
+- (void) displayLocationDisabledAlert {
     
-    if(self.sasNoticeView == nil) {
-        self.sasNoticeView = [[SASNoticeView alloc] init];
-        [self.sasNoticeView setNotice:text];
-        [self.sasNoticeView setTitle:@"Note"];
+    [self clearLocationDisabledAlert];
+    
+    if(self.permissionProblemAlert == nil) {
+        printf("Was nil");
+        self.permissionProblemAlert = [[FXAlertController alloc] initWithTitle:@"LOCATION DISABLED" message:permissionsProblemText];
+        self.permissionProblemAlert.font = [UIFont fontWithName:@"Avenir Next" size:15];
+        
+        FXAlertButton *gotoSettingsButton = [[FXAlertButton alloc] initWithType:FXAlertButtonTypeCancel];
+        [gotoSettingsButton setTitle:@"Open Settings" forState:UIControlStateNormal];
+        [gotoSettingsButton addTarget:self action:@selector(openSettings) forControlEvents:UIControlEventTouchUpInside];
+        
+        [self.permissionProblemAlert addButton:gotoSettingsButton];
+
     }
-    [self.sasNoticeView animateIntoView:self.view];
     
+    [self presentViewController:self.permissionProblemAlert animated:YES completion:nil];
 }
 
 
 
--(void) clearSASNotice { // called when returning from outside app
-    if (self.sasNoticeView) {
-        [self.sasNoticeView animateOutOfView];
-        self.sasNoticeView = nil;
+- (void) openSettings {
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
+}
+
+
+
+- (void) clearLocationDisabledAlert { // called when returning from outside app
+    if (self.permissionProblemAlert) {
+        [self.permissionProblemAlert dismissViewControllerAnimated:YES completion:nil];
+        self.permissionProblemAlert = nil;
     }
 }
 
@@ -121,11 +133,13 @@ NSString *permissionsProblemOne = @"Please enable location services for this app
 }
 
 
+
 #pragma mark SASFilterViewDelegate
 - (void) sasFilterView:(SASFilterView *)view doneButtonWasPressedWithSelectedDeviceType:(SASDeviceType)device {
     [self.sasMapView filterAnnotationsForDeviceType:device];
     [self.sasFilterView animateOutOfView];
 }
+
 
 
 - (void) sasFilterView:(SASFilterView *)view isVisibleInViewHierarhy:(BOOL)visibility {
@@ -171,8 +185,8 @@ NSString *permissionsProblemOne = @"Please enable location services for this app
     
     BOOL makeCheckForMapWarning = NO;
     
-    if (self.sasNoticeView) {
-        [self.sasNoticeView animateOutOfView]; // get rid of any existing permissions box blocking access to camera etc.
+    if (self.permissionProblemAlert) {
+        [self.permissionProblemAlert dismissViewControllerAnimated:YES completion:nil];
     }
     
     if([CLLocationManager locationServicesEnabled]){
@@ -194,7 +208,7 @@ NSString *permissionsProblemOne = @"Please enable location services for this app
                 
             case kCLAuthorizationStatusDenied:
                 NSLog(@"Location services denied by user");
-                [self locationServicesDisabledNotice:permissionsProblemOne];
+                [self displayLocationDisabledAlert];
                 break;
                 
             case kCLAuthorizationStatusRestricted:
@@ -208,7 +222,7 @@ NSString *permissionsProblemOne = @"Please enable location services for this app
     }
     else {
         NSLog(@"Location Services Are Disabled");
-        [self locationServicesDisabledNotice:permissionsProblemOne];
+        [self displayLocationDisabledAlert];
     }
     
     
@@ -245,6 +259,8 @@ NSString *permissionsProblemOne = @"Please enable location services for this app
             [self presentViewController:disclaimerWarning animated:YES completion:nil];
         }
 }
+
+
 
 - (void) acceptMapWarning {
     
@@ -297,7 +313,6 @@ NSString *permissionsProblemOne = @"Please enable location services for this app
 //     of the uploading.
 - (IBAction)uploadNewNewDevice:(id)sender {
     
-
     if(self.sasImagePickerController == nil) {
         self.sasImagePickerController = [[SASImagePickerViewController alloc] init];
         self.sasImagePickerController.sasImagePickerDelegate = self;
