@@ -188,19 +188,19 @@
 
 - (void) setupImageViews {
     
-    // Show activity indicator.
-    self.sasActivityIndicator = [[SASActivityIndicator alloc] initWithMessage:@"Loading..."];
-    [self.sasImageView addSubview:self.sasActivityIndicator];
-    self.sasActivityIndicator.backgroundColor = [UIColor clearColor];
-    self.sasActivityIndicator.center = CGPointMake(self.view.center.x, self.sasImageView.center.y);
-    [self.sasActivityIndicator startAnimating];
     
-    
-    if(!self.downloadImage) {
+    if(!self.shouldDownloadImage) {
         self.sasImageView.image = self.image;
         self.blurredImageView.image = self.image;
     }
-    else if (self.annotation.device.imageURLString != nil && self.downloadImage && !imageLoaded) {
+    else if (self.annotation.device.imageURLString != nil && self.shouldDownloadImage && !imageLoaded) {
+        
+        // Show activity indicator.
+        self.sasActivityIndicator = [[SASActivityIndicator alloc] initWithMessage:@"Loading..."];
+        self.sasActivityIndicator.backgroundColor = [UIColor clearColor];
+        self.sasActivityIndicator.center = CGPointMake(self.view.center.x, self.sasImageView.center.y);
+        [self.sasImageView addSubview:self.sasActivityIndicator];
+        [self.sasActivityIndicator startAnimating];
         
         [[SDWebImageDownloader sharedDownloader] downloadImageWithURL:self.annotation.device.imageURL
                                                               options:0

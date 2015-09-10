@@ -34,7 +34,7 @@
       and is set via the `image` property. If set to NO and
       no `image` property is set no image will be displayed.
  */
-@property(assign, nonatomic) BOOL downloadImage;
+@property(assign, nonatomic, getter=shouldDownloadImage) BOOL downloadImage;
 
 
 /**
