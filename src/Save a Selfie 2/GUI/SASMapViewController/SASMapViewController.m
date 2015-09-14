@@ -62,7 +62,6 @@ NSString *permissionsProblemText = @"Please enable location services for this ap
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    
     [self.navigationController setNavigationBarHidden:YES animated:NO];
     self.tabBarController.tabBar.hidden = NO;
     
@@ -79,7 +78,6 @@ NSString *permissionsProblemText = @"Please enable location services for this ap
 }
 
 
-
 - (IBAction)locateUser:(id)sender {
      [self.sasMapView locateUser];
 }
@@ -90,8 +88,8 @@ NSString *permissionsProblemText = @"Please enable location services for this ap
     
     [self clearLocationDisabledAlert];
     
-    if(self.permissionProblemAlert == nil) {
-        printf("Was nil");
+    if (self.permissionProblemAlert == nil) {
+        
         self.permissionProblemAlert = [[FXAlertController alloc] initWithTitle:@"LOCATION DISABLED" message:permissionsProblemText];
         self.permissionProblemAlert.font = [UIFont fontWithName:@"Avenir Next" size:15];
         
@@ -100,10 +98,10 @@ NSString *permissionsProblemText = @"Please enable location services for this ap
         [gotoSettingsButton addTarget:self action:@selector(openSettings) forControlEvents:UIControlEventTouchUpInside];
         
         [self.permissionProblemAlert addButton:gotoSettingsButton];
+        
+        [self presentViewController:self.permissionProblemAlert animated:YES completion:nil];
 
     }
-    
-    [self presentViewController:self.permissionProblemAlert animated:YES completion:nil];
 }
 
 
@@ -185,21 +183,15 @@ NSString *permissionsProblemText = @"Please enable location services for this ap
     
     BOOL makeCheckForMapWarning = NO;
     
-    if (self.permissionProblemAlert) {
-        [self.permissionProblemAlert dismissViewControllerAnimated:YES completion:nil];
-    }
     
     if([CLLocationManager locationServicesEnabled]){
-        
         switch(status){
-                
+
             case kCLAuthorizationStatusAuthorizedAlways:
                 NSLog(@"We have access to location services");
                 break;
                 
             case kCLAuthorizationStatusAuthorizedWhenInUse:
-                NSLog(@"We have access to location services");
-                
                 makeCheckForMapWarning = YES;
                 // Only when we have access to location
                 // can this be set to YES.
@@ -207,7 +199,7 @@ NSString *permissionsProblemText = @"Please enable location services for this ap
                 break;
                 
             case kCLAuthorizationStatusDenied:
-                NSLog(@"Location services denied by user");
+                NSLog(@"Location services denied by user!");
                 [self displayLocationDisabledAlert];
                 break;
                 
@@ -218,6 +210,11 @@ NSString *permissionsProblemText = @"Please enable location services for this ap
             case kCLAuthorizationStatusNotDetermined:
                 NSLog(@"Unable to determine, possibly not available");
                 break;
+                
+            default:
+                [self displayLocationDisabledAlert];
+                break;
+                
         }
     }
     else {
@@ -229,8 +226,6 @@ NSString *permissionsProblemText = @"Please enable location services for this ap
     if (makeCheckForMapWarning) {
         [self makeCheckForMapWarning];
     }
-    
-
 }
 
 #pragma Map Warning

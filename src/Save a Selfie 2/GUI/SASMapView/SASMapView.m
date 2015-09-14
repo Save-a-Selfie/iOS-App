@@ -246,9 +246,7 @@
 //  SASLocationDelegate. However, any object who holds a SASMapView shouldn't need to adobt the SASLocation
 //  delegate as it's SASMapView they should only really be interested in. So when this object(SASMapView) gets
 //  an update from SASLocation about authorization changes for location services, we simply forward them onto
-//  any object who wants to receive said notifications. This makes a nice object that updates, adoptees of location
-//  and map changes.
-
+//  any object who wants to receive said notifications.
 - (void)sasLocation:(SASLocation *)sasLocation locationPermissionsHaveChanged:(CLAuthorizationStatus)status {
     if(self.notificationReceiver != nil && [self.notificationReceiver respondsToSelector:@selector(sasMapView:authorizationStatusHasChanged:)]) {
         [self.notificationReceiver sasMapView:self authorizationStatusHasChanged:status];

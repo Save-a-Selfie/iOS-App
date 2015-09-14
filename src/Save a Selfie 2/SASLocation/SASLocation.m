@@ -140,7 +140,7 @@
 
 // Forward permissions changes to delegate.
 - (void) locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
-    
+
     if(self.delegate != nil && [self.delegate respondsToSelector:@selector(sasLocation:locationPermissionsHaveChanged:)]) {
         [self.delegate sasLocation:self locationPermissionsHaveChanged:status];
     }
