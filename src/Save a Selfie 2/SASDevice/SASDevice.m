@@ -156,6 +156,33 @@
 }
 
 
+
++ (UIImage *) getUnselectedDeviceImageForDevice:(SASDeviceType) deviceType {
+    
+    switch (deviceType) {
+        case SASDeviceTypeDefibrillator:
+            return [UIImage imageNamed:@"DefibrillatorUnselected"];
+
+            
+        case SASDeviceTypeLifeRing:
+            return [UIImage imageNamed:@"LifeRingUnselected"];
+            
+        case SASDeviceTypeFirstAidKit:
+            return [UIImage imageNamed:@"FirstAidKitUnselected"];
+            
+            
+        case SASDeviceTypeFireHydrant:
+            return [UIImage imageNamed:@"FireHydrantUnselected"];
+            
+        case SASDeviceTypeAll:
+            return [UIImage new];
+            
+        default:
+            break;
+    }
+}
+
+
 + (UIImage*) getDeviceMapAnnotationImageForDeviceType:(SASDeviceType) deviceType {
     
     switch (deviceType) {

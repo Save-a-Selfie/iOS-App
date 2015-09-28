@@ -19,7 +19,7 @@
 #import "SASNotificationView.h"
 #import "UIView+Animations.h"
 #import "EULAViewController.h"
-
+#import "SASFilterViewNew.h"
 #import "FXAlert.h"
 #import "SASTabBarController.h"
 
@@ -43,6 +43,8 @@
 @property (strong, nonatomic) IBOutlet UIButton *uploadNewImageToServerButton;
 @property (strong, nonatomic) IBOutlet UIButton *locateUserButton;
 
+@property (strong, nonatomic) UISegmentedControl *mapTypeSegmentedContol;
+@property (strong, nonatomic) SASFilterViewNew *sasFilterViewNew;
 
 
 @end
@@ -122,12 +124,19 @@ NSString *permissionsProblemText = @"Please enable location services for this ap
 
 
 - (IBAction) showSASFilterView:(id)sender {
-    if(self.sasFilterView == nil) {
-        self.sasFilterView = [[SASFilterView alloc] init];
-        self.sasFilterView.delegate = self;
+//    if(self.sasFilterView == nil) {
+//        self.sasFilterView = [[SASFilterView alloc] init];
+//        self.sasFilterView.delegate = self;
+//    }
+//
+//    [self.sasFilterView animateIntoView:self.sasMapView];
+    
+    
+    if(!self.sasFilterViewNew) {
+        self.sasFilterViewNew = [[SASFilterViewNew alloc] initWithPosition:CGPointMake(self.locateUserButton.frame.origin.x, 50) forMapView:self.sasMapView];
     }
+    [self.sasFilterViewNew presentIntoView:self.view];
 
-    [self.sasFilterView animateIntoView:self.sasMapView];
 }
 
 

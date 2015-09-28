@@ -38,6 +38,7 @@
 		1869E3E01B9B3AC4000E1DA7 /* CMPopTipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1869E3DF1B9B3AC4000E1DA7 /* CMPopTipView.m */; };
 		186A39A21B3C933E00F38EDB /* SASFilterViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 186A39A11B3C933E00F38EDB /* SASFilterViewCell.xib */; };
 		186A39A91B3C93E600F38EDB /* SASFilterViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 186A39A81B3C93E600F38EDB /* SASFilterViewCell.m */; };
+		186F9ECF1BB86C8000D2AE46 /* SASFilterViewNew.m in Sources */ = {isa = PBXBuildFile; fileRef = 186F9ECE1BB86C8000D2AE46 /* SASFilterViewNew.m */; settings = {ASSET_TAGS = (); }; };
 		188CAEE51B20EA59006A90EB /* SASSocial.m in Sources */ = {isa = PBXBuildFile; fileRef = 188CAEE41B20EA59006A90EB /* SASSocial.m */; };
 		188CAEED1B21006C006A90EB /* Screen.m in Sources */ = {isa = PBXBuildFile; fileRef = 188CAEEC1B21006C006A90EB /* Screen.m */; };
 		1891E3D31B1743C8008CC10C /* SASMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1891E3D21B1743C8008CC10C /* SASMapView.m */; };
@@ -59,6 +60,7 @@
 		18EE44DE1B556A1F00F8F93B /* SASNotificationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EE44DD1B556A1F00F8F93B /* SASNotificationView.m */; };
 		18F46A4B1B2B9F1F0062BD05 /* SASFilterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F46A4A1B2B9F1F0062BD05 /* SASFilterView.m */; };
 		18F46A4E1B2B9F370062BD05 /* SASFilterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18F46A4D1B2B9F370062BD05 /* SASFilterView.xib */; };
+		18F9AF241BB9E1B800073867 /* SASFilterViewButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F9AF231BB9E1B800073867 /* SASFilterViewButton.m */; settings = {ASSET_TAGS = (); }; };
 		D0EAAC0B1A0FD59B00C0F955 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0EAAC0A1A0FD59B00C0F955 /* Social.framework */; };
 		D0EAAC0D1A0FD63B00C0F955 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0EAAC0C1A0FD63B00C0F955 /* MessageUI.framework */; };
 		D0EAAC0F1A100F2D00C0F955 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0EAAC0E1A100F2D00C0F955 /* Accounts.framework */; };
@@ -162,6 +164,8 @@
 		186A39A11B3C933E00F38EDB /* SASFilterViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SASFilterViewCell.xib; sourceTree = "<group>"; };
 		186A39A71B3C93E600F38EDB /* SASFilterViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASFilterViewCell.h; sourceTree = "<group>"; };
 		186A39A81B3C93E600F38EDB /* SASFilterViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASFilterViewCell.m; sourceTree = "<group>"; };
+		186F9ECD1BB86C8000D2AE46 /* SASFilterViewNew.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASFilterViewNew.h; sourceTree = "<group>"; };
+		186F9ECE1BB86C8000D2AE46 /* SASFilterViewNew.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASFilterViewNew.m; sourceTree = "<group>"; };
 		188CAEE31B20EA59006A90EB /* SASSocial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASSocial.h; sourceTree = "<group>"; };
 		188CAEE41B20EA59006A90EB /* SASSocial.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASSocial.m; sourceTree = "<group>"; };
 		188CAEEB1B21006C006A90EB /* Screen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Screen.h; sourceTree = "<group>"; };
@@ -203,6 +207,8 @@
 		18F46A491B2B9F1F0062BD05 /* SASFilterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASFilterView.h; sourceTree = "<group>"; };
 		18F46A4A1B2B9F1F0062BD05 /* SASFilterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASFilterView.m; sourceTree = "<group>"; };
 		18F46A4D1B2B9F370062BD05 /* SASFilterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SASFilterView.xib; sourceTree = "<group>"; };
+		18F9AF221BB9E1B800073867 /* SASFilterViewButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASFilterViewButton.h; sourceTree = "<group>"; };
+		18F9AF231BB9E1B800073867 /* SASFilterViewButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASFilterViewButton.m; sourceTree = "<group>"; };
 		6DD50A6FBD23D090F1506F00 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		6FAEC062F47D183CE9855B1C /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		CEC3A1E290F274AEC4E4510F /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -562,6 +568,13 @@
 			path = SASFilterViewCell;
 			sourceTree = "<group>";
 		};
+		186F9ECC1BB8681B00D2AE46 /* SASMapSegmentedControl */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = SASMapSegmentedControl;
+			sourceTree = "<group>";
+		};
 		188CAEE61B20EA5D006A90EB /* SASSocial */ = {
 			isa = PBXGroup;
 			children = (
@@ -672,6 +685,7 @@
 		18A525091B16708600E8F8F6 /* SASMapViewController */ = {
 			isa = PBXGroup;
 			children = (
+				186F9ECC1BB8681B00D2AE46 /* SASMapSegmentedControl */,
 				18A525061B16708400E8F8F6 /* SASMapViewController.h */,
 				18A525071B16708400E8F8F6 /* SASMapViewController.m */,
 				18F46A4C1B2B9F230062BD05 /* SASFilterView */,
@@ -809,6 +823,10 @@
 				18F46A4D1B2B9F370062BD05 /* SASFilterView.xib */,
 				18F46A491B2B9F1F0062BD05 /* SASFilterView.h */,
 				18F46A4A1B2B9F1F0062BD05 /* SASFilterView.m */,
+				186F9ECD1BB86C8000D2AE46 /* SASFilterViewNew.h */,
+				186F9ECE1BB86C8000D2AE46 /* SASFilterViewNew.m */,
+				18F9AF221BB9E1B800073867 /* SASFilterViewButton.h */,
+				18F9AF231BB9E1B800073867 /* SASFilterViewButton.m */,
 				186A39A61B3C938C00F38EDB /* SASFilterViewCell */,
 			);
 			path = SASFilterView;
@@ -977,7 +995,7 @@
 		D72E1DA519EE841E005DD8A5 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0610;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Stephen Fox";
 				TargetAttributes = {
 					189D4F3B1B5C49BF005E709C = {
@@ -986,7 +1004,7 @@
 					};
 					D72E1DAC19EE841E005DD8A5 = {
 						CreatedOnToolsVersion = 6.0.1;
-						DevelopmentTeam = N9HC9H544M;
+						DevelopmentTeam = EBZ9ESQDZH;
 					};
 				};
 			};
@@ -1103,6 +1121,7 @@
 				18DAE8531B46BA6400CAEF2D /* SASDeviceButton.m in Sources */,
 				1845C4EA1B2091F600E3D7BC /* SASActivityIndicator.m in Sources */,
 				185F3ED21B9E04FB00345CFB /* FXAlertController.m in Sources */,
+				186F9ECF1BB86C8000D2AE46 /* SASFilterViewNew.m in Sources */,
 				D72E1DB619EE841E005DD8A5 /* AppDelegate.m in Sources */,
 				D715E48F1A064FDA0026D91F /* UIView+NibInitializer.m in Sources */,
 				1845C4EF1B209E6C00E3D7BC /* SASUtilities.m in Sources */,
@@ -1115,6 +1134,7 @@
 				D756A2A919F309690089EF80 /* SASTabBarController.m in Sources */,
 				1835D2791B78F7D100A62B7F /* SASGalleryCollectionViewController.m in Sources */,
 				18EE44DE1B556A1F00F8F93B /* SASNotificationView.m in Sources */,
+				18F9AF241BB9E1B800073867 /* SASFilterViewButton.m in Sources */,
 				185F3ED11B9E04FB00345CFB /* FXAlertButton.m in Sources */,
 				1810C90A1B289044009063E5 /* UIImage+SASImage.m in Sources */,
 				1869E3E01B9B3AC4000E1DA7 /* CMPopTipView.m in Sources */,
@@ -1185,6 +1205,7 @@
 				INFOPLIST_FILE = "Save a Selfie Tests/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.stephenfox.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Save a Selfie.app/Save a Selfie";
 			};
@@ -1204,6 +1225,7 @@
 				INFOPLIST_FILE = "Save a Selfie Tests/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.stephenfox.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Save a Selfie.app/Save a Selfie";
 			};
@@ -1229,6 +1251,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -1302,6 +1325,7 @@
 				INFOPLIST_FILE = "Save a Selfie 2/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = fox.stephen.saveaselfie;
 				PRODUCT_NAME = "Save a Selfie";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Save a Selfie 2/GUI/Save a Selfie-Bridging-Header.h";
@@ -1325,6 +1349,7 @@
 				INFOPLIST_FILE = "Save a Selfie 2/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = fox.stephen.saveaselfie;
 				PRODUCT_NAME = "Save a Selfie";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Save a Selfie 2/GUI/Save a Selfie-Bridging-Header.h";

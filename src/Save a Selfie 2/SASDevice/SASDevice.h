@@ -45,13 +45,29 @@ typedef NS_ENUM(int, SASDeviceType) {
  */
 + (NSString*) getDeviceNameForDeviceType:(SASDeviceType) deviceType;
 
-// @return Device Image for specified SASDeviceType.
+
+
+/**
+ @return Selected(normal image) device image for given parameter.
+ */
 + (UIImage*) getDeviceImageForDeviceType:(SASDeviceType) deviceType;
 
-// @return Device map annotation image for specified SASDeviceType.
+/**
+ @return Unselected device image for given parameter.
+ */
++ (UIImage *) getUnselectedDeviceImageForDevice:(SASDeviceType) deviceType;
+
+
+/**
+ @return Device map annotation (used for mapView) for given parameter.
+ */
 + (UIImage*) getDeviceMapAnnotationImageForDeviceType:(SASDeviceType) deviceType;
 
-// @return Device map pin image for speified SASDeviceType.
+
+
+/**
+ @return Device map pin for given parameter.
+ */
 + (UIImage*) getDeviceMapPinImageForDeviceType:(SASDeviceType) deviceType;
 
 

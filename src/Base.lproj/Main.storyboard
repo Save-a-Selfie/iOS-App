@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="49e-Tb-3d3">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -48,12 +49,8 @@
                                     <action selector="uploadNewNewDevice:" destination="wxp-4h-T6p" eventType="touchUpInside" id="TpP-QQ-zvK"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gKB-VO-JHZ">
-                                <rect key="frame" x="249" y="72" width="55" height="55"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="55" id="Cnm-CH-gTB"/>
-                                    <constraint firstAttribute="height" constant="55" id="yqI-KC-6i9"/>
-                                </constraints>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gKB-VO-JHZ">
+                                <rect key="frame" x="263" y="421" width="41" height="41"/>
                                 <state key="normal" image="FilterDevicesIcon">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -69,9 +66,7 @@
                             <constraint firstItem="f2t-3C-hgn" firstAttribute="leading" secondItem="XjZ-Ty-pLe" secondAttribute="leadingMargin" id="DR6-uF-aMh"/>
                             <constraint firstItem="uvr-bw-CUg" firstAttribute="top" secondItem="XjZ-Ty-pLe" secondAttribute="top" id="Mfu-73-4vD"/>
                             <constraint firstItem="WI1-wW-Rnp" firstAttribute="top" secondItem="f2t-3C-hgn" secondAttribute="bottom" constant="10" id="VeB-fo-DoV"/>
-                            <constraint firstItem="gKB-VO-JHZ" firstAttribute="top" secondItem="VOt-Ui-pgj" secondAttribute="bottom" constant="8" id="bfn-Uf-z7J"/>
                             <constraint firstItem="ZSL-vM-Epo" firstAttribute="trailing" secondItem="XjZ-Ty-pLe" secondAttribute="trailingMargin" id="hGo-IO-5xk"/>
-                            <constraint firstItem="gKB-VO-JHZ" firstAttribute="leading" secondItem="uvr-bw-CUg" secondAttribute="trailing" constant="-71" id="mug-PU-Apg"/>
                             <constraint firstAttribute="trailing" secondItem="uvr-bw-CUg" secondAttribute="trailing" id="tlg-t5-GCh"/>
                             <constraint firstItem="uvr-bw-CUg" firstAttribute="leading" secondItem="XjZ-Ty-pLe" secondAttribute="leading" id="yPr-Vm-Mry"/>
                         </constraints>
@@ -461,7 +456,7 @@
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="1jy-o8-krr" customClass="SASGalleryCell">
-                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                <rect key="frame" x="0.0" y="64" width="113" height="115"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="113" height="115"/>
@@ -609,9 +604,4 @@
         <image name="Stack of Photos-50" width="25" height="25"/>
         <image name="info_24" width="24" height="24"/>
     </resources>
-    <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <simulatedStatusBarMetrics key="statusBar"/>
-        <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4"/>
-    </simulatedMetricsContainer>
 </document>
