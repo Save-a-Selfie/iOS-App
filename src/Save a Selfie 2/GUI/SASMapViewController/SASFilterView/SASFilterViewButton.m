@@ -7,7 +7,7 @@
 //
 
 #import "SASFilterViewButton.h"
-#import "SASDevice.h"
+
 
 
 @implementation SASFilterViewButton

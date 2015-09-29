@@ -147,16 +147,11 @@
 }
 
 
-
-// Filters the map view and shows only one type of
-// annotation on the map view.
-- (void)filterAnnotationsForDeviceType:(SASDeviceType)type {
+#pragma mark - Filterable Protocol
+- (void)filterMapForDevice:(SASDeviceType) deviceType {
     
-    switch (type) {
-        case SASDeviceTypeAll:
-            self.annotationsToShow = SASDeviceTypeAll;
-            break;
-            
+    switch (deviceType) {
+       
         case SASDeviceTypeDefibrillator:
             self.annotationsToShow = SASDeviceTypeDefibrillator;
             break;
@@ -178,6 +173,8 @@
     }
     [self reloadAnnotations];
 }
+
+
 
 
 // Zooms to a region on the map view.

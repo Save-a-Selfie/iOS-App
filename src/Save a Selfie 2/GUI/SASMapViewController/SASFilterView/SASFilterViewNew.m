@@ -14,6 +14,7 @@
 
 @interface SASFilterViewNew () {
     CGFloat buttonSpacing;
+    
 }
 
 @property (strong, nonatomic) NSMutableArray *selectedItems;
@@ -21,13 +22,17 @@
 @property (strong, nonatomic) NSMutableArray *buttons;
 @property (weak, nonatomic) SASMapView *referencedMapView;
 
-
 @end
 
 
 
 @implementation SASFilterViewNew
 
+SASDeviceType filterableDevices[4] = {SASDeviceTypeDefibrillator,
+                                      SASDeviceTypeLifeRing,
+                                      SASDeviceTypeFirstAidKit,
+                                      SASDeviceTypeFireHydrant
+                                      };
 
 - (instancetype)initWithPosition:(CGPoint) position forMapView:(SASMapView *) mapView {
     self = [super init];
@@ -36,12 +41,9 @@
         return nil;
     }
     
-
     self.frame = CGRectMake(position.x, position.y, 45, 245);
     _referencedMapView = mapView;
-    
     self.layer.masksToBounds = NO;
-    
     
     return self;
 }
@@ -52,23 +54,20 @@
     
     buttonSpacing = 55;
 
-    
     // Lazily Initialise all buttons.
     if(!self.buttons) {
+        
         
         int buttonCapacity = 4;
         self.buttons = [[NSMutableArray alloc] initWithCapacity:4];
         
         for (int i = 0; i < buttonCapacity; i++) {
             
-            printf("yeah");
-            
             SASFilterButtonType buttonType = i; // use i to get Enum value.
-            
             SASFilterViewButton *button = [[SASFilterViewButton alloc] initWithType:buttonType];
             button.frame = CGRectMake(0, self.frame.size.height - buttonSpacing, 45, 45);
+            [button addTarget:self action:@selector(filterForDevice:) forControlEvents:UIControlEventTouchUpInside];
             
-
             [self addSubview:button];
             [self.buttons addObject:button];
 
@@ -79,6 +78,8 @@
     
     [view addSubview:self];
 }
+
+
 
 
 - (void) animateToView {
@@ -100,6 +101,29 @@
 
 
 - (void) filterForDevice:(SASFilterViewButton *) sender {
+    
+    NSLog(@"%d (%@)", sender.deviceType, sender);
+    
+    switch (sender.deviceType) {
+        case SASDeviceTypeDefibrillator:
+            [self.referencedMapView filterMapForDevice:SASDeviceTypeDefibrillator];
+            break;
+            
+        case SASDeviceTypeLifeRing:
+            [self.referencedMapView filterMapForDevice:SASDeviceTypeLifeRing];
+            break;
+            
+        case SASDeviceTypeFirstAidKit:
+            [self.referencedMapView filterMapForDevice:SASDeviceTypeFirstAidKit];
+            break;
+            
+        case SASDeviceTypeFireHydrant:
+            [self.referencedMapView filterMapForDevice:SASDeviceTypeFireHydrant];
+            break;
+            
+        default:
+            break;
+    }
 }
 
 

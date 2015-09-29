@@ -11,6 +11,8 @@
 #import "SASLocation.h"
 #import "SASAnnotation.h"
 #import "SASDevice.h"
+#import "SASFilterViewNew.h"
+#import "Filterable.h"
 
 @class SASMapView;
 
@@ -38,7 +40,7 @@ typedef NS_ENUM(NSUInteger, SASAnnotationImage) {
 
 
 
-@interface SASMapView : MKMapView <MKMapViewDelegate>
+@interface SASMapView : MKMapView <MKMapViewDelegate, Filterable>
 
 
 // Reference this object to receive appropriate method calls for
@@ -98,16 +100,6 @@ typedef NS_ENUM(NSUInteger, SASAnnotationImage) {
 - (CLLocationCoordinate2D) currentUserLocation;
 
 
-
-
-/**
- This method will filter the map and show a single type of 
- of SASAnnotation for a specific device type.
- 
- @param type
-        The type of device for which the map should filter.
- */
-- (void) filterAnnotationsForDeviceType:(SASDeviceType) type;
 
 
 

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SASDevice.h"
 
 
 typedef NS_ENUM(NSUInteger, SASFilterButtonType) {
@@ -29,5 +30,11 @@ typedef NS_ENUM(NSUInteger, SASFilterButtonType) {
  triggered when it is pressed.
  */
 - (instancetype) initWithType:(SASFilterButtonType) type;
+
+
+/**
+ The device type associated with the button.
+ */
+@property (readonly) SASDeviceType deviceType;
 
 @end

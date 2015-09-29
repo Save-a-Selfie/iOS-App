@@ -8,14 +8,18 @@
 
 #import <UIKit/UIKit.h>
 #import "SASMapView.h"
+#import "SASDevice.h"
+#import "Filterable.h"
+
+@class SASMapView;
+
 
 @interface SASFilterViewNew : UIView
-
 
 /**
  Initialises a new instance a given point.
  */
-- (instancetype)initWithPosition:(CGPoint) position forMapView:(SASMapView *) mapView;
+- (instancetype)initWithPosition:(CGPoint) position forMapView:(SASMapView <Filterable> *) mapView;
 
 
 

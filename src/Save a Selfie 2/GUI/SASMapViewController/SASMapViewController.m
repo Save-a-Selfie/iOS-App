@@ -124,49 +124,17 @@ NSString *permissionsProblemText = @"Please enable location services for this ap
 
 
 - (IBAction) showSASFilterView:(id)sender {
-//    if(self.sasFilterView == nil) {
-//        self.sasFilterView = [[SASFilterView alloc] init];
-//        self.sasFilterView.delegate = self;
-//    }
-//
-//    [self.sasFilterView animateIntoView:self.sasMapView];
-    
     
     if(!self.sasFilterViewNew) {
-        self.sasFilterViewNew = [[SASFilterViewNew alloc] initWithPosition:CGPointMake(self.locateUserButton.frame.origin.x, 50) forMapView:self.sasMapView];
+        self.sasFilterViewNew = [[SASFilterViewNew alloc] initWithPosition:CGPointMake(self.locateUserButton.frame.origin.x, 50)
+                                                                forMapView:self.sasMapView];
     }
+    
     [self.sasFilterViewNew presentIntoView:self.view];
 
 }
 
 
-
-#pragma mark SASFilterViewDelegate
-- (void) sasFilterView:(SASFilterView *)view doneButtonWasPressedWithSelectedDeviceType:(SASDeviceType)device {
-    [self.sasMapView filterAnnotationsForDeviceType:device];
-    [self.sasFilterView animateOutOfView];
-}
-
-
-
-- (void) sasFilterView:(SASFilterView *)view isVisibleInViewHierarhy:(BOOL)visibility {
-    
-    if(visibility) {
-        
-        filterButtonBeforeAnimation = self.showFilterViewButton.frame.origin;
-        locateUserButtonBeforeAnimtation = self.locateUserButton.frame.origin;
-        uploadToServerButtonBeforeAnimation = self.uploadNewImageToServerButton.frame.origin;
-        
-        [UIView animateView:self.showFilterViewButton offScreenInDirection:SASAnimationDirectionRight completion:nil];
-        [UIView animateView:self.locateUserButton offScreenInDirection:SASAnimationDirectionDown completion:nil];
-        [UIView animateView:self.uploadNewImageToServerButton offScreenInDirection:SASAnimationDirectionDown completion:nil];
-    } else {
-        [UIView animateView:self.showFilterViewButton toPoint:filterButtonBeforeAnimation];
-        [UIView animateView:self.locateUserButton toPoint:locateUserButtonBeforeAnimtation];
-        [UIView animateView:self.uploadNewImageToServerButton toPoint:uploadToServerButtonBeforeAnimation];
-    }
-
-}
 
 
 
