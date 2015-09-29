@@ -15,7 +15,6 @@
 #import "SASImagePickerViewController.h"
 #import "SASUploadImageViewController.h"
 #import "UIFont+SASFont.h"
-#import "SASFilterView.h"
 #import "SASNotificationView.h"
 #import "UIView+Animations.h"
 #import "EULAViewController.h"
@@ -23,7 +22,7 @@
 #import "FXAlert.h"
 #import "SASTabBarController.h"
 
-@interface SASMapViewController () <SASImagePickerDelegate, SASFilterViewDelegate, SASUploadImageViewControllerDelegate, UIAlertViewDelegate, MKMapViewDelegate> {
+@interface SASMapViewController () <SASImagePickerDelegate, SASUploadImageViewControllerDelegate, UIAlertViewDelegate, MKMapViewDelegate> {
     CGPoint filterButtonBeforeAnimation;
     CGPoint locateUserButtonBeforeAnimtation;
     CGPoint uploadToServerButtonBeforeAnimation;
@@ -38,7 +37,6 @@
 
 @property (strong, nonatomic) FXAlertController* permissionProblemAlert;
 
-@property (strong, nonatomic) SASFilterView *sasFilterView;
 @property (weak, nonatomic) IBOutlet UIButton *showFilterViewButton;
 @property (strong, nonatomic) IBOutlet UIButton *uploadNewImageToServerButton;
 @property (strong, nonatomic) IBOutlet UIButton *locateUserButton;
