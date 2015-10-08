@@ -22,11 +22,7 @@
 #import "FXAlert.h"
 #import "SASTabBarController.h"
 
-@interface SASMapViewController () <SASImagePickerDelegate, SASUploadImageViewControllerDelegate, UIAlertViewDelegate, MKMapViewDelegate> {
-    CGPoint filterButtonBeforeAnimation;
-    CGPoint locateUserButtonBeforeAnimtation;
-    CGPoint uploadToServerButtonBeforeAnimation;
-}
+@interface SASMapViewController () <SASImagePickerDelegate, SASUploadImageViewControllerDelegate, UIAlertViewDelegate, MKMapViewDelegate>
 
 @property (nonatomic, strong) IBOutlet SASMapView* sasMapView;
 
@@ -124,12 +120,13 @@ NSString *permissionsProblemText = @"Please enable location services for this ap
 - (IBAction) showSASFilterView:(id)sender {
     
     if(!self.sasFilterViewNew) {
-        self.sasFilterViewNew = [[SASFilterViewNew alloc] initWithPosition:CGPointMake(self.locateUserButton.frame.origin.x, 50)
+        self.sasFilterViewNew = [[SASFilterViewNew alloc] initWithPosition:CGPointMake(self.locateUserButton.frame.origin.x, self.locateUserButton.frame.origin.y - 300)
                                                                 forMapView:self.sasMapView];
+        
+        printf("Locate button x value: %f.\n FilterView x value: %f",self.locateUserButton.frame.origin.x, self.sasFilterViewNew.frame.origin.x);
     }
     
     [self.sasFilterViewNew presentIntoView:self.view];
-
 }
 
 

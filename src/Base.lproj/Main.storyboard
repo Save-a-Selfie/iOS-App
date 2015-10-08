@@ -49,8 +49,12 @@
                                     <action selector="uploadNewNewDevice:" destination="wxp-4h-T6p" eventType="touchUpInside" id="TpP-QQ-zvK"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gKB-VO-JHZ">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gKB-VO-JHZ">
                                 <rect key="frame" x="263" y="421" width="41" height="41"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="41" id="hjv-8f-zRF"/>
+                                    <constraint firstAttribute="width" constant="41" id="l38-QQ-oh7"/>
+                                </constraints>
                                 <state key="normal" image="FilterDevicesIcon">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -61,9 +65,11 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="gKB-VO-JHZ" firstAttribute="leading" secondItem="uvr-bw-CUg" secondAttribute="trailing" constant="-57" id="2vz-m8-OG1"/>
                             <constraint firstItem="WI1-wW-Rnp" firstAttribute="top" secondItem="ZSL-vM-Epo" secondAttribute="bottom" constant="10" id="9LT-hn-dav"/>
                             <constraint firstAttribute="bottom" secondItem="uvr-bw-CUg" secondAttribute="bottom" id="A6l-EL-Dfc"/>
                             <constraint firstItem="f2t-3C-hgn" firstAttribute="leading" secondItem="XjZ-Ty-pLe" secondAttribute="leadingMargin" id="DR6-uF-aMh"/>
+                            <constraint firstItem="ZSL-vM-Epo" firstAttribute="top" secondItem="gKB-VO-JHZ" secondAttribute="bottom" constant="8" id="DVl-ow-ZgD"/>
                             <constraint firstItem="uvr-bw-CUg" firstAttribute="top" secondItem="XjZ-Ty-pLe" secondAttribute="top" id="Mfu-73-4vD"/>
                             <constraint firstItem="WI1-wW-Rnp" firstAttribute="top" secondItem="f2t-3C-hgn" secondAttribute="bottom" constant="10" id="VeB-fo-DoV"/>
                             <constraint firstItem="ZSL-vM-Epo" firstAttribute="trailing" secondItem="XjZ-Ty-pLe" secondAttribute="trailingMargin" id="hGo-IO-5xk"/>

@@ -13,8 +13,12 @@
 
 @class SASMapView;
 
-
+/**
+ A popup view which allows the user to filter
+ the mapView according to a device.
+ */
 @interface SASFilterViewNew : UIView
+
 
 /**
  Initialises a new instance a given point.
@@ -32,6 +36,11 @@
 
 
 
+/**
+ Flag to determine if the filter view is currently
+ in the view hierarchy.
+ */
+@property (readonly) BOOL isInViewHierachy;
 
 
 @end

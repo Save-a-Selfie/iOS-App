@@ -34,16 +34,17 @@ SASDeviceType filterableDevices[4] = {SASDeviceTypeDefibrillator,
                                       SASDeviceTypeFireHydrant
                                       };
 
-- (instancetype)initWithPosition:(CGPoint) position forMapView:(SASMapView *) mapView {
+- (instancetype)initWithPosition:(CGPoint) position forMapView:(SASMapView <Filterable>*) mapView {
     self = [super init];
     
     if (!self) {
         return nil;
     }
     
-    self.frame = CGRectMake(position.x, position.y, 45, 245);
+    self.frame = CGRectMake(position.x, position.y, 45, 235);
     _referencedMapView = mapView;
-    self.layer.masksToBounds = NO;
+    self.layer.masksToBounds = YES;
+    self.backgroundColor = [UIColor blackColor];
     
     return self;
 }
@@ -54,8 +55,7 @@ SASDeviceType filterableDevices[4] = {SASDeviceTypeDefibrillator,
     
     buttonSpacing = 55;
 
-    // Lazily Initialise all buttons.
-    if(!self.buttons) {
+         if(!self.buttons) {
         
         
         int buttonCapacity = 4;
@@ -77,6 +77,7 @@ SASDeviceType filterableDevices[4] = {SASDeviceTypeDefibrillator,
     }
     
     [view addSubview:self];
+    [self animateToView];
 }
 
 
@@ -94,7 +95,12 @@ SASDeviceType filterableDevices[4] = {SASDeviceTypeDefibrillator,
                      animations:^{
                          self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, 245);
                      }
-                     completion:nil];
+                     completion:^(BOOL completed) {
+                         _isInViewHierachy = YES;
+                     }];
+
+    
+    
     
 }
 

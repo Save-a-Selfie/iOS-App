@@ -47,9 +47,9 @@
     
     if(canProceedToUpload) {
         
-        NSArray *images = [UIImage createLargeImageAndThumbnailFromSource:self.sasUploadObject.image];
-        UIImage *standardImage = images[0];
-        UIImage *thumbnailImage = images[1];
+        NSDictionary *images = [UIImage createLargeImageAndThumbnailFromSource:self.sasUploadObject.image];
+        UIImage *standardImage = [images objectForKey:KeyForLargeImage];
+        UIImage *thumbnailImage = [images objectForKey:KeyForThubnailImage];
         
         // Construct information for uploading
         NSData *standardImageData = UIImageJPEGRepresentation(standardImage, 1.0);
@@ -160,5 +160,8 @@
         [self.delegate sasUploaderDidFinishUploadWithSuccess:self];
     }
 }
+
+
+
 
 @end

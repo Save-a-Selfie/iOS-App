@@ -10,6 +10,7 @@
 
 @interface UIImage (SASImage)
 
+
 /** 
  Images taken from the camera seem to show up in landscape.
  This method adjusts the image so it's in the correct orientation
@@ -35,10 +36,18 @@
  The thumbnail image is needed by the server, so
  must be uploaded along with the standard image.
  
- @param image :     The image to create the standard and thumbnail image.
- @return NSArray:   Returns the standard image and thubmnail image
-                    The standard image will be the first object in the array
-                    and the thumbnail will be the second image in the array.
+ @param image :         The image to create the standard and thumbnail image.
+ @return NSDictionary:  Returns the standard image and thubmnail image
+                        The standard image will be the first object in the array
+                        and the thumbnail will be the second image in the array.
  */
-+ (NSArray *) createLargeImageAndThumbnailFromSource:(UIImage *) image;
++ (NSDictionary *) createLargeImageAndThumbnailFromSource:(UIImage *) image;
+
+
+// Use these keys to retrieve the correct image from
+// the NSDictionary returned by the method
+//  `createLargeImageAndThumbnailFromSource:`
+extern NSString* const KeyForLargeImage;
+extern NSString* const KeyForThubnailImage;
+
 @end

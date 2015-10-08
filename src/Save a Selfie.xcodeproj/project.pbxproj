@@ -549,13 +549,6 @@
 			name = Libraries;
 			sourceTree = "<group>";
 		};
-		186F9ECC1BB8681B00D2AE46 /* SASMapSegmentedControl */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = SASMapSegmentedControl;
-			sourceTree = "<group>";
-		};
 		188CAEE61B20EA5D006A90EB /* SASSocial */ = {
 			isa = PBXGroup;
 			children = (
@@ -666,7 +659,6 @@
 		18A525091B16708600E8F8F6 /* SASMapViewController */ = {
 			isa = PBXGroup;
 			children = (
-				186F9ECC1BB8681B00D2AE46 /* SASMapSegmentedControl */,
 				18A525061B16708400E8F8F6 /* SASMapViewController.h */,
 				18A525071B16708400E8F8F6 /* SASMapViewController.m */,
 				18F46A4C1B2B9F230062BD05 /* SASFilterView */,
