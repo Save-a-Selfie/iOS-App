@@ -167,6 +167,7 @@
         // Set the elements of the UI which are coloured to the
         // respective colour associated with the device.
         [self setColourForColouredUIElements:self.annotation.device];
+        
     }
 }
 

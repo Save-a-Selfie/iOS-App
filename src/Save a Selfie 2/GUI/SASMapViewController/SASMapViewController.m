@@ -68,7 +68,8 @@ NSString *permissionsProblemText = @"Please enable location services for this ap
     self.sasMapView.notificationReceiver = self;
     self.sasMapView.zoomToUsersLocationInitially = YES;
     self.sasMapView.sasAnnotationImage = SASAnnotationImageCustom;
-    self.sasMapView.mapType = MKMapTypeHybrid;
+    self.sasMapView.mapType = MKMapTypeSatelliteFlyover;
+  
     [self.sasMapView loadSASAnnotationsToMap];
 
 }

@@ -113,11 +113,11 @@
 - (void) locateUser {
     
     if([self.sasLocation checkLocationPermissions]) {
-        if(CLLocationCoordinate2DIsValid(self.currentLocation)) {
+        if (CLLocationCoordinate2DIsValid(self.currentLocation)) {
             [self zoomToCoordinates:self.currentLocation animated:YES];
         }
         else {
-            NSLog(@"Trying to show user's location with invalid coordinates. \n Please make sure the user's coordinates have been set correctly.\n");
+            NSLog(@"Trying to show user's location with invalid coordinates.\nPlease make sure the user's coordinates have been set correctly.\n");
         }
     }
     else {
@@ -208,7 +208,7 @@
 
 // Removes any existing annotations.
 - (void) removeExistingAnnotationsFromMapView {
-    for(id<MKAnnotation> annotation in self.annotations) {
+    for (id<MKAnnotation> annotation in self.annotations) {
         [self removeAnnotation:annotation];
     }
 }
@@ -231,7 +231,8 @@
     
     // As the map view is providing a wrapper for the location object
     // pass on the location update of the user.
-    if (self.notificationReceiver != nil && [self.notificationReceiver respondsToSelector:@selector(sasMapView:usersLocationHasUpdated:)]) {
+    if (self.notificationReceiver != nil
+        && [self.notificationReceiver respondsToSelector:@selector(sasMapView:usersLocationHasUpdated:)]) {
         [self.notificationReceiver sasMapView:self usersLocationHasUpdated:location];
     }
 }
@@ -255,7 +256,7 @@
 #pragma SASObjectDownloaderDelegate
 - (void)sasObjectDownloader:(SASObjectDownloader *)downloader didDownloadObjects:(NSMutableArray *)objects {
     
-    if(self.objectInfoFromServer == nil) {
+    if (!self.objectInfoFromServer) {
         self.objectInfoFromServer = [[NSMutableArray alloc] initWithArray:objects];
     }
     
@@ -291,10 +292,9 @@
 
 #pragma mark MKMapViewDelegate
 // @Discussion:
-//  Here we are going to forward on the SASAnnotation which was tapped to any object conforming to SASMapViewNotifications
-//  and who references notificationReceiver.
-//  That object can handle what they do with the information provided by the
-//  annotation.
+//  Here we are going to forward on the SASAnnotation which was tapped to any object
+//  conforming to SASMapViewNotifications and who references notificationReceiver.
+//  That object can handle what they do with the information provided by the annotation.
 - (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
     
     SASAnnotation* selectedAnnotation = view.annotation;

@@ -31,81 +31,89 @@
 
 #pragma mark Object Life Cycle
 - (instancetype)init {
-    if(self = [super init]) {
-        [self setup];
-    }
-    return self;
+  self = [super init];
+  
+  if (!self)
+    return nil;
+  
+  [self setup];
+  return self;
 }
 
 
 - (instancetype) initWithDelegate:(id) delegate {
-    if (self = [super init]) {
-        _delegate = delegate;
-        [self setup];
-    }
-    return self;
+  if (self = [super init]) {
+    _delegate = delegate;
+    [self setup];
+  }
+  return self;
 }
+
 
 
 
 // Set up all connection & data objects here
 - (void) setup {
-    _url = [NSURL URLWithString: @"http://www.saveaselfie.org/wp/wp-content/themes/magazine-child/getMapData.php"];
-    _request = [NSURLRequest requestWithURL:self.url];
-    _responseData = [[NSMutableData alloc] init];
+  
+  _url = [NSURL URLWithString:
+          @"http://www.saveaselfie.org/wp/wp-content/themes/magazine-child/getMapData.php"];
+  _request = [NSURLRequest requestWithURL:self.url];
+  _responseData = [[NSMutableData alloc] init];
 }
 
 
 
 - (void) downloadObjectsFromServer {
-    self.connection = [[NSURLConnection alloc] initWithRequest:self.request delegate:self];
+  self.connection = [[NSURLConnection alloc] initWithRequest:self.request delegate:self];
 }
 
 
 
 #pragma mark NSURLConnectionDataDelegate methods
 - (void) connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
-    [self.responseData setLength: 0];
+  [self.responseData setLength: 0];
 }
 
 
 
 - (void) connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
-    [self.responseData appendData:data];
+  [self.responseData appendData:data];
 }
 
 
 
 #pragma mark NSURLConnectionDelegate methods
 - (void) connectionDidFinishLoading:(NSURLConnection *)connection {
-    
-    NSString *data = [[NSString alloc] initWithData:self.responseData
-                                           encoding:NSUTF8StringEncoding];
-    
-    NSArray *objectData = [data componentsSeparatedByString:@"\n"];
-    
-    
-    self.dowloadedObjects = [[NSMutableArray alloc] init];
-    
-    
-    for(int i = 0; i < [objectData count]; i++) {
-        if([objectData[i] length] != 0) {
-            SASDevice *device = [[SASDevice alloc] initDeviceWithInformationFromString:[objectData objectAtIndex:i]];
-            [self.dowloadedObjects insertObject:device atIndex:i];
-        }
+  
+  NSString *data = [[NSString alloc] initWithData:self.responseData
+                                         encoding:NSUTF8StringEncoding];
+  
+  NSArray *objectData = [data componentsSeparatedByString:@"\n"];
+  
+  
+  self.dowloadedObjects = [[NSMutableArray alloc] init];
+  
+  
+  for(int i = 0; i < [objectData count]; i++) {
+    if([objectData[i] length] != 0) {
+      SASDevice *device = [[SASDevice alloc] initDeviceWithInformationFromString:[objectData objectAtIndex:i]];
+      [self.dowloadedObjects insertObject:device atIndex:i];
     }
-    
-    
-    // Pass on the downloaded information to the delegate.
-    if (self.delegate != nil && [self.delegate respondsToSelector:@selector(sasObjectDownloader:didDownloadObjects:)]) {
-        [self.delegate sasObjectDownloader:self didDownloadObjects:self.dowloadedObjects];
-    }
+  }
+  
+  
+  // Pass on the downloaded information to the delegate.
+  if (self.delegate != nil
+      && [self.delegate respondsToSelector:@selector(sasObjectDownloader:didDownloadObjects:)]) {
+    [self.delegate sasObjectDownloader:self didDownloadObjects:self.dowloadedObjects];
+  }
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *) error {
-    if(self.delegate != nil && [self.delegate respondsToSelector:@selector(sasObjectDownloader:didFailWithError:)]) {
-        [self.delegate sasObjectDownloader:self didFailWithError:error];
-    }
+  if(self.delegate != nil
+     && [self.delegate respondsToSelector:@selector(sasObjectDownloader:didFailWithError:)]) {
+    [self.delegate sasObjectDownloader:self didFailWithError:error];
+  }
 }
 
 @end

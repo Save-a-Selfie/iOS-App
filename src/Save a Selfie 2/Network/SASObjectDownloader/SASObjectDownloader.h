@@ -14,7 +14,7 @@
 
 @protocol SASObjectDownloaderDelegate <NSObject>
 
-/**
+/*!
  This method is called when all objects from the server have been downloaded.
  The term `objects` refers to an array of SASDevices that have been initialised with
  an info string retrieved from the server. Each device encapsulates information such
@@ -22,7 +22,7 @@
  full info.
  
  @param downloader An instance of SASObjectDownloader responsible for messaging
-                   the delegate.
+ the delegate.
  @param  onbjects  An array of SASDevices retrieved from the server.
  */
 - (void) sasObjectDownloader:(SASObjectDownloader *) downloader didDownloadObjects: (NSArray*) objects;
@@ -55,11 +55,11 @@
 @property(nonatomic, weak) id<SASObjectDownloaderDelegate> delegate;
 
 /**
- This method downloads all the information from the server 
+ This method downloads all the information from the server
  which is then constructed into an NSArray of SASDevice's.
  Once all the information is downloaded and the SASDevices are
  constructed they are passed via the SASObjectDownloaderDelegate method:
-    - sasObjectDownloader: didDownloadObjects:
+ - sasObjectDownloader: didDownloadObjects:
  */
 - (void) downloadObjectsFromServer;
 

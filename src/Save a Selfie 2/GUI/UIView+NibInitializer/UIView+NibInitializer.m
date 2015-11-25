@@ -9,8 +9,8 @@
 
 @implementation UIView (NibInitializer)
 
-- (instancetype)initWithNibNamed:(NSString *)nibNameOrNil
-{
+- (instancetype)initWithNibNamed:(NSString *)nibNameOrNil {
+    
     if (!nibNameOrNil) {
         nibNameOrNil = NSStringFromClass([self class]);
     }
