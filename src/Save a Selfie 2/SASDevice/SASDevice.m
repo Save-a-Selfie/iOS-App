@@ -212,7 +212,6 @@
 
 
 + (UIImage*) getDeviceMapPinImageForDeviceType:(SASDeviceType) deviceType {
-    
     switch (deviceType) {
         case SASDeviceTypeDefibrillator:
             return [UIImage imageNamed:@"MapPinAED"];

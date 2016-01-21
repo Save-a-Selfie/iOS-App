@@ -18,7 +18,7 @@
 #import "SASNotificationView.h"
 #import "UIView+Animations.h"
 #import "EULAViewController.h"
-#import "SASFilterViewNew.h"
+#import "SASFilterView.h"
 #import "FXAlert.h"
 #import "SASTabBarController.h"
 
@@ -38,7 +38,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *locateUserButton;
 
 @property (strong, nonatomic) UISegmentedControl *mapTypeSegmentedContol;
-@property (strong, nonatomic) SASFilterViewNew *sasFilterViewNew;
+@property (strong, nonatomic) SASFilterView *sasFilterView;
 
 
 @end
@@ -68,7 +68,7 @@ NSString *permissionsProblemText = @"Please enable location services for this ap
     self.sasMapView.notificationReceiver = self;
     self.sasMapView.zoomToUsersLocationInitially = YES;
     self.sasMapView.sasAnnotationImage = SASAnnotationImageCustom;
-    self.sasMapView.mapType = MKMapTypeSatelliteFlyover;
+    self.sasMapView.mapType = MKMapTypeSatellite;
   
     [self.sasMapView loadSASAnnotationsToMap];
 
@@ -119,15 +119,14 @@ NSString *permissionsProblemText = @"Please enable location services for this ap
 
 
 - (IBAction) showSASFilterView:(id)sender {
-    
-    if(!self.sasFilterViewNew) {
-        self.sasFilterViewNew = [[SASFilterViewNew alloc] initWithPosition:CGPointMake(self.locateUserButton.frame.origin.x, self.locateUserButton.frame.origin.y - 300)
-                                                                forMapView:self.sasMapView];
-        
-        printf("Locate button x value: %f.\n FilterView x value: %f",self.locateUserButton.frame.origin.x, self.sasFilterViewNew.frame.origin.x);
-    }
-    
-    [self.sasFilterViewNew presentIntoView:self.view];
+  
+  if (!self.sasFilterView) {
+    self.sasFilterView = [[SASFilterView alloc] init];
+  }
+  
+  [self.sasFilterView animateIntoView:self.view];
+  NSLog(@"HEY THERE!");
+  
 }
 
 

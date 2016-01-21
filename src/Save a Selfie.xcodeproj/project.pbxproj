@@ -36,7 +36,6 @@
 		185F3ED41B9E04FB00345CFB /* FXPresentationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 185F3ED01B9E04FB00345CFB /* FXPresentationController.m */; };
 		1864FEAC1B27A39900EA564A /* UIFont+SASFont.m in Sources */ = {isa = PBXBuildFile; fileRef = 1864FEAB1B27A39900EA564A /* UIFont+SASFont.m */; };
 		1869E3E01B9B3AC4000E1DA7 /* CMPopTipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1869E3DF1B9B3AC4000E1DA7 /* CMPopTipView.m */; };
-		186F9ECF1BB86C8000D2AE46 /* SASFilterViewNew.m in Sources */ = {isa = PBXBuildFile; fileRef = 186F9ECE1BB86C8000D2AE46 /* SASFilterViewNew.m */; settings = {ASSET_TAGS = (); }; };
 		188CAEE51B20EA59006A90EB /* SASSocial.m in Sources */ = {isa = PBXBuildFile; fileRef = 188CAEE41B20EA59006A90EB /* SASSocial.m */; };
 		188CAEED1B21006C006A90EB /* Screen.m in Sources */ = {isa = PBXBuildFile; fileRef = 188CAEEC1B21006C006A90EB /* Screen.m */; };
 		1891E3D31B1743C8008CC10C /* SASMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1891E3D21B1743C8008CC10C /* SASMapView.m */; };
@@ -49,6 +48,10 @@
 		18BA4DF61B82C1500047DEC4 /* UIDevice+DeviceName.m in Sources */ = {isa = PBXBuildFile; fileRef = 18BA4DF51B82C1500047DEC4 /* UIDevice+DeviceName.m */; };
 		18C104861B714C5900B4731D /* SASGalleryContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C104851B714C5900B4731D /* SASGalleryContainer.m */; };
 		18C323991B1E2F1E0027BDEA /* SASImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C323981B1E2F1E0027BDEA /* SASImageViewController.m */; };
+		18D66E461C5113D100AA7238 /* SASFilterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D66E451C5113D100AA7238 /* SASFilterView.m */; };
+		18D66E4A1C51144800AA7238 /* SASFilterViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D66E491C51144800AA7238 /* SASFilterViewCell.m */; };
+		18D66E4D1C51156B00AA7238 /* SASFilterViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18D66E4C1C51156B00AA7238 /* SASFilterViewCell.xib */; };
+		18D66E4F1C5115CA00AA7238 /* SASFilterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18D66E4E1C5115CA00AA7238 /* SASFilterView.xib */; };
 		18DAE8531B46BA6400CAEF2D /* SASDeviceButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 18DAE8521B46BA6400CAEF2D /* SASDeviceButton.m */; };
 		18DDE50B1B3D7F0F00AB0CB3 /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18DDE50A1B3D7F0F00AB0CB3 /* Launch Screen.xib */; };
 		18EBF9771B272B3400EDA48B /* SASImagePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EBF9761B272B3400EDA48B /* SASImagePickerViewController.m */; };
@@ -56,7 +59,6 @@
 		18EBF9801B2741F600EDA48B /* SASUploadImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EBF97F1B2741F600EDA48B /* SASUploadImageViewController.m */; };
 		18EE44D11B554F3B00F8F93B /* SystemVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EE44D01B554F3B00F8F93B /* SystemVersion.m */; };
 		18EE44DE1B556A1F00F8F93B /* SASNotificationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EE44DD1B556A1F00F8F93B /* SASNotificationView.m */; };
-		18F9AF241BB9E1B800073867 /* SASFilterViewButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F9AF231BB9E1B800073867 /* SASFilterViewButton.m */; settings = {ASSET_TAGS = (); }; };
 		D0EAAC0B1A0FD59B00C0F955 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0EAAC0A1A0FD59B00C0F955 /* Social.framework */; };
 		D0EAAC0D1A0FD63B00C0F955 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0EAAC0C1A0FD63B00C0F955 /* MessageUI.framework */; };
 		D0EAAC0F1A100F2D00C0F955 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0EAAC0E1A100F2D00C0F955 /* Accounts.framework */; };
@@ -157,8 +159,6 @@
 		1864FEAB1B27A39900EA564A /* UIFont+SASFont.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+SASFont.m"; sourceTree = "<group>"; };
 		1869E3DE1B9B3AC4000E1DA7 /* CMPopTipView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMPopTipView.h; sourceTree = "<group>"; };
 		1869E3DF1B9B3AC4000E1DA7 /* CMPopTipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMPopTipView.m; sourceTree = "<group>"; };
-		186F9ECD1BB86C8000D2AE46 /* SASFilterViewNew.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASFilterViewNew.h; sourceTree = "<group>"; };
-		186F9ECE1BB86C8000D2AE46 /* SASFilterViewNew.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASFilterViewNew.m; sourceTree = "<group>"; };
 		188CAEE31B20EA59006A90EB /* SASSocial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASSocial.h; sourceTree = "<group>"; };
 		188CAEE41B20EA59006A90EB /* SASSocial.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASSocial.m; sourceTree = "<group>"; };
 		188CAEEB1B21006C006A90EB /* Screen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Screen.h; sourceTree = "<group>"; };
@@ -185,6 +185,12 @@
 		18C104851B714C5900B4731D /* SASGalleryContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASGalleryContainer.m; sourceTree = "<group>"; };
 		18C323971B1E2F1E0027BDEA /* SASImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASImageViewController.h; sourceTree = "<group>"; };
 		18C323981B1E2F1E0027BDEA /* SASImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASImageViewController.m; sourceTree = "<group>"; };
+		18D66E441C5113D100AA7238 /* SASFilterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASFilterView.h; sourceTree = "<group>"; };
+		18D66E451C5113D100AA7238 /* SASFilterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASFilterView.m; sourceTree = "<group>"; };
+		18D66E481C51144800AA7238 /* SASFilterViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SASFilterViewCell.h; path = SASFilterViewCell/SASFilterViewCell.h; sourceTree = "<group>"; };
+		18D66E491C51144800AA7238 /* SASFilterViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SASFilterViewCell.m; path = SASFilterViewCell/SASFilterViewCell.m; sourceTree = "<group>"; };
+		18D66E4C1C51156B00AA7238 /* SASFilterViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SASFilterViewCell.xib; sourceTree = "<group>"; };
+		18D66E4E1C5115CA00AA7238 /* SASFilterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SASFilterView.xib; sourceTree = "<group>"; };
 		18DAE8511B46BA6400CAEF2D /* SASDeviceButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASDeviceButton.h; sourceTree = "<group>"; };
 		18DAE8521B46BA6400CAEF2D /* SASDeviceButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASDeviceButton.m; sourceTree = "<group>"; };
 		18DDE50A1B3D7F0F00AB0CB3 /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Launch Screen.xib"; sourceTree = "<group>"; };
@@ -198,8 +204,6 @@
 		18EE44D01B554F3B00F8F93B /* SystemVersion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemVersion.m; sourceTree = "<group>"; };
 		18EE44DC1B556A1F00F8F93B /* SASNotificationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASNotificationView.h; sourceTree = "<group>"; };
 		18EE44DD1B556A1F00F8F93B /* SASNotificationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASNotificationView.m; sourceTree = "<group>"; };
-		18F9AF221BB9E1B800073867 /* SASFilterViewButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASFilterViewButton.h; sourceTree = "<group>"; };
-		18F9AF231BB9E1B800073867 /* SASFilterViewButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASFilterViewButton.m; sourceTree = "<group>"; };
 		6DD50A6FBD23D090F1506F00 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		6FAEC062F47D183CE9855B1C /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		CEC3A1E290F274AEC4E4510F /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -722,6 +726,16 @@
 			path = AppDelegate;
 			sourceTree = "<group>";
 		};
+		18D66E4B1C51145300AA7238 /* SASFilterViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				18D66E481C51144800AA7238 /* SASFilterViewCell.h */,
+				18D66E491C51144800AA7238 /* SASFilterViewCell.m */,
+				18D66E4C1C51156B00AA7238 /* SASFilterViewCell.xib */,
+			);
+			name = SASFilterViewCell;
+			sourceTree = "<group>";
+		};
 		18DAE8501B46BA2D00CAEF2D /* SASDeviceButton */ = {
 			isa = PBXGroup;
 			children = (
@@ -794,10 +808,10 @@
 			isa = PBXGroup;
 			children = (
 				18A49A191BBB33D800C50561 /* Filterable.h */,
-				186F9ECD1BB86C8000D2AE46 /* SASFilterViewNew.h */,
-				186F9ECE1BB86C8000D2AE46 /* SASFilterViewNew.m */,
-				18F9AF221BB9E1B800073867 /* SASFilterViewButton.h */,
-				18F9AF231BB9E1B800073867 /* SASFilterViewButton.m */,
+				18D66E441C5113D100AA7238 /* SASFilterView.h */,
+				18D66E451C5113D100AA7238 /* SASFilterView.m */,
+				18D66E4E1C5115CA00AA7238 /* SASFilterView.xib */,
+				18D66E4B1C51145300AA7238 /* SASFilterViewCell */,
 			);
 			path = SASFilterView;
 			sourceTree = "<group>";
@@ -1011,10 +1025,12 @@
 			files = (
 				D786E24E1A50AB1500A20FDD /* PopupImage.xib in Resources */,
 				18DDE50B1B3D7F0F00AB0CB3 /* Launch Screen.xib in Resources */,
+				18D66E4F1C5115CA00AA7238 /* SASFilterView.xib in Resources */,
 				D700239619F5253C00E45408 /* AlertBox.xib in Resources */,
 				D72E1DBF19EE841E005DD8A5 /* Main.storyboard in Resources */,
 				D759B32D1A7D3DC6009EA131 /* HelperCoordinates.gpx in Resources */,
 				1845C4EC1B20920300E3D7BC /* SASActivityIndicatorView.xib in Resources */,
+				18D66E4D1C51156B00AA7238 /* SASFilterViewCell.xib in Resources */,
 				180E18F81B7AC20D0077BBEF /* SASSponsorCardView.xib in Resources */,
 				18453A511B584DD20055A004 /* SASNotificationView.xib in Resources */,
 				D72E1DC119EE841F005DD8A5 /* Images.xcassets in Resources */,
@@ -1077,6 +1093,7 @@
 				18A525081B16708400E8F8F6 /* SASMapViewController.m in Sources */,
 				D786E1781A48C02900A20FDD /* SASDevice.m in Sources */,
 				18A524F71B166BAB00E8F8F6 /* SASLocation.m in Sources */,
+				18D66E4A1C51144800AA7238 /* SASFilterViewCell.m in Sources */,
 				D756A29C19F175230089EF80 /* UIImage+Alpha.m in Sources */,
 				18C104861B714C5900B4731D /* SASGalleryContainer.m in Sources */,
 				1891E3D91B176E9B008CC10C /* SASObjectDownloader.m in Sources */,
@@ -1088,8 +1105,8 @@
 				185F3ED41B9E04FB00345CFB /* FXPresentationController.m in Sources */,
 				18DAE8531B46BA6400CAEF2D /* SASDeviceButton.m in Sources */,
 				1845C4EA1B2091F600E3D7BC /* SASActivityIndicator.m in Sources */,
+				18D66E461C5113D100AA7238 /* SASFilterView.m in Sources */,
 				185F3ED21B9E04FB00345CFB /* FXAlertController.m in Sources */,
-				186F9ECF1BB86C8000D2AE46 /* SASFilterViewNew.m in Sources */,
 				D72E1DB619EE841E005DD8A5 /* AppDelegate.m in Sources */,
 				D715E48F1A064FDA0026D91F /* UIView+NibInitializer.m in Sources */,
 				1845C4EF1B209E6C00E3D7BC /* SASUtilities.m in Sources */,
@@ -1101,7 +1118,6 @@
 				D756A2A919F309690089EF80 /* SASTabBarController.m in Sources */,
 				1835D2791B78F7D100A62B7F /* SASGalleryCollectionViewController.m in Sources */,
 				18EE44DE1B556A1F00F8F93B /* SASNotificationView.m in Sources */,
-				18F9AF241BB9E1B800073867 /* SASFilterViewButton.m in Sources */,
 				185F3ED11B9E04FB00345CFB /* FXAlertButton.m in Sources */,
 				1810C90A1B289044009063E5 /* UIImage+SASImage.m in Sources */,
 				1869E3E01B9B3AC4000E1DA7 /* CMPopTipView.m in Sources */,

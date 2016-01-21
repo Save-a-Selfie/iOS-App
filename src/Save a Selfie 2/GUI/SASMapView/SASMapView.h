@@ -11,7 +11,6 @@
 #import "SASLocation.h"
 #import "SASAnnotation.h"
 #import "SASDevice.h"
-#import "SASFilterViewNew.h"
 #import "Filterable.h"
 
 @class SASMapView;

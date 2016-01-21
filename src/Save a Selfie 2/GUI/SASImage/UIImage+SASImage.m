@@ -36,8 +36,13 @@ NSString* const KeyForThubnailImage = @"THUMBNAIL_IMAGE";
 // @Disccusion:
 //  Merges two image together.
 + (UIImage *) doubleMerge: (UIImage *) photo
-                withImage:(UIImage *) logo1 atX: (int) x andY:(int)y withStrength:(float) mapOpacity
-                 andImage:(UIImage *) logo2 atX2:(int) x2 andY2:(int)y2
+                withImage:(UIImage *) logo1
+                      atX: (int) x
+                     andY:(int)y
+             withStrength:(float) mapOpacity
+                 andImage:(UIImage *) logo2
+                     atX2:(int) x2
+                    andY2:(int)y2
                  strength: (float) strength {
     float extraHeight = 0.0;
     // see http://stackoverflow.com/questions/10931155/uigraphicsbeginimagecontextwithoptions-and-multithreading re calling UIGraphicsBeginImageContextWithOptions on background thread – apparently it's fine
