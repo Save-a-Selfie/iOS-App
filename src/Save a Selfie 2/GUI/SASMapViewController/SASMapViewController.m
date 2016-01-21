@@ -22,7 +22,11 @@
 #import "FXAlert.h"
 #import "SASTabBarController.h"
 
-@interface SASMapViewController () <SASImagePickerDelegate, SASUploadImageViewControllerDelegate, UIAlertViewDelegate, MKMapViewDelegate>
+@interface SASMapViewController ()
+<SASImagePickerDelegate,
+SASUploadImageViewControllerDelegate,
+UIAlertViewDelegate,
+MKMapViewDelegate>
 
 @property (nonatomic, strong) IBOutlet SASMapView* sasMapView;
 
@@ -122,16 +126,11 @@ NSString *permissionsProblemText = @"Please enable location services for this ap
   
   if (!self.sasFilterView) {
     self.sasFilterView = [[SASFilterView alloc] init];
+    [self.sasFilterView mapToFilter:self.sasMapView];
   }
   
   [self.sasFilterView animateIntoView:self.view];
-  NSLog(@"HEY THERE!");
-  
 }
-
-
-
-
 
 #pragma mark <SASMapViewNotifications>
 - (void)sasMapView:(SASMapView *)mapView annotationWasTapped:(SASAnnotation *) annotation {
@@ -145,7 +144,6 @@ NSString *permissionsProblemText = @"Please enable location services for this ap
     [self.navigationController pushViewController:sasImageViewController animated:YES];
 
 }
-
 
 
 

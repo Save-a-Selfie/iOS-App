@@ -10,7 +10,7 @@
 
 
 /**
- A protocol any MKMapView instance can implement
+ A protocol for any MKMapView instance can implement
  to filter all the devices on the map.
  */
 @protocol Filterable <NSObject>

@@ -19,7 +19,7 @@
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UILabel *filterLabel;
 @property (assign, nonatomic) SASDeviceType selectedDevice;
-
+@property (strong, nonatomic) SASMapView *filterableMapView;
 @property (strong, nonatomic) NSMutableArray *cells;
 
 @end
@@ -59,7 +59,6 @@ SASDeviceType availableDevicesToFilter[5] = {
     _tableView.layer.cornerRadius = 8.0;
     
     
-    
     // Register SASFilterViewCell.
     [_tableView registerNib:[UINib nibWithNibName:@"SASFilterViewCell" bundle:nil]
      forCellReuseIdentifier:@"sasFilterViewCell"];
@@ -73,14 +72,18 @@ SASDeviceType availableDevicesToFilter[5] = {
 
 
 
+- (void)mapToFilter:(SASMapView<Filterable>*) mapView {
+  self.filterableMapView = mapView;
+}
+
 
 #pragma mark UITableViewDelegate
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+- (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
   return sizeof(availableDevicesToFilter) / sizeof(int);
 }
 
 
-- (void)tableView:(UITableView *)aTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+- (void) tableView:(UITableView *)aTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
   
   for (SASFilterViewCell *sasFilterViewCell in self.cells) {
     [self untickCell:sasFilterViewCell];
@@ -113,12 +116,15 @@ SASDeviceType availableDevicesToFilter[5] = {
   
   SASDeviceType deviceTypeForCell = [self getDeviceForCellWithIndexPath:indexPath];
   
+  
   if(self.cells == nil) {
     self.cells = [[NSMutableArray alloc] init];
   }
   
-  SASFilterViewCell *sasFilterViewCell = (SASFilterViewCell*)[self.tableView dequeueReusableCellWithIdentifier:@"sasFilterViewCell"];
-  sasFilterViewCell.deviceNameLabel.text = [SASDevice getDeviceNameForDeviceType:deviceTypeForCell];
+  SASFilterViewCell *sasFilterViewCell =
+    (SASFilterViewCell*)[self.tableView dequeueReusableCellWithIdentifier:@"sasFilterViewCell"];
+  sasFilterViewCell.deviceNameLabel.text =
+    [SASDevice getDeviceNameForDeviceType:deviceTypeForCell];
   sasFilterViewCell.imageView.image = [SASDevice getDeviceImageForDeviceType:deviceTypeForCell];
   sasFilterViewCell.associatedDeviceType = deviceTypeForCell;
   
@@ -171,17 +177,11 @@ SASDeviceType availableDevicesToFilter[5] = {
 
 
 // Forwards selected cells associatedDevice to delegate.
-- (IBAction)doneButtonPressed:(id)sender {
-  if(self.delegate != nil && [self.delegate respondsToSelector:@selector(sasFilterView:doneButtonWasPressedWithSelectedDeviceType:)]) {
-    [self.delegate sasFilterView:self doneButtonWasPressedWithSelectedDeviceType:self.selectedDevice];
-  }
-}
-
-
-- (void) updateDelegateOnViewVisibility:(BOOL) visibility {
-  if (self.delegate != nil && [self.delegate respondsToSelector:@selector(sasFilterView:isVisibleInViewHierarhy:)]) {
-    [self.delegate sasFilterView:self isVisibleInViewHierarhy:visibility];
-  }
+- (IBAction) doneButtonPressed:(id)sender {
+  // Message map on what to filter annotation to filter.
+  [self.filterableMapView filterMapForDevice:self.selectedDevice];
+  NSLog(@"%d", self.selectedDevice);
+  [self animateOutOfParentView];
 }
 
 
@@ -200,22 +200,18 @@ SASDeviceType availableDevicesToFilter[5] = {
                       options:UIViewAnimationOptionCurveLinear
                    animations:^{CGAffineTransform transform = CGAffineTransformMakeScale(1.02, 1.02);
                      self.transform = transform;
-                     
                    }
-                   completion:^(BOOL visible){[self updateDelegateOnViewVisibility:YES];}];
+                   completion:nil];
   
   
 }
 
 
 
-- (void) animateOutOfView {
+- (void) animateOutOfParentView {
   [self removeFromSuperview];
-  [self updateDelegateOnViewVisibility:NO];
-  
   // Change the scale back to 1.
   self.transform = CGAffineTransformMakeScale(1, 1);
-  
 }
 
 
