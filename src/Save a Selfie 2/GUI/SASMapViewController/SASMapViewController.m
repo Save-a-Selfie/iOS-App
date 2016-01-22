@@ -52,8 +52,6 @@ MKMapViewDelegate>
 NSString *permissionsProblemText = @"Please enable location services for this app. Launch the iPhone Settings app to do this.\n\nGo to Privacy > Location Services > Save a Selfie > While Using the App. You have to go out of this app, using the 'Home' button.";
 
 
-
-
 - (UIStatusBarStyle)preferredStatusBarStyle {
     return UIStatusBarStyleLightContent;
 }
@@ -142,7 +140,6 @@ NSString *permissionsProblemText = @"Please enable location services for this ap
     sasImageViewController.device = annotation.device;
     
     [self.navigationController pushViewController:sasImageViewController animated:YES];
-
 }
 
 
