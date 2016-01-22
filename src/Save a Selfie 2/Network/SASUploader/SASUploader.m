@@ -52,11 +52,6 @@
     UIImage *standardImage = [images objectForKey:KeyForLargeImage];
     UIImage *thumbnailImage = [images objectForKey:KeyForThubnailImage];
     
-    NSLog(@"%@", images);
-    NSLog(@"%@", standardImage);
-    NSLog(@"%@", thumbnailImage);
-    
-    NSLog(@"%@", standardImage);
     // Construct information for uploading
     NSData *standardImageData = UIImageJPEGRepresentation(standardImage, 1.0);
     NSData *thumbnailImageData = UIImageJPEGRepresentation(thumbnailImage, 1.0);

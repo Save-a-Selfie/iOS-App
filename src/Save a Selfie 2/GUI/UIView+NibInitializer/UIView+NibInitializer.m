@@ -6,6 +6,7 @@
 //
 
 #import "UIView+NibInitializer.h"
+#pragma clang diagnostic ignored "-Wobjc-designated-initializers"
 
 @implementation UIView (NibInitializer)
 
