@@ -8,11 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "SASUploadObject.h"
-
-
+#import "SASUploadManager.h"
 
 @interface SASUploaderNew : NSObject
 
-- (void) uploadObject:(SASUploadObject*) uploadObject;
+/**
+ Uploads a SASUploadObject to the backend.
+ */
+- (void) uploadObject:(SASUploadObject*) uploadObject completion:(UploadCompletionBlock)completion;
 
 @end

@@ -62,6 +62,10 @@
 }
 
 
+- (NSString*) deviceName {
+  return [SASDevice getDeviceNameForDeviceType:self.type];
+}
+
 
 #pragma mark <NSCopying> protocol.
 - (id)copyWithZone:(NSZone *)zone {
@@ -127,6 +131,8 @@
             break;
     }
 }
+
+
 
 + (UIImage*) getDeviceImageForDeviceType:(SASDeviceType) deviceType {
     

@@ -18,19 +18,19 @@
 @implementation SASUploadManager
 
 
-+ (SASUploadManager *)getSharedInstance {
++ (SASUploadManager *) sharedInstance {
   static SASUploadManager *sharedInstance;
   static dispatch_once_t token;
   
   dispatch_once(&token, ^{
     sharedInstance = [[self alloc] init];
   });
-  
   return sharedInstance;
 }
 
 
-- (void)beginObjectUpload:(SASUploadObject<SASVerifiedUploadObject> *)uploadObject completion:(UploadCompletionBlock)completionBlock {
+- (void)beginObjectUpload:(SASUploadObject<SASVerifiedUploadObject> *)uploadObject
+               completion:(UploadCompletionBlock)completionBlock {
   
   // First check to make sure the object has all the correct information to upload.
   // We don't want a incomplete/ invalid object.
@@ -42,7 +42,7 @@
     self.uploader = [[SASUploaderNew alloc] init];
   }
   
-  [self.uploader uploadObject:uploadObject];
+  [self.uploader uploadObject:uploadObject completion:completionBlock];
 }
 
 - (BOOL) verifyObject:(SASUploadObject <SASVerifiedUploadObject>*) object {

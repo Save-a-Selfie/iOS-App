@@ -25,7 +25,7 @@ typedef void (^UploadCompletionBlock)(BOOL completion);
 /**
  Obtain the shared instance to upload objects to the server.
  */
-+ (SASUploadManager*) getSharedInstance;
++ (SASUploadManager*) sharedInstance;
 
 
 /**

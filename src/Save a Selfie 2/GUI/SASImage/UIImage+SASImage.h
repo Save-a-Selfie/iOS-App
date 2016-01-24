@@ -41,7 +41,7 @@
                         The standard image will be the first object in the array
                         and the thumbnail will be the second image in the array.
  */
-+ (NSDictionary *) createLargeImageAndThumbnailFromSource:(UIImage *) image;
++ (NSDictionary<NSString *, UIImage *> *) createLargeImageAndThumbnailFromSource:(UIImage *) image;
 
 
 // Use these keys to retrieve the correct image from

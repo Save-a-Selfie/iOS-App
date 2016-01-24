@@ -35,6 +35,16 @@
 @property(nonatomic, assign) CLLocationCoordinate2D coordinates;
 
 /**
+ The longtitude coodrinates.
+ */
+@property(nonatomic, assign) CLLocationDegrees longtitude;
+
+/**
+ The latitude coordinates.
+ */
+@property(nonatomic, assign) CLLocationDegrees latitude;
+
+/**
  The image to upload.
  */
 @property(nonatomic, strong) UIImage *image;
@@ -55,5 +65,7 @@
  Creates a new instance and set the image to upload.
  */
 - (instancetype) initWithImage:(UIImage*) imageToUpload;
+
+
 
 @end
