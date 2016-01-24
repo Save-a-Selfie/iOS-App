@@ -24,7 +24,7 @@
 
 /**
  Use this flag to change whether or not
- an image will be loadedfrom the url from the set SASDevice property. 
+ an image will be loadedfrom the url or from the set SASDevice property. 
  The default is YES.
 
  YES - Image will be downloaded from the server using the devices imageURL property.

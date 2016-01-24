@@ -28,7 +28,8 @@
           withObject:(SASUploadObject<SASVerifiedUploadObject> *) uploadObject
           completion:(UploadCompletionBlock) completionBlock {
   
-  // Verify object is has correct attributes.
+  // Verify object is has correct attributes
+  // and message the callee if the object is invalid.
   if (![self verifyObject:uploadObject]) {
     completionBlock(InvalidObject);
   }

@@ -23,12 +23,12 @@
   selfie[@"address"] = [NSNull null];
   
   NSData *imageData = UIImageJPEGRepresentation(uploadObject.image, 1.0);
-  PFFile *imageFile = [PFFile fileWithData:imageData];
+  PFFile *imageFile = [PFFile fileWithName:@"image.jpg" data:imageData];
   selfie[@"image"] = imageFile;
   
 
   [selfie saveInBackgroundWithBlock:^(BOOL success, NSError *error) {
-    completion(success);
+    success ? completion(Success) : completion (Failed);
   }];
   
 }
