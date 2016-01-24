@@ -231,19 +231,29 @@
       self.uploadManager = [SASUploadManager sharedInstance];
     }
     
-    
+    // Message UploadManager to begin uploading to the server.
     [self.uploadManager uploadWorker:[[ParseUploadWorker alloc] init]
                           withObject:self.sasUploadObject
-                          completion:^(BOOL succeeded) {
-                            succeeded ? [self uploadSuccess] : [self uploadFailure];
+                          completion:^(UploadCompletionStatus status) {
+                            switch (status) {
+                              case Success:
+                                [self uploadSuccess];
+                                break;
+                              case Failed:
+                                [self uploadFailure];
+                                break;
+                              case InvalidObject:
+                                [self uploadFailure];
+                                
+                              default:
+                                break;
+                            }
                           }];
     [self uploadBegan];
   }
 }
 
 
-
-#pragma mark <SASUploaderDelegate>
 - (void) uploadBegan {
   
   // Activity Indicator

@@ -338,14 +338,17 @@ NSString *permissionsProblemText = @"Please enable location services for this ap
     
     
     if(self.sasUploadImageViewController == nil) {
-        self.sasUploadImageViewController = (SASUploadImageViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"SASUploadImageViewController"];
+        self.sasUploadImageViewController =
+          (SASUploadImageViewController *)[self.storyboard
+                                           instantiateViewControllerWithIdentifier:@"SASUploadImageViewController"];
         self.sasUploadImageViewController.delegate = self;
         [self.sasUploadImageViewController setSasUploadObject:sasUploadObject];
     }
 
     
     if (self.uploadImageNavigationController == nil) {
-        self.uploadImageNavigationController = [[UINavigationController alloc] initWithRootViewController:self.sasUploadImageViewController];
+        self.uploadImageNavigationController =
+          [[UINavigationController alloc] initWithRootViewController:self.sasUploadImageViewController];
     }
     
     [self presentViewController:self.uploadImageNavigationController animated:YES completion:nil];
@@ -355,7 +358,9 @@ NSString *permissionsProblemText = @"Please enable location services for this ap
 }
 
 #pragma mark SASUploadImageViewController Delegate
-- (void)sasUploadImageViewControllerDidFinishUploading:(UIViewController *)viewController withResponse:(SASUploadControllerResponse)response withObject:(SASUploadObject *)sasUploadObject {
+- (void)sasUploadImageViewControllerDidFinishUploading:(UIViewController *)viewController
+                                          withResponse:(SASUploadControllerResponse)response
+                                            withObject:(SASUploadObject *)sasUploadObject {
     
 
     // Alert the user if it was succes.

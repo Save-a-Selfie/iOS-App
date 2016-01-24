@@ -20,7 +20,9 @@ typedef NS_ENUM(NSInteger, SASUploadControllerResponse) {
 
 /// Called when SASImageViewController is dismissed.
 /// An SASUploadControllerResponse is paassed to the delegate.
-- (void)sasUploadImageViewControllerDidFinishUploading:(UIViewController *)viewController withResponse:(SASUploadControllerResponse) response withObject:(SASUploadObject *) sasUploadObject;
+- (void)sasUploadImageViewControllerDidFinishUploading:(UIViewController *)viewController
+                                          withResponse:(SASUploadControllerResponse) response
+                                            withObject:(SASUploadObject *) sasUploadObject;
 
 @end
 

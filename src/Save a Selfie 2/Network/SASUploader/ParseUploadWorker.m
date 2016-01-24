@@ -15,18 +15,19 @@
 
 - (void) uploadObject:(SASUploadObject*) uploadObject completion:(UploadCompletionBlock)completion {
   
-  PFObject *pfObject = [[PFObject alloc] initWithClassName:@"Selfie"];
-  pfObject[@"longtitude"] = @(uploadObject.longtitude);
-  pfObject[@"latitude"] = @(uploadObject.latitude);
-  pfObject[@"info"] = uploadObject.caption;
-  pfObject[@"aidType"] = uploadObject.associatedDevice.deviceName;
-  pfObject[@"address"] = [NSNull null];
+  PFObject *selfie = [[PFObject alloc] initWithClassName:@"Selfie"];
+  selfie[@"longitude"] = @(uploadObject.coordinates.longitude);
+  selfie[@"latitude"] = @(uploadObject.coordinates.latitude);
+  selfie[@"info"] = uploadObject.caption;
+  selfie[@"aidType"] = uploadObject.associatedDevice.deviceName;
+  selfie[@"address"] = [NSNull null];
   
   NSData *imageData = UIImageJPEGRepresentation(uploadObject.image, 1.0);
   PFFile *imageFile = [PFFile fileWithData:imageData];
-  pfObject[@"image"] = imageFile;
+  selfie[@"image"] = imageFile;
   
-  [pfObject saveInBackgroundWithBlock:^(BOOL success, NSError *error) {
+
+  [selfie saveInBackgroundWithBlock:^(BOOL success, NSError *error) {
     completion(success);
   }];
   

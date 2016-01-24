@@ -13,15 +13,16 @@
 /**
  The Selfie object is to be used to upload data to
  Parse, this is modelled exactly how it is represented
- on the backend.
+ on the backend, and changes should only be made 
+ to this class if the Parse schema changes.
  */
 @interface Selfie : NSObject
 
 @property(nonatomic, strong) PFFile *image;
 
-@property(nonatomic, assign) CLLocationDegrees *longitude;
+@property(nonatomic, assign) CLLocationDegrees longitude;
 
-@property(nonatomic, assign) CLLocationDegrees *latitude;
+@property(nonatomic, assign) CLLocationDegrees latitude;
 
 @property(nonatomic, assign) NSString *info;
 

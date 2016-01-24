@@ -39,6 +39,6 @@
  @param completioBlock Calling block upon success/ failure of object upload (see UploadWorker.h).
  */
 - (void) uploadWorker: (id<UploadWorker>) worker
-           withObject:(SASUploadObject <SASVerifiedUploadObject>*) uploadObject
-           completion:(UploadCompletionBlock) completionBlock;
+           withObject: (SASUploadObject <SASVerifiedUploadObject>*) uploadObject
+           completion: (UploadCompletionBlock) completionBlock;
 @end
