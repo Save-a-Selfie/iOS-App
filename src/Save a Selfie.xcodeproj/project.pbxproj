@@ -21,7 +21,7 @@
 		181D1E5D1B2359EA00FB5928 /* SASImageInspectorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 181D1E5C1B2359EA00FB5928 /* SASImageInspectorView.m */; };
 		181D1E621B235CF900FB5928 /* SASImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 181D1E611B235CF900FB5928 /* SASImageView.m */; };
 		1835D2791B78F7D100A62B7F /* SASGalleryCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1835D2781B78F7D100A62B7F /* SASGalleryCollectionViewController.m */; };
-		183C0CCD1C5274C900D66B2F /* SASUploaderNew.m in Sources */ = {isa = PBXBuildFile; fileRef = 183C0CCC1C5274C900D66B2F /* SASUploaderNew.m */; };
+		183C0CCD1C5274C900D66B2F /* ParseUploadWorker.m in Sources */ = {isa = PBXBuildFile; fileRef = 183C0CCC1C5274C900D66B2F /* ParseUploadWorker.m */; };
 		183C0CD01C527ECE00D66B2F /* SASUploadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 183C0CCF1C527ECE00D66B2F /* SASUploadManager.m */; };
 		18453A511B584DD20055A004 /* SASNotificationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18453A501B584DD20055A004 /* SASNotificationView.xib */; };
 		1845C4EA1B2091F600E3D7BC /* SASActivityIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 1845C4E91B2091F600E3D7BC /* SASActivityIndicator.m */; };
@@ -49,8 +49,7 @@
 		18BA4DF61B82C1500047DEC4 /* UIDevice+DeviceName.m in Sources */ = {isa = PBXBuildFile; fileRef = 18BA4DF51B82C1500047DEC4 /* UIDevice+DeviceName.m */; };
 		18C104861B714C5900B4731D /* SASGalleryContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C104851B714C5900B4731D /* SASGalleryContainer.m */; };
 		18C323991B1E2F1E0027BDEA /* SASImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C323981B1E2F1E0027BDEA /* SASImageViewController.m */; };
-		18C6F2201C546461002A8F17 /* ParseFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C6F21F1C546461002A8F17 /* ParseFactory.m */; };
-		18C6F2271C551AAC002A8F17 /* PFUploadObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C6F2261C551AAC002A8F17 /* PFUploadObject.m */; };
+		18C6F2271C551AAC002A8F17 /* Selfie.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C6F2261C551AAC002A8F17 /* Selfie.m */; };
 		18D66E461C5113D100AA7238 /* SASFilterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D66E451C5113D100AA7238 /* SASFilterView.m */; };
 		18D66E4A1C51144800AA7238 /* SASFilterViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D66E491C51144800AA7238 /* SASFilterViewCell.m */; };
 		18D66E4D1C51156B00AA7238 /* SASFilterViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18D66E4C1C51156B00AA7238 /* SASFilterViewCell.xib */; };
@@ -107,6 +106,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		180591FB1C555C6C0059215F /* UploadWorker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadWorker.h; sourceTree = "<group>"; };
 		1807AF3D1B4EE8F2006E1B28 /* StorageSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StorageSystem.h; sourceTree = "<group>"; };
 		1807AF3E1B4EE8F2006E1B28 /* StorageSystem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StorageSystem.m; sourceTree = "<group>"; };
 		1807AF4B1B4EEE79006E1B28 /* NSString+PDRegex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+PDRegex.h"; sourceTree = "<group>"; };
@@ -133,8 +133,8 @@
 		181D1E611B235CF900FB5928 /* SASImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASImageView.m; sourceTree = "<group>"; };
 		1835D2771B78F7D100A62B7F /* SASGalleryCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASGalleryCollectionViewController.h; sourceTree = "<group>"; };
 		1835D2781B78F7D100A62B7F /* SASGalleryCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASGalleryCollectionViewController.m; sourceTree = "<group>"; };
-		183C0CCB1C5274C900D66B2F /* SASUploaderNew.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASUploaderNew.h; sourceTree = "<group>"; };
-		183C0CCC1C5274C900D66B2F /* SASUploaderNew.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASUploaderNew.m; sourceTree = "<group>"; };
+		183C0CCB1C5274C900D66B2F /* ParseUploadWorker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParseUploadWorker.h; sourceTree = "<group>"; };
+		183C0CCC1C5274C900D66B2F /* ParseUploadWorker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParseUploadWorker.m; sourceTree = "<group>"; };
 		183C0CCE1C527ECE00D66B2F /* SASUploadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASUploadManager.h; sourceTree = "<group>"; };
 		183C0CCF1C527ECE00D66B2F /* SASUploadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASUploadManager.m; sourceTree = "<group>"; };
 		18453A501B584DD20055A004 /* SASNotificationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SASNotificationView.xib; sourceTree = "<group>"; };
@@ -190,10 +190,8 @@
 		18C104851B714C5900B4731D /* SASGalleryContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASGalleryContainer.m; sourceTree = "<group>"; };
 		18C323971B1E2F1E0027BDEA /* SASImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASImageViewController.h; sourceTree = "<group>"; };
 		18C323981B1E2F1E0027BDEA /* SASImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASImageViewController.m; sourceTree = "<group>"; };
-		18C6F21E1C546461002A8F17 /* ParseFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParseFactory.h; sourceTree = "<group>"; };
-		18C6F21F1C546461002A8F17 /* ParseFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParseFactory.m; sourceTree = "<group>"; };
-		18C6F2251C551AAC002A8F17 /* PFUploadObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFUploadObject.h; sourceTree = "<group>"; };
-		18C6F2261C551AAC002A8F17 /* PFUploadObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFUploadObject.m; sourceTree = "<group>"; };
+		18C6F2251C551AAC002A8F17 /* Selfie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Selfie.h; sourceTree = "<group>"; };
+		18C6F2261C551AAC002A8F17 /* Selfie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Selfie.m; sourceTree = "<group>"; };
 		18D66E441C5113D100AA7238 /* SASFilterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASFilterView.h; sourceTree = "<group>"; };
 		18D66E451C5113D100AA7238 /* SASFilterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASFilterView.m; sourceTree = "<group>"; };
 		18D66E481C51144800AA7238 /* SASFilterViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SASFilterViewCell.h; path = SASFilterViewCell/SASFilterViewCell.h; sourceTree = "<group>"; };
@@ -692,8 +690,9 @@
 		18B7C3451B44A75D00017170 /* SASUploader */ = {
 			isa = PBXGroup;
 			children = (
-				183C0CCB1C5274C900D66B2F /* SASUploaderNew.h */,
-				183C0CCC1C5274C900D66B2F /* SASUploaderNew.m */,
+				180591FB1C555C6C0059215F /* UploadWorker.h */,
+				183C0CCB1C5274C900D66B2F /* ParseUploadWorker.h */,
+				183C0CCC1C5274C900D66B2F /* ParseUploadWorker.m */,
 				183C0CCE1C527ECE00D66B2F /* SASUploadManager.h */,
 				183C0CCF1C527ECE00D66B2F /* SASUploadManager.m */,
 				18C6F2211C5464E2002A8F17 /* ParseFactory */,
@@ -742,10 +741,8 @@
 		18C6F2211C5464E2002A8F17 /* ParseFactory */ = {
 			isa = PBXGroup;
 			children = (
-				18C6F21E1C546461002A8F17 /* ParseFactory.h */,
-				18C6F21F1C546461002A8F17 /* ParseFactory.m */,
-				18C6F2251C551AAC002A8F17 /* PFUploadObject.h */,
-				18C6F2261C551AAC002A8F17 /* PFUploadObject.m */,
+				18C6F2251C551AAC002A8F17 /* Selfie.h */,
+				18C6F2261C551AAC002A8F17 /* Selfie.m */,
 			);
 			name = ParseFactory;
 			sourceTree = "<group>";
@@ -1148,7 +1145,7 @@
 				1845C4EA1B2091F600E3D7BC /* SASActivityIndicator.m in Sources */,
 				18D66E461C5113D100AA7238 /* SASFilterView.m in Sources */,
 				185F3ED21B9E04FB00345CFB /* FXAlertController.m in Sources */,
-				18C6F2271C551AAC002A8F17 /* PFUploadObject.m in Sources */,
+				18C6F2271C551AAC002A8F17 /* Selfie.m in Sources */,
 				D72E1DB619EE841E005DD8A5 /* AppDelegate.m in Sources */,
 				D715E48F1A064FDA0026D91F /* UIView+NibInitializer.m in Sources */,
 				1845C4EF1B209E6C00E3D7BC /* SASUtilities.m in Sources */,
@@ -1170,13 +1167,12 @@
 				18B7C3401B44885B00017170 /* SASBarButtonItem.m in Sources */,
 				1818AFC61B50435B004FF998 /* UIView+Animations.m in Sources */,
 				D756A29D19F175230089EF80 /* UIImage+RoundedCorner.m in Sources */,
-				18C6F2201C546461002A8F17 /* ParseFactory.m in Sources */,
 				D72E1DB319EE841E005DD8A5 /* main.m in Sources */,
 				184D99B31B49B02F005ECE33 /* SASNetworkUtilities.m in Sources */,
 				18EBF9771B272B3400EDA48B /* SASImagePickerViewController.m in Sources */,
 				D700239519F5253C00E45408 /* AlertBox.m in Sources */,
 				18592E051B51854C004DDFD8 /* UIView+WidthXY.m in Sources */,
-				183C0CCD1C5274C900D66B2F /* SASUploaderNew.m in Sources */,
+				183C0CCD1C5274C900D66B2F /* ParseUploadWorker.m in Sources */,
 				18EE44D11B554F3B00F8F93B /* SystemVersion.m in Sources */,
 				D700239D19F52EB700E45408 /* ExtendNSLogFunctionality.m in Sources */,
 				D756A28C19F1735E0089EF80 /* UIImage+Resize.m in Sources */,

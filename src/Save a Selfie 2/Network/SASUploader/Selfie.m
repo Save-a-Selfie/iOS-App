@@ -6,10 +6,10 @@
 //  Copyright © 2016 Stephen Fox. All rights reserved.
 //
 
-#import "PFUploadObject.h"
+#import "Selfie.h"
 
 
-@implementation PFUploadObject
+@implementation Selfie
 
 
 

@@ -11,6 +11,7 @@
 #import "SASDevice.h"
 #import "SASVerifiedUploadObject.h"
 
+
 @interface SASUploadObject : NSObject <SASVerifiedUploadObject>
 
 /**

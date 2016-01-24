@@ -8,19 +8,16 @@
 
 #import <UIKit/UIKit.h>
 #import "SASUploadObject.h"
+#import "UploadWorker.h"
 
-typedef NS_ENUM(NSUInteger, UploadCompletionStatus) {
-  Failed, // Upload failed.
-  Success, // Upload succeeded.
-  InvalidObject // An invalid object was passed.
-};
+
 
 /**
  This class is used to upload objects to the server.
  */
 @interface SASUploadManager : NSObject
 
-typedef void (^UploadCompletionBlock)(BOOL completion);
+
 
 /**
  Obtain the shared instance to upload objects to the server.
@@ -29,13 +26,19 @@ typedef void (^UploadCompletionBlock)(BOOL completion);
 
 
 /**
- Begins upload of an object to the server.
+ Begins upload of an object to the server with a worker.
+ A worker must conform to the UploadWorker protocol and
+ the implementation of how the upload is implemented is left
+ to that class.
+ 
+ @param worker A UploadWorker that will upload to a backend.
  
  @param uploadObject The object that is to be uploaded to the server, conforming to 
                      SASVerifiedUploadObject protocol
  
- @param completioBlock Calling block upon success/ failure of object upload.
+ @param completioBlock Calling block upon success/ failure of object upload (see UploadWorker.h).
  */
-- (void) beginObjectUpload:(SASUploadObject <SASVerifiedUploadObject>*) uploadObject
-                completion:(UploadCompletionBlock) completionBlock;
+- (void) uploadWorker: (id<UploadWorker>) worker
+           withObject:(SASUploadObject <SASVerifiedUploadObject>*) uploadObject
+           completion:(UploadCompletionBlock) completionBlock;
 @end

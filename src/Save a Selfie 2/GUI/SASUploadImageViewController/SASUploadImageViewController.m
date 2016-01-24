@@ -30,6 +30,7 @@
 #import "CMPopTipView.h"
 
 #import "SASUploadManager.h"
+#import "ParseUploadWorker.h"
 
 
 @interface SASUploadImageViewController () <UITextViewDelegate, EULADelegate, CMPopTipViewDelegate>
@@ -230,13 +231,12 @@
       self.uploadManager = [SASUploadManager sharedInstance];
     }
     
-    [self.uploadManager beginObjectUpload:self.sasUploadObject completion:^(BOOL completion) {
-      if (completion) {
-        [self uploadSuccess];
-      } else {
-        [self uploadFailure];
-      }
-    }];
+    
+    [self.uploadManager uploadWorker:[[ParseUploadWorker alloc] init]
+                          withObject:self.sasUploadObject
+                          completion:^(BOOL succeeded) {
+                            succeeded ? [self uploadSuccess] : [self uploadFailure];
+                          }];
     [self uploadBegan];
   }
 }

@@ -11,11 +11,11 @@
 #import <Parse.h>
 
 /**
- The PFUpload object is to be used to upload data to
+ The Selfie object is to be used to upload data to
  Parse, this is modelled exactly how it is represented
  on the backend.
  */
-@interface PFUploadObject : NSObject
+@interface Selfie : NSObject
 
 @property(nonatomic, strong) PFFile *image;
 

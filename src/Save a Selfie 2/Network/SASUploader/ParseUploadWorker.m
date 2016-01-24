@@ -1,29 +1,21 @@
 //
-//  ParseFactory.m
+//  SASUploaderNew.m
 //  Save a Selfie
 //
-//  Created by Stephen Fox on 24/01/2016.
+//  Created by Stephen Fox on 22/01/2016.
 //  Copyright © 2016 Stephen Fox. All rights reserved.
 //
 
-#import "ParseFactory.h"
+#import "ParseUploadWorker.h"
+#import "UIImage+SASImage.h"
+#import <Parse.h>
+
+@implementation ParseUploadWorker
 
 
-
-@implementation ParseFactory
-
-+ (ParseFactory *)sharedInstance {
-  static ParseFactory *sharedInstance;
-  static dispatch_once_t token;
+- (void) uploadObject:(SASUploadObject*) uploadObject completion:(UploadCompletionBlock)completion {
   
-  dispatch_once(&token, ^(){
-      sharedInstance = [[self alloc] init];
-  });
-  return sharedInstance;
-}
-
-- (PFObject*) createUploadObject:(SASUploadObject*) uploadObject {
-  PFObject *pfObject = [[PFObject alloc] initWithClassName:@"PFUploadObject"];
+  PFObject *pfObject = [[PFObject alloc] initWithClassName:@"Selfie"];
   pfObject[@"longtitude"] = @(uploadObject.longtitude);
   pfObject[@"latitude"] = @(uploadObject.latitude);
   pfObject[@"info"] = uploadObject.caption;
@@ -34,8 +26,13 @@
   PFFile *imageFile = [PFFile fileWithData:imageData];
   pfObject[@"image"] = imageFile;
   
-  return pfObject;
+  [pfObject saveInBackgroundWithBlock:^(BOOL success, NSError *error) {
+    completion(success);
+  }];
+  
 }
+
+
 
 
 @end

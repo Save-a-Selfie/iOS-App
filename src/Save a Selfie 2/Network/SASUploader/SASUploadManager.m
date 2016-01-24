@@ -7,13 +7,8 @@
 //
 
 #import "SASUploadManager.h"
-#import "SASUploaderNew.h"
+#import "ParseUploadWorker.h"
 
-@interface SASUploadManager ()
-
-@property (strong, nonatomic) SASUploaderNew *uploader;
-
-@end
 
 @implementation SASUploadManager
 
@@ -29,21 +24,19 @@
 }
 
 
-- (void)beginObjectUpload:(SASUploadObject<SASVerifiedUploadObject> *)uploadObject
-               completion:(UploadCompletionBlock)completionBlock {
+- (void)uploadWorker:(nonnull id<UploadWorker>) worker
+          withObject:(SASUploadObject<SASVerifiedUploadObject> *) uploadObject
+          completion:(UploadCompletionBlock) completionBlock {
   
-  // First check to make sure the object has all the correct information to upload.
-  // We don't want a incomplete/ invalid object.
+  // Verify object is has correct attributes.
   if (![self verifyObject:uploadObject]) {
     completionBlock(InvalidObject);
   }
   
-  if (!self.uploader) {
-    self.uploader = [[SASUploaderNew alloc] init];
-  }
-  
-  [self.uploader uploadObject:uploadObject completion:completionBlock];
+  // Message the worker to begin uploading to the server.
+  [worker uploadObject:uploadObject completion:completionBlock];
 }
+
 
 - (BOOL) verifyObject:(SASUploadObject <SASVerifiedUploadObject>*) object {
   if ([object captionHasBeenSet] && [object deviceHasBeenSet] && [object coordinatesHaveBeenSet]) {
