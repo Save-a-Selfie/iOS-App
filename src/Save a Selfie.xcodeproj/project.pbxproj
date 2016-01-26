@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		15AA30A63C377FEBFED40422 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DD50A6FBD23D090F1506F00 /* libPods.a */; };
+		180591FF1C5571580059215F /* SASDeviceButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 180591FE1C5571580059215F /* SASDeviceButtonView.m */; };
+		180592031C5577260059215F /* DefibrillatorButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 180592021C5577260059215F /* DefibrillatorButton.m */; };
+		180592061C5577340059215F /* LifeRingButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 180592051C5577340059215F /* LifeRingButton.m */; };
+		180592091C5577490059215F /* FireHydrantButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 180592081C5577490059215F /* FireHydrantButton.m */; };
+		1805920C1C5578C70059215F /* FirstAidKitButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 1805920B1C5578C70059215F /* FirstAidKitButton.m */; };
 		1807AF3F1B4EE8F2006E1B28 /* StorageSystem.m in Sources */ = {isa = PBXBuildFile; fileRef = 1807AF3E1B4EE8F2006E1B28 /* StorageSystem.m */; };
 		1807AF4D1B4EEE79006E1B28 /* NSString+PDRegex.m in Sources */ = {isa = PBXBuildFile; fileRef = 1807AF4C1B4EEE79006E1B28 /* NSString+PDRegex.m */; };
 		180E18F51B7AC1DF0077BBEF /* SASSponsorCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 180E18F41B7AC1DF0077BBEF /* SASSponsorCardView.m */; };
@@ -42,6 +47,7 @@
 		188CAEED1B21006C006A90EB /* Screen.m in Sources */ = {isa = PBXBuildFile; fileRef = 188CAEEC1B21006C006A90EB /* Screen.m */; };
 		1891E3D31B1743C8008CC10C /* SASMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1891E3D21B1743C8008CC10C /* SASMapView.m */; };
 		1891E3D91B176E9B008CC10C /* SASObjectDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 1891E3D81B176E9B008CC10C /* SASObjectDownloader.m */; };
+		189D02E31C566407001F150D /* SASDeviceButtonView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 189D02E21C566407001F150D /* SASDeviceButtonView.xib */; };
 		189D4F411B5C49BF005E709C /* Save_a_Selfie_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 189D4F401B5C49BF005E709C /* Save_a_Selfie_Tests.m */; };
 		18A524F71B166BAB00E8F8F6 /* SASLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A524F61B166BAB00E8F8F6 /* SASLocation.m */; };
 		18A525081B16708400E8F8F6 /* SASMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A525071B16708400E8F8F6 /* SASMapViewController.m */; };
@@ -107,11 +113,20 @@
 
 /* Begin PBXFileReference section */
 		180591FB1C555C6C0059215F /* UploadWorker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadWorker.h; sourceTree = "<group>"; };
+		180591FD1C5571580059215F /* SASDeviceButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASDeviceButtonView.h; sourceTree = "<group>"; };
+		180591FE1C5571580059215F /* SASDeviceButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASDeviceButtonView.m; sourceTree = "<group>"; };
+		180592011C5577260059215F /* DefibrillatorButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefibrillatorButton.h; sourceTree = "<group>"; };
+		180592021C5577260059215F /* DefibrillatorButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DefibrillatorButton.m; sourceTree = "<group>"; };
+		180592041C5577340059215F /* LifeRingButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LifeRingButton.h; sourceTree = "<group>"; };
+		180592051C5577340059215F /* LifeRingButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LifeRingButton.m; sourceTree = "<group>"; };
+		180592071C5577490059215F /* FireHydrantButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FireHydrantButton.h; sourceTree = "<group>"; };
+		180592081C5577490059215F /* FireHydrantButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FireHydrantButton.m; sourceTree = "<group>"; };
+		1805920A1C5578C70059215F /* FirstAidKitButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstAidKitButton.h; sourceTree = "<group>"; };
+		1805920B1C5578C70059215F /* FirstAidKitButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstAidKitButton.m; sourceTree = "<group>"; };
 		1807AF3D1B4EE8F2006E1B28 /* StorageSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StorageSystem.h; sourceTree = "<group>"; };
 		1807AF3E1B4EE8F2006E1B28 /* StorageSystem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StorageSystem.m; sourceTree = "<group>"; };
 		1807AF4B1B4EEE79006E1B28 /* NSString+PDRegex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+PDRegex.h"; sourceTree = "<group>"; };
 		1807AF4C1B4EEE79006E1B28 /* NSString+PDRegex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+PDRegex.m"; sourceTree = "<group>"; };
-		1807AF511B4F175C006E1B28 /* SASVerifiedUploadObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASVerifiedUploadObject.h; sourceTree = "<group>"; };
 		180E18F31B7AC1DF0077BBEF /* SASSponsorCardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SASSponsorCardView.h; path = "Save a Selfie 2/GUI/SASSponsorCardView.h"; sourceTree = SOURCE_ROOT; };
 		180E18F41B7AC1DF0077BBEF /* SASSponsorCardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SASSponsorCardView.m; path = "Save a Selfie 2/GUI/SASSponsorCardView.m"; sourceTree = SOURCE_ROOT; };
 		180E18F71B7AC20D0077BBEF /* SASSponsorCardView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SASSponsorCardView.xib; path = "Save a Selfie 2/GUI/SASSponsorCardView.xib"; sourceTree = SOURCE_ROOT; };
@@ -174,6 +189,7 @@
 		1891E3D21B1743C8008CC10C /* SASMapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASMapView.m; sourceTree = "<group>"; };
 		1891E3D71B176E9B008CC10C /* SASObjectDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASObjectDownloader.h; sourceTree = "<group>"; };
 		1891E3D81B176E9B008CC10C /* SASObjectDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASObjectDownloader.m; sourceTree = "<group>"; };
+		189D02E21C566407001F150D /* SASDeviceButtonView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SASDeviceButtonView.xib; sourceTree = "<group>"; };
 		189D4F3C1B5C49BF005E709C /* Save a Selfie Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Save a Selfie Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		189D4F3F1B5C49BF005E709C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		189D4F401B5C49BF005E709C /* Save_a_Selfie_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Save_a_Selfie_Tests.m; sourceTree = "<group>"; };
@@ -294,6 +310,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		180592001C5577050059215F /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				18DAE8521B46BA6400CAEF2D /* SASDeviceButton.m */,
+				18DAE8511B46BA6400CAEF2D /* SASDeviceButton.h */,
+				180592011C5577260059215F /* DefibrillatorButton.h */,
+				180592021C5577260059215F /* DefibrillatorButton.m */,
+				180592041C5577340059215F /* LifeRingButton.h */,
+				180592051C5577340059215F /* LifeRingButton.m */,
+				180592071C5577490059215F /* FireHydrantButton.h */,
+				180592081C5577490059215F /* FireHydrantButton.m */,
+				1805920A1C5578C70059215F /* FirstAidKitButton.h */,
+				1805920B1C5578C70059215F /* FirstAidKitButton.m */,
+			);
+			name = Buttons;
+			sourceTree = "<group>";
+		};
 		1807AF401B4EE8F8006E1B28 /* StorageSystem */ = {
 			isa = PBXGroup;
 			children = (
@@ -310,15 +343,6 @@
 				1807AF4C1B4EEE79006E1B28 /* NSString+PDRegex.m */,
 			);
 			path = "NSString+PDRegex";
-			sourceTree = "<group>";
-		};
-		1807AF501B4F169F006E1B28 /* SASVerifiedUploadObject */ = {
-			isa = PBXGroup;
-			children = (
-				1807AF511B4F175C006E1B28 /* SASVerifiedUploadObject.h */,
-			);
-			name = SASVerifiedUploadObject;
-			path = GUI/SASUploadImageViewController/SASVerifiedUploadObject;
 			sourceTree = "<group>";
 		};
 		180E18F61B7AC1EC0077BBEF /* SASSponsorCardView */ = {
@@ -757,12 +781,15 @@
 			name = SASFilterViewCell;
 			sourceTree = "<group>";
 		};
-		18DAE8501B46BA2D00CAEF2D /* SASDeviceButton */ = {
+		18DAE8501B46BA2D00CAEF2D /* SASDeviceButtonView */ = {
 			isa = PBXGroup;
 			children = (
-				18DAE8511B46BA6400CAEF2D /* SASDeviceButton.h */,
-				18DAE8521B46BA6400CAEF2D /* SASDeviceButton.m */,
+				180592001C5577050059215F /* Buttons */,
+				189D02E21C566407001F150D /* SASDeviceButtonView.xib */,
+				180591FD1C5571580059215F /* SASDeviceButtonView.h */,
+				180591FE1C5571580059215F /* SASDeviceButtonView.m */,
 			);
+			name = SASDeviceButtonView;
 			path = SASDeviceButton;
 			sourceTree = "<group>";
 		};
@@ -800,7 +827,7 @@
 			children = (
 				18EBF97E1B2741F600EDA48B /* SASUploadImageViewController.h */,
 				18EBF97F1B2741F600EDA48B /* SASUploadImageViewController.m */,
-				18DAE8501B46BA2D00CAEF2D /* SASDeviceButton */,
+				18DAE8501B46BA2D00CAEF2D /* SASDeviceButtonView */,
 			);
 			path = SASUploadImageViewController;
 			sourceTree = "<group>";
@@ -916,7 +943,6 @@
 		D72E1DAF19EE841E005DD8A5 /* Save a Selfie 2 */ = {
 			isa = PBXGroup;
 			children = (
-				1807AF501B4F169F006E1B28 /* SASVerifiedUploadObject */,
 				18EBF97C1B273A6900EDA48B /* SASUploadObject */,
 				1869E3E11B9B3B08000E1DA7 /* Libraries */,
 				18BA4DF71B82C1540047DEC4 /* UIDevice+DeviceName */,
@@ -1050,6 +1076,7 @@
 				18DDE50B1B3D7F0F00AB0CB3 /* Launch Screen.xib in Resources */,
 				18D66E4F1C5115CA00AA7238 /* SASFilterView.xib in Resources */,
 				D700239619F5253C00E45408 /* AlertBox.xib in Resources */,
+				189D02E31C566407001F150D /* SASDeviceButtonView.xib in Resources */,
 				D72E1DBF19EE841E005DD8A5 /* Main.storyboard in Resources */,
 				D759B32D1A7D3DC6009EA131 /* HelperCoordinates.gpx in Resources */,
 				1845C4EC1B20920300E3D7BC /* SASActivityIndicatorView.xib in Resources */,
@@ -1131,8 +1158,10 @@
 				18A525081B16708400E8F8F6 /* SASMapViewController.m in Sources */,
 				D786E1781A48C02900A20FDD /* SASDevice.m in Sources */,
 				18A524F71B166BAB00E8F8F6 /* SASLocation.m in Sources */,
+				180592061C5577340059215F /* LifeRingButton.m in Sources */,
 				18D66E4A1C51144800AA7238 /* SASFilterViewCell.m in Sources */,
 				D756A29C19F175230089EF80 /* UIImage+Alpha.m in Sources */,
+				180592091C5577490059215F /* FireHydrantButton.m in Sources */,
 				18C104861B714C5900B4731D /* SASGalleryContainer.m in Sources */,
 				1891E3D91B176E9B008CC10C /* SASObjectDownloader.m in Sources */,
 				1810C9141B28ABE3009063E5 /* ILTranslucentView.m in Sources */,
@@ -1151,9 +1180,11 @@
 				1845C4EF1B209E6C00E3D7BC /* SASUtilities.m in Sources */,
 				1864FEAC1B27A39900EA564A /* UIFont+SASFont.m in Sources */,
 				1818AFDA1B5153A5004FF998 /* SASGalleryCell.m in Sources */,
+				180592031C5577260059215F /* DefibrillatorButton.m in Sources */,
 				18EBF9801B2741F600EDA48B /* SASUploadImageViewController.m in Sources */,
 				181B9AEA1B7D406800E7FD3E /* SASSponsorCardManager.m in Sources */,
 				181D1E5D1B2359EA00FB5928 /* SASImageInspectorView.m in Sources */,
+				180591FF1C5571580059215F /* SASDeviceButtonView.m in Sources */,
 				D756A2A919F309690089EF80 /* SASTabBarController.m in Sources */,
 				1835D2791B78F7D100A62B7F /* SASGalleryCollectionViewController.m in Sources */,
 				18EE44DE1B556A1F00F8F93B /* SASNotificationView.m in Sources */,
@@ -1173,6 +1204,7 @@
 				D700239519F5253C00E45408 /* AlertBox.m in Sources */,
 				18592E051B51854C004DDFD8 /* UIView+WidthXY.m in Sources */,
 				183C0CCD1C5274C900D66B2F /* ParseUploadWorker.m in Sources */,
+				1805920C1C5578C70059215F /* FirstAidKitButton.m in Sources */,
 				18EE44D11B554F3B00F8F93B /* SystemVersion.m in Sources */,
 				D700239D19F52EB700E45408 /* ExtendNSLogFunctionality.m in Sources */,
 				D756A28C19F1735E0089EF80 /* UIImage+Resize.m in Sources */,

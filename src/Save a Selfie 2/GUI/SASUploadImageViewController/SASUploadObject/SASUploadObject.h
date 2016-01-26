@@ -9,13 +9,15 @@
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
 #import "SASDevice.h"
-#import "SASVerifiedUploadObject.h"
 
-
-@interface SASUploadObject : NSObject <SASVerifiedUploadObject>
 
 /**
- A unique identifier string whichh is used by the server.
+ A SASUploadObject is the expected type for a SASUploadManager.
+ */
+@interface SASUploadObject : NSObject
+
+/**
+ A unique identifier string which is used by the server.
  */
 @property(nonatomic, strong) NSString *identifier;
 

@@ -28,9 +28,11 @@
 #import "ExtendNSLogFunctionality.h"
 #import "UIView+NibInitializer.h"
 #import "CMPopTipView.h"
+#import "SASDeviceButtonView.h"
 
 #import "SASUploadManager.h"
 #import "ParseUploadWorker.h"
+
 
 
 @interface SASUploadImageViewController () <UITextViewDelegate, EULADelegate, CMPopTipViewDelegate>
@@ -39,11 +41,6 @@
 @property (weak, nonatomic) IBOutlet SASMapView *sasMapView;
 @property (strong, nonatomic) SASAnnotation *sasAnnotation;
 
-@property (weak, nonatomic) IBOutlet SASDeviceButton *defibrillatorButton;
-@property (weak, nonatomic) IBOutlet SASDeviceButton *lifeRingButton;
-@property (weak, nonatomic) IBOutlet SASDeviceButton *firstAidKitButton;
-@property (weak, nonatomic) IBOutlet SASDeviceButton *fireHydrantButton;
-
 @property (weak, nonatomic) IBOutlet UILabel *selectDeviceLabel;
 @property (weak, nonatomic) IBOutlet UIButton *doneButton;
 @property (weak, nonatomic) IBOutlet UITextView *deviceCaptionTextView;
@@ -51,7 +48,6 @@
 @property (strong, nonatomic) SASGreyView *sasGreyView;
 @property (strong, nonatomic) SASActivityIndicator *sasActivityIndicator;
 
-@property (strong, nonatomic) NSMutableArray *deviceButtonsArray;
 @property (nonatomic, assign) BOOL deviceHasBeenSelected;
 
 @property (strong, nonatomic) EULAViewController * eulaViewController;
@@ -69,7 +65,9 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
   
-  [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName: [UIFont fontWithName:@"AvenirNext-DemiBold" size:17.0f]}];
+  [self.navigationController.navigationBar
+   setTitleTextAttributes:@{NSFontAttributeName: [UIFont fontWithName:@"AvenirNext-DemiBold"
+                                                                 size:17.0f]}];
   
   [self displayUpdateInformation];
 }
@@ -93,7 +91,8 @@
     self.sasAnnotation = [[SASAnnotation alloc] init];
   }
   
-  self.longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(updateAnnotationOnMapView)];
+  self.longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self
+                                                                 action:@selector(updateAnnotationOnMapView)];
   [self.sasMapView addGestureRecognizer:self.longPress];
   
   
@@ -126,70 +125,12 @@
   self.navigationItem.leftBarButtonItem = cancelBarButtonItem;
   self.navigationController.navigationBar.topItem.title = @"Upload";
   [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName: [UIFont fontWithName:@"AvenirNext-DemiBold" size:17.0f] }];
-  
-  
-  if (self.deviceButtonsArray == nil) {
-    self.deviceButtonsArray = [[NSMutableArray alloc] initWithObjects:self.defibrillatorButton,
-                               self.lifeRingButton,
-                               self.firstAidKitButton,
-                               self.fireHydrantButton,
-                               nil];
-  }
-  
-  self.defibrillatorButton.selectedImage = [UIImage imageNamed:@"DefibrillatorSelected"];
-  self.defibrillatorButton.deviceType = SASDeviceTypeDefibrillator;
-  
-  self.lifeRingButton.selectedImage = [UIImage imageNamed:@"LifeRingSelected"];
-  self.lifeRingButton.deviceType = SASDeviceTypeLifeRing;
-  
-  self.firstAidKitButton.selectedImage = [UIImage imageNamed:@"FirstAidKitSelected"];
-  self.firstAidKitButton.deviceType = SASDeviceTypeFirstAidKit;
-  
-  self.fireHydrantButton.selectedImage = [UIImage imageNamed:@"FireHydrantSelected"];
-  self.fireHydrantButton.deviceType = SASDeviceTypeFireHydrant;
-  
-  self.defibrillatorButton.unselectedImage = [UIImage imageNamed:@"DefibrillatorUnselected"];
-  self.lifeRingButton.unselectedImage = [UIImage imageNamed:@"LifeRingUnselected"];
-  self.firstAidKitButton.unselectedImage = [UIImage imageNamed:@"FirstAidKitUnselected"];
-  self.fireHydrantButton.unselectedImage = [UIImage imageNamed:@"FireHydrantUnselected"];
-  
 }
+
 
 - (void) cancel {
   [self dismissSASUploadImageViewControllerWithResponse:SASUploadControllerResponseCancelled];
 }
-
-
-
-- (IBAction)deviceSelected:(SASDeviceButton*) sender {
-  
-  [self deselectDeviceButtons];
-  
-  [sender select];
-  
-#pragma mark SASUploadObject associated Device. set here.
-  self.sasUploadObject.associatedDevice.type = sender.deviceType;
-  
-  self.doneButton.hidden = NO;
-}
-
-
-
-// 'Deselects' a button by putting the image of the button back
-// to the default image when the button was not selected;
-- (void) deselectDeviceButtons {
-  for (SASDeviceButton* button in self.deviceButtonsArray) {
-    [button deselect];
-  }
-}
-
-
-- (void) selectDeviceButton:(SASDeviceButton *) button {
-  [button select];
-}
-
-
-
 
 
 
@@ -199,7 +140,8 @@
   }
   
   CGPoint touchPoint = [self.longPress locationInView:self.sasMapView];
-  CLLocationCoordinate2D location = [self.sasMapView convertPoint:touchPoint toCoordinateFromView:self.sasMapView];
+  CLLocationCoordinate2D location = [self.sasMapView convertPoint:touchPoint
+                                             toCoordinateFromView:self.sasMapView];
   
   
   self.sasAnnotation.coordinate = location;
@@ -231,25 +173,28 @@
       self.uploadManager = [SASUploadManager sharedInstance];
     }
     
-    // Message UploadManager to begin uploading to the server.
-    [self.uploadManager uploadWorker:[[ParseUploadWorker alloc] init]
-                          withObject:self.sasUploadObject
-                          completion:^(UploadCompletionStatus status) {
-                            switch (status) {
-                              case Success:
-                                [self uploadSuccess];
-                                break;
-                              case Failed:
-                                [self uploadFailure];
-                                break;
-                              case InvalidObject:
-                                [self uploadFailure];
-                                
-                              default:
-                                break;
-                            }
-                          }];
-    [self uploadBegan];
+    // Checks that everything is correct.
+    [self preUploadChecks: ^(){
+      // Message UploadManager to begin uploading to the server.
+      [self.uploadManager uploadWorker:[[ParseUploadWorker alloc] init]
+                            withObject:self.sasUploadObject
+                            completion:^(UploadCompletionStatus status) {
+                              switch (status) {
+                                case Success:
+                                  [self uploadSuccess];
+                                  break;
+                                case Failed:
+                                  [self uploadFailure];
+                                  break;
+                                case InvalidObject:
+                                  [self uploadFailure];
+                                  
+                                default:
+                                  break;
+                              }
+                            }];
+      [self uploadBegan];
+    }];
   }
 }
 
@@ -299,46 +244,49 @@
 
 
 
-/*- (void)sasUploader:(SASUploadObject *)object invalidObjectWithResponse:(SASUploadInvalidObject)response {
+// Makes sure all information about the uploadObject is set.
+// The block will be called if all checks passed.
+- (void) preUploadChecks:(void(^)()) successBlock {
   
   FXAlertController *invalidUploadObjectAlert = nil;
   FXAlertButton *okButton = nil;
   
-  
-  switch (response) {
-      
-    case SASUploadInvalidObjectCaption:
-      invalidUploadObjectAlert = [[FXAlertController alloc] initWithTitle:@"OOOPS!"
-                                                                  message:@"Please add a description for this post!"];
-      okButton = [[FXAlertButton alloc] initWithType:FXAlertButtonTypeStandard];
-      [okButton setTitle:@"Ok" forState:UIControlStateNormal];
-      [invalidUploadObjectAlert addButton:okButton];
-      [self presentViewController:invalidUploadObjectAlert animated:YES completion:nil];
-      break;
-      
-      
-    case SASUploadInvalidObjectDeviceType:
-      invalidUploadObjectAlert = [[FXAlertController alloc] initWithTitle:@"OOOPS!"
-                                                                  message:@"Please select a device for this post!"];
-      okButton = [[FXAlertButton alloc] initWithType:FXAlertButtonTypeStandard];
-      [okButton setTitle:@"Ok" forState:UIControlStateNormal];
-      [invalidUploadObjectAlert addButton:okButton];
-      [self presentViewController:invalidUploadObjectAlert animated:YES completion:nil];
-      
-      
-    case SASUploadInvalidObjectCoordinates:
-      invalidUploadObjectAlert = [[FXAlertController alloc] initWithTitle:@"OOOPS!"
-                                                                  message:@"Cannot determine location. Please select the map and tap the location of the device"];
-      okButton = [[FXAlertButton alloc] initWithType:FXAlertButtonTypeStandard];
-      [okButton setTitle:@"Ok" forState:UIControlStateNormal];
-      [invalidUploadObjectAlert addButton:okButton];
-      [self presentViewController:invalidUploadObjectAlert animated:YES completion:nil];
-      break;
-      
-    default:
-      break;
+  if ([self.sasUploadObject.description isEqualToString:@"Add Location Information"] ||
+      [self.sasUploadObject.description isEqualToString:@""]) {
+    invalidUploadObjectAlert = [[FXAlertController alloc] initWithTitle:@"OOOPS!"
+                                                                message:@"Please add a description for this post!"];
+    okButton = [[FXAlertButton alloc] initWithType:FXAlertButtonTypeStandard];
+    [okButton setTitle:@"Ok" forState:UIControlStateNormal];
+    [invalidUploadObjectAlert addButton:okButton];
+    [self presentViewController:invalidUploadObjectAlert animated:YES completion:nil];
+    return;
   }
-}*/
+  
+
+  if (!self.deviceHasBeenSelected) {
+    invalidUploadObjectAlert = [[FXAlertController alloc] initWithTitle:@"OOOPS!"
+                                                                message:@"Please select a device for this post!"];
+    okButton = [[FXAlertButton alloc] initWithType:FXAlertButtonTypeStandard];
+    [okButton setTitle:@"Ok" forState:UIControlStateNormal];
+    [invalidUploadObjectAlert addButton:okButton];
+    [self presentViewController:invalidUploadObjectAlert animated:YES completion:nil];
+    return;
+  }
+  
+
+  if (!CLLocationCoordinate2DIsValid(self.sasUploadObject.coordinates)) {
+    invalidUploadObjectAlert = [[FXAlertController alloc] initWithTitle:@"OOOPS!"
+                                                                message:@"Cannot determine location. Please select the map and tap the location of the device"];
+    okButton = [[FXAlertButton alloc] initWithType:FXAlertButtonTypeStandard];
+    [okButton setTitle:@"Ok" forState:UIControlStateNormal];
+    [invalidUploadObjectAlert addButton:okButton];
+    [self presentViewController:invalidUploadObjectAlert animated:YES completion:nil];
+    return;
+  }
+  
+  successBlock();
+}
+
 
 
 
@@ -423,8 +371,9 @@
 
 #pragma Check the user has agreed to the End User Licence Agreement
 - (BOOL) hasEULABeenAcepted {
-  
-  BOOL EULAAccepted = [[[NSUserDefaults standardUserDefaults] valueForKey:@"EULAAccepted"] isEqualToString:@"yes"];
+  BOOL EULAAccepted = [[[NSUserDefaults standardUserDefaults]
+                        valueForKey:@"EULAAccepted"]
+                       isEqualToString:@"yes"];
   
   if (EULAAccepted) {
     return YES;

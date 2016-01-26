@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="SASDeviceButtonView">
+            <rect key="frame" x="0.0" y="0.0" width="367" height="60"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CAW-gW-GAR">
+                    <rect key="frame" x="8" y="0.0" width="60" height="60"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="60" id="8bN-id-tMs"/>
+                        <constraint firstAttribute="width" constant="60" id="aqf-0o-G4A"/>
+                    </constraints>
+                    <state key="normal" title="Button" image="DefibrillatorUnselected"/>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qyA-v2-Wwt">
+                    <rect key="frame" x="193" y="0.0" width="60" height="60"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="qyA-v2-Wwt" secondAttribute="height" multiplier="1:1" id="2GD-17-cs7"/>
+                    </constraints>
+                    <state key="normal" title="Button"/>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zqC-w3-uIb" customClass="FireHydrantButton">
+                    <rect key="frame" x="287" y="0.0" width="60" height="60"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="zqC-w3-uIb" secondAttribute="height" multiplier="1:1" id="wcO-lJ-711"/>
+                    </constraints>
+                    <state key="normal" title="Button"/>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FM7-2g-4hH">
+                    <rect key="frame" x="99" y="0.0" width="60" height="60"/>
+                    <state key="normal" title="Button" image="LifeRingUnselected"/>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="zqC-w3-uIb" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="0bh-nv-YM5"/>
+                <constraint firstItem="zqC-w3-uIb" firstAttribute="leading" secondItem="qyA-v2-Wwt" secondAttribute="trailing" constant="34" id="18z-VI-cDX"/>
+                <constraint firstAttribute="trailing" secondItem="zqC-w3-uIb" secondAttribute="trailing" constant="20" id="1WS-GG-6uA"/>
+                <constraint firstAttribute="bottom" secondItem="CAW-gW-GAR" secondAttribute="bottom" id="2FG-8c-wWp"/>
+                <constraint firstItem="FM7-2g-4hH" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="71O-Pm-kJk"/>
+                <constraint firstItem="CAW-gW-GAR" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="QxZ-5u-IQ3"/>
+                <constraint firstItem="CAW-gW-GAR" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="T2B-KR-Jxx"/>
+                <constraint firstItem="FM7-2g-4hH" firstAttribute="leading" secondItem="CAW-gW-GAR" secondAttribute="trailing" constant="31" id="aOa-dt-pJa"/>
+                <constraint firstItem="qyA-v2-Wwt" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="gXP-Gh-RmH"/>
+                <constraint firstAttribute="bottom" secondItem="FM7-2g-4hH" secondAttribute="bottom" id="id2-6J-7PI"/>
+                <constraint firstAttribute="bottom" secondItem="qyA-v2-Wwt" secondAttribute="bottom" id="own-j0-5Ma"/>
+                <constraint firstItem="qyA-v2-Wwt" firstAttribute="leading" secondItem="FM7-2g-4hH" secondAttribute="trailing" constant="34" id="wU9-W0-B8h"/>
+                <constraint firstAttribute="bottom" secondItem="zqC-w3-uIb" secondAttribute="bottom" id="xys-dW-YAk"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="defibButton" destination="CAW-gW-GAR" id="2UX-Og-0GV"/>
+                <outlet property="fireHydrantButton" destination="zqC-w3-uIb" id="Jt3-eN-eeU"/>
+                <outlet property="firstAidKitButton" destination="qyA-v2-Wwt" id="Dwb-9K-9sx"/>
+                <outlet property="lifeRingButton" destination="FM7-2g-4hH" id="cEG-ng-KzK"/>
+            </connections>
+            <point key="canvasLocation" x="98.5" y="268"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="DefibrillatorUnselected" width="175" height="175"/>
+        <image name="LifeRingUnselected" width="175" height="175"/>
+    </resources>
+</document>

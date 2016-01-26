@@ -40,43 +40,4 @@
 }
 
 
-
-#pragma mark <SASVerifiedUploadObject>
-- (BOOL) captionHasBeenSet {
-    
-    if ([self.caption isEqualToString:@""] ||
-        [self.caption isEqualToString:@"Add Location Information"] ||
-        self.caption == nil) {
-        
-        return NO;
-        
-    } else {
-        return YES;
-    }
-}
-
-
-- (BOOL) deviceHasBeenSet {
-    if (self.associatedDevice.type != SASDeviceTypeAll) {
-        return YES;
-    } else {
-        return NO;
-    }
-}
-
-
-
-- (BOOL) coordinatesHaveBeenSet {
-    
-    CLLocationCoordinate2D tempCoordinates = kCLLocationCoordinate2DInvalid;
-    tempCoordinates = self.coordinates;
-    
-    if (CLLocationCoordinate2DIsValid(tempCoordinates)) {
-        return YES;
-    } else {
-        return NO;
-    }
-}
-
-
 @end

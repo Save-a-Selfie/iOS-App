@@ -24,29 +24,14 @@
 }
 
 
+
 - (void)uploadWorker:(nonnull id<UploadWorker>) worker
-          withObject:(SASUploadObject<SASVerifiedUploadObject> *) uploadObject
+          withObject:(SASUploadObject *) uploadObject
           completion:(UploadCompletionBlock) completionBlock {
-  
-  // Verify object is has correct attributes
-  // and message the callee if the object is invalid.
-  if (![self verifyObject:uploadObject]) {
-    completionBlock(InvalidObject);
-  }
   
   // Message the worker to begin uploading to the server.
   [worker uploadObject:uploadObject completion:completionBlock];
 }
-
-
-- (BOOL) verifyObject:(SASUploadObject <SASVerifiedUploadObject>*) object {
-  if ([object captionHasBeenSet] && [object deviceHasBeenSet] && [object coordinatesHaveBeenSet]) {
-    return YES;
-  } else {
-    return NO;
-  }
-}
-
 
 
 
