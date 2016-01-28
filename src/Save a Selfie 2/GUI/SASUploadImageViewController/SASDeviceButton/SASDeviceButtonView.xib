@@ -19,7 +19,7 @@
                     </constraints>
                     <state key="normal" title="Button" image="FirstAidKitUnselected"/>
                     <connections>
-                        <action selector="buttonSelected:" destination="iN0-l3-epB" eventType="touchUpInside" id="deC-Ew-bOO"/>
+                        <action selector="buttonSelected:" destination="iN0-l3-epB" eventType="touchUpInside" id="zal-vZ-WgQ"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FM7-2g-4hH" customClass="LifeRingButton">
@@ -29,7 +29,7 @@
                     </constraints>
                     <state key="normal" title="Button" image="LifeRingUnselected"/>
                     <connections>
-                        <action selector="buttonSelected:" destination="iN0-l3-epB" eventType="touchUpInside" id="epK-Mg-e38"/>
+                        <action selector="buttonSelected:" destination="iN0-l3-epB" eventType="touchUpInside" id="xjW-VA-9Wx"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CAW-gW-GAR" customClass="DefibrillatorButton">
@@ -39,7 +39,7 @@
                     </constraints>
                     <state key="normal" title="Button" image="DefibrillatorUnselected"/>
                     <connections>
-                        <action selector="buttonSelected:" destination="iN0-l3-epB" eventType="touchUpInside" id="ZmD-2j-8ib"/>
+                        <action selector="buttonSelected:" destination="iN0-l3-epB" eventType="touchUpInside" id="OgV-Mh-lWS"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zqC-w3-uIb" customClass="FireHydrantButton">
@@ -49,7 +49,7 @@
                     </constraints>
                     <state key="normal" title="Button" image="FireHydrantUnselected"/>
                     <connections>
-                        <action selector="buttonSelected:" destination="iN0-l3-epB" eventType="touchUpInside" id="VqI-5n-jYa"/>
+                        <action selector="buttonSelected:" destination="iN0-l3-epB" eventType="touchUpInside" id="4b4-OE-0ae"/>
                     </connections>
                 </button>
             </subviews>

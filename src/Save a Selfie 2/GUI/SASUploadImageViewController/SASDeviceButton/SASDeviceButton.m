@@ -54,6 +54,7 @@
 
 
 - (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+  [super touchesEnded:touches withEvent:event];
   if (self.status == Unselected) {
     self.status = Selected;
   } else {
@@ -70,11 +71,6 @@
 
 
 - (void)setUnselectedImage:(UIImage *)aUnselectedImage {
-  if (aUnselectedImage == nil) {
-    NSLog(@"Null....?");
-  } else {
-    NSLog(@"Nah, not null!");
-  }
   _unselectedImage = aUnselectedImage;
   [self setImage:aUnselectedImage forState:UIControlStateNormal];
 }

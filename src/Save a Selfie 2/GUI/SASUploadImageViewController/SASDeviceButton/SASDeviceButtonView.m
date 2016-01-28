@@ -64,17 +64,17 @@
 
 
 - (IBAction)buttonSelected:(SASDeviceButton *) sender {
-  
-  // Return as delegate is nil.
+  // make sure all other buttons get unselected when
+  // a new button is selected.
+  [self unselectAllButton];
   if (self.delegate != nil &&
       [self.delegate respondsToSelector:@selector(sasDeviceButtonView:buttonSelected:)]) {
-      // Message sender.
-      sender.status = Selected;
       [self.delegate sasDeviceButtonView:self buttonSelected:sender];
-    }
+  }
 }
 
 - (void)unselectAllButton {
+  NSLog(@"Should unselect all buttons");
   self.defibButton.status = Unselected;
   self.lifeRingButton.status = Unselected;
   self.firstAidKitButton.status = Unselected;
