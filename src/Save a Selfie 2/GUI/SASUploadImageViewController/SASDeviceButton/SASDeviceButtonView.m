@@ -17,24 +17,14 @@
 
 @interface SASDeviceButtonView ()
 
-@property (weak, nonatomic) IBOutlet UIButton *defibButton;
-@property (weak, nonatomic) IBOutlet UIButton *lifeRingButton;
-@property (weak, nonatomic) IBOutlet UIButton *firstAidKitButton;
-@property (weak, nonatomic) IBOutlet UIButton *fireHydrantButton;
-
+@property (weak, nonatomic) IBOutlet DefibrillatorButton *defibButton;
+@property (weak, nonatomic) IBOutlet LifeRingButton *lifeRingButton;
+@property (weak, nonatomic) IBOutlet FirstAidKitButton *firstAidKitButton;
+@property (weak, nonatomic) IBOutlet FireHydrantButton *fireHydrantButton;
 
 @end
 
 @implementation SASDeviceButtonView
-
-- (instancetype)initWithCoder:(NSCoder *)aDecoder {
-  self = [super initWithCoder:aDecoder];
-  if (!self) {
-    return nil;
-  }
-  
-  return self;
-}
 
 
 - (id) awakeAfterUsingCoder:(NSCoder *)aDecoder {
@@ -71,5 +61,27 @@
   }
   return self;
 }
+
+
+- (IBAction)buttonSelected:(SASDeviceButton *) sender {
+  
+  // Return as delegate is nil.
+  if (self.delegate != nil &&
+      [self.delegate respondsToSelector:@selector(sasDeviceButtonView:buttonSelected:)]) {
+      // Message sender.
+      sender.status = Selected;
+      [self.delegate sasDeviceButtonView:self buttonSelected:sender];
+    }
+}
+
+- (void)unselectAllButton {
+  self.defibButton.status = Unselected;
+  self.lifeRingButton.status = Unselected;
+  self.firstAidKitButton.status = Unselected;
+  self.fireHydrantButton.status = Unselected;
+}
+
+
+
 
 @end

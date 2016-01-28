@@ -9,7 +9,17 @@
 #import <UIKit/UIKit.h>
 #import "SASDevice.h"
 
+typedef NS_ENUM(NSUInteger, SASDeviceButtonStatus) {
+  Unselected,
+  Selected
+};
+
 @interface SASDeviceButton : UIButton
 
+// The status of the button whether its selected or not.
+@property (assign, nonatomic) SASDeviceButtonStatus status;
+
+
+@property (assign, nonatomic) SASDeviceType deviceType;
 
 @end

@@ -12,19 +12,25 @@
             <rect key="frame" x="0.0" y="0.0" width="367" height="60"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qyA-v2-Wwt">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qyA-v2-Wwt" customClass="FirstAidKitButton">
                     <rect key="frame" x="193" y="0.0" width="60" height="60"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="qyA-v2-Wwt" secondAttribute="height" multiplier="1:1" id="78N-mb-OKX"/>
                     </constraints>
                     <state key="normal" title="Button" image="FirstAidKitUnselected"/>
+                    <connections>
+                        <action selector="buttonSelected:" destination="iN0-l3-epB" eventType="touchUpInside" id="deC-Ew-bOO"/>
+                    </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FM7-2g-4hH">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FM7-2g-4hH" customClass="LifeRingButton">
                     <rect key="frame" x="99" y="0.0" width="60" height="60"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="FM7-2g-4hH" secondAttribute="height" multiplier="1:1" id="WZG-NQ-13F"/>
                     </constraints>
                     <state key="normal" title="Button" image="LifeRingUnselected"/>
+                    <connections>
+                        <action selector="buttonSelected:" destination="iN0-l3-epB" eventType="touchUpInside" id="epK-Mg-e38"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zqC-w3-uIb" customClass="FireHydrantButton">
                     <rect key="frame" x="287" y="0.0" width="60" height="60"/>
@@ -32,13 +38,19 @@
                         <constraint firstAttribute="width" secondItem="zqC-w3-uIb" secondAttribute="height" multiplier="1:1" id="8qW-mq-iAC"/>
                     </constraints>
                     <state key="normal" title="Button" image="FireHydrantUnselected"/>
+                    <connections>
+                        <action selector="buttonSelected:" destination="iN0-l3-epB" eventType="touchUpInside" id="VqI-5n-jYa"/>
+                    </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CAW-gW-GAR">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CAW-gW-GAR" customClass="DefibrillatorButton">
                     <rect key="frame" x="8" y="0.0" width="60" height="60"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="CAW-gW-GAR" secondAttribute="height" multiplier="1:1" id="UoD-X0-wNS"/>
                     </constraints>
                     <state key="normal" title="Button" image="DefibrillatorUnselected"/>
+                    <connections>
+                        <action selector="buttonSelected:" destination="iN0-l3-epB" eventType="touchUpInside" id="ZmD-2j-8ib"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>

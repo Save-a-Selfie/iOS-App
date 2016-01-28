@@ -342,6 +342,7 @@
                     <connections>
                         <outlet property="deviceCaptionTextView" destination="uIr-b8-EMK" id="TDB-eT-riY"/>
                         <outlet property="doneButton" destination="isd-II-BZu" id="M95-Uv-X6C"/>
+                        <outlet property="sasDeviceButtonView" destination="1Tg-qs-gbG" id="rIA-Rq-Zbp"/>
                         <outlet property="sasImageView" destination="afK-H1-q78" id="RvA-Mq-WU6"/>
                         <outlet property="sasMapView" destination="MJY-qg-MTp" id="kBI-fn-tc9"/>
                         <outlet property="selectDeviceLabel" destination="Gyw-so-Gq1" id="ubi-VY-efJ"/>

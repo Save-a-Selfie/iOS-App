@@ -35,7 +35,10 @@
 
 
 
-@interface SASUploadImageViewController () <UITextViewDelegate, EULADelegate, CMPopTipViewDelegate>
+@interface SASUploadImageViewController () <UITextViewDelegate,
+EULADelegate,
+CMPopTipViewDelegate,
+SASDeviceButtonViewDelegate>
 
 @property (strong, nonatomic) IBOutlet SASImageView *sasImageView;
 @property (weak, nonatomic) IBOutlet SASMapView *sasMapView;
@@ -45,12 +48,13 @@
 @property (weak, nonatomic) IBOutlet UIButton *doneButton;
 @property (weak, nonatomic) IBOutlet UITextView *deviceCaptionTextView;
 
+@property (weak, nonatomic) IBOutlet SASDeviceButtonView *sasDeviceButtonView;
 @property (strong, nonatomic) SASGreyView *sasGreyView;
 @property (strong, nonatomic) SASActivityIndicator *sasActivityIndicator;
 
 @property (nonatomic, assign) BOOL deviceHasBeenSelected;
 
-@property (strong, nonatomic) EULAViewController * eulaViewController;
+@property (strong, nonatomic) EULAViewController *eulaViewController;
 @property (strong, nonatomic) SASBarButtonItem *doneBarButtonItem;
 
 @property (strong, nonatomic) UILongPressGestureRecognizer *longPress;
@@ -94,7 +98,7 @@
   self.longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self
                                                                  action:@selector(updateAnnotationOnMapView)];
   [self.sasMapView addGestureRecognizer:self.longPress];
-  
+  self.sasDeviceButtonView.delegate = self;
   
   self.sasAnnotation.coordinate = self.sasUploadObject.coordinates;
   
@@ -146,14 +150,31 @@
   
   self.sasAnnotation.coordinate = location;
   self.sasUploadObject.coordinates = self.sasAnnotation.coordinate;
-  
   [self.sasMapView showAnnotation:self.sasAnnotation andZoom:NO animated:NO];
-  
 }
 
 
 
+#pragma SASDeviceButtonViewDelegate
 
+
+- (void)sasDeviceButtonView:(SASDeviceButtonView *)view buttonSelected:(SASDeviceButton *)button {
+  switch (button.status) {
+    case Selected:
+      self.deviceHasBeenSelected = YES;
+      self.sasUploadObject.associatedDevice.type = button.deviceType;
+      break;
+    
+    case Unselected:
+      self.deviceHasBeenSelected = NO;
+      self.sasUploadObject.associatedDevice = nil;
+      break;
+    
+    default:
+      break;
+  }
+  
+}
 
 #pragma mark Upload Routine
 - (IBAction)beginUploadRoutine:(id)sender {
@@ -228,8 +249,9 @@
   self.view.userInteractionEnabled = YES;
   self.doneButton.enabled = YES;
   
-  FXAlertController *uploadErrorAlert = [[FXAlertController alloc] initWithTitle:@"OOOPS!"
-                                                                         message:@"There seemed to be a problem posting! Please check you're connected to Wifi/ Network and try again."];
+  FXAlertController *uploadErrorAlert =
+    [[FXAlertController alloc] initWithTitle:@"OOOPS!"
+                                     message:@"There seemed to be a problem posting! Please check you're connected to Wifi/ Network and try again."];
   
   FXAlertButton *okButton = [[FXAlertButton alloc] initWithType:FXAlertButtonTypeCancel];
   [okButton setTitle:@"Ok" forState:UIControlStateNormal];

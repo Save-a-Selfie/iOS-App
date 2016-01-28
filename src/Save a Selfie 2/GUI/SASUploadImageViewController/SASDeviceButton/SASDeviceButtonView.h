@@ -7,8 +7,27 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "SASDeviceButton.h"
+#import "SASDevice.h"
+
+@class SASDeviceButtonView;
+@class SASDeviceButton;
+
+
+
+
+@protocol SASDeviceButtonViewDelegate <NSObject>
+
+/**
+ Messages the delegate when a button has been selected.
+ */
+- (void) sasDeviceButtonView:(SASDeviceButtonView *) view
+              buttonSelected:(SASDeviceButton*) button;
+
+@end
 
 @interface SASDeviceButtonView : UIView
+
+@property (weak, nonatomic) id<SASDeviceButtonViewDelegate> delegate;
+
 
 @end

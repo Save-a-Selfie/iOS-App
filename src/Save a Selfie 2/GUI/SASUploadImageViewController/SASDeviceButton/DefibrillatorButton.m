@@ -19,5 +19,22 @@
   return self;
 }
 
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+  [super touchesBegan:touches withEvent:event];
+}
+
+- (void)touchesCancelled:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+  [super touchesCancelled:touches withEvent:event];
+}
+
+- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+  if (self.status == Unselected) {
+    self.status = Selected;
+    [self setImage:[UIImage imageNamed:@"Defibrillator"] forState:UIControlStateNormal];
+  } else {
+    self.status = Unselected;
+    [self setImage:[UIImage imageNamed:@"DefibrillatorUnselected"] forState:UIControlStateNormal];
+  }
+}
 
 @end
