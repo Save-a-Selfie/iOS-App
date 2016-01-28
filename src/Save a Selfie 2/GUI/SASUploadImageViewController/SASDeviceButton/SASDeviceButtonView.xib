@@ -32,16 +32,6 @@
                         <action selector="buttonSelected:" destination="iN0-l3-epB" eventType="touchUpInside" id="epK-Mg-e38"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zqC-w3-uIb" customClass="FireHydrantButton">
-                    <rect key="frame" x="287" y="0.0" width="60" height="60"/>
-                    <constraints>
-                        <constraint firstAttribute="width" secondItem="zqC-w3-uIb" secondAttribute="height" multiplier="1:1" id="8qW-mq-iAC"/>
-                    </constraints>
-                    <state key="normal" title="Button" image="FireHydrantUnselected"/>
-                    <connections>
-                        <action selector="buttonSelected:" destination="iN0-l3-epB" eventType="touchUpInside" id="VqI-5n-jYa"/>
-                    </connections>
-                </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CAW-gW-GAR" customClass="DefibrillatorButton">
                     <rect key="frame" x="8" y="0.0" width="60" height="60"/>
                     <constraints>
@@ -50,6 +40,16 @@
                     <state key="normal" title="Button" image="DefibrillatorUnselected"/>
                     <connections>
                         <action selector="buttonSelected:" destination="iN0-l3-epB" eventType="touchUpInside" id="ZmD-2j-8ib"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zqC-w3-uIb" customClass="FireHydrantButton">
+                    <rect key="frame" x="287" y="0.0" width="60" height="60"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="zqC-w3-uIb" secondAttribute="height" multiplier="1:1" id="8qW-mq-iAC"/>
+                    </constraints>
+                    <state key="normal" title="Button" image="FireHydrantUnselected"/>
+                    <connections>
+                        <action selector="buttonSelected:" destination="iN0-l3-epB" eventType="touchUpInside" id="VqI-5n-jYa"/>
                     </connections>
                 </button>
             </subviews>

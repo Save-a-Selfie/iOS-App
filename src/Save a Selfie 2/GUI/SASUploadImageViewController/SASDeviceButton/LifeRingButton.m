@@ -10,32 +10,40 @@
 
 @implementation LifeRingButton
 
-- (instancetype)initWithCoder:(NSCoder *)aDecoder {
-  self = [super initWithCoder:aDecoder];
-  
-  if (!self)
+
+- (instancetype)init {
+  self = [super init];
+  if (!self) {
     return nil;
-  [self setImage:[SASDevice getUnselectedDeviceImageForDevice:SASDeviceTypeLifeRing]
-        forState:UIControlStateNormal];
+  }
+  [self commonInit];
   return self;
 }
 
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-  [super touchesBegan:touches withEvent:event];
-}
 
-- (void)touchesCancelled:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-  [super touchesCancelled:touches withEvent:event];
-}
-
-- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-  if (self.status == Unselected) {
-    self.status = Selected;
-    [self setImage:[UIImage imageNamed:@"LifeRing"] forState:UIControlStateNormal];
-  } else {
-    self.status = Unselected;
-    [self setImage:[UIImage imageNamed:@"LifeRingUnselected"] forState:UIControlStateNormal];
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+  self = [super initWithCoder:aDecoder];
+  if (!self) {
+    return nil;
   }
+  [self commonInit];
+  return self;
 }
 
+- (instancetype)initWithFrame:(CGRect)frame {
+  self = [super initWithFrame:frame];
+  if (!self) {
+    return nil;
+  }
+  [self commonInit];
+  return self;
+}
+
+
+- (void) commonInit {
+  self.adjustsImageWhenDisabled = NO;
+  self.adjustsImageWhenHighlighted = NO;
+  self.selectedImage = [UIImage imageNamed:@"LifeRing"];
+  self.unselectedImage = [UIImage imageNamed:@"LifeRingUnselected"];
+}
 @end

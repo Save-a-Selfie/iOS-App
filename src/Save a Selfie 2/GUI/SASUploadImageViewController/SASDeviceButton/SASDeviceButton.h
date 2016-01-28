@@ -19,7 +19,12 @@ typedef NS_ENUM(NSUInteger, SASDeviceButtonStatus) {
 // The status of the button whether its selected or not.
 @property (assign, nonatomic) SASDeviceButtonStatus status;
 
-
 @property (assign, nonatomic) SASDeviceType deviceType;
+
+// Image of button when selected.
+@property (nullable, strong, nonatomic) UIImage *selectedImage;
+
+// Image of button when unselected.
+@property (nullable, strong, nonatomic) UIImage *unselectedImage;
 
 @end

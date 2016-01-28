@@ -10,7 +10,7 @@
 
 
 @implementation SASDeviceButton
-
+#pragma mark Object life cycle.
 - (instancetype)init {
   self = [super init];
   
@@ -40,9 +40,59 @@
 }
 
 - (void) commonInit {
-  self.adjustsImageWhenDisabled = NO;
-  self.adjustsImageWhenHighlighted = NO;
   _status = Unselected;
+}
+
+# pragma mark touch methods.
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+  [super touchesBegan:touches withEvent:event];
+}
+
+- (void)touchesCancelled:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+  [super touchesCancelled:touches withEvent:event];
+}
+
+
+- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+  if (self.status == Unselected) {
+    self.status = Selected;
+  } else {
+    self.status = Unselected;
+  }
+}
+
+
+#pragma mark Mutators.
+- (void)setSelectedImage:(UIImage *)aSelectedImage {
+  _selectedImage = aSelectedImage;
+  [self setImage:aSelectedImage forState:UIControlStateNormal];
+}
+
+
+- (void)setUnselectedImage:(UIImage *)aUnselectedImage {
+  if (aUnselectedImage == nil) {
+    NSLog(@"Null....?");
+  } else {
+    NSLog(@"Nah, not null!");
+  }
+  _unselectedImage = aUnselectedImage;
+  [self setImage:aUnselectedImage forState:UIControlStateNormal];
+}
+
+
+- (void)setStatus:(SASDeviceButtonStatus)status {
+  switch (status) {
+    case Selected:
+      _status = Selected;
+      [self setImage:self.selectedImage forState:UIControlStateNormal];
+      break;
+      
+    case Unselected:
+      _status = Unselected;
+      [self setImage:self.unselectedImage forState:UIControlStateNormal];
+    default:
+      break;
+  }
 }
 
 @end
