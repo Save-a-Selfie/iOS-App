@@ -156,25 +156,12 @@ SASDeviceButtonViewDelegate>
 
 
 #pragma SASDeviceButtonViewDelegate
-
-
-- (void)sasDeviceButtonView:(SASDeviceButtonView *)view buttonSelected:(SASDeviceButton *)button {
-  switch (button.status) {
-    case Selected:
-      self.deviceHasBeenSelected = YES;
-      self.sasUploadObject.associatedDevice.type = button.deviceType;
-      break;
-    
-    case Unselected:
-      self.deviceHasBeenSelected = NO;
-      self.sasUploadObject.associatedDevice = nil;
-      break;
-    
-    default:
-      break;
-  }
-  
+- (void)sasDeviceButtonView:(SASDeviceButtonView *) view
+             buttonSelected:(SASDeviceButton *) button {
+  self.deviceHasBeenSelected = YES;
+  self.sasUploadObject.associatedDevice.type = button.deviceType;
 }
+
 
 #pragma mark Upload Routine
 - (IBAction)beginUploadRoutine:(id)sender {
@@ -209,7 +196,6 @@ SASDeviceButtonViewDelegate>
                                   break;
                                 case InvalidObject:
                                   [self uploadFailure];
-                                  
                                 default:
                                   break;
                               }
@@ -273,8 +259,9 @@ SASDeviceButtonViewDelegate>
   FXAlertController *invalidUploadObjectAlert = nil;
   FXAlertButton *okButton = nil;
   
-  if ([self.sasUploadObject.description isEqualToString:@"Add Location Information"] ||
-      [self.sasUploadObject.description isEqualToString:@""]) {
+  if ( self.sasUploadObject.caption == nil ||
+      [self.sasUploadObject.caption isEqualToString:@"Add Location Information"] ||
+      [self.sasUploadObject.caption isEqualToString:@""]) {
     invalidUploadObjectAlert = [[FXAlertController alloc] initWithTitle:@"OOOPS!"
                                                                 message:@"Please add a description for this post!"];
     okButton = [[FXAlertButton alloc] initWithType:FXAlertButtonTypeStandard];
@@ -325,10 +312,7 @@ SASDeviceButtonViewDelegate>
   if([self.deviceCaptionTextView.text isEqualToString:@"Add Location Information"]) {
     self.deviceCaptionTextView.text = @"";
   }
-  
   [self addGreyView];
-  
-  
 }
 
 

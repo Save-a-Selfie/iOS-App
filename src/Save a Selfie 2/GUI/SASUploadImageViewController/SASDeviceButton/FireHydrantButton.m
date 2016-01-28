@@ -44,6 +44,7 @@
   self.adjustsImageWhenHighlighted = NO;
   self.selectedImage = [UIImage imageNamed:@"FireHydrant"];
   self.unselectedImage = [UIImage imageNamed:@"FireHydrantUnselected"];
+  self.deviceType = SASDeviceTypeFireHydrant;
 }
 
 @end

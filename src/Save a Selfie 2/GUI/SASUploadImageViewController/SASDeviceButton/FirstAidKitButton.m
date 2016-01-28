@@ -45,6 +45,7 @@
   self.adjustsImageWhenHighlighted = NO;
   self.selectedImage = [UIImage imageNamed:@"FirstAidKit"];
   self.unselectedImage = [UIImage imageNamed:@"FirstAidKitUnselected"];
+  self.deviceType = SASDeviceTypeFirstAidKit;
 }
 
 

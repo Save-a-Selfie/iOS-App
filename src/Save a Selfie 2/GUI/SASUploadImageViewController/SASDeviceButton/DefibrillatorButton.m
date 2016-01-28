@@ -43,6 +43,7 @@
   self.adjustsImageWhenHighlighted = NO;
   self.selectedImage = [UIImage imageNamed:@"Defibrillator"];
   self.unselectedImage = [UIImage imageNamed:@"DefibrillatorUnselected"];
+  self.deviceType = SASDeviceTypeDefibrillator;
 }
 
 @end

@@ -74,7 +74,6 @@
 }
 
 - (void)unselectAllButton {
-  NSLog(@"Should unselect all buttons");
   self.defibButton.status = Unselected;
   self.lifeRingButton.status = Unselected;
   self.firstAidKitButton.status = Unselected;

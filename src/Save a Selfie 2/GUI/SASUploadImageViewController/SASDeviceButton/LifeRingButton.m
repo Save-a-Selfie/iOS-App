@@ -45,5 +45,6 @@
   self.adjustsImageWhenHighlighted = NO;
   self.selectedImage = [UIImage imageNamed:@"LifeRing"];
   self.unselectedImage = [UIImage imageNamed:@"LifeRingUnselected"];
+  self.deviceType = SASDeviceTypeLifeRing;
 }
 @end
