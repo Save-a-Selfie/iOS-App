@@ -89,12 +89,10 @@ NSString *permissionsProblemText = @"Please enable location services for this ap
 }
 
 
-
 - (void) displayLocationDisabledAlert {
   [self clearLocationDisabledAlert];
   
   if (self.permissionProblemAlert == nil) {
-    
     self.permissionProblemAlert = [[FXAlertController alloc] initWithTitle:@"LOCATION DISABLED" message:permissionsProblemText];
     self.permissionProblemAlert.font = [UIFont fontWithName:@"Avenir Next" size:15];
     
@@ -153,11 +151,11 @@ NSString *permissionsProblemText = @"Please enable location services for this ap
 
 #pragma mark <SASMapViewNotifications>
 - (void)sasMapView:(SASMapView *)mapView annotationWasTapped:(SASAnnotation *) annotation {
-  
   // Present the SASImageviewController to display the image associated
   // with the annotation selected.
   SASImageViewController *sasImageViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SASImageViewController"];
   sasImageViewController.device = [self.annotationDict objectForKey:annotation];
+  sasImageViewController.annotation = annotation;
   [self.navigationController pushViewController:sasImageViewController animated:YES];
 }
 
@@ -207,7 +205,6 @@ NSString *permissionsProblemText = @"Please enable location services for this ap
     [self displayLocationDisabledAlert];
   }
   
-  
   if (makeCheckForMapWarning) {
     [self makeCheckForMapWarning];
   }
@@ -243,21 +240,15 @@ NSString *permissionsProblemText = @"Please enable location services for this ap
 
 
 - (void) acceptMapWarning {
-  
   self.sasMapView.userInteractionEnabled = YES;
-  
   [[NSUserDefaults standardUserDefaults] setValue:@"yes" forKey:@"mapWarningAccepted"];
   [[NSUserDefaults standardUserDefaults] synchronize];
-  
   EULAViewController *eulaVC = [EULAViewController new];
   [eulaVC updateEULATable];
-  
-  
 }
 
 
 - (void) declineMapWarning {
-  
   // Disabled user interaction for user until they accept the map warning.
   self.sasMapView.userInteractionEnabled = NO;
   
@@ -298,8 +289,6 @@ NSString *permissionsProblemText = @"Please enable location services for this ap
     self.sasImagePickerController.sasImagePickerDelegate = self;
   }
   
-  
-  
   if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
     [self.sasImagePickerController setSourceType:UIImagePickerControllerSourceTypeCamera];
     [self presentViewController:self.sasImagePickerController animated:YES completion:nil];
@@ -310,22 +299,12 @@ NSString *permissionsProblemText = @"Please enable location services for this ap
 
 #pragma mark SASImagePickerDelegate Method
 - (void)sasImagePickerController:(SASImagePickerViewController *)sasImagePicker didFinishWithImage:(UIImage *)image {
-  
-  
   // Create an upload object and set the image.
-  SASNetworkObject *sasUploadObject = [[SASNetworkObject alloc] initWithImage:image];
-  
-  
-  
-  // Dismiss the SASImagePickerViewController and pass
-  // the image onto SASUploadImageViewController via
-  //
-  //  -presentSASUploadImageViewControllerWithImage:
-  //
+  SASNetworkObject *sasNetworkObject = [[SASNetworkObject alloc] initWithImage:image];
   
   [self.sasImagePickerController dismissViewControllerAnimated:YES completion:^{
     self.sasImagePickerController = nil;
-    [self presentSASUploadImageViewControllerWithUploadObject:sasUploadObject];
+    [self presentSASUploadImageViewControllerWithUploadObject:sasNetworkObject];
   }];
   
 }
@@ -339,15 +318,11 @@ NSString *permissionsProblemText = @"Please enable location services for this ap
 
 
 
-
 // Presents a SASUploadImageViewController via
 - (void) presentSASUploadImageViewControllerWithUploadObject:(SASNetworkObject*) sasUploadObject {
-  
-  
-  
   // @Discussion:
-  //  The user location will be got here, now it may
-  //  seem like it should be gotten just before the user
+  //  The user location will be set here, now it may
+  //  seem like it should be set just before the user
   //  actually decides to upload the image/device, however,
   //  it is possible the user may take the picture and move
   //  from the location an upload moments later.

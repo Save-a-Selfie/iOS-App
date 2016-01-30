@@ -22,7 +22,7 @@
 
 
 @interface SASImageViewController () <SASMapViewNotifications ,UIScrollViewDelegate> {
-    BOOL imageLoaded;
+  BOOL imageLoaded;
 }
 
 @property (nonatomic, assign) SASDeviceType sasDeviceType;
@@ -57,181 +57,178 @@
 
 #pragma Object Life Cycle.
 - (instancetype)init {
-    if (self = [super init]) {
-        [self setup];
-    }
-    return self;
+  if (self = [super init]) {
+    [self setup];
+  }
+  return self;
 }
 
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
-    if (self = [super initWithCoder:aDecoder]) {
-        [self setup];
-    }
-    return self;
+  if (self = [super initWithCoder:aDecoder]) {
+    [self setup];
+  }
+  return self;
 }
 
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
-        [self setup];
-    }
-    return self;
+  if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
+    [self setup];
+  }
+  return self;
 }
 
 
 #pragma Convenience method for inits.
 - (void) setup {
-    _downloadImage = YES;
+  _downloadImage = YES;
 }
 
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
-    self.sasImageView.canShowFullSizePreview = YES;
-    self.sasImageView.hideOriginalInPreview = YES;
+  [super viewDidLoad];
+  self.sasImageView.canShowFullSizePreview = YES;
+  self.sasImageView.hideOriginalInPreview = YES;
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
-    [super viewDidDisappear:animated];
-    self.sasMapView = nil;
-    
-    if(!self.downloadImage) {
-        self.image = nil;
-    }
-
+  [super viewDidDisappear:animated];
+  self.sasMapView = nil;
+  
+  if(!self.downloadImage) {
+    self.image = nil;
+  }
+  
 }
 
 
 - (BOOL)hidesBottomBarWhenPushed {
-    return YES;
+  return YES;
 }
 
 
 - (void) viewWillLayoutSubviews {
-    
-    self.photoDescription.translatesAutoresizingMaskIntoConstraints = NO;
-    CGSize sizeThatFitsTextView = [self.photoDescription sizeThatFits:CGSizeMake(self.photoDescription.frame.size.width, MAXFLOAT)];
-    self.photoDesriptionHeightContraint.constant = sizeThatFitsTextView.height;
-    
-    [self.scrollView setContentSize:CGSizeMake(self.contentView.frame.size.width, self.contentView.frame.size.height + sizeThatFitsTextView.height)];
+  
+  self.photoDescription.translatesAutoresizingMaskIntoConstraints = NO;
+  CGSize sizeThatFitsTextView = [self.photoDescription sizeThatFits:CGSizeMake(self.photoDescription.frame.size.width, MAXFLOAT)];
+  self.photoDesriptionHeightContraint.constant = sizeThatFitsTextView.height;
+  
+  [self.scrollView setContentSize:CGSizeMake(self.contentView.frame.size.width, self.contentView.frame.size.height + sizeThatFitsTextView.height)];
 }
 
 
 
 - (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    
-    [SASUtilities addSASBlurToView:self.blurredImageView];
-    self.blurredImageView.contentMode = UIViewContentModeScaleToFill;
+  [super viewDidAppear:animated];
+  
+  [SASUtilities addSASBlurToView:self.blurredImageView];
+  self.blurredImageView.contentMode = UIViewContentModeScaleToFill;
 }
 
 
 
 
 - (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
-    
-    SASBarButtonItem *reportButton = [[SASBarButtonItem alloc] initWithTitle:@"Report"
-                                                                       style:UIBarButtonItemStylePlain
-                                                                      target:self
-                                                                      action:@selector(reportImage)];
-    self.navigationItem.rightBarButtonItem = reportButton;
-
-    
-    // Store the type of device shown in the image
-    self.sasDeviceType = self.device.type;
+  [super viewWillAppear:animated];
+  [self.navigationController setNavigationBarHidden:NO animated:YES];
+  
+  SASBarButtonItem *reportButton = [[SASBarButtonItem alloc] initWithTitle:@"Report"
+                                                                     style:UIBarButtonItemStylePlain
+                                                                    target:self
+                                                                    action:@selector(reportImage)];
+  self.navigationItem.rightBarButtonItem = reportButton;
+  
+  
+  // Store the type of device shown in the image
+  self.sasDeviceType = self.device.type;
   
   self.scrollView.delegate = self;
-
-    // Get the appropriate device name.
-    NSString *deviceName = [SASDevice getDeviceNameForDeviceType:self.sasDeviceType];
-    self.navigationItem.title = deviceName;
+  
+  // Get the appropriate device name.
+  NSString *deviceName = [SASDevice getDeviceNameForDeviceType:self.sasDeviceType];
+  self.navigationItem.title = deviceName;
+  
+  [self setupImageViews];
+  [self setupMapView];
+  [self setupDescriptionForImage];
+  
+  
+  if (self.device != nil) {
     
-    [self setupImageViews];
-    [self setupMapView];
-    [self setupDescriptionForImage];
+    // Set the image for deviceImageView associated with the device i.e lifeRing, defib etc..
+    self.deviceImageView.image = [self deviceImageForAnnotation:self.device];
     
-    
-    if (self.device != nil) {
-        
-        // Set the image for deviceImageView associated with the device i.e lifeRing, defib etc..
-        self.deviceImageView.image = [self deviceImageForAnnotation:self.device];
-        
-        // Set the elements of the UI which are coloured to the
-        // respective colour associated with the device.
-        [self setColourForColouredUIElements:self.device];
-    }
+    // Set the elements of the UI which are coloured to the
+    // respective colour associated with the device.
+    [self setColourForColouredUIElements:self.device];
+  }
 }
 
 
 
 
 - (void) setupDescriptionForImage {
-    if(self.device.caption != nil) {
-        // Set the text description of the photo.
-        self.photoDescription.text = [NSString stringWithFormat:@"%@", self.device.caption];
-        [self.photoDescription setFont:[UIFont fontWithName:@"Avenir Next" size:18]];
-        [self.photoDescription sizeToFit];
-        [self.photoDescription.layer setBorderWidth:0.0];
-    }
+  if(self.device.caption != nil) {
+    // Set the text description of the photo.
+    self.photoDescription.text = [NSString stringWithFormat:@"%@", self.device.caption];
+    [self.photoDescription setFont:[UIFont fontWithName:@"Avenir Next" size:18]];
+    [self.photoDescription sizeToFit];
+    [self.photoDescription.layer setBorderWidth:0.0];
+  }
 }
 
 
 
 
 - (void) setupImageViews {
+  if(!self.shouldDownloadImage) {
+    self.sasImageView.image = self.image;
+    self.blurredImageView.image = self.image;
+  }
+  else if (self.device.imageURLString != nil && self.shouldDownloadImage && !imageLoaded) {
     
+    // Show activity indicator.
+    self.sasActivityIndicator = [[SASActivityIndicator alloc] initWithMessage:@"Loading..."];
+    self.sasActivityIndicator.backgroundColor = [UIColor clearColor];
+    self.sasActivityIndicator.center = CGPointMake(self.view.center.x, self.sasImageView.center.y);
+    [self.sasImageView addSubview:self.sasActivityIndicator];
+    [self.sasActivityIndicator startAnimating];
     
-    if(!self.shouldDownloadImage) {
-        self.sasImageView.image = self.image;
-        self.blurredImageView.image = self.image;
-    }
-    else if (self.device.imageURLString != nil && self.shouldDownloadImage && !imageLoaded) {
-        
-        // Show activity indicator.
-        self.sasActivityIndicator = [[SASActivityIndicator alloc] initWithMessage:@"Loading..."];
-        self.sasActivityIndicator.backgroundColor = [UIColor clearColor];
-        self.sasActivityIndicator.center = CGPointMake(self.view.center.x, self.sasImageView.center.y);
-        [self.sasImageView addSubview:self.sasActivityIndicator];
-        [self.sasActivityIndicator startAnimating];
-        
-        [[SDWebImageDownloader sharedDownloader] downloadImageWithURL:self.device.imageURL
-                                                              options:0
-                                                             progress:nil
-                                                            completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished) {
-                                                                if (image && finished) {
-                                                                    
-                                                                    dispatch_async(dispatch_get_main_queue(), ^(void){
-                                                                        
-                                                                        self.sasImageView.image = image;
-                                                                        self.blurredImageView.image = image;
-                                                                        
-                                                                        [self.sasActivityIndicator stopAnimating];
-                                                                        [self.sasActivityIndicator removeFromSuperview];
-                                                                        self.sasActivityIndicator = nil;
-                                                                        
-                                                                        imageLoaded = YES;
-                                                                    });
-                                                                }
-                                                            }];
-    }
+    [[SDWebImageDownloader sharedDownloader] downloadImageWithURL:self.device.imageURL
+                                                          options:0
+                                                         progress:nil
+                                                        completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished) {
+                                                          if (image && finished) {
+                                                            
+                                                            dispatch_async(dispatch_get_main_queue(), ^(void){
+                                                              
+                                                              self.sasImageView.image = image;
+                                                              self.blurredImageView.image = image;
+                                                              
+                                                              [self.sasActivityIndicator stopAnimating];
+                                                              [self.sasActivityIndicator removeFromSuperview];
+                                                              self.sasActivityIndicator = nil;
+                                                              
+                                                              imageLoaded = YES;
+                                                            });
+                                                          }
+                                                        }];
+  }
 }
 
 
 
 
 - (void) setupMapView {
-    
-    // The sasMapView property should show the location
-    // of where the device is located.
-    self.sasMapView.sasAnnotationImage = SASAnnotationImageDefault;
-    self.sasMapView.notificationReceiver = self;
-    self.sasMapView.userInteractionEnabled = YES;
-    self.sasMapView.showsUserLocation = YES;
-    [self.sasMapView setMapType:MKMapTypeHybrid];
-    [self showDeviceLocation];
-    
+  
+  // The sasMapView property should show the location
+  // of where the device is located.
+  self.sasMapView.sasAnnotationImage = SASAnnotationImageDefault;
+  self.sasMapView.notificationReceiver = self;
+  self.sasMapView.userInteractionEnabled = YES;
+  self.sasMapView.showsUserLocation = YES;
+  [self.sasMapView setMapType:MKMapTypeHybrid];
+  [self showDeviceLocation];  
 }
 
 
@@ -239,7 +236,7 @@
 
 // Shows the location of the device on the map.
 - (IBAction)showDeviceLocation {
-    [self.sasMapView showAnnotation:self.annotation andZoom:YES animated:YES];
+  [self.sasMapView showAnnotation:self.annotation andZoom:YES animated:YES];
 }
 
 
@@ -249,19 +246,19 @@
 // Sets all the UIElements of this view, whose colour
 // is dependant on the device being shown in the image.
 - (void) setColourForColouredUIElements:(SASDevice*) device {
-    
-    
-    [self.showDeviceLocationPin setImage:[SASDevice getDeviceMapPinImageForDeviceType:self.sasDeviceType]
-                                forState:UIControlStateNormal];
-    
-    self.distanceLabel.textColor = [SASColour getSASColourForDeviceType: self.sasDeviceType];
-    
-    // Navigation Bar.
-    [self.navigationController.navigationBar setTintColor:[SASColour getSASColourForDeviceType: self.sasDeviceType]];
-    [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName: [UIFont fontWithName:@"AvenirNext-DemiBold" size:17.0f],
-                                                                      NSForegroundColorAttributeName : [SASColour getSASColourForDeviceType: self.sasDeviceType],
-                                                                      }];
-    
+  
+  
+  [self.showDeviceLocationPin setImage:[SASDevice getDeviceMapPinImageForDeviceType:self.sasDeviceType]
+                              forState:UIControlStateNormal];
+  
+  self.distanceLabel.textColor = [SASColour getSASColourForDeviceType: self.sasDeviceType];
+  
+  // Navigation Bar.
+  [self.navigationController.navigationBar setTintColor:[SASColour getSASColourForDeviceType: self.sasDeviceType]];
+  [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName: [UIFont fontWithName:@"AvenirNext-DemiBold" size:17.0f],
+                                                                    NSForegroundColorAttributeName : [SASColour getSASColourForDeviceType: self.sasDeviceType],
+                                                                    }];
+  
 }
 
 
@@ -271,7 +268,7 @@
 // Gets the image associated with the device from
 // the annotation selected on the map.
 - (UIImage*) deviceImageForAnnotation: (SASDevice*) device {
-    return [SASDevice getDeviceImageForDeviceType:device.type];
+  return [SASDevice getDeviceImageForDeviceType:device.type];
 }
 
 
@@ -280,45 +277,45 @@
 
 #pragma mark SASMapNotificationReceiver
 - (void)sasMapView:(SASMapView *)mapView usersLocationHasUpdated:(CLLocationCoordinate2D)coordinate {
-    
-    CLLocation *usersLocation = [[CLLocation alloc] initWithLatitude:self.annotation.coordinate.latitude longitude:self.annotation.coordinate.longitude];
-    CLLocation *deviceLocation = [[CLLocation alloc] initWithLatitude:coordinate.latitude longitude:coordinate.longitude];
-    CLLocationDistance distance = [usersLocation distanceFromLocation:deviceLocation];
-    
-    NSString *distanceString = [NSString stringWithFormat:@"%.1fKM Approx", distance/1000];
-    
-    self.distanceLabel.text = distanceString;
+  
+  CLLocation *usersLocation = [[CLLocation alloc] initWithLatitude:self.annotation.coordinate.latitude longitude:self.annotation.coordinate.longitude];
+  CLLocation *deviceLocation = [[CLLocation alloc] initWithLatitude:coordinate.latitude longitude:coordinate.longitude];
+  CLLocationDistance distance = [usersLocation distanceFromLocation:deviceLocation];
+  
+  NSString *distanceString = [NSString stringWithFormat:@"%.1fKM Approx", distance/1000];
+  
+  self.distanceLabel.text = distanceString;
 }
 
 
 
 #pragma mark Share to Social Media
 - (IBAction)shareToSocialMedia:(id)sender {
-    if (self.device.caption == nil || self.sasImageView.image == nil) {
-        
-        FXAlertController *couldNotShareAlert = [[FXAlertController alloc] initWithTitle:@"OOOPS" message:@"There seemed to be a problem trying to share the image. Please try again."];
-        
-        FXAlertButton *okButton = [[FXAlertButton alloc] initWithType:FXAlertButtonTypeStandard];
-        [okButton setTitle:@"Cancel" forState:UIControlStateNormal];
-        
-        [couldNotShareAlert addButton:okButton];
-        
-        [self presentViewController:couldNotShareAlert animated:YES completion:nil];
-    }
-    else {
-        [SASSocial shareToSocialMedia:self.device.caption
-                             andImage:self.sasImageView.image target:self];
-    }
+  if (self.device.caption == nil || self.sasImageView.image == nil) {
+    
+    FXAlertController *couldNotShareAlert = [[FXAlertController alloc] initWithTitle:@"OOOPS" message:@"There seemed to be a problem trying to share the image. Please try again."];
+    
+    FXAlertButton *okButton = [[FXAlertButton alloc] initWithType:FXAlertButtonTypeStandard];
+    [okButton setTitle:@"Cancel" forState:UIControlStateNormal];
+    
+    [couldNotShareAlert addButton:okButton];
+    
+    [self presentViewController:couldNotShareAlert animated:YES completion:nil];
+  }
+  else {
+    [SASSocial shareToSocialMedia:self.device.caption
+                         andImage:self.sasImageView.image target:self];
+  }
 }
 
 
 
 #pragma mark Report Device
 - (void) reportImage {
-    [[UIApplication sharedApplication]
-     openURL:[NSURL URLWithString:
-              [NSString stringWithFormat:@"http://saveaselfie.org/problem-with-an-image/?imageURL=%@", self.device.imageURLString]]];
-
+  [[UIApplication sharedApplication]
+   openURL:[NSURL URLWithString:
+            [NSString stringWithFormat:@"http://saveaselfie.org/problem-with-an-image/?imageURL=%@", self.device.imageURLString]]];
+  
 }
 
 
