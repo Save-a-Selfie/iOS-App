@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "SASUploadObject.h"
-#import "SASUploadManager.h"
+#import "SASNetworkObject.h"
+#import "SASNetworkManager.h"
 
 /**
  This class uploads manages uploading to the Parse Server.
@@ -19,7 +19,7 @@
 /**
  Uploads a SASUploadObject to the Parse server.
  */
-- (void) uploadObject:(SASUploadObject*) uploadObject
+- (void) uploadObject:(SASNetworkObject*) uploadObject
            completion:(UploadCompletionBlock)completion;
 
 @end

@@ -13,7 +13,7 @@
 #import "Screen.h"
 #import "UIView+Alert.h"
 #import "SASImagePickerViewController.h"
-#import "SASUploadImageViewController.h"
+#import "SASUploadViewController.h"
 #import "UIFont+SASFont.h"
 #import "SASNotificationView.h"
 #import "UIView+Animations.h"
@@ -24,14 +24,14 @@
 
 @interface SASMapViewController ()
 <SASImagePickerDelegate,
-SASUploadImageViewControllerDelegate,
+SASUploadViewControllerDelegate,
 UIAlertViewDelegate,
 MKMapViewDelegate>
 
 @property (nonatomic, strong) IBOutlet SASMapView* sasMapView;
 
 @property (nonatomic, strong) SASImagePickerViewController *sasImagePickerController;
-@property (nonatomic, strong) SASUploadImageViewController *sasUploadImageViewController;
+@property (nonatomic, strong) SASUploadViewController *sasUploadViewController;
 
 @property (nonatomic, strong) UINavigationController *uploadImageNavigationController;
 
@@ -295,7 +295,7 @@ NSString *permissionsProblemText = @"Please enable location services for this ap
     
 
     // Create an upload object and set the image.
-    SASUploadObject *sasUploadObject = [[SASUploadObject alloc] initWithImage:image];
+    SASNetworkObject *sasUploadObject = [[SASNetworkObject alloc] initWithImage:image];
     
 
     
@@ -323,7 +323,7 @@ NSString *permissionsProblemText = @"Please enable location services for this ap
 
 
 // Presents a SASUploadImageViewController via
-- (void) presentSASUploadImageViewControllerWithUploadObject:(SASUploadObject*) sasUploadObject {
+- (void) presentSASUploadImageViewControllerWithUploadObject:(SASNetworkObject*) sasUploadObject {
     
 
 
@@ -337,18 +337,17 @@ NSString *permissionsProblemText = @"Please enable location services for this ap
     sasUploadObject.coordinates = [self.sasMapView currentUserLocation];
     
     
-    if(self.sasUploadImageViewController == nil) {
-        self.sasUploadImageViewController =
-          (SASUploadImageViewController *)[self.storyboard
-                                           instantiateViewControllerWithIdentifier:@"SASUploadImageViewController"];
-        self.sasUploadImageViewController.delegate = self;
-        [self.sasUploadImageViewController setSasUploadObject:sasUploadObject];
+    if(self.sasUploadViewController == nil) {
+        self.sasUploadViewController =
+          (SASUploadViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"SASUploadImageViewController"];
+        self.sasUploadViewController.delegate = self;
+        [self.sasUploadViewController setSasUploadObject:sasUploadObject];
     }
 
     
     if (self.uploadImageNavigationController == nil) {
         self.uploadImageNavigationController =
-          [[UINavigationController alloc] initWithRootViewController:self.sasUploadImageViewController];
+          [[UINavigationController alloc] initWithRootViewController:self.sasUploadViewController];
     }
     
     [self presentViewController:self.uploadImageNavigationController animated:YES completion:nil];
@@ -357,26 +356,20 @@ NSString *permissionsProblemText = @"Please enable location services for this ap
     
 }
 
-#pragma mark SASUploadImageViewController Delegate
-- (void)sasUploadImageViewControllerDidFinishUploading:(UIViewController *)viewController
-                                          withResponse:(SASUploadControllerResponse)response
-                                            withObject:(SASUploadObject *)sasUploadObject {
-    
-
-    // Alert the user if it was succes.
-    if(response == SASUploadControllerResponseUploaded) {
-        SASNotificationView *sasNotificationView = [[SASNotificationView alloc] init];
-        sasNotificationView.title = @"THANK YOU!";
-        sasNotificationView.image = [UIImage imageNamed:@"DoneImage"];
-        [sasNotificationView animateIntoView:self.view];
-    }
-    
-
-    sasUploadObject = nil;
-    self.sasUploadImageViewController = nil;
-    self.uploadImageNavigationController = nil;
-
+#pragma mark SASUploadViewController Delegate
+- (void)sasUploadViewController:(UIViewController *)viewController withResponse:(SASUploadControllerResponse)response withObject:(SASNetworkObject *)sasUploadObject {
+  // Alert the user if it was succes.
+  if(response == SASUploadControllerResponseUploaded) {
+    SASNotificationView *sasNotificationView = [[SASNotificationView alloc] init];
+    sasNotificationView.title = @"THANK YOU!";
+    sasNotificationView.image = [UIImage imageNamed:@"DoneImage"];
+    [sasNotificationView animateIntoView:self.view];
+  }
+  
+  
+  sasUploadObject = nil;
+  self.sasUploadViewController = nil;
+  self.uploadImageNavigationController = nil;
 }
-
 
 @end

@@ -7,7 +7,6 @@
 //
 
 #import "SASGalleryCollectionViewController.h"
-#import "SASObjectDownloader.h"
 #import "SASGalleryContainer.h"
 #import "SASDevice.h"
 #import <SDWebImageDownloader.h>

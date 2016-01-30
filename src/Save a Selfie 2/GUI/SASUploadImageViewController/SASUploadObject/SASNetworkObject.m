@@ -6,18 +6,18 @@
 //  Copyright (c) 2015 Stephen Fox. All rights reserved.
 //
 
-#import "SASUploadObject.h"
+#import "SASNetworkObject.h"
 #import "UIImage+SASImage.h"
 
 
-@interface SASUploadObject()
+@interface SASNetworkObject()
 
 
 @property (assign, nonatomic) BOOL deviceHasBeenSet;
 
 @end
 
-@implementation SASUploadObject
+@implementation SASNetworkObject
 
 
 - (instancetype)initWithImage:(UIImage *)imageToUpload {

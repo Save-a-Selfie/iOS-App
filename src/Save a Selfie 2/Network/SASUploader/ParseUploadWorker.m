@@ -13,7 +13,8 @@
 @implementation ParseUploadWorker
 
 
-- (void) uploadObject:(SASUploadObject*) uploadObject completion:(UploadCompletionBlock)completion {
+- (void) uploadObject:(SASNetworkObject*) uploadObject
+           completion:(UploadCompletionBlock)completion {
   
   PFObject *selfie = [[PFObject alloc] initWithClassName:@"Selfie"];
   selfie[@"longitude"] = @(uploadObject.coordinates.longitude);
@@ -28,7 +29,7 @@
   
 
   [selfie saveInBackgroundWithBlock:^(BOOL success, NSError *error) {
-    success ? completion(Success) : completion (Failed);
+    success ? completion(Success) : completion(Failed);
   }];
   
 }

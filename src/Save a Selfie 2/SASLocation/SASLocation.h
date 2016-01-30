@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
-#import "SASObjectDownloader.h"
 
 @class SASLocation;
 

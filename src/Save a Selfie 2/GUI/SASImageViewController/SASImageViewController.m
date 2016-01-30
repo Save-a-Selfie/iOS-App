@@ -14,7 +14,6 @@
 #import "SASUtilities.h"
 #import "SASSocial.h"
 #import "SASImageView.h"
-#import "SASObjectDownloader.h"
 #import "SASBarButtonItem.h"
 #import "UIFont+SASFont.h"
 #import "FXAlert.h"
@@ -48,7 +47,6 @@
 
 @property (nonatomic, weak) IBOutlet UIButton *showDeviceLocationPin;
 
-@property (nonatomic, strong) SASObjectDownloader *sasObjectDownloader;
 
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *photoDesriptionHeightContraint;
 

@@ -8,21 +8,24 @@
 
 #import <UIKit/UIKit.h>
 
-@class SASUploadObject;
+@class SASNetworkObject;
 
 // Statuses concerned with upload.
 typedef NS_ENUM(NSUInteger, UploadCompletionStatus) {
   Failed, // Upload failed.
   Success, // Upload succeeded.
-  InvalidObject // An invalid object was passed.
 };
 
 
+/**
+ This protocol should be implemented for uploads to a server.
+ The uploading implementation is left to the conformin client. */
 @protocol UploadWorker <NSObject>
 
 typedef void (^UploadCompletionBlock)(UploadCompletionStatus completion);
 
-- (void) uploadObject:(SASUploadObject*) uploadObject
+
+- (void) uploadObject:(SASNetworkObject*) uploadObject
            completion:(UploadCompletionBlock)completion;
 
 @end

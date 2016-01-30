@@ -12,9 +12,10 @@
 
 
 /**
- A SASUploadObject is the expected type for a SASUploadManager.
+ SASNetwork encapsulates all information used for uploading
+ and downloading to the server.
  */
-@interface SASUploadObject : NSObject
+@interface SASNetworkObject : NSObject
 
 /**
  A unique identifier string which is used by the server.

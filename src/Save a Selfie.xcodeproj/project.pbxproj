@@ -21,12 +21,14 @@
 		1810C9141B28ABE3009063E5 /* ILTranslucentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1810C9131B28ABE3009063E5 /* ILTranslucentView.m */; };
 		1818AFC61B50435B004FF998 /* UIView+Animations.m in Sources */ = {isa = PBXBuildFile; fileRef = 1818AFC51B50435B004FF998 /* UIView+Animations.m */; };
 		1818AFDA1B5153A5004FF998 /* SASGalleryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1818AFD91B5153A5004FF998 /* SASGalleryCell.m */; };
+		1819829D1C5ADDFF008A1A14 /* SASNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1819829C1C5ADDFF008A1A14 /* SASNetworkManager.m */; };
+		181982A11C5AF302008A1A14 /* SASNetworkQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 181982A01C5AF302008A1A14 /* SASNetworkQuery.m */; };
+		181982A91C5AF7AB008A1A14 /* ParseDownloadWorker.m in Sources */ = {isa = PBXBuildFile; fileRef = 181982A81C5AF7AB008A1A14 /* ParseDownloadWorker.m */; };
 		181B9AEA1B7D406800E7FD3E /* SASSponsorCardManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 181B9AE91B7D406800E7FD3E /* SASSponsorCardManager.m */; };
 		181D1E5D1B2359EA00FB5928 /* SASImageInspectorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 181D1E5C1B2359EA00FB5928 /* SASImageInspectorView.m */; };
 		181D1E621B235CF900FB5928 /* SASImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 181D1E611B235CF900FB5928 /* SASImageView.m */; };
 		1835D2791B78F7D100A62B7F /* SASGalleryCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1835D2781B78F7D100A62B7F /* SASGalleryCollectionViewController.m */; };
 		183C0CCD1C5274C900D66B2F /* ParseUploadWorker.m in Sources */ = {isa = PBXBuildFile; fileRef = 183C0CCC1C5274C900D66B2F /* ParseUploadWorker.m */; };
-		183C0CD01C527ECE00D66B2F /* SASUploadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 183C0CCF1C527ECE00D66B2F /* SASUploadManager.m */; };
 		18453A511B584DD20055A004 /* SASNotificationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18453A501B584DD20055A004 /* SASNotificationView.xib */; };
 		1845C4EA1B2091F600E3D7BC /* SASActivityIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 1845C4E91B2091F600E3D7BC /* SASActivityIndicator.m */; };
 		1845C4EC1B20920300E3D7BC /* SASActivityIndicatorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1845C4EB1B20920300E3D7BC /* SASActivityIndicatorView.xib */; };
@@ -46,7 +48,6 @@
 		188CAEE51B20EA59006A90EB /* SASSocial.m in Sources */ = {isa = PBXBuildFile; fileRef = 188CAEE41B20EA59006A90EB /* SASSocial.m */; };
 		188CAEED1B21006C006A90EB /* Screen.m in Sources */ = {isa = PBXBuildFile; fileRef = 188CAEEC1B21006C006A90EB /* Screen.m */; };
 		1891E3D31B1743C8008CC10C /* SASMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1891E3D21B1743C8008CC10C /* SASMapView.m */; };
-		1891E3D91B176E9B008CC10C /* SASObjectDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 1891E3D81B176E9B008CC10C /* SASObjectDownloader.m */; };
 		189D02E31C566407001F150D /* SASDeviceButtonView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 189D02E21C566407001F150D /* SASDeviceButtonView.xib */; };
 		189D4F411B5C49BF005E709C /* Save_a_Selfie_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 189D4F401B5C49BF005E709C /* Save_a_Selfie_Tests.m */; };
 		18A524F71B166BAB00E8F8F6 /* SASLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A524F61B166BAB00E8F8F6 /* SASLocation.m */; };
@@ -56,6 +57,7 @@
 		18C104861B714C5900B4731D /* SASGalleryContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C104851B714C5900B4731D /* SASGalleryContainer.m */; };
 		18C323991B1E2F1E0027BDEA /* SASImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C323981B1E2F1E0027BDEA /* SASImageViewController.m */; };
 		18C6F2271C551AAC002A8F17 /* Selfie.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C6F2261C551AAC002A8F17 /* Selfie.m */; };
+		18CFECA51C5C2A0B00DC47AE /* DefaultDownloadWorker.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CFECA41C5C2A0B00DC47AE /* DefaultDownloadWorker.m */; };
 		18D66E461C5113D100AA7238 /* SASFilterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D66E451C5113D100AA7238 /* SASFilterView.m */; };
 		18D66E4A1C51144800AA7238 /* SASFilterViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D66E491C51144800AA7238 /* SASFilterViewCell.m */; };
 		18D66E4D1C51156B00AA7238 /* SASFilterViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18D66E4C1C51156B00AA7238 /* SASFilterViewCell.xib */; };
@@ -63,8 +65,8 @@
 		18DAE8531B46BA6400CAEF2D /* SASDeviceButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 18DAE8521B46BA6400CAEF2D /* SASDeviceButton.m */; };
 		18DDE50B1B3D7F0F00AB0CB3 /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18DDE50A1B3D7F0F00AB0CB3 /* Launch Screen.xib */; };
 		18EBF9771B272B3400EDA48B /* SASImagePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EBF9761B272B3400EDA48B /* SASImagePickerViewController.m */; };
-		18EBF97B1B273A6600EDA48B /* SASUploadObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EBF97A1B273A6600EDA48B /* SASUploadObject.m */; };
-		18EBF9801B2741F600EDA48B /* SASUploadImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EBF97F1B2741F600EDA48B /* SASUploadImageViewController.m */; };
+		18EBF97B1B273A6600EDA48B /* SASNetworkObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EBF97A1B273A6600EDA48B /* SASNetworkObject.m */; };
+		18EBF9801B2741F600EDA48B /* SASUploadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EBF97F1B2741F600EDA48B /* SASUploadViewController.m */; };
 		18EE44D11B554F3B00F8F93B /* SystemVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EE44D01B554F3B00F8F93B /* SystemVersion.m */; };
 		18EE44DE1B556A1F00F8F93B /* SASNotificationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EE44DD1B556A1F00F8F93B /* SASNotificationView.m */; };
 		D0EAAC0B1A0FD59B00C0F955 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0EAAC0A1A0FD59B00C0F955 /* Social.framework */; };
@@ -138,6 +140,13 @@
 		1818AFC51B50435B004FF998 /* UIView+Animations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Animations.m"; sourceTree = "<group>"; };
 		1818AFD81B5153A5004FF998 /* SASGalleryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASGalleryCell.h; sourceTree = "<group>"; };
 		1818AFD91B5153A5004FF998 /* SASGalleryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASGalleryCell.m; sourceTree = "<group>"; };
+		1819829B1C5ADDFF008A1A14 /* SASNetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASNetworkManager.h; sourceTree = "<group>"; };
+		1819829C1C5ADDFF008A1A14 /* SASNetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASNetworkManager.m; sourceTree = "<group>"; };
+		1819829F1C5AF302008A1A14 /* SASNetworkQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASNetworkQuery.h; sourceTree = "<group>"; };
+		181982A01C5AF302008A1A14 /* SASNetworkQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASNetworkQuery.m; sourceTree = "<group>"; };
+		181982A61C5AF64C008A1A14 /* DownloadWorker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadWorker.h; sourceTree = "<group>"; };
+		181982A71C5AF7AB008A1A14 /* ParseDownloadWorker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParseDownloadWorker.h; sourceTree = "<group>"; };
+		181982A81C5AF7AB008A1A14 /* ParseDownloadWorker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParseDownloadWorker.m; sourceTree = "<group>"; };
 		181B9AE81B7D406800E7FD3E /* SASSponsorCardManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SASSponsorCardManager.h; path = ../SASSponsorCardManager.h; sourceTree = "<group>"; };
 		181B9AE91B7D406800E7FD3E /* SASSponsorCardManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SASSponsorCardManager.m; path = ../SASSponsorCardManager.m; sourceTree = "<group>"; };
 		181D1E5B1B2359EA00FB5928 /* SASImageInspectorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SASImageInspectorView.h; path = SASImageInspectorView/SASImageInspectorView.h; sourceTree = "<group>"; };
@@ -148,8 +157,6 @@
 		1835D2781B78F7D100A62B7F /* SASGalleryCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASGalleryCollectionViewController.m; sourceTree = "<group>"; };
 		183C0CCB1C5274C900D66B2F /* ParseUploadWorker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParseUploadWorker.h; sourceTree = "<group>"; };
 		183C0CCC1C5274C900D66B2F /* ParseUploadWorker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParseUploadWorker.m; sourceTree = "<group>"; };
-		183C0CCE1C527ECE00D66B2F /* SASUploadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASUploadManager.h; sourceTree = "<group>"; };
-		183C0CCF1C527ECE00D66B2F /* SASUploadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASUploadManager.m; sourceTree = "<group>"; };
 		18453A501B584DD20055A004 /* SASNotificationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SASNotificationView.xib; sourceTree = "<group>"; };
 		1845C4E81B2091F600E3D7BC /* SASActivityIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASActivityIndicator.h; sourceTree = "<group>"; };
 		1845C4E91B2091F600E3D7BC /* SASActivityIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASActivityIndicator.m; sourceTree = "<group>"; };
@@ -187,8 +194,6 @@
 		188CAEEC1B21006C006A90EB /* Screen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Screen.m; sourceTree = "<group>"; };
 		1891E3D11B1743C8008CC10C /* SASMapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASMapView.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		1891E3D21B1743C8008CC10C /* SASMapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASMapView.m; sourceTree = "<group>"; };
-		1891E3D71B176E9B008CC10C /* SASObjectDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASObjectDownloader.h; sourceTree = "<group>"; };
-		1891E3D81B176E9B008CC10C /* SASObjectDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASObjectDownloader.m; sourceTree = "<group>"; };
 		189D02E21C566407001F150D /* SASDeviceButtonView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SASDeviceButtonView.xib; sourceTree = "<group>"; };
 		189D4F3C1B5C49BF005E709C /* Save a Selfie Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Save a Selfie Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		189D4F3F1B5C49BF005E709C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -208,6 +213,8 @@
 		18C323981B1E2F1E0027BDEA /* SASImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASImageViewController.m; sourceTree = "<group>"; };
 		18C6F2251C551AAC002A8F17 /* Selfie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Selfie.h; sourceTree = "<group>"; };
 		18C6F2261C551AAC002A8F17 /* Selfie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Selfie.m; sourceTree = "<group>"; };
+		18CFECA31C5C2A0B00DC47AE /* DefaultDownloadWorker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DefaultDownloadWorker.h; path = "Save a Selfie 2/Network/DefaultDownloadWorker.h"; sourceTree = SOURCE_ROOT; };
+		18CFECA41C5C2A0B00DC47AE /* DefaultDownloadWorker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DefaultDownloadWorker.m; path = "Save a Selfie 2/Network/DefaultDownloadWorker.m"; sourceTree = SOURCE_ROOT; };
 		18D66E441C5113D100AA7238 /* SASFilterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASFilterView.h; sourceTree = "<group>"; };
 		18D66E451C5113D100AA7238 /* SASFilterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASFilterView.m; sourceTree = "<group>"; };
 		18D66E481C51144800AA7238 /* SASFilterViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SASFilterViewCell.h; path = SASFilterViewCell/SASFilterViewCell.h; sourceTree = "<group>"; };
@@ -219,10 +226,10 @@
 		18DDE50A1B3D7F0F00AB0CB3 /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Launch Screen.xib"; sourceTree = "<group>"; };
 		18EBF9751B272B3400EDA48B /* SASImagePickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASImagePickerViewController.h; sourceTree = "<group>"; };
 		18EBF9761B272B3400EDA48B /* SASImagePickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASImagePickerViewController.m; sourceTree = "<group>"; };
-		18EBF9791B273A6600EDA48B /* SASUploadObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASUploadObject.h; sourceTree = "<group>"; };
-		18EBF97A1B273A6600EDA48B /* SASUploadObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASUploadObject.m; sourceTree = "<group>"; };
-		18EBF97E1B2741F600EDA48B /* SASUploadImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASUploadImageViewController.h; sourceTree = "<group>"; };
-		18EBF97F1B2741F600EDA48B /* SASUploadImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASUploadImageViewController.m; sourceTree = "<group>"; };
+		18EBF9791B273A6600EDA48B /* SASNetworkObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASNetworkObject.h; sourceTree = "<group>"; };
+		18EBF97A1B273A6600EDA48B /* SASNetworkObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASNetworkObject.m; sourceTree = "<group>"; };
+		18EBF97E1B2741F600EDA48B /* SASUploadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASUploadViewController.h; sourceTree = "<group>"; };
+		18EBF97F1B2741F600EDA48B /* SASUploadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASUploadViewController.m; sourceTree = "<group>"; };
 		18EE44CF1B554F3B00F8F93B /* SystemVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemVersion.h; sourceTree = "<group>"; };
 		18EE44D01B554F3B00F8F93B /* SystemVersion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemVersion.m; sourceTree = "<group>"; };
 		18EE44DC1B556A1F00F8F93B /* SASNotificationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASNotificationView.h; sourceTree = "<group>"; };
@@ -632,8 +639,8 @@
 		1891E3DA1B176E9F008CC10C /* SASObjectDownloader */ = {
 			isa = PBXGroup;
 			children = (
-				1891E3D71B176E9B008CC10C /* SASObjectDownloader.h */,
-				1891E3D81B176E9B008CC10C /* SASObjectDownloader.m */,
+				18CFECA31C5C2A0B00DC47AE /* DefaultDownloadWorker.h */,
+				18CFECA41C5C2A0B00DC47AE /* DefaultDownloadWorker.m */,
 			);
 			path = SASObjectDownloader;
 			sourceTree = "<group>";
@@ -717,8 +724,6 @@
 				180591FB1C555C6C0059215F /* UploadWorker.h */,
 				183C0CCB1C5274C900D66B2F /* ParseUploadWorker.h */,
 				183C0CCC1C5274C900D66B2F /* ParseUploadWorker.m */,
-				183C0CCE1C527ECE00D66B2F /* SASUploadManager.h */,
-				183C0CCF1C527ECE00D66B2F /* SASUploadManager.m */,
 				18C6F2211C5464E2002A8F17 /* ParseFactory */,
 			);
 			path = SASUploader;
@@ -796,9 +801,17 @@
 		18DAE8541B46C3C200CAEF2D /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				18EBF97C1B273A6900EDA48B /* SASNetworkObject */,
+				1819829B1C5ADDFF008A1A14 /* SASNetworkManager.h */,
+				1819829C1C5ADDFF008A1A14 /* SASNetworkManager.m */,
 				184D99B41B49B036005ECE33 /* SASNetworkUtilities */,
 				1891E3DA1B176E9F008CC10C /* SASObjectDownloader */,
 				18B7C3451B44A75D00017170 /* SASUploader */,
+				1819829F1C5AF302008A1A14 /* SASNetworkQuery.h */,
+				181982A01C5AF302008A1A14 /* SASNetworkQuery.m */,
+				181982A61C5AF64C008A1A14 /* DownloadWorker.h */,
+				181982A71C5AF7AB008A1A14 /* ParseDownloadWorker.h */,
+				181982A81C5AF7AB008A1A14 /* ParseDownloadWorker.m */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -812,21 +825,21 @@
 			path = SASImagePickerController;
 			sourceTree = "<group>";
 		};
-		18EBF97C1B273A6900EDA48B /* SASUploadObject */ = {
+		18EBF97C1B273A6900EDA48B /* SASNetworkObject */ = {
 			isa = PBXGroup;
 			children = (
-				18EBF9791B273A6600EDA48B /* SASUploadObject.h */,
-				18EBF97A1B273A6600EDA48B /* SASUploadObject.m */,
+				18EBF9791B273A6600EDA48B /* SASNetworkObject.h */,
+				18EBF97A1B273A6600EDA48B /* SASNetworkObject.m */,
 			);
-			name = SASUploadObject;
-			path = GUI/SASUploadImageViewController/SASUploadObject;
+			name = SASNetworkObject;
+			path = ../GUI/SASUploadImageViewController/SASUploadObject;
 			sourceTree = "<group>";
 		};
 		18EBF97D1B273A7700EDA48B /* SASUploadImageViewController */ = {
 			isa = PBXGroup;
 			children = (
-				18EBF97E1B2741F600EDA48B /* SASUploadImageViewController.h */,
-				18EBF97F1B2741F600EDA48B /* SASUploadImageViewController.m */,
+				18EBF97E1B2741F600EDA48B /* SASUploadViewController.h */,
+				18EBF97F1B2741F600EDA48B /* SASUploadViewController.m */,
 				18DAE8501B46BA2D00CAEF2D /* SASDeviceButtonView */,
 			);
 			path = SASUploadImageViewController;
@@ -943,7 +956,6 @@
 		D72E1DAF19EE841E005DD8A5 /* Save a Selfie 2 */ = {
 			isa = PBXGroup;
 			children = (
-				18EBF97C1B273A6900EDA48B /* SASUploadObject */,
 				1869E3E11B9B3B08000E1DA7 /* Libraries */,
 				18BA4DF71B82C1540047DEC4 /* UIDevice+DeviceName */,
 				18A525051B166E0D00E8F8F6 /* SASDevice */,
@@ -1154,7 +1166,7 @@
 				18C323991B1E2F1E0027BDEA /* SASImageViewController.m in Sources */,
 				D700239919F52E8800E45408 /* UIButton+Maker.m in Sources */,
 				184D99B71B49C24A005ECE33 /* SASGreyView.m in Sources */,
-				18EBF97B1B273A6600EDA48B /* SASUploadObject.m in Sources */,
+				18EBF97B1B273A6600EDA48B /* SASNetworkObject.m in Sources */,
 				18A525081B16708400E8F8F6 /* SASMapViewController.m in Sources */,
 				D786E1781A48C02900A20FDD /* SASDevice.m in Sources */,
 				18A524F71B166BAB00E8F8F6 /* SASLocation.m in Sources */,
@@ -1163,10 +1175,10 @@
 				D756A29C19F175230089EF80 /* UIImage+Alpha.m in Sources */,
 				180592091C5577490059215F /* FireHydrantButton.m in Sources */,
 				18C104861B714C5900B4731D /* SASGalleryContainer.m in Sources */,
-				1891E3D91B176E9B008CC10C /* SASObjectDownloader.m in Sources */,
 				1810C9141B28ABE3009063E5 /* ILTranslucentView.m in Sources */,
 				D786E1811A48C10500A20FDD /* SASAnnotation.m in Sources */,
 				188CAEED1B21006C006A90EB /* Screen.m in Sources */,
+				1819829D1C5ADDFF008A1A14 /* SASNetworkManager.m in Sources */,
 				185F3ED31B9E04FB00345CFB /* FXAlertControllerTransitionAnimator.m in Sources */,
 				18592E021B5184E2004DDFD8 /* SASSponsorViewController.m in Sources */,
 				185F3ED41B9E04FB00345CFB /* FXPresentationController.m in Sources */,
@@ -1180,8 +1192,10 @@
 				1845C4EF1B209E6C00E3D7BC /* SASUtilities.m in Sources */,
 				1864FEAC1B27A39900EA564A /* UIFont+SASFont.m in Sources */,
 				1818AFDA1B5153A5004FF998 /* SASGalleryCell.m in Sources */,
+				18CFECA51C5C2A0B00DC47AE /* DefaultDownloadWorker.m in Sources */,
 				180592031C5577260059215F /* DefibrillatorButton.m in Sources */,
-				18EBF9801B2741F600EDA48B /* SASUploadImageViewController.m in Sources */,
+				181982A11C5AF302008A1A14 /* SASNetworkQuery.m in Sources */,
+				18EBF9801B2741F600EDA48B /* SASUploadViewController.m in Sources */,
 				181B9AEA1B7D406800E7FD3E /* SASSponsorCardManager.m in Sources */,
 				181D1E5D1B2359EA00FB5928 /* SASImageInspectorView.m in Sources */,
 				D756A2A919F309690089EF80 /* SASTabBarController.m in Sources */,
@@ -1212,8 +1226,8 @@
 				D786E2511A50AC7F00A20FDD /* PopupImage.m in Sources */,
 				180E18F51B7AC1DF0077BBEF /* SASSponsorCardView.m in Sources */,
 				180E295D1B5464C1003548FA /* EULAViewController.m in Sources */,
-				183C0CD01C527ECE00D66B2F /* SASUploadManager.m in Sources */,
 				1891E3D31B1743C8008CC10C /* SASMapView.m in Sources */,
+				181982A91C5AF7AB008A1A14 /* ParseDownloadWorker.m in Sources */,
 				1807AF4D1B4EEE79006E1B28 /* NSString+PDRegex.m in Sources */,
 				185A39B81B1FD7B900699D31 /* SASColour.m in Sources */,
 			);

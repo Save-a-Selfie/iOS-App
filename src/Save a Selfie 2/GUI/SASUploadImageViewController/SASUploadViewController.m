@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Stephen Fox. All rights reserved.
 //
 
-#import "SASUploadImageViewController.h"
+#import "SASUploadViewController.h"
 #import "SASImageView.h"
 #import "SASUtilities.h"
 #import "SASAnnotation.h"
@@ -30,12 +30,12 @@
 #import "CMPopTipView.h"
 #import "SASDeviceButtonView.h"
 
-#import "SASUploadManager.h"
+#import "SASNetworkManager.h"
 #import "ParseUploadWorker.h"
 
 
 
-@interface SASUploadImageViewController () <UITextViewDelegate,
+@interface SASUploadViewController () <UITextViewDelegate,
 EULADelegate,
 CMPopTipViewDelegate,
 SASDeviceButtonViewDelegate>
@@ -60,10 +60,10 @@ SASDeviceButtonViewDelegate>
 @property (strong, nonatomic) UILongPressGestureRecognizer *longPress;
 @property (strong, nonatomic) UIView* updateView;
 
-@property (strong, nonatomic) SASUploadManager *uploadManager;
+@property (strong, nonatomic) SASNetworkManager *networkManager;
 @end
 
-@implementation SASUploadImageViewController
+@implementation SASUploadViewController
 
 
 - (void)viewDidLoad {
@@ -177,29 +177,24 @@ SASDeviceButtonViewDelegate>
 #pragma mark UUID set here.
     self.sasUploadObject.UUID = [NSUUID UUID].UUIDString;
     
-    if (!self.uploadManager) {
-      self.uploadManager = [SASUploadManager sharedInstance];
+    if (!self.networkManager) {
+      self.networkManager = [SASNetworkManager sharedInstance];
     }
     
     // Checks that everything is correct.
     [self preUploadChecks: ^(){
-      // Message UploadManager to begin uploading to the server.
-      [self.uploadManager uploadWorker:[[ParseUploadWorker alloc] init]
-                            withObject:self.sasUploadObject
-                            completion:^(UploadCompletionStatus status) {
-                              switch (status) {
-                                case Success:
-                                  [self uploadSuccess];
-                                  break;
-                                case Failed:
-                                  [self uploadFailure];
-                                  break;
-                                case InvalidObject:
-                                  [self uploadFailure];
-                                default:
-                                  break;
-                              }
-                            }];
+      [self.networkManager uploadWithWorker:[[ParseUploadWorker alloc] init]
+                                 withObject:self.sasUploadObject
+                                 completion:^(UploadCompletionStatus status) {
+                                   switch (status) {
+                                     case Failed:
+                                       [self uploadFailure];
+                                       break;
+                                       case Success:
+                                       [self uploadSuccess];
+                                       break;
+                                   }
+                                 }];
       [self uploadBegan];
     }];
   }
@@ -207,14 +202,12 @@ SASDeviceButtonViewDelegate>
 
 
 - (void) uploadBegan {
-  
   // Activity Indicator
   self.sasActivityIndicator = [[SASActivityIndicator alloc] initWithMessage:@"Posting"];
   self.sasActivityIndicator.backgroundColor = [UIColor colorWithWhite:1.0 alpha:1.0];
   [self.view addSubview:self.sasActivityIndicator];
   self.sasActivityIndicator.center = self.view.center;
   [self.sasActivityIndicator startAnimating];
-  
   
   self.doneButton.enabled = NO;
   self.view.userInteractionEnabled = NO;
@@ -361,11 +354,12 @@ SASDeviceButtonViewDelegate>
 - (void) dismissSASUploadImageViewControllerWithResponse:(SASUploadControllerResponse) response {
   
   // Call delegate.
-  if (self.delegate != nil && [self.delegate respondsToSelector:@selector(sasUploadImageViewControllerDidFinishUploading:withResponse:withObject:)]) {
-    [self.delegate sasUploadImageViewControllerDidFinishUploading:self
-                                                     withResponse:response
-                                                       withObject:self.sasUploadObject];
+  if (self.delegate != nil &&
+      [self.delegate respondsToSelector:@selector(sasUploadViewController:withResponse:withObject:)]) {
     
+    [self.delegate sasUploadViewController:self
+                              withResponse:response
+                                withObject:self.sasUploadObject];
   }
   
   [self dismissViewControllerAnimated:YES completion:nil];

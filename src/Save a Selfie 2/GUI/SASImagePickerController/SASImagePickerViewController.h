@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@class SASUploadObject;
+@class SASNetworkObject;
 @class SASImagePickerViewController;
 
 @protocol SASImagePickerDelegate <NSObject>
