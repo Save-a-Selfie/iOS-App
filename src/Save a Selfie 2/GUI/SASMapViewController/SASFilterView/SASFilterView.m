@@ -72,7 +72,7 @@ SASDeviceType availableDevicesToFilter[5] = {
 
 
 
-- (void)mapToFilter:(SASMapView<Filterable>*) mapView {
+- (void)mapToFilter:(SASMapView<MapFilterable>*) mapView {
   self.filterableMapView = mapView;
 }
 

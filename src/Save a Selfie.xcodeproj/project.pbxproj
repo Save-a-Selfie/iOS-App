@@ -198,7 +198,7 @@
 		189D4F3C1B5C49BF005E709C /* Save a Selfie Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Save a Selfie Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		189D4F3F1B5C49BF005E709C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		189D4F401B5C49BF005E709C /* Save_a_Selfie_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Save_a_Selfie_Tests.m; sourceTree = "<group>"; };
-		18A49A191BBB33D800C50561 /* Filterable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Filterable.h; sourceTree = "<group>"; };
+		18A49A191BBB33D800C50561 /* MapFilterable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MapFilterable.h; sourceTree = "<group>"; };
 		18A524F51B166BAB00E8F8F6 /* SASLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASLocation.h; sourceTree = "<group>"; };
 		18A524F61B166BAB00E8F8F6 /* SASLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASLocation.m; sourceTree = "<group>"; };
 		18A525061B16708400E8F8F6 /* SASMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASMapViewController.h; sourceTree = "<group>"; };
@@ -877,7 +877,7 @@
 		18F46A4C1B2B9F230062BD05 /* SASFilterView */ = {
 			isa = PBXGroup;
 			children = (
-				18A49A191BBB33D800C50561 /* Filterable.h */,
+				18A49A191BBB33D800C50561 /* MapFilterable.h */,
 				18D66E441C5113D100AA7238 /* SASFilterView.h */,
 				18D66E451C5113D100AA7238 /* SASFilterView.m */,
 				18D66E4E1C5115CA00AA7238 /* SASFilterView.xib */,

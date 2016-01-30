@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "SASDevice.h"
-#import "Filterable.h"
+#import "MapFilterable.h"
 #import "SASMapView.h"
 
 @class SASFilterView;
@@ -30,6 +30,6 @@
  The map view will be message about what annotations to
  filter.
  */
-- (void) mapToFilter:(MKMapView<Filterable>*) mapView;
+- (void) mapToFilter:(MKMapView<MapFilterable>*) mapView;
 
 @end

@@ -235,7 +235,7 @@
 //  That object can handle what they do with the information provided by the annotation.
 - (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
   
-  SASAnnotation* selectedAnnotation = view.annotation;
+  SASAnnotation* selectedAnnotation = (SASAnnotation*)view.annotation;
   
   if(self.notificationReceiver != nil &&
      ![selectedAnnotation isKindOfClass:MKUserLocation.class] &&

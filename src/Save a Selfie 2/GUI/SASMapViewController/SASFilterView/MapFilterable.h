@@ -13,7 +13,7 @@
  A protocol for any MKMapView instance can implement
  to filter all the devices on the map.
  */
-@protocol Filterable <NSObject>
+@protocol MapFilterable <NSObject>
 
 - (void) filterMapForDevice:(SASDeviceType) deviceType;
 
