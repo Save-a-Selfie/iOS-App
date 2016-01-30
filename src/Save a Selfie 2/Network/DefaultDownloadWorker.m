@@ -10,7 +10,7 @@
 #import "DefaultDownloadWorker.h"
 #import "SASAnnotation.h"
 
-@interface DefaultDownloadWorker () <NSURLSessionDelegate>
+@interface DefaultDownloadWorker ()
 
 @property (strong, nonatomic) NSURLSession *nsUrlDefaultSession;
 @property (strong, nonatomic) NSURL *url;
@@ -31,20 +31,21 @@ NSString* const downloadURL = @"http://www.saveaselfie.org/wp/wp-content/themes/
 }
 
 - (void) commonInit {
-  
-  NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
-
+  self.nsUrlDefaultSession =
+    [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
   self.url = [NSURL URLWithString:downloadURL];
-  self.nsUrlDefaultSession = [NSURLSession sessionWithConfiguration:config delegate:self delegateQueue:[NSOperationQueue mainQueue]];
 }
 
 
 #pragma mark DownloadWorker protocol.
-- (void)downloadWithQuery:(SASNetworkQuery *)query completionResult:(DownloadWorkerCompletionBlock)completionBlock {
+- (void)downloadWithQuery:(SASNetworkQuery *)query
+         completionResult:(DownloadWorkerCompletionBlock) completionBlock {
   // Determine the query type.
   switch (query.type) {
     case SASNetworkQueryTypeAll:
       [self downloadAllDevicesFromServer:^(NSData *data, NSURLResponse *response, NSError *error) {
+        NSLog(@"Error: %@", error);
+        NSLog(@"Response: %@", response);
         NSArray *sasDevices = [self constructDevicesFromResponse:data];
         completionBlock(sasDevices);
       }];
@@ -53,8 +54,8 @@ NSString* const downloadURL = @"http://www.saveaselfie.org/wp/wp-content/themes/
 }
 
 
-- (void) downloadAllDevicesFromServer: (void (^)(NSData *data, NSURLResponse *response, NSError *error)) result {
-  [self.nsUrlDefaultSession dataTaskWithURL:self.url completionHandler:result];
+- (void) downloadAllDevicesFromServer: (void (^)(NSData *data, NSURLResponse *response, NSError *error)) completionHandler {
+  [[self.nsUrlDefaultSession dataTaskWithURL:self.url completionHandler:completionHandler] resume];
 }
 
 

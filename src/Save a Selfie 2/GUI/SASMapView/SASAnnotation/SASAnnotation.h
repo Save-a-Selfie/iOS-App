@@ -2,11 +2,11 @@
 //  SASAnnotation.h
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 #import "SASDevice.h"
 
-@interface SASAnnotation : NSObject <MKAnnotation>
+@interface SASAnnotation : NSObject <MKAnnotation, NSCopying>
 
 /**
  This property can be used to indentify what type
@@ -19,24 +19,23 @@
  */
 @property (nonatomic, assign) CLLocationCoordinate2D coordinate;
 
+
 /**
- All SASAnnotations must have a SASDevice property set as
- it is required in the initialisation of an SASAnnotation.
+ This property is set when a SASAnnotation has been initialised
+ which a SASDevice.
  */
-@property (nonatomic, readonly) SASDevice *device;
-
-
-
+@property (nonatomic, assign) SASDeviceType deviceType;
 
 /**
- Initialises an new SASAnnotation instance.
+ Initialises an new SASAnnotation instance given a SASDevice.
  
  @param device The device is needed so the correct info
                can be gathered for the annotation i.e coordinates, type etc.
  
  @return New instance of SASAnnotation.
  */
-- (instancetype) initAnnotationWithObject:(SASDevice*) device;
++ (SASAnnotation*) annotationWithSASDevice:(SASDevice*) device;
+
 
 
 @end

@@ -5,7 +5,6 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 
-
 // Device types:
 // Defibrillator
 // Life Ring
@@ -28,9 +27,21 @@ typedef NS_ENUM(int, SASDeviceType) {
 @property (nonatomic, strong, readonly) NSString *imageURLString;
 @property (nonatomic, strong, readonly) NSURL *imageURL;
 @property (nonatomic, strong, readonly) NSString *caption;
-@property (nonatomic, strong, readonly) NSString *thumb;
-@property (nonatomic, strong, readonly) NSString *app;
 @property (nonatomic, readonly) CLLocationCoordinate2D deviceLocation;
+
+
+
+/**
+ Returns an SASDevice instance that has been initiliased with a string.
+ 
+ @param infoString
+ A string containing all the information to create a SASDevice object.
+ The information string is typically gotten from the server and has
+ all the neccessary information to create the instance.
+ 
+ @return SASDevice
+ */
+- (instancetype) initDeviceWithInformationFromString: (NSString *)infoString;
 
 
 /**
@@ -73,17 +84,6 @@ typedef NS_ENUM(int, SASDeviceType) {
 
 
 
-/**
- Returns an SASDevice instance that has been initiliased with a string.
- 
- @param infoString
-        A string containing all the information to create a SASDevice object.
-        The information string is typically gotten from the server and has
-        all the neccessary information to create the instance.
-
- @return SASDevice
- */
-- (id) initDeviceWithInformationFromString: (NSString *)infoString;
 
 
 

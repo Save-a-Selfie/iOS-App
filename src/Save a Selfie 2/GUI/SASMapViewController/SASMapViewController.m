@@ -21,6 +21,9 @@
 #import "SASFilterView.h"
 #import "FXAlert.h"
 #import "SASTabBarController.h"
+#import "SASNetworkQuery.h"
+#import "SASNetworkManager.h"
+#import "DefaultDownloadWorker.h"
 
 @interface SASMapViewController ()
 <SASImagePickerDelegate,
@@ -44,6 +47,8 @@ MKMapViewDelegate>
 @property (strong, nonatomic) UISegmentedControl *mapTypeSegmentedContol;
 @property (strong, nonatomic) SASFilterView *sasFilterView;
 
+@property (strong, nonatomic) SASNetworkManager *networkManager;
+@property (strong, nonatomic) NSMutableDictionary <SASAnnotation*, SASDevice*> *annotationDict;
 
 @end
 
@@ -53,205 +58,218 @@ NSString *permissionsProblemText = @"Please enable location services for this ap
 
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
-    return UIStatusBarStyleLightContent;
+  return UIStatusBarStyleLightContent;
 }
 
 
 - (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    
-    [self.navigationController setNavigationBarHidden:YES animated:NO];
-    self.tabBarController.tabBar.hidden = NO;
-    
-
-    // Receive updates i.e location permission changes etc.
-    // See SASMapView's: @protocol SASMapViewNotifications
-    // for all available botifications.
-    self.sasMapView.notificationReceiver = self;
-    self.sasMapView.zoomToUsersLocationInitially = YES;
-    self.sasMapView.sasAnnotationImage = SASAnnotationImageCustom;
-    self.sasMapView.mapType = MKMapTypeSatellite;
+  [super viewWillAppear:animated];
   
-    [self.sasMapView loadSASAnnotationsToMap];
-
+  [self.navigationController setNavigationBarHidden:YES animated:NO];
+  self.tabBarController.tabBar.hidden = NO;
+  
+  self.sasMapView.notificationReceiver = self;
+  self.sasMapView.zoomToUsersLocationInitially = YES;
+  self.sasMapView.sasAnnotationImage = SASAnnotationImageCustom;
+  self.sasMapView.mapType = MKMapTypeSatellite;
+  
+  [self downloadInformationFromServer:^(NSArray* devices){
+    self.annotationDict = [[NSMutableDictionary alloc] init];
+    for (SASDevice *d in devices) {
+      SASAnnotation *annotation = [SASAnnotation annotationWithSASDevice:d];
+      [self.annotationDict setObject:d forKey:annotation];
+    }
+    [self.sasMapView addAnnotations:self.annotationDict.allKeys];
+  }];
 }
 
 
 - (IBAction)locateUser:(id)sender {
-     [self.sasMapView locateUser];
+  [self.sasMapView locateUser];
 }
 
 
 
 - (void) displayLocationDisabledAlert {
+  [self clearLocationDisabledAlert];
+  
+  if (self.permissionProblemAlert == nil) {
     
-    [self clearLocationDisabledAlert];
+    self.permissionProblemAlert = [[FXAlertController alloc] initWithTitle:@"LOCATION DISABLED" message:permissionsProblemText];
+    self.permissionProblemAlert.font = [UIFont fontWithName:@"Avenir Next" size:15];
     
-    if (self.permissionProblemAlert == nil) {
-        
-        self.permissionProblemAlert = [[FXAlertController alloc] initWithTitle:@"LOCATION DISABLED" message:permissionsProblemText];
-        self.permissionProblemAlert.font = [UIFont fontWithName:@"Avenir Next" size:15];
-        
-        FXAlertButton *gotoSettingsButton = [[FXAlertButton alloc] initWithType:FXAlertButtonTypeCancel];
-        [gotoSettingsButton setTitle:@"Open Settings" forState:UIControlStateNormal];
-        [gotoSettingsButton addTarget:self action:@selector(openSettings) forControlEvents:UIControlEventTouchUpInside];
-        
-        [self.permissionProblemAlert addButton:gotoSettingsButton];
-        
-        [self presentViewController:self.permissionProblemAlert animated:YES completion:nil];
-
-    }
+    FXAlertButton *gotoSettingsButton = [[FXAlertButton alloc] initWithType:FXAlertButtonTypeCancel];
+    [gotoSettingsButton setTitle:@"Open Settings" forState:UIControlStateNormal];
+    [gotoSettingsButton addTarget:self action:@selector(openSettings) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.permissionProblemAlert addButton:gotoSettingsButton];
+    
+    [self presentViewController:self.permissionProblemAlert animated:YES completion:nil];
+    
+  }
 }
 
 
 
 - (void) openSettings {
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
+  [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
 }
 
 
 
 - (void) clearLocationDisabledAlert { // called when returning from outside app
-    if (self.permissionProblemAlert) {
-        [self.permissionProblemAlert dismissViewControllerAnimated:YES completion:nil];
-        self.permissionProblemAlert = nil;
-    }
+  if (self.permissionProblemAlert) {
+    [self.permissionProblemAlert dismissViewControllerAnimated:YES completion:nil];
+    self.permissionProblemAlert = nil;
+  }
 }
 
 
 
 - (IBAction) showSASFilterView:(id)sender {
-  
   if (!self.sasFilterView) {
     self.sasFilterView = [[SASFilterView alloc] init];
     [self.sasFilterView mapToFilter:self.sasMapView];
   }
-  
   [self.sasFilterView animateIntoView:self.view];
 }
 
-#pragma mark <SASMapViewNotifications>
-- (void)sasMapView:(SASMapView *)mapView annotationWasTapped:(SASAnnotation *) annotation {
-    
-    // Present the SASImageviewController to display the image associated
-    // with the annotation selected.
-    SASImageViewController *sasImageViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SASImageViewController"];
-    
-    sasImageViewController.device = annotation.device;
-    
-    [self.navigationController pushViewController:sasImageViewController animated:YES];
+
+
+- (void) downloadInformationFromServer:(void(^)(NSArray <SASDevice*>*)) completionBlock {
+  self.networkManager = [SASNetworkManager sharedInstance];
+  SASNetworkQuery *query = [SASNetworkQuery queryWithType:SASNetworkQueryTypeAll];
+  DefaultDownloadWorker *downloadWorker = [[DefaultDownloadWorker alloc] init];
+  
+  [self.networkManager downloadWithQuery:query
+                               forWorker:downloadWorker
+                              completion:^(NSArray *devices) {
+    completionBlock(devices);
+  }];
 }
 
 
 
 
-// This method will be called anythime permissions for lacation is changed.
-- (void)sasMapView:(SASMapView *)mapView authorizationStatusHasChanged:(CLAuthorizationStatus)status {
-    
-    BOOL makeCheckForMapWarning = NO;
-    
-    
-    if([CLLocationManager locationServicesEnabled]){
-        switch(status){
+#pragma mark <SASMapViewNotifications>
+- (void)sasMapView:(SASMapView *)mapView annotationWasTapped:(SASAnnotation *) annotation {
+  
+  // Present the SASImageviewController to display the image associated
+  // with the annotation selected.
+  SASImageViewController *sasImageViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SASImageViewController"];
+  sasImageViewController.device = [self.annotationDict objectForKey:annotation];
+  [self.navigationController pushViewController:sasImageViewController animated:YES];
+}
 
-            case kCLAuthorizationStatusAuthorizedAlways:
-                NSLog(@"We have access to location services");
-                break;
-                
-            case kCLAuthorizationStatusAuthorizedWhenInUse:
-                makeCheckForMapWarning = YES;
-                // Only when we have access to location
-                // can this be set to YES.
-                self.sasMapView.showsUserLocation = YES;
-                break;
-                
-            case kCLAuthorizationStatusDenied:
-                NSLog(@"Location services denied by user!");
-                [self displayLocationDisabledAlert];
-                break;
-                
-            case kCLAuthorizationStatusRestricted:
-                NSLog(@"Parental controls restrict location services");
-                break;
-                
-            case kCLAuthorizationStatusNotDetermined:
-                NSLog(@"Unable to determine, possibly not available");
-                break;
-                
-            default:
-                [self displayLocationDisabledAlert];
-                break;
-                
-        }
-    }
-    else {
-        NSLog(@"Location Services Are Disabled");
+
+
+// This method will be called anytime permissions for lacation is changed.
+- (void)sasMapView:(SASMapView *)mapView authorizationStatusHasChanged:(CLAuthorizationStatus)status {
+  
+  BOOL makeCheckForMapWarning = NO;
+  
+  
+  if([CLLocationManager locationServicesEnabled]){
+    switch(status){
+        
+      case kCLAuthorizationStatusAuthorizedAlways:
+        NSLog(@"We have access to location services");
+        break;
+        
+      case kCLAuthorizationStatusAuthorizedWhenInUse:
+        makeCheckForMapWarning = YES;
+        // Only when we have access to location
+        // can this be set to YES.
+        self.sasMapView.showsUserLocation = YES;
+        break;
+        
+      case kCLAuthorizationStatusDenied:
+        NSLog(@"Location services denied by user!");
         [self displayLocationDisabledAlert];
+        break;
+        
+      case kCLAuthorizationStatusRestricted:
+        NSLog(@"Parental controls restrict location services");
+        break;
+        
+      case kCLAuthorizationStatusNotDetermined:
+        NSLog(@"Unable to determine, possibly not available");
+        break;
+        
+      default:
+        [self displayLocationDisabledAlert];
+        break;
+        
     }
-    
-    
-    if (makeCheckForMapWarning) {
-        [self makeCheckForMapWarning];
-    }
+  }
+  else {
+    NSLog(@"Location Services Are Disabled");
+    [self displayLocationDisabledAlert];
+  }
+  
+  
+  if (makeCheckForMapWarning) {
+    [self makeCheckForMapWarning];
+  }
 }
 
 #pragma Map Warning
 - (void) makeCheckForMapWarning {
+  
+  BOOL hasMapWarningHasBeenAccepted = [[[NSUserDefaults standardUserDefaults]
+                                        valueForKey:@"mapWarningAccepted"]
+                                       isEqualToString:@"yes"];
+  
+  
+  if (!hasMapWarningHasBeenAccepted) {
     
-    BOOL hasMapWarningHasBeenAccepted = [[[NSUserDefaults standardUserDefaults]
-                                          valueForKey:@"mapWarningAccepted"]
-                                         isEqualToString:@"yes"];
+    FXAlertController *disclaimerWarning = [[FXAlertController alloc] initWithTitle:@"WARNING!" message:@"The information here is correct to the best of our knowledge, but use, is at your risk and discretion, with no liability to Save a Selfie, the developers or Apple."];
     
-
-    if (!hasMapWarningHasBeenAccepted) {
-            
-            FXAlertController *disclaimerWarning = [[FXAlertController alloc] initWithTitle:@"WARNING!" message:@"The information here is correct to the best of our knowledge, but use, is at your risk and discretion, with no liability to Save a Selfie, the developers or Apple."];
-            
-            FXAlertButton *acceptButton = [[FXAlertButton alloc] initWithType:FXAlertButtonTypeStandard];
-            [acceptButton setTitle:@"Accept" forState:UIControlStateNormal];
-            [acceptButton addTarget:self action:@selector(acceptMapWarning) forControlEvents:UIControlEventTouchUpInside];
-
-            FXAlertButton *declineButton = [[FXAlertButton alloc] initWithType:FXAlertButtonTypeCancel];
-            [declineButton setTitle:@"Decline" forState:UIControlStateNormal];
-            [declineButton addTarget:self action:@selector(declineMapWarning) forControlEvents:UIControlEventTouchUpInside];
-            
-            [disclaimerWarning addButton:acceptButton];
-            [disclaimerWarning addButton:declineButton];
-            
-            [self presentViewController:disclaimerWarning animated:YES completion:nil];
-        }
+    FXAlertButton *acceptButton = [[FXAlertButton alloc] initWithType:FXAlertButtonTypeStandard];
+    [acceptButton setTitle:@"Accept" forState:UIControlStateNormal];
+    [acceptButton addTarget:self action:@selector(acceptMapWarning) forControlEvents:UIControlEventTouchUpInside];
+    
+    FXAlertButton *declineButton = [[FXAlertButton alloc] initWithType:FXAlertButtonTypeCancel];
+    [declineButton setTitle:@"Decline" forState:UIControlStateNormal];
+    [declineButton addTarget:self action:@selector(declineMapWarning) forControlEvents:UIControlEventTouchUpInside];
+    
+    [disclaimerWarning addButton:acceptButton];
+    [disclaimerWarning addButton:declineButton];
+    
+    [self presentViewController:disclaimerWarning animated:YES completion:nil];
+  }
 }
 
 
 
 - (void) acceptMapWarning {
-    
-    self.sasMapView.userInteractionEnabled = YES;
-    
-    [[NSUserDefaults standardUserDefaults] setValue:@"yes" forKey:@"mapWarningAccepted"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    
-    EULAViewController *eulaVC = [EULAViewController new];
-    [eulaVC updateEULATable];
-    
-   
+  
+  self.sasMapView.userInteractionEnabled = YES;
+  
+  [[NSUserDefaults standardUserDefaults] setValue:@"yes" forKey:@"mapWarningAccepted"];
+  [[NSUserDefaults standardUserDefaults] synchronize];
+  
+  EULAViewController *eulaVC = [EULAViewController new];
+  [eulaVC updateEULATable];
+  
+  
 }
 
 
 - (void) declineMapWarning {
-    
-    // Disabled user interaction for user until they accept the map warning.
-    self.sasMapView.userInteractionEnabled = NO;
-    
-    FXAlertController *disclaimerAlert = [[FXAlertController alloc] initWithTitle:@"DISCLAIMER" message:@"To use this app you must accept the disclaimer."];
-    
-    FXAlertButton *showMeButton = [[FXAlertButton alloc] initWithType:FXAlertButtonTypeStandard];
-    [showMeButton setTitle:@"Show me" forState:UIControlStateNormal];
-    [showMeButton addTarget:self action:@selector(makeCheckForMapWarning) forControlEvents:UIControlEventTouchUpInside];
-    [disclaimerAlert addButton:showMeButton];
-    
-    [self presentViewController:disclaimerAlert animated:YES completion:nil];
-
+  
+  // Disabled user interaction for user until they accept the map warning.
+  self.sasMapView.userInteractionEnabled = NO;
+  
+  FXAlertController *disclaimerAlert = [[FXAlertController alloc] initWithTitle:@"DISCLAIMER" message:@"To use this app you must accept the disclaimer."];
+  
+  FXAlertButton *showMeButton = [[FXAlertButton alloc] initWithType:FXAlertButtonTypeStandard];
+  [showMeButton setTitle:@"Show me" forState:UIControlStateNormal];
+  [showMeButton addTarget:self action:@selector(makeCheckForMapWarning) forControlEvents:UIControlEventTouchUpInside];
+  [disclaimerAlert addButton:showMeButton];
+  
+  [self presentViewController:disclaimerAlert animated:YES completion:nil];
+  
 }
 
 
@@ -274,48 +292,48 @@ NSString *permissionsProblemText = @"Please enable location services for this ap
 //  3. Then the image is handed to sasUploadImageViewController, which will handle all
 //     of the uploading.
 - (IBAction)uploadNewNewDevice:(id)sender {
-    
-    if(self.sasImagePickerController == nil) {
-        self.sasImagePickerController = [[SASImagePickerViewController alloc] init];
-        self.sasImagePickerController.sasImagePickerDelegate = self;
-    }
-
-    
-    
-    if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-        [self.sasImagePickerController setSourceType:UIImagePickerControllerSourceTypeCamera];
-        [self presentViewController:self.sasImagePickerController animated:YES completion:nil];
-    }
-    
+  
+  if(self.sasImagePickerController == nil) {
+    self.sasImagePickerController = [[SASImagePickerViewController alloc] init];
+    self.sasImagePickerController.sasImagePickerDelegate = self;
+  }
+  
+  
+  
+  if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+    [self.sasImagePickerController setSourceType:UIImagePickerControllerSourceTypeCamera];
+    [self presentViewController:self.sasImagePickerController animated:YES completion:nil];
+  }
+  
 }
 
 
 #pragma mark SASImagePickerDelegate Method
 - (void)sasImagePickerController:(SASImagePickerViewController *)sasImagePicker didFinishWithImage:(UIImage *)image {
-    
-
-    // Create an upload object and set the image.
-    SASNetworkObject *sasUploadObject = [[SASNetworkObject alloc] initWithImage:image];
-    
-
-    
-    // Dismiss the SASImagePickerViewController and pass
-    // the image onto SASUploadImageViewController via
-    //
-    //  -presentSASUploadImageViewControllerWithImage:
-    //
-
-    [self.sasImagePickerController dismissViewControllerAnimated:YES completion:^{
-        self.sasImagePickerController = nil;
-        [self presentSASUploadImageViewControllerWithUploadObject:sasUploadObject];
-    }];
-    
+  
+  
+  // Create an upload object and set the image.
+  SASNetworkObject *sasUploadObject = [[SASNetworkObject alloc] initWithImage:image];
+  
+  
+  
+  // Dismiss the SASImagePickerViewController and pass
+  // the image onto SASUploadImageViewController via
+  //
+  //  -presentSASUploadImageViewControllerWithImage:
+  //
+  
+  [self.sasImagePickerController dismissViewControllerAnimated:YES completion:^{
+    self.sasImagePickerController = nil;
+    [self presentSASUploadImageViewControllerWithUploadObject:sasUploadObject];
+  }];
+  
 }
 
 
 
 - (void)sasImagePickerControllerDidCancel:(SASImagePickerViewController *)sasImagePickerController {
-    self.sasImagePickerController = nil;
+  self.sasImagePickerController = nil;
 }
 
 
@@ -324,36 +342,36 @@ NSString *permissionsProblemText = @"Please enable location services for this ap
 
 // Presents a SASUploadImageViewController via
 - (void) presentSASUploadImageViewControllerWithUploadObject:(SASNetworkObject*) sasUploadObject {
-    
-
-
-    // @Discussion:
-    //  The user location will be got here, now it may
-    //  seem like it should be gotten just before the user
-    //  actually decides to upload the image/device, however,
-    //  it is possible the user may take the picture and move
-    //  from the location an upload moments later.
-    //  So for now we will set the coordinates here.
-    sasUploadObject.coordinates = [self.sasMapView currentUserLocation];
-    
-    
-    if(self.sasUploadViewController == nil) {
-        self.sasUploadViewController =
-          (SASUploadViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"SASUploadImageViewController"];
-        self.sasUploadViewController.delegate = self;
-        [self.sasUploadViewController setSasUploadObject:sasUploadObject];
-    }
-
-    
-    if (self.uploadImageNavigationController == nil) {
-        self.uploadImageNavigationController =
-          [[UINavigationController alloc] initWithRootViewController:self.sasUploadViewController];
-    }
-    
-    [self presentViewController:self.uploadImageNavigationController animated:YES completion:nil];
-    
-
-    
+  
+  
+  
+  // @Discussion:
+  //  The user location will be got here, now it may
+  //  seem like it should be gotten just before the user
+  //  actually decides to upload the image/device, however,
+  //  it is possible the user may take the picture and move
+  //  from the location an upload moments later.
+  //  So for now we will set the coordinates here.
+  sasUploadObject.coordinates = [self.sasMapView currentUserLocation];
+  
+  
+  if(self.sasUploadViewController == nil) {
+    self.sasUploadViewController =
+    (SASUploadViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"SASUploadImageViewController"];
+    self.sasUploadViewController.delegate = self;
+    [self.sasUploadViewController setSasUploadObject:sasUploadObject];
+  }
+  
+  
+  if (self.uploadImageNavigationController == nil) {
+    self.uploadImageNavigationController =
+    [[UINavigationController alloc] initWithRootViewController:self.sasUploadViewController];
+  }
+  
+  [self presentViewController:self.uploadImageNavigationController animated:YES completion:nil];
+  
+  
+  
 }
 
 #pragma mark SASUploadViewController Delegate

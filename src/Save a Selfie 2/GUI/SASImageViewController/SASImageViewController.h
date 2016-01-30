@@ -22,6 +22,9 @@
 @property(strong, nonatomic) SASDevice* device;
 
 
+
+@property(strong, nonatomic) SASAnnotation* annotation;
+
 /**
  Use this flag to change whether or not
  an image will be loadedfrom the url or from the set SASDevice property. 

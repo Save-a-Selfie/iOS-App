@@ -15,7 +15,7 @@
 
 - (void)downloadWithQuery:(SASNetworkQuery *)query completionResult:(DownloadWorkerCompletionBlock) resultBlock {
   switch (query.type) {
-    case All:
+    case SASNetworkQueryTypeAll:
       [self downloadAllAndPassToBlock:resultBlock];
       break;
     default:

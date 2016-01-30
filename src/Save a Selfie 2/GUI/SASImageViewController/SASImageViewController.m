@@ -26,7 +26,6 @@
 }
 
 @property (nonatomic, assign) SASDeviceType sasDeviceType;
-@property (nonatomic, strong) SASAnnotation *annotation;
 
 @property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, weak) IBOutlet UIView *contentView;
@@ -142,30 +141,26 @@
     
     // Store the type of device shown in the image
     self.sasDeviceType = self.device.type;
-    
-    self.annotation = [[SASAnnotation alloc] initAnnotationWithObject:self.device];
-    
-    self.scrollView.delegate = self;
+  
+  self.scrollView.delegate = self;
 
     // Get the appropriate device name.
     NSString *deviceName = [SASDevice getDeviceNameForDeviceType:self.sasDeviceType];
     self.navigationItem.title = deviceName;
-    
     
     [self setupImageViews];
     [self setupMapView];
     [self setupDescriptionForImage];
     
     
-    if (self.annotation.device != nil) {
+    if (self.device != nil) {
         
         // Set the image for deviceImageView associated with the device i.e lifeRing, defib etc..
-        self.deviceImageView.image = [self deviceImageForAnnotation:self.annotation.device];
+        self.deviceImageView.image = [self deviceImageForAnnotation:self.device];
         
         // Set the elements of the UI which are coloured to the
         // respective colour associated with the device.
-        [self setColourForColouredUIElements:self.annotation.device];
-        
+        [self setColourForColouredUIElements:self.device];
     }
 }
 
@@ -173,9 +168,9 @@
 
 
 - (void) setupDescriptionForImage {
-    if(self.annotation.device.caption != nil) {
+    if(self.device.caption != nil) {
         // Set the text description of the photo.
-        self.photoDescription.text = [NSString stringWithFormat:@"%@", self.annotation.device.caption];
+        self.photoDescription.text = [NSString stringWithFormat:@"%@", self.device.caption];
         [self.photoDescription setFont:[UIFont fontWithName:@"Avenir Next" size:18]];
         [self.photoDescription sizeToFit];
         [self.photoDescription.layer setBorderWidth:0.0];
@@ -192,7 +187,7 @@
         self.sasImageView.image = self.image;
         self.blurredImageView.image = self.image;
     }
-    else if (self.annotation.device.imageURLString != nil && self.shouldDownloadImage && !imageLoaded) {
+    else if (self.device.imageURLString != nil && self.shouldDownloadImage && !imageLoaded) {
         
         // Show activity indicator.
         self.sasActivityIndicator = [[SASActivityIndicator alloc] initWithMessage:@"Loading..."];
@@ -201,7 +196,7 @@
         [self.sasImageView addSubview:self.sasActivityIndicator];
         [self.sasActivityIndicator startAnimating];
         
-        [[SDWebImageDownloader sharedDownloader] downloadImageWithURL:self.annotation.device.imageURL
+        [[SDWebImageDownloader sharedDownloader] downloadImageWithURL:self.device.imageURL
                                                               options:0
                                                              progress:nil
                                                             completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished) {
@@ -299,7 +294,7 @@
 
 #pragma mark Share to Social Media
 - (IBAction)shareToSocialMedia:(id)sender {
-    if (self.annotation.device.caption == nil || self.sasImageView.image == nil) {
+    if (self.device.caption == nil || self.sasImageView.image == nil) {
         
         FXAlertController *couldNotShareAlert = [[FXAlertController alloc] initWithTitle:@"OOOPS" message:@"There seemed to be a problem trying to share the image. Please try again."];
         
@@ -311,7 +306,7 @@
         [self presentViewController:couldNotShareAlert animated:YES completion:nil];
     }
     else {
-        [SASSocial shareToSocialMedia:self.annotation.device.caption
+        [SASSocial shareToSocialMedia:self.device.caption
                              andImage:self.sasImageView.image target:self];
     }
 }
@@ -322,8 +317,7 @@
 - (void) reportImage {
     [[UIApplication sharedApplication]
      openURL:[NSURL URLWithString:
-              [NSString stringWithFormat:@"http://saveaselfie.org/problem-with-an-image/?imageURL=%@", self.annotation.device.imageURLString]]];
-    
+              [NSString stringWithFormat:@"http://saveaselfie.org/problem-with-an-image/?imageURL=%@", self.device.imageURLString]]];
 
 }
 

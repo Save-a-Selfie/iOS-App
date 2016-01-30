@@ -19,7 +19,8 @@ typedef NS_ENUM(NSUInteger, UploadCompletionStatus) {
 
 /**
  This protocol should be implemented for uploads to a server.
- The uploading implementation is left to the conformin client. */
+ The uploading implementation is left to the conforming client.
+ */
 @protocol UploadWorker <NSObject>
 
 typedef void (^UploadCompletionBlock)(UploadCompletionStatus completion);

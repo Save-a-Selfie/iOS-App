@@ -28,9 +28,7 @@ typedef NS_ENUM(NSUInteger, SASAnnotationImage) {
 @optional
 - (void) sasMapView:(SASMapView *) mapView authorizationStatusHasChanged: (CLAuthorizationStatus) status;
 
-
 - (void) sasMapView:(SASMapView *) mapView annotationWasTapped: (SASAnnotation*) annotation;
-
 
 - (void) sasMapView:(SASMapView *) mapView usersLocationHasUpdated: (CLLocationCoordinate2D) coordinate;
 
@@ -78,13 +76,6 @@ typedef NS_ENUM(NSUInteger, SASAnnotationImage) {
 
 
 /**
- This method will load all the annotations from the server
- to the mapView
- */
-- (void) loadSASAnnotationsToMap;
-
-
-/**
  Returns the last updated location of the user.
  
  @return currentUserLocation
@@ -97,8 +88,6 @@ typedef NS_ENUM(NSUInteger, SASAnnotationImage) {
  
  */
 - (CLLocationCoordinate2D) currentUserLocation;
-
-
 
 
 

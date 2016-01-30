@@ -10,4 +10,9 @@
 
 @implementation SASNetworkQuery
 
++ (SASNetworkQuery*) queryWithType:(SASNetworkQueryType) type {
+  SASNetworkQuery *query = [[SASNetworkQuery alloc] init];
+  query.type = type;
+  return query;
+}
 @end

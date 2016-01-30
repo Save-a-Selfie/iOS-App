@@ -11,9 +11,13 @@
 
 @class SASDevice;
 
+/**
+ This protocol should be implemented for downloads from a server.
+ The uploading implementation is left to the conforming client.
+ */
 @protocol DownloadWorker <NSObject>
 
-typedef void (^DownloadWorkerCompletionBlock)( NSArray <SASDevice *> *result);
+typedef void (^DownloadWorkerCompletionBlock)(NSArray <SASDevice *> *result);
 
 
 - (void) downloadWithQuery:(SASNetworkQuery *) query

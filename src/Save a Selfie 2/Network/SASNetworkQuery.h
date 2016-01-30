@@ -25,6 +25,6 @@ typedef NS_ENUM(NSUInteger, SASNetworkQueryType) {
  Returns a new instance of SASNetworkQuery for a specific query
  type.
  */
-+ (instancetype) queryWithType: (SASNetworkQueryType) type;
++ (SASNetworkQuery*) queryWithType: (SASNetworkQueryType) type;
 
 @end

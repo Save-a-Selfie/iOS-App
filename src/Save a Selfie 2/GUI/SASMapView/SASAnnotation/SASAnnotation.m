@@ -3,7 +3,7 @@
 //
 
 #import "SASAnnotation.h"
-#import "SASDevice.h"
+
 
 
 @interface SASAnnotation()
@@ -15,16 +15,24 @@
 
 @implementation SASAnnotation
 
++ (SASAnnotation*) annotationWithSASDevice:(SASDevice *) device {
+  SASAnnotation *annotation = [[SASAnnotation alloc] init];
+  annotation.name = [SASDevice getDeviceNameForDeviceType:device.type];
+  annotation.deviceType = device.type;
+  annotation.coordinate = device.deviceLocation;
+  annotation.image = (UIImage*)[SASDevice getDeviceMapAnnotationImageForDeviceType:device.type];
+  return annotation;
+}
 
-- (instancetype) initAnnotationWithObject:(SASDevice*) aDevice {
-    if (self = [super init]) {
-        
-        _name = [SASDevice getDeviceNameForDeviceType:aDevice.type];
-        _coordinate = aDevice.deviceLocation;
-        _image = (UIImage*)[SASDevice getDeviceMapAnnotationImageForDeviceType:aDevice.type];
-        _device = aDevice;
-    }
-    return self;
+
+#pragma mark <NSCopying> protocol
+- (id)copyWithZone:(NSZone *)zone {
+  SASAnnotation *copy = [[SASAnnotation alloc] init];
+  copy.name = self.name;
+  copy.deviceType = self.deviceType;
+  copy.coordinate = self.coordinate;
+  copy.image = [self.image copy];
+  return copy;
 }
 
 

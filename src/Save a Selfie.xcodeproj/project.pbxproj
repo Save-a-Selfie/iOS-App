@@ -144,9 +144,9 @@
 		1819829C1C5ADDFF008A1A14 /* SASNetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASNetworkManager.m; sourceTree = "<group>"; };
 		1819829F1C5AF302008A1A14 /* SASNetworkQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASNetworkQuery.h; sourceTree = "<group>"; };
 		181982A01C5AF302008A1A14 /* SASNetworkQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASNetworkQuery.m; sourceTree = "<group>"; };
-		181982A61C5AF64C008A1A14 /* DownloadWorker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadWorker.h; sourceTree = "<group>"; };
-		181982A71C5AF7AB008A1A14 /* ParseDownloadWorker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParseDownloadWorker.h; sourceTree = "<group>"; };
-		181982A81C5AF7AB008A1A14 /* ParseDownloadWorker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParseDownloadWorker.m; sourceTree = "<group>"; };
+		181982A61C5AF64C008A1A14 /* DownloadWorker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DownloadWorker.h; path = ../DownloadWorker.h; sourceTree = "<group>"; };
+		181982A71C5AF7AB008A1A14 /* ParseDownloadWorker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ParseDownloadWorker.h; path = ../ParseDownloadWorker.h; sourceTree = "<group>"; };
+		181982A81C5AF7AB008A1A14 /* ParseDownloadWorker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ParseDownloadWorker.m; path = ../ParseDownloadWorker.m; sourceTree = "<group>"; };
 		181B9AE81B7D406800E7FD3E /* SASSponsorCardManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SASSponsorCardManager.h; path = ../SASSponsorCardManager.h; sourceTree = "<group>"; };
 		181B9AE91B7D406800E7FD3E /* SASSponsorCardManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SASSponsorCardManager.m; path = ../SASSponsorCardManager.m; sourceTree = "<group>"; };
 		181D1E5B1B2359EA00FB5928 /* SASImageInspectorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SASImageInspectorView.h; path = SASImageInspectorView/SASImageInspectorView.h; sourceTree = "<group>"; };
@@ -636,12 +636,16 @@
 			path = Screen;
 			sourceTree = "<group>";
 		};
-		1891E3DA1B176E9F008CC10C /* SASObjectDownloader */ = {
+		1891E3DA1B176E9F008CC10C /* DownloadWorkers */ = {
 			isa = PBXGroup;
 			children = (
+				181982A61C5AF64C008A1A14 /* DownloadWorker.h */,
 				18CFECA31C5C2A0B00DC47AE /* DefaultDownloadWorker.h */,
 				18CFECA41C5C2A0B00DC47AE /* DefaultDownloadWorker.m */,
+				181982A71C5AF7AB008A1A14 /* ParseDownloadWorker.h */,
+				181982A81C5AF7AB008A1A14 /* ParseDownloadWorker.m */,
 			);
+			name = DownloadWorkers;
 			path = SASObjectDownloader;
 			sourceTree = "<group>";
 		};
@@ -718,7 +722,7 @@
 			path = SASBarButtonItem;
 			sourceTree = "<group>";
 		};
-		18B7C3451B44A75D00017170 /* SASUploader */ = {
+		18B7C3451B44A75D00017170 /* UploadWorkers */ = {
 			isa = PBXGroup;
 			children = (
 				180591FB1C555C6C0059215F /* UploadWorker.h */,
@@ -726,6 +730,7 @@
 				183C0CCC1C5274C900D66B2F /* ParseUploadWorker.m */,
 				18C6F2211C5464E2002A8F17 /* ParseFactory */,
 			);
+			name = UploadWorkers;
 			path = SASUploader;
 			sourceTree = "<group>";
 		};
@@ -776,6 +781,15 @@
 			name = ParseFactory;
 			sourceTree = "<group>";
 		};
+		18CFECA61C5C3EC400DC47AE /* SASNetworkQuery */ = {
+			isa = PBXGroup;
+			children = (
+				1819829F1C5AF302008A1A14 /* SASNetworkQuery.h */,
+				181982A01C5AF302008A1A14 /* SASNetworkQuery.m */,
+			);
+			name = SASNetworkQuery;
+			sourceTree = "<group>";
+		};
 		18D66E4B1C51145300AA7238 /* SASFilterViewCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -805,13 +819,9 @@
 				1819829B1C5ADDFF008A1A14 /* SASNetworkManager.h */,
 				1819829C1C5ADDFF008A1A14 /* SASNetworkManager.m */,
 				184D99B41B49B036005ECE33 /* SASNetworkUtilities */,
-				1891E3DA1B176E9F008CC10C /* SASObjectDownloader */,
-				18B7C3451B44A75D00017170 /* SASUploader */,
-				1819829F1C5AF302008A1A14 /* SASNetworkQuery.h */,
-				181982A01C5AF302008A1A14 /* SASNetworkQuery.m */,
-				181982A61C5AF64C008A1A14 /* DownloadWorker.h */,
-				181982A71C5AF7AB008A1A14 /* ParseDownloadWorker.h */,
-				181982A81C5AF7AB008A1A14 /* ParseDownloadWorker.m */,
+				1891E3DA1B176E9F008CC10C /* DownloadWorkers */,
+				18B7C3451B44A75D00017170 /* UploadWorkers */,
+				18CFECA61C5C3EC400DC47AE /* SASNetworkQuery */,
 			);
 			path = Network;
 			sourceTree = "<group>";
