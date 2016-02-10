@@ -47,7 +47,11 @@ NSString* const downloadURL = @"http://www.saveaselfie.org/wp/wp-content/themes/
         NSLog(@"Error: %@", error);
         NSLog(@"Response: %@", response);
         NSArray *sasDevices = [self constructDevicesFromResponse:data];
-        completionBlock(sasDevices);
+        
+        // Call back on main thread.
+        dispatch_async(dispatch_get_main_queue(), ^(){
+          completionBlock(sasDevices);
+        });
       }];
       break;
   }

@@ -85,7 +85,8 @@
       
       [SDWebImageDownloader.sharedDownloader
        downloadImageWithURL:url
-       options:0 progress:nil
+       options:0
+       progress:nil
        completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished) {
          
          if (image && finished) {
