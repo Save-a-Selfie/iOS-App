@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Test.h"
 
 @interface SASGalleryCollectionViewController : UICollectionViewController
+
+@property (nonatomic, weak) id<SASGalleryControllerDataSource> dataSource;
 
 @end

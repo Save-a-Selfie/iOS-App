@@ -17,20 +17,32 @@
 #import "FXAlert.h"
 #import "SASNetworkManager.h"
 #import "DefaultDownloadWorker.h"
+#import "SASGalleryDelegate.h"
+#import "SASGalleryDataSource.h"
+
+/**
+ The basic control flow of this class from
+ image download to displaying to user:
+ - viewDidLoad
+ - downloadFromServer 
+ - setupGallery.
+ */
 
 @interface SASGalleryCollectionViewController () <UICollectionViewDataSource,
 UICollectionViewDelegate,
 SASGalleryCellDelegate> {
-  int imagesDownloaded;
+  
+  int imagesDownloadedCount;
 }
 
 @property (strong, nonatomic) SASNetworkManager *networkManager;
 @property (strong, nonatomic) __block SASGalleryContainer *galleryContainer;
-@property (strong, nonatomic) NSArray *downloadedObjects;
+@property (strong, nonatomic) NSArray<SASDevice*> *downloadedObjects;
 @property (strong, nonatomic) UIActivityIndicatorView *activityIndicator;
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
-
 @property (assign,nonatomic) __block BOOL canRefresh;
+@property (strong, nonatomic) SASGalleryDataSource *galleryDataSource;
+@property (strong, nonatomic) SASGalleryCell *galleryCell;
 
 @end
 
@@ -43,63 +55,52 @@ NSString * const reuseIdentifier = @"cell";
 -(void)viewDidLoad {
   [super viewDidLoad];
   
-  self.collectionView.delegate = self;
-  self.collectionView.dataSource = self;
-  self.collectionView.backgroundColor = [UIColor whiteColor];
-  
-  
   if(!self.refreshControl) {
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(refresh) forControlEvents:UIControlEventValueChanged];
     NSAttributedString *a = [[NSAttributedString alloc] initWithString:@"Pull to refresh"];
-    self.refreshControl.attributedTitle = a;
     
+    self.refreshControl.attributedTitle = a;
     [self.collectionView addSubview:self.refreshControl];
+    
   }
 }
 
 
-
 - (void)viewWillAppear:(BOOL)animated {
-  
-  
-  
   [super viewWillAppear:animated];
-  self.navigationItem.title = @"Gallery";
   
+  self.collectionView.delegate = self;
+  self.collectionView.dataSource = self;
+  self.collectionView.backgroundColor = [UIColor whiteColor];
+  
+  if (!self.galleryDataSource) {
+    self.galleryCell = [[SASGalleryCell alloc] init];
+    self.galleryCell.delegate = self;
+    self.galleryDataSource = [[SASGalleryDataSource alloc] initWithReuseCell:self.galleryCell reuseIdentifier:@"cell" networkManager:self.networkManager worker:[[DefaultDownloadWorker alloc] init]];
+    [self.galleryDataSource downloadFromServer:^(BOOL completion) {
+      if (completion) {
+        [self initialSetupOfGallery];
+      }
+    }];
+    self.dataSource = self.galleryDataSource;
+  }
+  
+  
+  self.navigationItem.title = @"Gallery";
   [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName: [UIFont fontWithName:@"AvenirNext-DemiBold" size:17.0f],
                                                                     NSForegroundColorAttributeName : [UIColor blackColor]
                                                                     }];
 }
 
 
-- (void) downloadFromServer {
-  if (!self.networkManager) {
-    self.networkManager = [SASNetworkManager sharedInstance];
-  }
-  
-  SASNetworkQuery *query = [SASNetworkQuery queryWithType:SASNetworkQueryTypeAll];
-  
-  [self.networkManager downloadWithQuery:query
-                               forWorker:[[DefaultDownloadWorker alloc]init]
-                              completion:^(NSArray* devices) {
-                                self.downloadedObjects = devices;
-                              }];
-}
 
 - (void) refresh {
-  
   if (self.canRefresh) {
     self.canRefresh = NO;
-    
     self.downloadedObjects = nil;
     [self.galleryContainer clear];
-    
-    // Calling this reloads the datasource, so no need to
-    // do that here.
-    [self downloadFromServer];
   }
-  
   [self.refreshControl endRefreshing];
 }
 
@@ -110,7 +111,6 @@ NSString * const reuseIdentifier = @"cell";
     self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     
   }
-  
   UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:self.activityIndicator];
   
   self.navigationItem.rightBarButtonItem = nil;
@@ -124,34 +124,19 @@ NSString * const reuseIdentifier = @"cell";
   self.navigationItem.rightBarButtonItem = nil;
 }
 
-
-
-
-- (void) setupGallery:(NSArray <SASDevice*>*) devices {
-  // Set up our data store.
-  if (!self.galleryContainer) {
-    self.galleryContainer = [[SASGalleryContainer alloc] init];
-  }
-  
-  
-  NSRange range = NSMakeRange(0, 55);
-  imagesDownloaded = (int)range.length;
-  
+- (void) initialSetupOfGallery {
   [self showActivityIndicator];
   
-  // Download a few images to fill the screen.
-  [self downloadImages:devices withinRange:range completion:^(BOOL completed){
-    if (completed) {
+  NSRange range = NSMakeRange(0, 55);
+  imagesDownloadedCount = (int)range.length;
+  
+  [self.dataSource imagesWithinRange:range completion:^(BOOL completion) {
+    if (completion) {
       [self hideActivityIndicator];
-      
-      // Initial set of images have been downloaded,
-      // it is okay for the user to ask for a refresh.
       self.canRefresh = YES;
-      NSLog(@"%d", self.canRefresh);
     }
   }];
 }
-
 
 
 //- (void) sasObjectDownloader:(SASObjectDownloader *)downloader didFailWithError:(NSError *)error {
@@ -166,77 +151,6 @@ NSString * const reuseIdentifier = @"cell";
 //  [self presentViewController:downloadErrorAlert animated:YES completion:nil];
 //  
 //}
-
-
-
-#pragma mark Download Images.
-- (void) downloadImages:(NSArray *) objects withinRange:(NSRange) range completion:(void(^)(BOOL completed)) completion {
-  
-  __block int downloadAmount = (int)range.length - (int)range.location;
-  __block int count = 0;
-  
-  for (int i = (int)range.location; i < (int)range.length; ++i) {
-    if (!(i >= objects.count)) {
-      
-      SASDevice *deviceAtIndex = [objects objectAtIndex:i];
-      
-      NSString *imageURL = deviceAtIndex.imageURLString;
-      
-      NSURL *url =[NSURL URLWithString:imageURL];
-      
-      [SDWebImageDownloader.sharedDownloader downloadImageWithURL:url options:0 progress:nil completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished) {
-        
-        if (image && finished) {
-          
-          [self.galleryContainer addImage:image forDevice:deviceAtIndex];
-          
-          // This must be called on the main thread.
-          dispatch_async(dispatch_get_main_queue(), ^{
-            [self.collectionView reloadData];
-            count++;
-            
-            // We've downloaded all images.
-            if (count == downloadAmount) {
-              if(completion) {
-                completion(YES);
-              }
-            }
-          });
-        }
-      }];
-    }
-  }
-}
-
-
-
-
-#pragma mark <UICollectionViewDataSource>
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-  return [self.galleryContainer deviceCount];
-}
-
-
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-  
-  SASGalleryCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
-  
-  SASDevice *device = self.downloadedObjects[indexPath.row];
-  
-  
-  UIImage *image = [self.galleryContainer imageForDevice:device];
-  
-  
-  // Set the cell's image.
-  cell.imageView.image = image;
-  
-  // Set the cell's device.
-  cell.device = device;
-  cell.delegate = self;
-  
-  return cell;
-}
-
 
 
 #pragma mark UICollectionViewLayout.
@@ -270,23 +184,6 @@ NSString * const reuseIdentifier = @"cell";
 
 
 
-#pragma mark <SASGalleryCellDelegate>
-- (void)sasGalleryCellDelegate:(SASGalleryCell *)cell wasTappedWithObject:(SASDevice *)device {
-  
-  UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-  SASImageViewController *sasImageViewController = [storyboard instantiateViewControllerWithIdentifier:@"SASImageViewController"];
-  
-  sasImageViewController.device = device;
-  sasImageViewController.downloadImage = NO;
-  sasImageViewController.image = [cell.imageView.image copy];
-  
-  
-  [self.navigationController pushViewController:sasImageViewController animated:YES];
-  
-}
-
-
-
 #pragma mark <UIScrollViewDelegate>
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
   float bottomEdge = self.collectionView.contentOffset.y + self.collectionView.frame.size.height;
@@ -294,20 +191,24 @@ NSString * const reuseIdentifier = @"cell";
   if (bottomEdge >= self.collectionView.contentSize.height) {
     
     // Download the next 15 images.
-    NSRange range = NSMakeRange(imagesDownloaded, imagesDownloaded + 15);
-    imagesDownloaded = (int)range.length;
+    NSRange range = NSMakeRange(imagesDownloadedCount, imagesDownloadedCount + 15);
+    imagesDownloadedCount = (int)range.length;
     
     [self showActivityIndicator];
     
-    [self downloadImages:self.downloadedObjects
-             withinRange:range
-              completion:^(BOOL completed){
-                if (completed) {
-                  [self hideActivityIndicator];
-                }
-              }
-     ];
+    [self.dataSource imagesWithinRange:range completion:^(BOOL completed) {
+      if (completed) {
+        [self hideActivityIndicator];
+      } else {
+        [self.collectionView reloadData];
+      }
+    }];
   }
+}
+
+#pragma mark <SASGalleryCellDelegate>
+- (void)sasGalleryCellDelegate:(SASGalleryCell *)cell wasTappedWithObject:(SASDevice *)device {
+  NSLog(@"Cell was tapped");
 }
 
 @end
