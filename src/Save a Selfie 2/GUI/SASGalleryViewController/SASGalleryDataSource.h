@@ -13,7 +13,7 @@
 
 /**
  A data source for SASGalleryViewController.
- - The gallery should initialise an instance
+ - The gallery should initialise an instance,
    message it to download the data from the server
    and once the completion handler has been called
    should then ask for the images with the specified range
@@ -27,9 +27,9 @@
  initialise the datasource will begin retrieving its
  datasource from the providided NetworkManager.
  
- @param identifier Provided for the UICollectionViewController.
+ @param identifier       Provided for the UICollectionViewController.
  @param networkMananager Used to download the data.
- @param worker Used for downloading data.
+ @param worker           Used for downloading data.
  
  */
 - (instancetype) initWithReuseCell:(SASGalleryCell*) reuseCell

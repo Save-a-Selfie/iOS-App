@@ -28,7 +28,7 @@
  - setupGallery.
  */
 
-@interface SASGalleryCollectionViewController () <UICollectionViewDataSource,
+@interface SASGalleryCollectionViewController () <
 UICollectionViewDelegate,
 SASGalleryCellDelegate> {
   
@@ -70,22 +70,21 @@ NSString * const reuseIdentifier = @"cell";
 - (void)viewWillAppear:(BOOL)animated {
   [super viewWillAppear:animated];
   
-  self.collectionView.delegate = self;
-  self.collectionView.dataSource = self;
-  self.collectionView.backgroundColor = [UIColor whiteColor];
-  
+ 
   if (!self.galleryDataSource) {
     self.galleryCell = [[SASGalleryCell alloc] init];
     self.galleryCell.delegate = self;
     self.galleryDataSource = [[SASGalleryDataSource alloc] initWithReuseCell:self.galleryCell reuseIdentifier:@"cell" networkManager:self.networkManager worker:[[DefaultDownloadWorker alloc] init]];
     [self.galleryDataSource downloadFromServer:^(BOOL completion) {
       if (completion) {
+        self.collectionView.dataSource = self.galleryDataSource;
         [self initialSetupOfGallery];
       }
     }];
-    self.dataSource = self.galleryDataSource;
+    
+    self.collectionView.delegate = self;
+    self.collectionView.backgroundColor = [UIColor whiteColor];
   }
-  
   
   self.navigationItem.title = @"Gallery";
   [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName: [UIFont fontWithName:@"AvenirNext-DemiBold" size:17.0f],
@@ -111,8 +110,8 @@ NSString * const reuseIdentifier = @"cell";
     self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     
   }
-  UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:self.activityIndicator];
   
+  UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:self.activityIndicator];
   self.navigationItem.rightBarButtonItem = nil;
   self.navigationItem.rightBarButtonItem = item;
   [self.activityIndicator startAnimating];
@@ -124,17 +123,20 @@ NSString * const reuseIdentifier = @"cell";
   self.navigationItem.rightBarButtonItem = nil;
 }
 
+
 - (void) initialSetupOfGallery {
   [self showActivityIndicator];
   
   NSRange range = NSMakeRange(0, 55);
   imagesDownloadedCount = (int)range.length;
   
-  [self.dataSource imagesWithinRange:range completion:^(BOOL completion) {
+  [self.galleryDataSource imagesWithinRange:range completion:^(BOOL completion) {
     if (completion) {
       [self hideActivityIndicator];
       self.canRefresh = YES;
+      [self.collectionView reloadData];
     }
+    [self.collectionView reloadData];
   }];
 }
 
@@ -172,7 +174,7 @@ NSString * const reuseIdentifier = @"cell";
   UIDeviceModel model = [UIDevice model];
   
   if (model == UIDeviceModelIphone6) {
-    return CGSizeMake(62, 62);
+    return CGSizeMake(30, 30);
   } else if (model == UIDeviceModelIphone6Plus) {
     return CGSizeMake(81, 81);
   } else {
@@ -196,7 +198,7 @@ NSString * const reuseIdentifier = @"cell";
     
     [self showActivityIndicator];
     
-    [self.dataSource imagesWithinRange:range completion:^(BOOL completed) {
+    [self.galleryDataSource imagesWithinRange:range completion:^(BOOL completed) {
       if (completed) {
         [self hideActivityIndicator];
       } else {
@@ -208,7 +210,7 @@ NSString * const reuseIdentifier = @"cell";
 
 #pragma mark <SASGalleryCellDelegate>
 - (void)sasGalleryCellDelegate:(SASGalleryCell *)cell wasTappedWithObject:(SASDevice *)device {
-  NSLog(@"Cell was tapped");
+  
 }
 
 @end

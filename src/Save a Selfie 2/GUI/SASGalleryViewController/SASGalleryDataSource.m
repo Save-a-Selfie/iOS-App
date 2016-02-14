@@ -42,6 +42,7 @@
   _networkManager = networkManager;
   _worker = worker;
   _galleryCell = reuseCell;
+  _galleryContainer = [[SASGalleryContainer alloc] init];
   
   return self;
   
@@ -93,7 +94,7 @@
            [self.galleryContainer addImage:image forDevice:deviceAtIndex];
            
            dispatch_async(dispatch_get_main_queue(), ^() {
-             count++;
+             ++count;
              if (count == downloadAmount) {
                completed(YES);
              } else {
@@ -125,6 +126,7 @@
   
   // Set the cell's device.
   self.galleryCell.device = device;
+  
   return self.galleryCell;
 }
 

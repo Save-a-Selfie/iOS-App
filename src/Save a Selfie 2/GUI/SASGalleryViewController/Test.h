@@ -11,9 +11,13 @@
 @protocol SASGalleryControllerDataSource <UICollectionViewDataSource>
 
 /**
- Called when the next set/ group of images are needed
- by the gallery. */
+ Downloads next set of images, within a specified range.
+ @param range The range of images to download.
+ @param completion Called when all images within the specified range
+                   have been downloaded. Please note even when completion is NO
+                   a new will have been downloaded. Only when all have been retrieved is YES passed.
+ */
 - (void) imagesWithinRange:(NSRange) range
-                completion: (void(^)(BOOL completion)) completion;
+                completion: (void(^)(BOOL finished)) completion;
 
 @end
