@@ -49,10 +49,8 @@ SASGalleryCellDelegate> {
 
 @implementation SASGalleryCollectionViewController
 
-NSString * const reuseIdentifier = @"cell";
 
-
--(void)viewDidLoad {
+- (void)viewDidLoad {
   [super viewDidLoad];
   
   if(!self.refreshControl) {
@@ -210,7 +208,15 @@ NSString * const reuseIdentifier = @"cell";
 
 #pragma mark <SASGalleryCellDelegate>
 - (void)sasGalleryCellDelegate:(SASGalleryCell *)cell wasTappedWithObject:(SASDevice *)device {
+  UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+  SASImageViewController *sasImageViewController = [storyboard instantiateViewControllerWithIdentifier:@"SASImageViewController"];
   
+  sasImageViewController.device = device;
+  sasImageViewController.downloadImage = NO;
+  sasImageViewController.image = [cell.imageView.image copy];
+  
+  
+  [self.navigationController pushViewController:sasImageViewController animated:YES];
 }
 
 @end

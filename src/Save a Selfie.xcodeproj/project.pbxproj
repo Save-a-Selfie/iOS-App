@@ -52,6 +52,7 @@
 		189D4F411B5C49BF005E709C /* Save_a_Selfie_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 189D4F401B5C49BF005E709C /* Save_a_Selfie_Tests.m */; };
 		18A524F71B166BAB00E8F8F6 /* SASLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A524F61B166BAB00E8F8F6 /* SASLocation.m */; };
 		18A525081B16708400E8F8F6 /* SASMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A525071B16708400E8F8F6 /* SASMapViewController.m */; };
+		18B00B161C71427B0039A150 /* SASAppCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B00B151C71427B0039A150 /* SASAppCache.m */; };
 		18B7C3401B44885B00017170 /* SASBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B7C33F1B44885B00017170 /* SASBarButtonItem.m */; };
 		18BA4DF61B82C1500047DEC4 /* UIDevice+DeviceName.m in Sources */ = {isa = PBXBuildFile; fileRef = 18BA4DF51B82C1500047DEC4 /* UIDevice+DeviceName.m */; };
 		18C104861B714C5900B4731D /* SASGalleryContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C104851B714C5900B4731D /* SASGalleryContainer.m */; };
@@ -205,6 +206,8 @@
 		18A524F61B166BAB00E8F8F6 /* SASLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASLocation.m; sourceTree = "<group>"; };
 		18A525061B16708400E8F8F6 /* SASMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASMapViewController.h; sourceTree = "<group>"; };
 		18A525071B16708400E8F8F6 /* SASMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASMapViewController.m; sourceTree = "<group>"; };
+		18B00B141C71427B0039A150 /* SASAppCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASAppCache.h; sourceTree = "<group>"; };
+		18B00B151C71427B0039A150 /* SASAppCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASAppCache.m; sourceTree = "<group>"; };
 		18B7C33E1B44885B00017170 /* SASBarButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASBarButtonItem.h; sourceTree = "<group>"; };
 		18B7C33F1B44885B00017170 /* SASBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASBarButtonItem.m; sourceTree = "<group>"; };
 		18BA4DF41B82C1500047DEC4 /* UIDevice+DeviceName.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIDevice+DeviceName.h"; path = "Save a Selfie 2/UIDevice+DeviceName.h"; sourceTree = SOURCE_ROOT; };
@@ -223,6 +226,7 @@
 		18D66E491C51144800AA7238 /* SASFilterViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SASFilterViewCell.m; path = SASFilterViewCell/SASFilterViewCell.m; sourceTree = "<group>"; };
 		18D66E4C1C51156B00AA7238 /* SASFilterViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SASFilterViewCell.xib; sourceTree = "<group>"; };
 		18D66E4E1C5115CA00AA7238 /* SASFilterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SASFilterView.xib; sourceTree = "<group>"; };
+		18D8C67F1C7283D600D47E85 /* Cacheable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cacheable.h; sourceTree = "<group>"; };
 		18DAE8511B46BA6400CAEF2D /* SASDeviceButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASDeviceButton.h; sourceTree = "<group>"; };
 		18DAE8521B46BA6400CAEF2D /* SASDeviceButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASDeviceButton.m; sourceTree = "<group>"; };
 		18DDE50A1B3D7F0F00AB0CB3 /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Launch Screen.xib"; sourceTree = "<group>"; };
@@ -722,6 +726,16 @@
 			path = SASMapViewController;
 			sourceTree = "<group>";
 		};
+		18B00B171C7149DC0039A150 /* SASAppCache */ = {
+			isa = PBXGroup;
+			children = (
+				18B00B141C71427B0039A150 /* SASAppCache.h */,
+				18B00B151C71427B0039A150 /* SASAppCache.m */,
+				18D8C67F1C7283D600D47E85 /* Cacheable.h */,
+			);
+			name = SASAppCache;
+			sourceTree = "<group>";
+		};
 		18B7C3411B44886000017170 /* SASBarButtonItem */ = {
 			isa = PBXGroup;
 			children = (
@@ -994,6 +1008,7 @@
 		D72E1DAF19EE841E005DD8A5 /* Save a Selfie 2 */ = {
 			isa = PBXGroup;
 			children = (
+				18B00B171C7149DC0039A150 /* SASAppCache */,
 				1869E3E11B9B3B08000E1DA7 /* Libraries */,
 				18BA4DF71B82C1540047DEC4 /* UIDevice+DeviceName */,
 				18A525051B166E0D00E8F8F6 /* SASDevice */,
@@ -1253,6 +1268,7 @@
 				D72E1DB319EE841E005DD8A5 /* main.m in Sources */,
 				18F736CA1C640819009B6A90 /* SASGalleryDelegate.m in Sources */,
 				184D99B31B49B02F005ECE33 /* SASNetworkUtilities.m in Sources */,
+				18B00B161C71427B0039A150 /* SASAppCache.m in Sources */,
 				18EBF9771B272B3400EDA48B /* SASImagePickerViewController.m in Sources */,
 				D700239519F5253C00E45408 /* AlertBox.m in Sources */,
 				186D600C1C591C8700B57B10 /* SASDeviceButtonView.m in Sources */,

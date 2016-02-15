@@ -22,6 +22,7 @@
 @property (strong, nonatomic) SASGalleryContainer *galleryContainer;
 @property (weak, nonatomic) SASGalleryCell *galleryCell;
 @property (assign, nonatomic) BOOL objectsDowloaded;
+@property (weak, nonatomic) id<SASGalleryCellDelegate> cellDelegate;
 
 @end
 
@@ -30,7 +31,7 @@
 @implementation SASGalleryDataSource
 
 #pragma mark Object life cycle.
-- (instancetype)initWithReuseCell:(SASGalleryCell *)reuseCell
+- (instancetype)initWithReuseCell:(SASGalleryCell *) reuseCell
                   reuseIdentifier:(NSString *) identifier
                    networkManager:(SASNetworkManager *) networkManager
                            worker:(id<DownloadWorker>) worker {
@@ -43,7 +44,7 @@
   _worker = worker;
   _galleryCell = reuseCell;
   _galleryContainer = [[SASGalleryContainer alloc] init];
-  
+  _cellDelegate = _galleryCell.delegate;
   return self;
   
 }
@@ -116,10 +117,13 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView
                   cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+
   self.galleryCell = [collectionView dequeueReusableCellWithReuseIdentifier:self.reuseIdentifier forIndexPath:indexPath];
-  
+
   SASDevice *device = self.downloadedObjects[indexPath.row];
   UIImage *image = [self.galleryContainer imageForDevice:device];
+  
+  self.galleryCell.delegate = self.cellDelegate;
   
   // Set the cell's image.
   self.galleryCell.imageView.image = image;

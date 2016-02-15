@@ -36,5 +36,13 @@
   [worker downloadWithQuery:query completionResult:block];
 }
 
+
+
+- (void)cacheableDownloadWithQuery:(SASNetworkQuery *)query forWorker:(id<DownloadWorker>)worker cache:(id<Cacheable>)cache {
+  [worker downloadWithQuery:query completionResult:^(NSArray *result) {
+    [cache cacheObjects:result];
+  }];
+}
+
 @end
 

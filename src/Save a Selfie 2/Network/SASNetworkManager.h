@@ -10,6 +10,8 @@
 #import "SASNetworkObject.h"
 #import "UploadWorker.h"
 #import "DownloadWorker.h"
+#import "SASAppCache.h"
+#import "Cacheable.h"
 
 
 /**
@@ -23,6 +25,7 @@
  
  */
 @interface SASNetworkManager : NSObject
+
 
 
 /**
@@ -64,5 +67,23 @@
 - (void) downloadWithQuery: (SASNetworkQuery*) query
                  forWorker:(id<DownloadWorker>) worker
                 completion:(DownloadWorkerCompletionBlock) block;
+
+
+/**
+ Attempts to download from the server with a query and a worker.
+ Once downloaded will cache the objects to the global SASAppCache.
+ 
+ @param query The query determinces what will be downloaded from the server.
+ 
+ @param worker The worker is the implementation of the download.
+ 
+ @param cache An object that implements the Cacheable interface.
+              This object will be called when the network request
+              has finished. It is up to the cache object to implement
+              they're own caching technique.
+ */
+- (void) cacheableDownloadWithQuery: (SASNetworkQuery*) query
+                          forWorker:(id<DownloadWorker>) worker
+                              cache:(id<Cacheable>) cache;
 
 @end

@@ -24,12 +24,14 @@
 #import "SASNetworkQuery.h"
 #import "SASNetworkManager.h"
 #import "DefaultDownloadWorker.h"
+#import "Cacheable.h"
 
 @interface SASMapViewController ()
 <SASImagePickerDelegate,
 SASUploadViewControllerDelegate,
 UIAlertViewDelegate,
-MKMapViewDelegate>
+MKMapViewDelegate,
+Cacheable>
 
 @property (nonatomic, strong) IBOutlet SASMapView* sasMapView;
 
@@ -49,6 +51,7 @@ MKMapViewDelegate>
 
 @property (strong, nonatomic) SASNetworkManager *networkManager;
 @property (strong, nonatomic) NSMutableDictionary <SASAnnotation*, SASDevice*> *annotationDict;
+@property (strong, nonatomic) SASAppCache *sasAppCache;
 
 @end
 
@@ -73,14 +76,7 @@ NSString *permissionsProblemText = @"Please enable location services for this ap
   self.sasMapView.sasAnnotationImage = SASAnnotationImageCustom;
   self.sasMapView.mapType = MKMapTypeSatellite;
   
-  [self downloadInformationFromServer:^(NSArray* devices){
-    self.annotationDict = [[NSMutableDictionary alloc] init];
-    for (SASDevice *d in devices) {
-      SASAnnotation *annotation = [SASAnnotation annotationWithSASDevice:d];
-      [self.annotationDict setObject:d forKey:annotation];
-    }
-    [self.sasMapView addAnnotations:self.annotationDict.allKeys];
-  }];
+  [self downloadInformationFromServer];
 }
 
 
@@ -134,20 +130,53 @@ NSString *permissionsProblemText = @"Please enable location services for this ap
 
 
 
-- (void) downloadInformationFromServer:(void(^)(NSArray <SASDevice*>*)) completionBlock {
+- (void) downloadInformationFromServer {
   self.networkManager = [SASNetworkManager sharedInstance];
   SASNetworkQuery *query = [SASNetworkQuery queryWithType:SASNetworkQueryTypeAll];
   DefaultDownloadWorker *downloadWorker = [[DefaultDownloadWorker alloc] init];
   
-  [self.networkManager downloadWithQuery:query
-                               forWorker:downloadWorker
-                              completion:^(NSArray *devices) {
-    completionBlock(devices);
-  }];
+  [self.networkManager cacheableDownloadWithQuery:query
+                                        forWorker:downloadWorker
+                                            cache:self];
 }
 
 
+#pragma mark <Cacheable>
+- (void)cacheObjects:(NSArray<NSObject *> *) objects {
 
+  // Ideally we shouldn't need to check the contents
+  // of the array, however, as we're going to cache it
+  // we better make sure it is what we expect. (SASDevice);
+  if (objects) {
+    unsigned long length = objects.count;
+    if ([objects[length - 1] isKindOfClass:[SASDevice class]]) {
+      if (!self.sasAppCache) {
+        self.sasAppCache = [SASAppCache sharedInstance];
+      }
+      
+
+      // Cache all the devices and annotations
+      // generated from the devices.
+      for (SASDevice *s in objects) {
+        SASAnnotation *annotation = [SASAnnotation annotationWithSASDevice:s];
+        [self.sasAppCache cacheAnnotation:annotation forDevice:s];
+      }
+    }
+  }
+  [self displayAnnotationsToMap];
+}
+
+
+- (void) displayAnnotationsToMap {
+  if (!self.sasAppCache) {
+    self.sasAppCache = [SASAppCache sharedInstance];
+  }
+  
+  NSArray *keys = [self.sasAppCache keys];
+  for (SASDevice* key in keys) {
+    [self.sasMapView addAnnotation:[self.sasAppCache cachedAnnotationForKey:key]];
+  }
+}
 
 #pragma mark <SASMapViewNotifications>
 - (void)sasMapView:(SASMapView *)mapView annotationWasTapped:(SASAnnotation *) annotation {
