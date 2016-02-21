@@ -27,6 +27,7 @@
 		181B9AEA1B7D406800E7FD3E /* SASSponsorCardManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 181B9AE91B7D406800E7FD3E /* SASSponsorCardManager.m */; };
 		181D1E5D1B2359EA00FB5928 /* SASImageInspectorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 181D1E5C1B2359EA00FB5928 /* SASImageInspectorView.m */; };
 		181D1E621B235CF900FB5928 /* SASImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 181D1E611B235CF900FB5928 /* SASImageView.m */; };
+		182C83E51C79FD9A0042BA21 /* SASAppCacheTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 182C83E41C79FD9A0042BA21 /* SASAppCacheTest.m */; };
 		1835D2791B78F7D100A62B7F /* SASGalleryCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1835D2781B78F7D100A62B7F /* SASGalleryCollectionViewController.m */; };
 		183C0CCD1C5274C900D66B2F /* ParseUploadWorker.m in Sources */ = {isa = PBXBuildFile; fileRef = 183C0CCC1C5274C900D66B2F /* ParseUploadWorker.m */; };
 		18453A511B584DD20055A004 /* SASNotificationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18453A501B584DD20055A004 /* SASNotificationView.xib */; };
@@ -156,6 +157,7 @@
 		181D1E5C1B2359EA00FB5928 /* SASImageInspectorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SASImageInspectorView.m; path = SASImageInspectorView/SASImageInspectorView.m; sourceTree = "<group>"; };
 		181D1E601B235CF900FB5928 /* SASImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASImageView.h; sourceTree = "<group>"; };
 		181D1E611B235CF900FB5928 /* SASImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASImageView.m; sourceTree = "<group>"; };
+		182C83E41C79FD9A0042BA21 /* SASAppCacheTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASAppCacheTest.m; sourceTree = "<group>"; };
 		1835D2771B78F7D100A62B7F /* SASGalleryCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASGalleryCollectionViewController.h; sourceTree = "<group>"; };
 		1835D2781B78F7D100A62B7F /* SASGalleryCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASGalleryCollectionViewController.m; sourceTree = "<group>"; };
 		183C0CCB1C5274C900D66B2F /* ParseUploadWorker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParseUploadWorker.h; sourceTree = "<group>"; };
@@ -666,6 +668,7 @@
 			isa = PBXGroup;
 			children = (
 				189D4F401B5C49BF005E709C /* Save_a_Selfie_Tests.m */,
+				182C83E41C79FD9A0042BA21 /* SASAppCacheTest.m */,
 				189D4F3E1B5C49BF005E709C /* Supporting Files */,
 			);
 			path = "Save a Selfie Tests";
@@ -1208,6 +1211,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				182C83E51C79FD9A0042BA21 /* SASAppCacheTest.m in Sources */,
 				189D4F411B5C49BF005E709C /* Save_a_Selfie_Tests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

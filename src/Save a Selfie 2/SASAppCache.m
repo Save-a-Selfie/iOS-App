@@ -7,13 +7,13 @@
 //
 
 #import "SASAppCache.h"
+#import "SASAnnotation.h"
 
 @interface SASAppCache ()
 
 // This is the keys for both images and annotations.
-@property (strong, nonatomic) NSMutableArray<SASDevice*> *cachedDevices;
 @property (strong, nonatomic) NSMutableDictionary<SASDevice*, UIImage*> *cachedDevicesAndImages;
-@property (strong, nonatomic) NSMutableDictionary<SASDevice*, SASAnnotation*> *cachedDeviceAndAnnotations;
+@property (strong, nonatomic) NSMutableDictionary<SASDevice*, SASAnnotation*> *cachedDevicesAndAnnotations;
 @end
 
 @implementation SASAppCache
@@ -29,7 +29,8 @@
                                            selector:@selector(handleMemoryWarning)
                                                name:UIApplicationDidReceiveMemoryWarningNotification
                                              object:nil];
-  _cachedDevices = [[NSMutableArray alloc] init];
+  _cachedDevicesAndImages = [[NSMutableDictionary alloc] init];
+  _cachedDevicesAndAnnotations = [[NSMutableDictionary alloc] init];
   
   return self;
 }
@@ -46,12 +47,6 @@
 }
 
 
-- (void)cacheDevice:(SASDevice *)device {
-  if (!self.cachedDevices) {
-    self.cachedDevices = [[NSMutableArray alloc] init];
-  }
-  [self.cachedDevices addObject:device];
-}
 
 
 - (void)cacheImage:(UIImage *)image forDevice:(SASDevice *)device {
@@ -62,24 +57,21 @@
   // If there already exists an object with the exact key,
   // remove it first and then add it back again with
   // the new version of the image.
-  if ([self keyExists:device]) {
+  if ([self keyForAnnotationExists:device]) {
     [self.cachedDevicesAndImages removeObjectForKey:device];
-    [self.cachedDevices removeObject:device];
   }
-  [self.cachedDevices addObject:device];
   [self.cachedDevicesAndImages setObject:image forKey:device];
 }
 
+
 - (void)cacheAnnotation:(SASAnnotation *)annotation forDevice:(SASDevice *)device {
-  if (!self.cachedDeviceAndAnnotations) {
-    self.cachedDeviceAndAnnotations = [[NSMutableDictionary alloc] init];
+  if (!self.cachedDevicesAndAnnotations) {
+    self.cachedDevicesAndAnnotations = [[NSMutableDictionary alloc] init];
   }
-  if ([self keyExists:device]) {
-    [self.cachedDeviceAndAnnotations removeObjectForKey:device];
-    [self.cachedDevices removeObject:device];
+  if ([self keyForAnnotationExists:device]) {
+    [self.cachedDevicesAndAnnotations removeObjectForKey:device];
   }
-  [self.cachedDevices addObject:device];
-  [self.cachedDeviceAndAnnotations setObject:annotation forKey:device];
+  [self.cachedDevicesAndAnnotations setObject:annotation forKey:device];
 }
 
 
@@ -87,19 +79,46 @@
   return [self.cachedDevicesAndImages objectForKey:key];
 }
 
-
-- (SASAnnotation *)cachedAnnotationForKey:(SASDevice *)key {
-  return [self.cachedDeviceAndAnnotations objectForKey:key];
-}
-
-- (NSArray<SASDevice *> *)keys {
-  return [self.cachedDevices copy];
+- (SASAnnotation *) cachedAnnotationForKey:(SASDevice *) key {
+  return [self.cachedDevicesAndAnnotations objectForKey:key];
 }
 
 
-// Checks to see if the device already within the cache.
-- (BOOL) keyExists: (SASDevice*) device {
-  if ([self.cachedDevices containsObject:device]) {
+- (NSArray<SASDevice *> *)keysForImages {
+  return [[self.cachedDevicesAndImages allKeys] copy];
+}
+
+- (NSArray<SASDevice *> *)keysForAnnotations {
+  return [[self.cachedDevicesAndAnnotations allKeys] copy];
+}
+
+// Return a copy of the key value pairs for annotations.
+- (NSDictionary<SASDevice*, SASAnnotation*>*) annotationKeyValuePairs {
+  return [self.cachedDevicesAndAnnotations copy];
+}
+
+
+- (NSDictionary<SASDevice*, UIImage*>*) imageKeyValuePairs {
+  return [self.cachedDevicesAndImages copy];
+}
+
+
+
+// Checks to see if the device already within the cache for images.
+- (BOOL) keyForImageExists: (SASDevice*) device {
+  NSArray *imageKeys = [self.cachedDevicesAndImages allKeys];
+  if ([imageKeys containsObject:device]) {
+    return YES;
+  } else {
+    return NO;
+  }
+}
+
+
+// // Checks to see if the device already within the cache for annotations.
+- (BOOL) keyForAnnotationExists: (SASDevice*) device {
+  NSArray *annotationKeys = [self.cachedDevicesAndAnnotations allKeys];
+  if ([annotationKeys containsObject:device]) {
     return YES;
   } else {
     return NO;

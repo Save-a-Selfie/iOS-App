@@ -50,7 +50,6 @@ Cacheable>
 @property (strong, nonatomic) SASFilterView *sasFilterView;
 
 @property (strong, nonatomic) SASNetworkManager *networkManager;
-@property (strong, nonatomic) NSMutableDictionary <SASAnnotation*, SASDevice*> *annotationDict;
 @property (strong, nonatomic) SASAppCache *sasAppCache;
 
 @end
@@ -145,7 +144,8 @@ NSString *permissionsProblemText = @"Please enable location services for this ap
 - (void)cacheObjects:(NSArray<NSObject *> *) objects {
 
   // Ideally we shouldn't need to check the contents
-  // of the array, however, as we're going to cache it
+  // of the array, as we know its source,
+  // however, as we're going to cache it
   // we better make sure it is what we expect. (SASDevice);
   if (objects) {
     unsigned long length = objects.count;
@@ -172,8 +172,8 @@ NSString *permissionsProblemText = @"Please enable location services for this ap
     self.sasAppCache = [SASAppCache sharedInstance];
   }
   
-  NSArray *keys = [self.sasAppCache keys];
-  for (SASDevice* key in keys) {
+  NSArray<SASDevice*> *annotationKeys = [self.sasAppCache keysForAnnotations];
+  for (SASDevice* key in annotationKeys) {
     [self.sasMapView addAnnotation:[self.sasAppCache cachedAnnotationForKey:key]];
   }
 }
@@ -183,7 +183,14 @@ NSString *permissionsProblemText = @"Please enable location services for this ap
   // Present the SASImageviewController to display the image associated
   // with the annotation selected.
   SASImageViewController *sasImageViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SASImageViewController"];
-  sasImageViewController.device = [self.annotationDict objectForKey:annotation];
+  
+  // Get the device associated with the SASAnnotation from the App cache.
+  NSDictionary *annotationKeys = [self.sasAppCache annotationKeyValuePairs];
+  NSArray<SASDevice*> *deviceKeyArray = [annotationKeys allKeysForObject:annotation];
+  SASDevice *device = [deviceKeyArray lastObject];
+  
+  sasImageViewController.device = device;
+  
   sasImageViewController.annotation = annotation;
   [self.navigationController pushViewController:sasImageViewController animated:YES];
 }
@@ -194,7 +201,6 @@ NSString *permissionsProblemText = @"Please enable location services for this ap
 - (void)sasMapView:(SASMapView *)mapView authorizationStatusHasChanged:(CLAuthorizationStatus)status {
   
   BOOL makeCheckForMapWarning = NO;
-  
   
   if([CLLocationManager locationServicesEnabled]){
     switch(status){

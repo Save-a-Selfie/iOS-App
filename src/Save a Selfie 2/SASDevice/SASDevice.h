@@ -83,15 +83,12 @@ typedef NS_ENUM(int, SASDeviceType) {
 
 
 
-
-
-
-
-
 /**
  Returns string representation of a SASDevice. i.e "Defibrillator" etc.
  */
 - (NSString *)deviceName;
+
+
 
 
 @end
