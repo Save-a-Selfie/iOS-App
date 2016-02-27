@@ -25,7 +25,7 @@
 #import "SASNetworkManager.h"
 #import "DefaultDownloadWorker.h"
 #import "Cacheable.h"
-
+#import "ParseDownloadWorker.h"
 @interface SASMapViewController ()
 <SASImagePickerDelegate,
 SASUploadViewControllerDelegate,
@@ -75,9 +75,13 @@ NSString *permissionsProblemText = @"Please enable location services for this ap
   self.sasMapView.sasAnnotationImage = SASAnnotationImageCustom;
   self.sasMapView.mapType = MKMapTypeSatellite;
   
-  [self downloadInformationFromServer];
+
 }
 
+- (void)viewDidLoad {
+  [super viewDidLoad];
+  [self downloadInformationFromServer];
+}
 
 - (IBAction)locateUser:(id)sender {
   [self.sasMapView locateUser];
@@ -133,7 +137,7 @@ NSString *permissionsProblemText = @"Please enable location services for this ap
   self.networkManager = [SASNetworkManager sharedInstance];
   SASNetworkQuery *query = [SASNetworkQuery queryWithType:SASNetworkQueryTypeAll];
   DefaultDownloadWorker *downloadWorker = [[DefaultDownloadWorker alloc] init];
-  
+  ParseDownloadWorker *pdownloadWorker = [[ParseDownloadWorker alloc] init];
   [self.networkManager cacheableDownloadWithQuery:query
                                         forWorker:downloadWorker
                                             cache:self];
@@ -149,6 +153,7 @@ NSString *permissionsProblemText = @"Please enable location services for this ap
   // we better make sure it is what we expect. (SASDevice);
   if (objects) {
     unsigned long length = objects.count;
+#warning Causes array out of index sometimes: update(Stephen Fox)
     if ([objects[length - 1] isKindOfClass:[SASDevice class]]) {
       if (!self.sasAppCache) {
         self.sasAppCache = [SASAppCache sharedInstance];

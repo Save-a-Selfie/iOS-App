@@ -71,7 +71,6 @@
 		18EBF9801B2741F600EDA48B /* SASUploadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EBF97F1B2741F600EDA48B /* SASUploadViewController.m */; };
 		18EE44D11B554F3B00F8F93B /* SystemVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EE44D01B554F3B00F8F93B /* SystemVersion.m */; };
 		18EE44DE1B556A1F00F8F93B /* SASNotificationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EE44DD1B556A1F00F8F93B /* SASNotificationView.m */; };
-		18F736CA1C640819009B6A90 /* SASGalleryDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F736C91C640819009B6A90 /* SASGalleryDelegate.m */; };
 		18F736CE1C6409A2009B6A90 /* SASGalleryDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F736CD1C6409A2009B6A90 /* SASGalleryDataSource.m */; };
 		D0EAAC0B1A0FD59B00C0F955 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0EAAC0A1A0FD59B00C0F955 /* Social.framework */; };
 		D0EAAC0D1A0FD63B00C0F955 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0EAAC0C1A0FD63B00C0F955 /* MessageUI.framework */; };
@@ -242,8 +241,6 @@
 		18EE44D01B554F3B00F8F93B /* SystemVersion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemVersion.m; sourceTree = "<group>"; };
 		18EE44DC1B556A1F00F8F93B /* SASNotificationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASNotificationView.h; sourceTree = "<group>"; };
 		18EE44DD1B556A1F00F8F93B /* SASNotificationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASNotificationView.m; sourceTree = "<group>"; };
-		18F736C81C640819009B6A90 /* SASGalleryDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASGalleryDelegate.h; sourceTree = "<group>"; };
-		18F736C91C640819009B6A90 /* SASGalleryDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASGalleryDelegate.m; sourceTree = "<group>"; };
 		18F736CC1C6409A2009B6A90 /* SASGalleryDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASGalleryDataSource.h; sourceTree = "<group>"; };
 		18F736CD1C6409A2009B6A90 /* SASGalleryDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASGalleryDataSource.m; sourceTree = "<group>"; };
 		18F736D31C6411E5009B6A90 /* Test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Test.h; sourceTree = "<group>"; };
@@ -418,7 +415,6 @@
 				1835D2771B78F7D100A62B7F /* SASGalleryCollectionViewController.h */,
 				1835D2781B78F7D100A62B7F /* SASGalleryCollectionViewController.m */,
 				18F736CF1C6409A5009B6A90 /* DataSource */,
-				18F736CB1C640820009B6A90 /* Delegate */,
 				189E26371B78F4D100C7B84F /* SASGalleryContainer */,
 				1818AFDB1B5153A9004FF998 /* SASGalleryCell */,
 			);
@@ -912,15 +908,6 @@
 			path = SASFilterView;
 			sourceTree = "<group>";
 		};
-		18F736CB1C640820009B6A90 /* Delegate */ = {
-			isa = PBXGroup;
-			children = (
-				18F736C81C640819009B6A90 /* SASGalleryDelegate.h */,
-				18F736C91C640819009B6A90 /* SASGalleryDelegate.m */,
-			);
-			name = Delegate;
-			sourceTree = "<group>";
-		};
 		18F736CF1C6409A5009B6A90 /* DataSource */ = {
 			isa = PBXGroup;
 			children = (
@@ -1270,7 +1257,6 @@
 				1818AFC61B50435B004FF998 /* UIView+Animations.m in Sources */,
 				D756A29D19F175230089EF80 /* UIImage+RoundedCorner.m in Sources */,
 				D72E1DB319EE841E005DD8A5 /* main.m in Sources */,
-				18F736CA1C640819009B6A90 /* SASGalleryDelegate.m in Sources */,
 				184D99B31B49B02F005ECE33 /* SASNetworkUtilities.m in Sources */,
 				18B00B161C71427B0039A150 /* SASAppCache.m in Sources */,
 				18EBF9771B272B3400EDA48B /* SASImagePickerViewController.m in Sources */,

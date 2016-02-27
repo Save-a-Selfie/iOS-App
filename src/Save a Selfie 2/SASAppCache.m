@@ -47,7 +47,9 @@
 }
 
 
-
+- (NSUInteger)cachedAmount {
+  return [self.cachedDevicesAndAnnotations count] + [self.cachedDevicesAndImages count];
+}
 
 - (void)cacheImage:(UIImage *)image forDevice:(SASDevice *)device {
   if (!self.cachedDevicesAndImages) {

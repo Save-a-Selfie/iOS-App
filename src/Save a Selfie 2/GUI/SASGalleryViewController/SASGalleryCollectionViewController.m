@@ -17,7 +17,6 @@
 #import "FXAlert.h"
 #import "SASNetworkManager.h"
 #import "DefaultDownloadWorker.h"
-#import "SASGalleryDelegate.h"
 #import "SASGalleryDataSource.h"
 
 /**
@@ -125,8 +124,11 @@ SASGalleryCellDelegate> {
 - (void) initialSetupOfGallery {
   [self showActivityIndicator];
   
-  NSRange range = NSMakeRange(0, 55);
+  NSRange range = NSMakeRange(0, 35);
   imagesDownloadedCount = (int)range.length;
+  
+  NSDate *methodStart = [NSDate date];
+  
   
   [self.galleryDataSource imagesWithinRange:range completion:^(BOOL completion) {
     if (completion) {
@@ -135,6 +137,9 @@ SASGalleryCellDelegate> {
       [self.collectionView reloadData];
     }
     [self.collectionView reloadData];
+    NSDate *methodFinish = [NSDate date];
+    NSTimeInterval executionTime = [methodFinish timeIntervalSinceDate:methodStart];
+    NSLog(@"executionTime = %f", executionTime);
   }];
 }
 

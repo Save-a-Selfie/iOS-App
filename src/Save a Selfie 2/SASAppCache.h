@@ -58,4 +58,6 @@
 
 - (nullable NSDictionary<SASDevice*, SASAnnotation*>*) annotationKeyValuePairs;
 
+// Returns the number of items cached.
+- (NSUInteger) cachedAmount;
 @end

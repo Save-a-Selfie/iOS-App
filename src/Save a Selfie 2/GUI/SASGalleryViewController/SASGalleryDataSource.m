@@ -12,6 +12,7 @@
 #import <SDWebImageDownloader.h>
 #import "SASGalleryContainer.h"
 #import "SASImageViewController.h"
+#import "SASAppCache.h"
 
 @interface SASGalleryDataSource ()
 
@@ -23,6 +24,7 @@
 @property (weak, nonatomic) SASGalleryCell *galleryCell;
 @property (assign, nonatomic) BOOL objectsDowloaded;
 @property (weak, nonatomic) id<SASGalleryCellDelegate> cellDelegate;
+@property (strong, nonatomic) SASAppCache *appCache;
 
 @end
 
@@ -50,11 +52,17 @@
 }
 
 
-- (void) downloadFromServer:(void(^)(BOOL)) completion {
+/**
+ Attempts to download from the server.
+ Will check the app cache first to see if there is devices
+ otherwise it will download.
+ */
+- (void) downloadFromServer:(void(^)(BOOL )) completion {
+            
   if (!self.networkManager) {
     self.networkManager = [SASNetworkManager sharedInstance];
   }
-  
+
   SASNetworkQuery *query = [SASNetworkQuery queryWithType:SASNetworkQueryTypeAll];
   [self.networkManager downloadWithQuery:query
                                forWorker:[[DefaultDownloadWorker alloc]init]
@@ -64,6 +72,14 @@
                                 completion(YES);
                               }];
 }
+
+- (BOOL) appCacheAvailable {
+  if (!self.appCache) {
+    self.appCache = [SASAppCache sharedInstance];
+  }
+  return [self.appCache cachedAmount] == 0 ? YES : NO;
+}
+
 
 
 

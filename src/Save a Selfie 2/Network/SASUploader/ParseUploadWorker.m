@@ -17,15 +17,14 @@
            completion:(UploadCompletionBlock)completion {
   
   PFObject *selfie = [[PFObject alloc] initWithClassName:@"Selfie"];
-  selfie[@"longitude"] = @(uploadObject.coordinates.longitude);
-  selfie[@"latitude"] = @(uploadObject.coordinates.latitude);
-  selfie[@"info"] = uploadObject.caption;
-  selfie[@"aidType"] = uploadObject.associatedDevice.deviceName;
-  selfie[@"address"] = [NSNull null];
+  selfie[@"t7"] = @(uploadObject.coordinates.longitude);
+  selfie[@"t6"] = @(uploadObject.coordinates.latitude);
+  selfie[@"t8"] = uploadObject.caption;
+  selfie[@"t2"] = uploadObject.associatedDevice.deviceName;
   
   NSData *imageData = UIImageJPEGRepresentation(uploadObject.image, 1.0);
   PFFile *imageFile = [PFFile fileWithName:@"image.jpg" data:imageData];
-  selfie[@"image"] = imageFile;
+  selfie[@"t5"] = imageFile;
   
 
   [selfie saveInBackgroundWithBlock:^(BOOL success, NSError *error) {
