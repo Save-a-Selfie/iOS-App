@@ -11,6 +11,9 @@
 #import "SASFacebookLoginViewController.h"
 #import "SASMapViewController.h"
 #import "FXAlert.h"
+#import "SASNetworkManager.h"
+#include "DefaultSignUpWorker.h"
+
 
 @interface AppDelegate () <FBSDKLoginButtonDelegate>
 
@@ -49,14 +52,26 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 - (void)loginButton:(FBSDKLoginButton *)loginButton
 didCompleteWithResult:(FBSDKLoginManagerLoginResult *)result error:(NSError *)error {
   if (error) {
-    FXAlertController *alertView = [[FXAlertController alloc] initWithTitle:@"Failed"
-                                                                    message:@"There was a problem trying to log you into facebook."];
-    FXAlertButton *okButton = [[FXAlertButton alloc] initWithType:FXAlertButtonTypeStandard];
-    [alertView addButton:okButton];
-    [self.window.rootViewController presentViewController:alertView animated:YES completion:nil];
-  } else if (result.isCancelled) {
+    [self displayFBLoginErrorAlert];
+  }
+  else if (result.isCancelled) {
     
-  } else {
+  }
+  else {
+    // Make sure we have access to all info we need.
+    if (![[FBSDKAccessToken currentAccessToken] hasGranted:@"public_profile"] ||
+        ![[FBSDKAccessToken currentAccessToken] hasGranted:@"email"]) {
+      [self displayFBLoginErrorAlert];
+      return;
+    }
+
+    // Signup user to save a selfie server.
+    DefaultSignUpWorker *signupWorker = [[DefaultSignUpWorker alloc] init];
+    [signupWorker setParam:@{@"fields" : @"id,name,email,picture"}];
+    
+    SASNetworkManager *networkManager = [SASNetworkManager sharedInstance];
+    [networkManager signUpWithWorker:signupWorker completion:^(void) {}];
+
     [self presentSASMapViewController];
   }
 }
@@ -69,6 +84,14 @@ didCompleteWithResult:(FBSDKLoginManagerLoginResult *)result error:(NSError *)er
                                                      annotation:annotation];
 }
 
+
+- (void) displayFBLoginErrorAlert {
+  FXAlertController *alertView = [[FXAlertController alloc] initWithTitle:@"Failed"
+                                                                  message:@"There was a problem trying to log you into facebook."];
+  FXAlertButton *okButton = [[FXAlertButton alloc] initWithType:FXAlertButtonTypeStandard];
+  [alertView addButton:okButton];
+  [self.window.rootViewController presentViewController:alertView animated:YES completion:nil];
+}
 
 
 - (void) presentSASMapViewController {

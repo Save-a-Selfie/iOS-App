@@ -147,4 +147,16 @@
 }
 
 
+- (void)beginReverseGeolocationUpdate:(CLLocationCoordinate2D)coordinates withUpdate:(void (^)(CLPlacemark *, NSError *))geoLocationUpdate {
+  CLLocation *location = [[CLLocation alloc] initWithLatitude:coordinates.latitude longitude:coordinates.longitude];
+  CLGeocoder *geocoder = [CLGeocoder new];
+  
+  [geocoder reverseGeocodeLocation:location completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
+    if (error || placemarks.count != 0) {
+      CLPlacemark *placemark = [placemarks objectAtIndex:0];
+      geoLocationUpdate(placemark, error);
+    }
+  }];
+}
+
 @end

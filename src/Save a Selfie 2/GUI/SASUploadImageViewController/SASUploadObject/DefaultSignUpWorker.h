@@ -8,7 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "SignUpWorker.h"
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <FBSDKLoginKit/FBSDKLoginKit.h>
 
 @interface DefaultSignUpWorker : NSObject <SignUpWorker>
+
+
 
 @end

@@ -46,5 +46,11 @@
   }];
 }
 
+
+- (void) signUpWithWorker:(id<SignUpWorker>) signUpWorker
+               completion:(SignUpWorkerCompletionBlock) completion {
+  [signUpWorker signupWithCompletionBlock:completion];
+}
+
 @end
 

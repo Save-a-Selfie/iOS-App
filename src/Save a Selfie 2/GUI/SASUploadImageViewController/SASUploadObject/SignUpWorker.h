@@ -8,11 +8,19 @@
 
 #import <UIKit/UIKit.h>
 
+
 @protocol SignUpWorker <NSObject>
 
+typedef void (^SignUpWorkerCompletionBlock)(void);
 
-- (void) setParams:(NSSet*) set;
 
-- (void) signup;
+// Usually there will be some parameters to be used
+// with sign up e.g. email, name etc.
+@property(strong, nonatomic) NSDictionary *param;
+
+
+- (void) signupWithCompletionBlock:(SignUpWorkerCompletionBlock) completion;
+
+
 
 @end

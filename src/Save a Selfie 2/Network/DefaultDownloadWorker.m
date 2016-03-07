@@ -10,13 +10,13 @@
 #import "DefaultDownloadWorker.h"
 #import "SASAnnotation.h"
 #import <AddressBookUI/AddressBookUI.h>
-#import <CoreLocation/CLGeocoder.h>
-#import <CoreLocation/CLPlacemark.h>
+#import <SASLocation.h>
+
 
 @interface DefaultDownloadWorker ()
 
 @property (strong, nonatomic) NSURLSession *nsUrlDefaultSession;
-
+@property (strong, nonatomic) SASLocation *sasLocation;
 
 @end
 
@@ -36,6 +36,7 @@ NSString* const downloadURL = @"https://guarded-mountain-99906.herokuapp.com/";
 }
 
 - (void) commonInit {
+  _sasLocation = [[SASLocation alloc] init];
   _nsUrlDefaultSession =
   [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
 }
@@ -88,7 +89,6 @@ NSString* const downloadURL = @"https://guarded-mountain-99906.herokuapp.com/";
   NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
   request.HTTPMethod = @"POST";
   [request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-  [request setURL:url];  
   
 }
 
@@ -127,15 +127,8 @@ NSString* const downloadURL = @"https://guarded-mountain-99906.herokuapp.com/";
 
 // Returns string in the format: https://guarded-mountain-99906.herokuapp.com/getAllSelfiesByPostalCode/{postal_code}
 - (void) constructURLForClosestSelfies:(CLLocationCoordinate2D) coordinates result:(void (^)(NSString *url, NSError *failedError)) url {
-  CLLocation *location = [[CLLocation alloc] initWithLatitude:coordinates.latitude longitude:coordinates.longitude];
-  CLGeocoder *geocoder = [CLGeocoder new];
-  
-  [geocoder reverseGeocodeLocation:location completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
-    if (error || placemarks.count != 0) {
-      CLPlacemark *placemark = [placemarks objectAtIndex:0];
-      
-      NSLog(@"%@", placemark.postalCode);
-    }
+  [self.sasLocation beginReverseGeolocationUpdate:coordinates withUpdate:^(CLPlacemark *placeMark, NSError *error) {
+    NSLog(@"%@", placeMark.postalCode);
     url([NSString stringWithFormat:@"%@%@", downloadURL, @"getAllSelfiesByPostalCode/"], error);
   }];
 }

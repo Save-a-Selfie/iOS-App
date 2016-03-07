@@ -83,4 +83,18 @@
  */
 - (BOOL) canStartLocating;
 
+
+
+/**
+ Begins asynchronously reverse geolocation updating 
+ with the current location tracked by SASLocation.
+ 
+ @param coordinates The coordinates to reverse geolocate.
+ @param geoLocationUpdate A block used for passing information
+                          back to the receiver once geolocation has
+                          been completed.*/
+- (void) beginReverseGeolocationUpdate:(CLLocationCoordinate2D) coordinates
+                            withUpdate:(void(^)(CLPlacemark *placeMark, NSError *error)) geoLocationUpdate;
+
+
 @end

@@ -91,7 +91,8 @@
 /**
  Attempts to sign a user up to the backend.
  */
-- (void) signUp:(id<SignUpWorker>) signUpWorker;
+- (void) signUpWithWorker:(id<SignUpWorker>) signUpWorker
+               completion:(SignUpWorkerCompletionBlock) completion;
 
 
 @end
