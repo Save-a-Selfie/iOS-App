@@ -1,4 +1,7 @@
 platform :ios, '7.1'
 pod 'SDWebImage', '~>3.6'
 pod 'MBProgressHUD', '~> 0.9.1'
-pod 'Parse'
+pod 'FBSDKCoreKit'
+pod 'FBSDKLoginKit'
+pod 'FBSDKShareKit'
+pod 'Unirest', '~> 1.1.4'

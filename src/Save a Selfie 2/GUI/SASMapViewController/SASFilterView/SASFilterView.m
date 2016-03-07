@@ -8,7 +8,6 @@
 
 #import "SASFilterView.h"
 #import "SASUtilities.h"
-#import "ILTranslucentView.h"
 #import "SASDevice.h"
 #import "SASFilterViewCell.h"
 #import "UIFont+SASFont.h"

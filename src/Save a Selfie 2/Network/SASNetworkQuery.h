@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MapKit/MapKit.h>
 
 typedef NS_ENUM(NSUInteger, SASNetworkQueryType) {
-  SASNetworkQueryTypeAll
+  SASNetworkQueryTypeAll,
+  SASNetworkQueryTypeClosest // The closest devices to the user.
 };
 
 /**
@@ -27,4 +29,17 @@ typedef NS_ENUM(NSUInteger, SASNetworkQueryType) {
  */
 + (SASNetworkQuery*) queryWithType: (SASNetworkQueryType) type;
 
+
+/**
+ This MUST be set when creating a query of type SASNetworkQeuryClosest.
+ Otherwise there will be no way of knowing the current location of the user.
+ 
+ @param coordinates The coordinates to be used in the query.
+ */
+- (void) setLocationArguments:(CLLocationCoordinate2D) coordinates;
+
+
+/**
+ The coordinates for a query.*/
+- (CLLocationCoordinate2D) coordinates;
 @end

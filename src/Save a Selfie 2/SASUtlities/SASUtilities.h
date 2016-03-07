@@ -16,15 +16,6 @@
 
 + (NSString*) getCurrentTimeStamp;
 
-/**
- Adds an ILTranslucentView to a view using -addSubview:
- 
- @param view
-        The view to which the ILTranslucentView object will be
-        added to.
- */
-+ (void) addSASBlurToView:(UIView*) view;
-
 
 
 

@@ -35,7 +35,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *shareButton;
 
 @property (nonatomic, weak) IBOutlet SASImageView *sasImageView;
-@property (strong, nonatomic) IBOutlet SASImageView *blurredImageView;
 
 @property (nonatomic, strong) SASActivityIndicator *sasActivityIndicator;
 
@@ -118,14 +117,6 @@
 
 
 
-- (void)viewDidAppear:(BOOL)animated {
-  [super viewDidAppear:animated];
-  
-  [SASUtilities addSASBlurToView:self.blurredImageView];
-  self.blurredImageView.contentMode = UIViewContentModeScaleToFill;
-}
-
-
 
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -183,7 +174,6 @@
 - (void) setupImageViews {
   if(!self.shouldDownloadImage) {
     self.sasImageView.image = self.image;
-    self.blurredImageView.image = self.image;
   }
   else if (self.device.imageURLString != nil && self.shouldDownloadImage && !imageLoaded) {
     
@@ -203,7 +193,7 @@
                                                             dispatch_async(dispatch_get_main_queue(), ^(void){
                                                               
                                                               self.sasImageView.image = image;
-                                                              self.blurredImageView.image = image;
+
                                                               
                                                               [self.sasActivityIndicator stopAnimating];
                                                               [self.sasActivityIndicator removeFromSuperview];

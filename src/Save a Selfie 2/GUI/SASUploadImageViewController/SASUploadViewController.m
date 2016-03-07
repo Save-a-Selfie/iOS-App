@@ -31,7 +31,7 @@
 #import "SASDeviceButtonView.h"
 
 #import "SASNetworkManager.h"
-#import "ParseUploadWorker.h"
+#import "AppUserDefaults.h"
 
 
 
@@ -183,18 +183,18 @@ SASDeviceButtonViewDelegate>
     
     // Checks that everything is correct.
     [self preUploadChecks: ^(){
-      [self.networkManager uploadWithWorker:[[ParseUploadWorker alloc] init]
-                                 withObject:self.sasUploadObject
-                                 completion:^(UploadCompletionStatus status) {
-                                   switch (status) {
-                                     case Failed:
-                                       [self uploadFailure];
-                                       break;
-                                       case Success:
-                                       [self uploadSuccess];
-                                       break;
-                                   }
-                                 }];
+//      [self.networkManager uploadWithWorker:[[ParseUploadWorker alloc] init]
+//                                 withObject:self.sasUploadObject
+//                                 completion:^(UploadCompletionStatus status) {
+//                                   switch (status) {
+//                                     case Failed:
+//                                       [self uploadFailure];
+//                                       break;
+//                                       case Success:
+//                                       [self uploadSuccess];
+//                                       break;
+//                                   }
+//                                 }];
       [self uploadBegan];
     }];
   }

@@ -12,30 +12,30 @@
 		180592061C5577340059215F /* LifeRingButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 180592051C5577340059215F /* LifeRingButton.m */; };
 		180592091C5577490059215F /* FireHydrantButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 180592081C5577490059215F /* FireHydrantButton.m */; };
 		1805920C1C5578C70059215F /* FirstAidKitButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 1805920B1C5578C70059215F /* FirstAidKitButton.m */; };
+		1806DB3F1C83B2760081CAFE /* AppUserDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 1806DB3E1C83B2760081CAFE /* AppUserDefaults.m */; };
+		1806DB431C83BAF50081CAFE /* SASFacebookLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1806DB421C83BAF50081CAFE /* SASFacebookLoginViewController.m */; };
 		1807AF3F1B4EE8F2006E1B28 /* StorageSystem.m in Sources */ = {isa = PBXBuildFile; fileRef = 1807AF3E1B4EE8F2006E1B28 /* StorageSystem.m */; };
 		1807AF4D1B4EEE79006E1B28 /* NSString+PDRegex.m in Sources */ = {isa = PBXBuildFile; fileRef = 1807AF4C1B4EEE79006E1B28 /* NSString+PDRegex.m */; };
 		180E18F51B7AC1DF0077BBEF /* SASSponsorCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 180E18F41B7AC1DF0077BBEF /* SASSponsorCardView.m */; };
 		180E18F81B7AC20D0077BBEF /* SASSponsorCardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 180E18F71B7AC20D0077BBEF /* SASSponsorCardView.xib */; };
 		180E295D1B5464C1003548FA /* EULAViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 180E295C1B5464C1003548FA /* EULAViewController.m */; };
 		1810C90A1B289044009063E5 /* UIImage+SASImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 1810C9091B289044009063E5 /* UIImage+SASImage.m */; };
-		1810C9141B28ABE3009063E5 /* ILTranslucentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1810C9131B28ABE3009063E5 /* ILTranslucentView.m */; };
 		1818AFC61B50435B004FF998 /* UIView+Animations.m in Sources */ = {isa = PBXBuildFile; fileRef = 1818AFC51B50435B004FF998 /* UIView+Animations.m */; };
 		1818AFDA1B5153A5004FF998 /* SASGalleryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1818AFD91B5153A5004FF998 /* SASGalleryCell.m */; };
 		1819829D1C5ADDFF008A1A14 /* SASNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1819829C1C5ADDFF008A1A14 /* SASNetworkManager.m */; };
 		181982A11C5AF302008A1A14 /* SASNetworkQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 181982A01C5AF302008A1A14 /* SASNetworkQuery.m */; };
-		181982A91C5AF7AB008A1A14 /* ParseDownloadWorker.m in Sources */ = {isa = PBXBuildFile; fileRef = 181982A81C5AF7AB008A1A14 /* ParseDownloadWorker.m */; };
 		181B9AEA1B7D406800E7FD3E /* SASSponsorCardManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 181B9AE91B7D406800E7FD3E /* SASSponsorCardManager.m */; };
 		181D1E5D1B2359EA00FB5928 /* SASImageInspectorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 181D1E5C1B2359EA00FB5928 /* SASImageInspectorView.m */; };
 		181D1E621B235CF900FB5928 /* SASImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 181D1E611B235CF900FB5928 /* SASImageView.m */; };
 		182C83E51C79FD9A0042BA21 /* SASAppCacheTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 182C83E41C79FD9A0042BA21 /* SASAppCacheTest.m */; };
 		1835D2791B78F7D100A62B7F /* SASGalleryCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1835D2781B78F7D100A62B7F /* SASGalleryCollectionViewController.m */; };
-		183C0CCD1C5274C900D66B2F /* ParseUploadWorker.m in Sources */ = {isa = PBXBuildFile; fileRef = 183C0CCC1C5274C900D66B2F /* ParseUploadWorker.m */; };
 		18453A511B584DD20055A004 /* SASNotificationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18453A501B584DD20055A004 /* SASNotificationView.xib */; };
 		1845C4EA1B2091F600E3D7BC /* SASActivityIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 1845C4E91B2091F600E3D7BC /* SASActivityIndicator.m */; };
 		1845C4EC1B20920300E3D7BC /* SASActivityIndicatorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1845C4EB1B20920300E3D7BC /* SASActivityIndicatorView.xib */; };
 		1845C4EF1B209E6C00E3D7BC /* SASUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 1845C4EE1B209E6C00E3D7BC /* SASUtilities.m */; };
 		184D99B31B49B02F005ECE33 /* SASNetworkUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 184D99B21B49B02F005ECE33 /* SASNetworkUtilities.m */; };
 		184D99B71B49C24A005ECE33 /* SASGreyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 184D99B61B49C24A005ECE33 /* SASGreyView.m */; };
+		1857514F1C8E27430032EEF1 /* DefaultSignUpWorker.m in Sources */ = {isa = PBXBuildFile; fileRef = 1857514E1C8E27430032EEF1 /* DefaultSignUpWorker.m */; };
 		18592E021B5184E2004DDFD8 /* SASSponsorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18592E011B5184E2004DDFD8 /* SASSponsorViewController.m */; };
 		18592E051B51854C004DDFD8 /* UIView+WidthXY.m in Sources */ = {isa = PBXBuildFile; fileRef = 18592E041B51854C004DDFD8 /* UIView+WidthXY.m */; };
 		185A39B81B1FD7B900699D31 /* SASColour.m in Sources */ = {isa = PBXBuildFile; fileRef = 185A39B71B1FD7B900699D31 /* SASColour.m */; };
@@ -58,7 +58,6 @@
 		18BA4DF61B82C1500047DEC4 /* UIDevice+DeviceName.m in Sources */ = {isa = PBXBuildFile; fileRef = 18BA4DF51B82C1500047DEC4 /* UIDevice+DeviceName.m */; };
 		18C104861B714C5900B4731D /* SASGalleryContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C104851B714C5900B4731D /* SASGalleryContainer.m */; };
 		18C323991B1E2F1E0027BDEA /* SASImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C323981B1E2F1E0027BDEA /* SASImageViewController.m */; };
-		18C6F2271C551AAC002A8F17 /* Selfie.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C6F2261C551AAC002A8F17 /* Selfie.m */; };
 		18CFECA51C5C2A0B00DC47AE /* DefaultDownloadWorker.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CFECA41C5C2A0B00DC47AE /* DefaultDownloadWorker.m */; };
 		18D66E461C5113D100AA7238 /* SASFilterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D66E451C5113D100AA7238 /* SASFilterView.m */; };
 		18D66E4A1C51144800AA7238 /* SASFilterViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D66E491C51144800AA7238 /* SASFilterViewCell.m */; };
@@ -126,6 +125,10 @@
 		180592081C5577490059215F /* FireHydrantButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FireHydrantButton.m; sourceTree = "<group>"; };
 		1805920A1C5578C70059215F /* FirstAidKitButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstAidKitButton.h; sourceTree = "<group>"; };
 		1805920B1C5578C70059215F /* FirstAidKitButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstAidKitButton.m; sourceTree = "<group>"; };
+		1806DB3D1C83B2760081CAFE /* AppUserDefaults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppUserDefaults.h; sourceTree = "<group>"; };
+		1806DB3E1C83B2760081CAFE /* AppUserDefaults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppUserDefaults.m; sourceTree = "<group>"; };
+		1806DB411C83BAF50081CAFE /* SASFacebookLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASFacebookLoginViewController.h; sourceTree = "<group>"; };
+		1806DB421C83BAF50081CAFE /* SASFacebookLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASFacebookLoginViewController.m; sourceTree = "<group>"; };
 		1807AF3D1B4EE8F2006E1B28 /* StorageSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StorageSystem.h; sourceTree = "<group>"; };
 		1807AF3E1B4EE8F2006E1B28 /* StorageSystem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StorageSystem.m; sourceTree = "<group>"; };
 		1807AF4B1B4EEE79006E1B28 /* NSString+PDRegex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+PDRegex.h"; sourceTree = "<group>"; };
@@ -137,8 +140,6 @@
 		180E295C1B5464C1003548FA /* EULAViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EULAViewController.m; sourceTree = "<group>"; };
 		1810C9081B289044009063E5 /* UIImage+SASImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+SASImage.h"; sourceTree = "<group>"; };
 		1810C9091B289044009063E5 /* UIImage+SASImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+SASImage.m"; sourceTree = "<group>"; };
-		1810C9121B28ABE3009063E5 /* ILTranslucentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ILTranslucentView.h; sourceTree = "<group>"; };
-		1810C9131B28ABE3009063E5 /* ILTranslucentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ILTranslucentView.m; sourceTree = "<group>"; };
 		1818AFC41B50435B004FF998 /* UIView+Animations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Animations.h"; sourceTree = "<group>"; };
 		1818AFC51B50435B004FF998 /* UIView+Animations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Animations.m"; sourceTree = "<group>"; };
 		1818AFD81B5153A5004FF998 /* SASGalleryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASGalleryCell.h; sourceTree = "<group>"; };
@@ -148,8 +149,6 @@
 		1819829F1C5AF302008A1A14 /* SASNetworkQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASNetworkQuery.h; sourceTree = "<group>"; };
 		181982A01C5AF302008A1A14 /* SASNetworkQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASNetworkQuery.m; sourceTree = "<group>"; };
 		181982A61C5AF64C008A1A14 /* DownloadWorker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DownloadWorker.h; path = ../DownloadWorker.h; sourceTree = "<group>"; };
-		181982A71C5AF7AB008A1A14 /* ParseDownloadWorker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ParseDownloadWorker.h; path = ../ParseDownloadWorker.h; sourceTree = "<group>"; };
-		181982A81C5AF7AB008A1A14 /* ParseDownloadWorker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ParseDownloadWorker.m; path = ../ParseDownloadWorker.m; sourceTree = "<group>"; };
 		181B9AE81B7D406800E7FD3E /* SASSponsorCardManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SASSponsorCardManager.h; path = ../SASSponsorCardManager.h; sourceTree = "<group>"; };
 		181B9AE91B7D406800E7FD3E /* SASSponsorCardManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SASSponsorCardManager.m; path = ../SASSponsorCardManager.m; sourceTree = "<group>"; };
 		181D1E5B1B2359EA00FB5928 /* SASImageInspectorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SASImageInspectorView.h; path = SASImageInspectorView/SASImageInspectorView.h; sourceTree = "<group>"; };
@@ -159,8 +158,6 @@
 		182C83E41C79FD9A0042BA21 /* SASAppCacheTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASAppCacheTest.m; sourceTree = "<group>"; };
 		1835D2771B78F7D100A62B7F /* SASGalleryCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASGalleryCollectionViewController.h; sourceTree = "<group>"; };
 		1835D2781B78F7D100A62B7F /* SASGalleryCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASGalleryCollectionViewController.m; sourceTree = "<group>"; };
-		183C0CCB1C5274C900D66B2F /* ParseUploadWorker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParseUploadWorker.h; sourceTree = "<group>"; };
-		183C0CCC1C5274C900D66B2F /* ParseUploadWorker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParseUploadWorker.m; sourceTree = "<group>"; };
 		18453A501B584DD20055A004 /* SASNotificationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SASNotificationView.xib; sourceTree = "<group>"; };
 		1845C4E81B2091F600E3D7BC /* SASActivityIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASActivityIndicator.h; sourceTree = "<group>"; };
 		1845C4E91B2091F600E3D7BC /* SASActivityIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASActivityIndicator.m; sourceTree = "<group>"; };
@@ -171,6 +168,9 @@
 		184D99B21B49B02F005ECE33 /* SASNetworkUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASNetworkUtilities.m; sourceTree = "<group>"; };
 		184D99B51B49C24A005ECE33 /* SASGreyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASGreyView.h; sourceTree = "<group>"; };
 		184D99B61B49C24A005ECE33 /* SASGreyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASGreyView.m; sourceTree = "<group>"; };
+		185751491C8E26E60032EEF1 /* SignUpWorker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpWorker.h; sourceTree = "<group>"; };
+		1857514D1C8E27430032EEF1 /* DefaultSignUpWorker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefaultSignUpWorker.h; sourceTree = "<group>"; };
+		1857514E1C8E27430032EEF1 /* DefaultSignUpWorker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DefaultSignUpWorker.m; sourceTree = "<group>"; };
 		18592E001B5184E2004DDFD8 /* SASSponsorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASSponsorViewController.h; sourceTree = "<group>"; };
 		18592E011B5184E2004DDFD8 /* SASSponsorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASSponsorViewController.m; sourceTree = "<group>"; };
 		18592E031B51854C004DDFD8 /* UIView+WidthXY.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+WidthXY.h"; sourceTree = "<group>"; };
@@ -217,8 +217,6 @@
 		18C104851B714C5900B4731D /* SASGalleryContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASGalleryContainer.m; sourceTree = "<group>"; };
 		18C323971B1E2F1E0027BDEA /* SASImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASImageViewController.h; sourceTree = "<group>"; };
 		18C323981B1E2F1E0027BDEA /* SASImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASImageViewController.m; sourceTree = "<group>"; };
-		18C6F2251C551AAC002A8F17 /* Selfie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Selfie.h; sourceTree = "<group>"; };
-		18C6F2261C551AAC002A8F17 /* Selfie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Selfie.m; sourceTree = "<group>"; };
 		18CFECA31C5C2A0B00DC47AE /* DefaultDownloadWorker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DefaultDownloadWorker.h; path = "Save a Selfie 2/Network/DefaultDownloadWorker.h"; sourceTree = SOURCE_ROOT; };
 		18CFECA41C5C2A0B00DC47AE /* DefaultDownloadWorker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DefaultDownloadWorker.m; path = "Save a Selfie 2/Network/DefaultDownloadWorker.m"; sourceTree = SOURCE_ROOT; };
 		18D66E441C5113D100AA7238 /* SASFilterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASFilterView.h; sourceTree = "<group>"; };
@@ -344,6 +342,24 @@
 			name = Buttons;
 			sourceTree = "<group>";
 		};
+		1806DB401C83B27C0081CAFE /* AppUserDefaults */ = {
+			isa = PBXGroup;
+			children = (
+				1806DB3D1C83B2760081CAFE /* AppUserDefaults.h */,
+				1806DB3E1C83B2760081CAFE /* AppUserDefaults.m */,
+			);
+			name = AppUserDefaults;
+			sourceTree = "<group>";
+		};
+		1806DB441C83BB690081CAFE /* SASFacebookLoginViewController */ = {
+			isa = PBXGroup;
+			children = (
+				1806DB411C83BAF50081CAFE /* SASFacebookLoginViewController.h */,
+				1806DB421C83BAF50081CAFE /* SASFacebookLoginViewController.m */,
+			);
+			name = SASFacebookLoginViewController;
+			sourceTree = "<group>";
+		};
 		1807AF401B4EE8F8006E1B28 /* StorageSystem */ = {
 			isa = PBXGroup;
 			children = (
@@ -389,15 +405,6 @@
 			);
 			name = "UIImage+SASImage";
 			path = SASImage;
-			sourceTree = "<group>";
-		};
-		1810C9151B28B1EF009063E5 /* IltranslucentView */ = {
-			isa = PBXGroup;
-			children = (
-				1810C9121B28ABE3009063E5 /* ILTranslucentView.h */,
-				1810C9131B28ABE3009063E5 /* ILTranslucentView.m */,
-			);
-			path = IltranslucentView;
 			sourceTree = "<group>";
 		};
 		1818AFC71B50435F004FF998 /* UIView+Animations */ = {
@@ -485,7 +492,6 @@
 			children = (
 				1845C4ED1B209E6C00E3D7BC /* SASUtilities.h */,
 				1845C4EE1B209E6C00E3D7BC /* SASUtilities.m */,
-				1810C9151B28B1EF009063E5 /* IltranslucentView */,
 			);
 			path = SASUtlities;
 			sourceTree = "<group>";
@@ -506,6 +512,17 @@
 				184D99B61B49C24A005ECE33 /* SASGreyView.m */,
 			);
 			path = SASGreyView;
+			sourceTree = "<group>";
+		};
+		1857514C1C8E26EA0032EEF1 /* SignUpWorker */ = {
+			isa = PBXGroup;
+			children = (
+				185751491C8E26E60032EEF1 /* SignUpWorker.h */,
+				1857514D1C8E27430032EEF1 /* DefaultSignUpWorker.h */,
+				1857514E1C8E27430032EEF1 /* DefaultSignUpWorker.m */,
+			);
+			name = SignUpWorker;
+			path = ../GUI/SASUploadImageViewController/SASUploadObject;
 			sourceTree = "<group>";
 		};
 		18592DFF1B5182F4004DDFD8 /* UIView+NibInitializer */ = {
@@ -615,6 +632,7 @@
 		188CAEE71B20FE46006A90EB /* GUI */ = {
 			isa = PBXGroup;
 			children = (
+				1806DB441C83BB690081CAFE /* SASFacebookLoginViewController */,
 				18C323941B1E1FDC0027BDEA /* SASImageViewController */,
 				18EBF9781B272B3700EDA48B /* SASImagePickerController */,
 				181A02CA1B543EDD009048FE /* SASInformationViewController */,
@@ -653,8 +671,6 @@
 				181982A61C5AF64C008A1A14 /* DownloadWorker.h */,
 				18CFECA31C5C2A0B00DC47AE /* DefaultDownloadWorker.h */,
 				18CFECA41C5C2A0B00DC47AE /* DefaultDownloadWorker.m */,
-				181982A71C5AF7AB008A1A14 /* ParseDownloadWorker.h */,
-				181982A81C5AF7AB008A1A14 /* ParseDownloadWorker.m */,
 			);
 			name = DownloadWorkers;
 			path = SASObjectDownloader;
@@ -748,9 +764,6 @@
 			isa = PBXGroup;
 			children = (
 				180591FB1C555C6C0059215F /* UploadWorker.h */,
-				183C0CCB1C5274C900D66B2F /* ParseUploadWorker.h */,
-				183C0CCC1C5274C900D66B2F /* ParseUploadWorker.m */,
-				18C6F2211C5464E2002A8F17 /* ParseFactory */,
 			);
 			name = UploadWorkers;
 			path = SASUploader;
@@ -794,15 +807,6 @@
 			path = AppDelegate;
 			sourceTree = "<group>";
 		};
-		18C6F2211C5464E2002A8F17 /* ParseFactory */ = {
-			isa = PBXGroup;
-			children = (
-				18C6F2251C551AAC002A8F17 /* Selfie.h */,
-				18C6F2261C551AAC002A8F17 /* Selfie.m */,
-			);
-			name = ParseFactory;
-			sourceTree = "<group>";
-		};
 		18CFECA61C5C3EC400DC47AE /* SASNetworkQuery */ = {
 			isa = PBXGroup;
 			children = (
@@ -837,6 +841,7 @@
 		18DAE8541B46C3C200CAEF2D /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				1857514C1C8E26EA0032EEF1 /* SignUpWorker */,
 				18EBF97C1B273A6900EDA48B /* SASNetworkObject */,
 				1819829B1C5ADDFF008A1A14 /* SASNetworkManager.h */,
 				1819829C1C5ADDFF008A1A14 /* SASNetworkManager.m */,
@@ -1002,6 +1007,7 @@
 				1869E3E11B9B3B08000E1DA7 /* Libraries */,
 				18BA4DF71B82C1540047DEC4 /* UIDevice+DeviceName */,
 				18A525051B166E0D00E8F8F6 /* SASDevice */,
+				1806DB401C83B27C0081CAFE /* AppUserDefaults */,
 				18C3239A1B1E33140027BDEA /* AppDelegate */,
 				1845C4F01B209E7C00E3D7BC /* SASUtlities */,
 				18A524F81B166BAF00E8F8F6 /* SASLocation */,
@@ -1220,10 +1226,10 @@
 				180592091C5577490059215F /* FireHydrantButton.m in Sources */,
 				18F736CE1C6409A2009B6A90 /* SASGalleryDataSource.m in Sources */,
 				18C104861B714C5900B4731D /* SASGalleryContainer.m in Sources */,
-				1810C9141B28ABE3009063E5 /* ILTranslucentView.m in Sources */,
 				D786E1811A48C10500A20FDD /* SASAnnotation.m in Sources */,
 				188CAEED1B21006C006A90EB /* Screen.m in Sources */,
 				1819829D1C5ADDFF008A1A14 /* SASNetworkManager.m in Sources */,
+				1806DB431C83BAF50081CAFE /* SASFacebookLoginViewController.m in Sources */,
 				185F3ED31B9E04FB00345CFB /* FXAlertControllerTransitionAnimator.m in Sources */,
 				18592E021B5184E2004DDFD8 /* SASSponsorViewController.m in Sources */,
 				185F3ED41B9E04FB00345CFB /* FXPresentationController.m in Sources */,
@@ -1231,7 +1237,6 @@
 				1845C4EA1B2091F600E3D7BC /* SASActivityIndicator.m in Sources */,
 				18D66E461C5113D100AA7238 /* SASFilterView.m in Sources */,
 				185F3ED21B9E04FB00345CFB /* FXAlertController.m in Sources */,
-				18C6F2271C551AAC002A8F17 /* Selfie.m in Sources */,
 				D72E1DB619EE841E005DD8A5 /* AppDelegate.m in Sources */,
 				D715E48F1A064FDA0026D91F /* UIView+NibInitializer.m in Sources */,
 				1845C4EF1B209E6C00E3D7BC /* SASUtilities.m in Sources */,
@@ -1245,6 +1250,7 @@
 				181D1E5D1B2359EA00FB5928 /* SASImageInspectorView.m in Sources */,
 				D756A2A919F309690089EF80 /* SASTabBarController.m in Sources */,
 				1835D2791B78F7D100A62B7F /* SASGalleryCollectionViewController.m in Sources */,
+				1857514F1C8E27430032EEF1 /* DefaultSignUpWorker.m in Sources */,
 				18EE44DE1B556A1F00F8F93B /* SASNotificationView.m in Sources */,
 				185F3ED11B9E04FB00345CFB /* FXAlertButton.m in Sources */,
 				1810C90A1B289044009063E5 /* UIImage+SASImage.m in Sources */,
@@ -1263,7 +1269,6 @@
 				D700239519F5253C00E45408 /* AlertBox.m in Sources */,
 				186D600C1C591C8700B57B10 /* SASDeviceButtonView.m in Sources */,
 				18592E051B51854C004DDFD8 /* UIView+WidthXY.m in Sources */,
-				183C0CCD1C5274C900D66B2F /* ParseUploadWorker.m in Sources */,
 				1805920C1C5578C70059215F /* FirstAidKitButton.m in Sources */,
 				18EE44D11B554F3B00F8F93B /* SystemVersion.m in Sources */,
 				D700239D19F52EB700E45408 /* ExtendNSLogFunctionality.m in Sources */,
@@ -1271,9 +1276,9 @@
 				181D1E621B235CF900FB5928 /* SASImageView.m in Sources */,
 				D786E2511A50AC7F00A20FDD /* PopupImage.m in Sources */,
 				180E18F51B7AC1DF0077BBEF /* SASSponsorCardView.m in Sources */,
+				1806DB3F1C83B2760081CAFE /* AppUserDefaults.m in Sources */,
 				180E295D1B5464C1003548FA /* EULAViewController.m in Sources */,
 				1891E3D31B1743C8008CC10C /* SASMapView.m in Sources */,
-				181982A91C5AF7AB008A1A14 /* ParseDownloadWorker.m in Sources */,
 				1807AF4D1B4EEE79006E1B28 /* NSString+PDRegex.m in Sources */,
 				185A39B81B1FD7B900699D31 /* SASColour.m in Sources */,
 			);

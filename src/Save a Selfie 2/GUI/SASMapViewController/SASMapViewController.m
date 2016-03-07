@@ -25,7 +25,7 @@
 #import "SASNetworkManager.h"
 #import "DefaultDownloadWorker.h"
 #import "Cacheable.h"
-#import "ParseDownloadWorker.h"
+
 @interface SASMapViewController ()
 <SASImagePickerDelegate,
 SASUploadViewControllerDelegate,
@@ -80,7 +80,6 @@ NSString *permissionsProblemText = @"Please enable location services for this ap
 
 - (void)viewDidLoad {
   [super viewDidLoad];
-  [self downloadInformationFromServer];
 }
 
 - (IBAction)locateUser:(id)sender {
@@ -133,16 +132,20 @@ NSString *permissionsProblemText = @"Please enable location services for this ap
 
 
 
-- (void) downloadInformationFromServer {
+- (void)sasMapView:(SASMapView *)mapView usersLocationHasUpdated:(CLLocationCoordinate2D)coordinate {
+  
+#warning Add timing capabilities so if no location found all are displayed.
   self.networkManager = [SASNetworkManager sharedInstance];
-  SASNetworkQuery *query = [SASNetworkQuery queryWithType:SASNetworkQueryTypeAll];
+  SASNetworkQuery *query = [SASNetworkQuery queryWithType:SASNetworkQueryTypeClosest];
+  [query setLocationArguments:[self.sasMapView currentUserLocation]];
+  
   DefaultDownloadWorker *downloadWorker = [[DefaultDownloadWorker alloc] init];
-  ParseDownloadWorker *pdownloadWorker = [[ParseDownloadWorker alloc] init];
+  
   [self.networkManager cacheableDownloadWithQuery:query
                                         forWorker:downloadWorker
                                             cache:self];
+  
 }
-
 
 #pragma mark <Cacheable>
 - (void)cacheObjects:(NSArray<NSObject *> *) objects {

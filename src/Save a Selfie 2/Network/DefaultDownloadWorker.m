@@ -9,17 +9,22 @@
 #import "UIKit/UIKit.h"
 #import "DefaultDownloadWorker.h"
 #import "SASAnnotation.h"
+#import <AddressBookUI/AddressBookUI.h>
+#import <CoreLocation/CLGeocoder.h>
+#import <CoreLocation/CLPlacemark.h>
 
 @interface DefaultDownloadWorker ()
 
 @property (strong, nonatomic) NSURLSession *nsUrlDefaultSession;
-@property (strong, nonatomic) NSURL *url;
+
 
 @end
 
 @implementation DefaultDownloadWorker
 
-NSString* const downloadURL = @"http://www.saveaselfie.org/wp/wp-content/themes/magazine-child/getMapData.php";
+NSString* const downloadURL = @"https://guarded-mountain-99906.herokuapp.com/";
+
+
 
 - (instancetype)init {
   self = [super init];
@@ -31,38 +36,70 @@ NSString* const downloadURL = @"http://www.saveaselfie.org/wp/wp-content/themes/
 }
 
 - (void) commonInit {
-  self.nsUrlDefaultSession =
-    [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
-  self.url = [NSURL URLWithString:downloadURL];
+  _nsUrlDefaultSession =
+  [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
 }
 
 
-#pragma mark DownloadWorker protocol.
-- (void)downloadWithQuery:(SASNetworkQuery *)query
-         completionResult:(DownloadWorkerCompletionBlock) completionBlock {
-  // Determine the query type.
+- (void)downloadWithQuery:(SASNetworkQuery *)query completionResult:(DownloadWorkerCompletionBlock)completionBlock {
+  // Call the appropriate method based on query.
   switch (query.type) {
     case SASNetworkQueryTypeAll:
       [self downloadAllDevicesFromServer:^(NSData *data, NSURLResponse *response, NSError *error) {
-        NSLog(@"Error: %@", error);
-        NSLog(@"Response: %@", response);
-        NSArray *sasDevices = [self constructDevicesFromResponse:data];
-        
-        // Call back on main thread.
-        dispatch_async(dispatch_get_main_queue(), ^(){
-          completionBlock(sasDevices);
-        });
+        // ..... do something
       }];
+      break;
+      
+    case SASNetworkQueryTypeClosest:
+#warning Should check coorinates and let caller know the coordinates are invalid.
+      [self downloadClosestDevicesFromServer:query.coordinates completion:^(NSData *data, NSURLResponse *response, NSError *error) {
+        
+      }];
+
+    default:
       break;
   }
 }
 
 
+#pragma mark DownloadWorker protocol.
+//- (void)downloadWithQuery:(SASNetworkQuery *)query
+//         completionResult:(DownloadWorkerCompletionBlock) completionBlock {
+//  // Determine the query type.
+//  switch (query.type) {
+//    case SASNetworkQueryTypeAll:
+//      [self downloadAllDevicesFromServer:^(NSData *data, NSURLResponse *response, NSError *error) {
+//        NSLog(@"Error: %@", error);
+//        NSLog(@"Response: %@", response);
+//        NSArray *sasDevices = [self constructDevicesFromResponse:data];
+//        
+//        // Call back on main thread.
+//        dispatch_async(dispatch_get_main_queue(), ^(){
+//          completionBlock(sasDevices);
+//        });
+//      }];
+//      break;
+//  }
+//}
+
+
 - (void) downloadAllDevicesFromServer: (void (^)(NSData *data, NSURLResponse *response, NSError *error)) completionHandler {
-  [[self.nsUrlDefaultSession dataTaskWithURL:self.url completionHandler:completionHandler] resume];
+  NSURL *url = [self constructURLForAllSelfies];
+  NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+  request.HTTPMethod = @"POST";
+  [request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+  [request setURL:url];  
+  
 }
 
 
+- (void) downloadClosestDevicesFromServer:(CLLocationCoordinate2D) coordinates
+                              completion: (void (^)(NSData *data, NSURLResponse *response, NSError *error)) completionHandler {
+  [self constructURLForClosestSelfies:coordinates result:^(NSString *url, NSError *failedError) {
+    
+  }];
+
+}
 
 /**
  Constructs SASDevices from NSData retrieved from the server.
@@ -80,6 +117,27 @@ NSString* const downloadURL = @"http://www.saveaselfie.org/wp/wp-content/themes/
   }
   //Dont return the mutable version of the array.
   return [devices copy];
+}
+
+
+
+- (NSURL*) constructURLForAllSelfies {
+  return [NSURL URLWithString: [NSString stringWithFormat:@"%@%@", downloadURL, @"getAllSelfies"]];
+}
+
+// Returns string in the format: https://guarded-mountain-99906.herokuapp.com/getAllSelfiesByPostalCode/{postal_code}
+- (void) constructURLForClosestSelfies:(CLLocationCoordinate2D) coordinates result:(void (^)(NSString *url, NSError *failedError)) url {
+  CLLocation *location = [[CLLocation alloc] initWithLatitude:coordinates.latitude longitude:coordinates.longitude];
+  CLGeocoder *geocoder = [CLGeocoder new];
+  
+  [geocoder reverseGeocodeLocation:location completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
+    if (error || placemarks.count != 0) {
+      CLPlacemark *placemark = [placemarks objectAtIndex:0];
+      
+      NSLog(@"%@", placemark.postalCode);
+    }
+    url([NSString stringWithFormat:@"%@%@", downloadURL, @"getAllSelfiesByPostalCode/"], error);
+  }];
 }
 
 @end

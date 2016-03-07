@@ -12,6 +12,7 @@
 #import "DownloadWorker.h"
 #import "SASAppCache.h"
 #import "Cacheable.h"
+#import "SignUpWorker.h"
 
 
 /**
@@ -85,5 +86,12 @@
 - (void) cacheableDownloadWithQuery: (SASNetworkQuery*) query
                           forWorker:(id<DownloadWorker>) worker
                               cache:(id<Cacheable>) cache;
+
+
+/**
+ Attempts to sign a user up to the backend.
+ */
+- (void) signUp:(id<SignUpWorker>) signUpWorker;
+
 
 @end

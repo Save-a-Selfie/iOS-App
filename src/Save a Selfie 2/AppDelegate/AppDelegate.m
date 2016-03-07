@@ -7,9 +7,15 @@
 //
 
 #import "AppDelegate.h"
-#import <Parse/Parse.h>
+#import "AppUserDefaults.h"
+#import "SASFacebookLoginViewController.h"
+#import "SASMapViewController.h"
+#import "FXAlert.h"
 
-@interface AppDelegate ()
+@interface AppDelegate () <FBSDKLoginButtonDelegate>
+
+@property (strong, nonatomic) FBSDKLoginButton *fbLoginButton;
+@property (strong, nonatomic) SASFacebookLoginViewController *fbViewController;
 
 @end
 
@@ -23,9 +29,56 @@ BOOL NSLogOn = NO; // YES to show logs, NO if not
 - (BOOL)application:(UIApplication *)application
 didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
   
-  [Parse setApplicationId:@"pidt6nz9C05S46ykNMXZQPunAPjIULBwnfbrjpVz"
-                clientKey:@"tMAXH4AeFLkeM2b8weuZe5IlNeU7AbuXe2wLmWtG"];
+  // Check if logged into facebook already.
+  if (![FBSDKAccessToken currentAccessToken]) {
+    self.fbLoginButton = [[FBSDKLoginButton alloc] init];
+    self.fbLoginButton.readPermissions = @[@"public_profile", @"email"];
+    self.fbLoginButton.loginBehavior = FBSDKLoginBehaviorNative;
+    self.fbLoginButton.delegate = self;
+    self.fbViewController = [[SASFacebookLoginViewController alloc]
+                             initWithFBLoginButton:self.fbLoginButton];
+    self.window.rootViewController = self.fbViewController;
+  }
+  else {
+    [self presentSASMapViewController];
+  }
   return YES;
+}
+
+
+- (void)loginButton:(FBSDKLoginButton *)loginButton
+didCompleteWithResult:(FBSDKLoginManagerLoginResult *)result error:(NSError *)error {
+  if (error) {
+    FXAlertController *alertView = [[FXAlertController alloc] initWithTitle:@"Failed"
+                                                                    message:@"There was a problem trying to log you into facebook."];
+    FXAlertButton *okButton = [[FXAlertButton alloc] initWithType:FXAlertButtonTypeStandard];
+    [alertView addButton:okButton];
+    [self.window.rootViewController presentViewController:alertView animated:YES completion:nil];
+  } else if (result.isCancelled) {
+    
+  } else {
+    [self presentSASMapViewController];
+  }
+}
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+  return [[FBSDKApplicationDelegate sharedInstance] application:application
+                                                        openURL:url
+                                              sourceApplication:sourceApplication
+                                                     annotation:annotation];
+}
+
+
+
+- (void) presentSASMapViewController {
+  UIStoryboard *mainStory = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+  
+  UITabBarController *tabBarController = [mainStory instantiateViewControllerWithIdentifier:@"TabBarController"];
+  self.window.rootViewController = tabBarController;
+}
+
+- (void)loginButtonDidLogOut:(FBSDKLoginButton *)loginButton {
 }
 
 

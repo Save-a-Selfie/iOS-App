@@ -7,7 +7,7 @@
 //
 
 #import "SASUtilities.h"
-#import "ILTranslucentView.h"
+
 
 @implementation SASUtilities
 
@@ -34,39 +34,6 @@
     NSString *strDateTime   = [dateFormatter stringFromDate:objDate];
     
     return strDateTime;
-}
-
-
-// Adds a ILTranlucentView tas a subview to a desired view.
-// @param: view: View to which a blurred view is added as a subview.
-+ (void) addSASBlurToView:(UIView*) view {
-    ILTranslucentView *blur = [ILTranslucentView new];
-    
-    blur.frame = view.frame;
-    
-    blur.backgroundColor = [UIColor clearColor];
-    blur.translucentStyle = UIBarStyleDefault;
-    blur.translucentTintColor = [UIColor clearColor];
-    blur.translucentAlpha = 0.999;
-    
-    [view addSubview:blur];
-
-}
-
-// Changes the view to a blurview.
-+ (void) blurForView:(UIView*) view {
-    
-    ILTranslucentView *blur = [ILTranslucentView new];
-    blur.frame = view.frame;
-    
-    blur.backgroundColor = [UIColor clearColor];
-    blur.translucentStyle = UIBarStyleDefault;
-    blur.translucentTintColor = [UIColor clearColor];
-    blur.translucentAlpha = 0.7;
-    
-    [view addSubview:blur];
-    [view sendSubviewToBack:blur];
-    view.backgroundColor = [UIColor clearColor];
 }
 
 
