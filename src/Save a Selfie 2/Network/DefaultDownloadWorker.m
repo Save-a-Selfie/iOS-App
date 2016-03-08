@@ -10,7 +10,7 @@
 #import "DefaultDownloadWorker.h"
 #import "SASAnnotation.h"
 #import <AddressBookUI/AddressBookUI.h>
-#import <SASLocation.h>
+#import "SASLocation.h"
 
 
 @interface DefaultDownloadWorker ()

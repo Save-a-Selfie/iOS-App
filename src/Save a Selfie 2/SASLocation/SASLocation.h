@@ -86,8 +86,7 @@
 
 
 /**
- Begins asynchronously reverse geolocation updating 
- with the current location tracked by SASLocation.
+ Begins asynchronously reverse geolocation updating.
  
  @param coordinates The coordinates to reverse geolocate.
  @param geoLocationUpdate A block used for passing information
