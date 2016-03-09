@@ -9,7 +9,7 @@
 #import "DefaultSignUpWorker.h"
 #import <UNIRest.h>
 #import "SASLocation.h"
-#import <JSONKit.h>
+#import "SASAppUserDefaults.h"
 
 @interface DefaultSignUpWorker() <SASLocationDelegate>
 
@@ -84,7 +84,11 @@ NSString* const SIGN_UP_URL = @"https://guarded-mountain-99906.herokuapp.com/sig
                                    @"file": self.picture}];
     NSLog(@"");
   }] asJsonAsync:^(UNIHTTPJsonResponse *jsonResponse, NSError *error) {
-    
+    NSDictionary *jsonBodyObject = jsonResponse.body.object;
+    NSDictionary *jsonResponseMessage = [jsonBodyObject objectForKey:@"responseMessage"];
+    NSString *userToken = [jsonResponseMessage objectForKey:@"token"];
+#pragma warning: AddUserToken forUser:  so its user specific.
+    [SASAppUserDefaults addUserToken:userToken];
   }];
 }
 

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AppUserDefaults : NSObject
+@interface SASAppUserDefaults : NSObject
 
 
 

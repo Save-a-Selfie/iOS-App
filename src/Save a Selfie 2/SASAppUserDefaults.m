@@ -6,9 +6,9 @@
 //  Copyright © 2016 Stephen Fox. All rights reserved.
 //
 
-#import "AppUserDefaults.h"
+#import "SASAppUserDefaults.h"
 
-@implementation AppUserDefaults
+@implementation SASAppUserDefaults
 
 NSString* EULAKey = @"EULAAccepted";
 NSString* UserToken = @"UserToken";
