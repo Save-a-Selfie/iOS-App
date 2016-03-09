@@ -70,9 +70,19 @@ didCompleteWithResult:(FBSDKLoginManagerLoginResult *)result error:(NSError *)er
     [signupWorker setParam:@{@"fields" : @"id,name,email,picture"}];
     
     SASNetworkManager *networkManager = [SASNetworkManager sharedInstance];
-    [networkManager signUpWithWorker:signupWorker completion:^(void) {}];
-
-    [self presentSASMapViewController];
+    [networkManager signUpWithWorker:signupWorker completion:^(NSError *error) {
+      // Successfully signed up.
+      if (error == nil) {
+         [self presentSASMapViewController];
+      }
+      else if (error.code == 999) {
+        FXAlertController *signupFailure = [[FXAlertController alloc] init];
+        FXAlertButton *ok = [[FXAlertButton alloc] initWithType:FXAlertButtonTypeCancel];
+        [ok setTitle:@"Ok" forState:UIControlStateNormal];
+        [signupFailure addButton:ok];
+        [self.window.rootViewController presentViewController:signupFailure animated:YES completion: nil];
+      }
+    }];
   }
 }
 

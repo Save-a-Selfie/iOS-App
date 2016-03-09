@@ -73,7 +73,7 @@ NSString* const SIGN_UP_URL = @"https://guarded-mountain-99906.herokuapp.com/sig
  */
 - (void) signup {
   [[UNIRest post:^(UNISimpleRequest *simpleRequest) {
-
+    
     [simpleRequest setUrl:SIGN_UP_URL];
     [simpleRequest setHeaders:@{@"accept": @"application/json" }];
     [simpleRequest setParameters:@{@"name": self.name,
@@ -87,8 +87,22 @@ NSString* const SIGN_UP_URL = @"https://guarded-mountain-99906.herokuapp.com/sig
     NSDictionary *jsonBodyObject = jsonResponse.body.object;
     NSDictionary *jsonResponseMessage = [jsonBodyObject objectForKey:@"responseMessage"];
     NSString *userToken = [jsonResponseMessage objectForKey:@"token"];
+    
+    dispatch_async(dispatch_get_main_queue(), ^() {
+      if (userToken == nil) {
+        NSError *errorOccurred = [NSError errorWithDomain:@"Error with receiving token from sas server." code:999 userInfo:nil];
+        self.block(errorOccurred);
+        self.block = nil; // Remove reference to block.
+        return;
+      }
 #pragma warning: AddUserToken forUser:  so its user specific.
-    [SASAppUserDefaults addUserToken:userToken];
+      [SASAppUserDefaults addUserToken:userToken];
+      
+      // No error occurred.
+      self.block(nil);
+      self.block = nil; // Remove reference to block.
+      
+    });
   }];
 }
 
@@ -112,8 +126,8 @@ NSString* const SIGN_UP_URL = @"https://guarded-mountain-99906.herokuapp.com/sig
       // Turn into base 64 string.
       self.picture = [NSURL URLWithString:pictureUrl];
       //self.picture = [[NSData dataWithContentsOfURL:picUrl] base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
-
-
+      
+      
       self.fbInfoExtracted = YES;
       NSLog(@"FaceBook set.\n");
     }

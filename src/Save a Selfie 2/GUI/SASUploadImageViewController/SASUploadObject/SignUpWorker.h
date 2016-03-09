@@ -11,7 +11,7 @@
 
 @protocol SignUpWorker <NSObject>
 
-typedef void (^SignUpWorkerCompletionBlock)(void);
+typedef void (^SignUpWorkerCompletionBlock)(NSError * error);
 
 
 // Usually there will be some parameters to be used
