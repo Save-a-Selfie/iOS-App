@@ -152,10 +152,8 @@
   CLGeocoder *geocoder = [CLGeocoder new];
   
   [geocoder reverseGeocodeLocation:location completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
-    if (error || placemarks.count != 0) {
       CLPlacemark *placemark = [placemarks objectAtIndex:0];
       geoLocationUpdate(placemark, error);
-    }
   }];
 }
 

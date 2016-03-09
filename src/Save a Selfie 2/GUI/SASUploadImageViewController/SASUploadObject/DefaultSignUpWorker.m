@@ -9,6 +9,7 @@
 #import "DefaultSignUpWorker.h"
 #import <UNIRest.h>
 #import "SASLocation.h"
+#import <JSONKit.h>
 
 @interface DefaultSignUpWorker() <SASLocationDelegate>
 
@@ -18,9 +19,13 @@
 @property (strong, nonatomic) NSString *address;
 @property (strong, nonatomic) NSString *country;
 @property (strong, nonatomic) NSString *area;
+@property (strong, nonatomic) NSURL *picture;
 @property (assign, nonatomic) CLLocationCoordinate2D coordinates;
 @property (strong, nonatomic) SASLocation *sasLocation;
-@property (assign, nonatomic) BOOL locationIsSet;
+@property (assign, nonatomic) BOOL fbInfoExtracted;
+@property (assign, nonatomic) BOOL geolocationSucceeded;
+
+@property (strong, nonatomic) SignUpWorkerCompletionBlock block;
 
 
 @end
@@ -29,7 +34,7 @@
 
 @synthesize param = _param;
 
-NSString* const SIGN_UP_URL = @"https://guarded-mountain-99906.herokuapp.com/signup/";
+NSString* const SIGN_UP_URL = @"https://guarded-mountain-99906.herokuapp.com/signup";
 
 
 - (instancetype)init
@@ -37,43 +42,76 @@ NSString* const SIGN_UP_URL = @"https://guarded-mountain-99906.herokuapp.com/sig
   self = [super init];
   if (self) {
     
+    _coordinates = kCLLocationCoordinate2DInvalid;
     _sasLocation = [[SASLocation alloc] init];
     _sasLocation.delegate = self;
     [_sasLocation startUpdatingUsersLocation];
-
+    
   }
   return self;
 }
 
+
+#pragma mark SignUpWorker.h protocol method.
 - (void)signupWithCompletionBlock:(SignUpWorkerCompletionBlock) completion {
-  [self extractFBSDKInfo];
+  // Reference the completion block so we can call later.
+  self.block = completion;
   
-  
-//  [[UNIRest post:^(UNISimpleRequest *simpleRequest) {
-//    [simpleRequest setUrl:SIGN_UP_URL];
-//    [simpleRequest setHeaders:@{@"application/json": @"Content-Type"}];
-//    [simpleRequest setParameters:@{@"name": self.name,
-//                                   @"email": self.email,
-//                                   @"add": self.address,
-//                                   @"area": self.area,
-//                                   @"country": self.country}];
-//  }] asJsonAsync:^(UNIHTTPJsonResponse *jsonResponse, NSError *error) {
-//    
-//  }];
+  // Extract Facebook info.
+  [self extractFBSDKInfo:^(BOOL completion) {
+    if (self.geolocationSucceeded) {
+      [self signup];
+    }
+  }];
 }
 
 
 
+/**
+ Sign up with the save a selfie server once
+ all information about the user has been set.
+ */
+- (void) signup {
+  [[UNIRest post:^(UNISimpleRequest *simpleRequest) {
+
+    [simpleRequest setUrl:SIGN_UP_URL];
+    [simpleRequest setHeaders:@{@"accept": @"application/json" }];
+    [simpleRequest setParameters:@{@"name": self.name,
+                                   @"email": self.email,
+                                   @"add": self.address,
+                                   @"area": self.area,
+                                   @"country": self.country,
+                                   @"file": self.picture}];
+    NSLog(@"");
+  }] asJsonAsync:^(UNIHTTPJsonResponse *jsonResponse, NSError *error) {
+    
+  }];
+}
+
 
 /**
- Get info like email name etc from Facebook.*/
-- (void) extractFBSDKInfo {
+ Get info like email name etc from Facebook.
+ */
+- (void) extractFBSDKInfo:(void(^)(BOOL completion)) completion {
   FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc]
                                 initWithGraphPath:@"me" parameters:self.param];
   [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
     if ([result isKindOfClass:[NSDictionary class]]) {
-      self.name = result[@"name"];
-      self.email = result[@"email"];
+      self.name = [result objectForKey:@"name"];
+      self.email = [result objectForKey:@"email"];
+      
+      //Extract the facebook profile picture.
+      NSDictionary *pictureInfo = [result objectForKey:@"picture"];
+      NSDictionary *pictureData = [pictureInfo objectForKey:@"data"];
+      NSString *pictureUrl = [pictureData objectForKey:@"url"];
+      
+      // Turn into base 64 string.
+      self.picture = [NSURL URLWithString:pictureUrl];
+      //self.picture = [[NSData dataWithContentsOfURL:picUrl] base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+
+
+      self.fbInfoExtracted = YES;
+      NSLog(@"FaceBook set.\n");
     }
   }];
 }
@@ -81,20 +119,43 @@ NSString* const SIGN_UP_URL = @"https://guarded-mountain-99906.herokuapp.com/sig
 
 #pragma mark <SASLocationDelegate>
 - (void)sasLocation:(SASLocation *)sasLocation locationDidUpdate:(CLLocationCoordinate2D)location {
-  self.coordinates = location;
-  self.locationIsSet = YES;
-  [self setLocationProperties:self.coordinates];
+  
+  // Check validity of coordinates.
+  if (CLLocationCoordinate2DIsValid(location)) {
+    self.coordinates = location;
+    
+    // Once we have the location info extract all the facebook info.
+    [self setLocationProperties:self.coordinates];
+  }
 }
 
 
-// Sets the location properties of this class once we have
-// retrieved a location from SASLocation.
+/**
+ This begins the process of reverse geolocating the coordinates.
+ */
 - (void) setLocationProperties:(CLLocationCoordinate2D) location {
   [self.sasLocation beginReverseGeolocationUpdate:self.coordinates withUpdate:^(CLPlacemark *placeMark, NSError *error) {
-    NSArray *lines = placeMark.addressDictionary[@"FormatterdAddressLines"];
-    self.address = [lines componentsJoinedByString:@"\n"];
-    NSLog(self.address);
     
+    if (error) {
+      NSLog(@"An error with geolocation occurred.\n");
+      self.geolocationSucceeded = NO;
+      
+    } else {
+      self.address = placeMark.name;
+      self.country = placeMark.country;
+      self.area = placeMark.thoroughfare;
+      self.geolocationSucceeded = YES;
+    }
+    
+    // If location information is set before
+    // fb info is extracted then this will
+    // cause us to wait until that is done.
+    if (self.fbInfoExtracted && self.geolocationSucceeded) {
+      [self signup];
+      // We don't need location reference no more.
+      self.sasLocation.delegate = nil;
+      self.sasLocation = nil;
+    }
   }];
 }
 

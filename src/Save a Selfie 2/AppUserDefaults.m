@@ -10,25 +10,29 @@
 
 @implementation AppUserDefaults
 
+NSString* EULAKey = @"EULAAccepted";
+NSString* UserToken = @"UserToken";
+
 + (void)addValueForEULAAccepted:(NSString *) value {
-  [[NSUserDefaults standardUserDefaults] setValue:value forKey:@"EULAAccepted"];
+  [[NSUserDefaults standardUserDefaults] setValue:value forKey:EULAKey];
   [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 
 + (NSString *)getValueForEULAAccepted {
-  return [[NSUserDefaults standardUserDefaults] valueForKey:@"EULAAccepted"];
+  return [[NSUserDefaults standardUserDefaults] valueForKey:EULAKey];
 }
 
 
 
-+ (void)addValueForFacebookLoginAccepted:(NSString *)value {
-  [[NSUserDefaults standardUserDefaults] setValue:value forKey:@"FacebookLoginAccepted"];
++ (void) addUserToken:(NSString*) token {
+  [[NSUserDefaults standardUserDefaults] setValue:token forKey:UserToken];
   [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
-+ (NSString *)getValueForFacebookLoginAccepted {
-  return [[NSUserDefaults standardUserDefaults] valueForKey:@"FacebookLoginAccepted"];
+
++ (NSString*) userToken {
+  return [[NSUserDefaults standardUserDefaults] valueForKey:UserToken];
 }
 
 @end

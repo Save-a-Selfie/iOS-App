@@ -11,6 +11,7 @@ PODS:
     - FBSDKCoreKit
   - FBSDKShareKit (4.10.0):
     - FBSDKCoreKit
+  - JSONKit (1.5pre)
   - MBProgressHUD (0.9.1)
   - SDWebImage (3.7.3):
     - SDWebImage/Core (= 3.7.3)
@@ -21,6 +22,7 @@ DEPENDENCIES:
   - FBSDKCoreKit
   - FBSDKLoginKit
   - FBSDKShareKit
+  - JSONKit (= 1.5pre)
   - MBProgressHUD (~> 0.9.1)
   - SDWebImage (~> 3.6)
   - Unirest (~> 1.1.4)
@@ -30,6 +32,7 @@ SPEC CHECKSUMS:
   FBSDKCoreKit: 13bec8373fb3af94d44daf2aa1e0958687897fbd
   FBSDKLoginKit: d3d4a2e9d31954deb00bfea964167a05ca1ea976
   FBSDKShareKit: 54587b4624706ace1e810cf83412a918141f807a
+  JSONKit: bae313ce6a6c444f40489a6c0b023f399888871f
   MBProgressHUD: c47f2c166c126cf2ce36498d80f33e754d4e93ad
   SDWebImage: 1d2b1a1efda1ade1b00b6f8498865f8ddedc8a84
   Unirest: 5e4d93eaf32463bf619a4ecd3bbc8c32acf21eac

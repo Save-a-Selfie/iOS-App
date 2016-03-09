@@ -11,13 +11,14 @@
 @interface AppUserDefaults : NSObject
 
 
+
 + (void) addValueForEULAAccepted:(NSString*) value;
 
 + (NSString *) getValueForEULAAccepted;
 
-+ (void) addValueForFacebookLoginAccepted:(NSString *) value;
 
-+ (NSString *) getValueForFacebookLoginAccepted;
++ (void) addUserToken:(NSString*) token;
 
++ (NSString*) userToken;
 
 @end
