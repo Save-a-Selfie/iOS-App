@@ -19,7 +19,7 @@
   dispatch_once(&token, ^(){
     sharedInstance = [[self alloc] init];
   });
-  return sharedInstance; 
+  return sharedInstance;
 }
 
 

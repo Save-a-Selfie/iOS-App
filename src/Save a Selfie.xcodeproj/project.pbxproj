@@ -36,6 +36,7 @@
 		184D99B31B49B02F005ECE33 /* SASNetworkUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 184D99B21B49B02F005ECE33 /* SASNetworkUtilities.m */; };
 		184D99B71B49C24A005ECE33 /* SASGreyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 184D99B61B49C24A005ECE33 /* SASGreyView.m */; };
 		1854554C1C90CB7C0069DA2C /* SASUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1854554B1C90CB7C0069DA2C /* SASUser.m */; };
+		185455501C922EAE0069DA2C /* SASJSONParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1854554F1C922EAE0069DA2C /* SASJSONParser.m */; };
 		1857514F1C8E27430032EEF1 /* DefaultSignUpWorker.m in Sources */ = {isa = PBXBuildFile; fileRef = 1857514E1C8E27430032EEF1 /* DefaultSignUpWorker.m */; };
 		18592E021B5184E2004DDFD8 /* SASSponsorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18592E011B5184E2004DDFD8 /* SASSponsorViewController.m */; };
 		18592E051B51854C004DDFD8 /* UIView+WidthXY.m in Sources */ = {isa = PBXBuildFile; fileRef = 18592E041B51854C004DDFD8 /* UIView+WidthXY.m */; };
@@ -171,6 +172,8 @@
 		184D99B61B49C24A005ECE33 /* SASGreyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASGreyView.m; sourceTree = "<group>"; };
 		1854554A1C90CB7C0069DA2C /* SASUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASUser.h; sourceTree = "<group>"; };
 		1854554B1C90CB7C0069DA2C /* SASUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASUser.m; sourceTree = "<group>"; };
+		1854554E1C922EAE0069DA2C /* SASJSONParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASJSONParser.h; sourceTree = "<group>"; };
+		1854554F1C922EAE0069DA2C /* SASJSONParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASJSONParser.m; sourceTree = "<group>"; };
 		185751491C8E26E60032EEF1 /* SignUpWorker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpWorker.h; sourceTree = "<group>"; };
 		1857514D1C8E27430032EEF1 /* DefaultSignUpWorker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefaultSignUpWorker.h; sourceTree = "<group>"; };
 		1857514E1C8E27430032EEF1 /* DefaultSignUpWorker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DefaultSignUpWorker.m; sourceTree = "<group>"; };
@@ -517,6 +520,24 @@
 			path = SASGreyView;
 			sourceTree = "<group>";
 		};
+		1854554D1C92199C0069DA2C /* SASUser */ = {
+			isa = PBXGroup;
+			children = (
+				1854554A1C90CB7C0069DA2C /* SASUser.h */,
+				1854554B1C90CB7C0069DA2C /* SASUser.m */,
+			);
+			name = SASUser;
+			sourceTree = "<group>";
+		};
+		185455511C922EB50069DA2C /* SASJsonParser */ = {
+			isa = PBXGroup;
+			children = (
+				1854554E1C922EAE0069DA2C /* SASJSONParser.h */,
+				1854554F1C922EAE0069DA2C /* SASJSONParser.m */,
+			);
+			name = SASJsonParser;
+			sourceTree = "<group>";
+		};
 		1857514C1C8E26EA0032EEF1 /* SignUpWorker */ = {
 			isa = PBXGroup;
 			children = (
@@ -852,6 +873,7 @@
 				1891E3DA1B176E9F008CC10C /* DownloadWorkers */,
 				18B7C3451B44A75D00017170 /* UploadWorkers */,
 				18CFECA61C5C3EC400DC47AE /* SASNetworkQuery */,
+				185455511C922EB50069DA2C /* SASJsonParser */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -1006,6 +1028,7 @@
 		D72E1DAF19EE841E005DD8A5 /* Save a Selfie 2 */ = {
 			isa = PBXGroup;
 			children = (
+				1854554D1C92199C0069DA2C /* SASUser */,
 				18B00B171C7149DC0039A150 /* SASAppCache */,
 				1869E3E11B9B3B08000E1DA7 /* Libraries */,
 				18BA4DF71B82C1540047DEC4 /* UIDevice+DeviceName */,
@@ -1022,8 +1045,6 @@
 				D72E1DC019EE841F005DD8A5 /* Images.xcassets */,
 				18DDE50A1B3D7F0F00AB0CB3 /* Launch Screen.xib */,
 				D72E1DB019EE841E005DD8A5 /* Supporting Files */,
-				1854554A1C90CB7C0069DA2C /* SASUser.h */,
-				1854554B1C90CB7C0069DA2C /* SASUser.m */,
 			);
 			path = "Save a Selfie 2";
 			sourceTree = "<group>";
@@ -1284,6 +1305,7 @@
 				180E18F51B7AC1DF0077BBEF /* SASSponsorCardView.m in Sources */,
 				1806DB3F1C83B2760081CAFE /* SASAppUserDefaults.m in Sources */,
 				180E295D1B5464C1003548FA /* EULAViewController.m in Sources */,
+				185455501C922EAE0069DA2C /* SASJSONParser.m in Sources */,
 				1891E3D31B1743C8008CC10C /* SASMapView.m in Sources */,
 				1807AF4D1B4EEE79006E1B28 /* NSString+PDRegex.m in Sources */,
 				185A39B81B1FD7B900699D31 /* SASColour.m in Sources */,

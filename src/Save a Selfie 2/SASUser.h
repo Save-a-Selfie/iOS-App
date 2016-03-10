@@ -8,8 +8,24 @@
 
 #import <UIKit/UIKit.h>
 
+/**
+ A Singleton class representing information
+ on the current, logged on user.
+ */
 @interface SASUser : NSObject
 
-+ (void) userWithFacebookId:(NSString*) identifier;
 
++ (SASUser*) currentUser;
+
+
+/**
+ Sets the currently logged in user token.
+ */
+- (void) setToken:(NSString*) token;
+
+
+/**
+ Gets the token
+ */
+- (NSString*) token;
 @end

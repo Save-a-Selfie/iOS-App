@@ -136,8 +136,8 @@ NSString *permissionsProblemText = @"Please enable location services for this ap
   
 #warning Add timing capabilities so if no location found all are displayed.
   self.networkManager = [SASNetworkManager sharedInstance];
-  SASNetworkQuery *query = [SASNetworkQuery queryWithType:SASNetworkQueryTypeClosest];
-  [query setLocationArguments:[self.sasMapView currentUserLocation]];
+  SASNetworkQuery *query = [SASNetworkQuery queryWithType:SASNetworkQueryTypeAll];
+//  [query setLocationArguments:[self.sasMapView currentUserLocation]];
   
   DefaultDownloadWorker *downloadWorker = [[DefaultDownloadWorker alloc] init];
   

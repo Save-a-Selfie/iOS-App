@@ -15,34 +15,10 @@
 @implementation SASDevice
 
 
-- (id) initDeviceWithInformationFromString: (NSString *) aInfoString {
+
+- (id) initDeviceWithInformationFromString: (NSArray *) aInfoString {
   
   if (self = [super init]) {
-    
-    _infoString = aInfoString;
-    
-    NSArray *infoArray = [aInfoString componentsSeparatedByString:@"\t"];
-    
-    // URL for the image.
-    _imageURLString = [infoArray objectAtIndex:0];
-    
-    _imageURL = [NSURL URLWithString:_imageURLString];
-    
-    // Caption associated with the device.
-    _caption = [infoArray objectAtIndex:1];
-    
-    // Sets _type with the correct type of device with the `identifier/value`
-    // retrieved from the server.
-    [self setTypeWithIdentifierFromServer:[[infoArray objectAtIndex:2] intValue]];
-    
-    // Longitude and Latitude.
-    NSNumber *latitude = [infoArray objectAtIndex:3];
-    NSNumber *longitude = [infoArray objectAtIndex:4];
-    
-    _deviceLocation.latitude = latitude.doubleValue;
-    _deviceLocation.longitude = longitude.doubleValue;
-    
-    
   }
   
   return self;

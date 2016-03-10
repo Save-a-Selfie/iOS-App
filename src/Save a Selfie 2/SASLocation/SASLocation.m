@@ -147,7 +147,8 @@
 }
 
 
-- (void)beginReverseGeolocationUpdate:(CLLocationCoordinate2D)coordinates withUpdate:(void (^)(CLPlacemark *, NSError *))geoLocationUpdate {
+- (void)beginReverseGeolocationUpdate:(CLLocationCoordinate2D)coordinates
+                           withUpdate:(void (^)(CLPlacemark *, NSError *))geoLocationUpdate {
   CLLocation *location = [[CLLocation alloc] initWithLatitude:coordinates.latitude longitude:coordinates.longitude];
   CLGeocoder *geocoder = [CLGeocoder new];
   

@@ -64,7 +64,7 @@ didCompleteWithResult:(FBSDKLoginManagerLoginResult *)result error:(NSError *)er
       [self displayFBLoginErrorAlert];
       return;
     }
-
+    
     // Signup user to save a selfie server.
     DefaultSignUpWorker *signupWorker = [[DefaultSignUpWorker alloc] init];
     [signupWorker setParam:@{@"fields" : @"id,name,email,picture"}];
@@ -73,7 +73,7 @@ didCompleteWithResult:(FBSDKLoginManagerLoginResult *)result error:(NSError *)er
     [networkManager signUpWithWorker:signupWorker completion:^(NSError *error) {
       // Successfully signed up.
       if (error == nil) {
-         [self presentSASMapViewController];
+        [self presentSASMapViewController];
       }
       else if (error.code == 999) {
         FXAlertController *signupFailure = [[FXAlertController alloc] init];

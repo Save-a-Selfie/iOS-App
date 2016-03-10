@@ -11,6 +11,9 @@
 #import "SASAnnotation.h"
 #import <AddressBookUI/AddressBookUI.h>
 #import "SASLocation.h"
+#import <Unirest/UNIRest.h>
+#import "SASUser.h"
+#import "SASJSONParser.h"
 
 
 @interface DefaultDownloadWorker ()
@@ -22,7 +25,7 @@
 
 @implementation DefaultDownloadWorker
 
-NSString* const downloadURL = @"https://guarded-mountain-99906.herokuapp.com/";
+NSString* const GET_ALL_SELFIES_URL = @"https://guarded-mountain-99906.herokuapp.com/getAllSelfies/";
 
 
 
@@ -31,14 +34,8 @@ NSString* const downloadURL = @"https://guarded-mountain-99906.herokuapp.com/";
   if (!self) {
     return nil;
   }
-  [self commonInit];
-  return self;
-}
-
-- (void) commonInit {
   _sasLocation = [[SASLocation alloc] init];
-  _nsUrlDefaultSession =
-  [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+  return self;
 }
 
 
@@ -63,32 +60,22 @@ NSString* const downloadURL = @"https://guarded-mountain-99906.herokuapp.com/";
 }
 
 
-#pragma mark DownloadWorker protocol.
-//- (void)downloadWithQuery:(SASNetworkQuery *)query
-//         completionResult:(DownloadWorkerCompletionBlock) completionBlock {
-//  // Determine the query type.
-//  switch (query.type) {
-//    case SASNetworkQueryTypeAll:
-//      [self downloadAllDevicesFromServer:^(NSData *data, NSURLResponse *response, NSError *error) {
-//        NSLog(@"Error: %@", error);
-//        NSLog(@"Response: %@", response);
-//        NSArray *sasDevices = [self constructDevicesFromResponse:data];
-//        
-//        // Call back on main thread.
-//        dispatch_async(dispatch_get_main_queue(), ^(){
-//          completionBlock(sasDevices);
-//        });
-//      }];
-//      break;
-//  }
-//}
-
-
+// Downloads all the 'selfies' from the server.
 - (void) downloadAllDevicesFromServer: (void (^)(NSData *data, NSURLResponse *response, NSError *error)) completionHandler {
-  NSURL *url = [self constructURLForAllSelfies];
-  NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
-  request.HTTPMethod = @"POST";
-  [request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+  [[UNIRest get:^(UNISimpleRequest *simpleRequest) {
+    
+    SASUser *sasUser = [SASUser currentUser];
+    NSString *token = [sasUser token];
+    NSString *tokenFormat = [NSString stringWithFormat:@"Bearer %@", token];
+    
+    [simpleRequest setUrl:GET_ALL_SELFIES_URL];
+    [simpleRequest setHeaders:@{@"Content-Type": @"application/json",
+                                @"Authorization": tokenFormat}];
+    NSLog(@"%@", tokenFormat);
+  }] asJsonAsync:^(UNIHTTPJsonResponse *jsonResponse, NSError *error) {
+    NSArray *data = [SASJSONParser parseGetAllSelfieData:jsonResponse.body.object];
+    NSLog(@"da");
+  }];
   
 }
 
@@ -101,9 +88,8 @@ NSString* const downloadURL = @"https://guarded-mountain-99906.herokuapp.com/";
 
 }
 
-/**
- Constructs SASDevices from NSData retrieved from the server.
- */
+
+// Constructs SASDevices from NSData retrieved from the server.
 - (nullable NSArray<SASDevice *> *) constructDevicesFromResponse:(nonnull NSData *)data {
   NSString *dataString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
   NSArray *deviceStrings = [dataString componentsSeparatedByString:@"\n"];
@@ -121,15 +107,11 @@ NSString* const downloadURL = @"https://guarded-mountain-99906.herokuapp.com/";
 
 
 
-- (NSURL*) constructURLForAllSelfies {
-  return [NSURL URLWithString: [NSString stringWithFormat:@"%@%@", downloadURL, @"getAllSelfies"]];
-}
 
 // Returns string in the format: https://guarded-mountain-99906.herokuapp.com/getAllSelfiesByPostalCode/{postal_code}
 - (void) constructURLForClosestSelfies:(CLLocationCoordinate2D) coordinates result:(void (^)(NSString *url, NSError *failedError)) url {
   [self.sasLocation beginReverseGeolocationUpdate:coordinates withUpdate:^(CLPlacemark *placeMark, NSError *error) {
-    NSLog(@"%@", placeMark.postalCode);
-    url([NSString stringWithFormat:@"%@%@", downloadURL, @"getAllSelfiesByPostalCode/"], error);
+    url([NSString stringWithFormat:@"%@%@", GET_ALL_SELFIES_URL, @"getAllSelfiesByPostalCode/"], error);
   }];
 }
 

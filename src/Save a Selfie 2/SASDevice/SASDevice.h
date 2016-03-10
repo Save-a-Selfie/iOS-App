@@ -35,9 +35,7 @@ typedef NS_ENUM(int, SASDeviceType) {
  Returns an SASDevice instance that has been initiliased with a string.
  
  @param infoString
- A string containing all the information to create a SASDevice object.
- The information string is typically gotten from the server and has
- all the neccessary information to create the instance.
+
  
  @return SASDevice
  */

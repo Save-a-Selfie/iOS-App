@@ -10,6 +10,8 @@
 #import <UNIRest.h>
 #import "SASLocation.h"
 #import "SASAppUserDefaults.h"
+#import "SASUser.h"
+#import "SASJSONParser.h"
 
 @interface DefaultSignUpWorker() <SASLocationDelegate>
 
@@ -25,7 +27,7 @@
 @property (assign, nonatomic) BOOL fbInfoExtracted;
 @property (assign, nonatomic) BOOL geolocationSucceeded;
 
-@property (strong, nonatomic) SignUpWorkerCompletionBlock block;
+@property (nonatomic, copy) SignUpWorkerCompletionBlock block;
 
 
 @end
@@ -82,26 +84,29 @@ NSString* const SIGN_UP_URL = @"https://guarded-mountain-99906.herokuapp.com/sig
                                    @"area": self.area,
                                    @"country": self.country,
                                    @"file": self.picture}];
-    NSLog(@"");
   }] asJsonAsync:^(UNIHTTPJsonResponse *jsonResponse, NSError *error) {
-    NSDictionary *jsonBodyObject = jsonResponse.body.object;
-    NSDictionary *jsonResponseMessage = [jsonBodyObject objectForKey:@"responseMessage"];
+    // Parse out the json.
+    NSDictionary *jsonResponseMessage = [SASJSONParser parseSignUpResponse:jsonResponse.body.object];
     NSString *userToken = [jsonResponseMessage objectForKey:@"token"];
+#pragma warning: check this status.
+    NSString *insertStatus = [jsonResponseMessage objectForKey:@"insert_status"];
     
-    dispatch_async(dispatch_get_main_queue(), ^() {
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
       if (userToken == nil) {
-        NSError *errorOccurred = [NSError errorWithDomain:@"Error with receiving token from sas server." code:999 userInfo:nil];
+        NSError *errorOccurred = [NSError
+                                  errorWithDomain:@"Error with receiving token from sas server."
+                                  code:999
+                                  userInfo:nil];
         self.block(errorOccurred);
-        self.block = nil; // Remove reference to block.
-        return;
-      }
+      } else {
 #pragma warning: AddUserToken forUser:  so its user specific.
-      [SASAppUserDefaults addUserToken:userToken];
-      
-      // No error occurred.
-      self.block(nil);
-      self.block = nil; // Remove reference to block.
-      
+        SASUser *sasUser = [SASUser currentUser];
+        [sasUser setToken:userToken];
+        
+        // No error occurred.
+        self.block(nil);
+      }
     });
   }];
 }
@@ -127,9 +132,7 @@ NSString* const SIGN_UP_URL = @"https://guarded-mountain-99906.herokuapp.com/sig
       self.picture = [NSURL URLWithString:pictureUrl];
       //self.picture = [[NSData dataWithContentsOfURL:picUrl] base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
       
-      
       self.fbInfoExtracted = YES;
-      NSLog(@"FaceBook set.\n");
     }
   }];
 }
