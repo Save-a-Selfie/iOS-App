@@ -20,7 +20,6 @@
 
 @property (strong, nonatomic) NSURLSession *nsUrlDefaultSession;
 @property (strong, nonatomic) SASLocation *sasLocation;
-
 @end
 
 @implementation DefaultDownloadWorker
@@ -39,21 +38,17 @@ NSString* const GET_ALL_SELFIES_URL = @"https://guarded-mountain-99906.herokuapp
 }
 
 
-- (void)downloadWithQuery:(SASNetworkQuery *)query completionResult:(DownloadWorkerCompletionBlock)completionBlock {
+- (void)downloadWithQuery:(SASNetworkQuery *)query
+         completionResult:(DownloadWorkerCompletionBlock)completionBlock {
   // Call the appropriate method based on query.
   switch (query.type) {
     case SASNetworkQueryTypeAll:
-      [self downloadAllDevicesFromServer:^(NSData *data, NSURLResponse *response, NSError *error) {
-        // ..... do something
-      }];
+      [self downloadAllDevicesFromServer: completionBlock];
       break;
       
     case SASNetworkQueryTypeClosest:
-#warning Should check coorinates and let caller know the coordinates are invalid.
-      [self downloadClosestDevicesFromServer:query.coordinates completion:^(NSData *data, NSURLResponse *response, NSError *error) {
-        
-      }];
-
+      [self downloadClosestDevicesFromServer:query.coordinates completion:completionBlock];
+      
     default:
       break;
   }
@@ -61,7 +56,7 @@ NSString* const GET_ALL_SELFIES_URL = @"https://guarded-mountain-99906.herokuapp
 
 
 // Downloads all the 'selfies' from the server.
-- (void) downloadAllDevicesFromServer: (void (^)(NSData *data, NSURLResponse *response, NSError *error)) completionHandler {
+- (void) downloadAllDevicesFromServer: (DownloadWorkerCompletionBlock) completionHandler {
   [[UNIRest get:^(UNISimpleRequest *simpleRequest) {
     
     SASUser *sasUser = [SASUser currentUser];
@@ -69,40 +64,52 @@ NSString* const GET_ALL_SELFIES_URL = @"https://guarded-mountain-99906.herokuapp
     NSString *tokenFormat = [NSString stringWithFormat:@"Bearer %@", token];
     
     [simpleRequest setUrl:GET_ALL_SELFIES_URL];
-    [simpleRequest setHeaders:@{@"Content-Type": @"application/json",
+    [simpleRequest setHeaders:@{@"Accept": @"application/json",
+                                @"Content-Type": @"application/json",
                                 @"Authorization": tokenFormat}];
     NSLog(@"%@", tokenFormat);
   }] asJsonAsync:^(UNIHTTPJsonResponse *jsonResponse, NSError *error) {
-    NSArray *data = [SASJSONParser parseGetAllSelfieData:jsonResponse.body.object];
-    NSLog(@"da");
+    NSArray *jsonData = [SASJSONParser parseGetAllSelfieData:jsonResponse.body.object];
+    NSArray<SASDevice*> *devices = [self constructDevicesFromJSONData:jsonData];
+    
+    dispatch_async(dispatch_get_main_queue(), ^() {
+      completionHandler(devices);
+    });
   }];
   
 }
 
 
 - (void) downloadClosestDevicesFromServer:(CLLocationCoordinate2D) coordinates
-                              completion: (void (^)(NSData *data, NSURLResponse *response, NSError *error)) completionHandler {
+                               completion: (DownloadWorkerCompletionBlock) completionHandler {
   [self constructURLForClosestSelfies:coordinates result:^(NSString *url, NSError *failedError) {
     
   }];
-
+  
 }
 
 
-// Constructs SASDevices from NSData retrieved from the server.
-- (nullable NSArray<SASDevice *> *) constructDevicesFromResponse:(nonnull NSData *)data {
-  NSString *dataString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-  NSArray *deviceStrings = [dataString componentsSeparatedByString:@"\n"];
-  NSMutableArray *devices = [[NSMutableArray alloc] init];
+// Constructs all devices retrived from server in JSON format.
+- (NSArray<SASDevice*>*) constructDevicesFromJSONData:(NSArray*) jsonArray {
+  NSMutableArray<SASDevice*> *devices = [[NSMutableArray alloc] init];
   
-  for (int i = 0; i < [deviceStrings count]; i++) {
-    if ([deviceStrings[i] length] != 0) {
-      SASDevice *device = [[SASDevice alloc] initDeviceWithInformationFromString:deviceStrings[i]];
-      [devices addObject:device];
-    }
+  for (NSDictionary *jsonDevice in jsonArray) {
+    
+    SASDeviceType deviceType = [SASDevice deviceTypeForString:[jsonDevice objectForKey:@"aid_type"]];
+    NSString *imageFile = [jsonDevice objectForKey:@"file"];
+    
+    NSString *lat = [jsonDevice objectForKey:@"lat"];
+    NSString *long_ = [jsonDevice objectForKey:@"lng"];
+    
+    CLLocationCoordinate2D coordinates =
+    CLLocationCoordinate2DMake([lat doubleValue], [long_ doubleValue]);
+    SASDevice *sasDevice = [[SASDevice alloc] initDeviceWithInfo:deviceType
+                                                       imageFile:imageFile
+                                                         caption:@"HELLO DARKNESS"
+                                                     coordinates:coordinates];
+    [devices addObject:sasDevice];
   }
-  //Dont return the mutable version of the array.
-  return [devices copy];
+  return devices;
 }
 
 

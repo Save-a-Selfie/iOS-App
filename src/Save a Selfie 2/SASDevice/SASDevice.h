@@ -24,22 +24,27 @@ typedef NS_ENUM(int, SASDeviceType) {
 @interface SASDevice : NSObject <NSCopying>;
 
 @property (nonatomic, assign) SASDeviceType type;
-@property (nonatomic, strong, readonly) NSString *imageURLString;
-@property (nonatomic, strong, readonly) NSURL *imageURL;
-@property (nonatomic, strong, readonly) NSString *caption;
+@property (nonnull, nonatomic, strong, readonly) NSString *imageFile;
+@property (nonnull, nonatomic, strong, readonly) NSString *caption;
 @property (nonatomic, readonly) CLLocationCoordinate2D deviceLocation;
-
+@property (nonnull, readonly) NSString *imageURLString;
+@property (nonnull, readonly) NSURL *imageURL;
 
 
 /**
- Returns an SASDevice instance that has been initiliased with a string.
+ Creates a SASDevice with all information passed in.
  
- @param infoString
-
- 
- @return SASDevice
+ @param type The type e.g. Defibrillator, Life Ring etc.
+ @param file The name of the file which resides on the SAS backend.
+ @param caption The caption associated with the device.
+ @param coordinates The coordinates of the device.
  */
-- (instancetype) initDeviceWithInformationFromString: (NSString *)infoString;
+- (nonnull instancetype) initDeviceWithInfo: (SASDeviceType)type
+                          imageFile:(nonnull NSString*) file
+                            caption:(nonnull NSString*) caption
+                        coordinates:(CLLocationCoordinate2D) coordinates;;
+
+
 
 
 /**
@@ -52,39 +57,44 @@ typedef NS_ENUM(int, SASDeviceType) {
         - All
  Note All is used in special cases throughout the app.
  */
-+ (NSString*) getDeviceNameForDeviceType:(SASDeviceType) deviceType;
++ (nonnull NSString*) getDeviceNameForDeviceType:(SASDeviceType) deviceType;
 
 
+
+/**
+ Returns the associated device type for each string.
+ */
++ (SASDeviceType) deviceTypeForString:(nonnull NSString*) device;
 
 /**
  @return Selected(normal image) device image for given parameter.
  */
-+ (UIImage*) getDeviceImageForDeviceType:(SASDeviceType) deviceType;
++ (nonnull UIImage*) getDeviceImageForDeviceType:(SASDeviceType) deviceType;
 
 /**
  @return Unselected device image for given parameter.
  */
-+ (UIImage *) getUnselectedDeviceImageForDevice:(SASDeviceType) deviceType;
++ (nonnull UIImage *) getUnselectedDeviceImageForDevice:(SASDeviceType) deviceType;
 
 
 /**
  @return Device map annotation (used for mapView) for given parameter.
  */
-+ (UIImage*) getDeviceMapAnnotationImageForDeviceType:(SASDeviceType) deviceType;
++ (nonnull UIImage*) getDeviceMapAnnotationImageForDeviceType:(SASDeviceType) deviceType;
 
 
 
 /**
  @return Device map pin for given parameter.
  */
-+ (UIImage*) getDeviceMapPinImageForDeviceType:(SASDeviceType) deviceType;
++ (nonnull UIImage*) getDeviceMapPinImageForDeviceType:(SASDeviceType) deviceType;
 
 
 
 /**
  Returns string representation of a SASDevice. i.e "Defibrillator" etc.
  */
-- (NSString *)deviceName;
+- (nullable NSString *)deviceName;
 
 
 

@@ -16,19 +16,21 @@
 
 
 
-- (id) initDeviceWithInformationFromString: (NSArray *) aInfoString {
-  
-  if (self = [super init]) {
-  }
-  
+- (instancetype)initDeviceWithInfo:(SASDeviceType) type
+                         imageFile:(NSString *)file
+                           caption:(NSString *)caption
+                       coordinates:(CLLocationCoordinate2D)coordinates {
+  _type = type;
+  _imageFile = file;
+  _caption = caption;
+  _deviceLocation = coordinates;
   return self;
 }
 
 
-
 - (NSString *)description {
-  NSString *description = [NSString stringWithFormat:@"\nImageURL: %@,\nCaption: %@ ,\nType %d,\nCoordinates \n{ latititude: %f, \n longtitude: %f \n}\n",
-                           self.imageURLString,
+  NSString *description = [NSString stringWithFormat:@"\nImageFile: %@,\nCaption: %@ ,\nType %d,\nCoordinates \n{ latititude: %f, \n longtitude: %f \n}\n",
+                           self.imageFile,
                            self.caption,
                            self.type,
                            self.deviceLocation.latitude,
@@ -37,17 +39,32 @@
 }
 
 
+- (id)copyWithZone:(NSZone *)zone {
+  return [[SASDevice alloc] initDeviceWithInfo:self.type
+                                     imageFile:[self.imageFile copy]
+                                       caption:[self.caption copy]
+                                   coordinates:self.deviceLocation];
+}
+
++ (SASDeviceType)deviceTypeForString:(nonnull NSString *)device {
+  
+  if ([[device lowercaseString] containsString:@"defib"]) {
+    return SASDeviceTypeDefibrillator;
+  } else if ([[device lowercaseString] containsString:@"life"]) {
+    return SASDeviceTypeLifeRing;
+  } else if ([[device lowercaseString] containsString:@"first"]) {
+    return SASDeviceTypeFirstAidKit;
+  } else if ([[device lowercaseString] containsString:@"fire"]) {
+    return SASDeviceTypeFireHydrant;
+  } else {
+    return -1;
+  }
+}
+
 - (NSString*) deviceName {
   return [SASDevice getDeviceNameForDeviceType:self.type];
 }
 
-
-#pragma mark <NSCopying> protocol.
-- (id)copyWithZone:(NSZone *)zone {
-  SASDevice *copy = [self initDeviceWithInformationFromString:self.infoString];
-  return copy;
-  
-}
 
 
 

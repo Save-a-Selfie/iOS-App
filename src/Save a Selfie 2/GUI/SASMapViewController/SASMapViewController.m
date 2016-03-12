@@ -134,17 +134,19 @@ NSString *permissionsProblemText = @"Please enable location services for this ap
 
 - (void)sasMapView:(SASMapView *)mapView usersLocationHasUpdated:(CLLocationCoordinate2D)coordinate {
   
+  static dispatch_once_t token;
+  dispatch_once(&token, ^{
 #warning Add timing capabilities so if no location found all are displayed.
-  self.networkManager = [SASNetworkManager sharedInstance];
-  SASNetworkQuery *query = [SASNetworkQuery queryWithType:SASNetworkQueryTypeAll];
-//  [query setLocationArguments:[self.sasMapView currentUserLocation]];
-  
-  DefaultDownloadWorker *downloadWorker = [[DefaultDownloadWorker alloc] init];
-  
-  [self.networkManager cacheableDownloadWithQuery:query
-                                        forWorker:downloadWorker
-                                            cache:self];
-  
+    self.networkManager = [SASNetworkManager sharedInstance];
+    SASNetworkQuery *query = [SASNetworkQuery queryWithType:SASNetworkQueryTypeAll];
+    //  [query setLocationArguments:[self.sasMapView currentUserLocation]];
+    
+    DefaultDownloadWorker *downloadWorker = [[DefaultDownloadWorker alloc] init];
+    
+    [self.networkManager cacheableDownloadWithQuery:query
+                                          forWorker:downloadWorker
+                                              cache:self];
+  });
 }
 
 #pragma mark <Cacheable>
