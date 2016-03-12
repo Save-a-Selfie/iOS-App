@@ -17,8 +17,9 @@
 #import "SASBarButtonItem.h"
 #import "UIFont+SASFont.h"
 #import "FXAlert.h"
-#import "SDWebImageDownloader.h"
-
+#import <UNIRest.h>
+#import "SASNetworkManager.h"
+#import "DefaultImageDownloader.h"
 
 
 @interface SASImageViewController () <SASMapViewNotifications ,UIScrollViewDelegate> {
@@ -175,7 +176,7 @@
   if(!self.shouldDownloadImage) {
     self.sasImageView.image = self.image;
   }
-  else if (self.device.imageURLString != nil && self.shouldDownloadImage && !imageLoaded) {
+  else if (self.device.imageFile != nil && self.shouldDownloadImage && !imageLoaded) {
     
     // Show activity indicator.
     self.sasActivityIndicator = [[SASActivityIndicator alloc] initWithMessage:@"Loading..."];
@@ -184,25 +185,39 @@
     [self.sasImageView addSubview:self.sasActivityIndicator];
     [self.sasActivityIndicator startAnimating];
     
-    [[SDWebImageDownloader sharedDownloader] downloadImageWithURL:self.device.imageURL
-                                                          options:0
-                                                         progress:nil
-                                                        completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished) {
-                                                          if (image && finished) {
-                                                            
-                                                            dispatch_async(dispatch_get_main_queue(), ^(void){
-                                                              
-                                                              self.sasImageView.image = image;
-
-                                                              
-                                                              [self.sasActivityIndicator stopAnimating];
-                                                              [self.sasActivityIndicator removeFromSuperview];
-                                                              self.sasActivityIndicator = nil;
-                                                              
-                                                              imageLoaded = YES;
-                                                            });
-                                                          }
-                                                        }];
+    SASNetworkManager *networkManager = [SASNetworkManager sharedInstance];
+    DefaultImageDownloader *imageDownloader = [DefaultImageDownloader new];
+    SASNetworkQuery *networkQuery = [SASNetworkQuery queryWithType:SASNetworkQueryImageDownload];
+    [networkQuery setImageArguments:self.device.imageFile];
+    
+    [networkManager downloadImageWithQuery:networkQuery forWorker:imageDownloader completion:^(UIImage *image) {
+      dispatch_async(dispatch_get_main_queue(), ^{
+        self.sasImageView.image = image;
+        [self.sasActivityIndicator stopAnimating];
+        [self.sasActivityIndicator removeFromSuperview];
+        self.sasActivityIndicator = nil;
+        imageLoaded = YES;
+      });
+    }];
+//    [[SDWebImageDownloader sharedDownloader] downloadImageWithURL:self.device.imageURL
+//                                                          options:0
+//                                                         progress:nil
+//                                                        completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished) {
+//                                                          if (image && finished) {
+//                                                            
+//                                                            dispatch_async(dispatch_get_main_queue(), ^(void){
+//                                                              
+//                                                              self.sasImageView.image = image;
+//
+//                                                              
+//                                                              [self.sasActivityIndicator stopAnimating];
+//                                                              [self.sasActivityIndicator removeFromSuperview];
+//                                                              self.sasActivityIndicator = nil;
+//                                                              
+//                                                              imageLoaded = YES;
+//                                                            });
+//                                                          }
+//                                                        }];
   }
 }
 

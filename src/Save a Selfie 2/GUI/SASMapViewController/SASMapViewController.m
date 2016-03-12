@@ -156,7 +156,7 @@ NSString *permissionsProblemText = @"Please enable location services for this ap
   // of the array, as we know its source,
   // however, as we're going to cache it
   // we better make sure it is what we expect. (SASDevice);
-  if (objects) {
+  if (objects && (objects.count > 0)) {
     unsigned long length = objects.count;
 #warning Causes array out of index sometimes: update(Stephen Fox)
     if ([objects[length - 1] isKindOfClass:[SASDevice class]]) {
@@ -187,6 +187,7 @@ NSString *permissionsProblemText = @"Please enable location services for this ap
     [self.sasMapView addAnnotation:[self.sasAppCache cachedAnnotationForKey:key]];
   }
 }
+
 
 #pragma mark <SASMapViewNotifications>
 - (void)sasMapView:(SASMapView *)mapView annotationWasTapped:(SASAnnotation *) annotation {

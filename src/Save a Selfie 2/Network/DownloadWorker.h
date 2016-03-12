@@ -13,14 +13,19 @@
 
 /**
  This protocol should be implemented for downloads from a server.
- The uploading implementation is left to the conforming client.
  */
 @protocol DownloadWorker <NSObject>
 
 typedef void (^DownloadWorkerCompletionBlock)(NSArray <SASDevice *> *result);
 
+typedef void (^DownloadWorkerImageCompletionBlock)(UIImage* image) ;
 
+@optional
 - (void) downloadWithQuery:(SASNetworkQuery *) query
           completionResult:(DownloadWorkerCompletionBlock) completionBlock;
+
+
+- (void) downloadImageWithQuery:(SASNetworkQuery*) query
+          completionResult:(DownloadWorkerImageCompletionBlock) completionBlock;
 
 @end

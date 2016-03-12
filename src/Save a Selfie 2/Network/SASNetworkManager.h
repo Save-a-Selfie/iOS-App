@@ -95,4 +95,18 @@
                completion:(SignUpWorkerCompletionBlock) completion;
 
 
+/**
+ Attempts to downloads an image from a network call
+ implemented by some DownloadWorker object.
+ 
+ @param query The query used for downloading.
+ @param worker The object implementing the networking.
+ @param completion A block thats called upon completion.
+ 
+ */
+- (void) downloadImageWithQuery:(SASNetworkQuery*) query
+                      forWorker:(id<DownloadWorker>) worker
+                     completion:(DownloadWorkerImageCompletionBlock) completion;
+
+
 @end

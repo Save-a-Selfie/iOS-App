@@ -52,5 +52,12 @@
   [signUpWorker signupWithCompletionBlock:completion];
 }
 
+
+- (void) downloadImageWithQuery:(SASNetworkQuery *)query
+                      forWorker:(id<DownloadWorker>)worker
+                     completion:(DownloadWorkerImageCompletionBlock)completion {
+  [worker downloadImageWithQuery:query completionResult:completion];
+}
+
 @end
 

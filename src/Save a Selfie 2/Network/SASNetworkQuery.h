@@ -11,7 +11,8 @@
 
 typedef NS_ENUM(NSUInteger, SASNetworkQueryType) {
   SASNetworkQueryTypeAll,
-  SASNetworkQueryTypeClosest // The closest devices to the user.
+  SASNetworkQueryTypeClosest, // The closest devices to the user.
+  SASNetworkQueryImageDownload // A images download query.
 };
 
 /**
@@ -38,6 +39,13 @@ typedef NS_ENUM(NSUInteger, SASNetworkQueryType) {
  */
 - (void) setLocationArguments:(CLLocationCoordinate2D) coordinates;
 
+/**
+ Sets the image path to an image for downloading.
+*/
+- (void) setImageArguments:(NSString*) image;
+
+
+- (NSString*) imageArguments;
 
 /**
  The coordinates for a query.*/

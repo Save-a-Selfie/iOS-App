@@ -97,7 +97,7 @@ NSString* const GET_ALL_SELFIES_URL = @"https://guarded-mountain-99906.herokuapp
     
     SASDeviceType deviceType = [SASDevice deviceTypeForString:[jsonDevice objectForKey:@"aid_type"]];
     NSString *imageFile = [jsonDevice objectForKey:@"file"];
-    
+    NSString *caption = [jsonDevice objectForKey:@"description"];
     NSString *lat = [jsonDevice objectForKey:@"lat"];
     NSString *long_ = [jsonDevice objectForKey:@"lng"];
     
@@ -105,7 +105,7 @@ NSString* const GET_ALL_SELFIES_URL = @"https://guarded-mountain-99906.herokuapp
     CLLocationCoordinate2DMake([lat doubleValue], [long_ doubleValue]);
     SASDevice *sasDevice = [[SASDevice alloc] initDeviceWithInfo:deviceType
                                                        imageFile:imageFile
-                                                         caption:@"HELLO DARKNESS"
+                                                         caption:caption
                                                      coordinates:coordinates];
     [devices addObject:sasDevice];
   }
