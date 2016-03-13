@@ -32,36 +32,40 @@ BOOL NSLogOn = NO; // YES to show logs, NO if not
 - (BOOL)application:(UIApplication *)application
 didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
   
+  // This must be done for proper use of FBSDK. See documentation.
+  BOOL r = [[FBSDKApplicationDelegate sharedInstance] application:application
+                                    didFinishLaunchingWithOptions:launchOptions];
+  
   // Check if logged into facebook already.
   if (![FBSDKAccessToken currentAccessToken]) {
+    self.fbViewController = [[SASFacebookLoginViewController alloc]
+                             initWithFBLoginButton:self.fbLoginButton];
+    self.window.rootViewController = self.fbViewController;
+    
     self.fbLoginButton = [[FBSDKLoginButton alloc] init];
     self.fbLoginButton.readPermissions = @[@"public_profile", @"email"];
     self.fbLoginButton.loginBehavior = FBSDKLoginBehaviorNative;
     self.fbLoginButton.delegate = self;
-    self.fbViewController = [[SASFacebookLoginViewController alloc]
-                             initWithFBLoginButton:self.fbLoginButton];
-    self.window.rootViewController = self.fbViewController;
   }
   else {
     [self presentSASMapViewController];
   }
-  return YES;
+  return r;
 }
+
 
 
 - (void)loginButton:(FBSDKLoginButton *)loginButton
 didCompleteWithResult:(FBSDKLoginManagerLoginResult *)result error:(NSError *)error {
   if (error) {
-    [self displayFBLoginErrorAlert];
+    [self presentAlertView:@"There was a problem logging into Facebook."];
   }
-  else if (result.isCancelled) {
-    
-  }
+  else if (result.isCancelled) { }
   else {
     // Make sure we have access to all info we need.
     if (![[FBSDKAccessToken currentAccessToken] hasGranted:@"public_profile"] ||
         ![[FBSDKAccessToken currentAccessToken] hasGranted:@"email"]) {
-      [self displayFBLoginErrorAlert];
+      [self presentAlertView:@"There was a problem logging into Facebook."];
       return;
     }
     
@@ -70,17 +74,20 @@ didCompleteWithResult:(FBSDKLoginManagerLoginResult *)result error:(NSError *)er
     [signupWorker setParam:@{@"fields" : @"id,name,email,picture"}];
     
     SASNetworkManager *networkManager = [SASNetworkManager sharedInstance];
-    [networkManager signUpWithWorker:signupWorker completion:^(NSError *error) {
-      // Successfully signed up.
-      if (error == nil) {
-        [self presentSASMapViewController];
-      }
-      else if (error.code == 999) {
-        FXAlertController *signupFailure = [[FXAlertController alloc] init];
-        FXAlertButton *ok = [[FXAlertButton alloc] initWithType:FXAlertButtonTypeCancel];
-        [ok setTitle:@"Ok" forState:UIControlStateNormal];
-        [signupFailure addButton:ok];
-        [self.window.rootViewController presentViewController:signupFailure animated:YES completion: nil];
+    [networkManager signUpWithWorker:signupWorker completion:^(NSString *email, NSString *token, SignUpWorkerResponse response) {
+      switch (response) {
+        case SignUpWorkerResponseFailed:
+          [self presentAlertView:@"There was a problem trying to sign you up."];
+          break;
+        case SignUpWorkerResponseUserExists:
+          // See if that user has an associated SASUser with this device.
+          break;
+        case SignUpWorkerResponseSuccess:
+          // Create SASUser for the new user.
+          break;
+          
+        default:
+          break;
       }
     }];
   }
@@ -95,12 +102,12 @@ didCompleteWithResult:(FBSDKLoginManagerLoginResult *)result error:(NSError *)er
 }
 
 
-- (void) displayFBLoginErrorAlert {
-  FXAlertController *alertView = [[FXAlertController alloc] initWithTitle:@"Failed"
-                                                                  message:@"There was a problem trying to log you into facebook."];
-  FXAlertButton *okButton = [[FXAlertButton alloc] initWithType:FXAlertButtonTypeStandard];
-  [alertView addButton:okButton];
-  [self.window.rootViewController presentViewController:alertView animated:YES completion:nil];
+
+- (void) presentAlertView:(NSString*) message {
+  FXAlertController *alertController = [[FXAlertController alloc] initWithTitle:@"Error" message:message];
+  FXAlertButton *button = [[FXAlertButton alloc] init];
+  [button setTitle:@"Ok" forState:UIControlStateNormal];
+  [self.window.rootViewController presentViewController:alertController animated:YES completion:nil];
 }
 
 

@@ -8,10 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+typedef NS_ENUM(NSUInteger, SignUpWorkerResponse) {
+  SignUpWorkerResponseUserExists = 101,
+  SignUpWorkerResponseSuccess = 103,
+  SignUpWorkerResponseFailed = 102,
+};
 
 @protocol SignUpWorker <NSObject>
 
-typedef void (^SignUpWorkerCompletionBlock)(NSError * error);
+typedef void (^SignUpWorkerCompletionBlock)(NSString *email, NSString *token, SignUpWorkerResponse response);
 
 
 // Usually there will be some parameters to be used

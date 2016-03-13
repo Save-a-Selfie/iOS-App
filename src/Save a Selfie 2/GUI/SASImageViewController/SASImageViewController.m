@@ -199,25 +199,6 @@
         imageLoaded = YES;
       });
     }];
-//    [[SDWebImageDownloader sharedDownloader] downloadImageWithURL:self.device.imageURL
-//                                                          options:0
-//                                                         progress:nil
-//                                                        completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished) {
-//                                                          if (image && finished) {
-//                                                            
-//                                                            dispatch_async(dispatch_get_main_queue(), ^(void){
-//                                                              
-//                                                              self.sasImageView.image = image;
-//
-//                                                              
-//                                                              [self.sasActivityIndicator stopAnimating];
-//                                                              [self.sasActivityIndicator removeFromSuperview];
-//                                                              self.sasActivityIndicator = nil;
-//                                                              
-//                                                              imageLoaded = YES;
-//                                                            });
-//                                                          }
-//                                                        }];
   }
 }
 

@@ -32,6 +32,7 @@
 
 #import "SASNetworkManager.h"
 #import "SASAppUserDefaults.h"
+#import "DefaultUploadWorker.h"
 
 
 
@@ -170,32 +171,20 @@ SASDeviceButtonViewDelegate>
     [self showAlertForEULAToBeAccepted];
   }
   else {
-    
-#pragma mark SASUploadObject timestamp set here.
-    self.sasUploadObject.timeStamp = [SASUtilities getCurrentTimeStamp];
-    
-#pragma mark UUID set here.
-    self.sasUploadObject.UUID = [NSUUID UUID].UUIDString;
-    
     if (!self.networkManager) {
       self.networkManager = [SASNetworkManager sharedInstance];
     }
     
     // Checks that everything is correct.
+    SASNetworkManager *networkManager = [SASNetworkManager sharedInstance];
+    DefaultUploadWorker *uploadWorker = [[DefaultUploadWorker alloc] init];
+    
+
     [self preUploadChecks: ^(){
-//      [self.networkManager uploadWithWorker:[[ParseUploadWorker alloc] init]
-//                                 withObject:self.sasUploadObject
-//                                 completion:^(UploadCompletionStatus status) {
-//                                   switch (status) {
-//                                     case Failed:
-//                                       [self uploadFailure];
-//                                       break;
-//                                       case Success:
-//                                       [self uploadSuccess];
-//                                       break;
-//                                   }
-//                                 }];
       [self uploadBegan];
+      [networkManager uploadWithWorker:uploadWorker withObject:self.sasUploadObject completion:^(UploadCompletionStatus completion) {
+        
+      }];
     }];
   }
 }
@@ -229,8 +218,8 @@ SASDeviceButtonViewDelegate>
   self.doneButton.enabled = YES;
   
   FXAlertController *uploadErrorAlert =
-    [[FXAlertController alloc] initWithTitle:@"OOOPS!"
-                                     message:@"There seemed to be a problem posting! Please check you're connected to Wifi/ Network and try again."];
+  [[FXAlertController alloc] initWithTitle:@"OOOPS!"
+                                   message:@"There seemed to be a problem posting! Please check you're connected to Wifi/ Network and try again."];
   
   FXAlertButton *okButton = [[FXAlertButton alloc] initWithType:FXAlertButtonTypeCancel];
   [okButton setTitle:@"Ok" forState:UIControlStateNormal];
@@ -264,7 +253,7 @@ SASDeviceButtonViewDelegate>
     return;
   }
   
-
+  
   if (!self.deviceHasBeenSelected) {
     invalidUploadObjectAlert = [[FXAlertController alloc] initWithTitle:@"OOOPS!"
                                                                 message:@"Please select a device for this post!"];
@@ -275,7 +264,7 @@ SASDeviceButtonViewDelegate>
     return;
   }
   
-
+  
   if (!CLLocationCoordinate2DIsValid(self.sasUploadObject.coordinates)) {
     invalidUploadObjectAlert = [[FXAlertController alloc] initWithTitle:@"OOOPS!"
                                                                 message:@"Cannot determine location. Please select the map and tap the location of the device"];

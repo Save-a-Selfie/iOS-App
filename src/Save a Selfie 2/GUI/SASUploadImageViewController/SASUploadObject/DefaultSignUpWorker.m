@@ -89,23 +89,24 @@ NSString* const SIGN_UP_URL = @"https://guarded-mountain-99906.herokuapp.com/sig
     NSDictionary *jsonResponseMessage = [SASJSONParser parseSignUpResponse:jsonResponse.body.object];
     NSString *userToken = [jsonResponseMessage objectForKey:@"token"];
 #pragma warning: check this status.
-    NSString *insertStatus = [jsonResponseMessage objectForKey:@"insert_status"];
-    
+    NSNumber *insertStatus = [jsonResponseMessage objectForKey:@"insert_status"];
     
     dispatch_async(dispatch_get_main_queue(), ^{
-      if (userToken == nil) {
-        NSError *errorOccurred = [NSError
-                                  errorWithDomain:@"Error with receiving token from sas server."
-                                  code:999
-                                  userInfo:nil];
-        self.block(errorOccurred);
-      } else {
-#pragma warning: AddUserToken forUser:  so its user specific.
-        SASUser *sasUser = [SASUser currentUser];
-        [sasUser setToken:userToken];
-        
-        // No error occurred.
-        self.block(nil);
+      
+      SignUpWorkerCompletionBlock block = self.block;
+      
+      // User already exists.
+      if (insertStatus.integerValue == 101) {
+        self.block = nil;
+        block(self.email, userToken, SignUpWorkerResponseUserExists);
+      }
+      else if (insertStatus.integerValue == 102) { // Failed
+        self.block = nil;
+        block(self.email, nil, SignUpWorkerResponseFailed);
+      }
+      else if (insertStatus.integerValue == 103) {
+        self.block = nil;
+        block(self.email, userToken, SignUpWorkerResponseSuccess);
       }
     });
   }];
