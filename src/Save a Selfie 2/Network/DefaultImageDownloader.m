@@ -33,8 +33,8 @@ NSString* const GET_IMAGE_URL = @"https://guarded-mountain-99906.herokuapp.com/g
 
 - (void) downloadImage:(DownloadWorkerImageCompletionBlock) completionBlock {
   [[UNIRest get:^(UNISimpleRequest *simpleRequest) {
-    SASUser *sasUser = [SASUser currentUser];
-    NSString *token = [sasUser token];
+    NSDictionary *userInfo = [SASUser currentLoggedUser];
+    NSString *token = [userInfo objectForKey:USER_DICT_TOKEN];
     NSString *tokenFormat = [NSString stringWithFormat:@"Bearer %@", token];
     
     // Append image file path to url.

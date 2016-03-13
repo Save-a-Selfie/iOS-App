@@ -39,8 +39,8 @@ NSString* const UPLOAD_IMAGE_URL  = @"https://guarded-mountain-99906.herokuapp.c
 
 - (void) upload:(SASNetworkObject*) uploadObject completion:(UploadCompletionBlock) completion {
   [[UNIRest post:^(UNISimpleRequest *simpleRequest) {
-    SASUser *sasUser = [SASUser currentUser];
-    NSString *token = [sasUser token];
+    NSDictionary *userInfo = [SASUser currentLoggedUser];
+    NSString *token = [userInfo objectForKey:USER_DICT_TOKEN];
     NSString *tokenFormat = [NSString stringWithFormat:@"Bearer %@", token];
     
     

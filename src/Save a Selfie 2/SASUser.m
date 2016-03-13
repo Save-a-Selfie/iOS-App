@@ -7,42 +7,48 @@
 //
 
 #import "SASUser.h"
+#import "SASAppSharedPreferences.h"
 
 /**
- While the FBSDK has record of a user
+ While the FBSDK or Twitter has record of a user
  logged in, it does not store information
  about users on the Save a Selfie backend.
  This is what this class is for.
- */
+*/
 
-@interface SASUser ()
 
-@property (strong, nonatomic) NSString *token;
-
-@end
 
 @implementation SASUser
 
-@synthesize token = _token;
+const NSString *USER_DICT_EMAIL = @"saveaselfie_email";
+const NSString *USER_DICT_TOKEN = @"saveaselfie_token";
 
-+ (SASUser *)currentUser {
-  static dispatch_once_t token;
-  static SASUser *sharedInstance;
++ (void)setCurrentLoggedUser:(NSString *)token withEmail:(NSString *)email {
+  // Set the current logged in user.
+  [SASAppSharedPreferences setCurrentLoggedUserEmail:email];
   
-  dispatch_once(&token, ^{
-    sharedInstance = [[self alloc] init];
-  });
-  return sharedInstance;
+  // Store that user to the device (keychain).
+  [SASAppSharedPreferences addUserToken:token withEmail:email];
+  
 }
 
 
-- (void) setToken:(NSString*) token {
-  _token = token;
++ (NSDictionary *)currentLoggedUser {
+  // Current logged in user's email.
+  NSString *email = [SASAppSharedPreferences currentLoggedInUserEmail];
+  NSString *token = [SASAppSharedPreferences userTokenWithEmail:email];
+  
+  NSMutableDictionary *userDict = [[NSMutableDictionary alloc] init];
+  [userDict setObject:email forKey:USER_DICT_EMAIL];
+  [userDict setObject:token forKey:USER_DICT_TOKEN];
+  
+  return [userDict mutableCopy];
+}
+
++ (void)removeCurrentLoggedUser {
+  [SASAppSharedPreferences removeUserInformation];
 }
 
 
-- (NSString *)token {
-  return _token;
-}
 
 @end

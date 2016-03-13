@@ -9,7 +9,6 @@
 #import "SASGalleryCollectionViewController.h"
 #import "SASGalleryContainer.h"
 #import "SASDevice.h"
-#import <SDWebImageDownloader.h>
 #import "SASGalleryCell.h"
 #import "SASImageViewController.h"
 #import "UIDevice+DeviceName.h"

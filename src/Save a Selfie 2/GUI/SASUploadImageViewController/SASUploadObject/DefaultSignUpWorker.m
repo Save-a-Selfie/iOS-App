@@ -9,7 +9,7 @@
 #import "DefaultSignUpWorker.h"
 #import <UNIRest.h>
 #import "SASLocation.h"
-#import "SASAppUserDefaults.h"
+#import "SASAppSharedPreferences.h"
 #import "SASUser.h"
 #import "SASJSONParser.h"
 
@@ -47,7 +47,7 @@ NSString* const SIGN_UP_URL = @"https://guarded-mountain-99906.herokuapp.com/sig
     _coordinates = kCLLocationCoordinate2DInvalid;
     _sasLocation = [[SASLocation alloc] init];
     _sasLocation.delegate = self;
-    [_sasLocation startUpdatingUsersLocation];
+    //[_sasLocation startUpdatingUsersLocation];
     
   }
   return self;
@@ -61,9 +61,7 @@ NSString* const SIGN_UP_URL = @"https://guarded-mountain-99906.herokuapp.com/sig
   
   // Extract Facebook info.
   [self extractFBSDKInfo:^(BOOL completion) {
-    if (self.geolocationSucceeded) {
-      [self signup];
-    }
+    [self signup];
   }];
 }
 
@@ -79,10 +77,10 @@ NSString* const SIGN_UP_URL = @"https://guarded-mountain-99906.herokuapp.com/sig
     [simpleRequest setUrl:SIGN_UP_URL];
     [simpleRequest setHeaders:@{@"accept": @"application/json" }];
     [simpleRequest setParameters:@{@"name": self.name,
-                                   @"email": self.email,
-                                   @"add": self.address,
-                                   @"area": self.area,
-                                   @"country": self.country,
+                                   @"email": @"",
+                                   @"add": @"",
+                                   @"area": @"",
+                                   @"country": @"",
                                    @"file": self.picture}];
   }] asJsonAsync:^(UNIHTTPJsonResponse *jsonResponse, NSError *error) {
     // Parse out the json.
@@ -134,6 +132,7 @@ NSString* const SIGN_UP_URL = @"https://guarded-mountain-99906.herokuapp.com/sig
       //self.picture = [[NSData dataWithContentsOfURL:picUrl] base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
       
       self.fbInfoExtracted = YES;
+      completion(YES);
     }
   }];
 }
@@ -156,6 +155,7 @@ NSString* const SIGN_UP_URL = @"https://guarded-mountain-99906.herokuapp.com/sig
  This begins the process of reverse geolocating the coordinates.
  */
 - (void) setLocationProperties:(CLLocationCoordinate2D) location {
+  if ([self.sasLocation canStartLocating]) {}
   [self.sasLocation beginReverseGeolocationUpdate:self.coordinates withUpdate:^(CLPlacemark *placeMark, NSError *error) {
     
     if (error) {

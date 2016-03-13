@@ -10,22 +10,30 @@
 
 /**
  A Singleton class representing information
- on the current, logged on user.
+ on users and they're respetive tokens for
+ requesting information from the save a selfie
+ backend.
  */
 @interface SASUser : NSObject
 
+extern const NSString* USER_DICT_EMAIL; // Key for user's email.
+extern const NSString* USER_DICT_TOKEN; // Key for user's token.
 
-+ (SASUser*) currentUser;
 
-
-/**
- Sets the currently logged in user token.
- */
-- (void) setToken:(NSString*) token;
++ (void) setCurrentLoggedUser:(NSString*) token withEmail:(NSString*)email;
 
 
 /**
- Gets the token
- */
-- (NSString*) token;
+ Returns information on the current logged on user.
+ 
+ To access the infomation use:
+  USER_DICT_EMAIL: Key for user's email.
+  USER_DICT_TOKEN: Key for user's token.
+  */
++ (NSDictionary*) currentLoggedUser;
+
+
++ (void) removeCurrentLoggedUser;
+
+
 @end

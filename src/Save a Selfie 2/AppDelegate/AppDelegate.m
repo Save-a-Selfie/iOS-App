@@ -1,3 +1,4 @@
+
 //
 //  AppDelegate.m
 //  Save a Selfie 2
@@ -7,13 +8,13 @@
 //
 
 #import "AppDelegate.h"
-#import "SASAppUserDefaults.h"
+#import "SASAppSharedPreferences.h"
 #import "SASFacebookLoginViewController.h"
 #import "SASMapViewController.h"
 #import "FXAlert.h"
 #import "SASNetworkManager.h"
 #include "DefaultSignUpWorker.h"
-
+#include "SASUser.h"
 
 @interface AppDelegate () <FBSDKLoginButtonDelegate>
 
@@ -27,7 +28,7 @@
 
 UIFont *customFont, *customFontSmaller;
 
-BOOL NSLogOn = NO; // YES to show logs, NO if not
+BOOL NSLogOn = NO; // YES to show logs, NO if not.
 
 - (BOOL)application:(UIApplication *)application
 didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
@@ -38,14 +39,13 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
   
   // Check if logged into facebook already.
   if (![FBSDKAccessToken currentAccessToken]) {
-    self.fbViewController = [[SASFacebookLoginViewController alloc]
-                             initWithFBLoginButton:self.fbLoginButton];
-    self.window.rootViewController = self.fbViewController;
-    
     self.fbLoginButton = [[FBSDKLoginButton alloc] init];
     self.fbLoginButton.readPermissions = @[@"public_profile", @"email"];
     self.fbLoginButton.loginBehavior = FBSDKLoginBehaviorNative;
     self.fbLoginButton.delegate = self;
+    self.fbViewController = [[SASFacebookLoginViewController alloc]
+                             initWithFBLoginButton:self.fbLoginButton];
+    self.window.rootViewController = self.fbViewController;
   }
   else {
     [self presentSASMapViewController];
@@ -61,13 +61,11 @@ didCompleteWithResult:(FBSDKLoginManagerLoginResult *)result error:(NSError *)er
     [self presentAlertView:@"There was a problem logging into Facebook."];
   }
   else if (result.isCancelled) { }
-  else {
-    // Make sure we have access to all info we need.
-    if (![[FBSDKAccessToken currentAccessToken] hasGranted:@"public_profile"] ||
-        ![[FBSDKAccessToken currentAccessToken] hasGranted:@"email"]) {
-      [self presentAlertView:@"There was a problem logging into Facebook."];
-      return;
-    }
+  // Make sure we have access to all info we need.
+  else if (![[FBSDKAccessToken currentAccessToken] hasGranted:@"public_profile"] ||
+           ![[FBSDKAccessToken currentAccessToken] hasGranted:@"email"]) {
+    [self presentAlertView:@"There was a problem logging into Facebook."];
+  } else {
     
     // Signup user to save a selfie server.
     DefaultSignUpWorker *signupWorker = [[DefaultSignUpWorker alloc] init];
@@ -75,23 +73,31 @@ didCompleteWithResult:(FBSDKLoginManagerLoginResult *)result error:(NSError *)er
     
     SASNetworkManager *networkManager = [SASNetworkManager sharedInstance];
     [networkManager signUpWithWorker:signupWorker completion:^(NSString *email, NSString *token, SignUpWorkerResponse response) {
+      NSLog(@"");
       switch (response) {
         case SignUpWorkerResponseFailed:
           [self presentAlertView:@"There was a problem trying to sign you up."];
           break;
         case SignUpWorkerResponseUserExists:
-          // See if that user has an associated SASUser with this device.
+          NSLog(@"User exists but we should sign them in now");
+          // User's already signed up; Sign them in.
+          [SASUser setCurrentLoggedUser:token withEmail:email];
+          // Now let user into app.
+          [self presentSASMapViewController];
           break;
         case SignUpWorkerResponseSuccess:
-          // Create SASUser for the new user.
+          // New account. Sign them in.
+          [SASUser setCurrentLoggedUser:token withEmail:email];
+          // Now let user into app.
+          [self presentSASMapViewController];
           break;
-          
         default:
           break;
-      }
-    }];
+      }}];
   }
 }
+
+
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
@@ -107,6 +113,7 @@ didCompleteWithResult:(FBSDKLoginManagerLoginResult *)result error:(NSError *)er
   FXAlertController *alertController = [[FXAlertController alloc] initWithTitle:@"Error" message:message];
   FXAlertButton *button = [[FXAlertButton alloc] init];
   [button setTitle:@"Ok" forState:UIControlStateNormal];
+  [alertController addButton:button];
   [self.window.rootViewController presentViewController:alertController animated:YES completion:nil];
 }
 
@@ -119,6 +126,8 @@ didCompleteWithResult:(FBSDKLoginManagerLoginResult *)result error:(NSError *)er
 }
 
 - (void)loginButtonDidLogOut:(FBSDKLoginButton *)loginButton {
+  // Remove the current logged in user.
+  [SASUser removeCurrentLoggedUser];
 }
 
 

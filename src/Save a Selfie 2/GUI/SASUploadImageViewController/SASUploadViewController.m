@@ -31,7 +31,7 @@
 #import "SASDeviceButtonView.h"
 
 #import "SASNetworkManager.h"
-#import "SASAppUserDefaults.h"
+#import "SASAppSharedPreferences.h"
 #import "DefaultUploadWorker.h"
 
 

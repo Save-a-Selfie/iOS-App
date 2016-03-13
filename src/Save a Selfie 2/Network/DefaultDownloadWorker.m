@@ -58,9 +58,9 @@ NSString* const GET_ALL_SELFIES_URL = @"https://guarded-mountain-99906.herokuapp
 // Downloads all the 'selfies' from the server.
 - (void) downloadAllDevicesFromServer: (DownloadWorkerCompletionBlock) completionHandler {
   [[UNIRest get:^(UNISimpleRequest *simpleRequest) {
+    NSDictionary *userInfo = [SASUser currentLoggedUser];
+    NSString *token = [userInfo objectForKey:USER_DICT_TOKEN];
     
-    SASUser *sasUser = [SASUser currentUser];
-    NSString *token = [sasUser token];
     NSString *tokenFormat = [NSString stringWithFormat:@"Bearer %@", token];
     
     [simpleRequest setUrl:GET_ALL_SELFIES_URL];

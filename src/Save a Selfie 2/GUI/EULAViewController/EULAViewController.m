@@ -7,7 +7,7 @@
 #import "StorageSystem.h"
 #import "UIView+NibInitializer.h"
 #import "ExtendNSLogFunctionality.h"
-#import "SASAppUserDefaults.h"
+#import "SASAppSharedPreferences.h"
 
 #define DATAFILE @"EULA.html"
 #define ROOT @"http://www.saveaselfie.org/SASDocs/"
@@ -83,11 +83,11 @@
   if (sender.selectedSegmentIndex == 0) {
     
     response = EULAResponseAccepted;
-    [SASAppUserDefaults addValueForEULAAccepted:@"yes"];;
+    [SASAppSharedPreferences addValueForEULAAccepted:@"yes"];;
   } else {
     
     response = EULAResponseDeclined;
-    [SASAppUserDefaults addValueForEULAAccepted:@"no"];
+    [SASAppSharedPreferences addValueForEULAAccepted:@"no"];
   }
   
   // Forward to delegate

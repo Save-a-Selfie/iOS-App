@@ -11,20 +11,16 @@ PODS:
     - FBSDKCoreKit
   - FBSDKShareKit (4.10.0):
     - FBSDKCoreKit
+  - FXKeychain (1.5.3)
   - MBProgressHUD (0.9.1)
-  - SBJson (4.0.2)
-  - SDWebImage (3.7.3):
-    - SDWebImage/Core (= 3.7.3)
-  - SDWebImage/Core (3.7.3)
   - Unirest (1.1.4)
 
 DEPENDENCIES:
   - FBSDKCoreKit
   - FBSDKLoginKit
   - FBSDKShareKit
+  - FXKeychain (~> 1.5)
   - MBProgressHUD (~> 0.9.1)
-  - SBJson (~> 4.0.1)
-  - SDWebImage (~> 3.6)
   - Unirest (~> 1.1.4)
 
 SPEC CHECKSUMS:
@@ -32,9 +28,8 @@ SPEC CHECKSUMS:
   FBSDKCoreKit: 13bec8373fb3af94d44daf2aa1e0958687897fbd
   FBSDKLoginKit: d3d4a2e9d31954deb00bfea964167a05ca1ea976
   FBSDKShareKit: 54587b4624706ace1e810cf83412a918141f807a
+  FXKeychain: 2fe54573946ffef634f4e2a2851e6c8f4ea15e76
   MBProgressHUD: c47f2c166c126cf2ce36498d80f33e754d4e93ad
-  SBJson: c18691cc18375b14664ff0fec841f8c4faef1934
-  SDWebImage: 1d2b1a1efda1ade1b00b6f8498865f8ddedc8a84
   Unirest: 5e4d93eaf32463bf619a4ecd3bbc8c32acf21eac
 
 COCOAPODS: 0.39.0
