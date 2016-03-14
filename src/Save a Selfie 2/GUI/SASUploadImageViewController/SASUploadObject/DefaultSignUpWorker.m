@@ -12,8 +12,11 @@
 #import "SASAppSharedPreferences.h"
 #import "SASUser.h"
 #import "SASJSONParser.h"
+#import <Fabric/Fabric.h>
+#import <TwitterKit/TwitterKit.h>
+#import "AppDelegate.h"
 
-@interface DefaultSignUpWorker() <SASLocationDelegate>
+@interface DefaultSignUpWorker()
 
 
 @property (strong, nonatomic) NSString *name;
@@ -34,7 +37,8 @@
 
 @implementation DefaultSignUpWorker
 
-@synthesize param = _param;
+@synthesize faceBookParam = _faceBookParam;
+@synthesize twitterParam = _twitterParam;
 
 NSString* const SIGN_UP_URL = @"https://guarded-mountain-99906.herokuapp.com/signup";
 
@@ -44,10 +48,6 @@ NSString* const SIGN_UP_URL = @"https://guarded-mountain-99906.herokuapp.com/sig
   self = [super init];
   if (self) {
     
-    _coordinates = kCLLocationCoordinate2DInvalid;
-    _sasLocation = [[SASLocation alloc] init];
-    _sasLocation.delegate = self;
-    //[_sasLocation startUpdatingUsersLocation];
     
   }
   return self;
@@ -56,13 +56,39 @@ NSString* const SIGN_UP_URL = @"https://guarded-mountain-99906.herokuapp.com/sig
 
 #pragma mark SignUpWorker.h protocol method.
 - (void)signupWithCompletionBlock:(SignUpWorkerCompletionBlock) completion {
-  // Reference the completion block so we can call later.
+  // Reference the completion block so we can call later, if needed.
   self.block = completion;
   
-  // Extract Facebook info.
-  [self extractFBSDKInfo:^(BOOL completion) {
-    [self signup];
-  }];
+  // If facebook params are set then
+  // we take info from Facebook.
+  if (self.faceBookParam) {
+    // Extract Facebook info.
+    [self extractFBSDKInfo:^(BOOL comp) {
+      if (!comp) {
+        self.block = nil;
+        completion(nil, nil, SignUpWorkerResponseFailed);
+      } else {
+        [self signup];
+      }
+    }];
+  } else if (self.twitterParam) {
+    // Extract Twitter info.
+    [self extractTWTRSDKInfo:^(BOOL comp) {
+      if (!comp) {
+        self.block = nil;
+        completion(nil, nil, SignUpWorkerResponseFailed);
+      } else {
+        [self signup];
+      }
+    }];
+  } else {
+    // If either Facebook or Twitter params
+    // we're not set then we message caller
+    // that an error occurred.
+    self.block = nil;
+    completion(nil, nil, SignUpWorkerResponseFailed);
+  }
+  
 }
 
 
@@ -110,13 +136,38 @@ NSString* const SIGN_UP_URL = @"https://guarded-mountain-99906.herokuapp.com/sig
   }];
 }
 
+/**
+ Get info from twitter.
+ */
+- (void) extractTWTRSDKInfo:(void(^)(BOOL completion)) completion {
+  NSString* twtrUserID = [self.twitterParam objectForKey:@"userId"];
+  
+  TWTRAPIClient *twtrApiClient = [[TWTRAPIClient alloc] initWithUserID:twtrUserID];
+  [twtrApiClient loadUserWithID:twtrUserID completion:^(TWTRUser *user, NSError *error) {
+    if (user) {
+      self.name = user.name;
+      // Now get email.
+      TWTRShareEmailViewController *v = [[TWTRShareEmailViewController alloc] initWithUserID:twtrUserID completion:^(NSString *email, NSError *error) {
+        if (email) {
+          self.email = email;
+          completion(YES);
+        } else {
+          completion(NO);
+        }
+      }];
+      [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:v animated:YES completion:nil];
+    } else {
+      completion(NO);
+    }
+  }];
+}
 
 /**
  Get info like email name etc from Facebook.
  */
 - (void) extractFBSDKInfo:(void(^)(BOOL completion)) completion {
   FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc]
-                                initWithGraphPath:@"me" parameters:self.param];
+                                initWithGraphPath:@"me" parameters:self.faceBookParam];
   [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
     if ([result isKindOfClass:[NSDictionary class]]) {
       self.name = [result objectForKey:@"name"];
@@ -133,56 +184,19 @@ NSString* const SIGN_UP_URL = @"https://guarded-mountain-99906.herokuapp.com/sig
       
       self.fbInfoExtracted = YES;
       completion(YES);
-    }
-  }];
-}
-
-
-#pragma mark <SASLocationDelegate>
-- (void)sasLocation:(SASLocation *)sasLocation locationDidUpdate:(CLLocationCoordinate2D)location {
-  
-  // Check validity of coordinates.
-  if (CLLocationCoordinate2DIsValid(location)) {
-    self.coordinates = location;
-    
-    // Once we have the location info extract all the facebook info.
-    [self setLocationProperties:self.coordinates];
-  }
-}
-
-
-/**
- This begins the process of reverse geolocating the coordinates.
- */
-- (void) setLocationProperties:(CLLocationCoordinate2D) location {
-  if ([self.sasLocation canStartLocating]) {}
-  [self.sasLocation beginReverseGeolocationUpdate:self.coordinates withUpdate:^(CLPlacemark *placeMark, NSError *error) {
-    
-    if (error) {
-      NSLog(@"An error with geolocation occurred.\n");
-      self.geolocationSucceeded = NO;
-      
     } else {
-      self.address = placeMark.name;
-      self.country = placeMark.country;
-      self.area = placeMark.thoroughfare;
-      self.geolocationSucceeded = YES;
-    }
-    
-    // If location information is set before
-    // fb info is extracted then this will
-    // cause us to wait until that is done.
-    if (self.fbInfoExtracted && self.geolocationSucceeded) {
-      [self signup];
-      // We don't need location reference no more.
-      self.sasLocation.delegate = nil;
-      self.sasLocation = nil;
+      completion(NO);
     }
   }];
 }
 
 
-- (void)setParam:(NSDictionary *)param {
-  _param = param;
+- (void)setFaceBookParam:(NSDictionary *)faceBookParam {
+  _faceBookParam = faceBookParam;
+}
+
+
+- (void)setTwitterParam:(NSDictionary *)twitterParam {
+  _twitterParam = twitterParam;
 }
 @end

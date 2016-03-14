@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import <TwitterKit/TwitterKit.h>
 
 @interface SASSocialMediaLoginViewController : UIViewController
 
@@ -16,5 +16,7 @@
  Adds all the respective social media buttons to the 
  view controller's view.*/
 - (instancetype) initWithSocialMediaButtons:(NSArray*) buttons;
+
+
 
 @end

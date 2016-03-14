@@ -10,7 +10,7 @@
 #import "SASSocialMediaLoginViewController.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
-#import <TwitterKit/TwitterKit.h>
+
 
 @interface SASSocialMediaLoginViewController ()
 
@@ -33,21 +33,22 @@
 
 - (void) layoutButtons:(NSArray*) buttons {
   for (NSObject *button in buttons) {
-    if ([button isKindOfClass:[TWTRLogInButton class]]) { // Add twitter login button.
+    if ([button isKindOfClass:[FBSDKLoginButton class]]) { // Add Facebook login.
+      self.fbLoginButton = (FBSDKLoginButton*)button;
+      self.fbLoginButton.center = self.view.center;
+      [self.view addSubview:self.fbLoginButton];
+    }
+    else if ([button isKindOfClass:[TWTRLogInButton class]]) { // Add twitter login button.
       self.twtrLoginButton = (TWTRLogInButton*)button;
       // Position in center.
       self.twtrLoginButton.center = self.view.center;
       // Change position.
       [self.twtrLoginButton setFrame:CGRectMake(self.twtrLoginButton.frame.origin.x,
-                                           self.twtrLoginButton.frame.origin.y + 50,
-                                           self.twtrLoginButton.frame.size.width,
-                                           self.twtrLoginButton.frame.size.height)];
+                                                self.twtrLoginButton.frame.origin.y + 50,
+                                                self.twtrLoginButton.frame.size.width,
+                                                self.twtrLoginButton.frame.size.height)];
+      
       [self.view addSubview:self.twtrLoginButton];
-    }
-    else if ([button isKindOfClass:[FBSDKLoginButton class]]) { // Add Facebook login.
-      self.fbLoginButton = (FBSDKLoginButton*)button;
-      self.fbLoginButton.center = self.view.center;
-      [self.view addSubview:self.fbLoginButton];
     }
   }
 }

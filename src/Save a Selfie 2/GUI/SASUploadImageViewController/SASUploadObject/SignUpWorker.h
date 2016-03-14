@@ -19,13 +19,20 @@ typedef NS_ENUM(NSUInteger, SignUpWorkerResponse) {
 typedef void (^SignUpWorkerCompletionBlock)(NSString *email, NSString *token, SignUpWorkerResponse response);
 
 
-// Usually there will be some parameters to be used
-// with sign up e.g. email, name etc.
-@property(strong, nonatomic) NSDictionary *param;
+/** The parameters used with Facebook.
+ *  By setting these params, the information
+ *  for signup will be taken from Facebook.
+ */
+@property(strong, nonatomic) NSDictionary *faceBookParam;
+
+/** The parameters used with Twitter SDK.
+ *  By setting these params, the information
+ *  for signup will be taken from Twitter.
+*/
+@property(strong, nonatomic) NSDictionary *twitterParam;
 
 
 - (void) signupWithCompletionBlock:(SignUpWorkerCompletionBlock) completion;
-
 
 
 @end
