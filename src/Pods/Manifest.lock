@@ -5,6 +5,7 @@ PODS:
   - Bolts/AppLinks (1.6.0):
     - Bolts/Tasks
   - Bolts/Tasks (1.6.0)
+  - Fabric (1.6.7)
   - FBSDKCoreKit (4.10.0):
     - Bolts (~> 1.5)
   - FBSDKLoginKit (4.10.0):
@@ -13,23 +14,33 @@ PODS:
     - FBSDKCoreKit
   - FXKeychain (1.5.3)
   - MBProgressHUD (0.9.1)
+  - TwitterCore (1.15.3):
+    - Fabric
+  - TwitterKit (1.15.3):
+    - TwitterCore (= 1.15.3)
   - Unirest (1.1.4)
 
 DEPENDENCIES:
+  - Fabric
   - FBSDKCoreKit
   - FBSDKLoginKit
   - FBSDKShareKit
   - FXKeychain (~> 1.5)
   - MBProgressHUD (~> 0.9.1)
+  - TwitterCore
+  - TwitterKit
   - Unirest (~> 1.1.4)
 
 SPEC CHECKSUMS:
   Bolts: f52a250053bb517ca874523c3913776359ab3def
+  Fabric: caf7580c725e64db144f610ac65cd60956911dc7
   FBSDKCoreKit: 13bec8373fb3af94d44daf2aa1e0958687897fbd
   FBSDKLoginKit: d3d4a2e9d31954deb00bfea964167a05ca1ea976
   FBSDKShareKit: 54587b4624706ace1e810cf83412a918141f807a
   FXKeychain: 2fe54573946ffef634f4e2a2851e6c8f4ea15e76
   MBProgressHUD: c47f2c166c126cf2ce36498d80f33e754d4e93ad
+  TwitterCore: cce24b3c798993ccde72787ea79ea9a478b284e4
+  TwitterKit: 43600f2d2848c227739efea5b2939585e69339c3
   Unirest: 5e4d93eaf32463bf619a4ecd3bbc8c32acf21eac
 
 COCOAPODS: 0.39.0

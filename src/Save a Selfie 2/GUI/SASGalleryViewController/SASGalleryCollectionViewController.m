@@ -126,8 +126,6 @@ SASGalleryCellDelegate> {
   NSRange range = NSMakeRange(0, 35);
   imagesDownloadedCount = (int)range.length;
   
-  NSDate *methodStart = [NSDate date];
-  
   
   [self.galleryDataSource imagesWithinRange:range completion:^(BOOL completion) {
     if (completion) {
@@ -136,25 +134,11 @@ SASGalleryCellDelegate> {
       [self.collectionView reloadData];
     }
     [self.collectionView reloadData];
-    NSDate *methodFinish = [NSDate date];
-    NSTimeInterval executionTime = [methodFinish timeIntervalSinceDate:methodStart];
-    NSLog(@"executionTime = %f", executionTime);
+
   }];
 }
 
 
-//- (void) sasObjectDownloader:(SASObjectDownloader *)downloader didFailWithError:(NSError *)error {
-//  
-//  FXAlertController *downloadErrorAlert = [[FXAlertController alloc] initWithTitle:@"ERROR" message:@"There seemed to be a problem trying to retrieve the images. Please check Wifi/ Network is available."];
-//  
-//  FXAlertButton *cancelButton = [[FXAlertButton alloc] initWithType:FXAlertButtonTypeStandard];
-//  [cancelButton setTitle:@"Cancel" forState:UIControlStateNormal];
-//  
-//  [downloadErrorAlert addButton:cancelButton];
-//  
-//  [self presentViewController:downloadErrorAlert animated:YES completion:nil];
-//  
-//}
 
 
 #pragma mark UICollectionViewLayout.

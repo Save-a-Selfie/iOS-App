@@ -13,7 +13,7 @@
 		180592091C5577490059215F /* FireHydrantButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 180592081C5577490059215F /* FireHydrantButton.m */; };
 		1805920C1C5578C70059215F /* FirstAidKitButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 1805920B1C5578C70059215F /* FirstAidKitButton.m */; };
 		1806DB3F1C83B2760081CAFE /* SASAppSharedPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 1806DB3E1C83B2760081CAFE /* SASAppSharedPreferences.m */; };
-		1806DB431C83BAF50081CAFE /* SASFacebookLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1806DB421C83BAF50081CAFE /* SASFacebookLoginViewController.m */; };
+		1806DB431C83BAF50081CAFE /* SASSocialMediaLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1806DB421C83BAF50081CAFE /* SASSocialMediaLoginViewController.m */; };
 		1807AF3F1B4EE8F2006E1B28 /* StorageSystem.m in Sources */ = {isa = PBXBuildFile; fileRef = 1807AF3E1B4EE8F2006E1B28 /* StorageSystem.m */; };
 		1807AF4D1B4EEE79006E1B28 /* NSString+PDRegex.m in Sources */ = {isa = PBXBuildFile; fileRef = 1807AF4C1B4EEE79006E1B28 /* NSString+PDRegex.m */; };
 		180E18F51B7AC1DF0077BBEF /* SASSponsorCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 180E18F41B7AC1DF0077BBEF /* SASSponsorCardView.m */; };
@@ -133,8 +133,8 @@
 		1805920B1C5578C70059215F /* FirstAidKitButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstAidKitButton.m; sourceTree = "<group>"; };
 		1806DB3D1C83B2760081CAFE /* SASAppSharedPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASAppSharedPreferences.h; sourceTree = "<group>"; };
 		1806DB3E1C83B2760081CAFE /* SASAppSharedPreferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASAppSharedPreferences.m; sourceTree = "<group>"; };
-		1806DB411C83BAF50081CAFE /* SASFacebookLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASFacebookLoginViewController.h; sourceTree = "<group>"; };
-		1806DB421C83BAF50081CAFE /* SASFacebookLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASFacebookLoginViewController.m; sourceTree = "<group>"; };
+		1806DB411C83BAF50081CAFE /* SASSocialMediaLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASSocialMediaLoginViewController.h; sourceTree = "<group>"; };
+		1806DB421C83BAF50081CAFE /* SASSocialMediaLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASSocialMediaLoginViewController.m; sourceTree = "<group>"; };
 		1807AF3D1B4EE8F2006E1B28 /* StorageSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StorageSystem.h; sourceTree = "<group>"; };
 		1807AF3E1B4EE8F2006E1B28 /* StorageSystem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StorageSystem.m; sourceTree = "<group>"; };
 		1807AF4B1B4EEE79006E1B28 /* NSString+PDRegex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+PDRegex.h"; sourceTree = "<group>"; };
@@ -374,8 +374,8 @@
 		1806DB441C83BB690081CAFE /* SASFacebookLoginViewController */ = {
 			isa = PBXGroup;
 			children = (
-				1806DB411C83BAF50081CAFE /* SASFacebookLoginViewController.h */,
-				1806DB421C83BAF50081CAFE /* SASFacebookLoginViewController.m */,
+				1806DB411C83BAF50081CAFE /* SASSocialMediaLoginViewController.h */,
+				1806DB421C83BAF50081CAFE /* SASSocialMediaLoginViewController.m */,
 			);
 			name = SASFacebookLoginViewController;
 			sourceTree = "<group>";
@@ -1118,6 +1118,7 @@
 				D72E1DAB19EE841E005DD8A5 /* Resources */,
 				3EC7B6F7E41A3CCA0FE26AD6 /* Copy Pods Resources */,
 				2C79D5BFCD4B162A23C7173C /* Embed Pods Frameworks */,
+				181425881C962C4D001342A7 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1212,6 +1213,19 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		181425881C962C4D001342A7 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" 6346e9f7772455f49f4cb84544e614b8f5ad549a 7b99baba610ccff7214af4f40c45f2b81af1d2f89981c4088088644f376602d2";
+		};
 		2C79D5BFCD4B162A23C7173C /* Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1276,7 +1290,7 @@
 				D786E1811A48C10500A20FDD /* SASAnnotation.m in Sources */,
 				188CAEED1B21006C006A90EB /* Screen.m in Sources */,
 				1819829D1C5ADDFF008A1A14 /* SASNetworkManager.m in Sources */,
-				1806DB431C83BAF50081CAFE /* SASFacebookLoginViewController.m in Sources */,
+				1806DB431C83BAF50081CAFE /* SASSocialMediaLoginViewController.m in Sources */,
 				185F3ED31B9E04FB00345CFB /* FXAlertControllerTransitionAnimator.m in Sources */,
 				18592E021B5184E2004DDFD8 /* SASSponsorViewController.m in Sources */,
 				185F3ED41B9E04FB00345CFB /* FXPresentationController.m in Sources */,

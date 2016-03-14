@@ -228,16 +228,16 @@ NSString *permissionsProblemText = @"Please enable location services for this ap
         break;
         
       case kCLAuthorizationStatusDenied:
-        NSLog(@"Location services denied by user!");
+        NSLog(@"Location Info: Location services denied by user!");
         [self displayLocationDisabledAlert];
         break;
         
       case kCLAuthorizationStatusRestricted:
-        NSLog(@"Parental controls restrict location services");
+        NSLog(@"Location Info: Parental controls restrict location services");
         break;
         
       case kCLAuthorizationStatusNotDetermined:
-        NSLog(@"Unable to determine, possibly not available");
+        NSLog(@"Location Info: Unable to determine, possibly not available");
         break;
         
       default:

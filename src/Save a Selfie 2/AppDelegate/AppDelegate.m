@@ -9,17 +9,19 @@
 
 #import "AppDelegate.h"
 #import "SASAppSharedPreferences.h"
-#import "SASFacebookLoginViewController.h"
+#import "SASSocialMediaLoginViewController.h"
 #import "SASMapViewController.h"
 #import "FXAlert.h"
 #import "SASNetworkManager.h"
-#include "DefaultSignUpWorker.h"
-#include "SASUser.h"
+#import "DefaultSignUpWorker.h"
+#import "SASUser.h"
+#import <Fabric/Fabric.h>
+#import <TwitterKit/TwitterKit.h>
+
 
 @interface AppDelegate () <FBSDKLoginButtonDelegate>
 
-@property (strong, nonatomic) FBSDKLoginButton *fbLoginButton;
-@property (strong, nonatomic) SASFacebookLoginViewController *fbViewController;
+@property (strong, nonatomic) SASSocialMediaLoginViewController *socialMediaViewController;
 
 @end
 
@@ -33,24 +35,45 @@ BOOL NSLogOn = NO; // YES to show logs, NO if not.
 - (BOOL)application:(UIApplication *)application
 didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
   
+  // Ask Facebook and Twitter who's repsonsible for login.
+  return [self determineLoginMethod:application withOptions:launchOptions];
+}
+
+
+
+// Determines the login, by asking Facebook and Twitter.
+- (BOOL) determineLoginMethod:(UIApplication*) application withOptions:(NSDictionary*) launchOptions {
   // This must be done for proper use of FBSDK. See documentation.
   BOOL r = [[FBSDKApplicationDelegate sharedInstance] application:application
                                     didFinishLaunchingWithOptions:launchOptions];
   
-  // Check if logged into facebook already.
+  // Check if logged into Twitter already.
   if (![FBSDKAccessToken currentAccessToken]) {
-    self.fbLoginButton = [[FBSDKLoginButton alloc] init];
-    self.fbLoginButton.readPermissions = @[@"public_profile", @"email"];
-    self.fbLoginButton.loginBehavior = FBSDKLoginBehaviorNative;
-    self.fbLoginButton.delegate = self;
-    self.fbViewController = [[SASFacebookLoginViewController alloc]
-                             initWithFBLoginButton:self.fbLoginButton];
-    self.window.rootViewController = self.fbViewController;
+    FBSDKLoginButton *fbLoginButton = [[FBSDKLoginButton alloc] init];
+    fbLoginButton.readPermissions = @[@"public_profile", @"email"];
+    fbLoginButton.loginBehavior = FBSDKLoginBehaviorNative;
+    fbLoginButton.delegate = self;
+
+    // Check if logged into Twitter.
+    TWTRLogInButton *twtrLogInButton = [TWTRLogInButton buttonWithLogInCompletion:^(TWTRSession * _Nullable session, NSError * _Nullable error) {
+      if (!session) {
+        NSArray *loginButtons = [NSArray arrayWithObjects:fbLoginButton, twtrLogInButton, nil];
+        self.socialMediaViewController = [[SASSocialMediaLoginViewController alloc] initWithSocialMediaButtons:loginButtons];
+        self.window.rootViewController = self.socialMediaViewController;
+      }
+    }];
   }
   else {
+    // User has already logged into Twitter or Facebook, so just
+    // open app normally.
     [self presentSASMapViewController];
   }
   return r;
+}
+
+
+- (void) twitterLogin {
+  [Fabric with:@[[Twitter class]]];
 }
 
 
@@ -73,7 +96,6 @@ didCompleteWithResult:(FBSDKLoginManagerLoginResult *)result error:(NSError *)er
     
     SASNetworkManager *networkManager = [SASNetworkManager sharedInstance];
     [networkManager signUpWithWorker:signupWorker completion:^(NSString *email, NSString *token, SignUpWorkerResponse response) {
-      NSLog(@"");
       switch (response) {
         case SignUpWorkerResponseFailed:
           [self presentAlertView:@"There was a problem trying to sign you up."];
