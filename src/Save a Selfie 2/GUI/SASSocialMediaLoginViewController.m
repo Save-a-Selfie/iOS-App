@@ -16,6 +16,7 @@
 #import <TwitterKit/TwitterKit.h>
 #import "FXAlert.h"
 #import "SASUser.h"
+#import "SASActivityIndicator/SASActivityIndicator.h"
 
 
 @interface SASSocialMediaLoginViewController () <FBSDKLoginButtonDelegate>
@@ -24,6 +25,8 @@
 @property (weak, nonatomic) TWTRLogInButton *twtrLoginButton;
 @property (strong, nonatomic) NSArray* buttons;
 @property (strong, nonatomic) NSString *errorMessage;
+@property (assign, nonatomic) BOOL isLoading;
+@property (strong, nonatomic) SASActivityIndicator *sasAI;
 
 @end
 
@@ -72,6 +75,21 @@
   [self.view addSubview:self.fbLoginButton];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+  if (self.isLoading) {
+    [self presentLoader];
+  } else {
+    [self removeLoader];
+  }
+  
+  // Present alertView as this is
+  // the only time we know we're in the
+  // window hierarchy.
+  [self presentAlertView];
+  
+
+}
+
 
 // Return reference to a block that can
 // handle TWTRLogInCompletion.
@@ -91,12 +109,7 @@
   return twtrCompletionBlock;
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-  // Present alertView as this is
-  // the only time we know we're in the
-  // window hierarchy.
-  [self presentAlertView];
-}
+
 
 // Delegate callback for Facebook loginbutton.
 - (void)loginButton:(FBSDKLoginButton *)loginButton
@@ -125,6 +138,8 @@ didCompleteWithResult:(FBSDKLoginManagerLoginResult *)result error:(NSError *)er
 // Signs users who have given the app the correct permissions
 // from their social media handle.
 - (void) signUpUSerToSaveASelfie:(DefaultSignUpWorker*) signupWorker {
+  [self presentLoader];
+  self.isLoading = YES;
   SASNetworkManager *networkManager = [SASNetworkManager sharedInstance];
   [networkManager signUpWithWorker:signupWorker completion:^(NSDictionary *userInfo, SignUpWorkerResponse response) {
     // Something went wrong.
@@ -139,12 +154,14 @@ didCompleteWithResult:(FBSDKLoginManagerLoginResult *)result error:(NSError *)er
       case SignUpWorkerResponseUserExists:
         // User's already signed up; Sign them in.
         [self setCurrentUserInformation:userInfo];
+        self.isLoading = NO;
         // Now let user into app.
         [self presentSASMapViewController];
         break;
       case SignUpWorkerResponseSuccess:
         // New account. Sign them in.
         [self setCurrentUserInformation:userInfo];
+        self.isLoading = NO;
         // Now let user into app.
         [self presentSASMapViewController];
         break;
@@ -198,6 +215,26 @@ didCompleteWithResult:(FBSDKLoginManagerLoginResult *)result error:(NSError *)er
   [self presentViewController:alertController animated:YES completion:nil];
   // Remove reference to error message.
   self.errorMessage = nil;
+}
+
+
+- (void) presentLoader {
+  self.sasAI = [[SASActivityIndicator alloc] initWithMessage:@"Signing up!"];
+  self.sasAI.backgroundColor = [UIColor whiteColor];
+  self.sasAI.center = self.view.center;
+  UIView *greyView = [[UIView alloc] initWithFrame:CGRectMake(0, 0,
+                                                              self.view.frame.size.width,
+                                                              self.view.frame.size.height)];
+  [self.sasAI startAnimating];
+  greyView.backgroundColor = [UIColor colorWithWhite:0.5 alpha:0.6];
+  [greyView addSubview:self.sasAI];
+  [self.view addSubview:greyView];
+}
+
+- (void) removeLoader {
+  [self.sasAI stopAnimating];
+  [self.sasAI removeFromSuperview];
+  self.sasAI = nil;
 }
 
 - (void) presentSASMapViewController {
