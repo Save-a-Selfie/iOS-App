@@ -35,7 +35,7 @@ BOOL NSLogOn = NO; // YES to show logs, NO if not.
 
 - (BOOL)application:(UIApplication *)application
 didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-  
+  [self.window makeKeyAndVisible];
   // Ask Facebook and Twitter who's repsonsible for login.
   return [self determineLoginMethod:application withOptions:launchOptions];
 }
@@ -81,10 +81,10 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
   // Check if a user is logged in with Twitter.
   Twitter *twitter = [Twitter sharedInstance];
   if (!twitter.sessionStore.session) {
-
+    
     twitterSessionAvailable = NO;
   } else {
-//    [twitter.sessionStore logOutUserID:twitter.session.userID];
+    [twitter.sessionStore logOutUserID:twitter.session.userID];
     twitterSessionAvailable = YES;
   }
   
@@ -186,10 +186,12 @@ didCompleteWithResult:(FBSDKLoginManagerLoginResult *)result error:(NSError *)er
 
 
 - (void) presentAlertView:(NSString*) message {
+  NSLog(@"called");
   FXAlertController *alertController = [[FXAlertController alloc] initWithTitle:@"Error" message:message];
   FXAlertButton *button = [[FXAlertButton alloc] init];
   [button setTitle:@"Ok" forState:UIControlStateNormal];
   [alertController addButton:button];
+  NSLog(@"%@", self.window.rootViewController);
   [self.window.rootViewController presentViewController:alertController animated:YES completion:nil];
 }
 

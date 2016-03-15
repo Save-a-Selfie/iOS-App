@@ -31,6 +31,7 @@
   return self;
 }
 
+
 - (void) layoutButtons:(NSArray*) buttons {
   for (NSObject *button in buttons) {
     if ([button isKindOfClass:[FBSDKLoginButton class]]) { // Add Facebook login.

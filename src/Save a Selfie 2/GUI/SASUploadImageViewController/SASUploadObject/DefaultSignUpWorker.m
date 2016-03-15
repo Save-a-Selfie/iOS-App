@@ -15,7 +15,7 @@
 #import <Fabric/Fabric.h>
 #import <TwitterKit/TwitterKit.h>
 #import "AppDelegate.h"
-
+#import <JRSwizzle.h>
 @interface DefaultSignUpWorker()
 
 
@@ -147,6 +147,7 @@ NSString* const SIGN_UP_URL = @"https://guarded-mountain-99906.herokuapp.com/sig
     if (user) {
       self.name = user.name;
       // Now get email.
+
       TWTRShareEmailViewController *v = [[TWTRShareEmailViewController alloc] initWithUserID:twtrUserID completion:^(NSString *email, NSError *error) {
         if (email) {
           self.email = email;
@@ -155,6 +156,8 @@ NSString* const SIGN_UP_URL = @"https://guarded-mountain-99906.herokuapp.com/sig
           completion(NO);
         }
       }];
+      [TWTRShareEmailViewController jr_swizzleClassMethod:@selector(viewWillUnload)
+                                          withClassMethod:@selector(swizzled_viewDidDisappear:) error:nil];
       [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:v animated:YES completion:nil];
     } else {
       completion(NO);
@@ -190,7 +193,20 @@ NSString* const SIGN_UP_URL = @"https://guarded-mountain-99906.herokuapp.com/sig
   }];
 }
 
+/**
+ Please note this method is used because when -TWTRShareEmailViewController
+ is being removed the -AppDelegate.h will not correctly display an
+ alert if a failed signup occurs. So we will use the technique
+ of Method Swizzling to swap out implemenations of -TWTRShareEmailViewController
+ -viewWillDisapper method with this implementation so 
+ the AppDelegate can be correctly notified
+ when the view has been removed from the view hierarchy.
+ */
+- (void) swizzled_viewDidDisappear:(BOOL) animated {
+  AppDelegate* app = [[UIApplication sharedApplication] delegate];
+  [app presentAlertView:@"THIS ACTUALL WORKED"];
 
+}
 - (void)setFaceBookParam:(NSDictionary *)faceBookParam {
   _faceBookParam = faceBookParam;
 }

@@ -13,6 +13,7 @@ PODS:
   - FBSDKShareKit (4.10.0):
     - FBSDKCoreKit
   - FXKeychain (1.5.3)
+  - JRSwizzle (1.0)
   - MBProgressHUD (0.9.1)
   - TwitterCore (1.15.3):
     - Fabric
@@ -26,6 +27,7 @@ DEPENDENCIES:
   - FBSDKLoginKit
   - FBSDKShareKit
   - FXKeychain (~> 1.5)
+  - JRSwizzle (~> 1.0)
   - MBProgressHUD (~> 0.9.1)
   - TwitterCore
   - TwitterKit
@@ -38,6 +40,7 @@ SPEC CHECKSUMS:
   FBSDKLoginKit: d3d4a2e9d31954deb00bfea964167a05ca1ea976
   FBSDKShareKit: 54587b4624706ace1e810cf83412a918141f807a
   FXKeychain: 2fe54573946ffef634f4e2a2851e6c8f4ea15e76
+  JRSwizzle: dd5ead5d913a0f29e7f558200165849f006bb1e3
   MBProgressHUD: c47f2c166c126cf2ce36498d80f33e754d4e93ad
   TwitterCore: cce24b3c798993ccde72787ea79ea9a478b284e4
   TwitterKit: 43600f2d2848c227739efea5b2939585e69339c3
