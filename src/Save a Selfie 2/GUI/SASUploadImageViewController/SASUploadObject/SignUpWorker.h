@@ -11,12 +11,18 @@
 typedef NS_ENUM(NSUInteger, SignUpWorkerResponse) {
   SignUpWorkerResponseUserExists = 101,
   SignUpWorkerResponseSuccess = 103,
-  SignUpWorkerResponseFailed = 102,
+  SignUpWorkerResponseFailed = 102
 };
 
 @protocol SignUpWorker <NSObject>
 
-typedef void (^SignUpWorkerCompletionBlock)(NSString *email, NSString *token, SignUpWorkerResponse response);
+// Keys used for extracting user info from
+// a -SignUpWorkerCompletionBlock
+extern const NSString* USER_INFO_EMAIL_KEY;
+extern const NSString* USER_INFO_NAME_KEY;
+extern const NSString* USER_INFO_TOKEN_KEY;
+
+typedef void (^SignUpWorkerCompletionBlock)(NSDictionary* userInfo, SignUpWorkerResponse response);
 
 
 /** The parameters used with Facebook.

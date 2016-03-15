@@ -21,14 +21,8 @@
 
 @property (strong, nonatomic) NSString *name;
 @property (strong, nonatomic) NSString *email;
-@property (strong, nonatomic) NSString *address;
-@property (strong, nonatomic) NSString *country;
-@property (strong, nonatomic) NSString *area;
 @property (strong, nonatomic) NSURL *picture;
-@property (assign, nonatomic) CLLocationCoordinate2D coordinates;
-@property (strong, nonatomic) SASLocation *sasLocation;
-@property (assign, nonatomic) BOOL fbInfoExtracted;
-@property (assign, nonatomic) BOOL geolocationSucceeded;
+
 
 @property (nonatomic, copy) SignUpWorkerCompletionBlock block;
 
@@ -42,16 +36,10 @@
 
 NSString* const SIGN_UP_URL = @"https://guarded-mountain-99906.herokuapp.com/signup";
 
+const NSString* USER_INFO_EMAIL_KEY = @"EMAIL_KEY";
+const NSString* USER_INFO_NAME_KEY = @"NAME_KEY";
+const NSString* USER_INFO_TOKEN_KEY = @"TOKEN_KEY";
 
-- (instancetype)init
-{
-  self = [super init];
-  if (self) {
-    
-    
-  }
-  return self;
-}
 
 
 #pragma mark SignUpWorker.h protocol method.
@@ -66,7 +54,7 @@ NSString* const SIGN_UP_URL = @"https://guarded-mountain-99906.herokuapp.com/sig
     [self extractFBSDKInfo:^(BOOL comp) {
       if (!comp) {
         self.block = nil;
-        completion(nil, nil, SignUpWorkerResponseFailed);
+        completion(nil, SignUpWorkerResponseFailed);
       } else {
         [self signup];
       }
@@ -76,7 +64,7 @@ NSString* const SIGN_UP_URL = @"https://guarded-mountain-99906.herokuapp.com/sig
     [self extractTWTRSDKInfo:^(BOOL comp) {
       if (!comp) {
         self.block = nil;
-        completion(nil, nil, SignUpWorkerResponseFailed);
+        completion(nil, SignUpWorkerResponseFailed);
       } else {
         [self signup];
       }
@@ -86,9 +74,8 @@ NSString* const SIGN_UP_URL = @"https://guarded-mountain-99906.herokuapp.com/sig
     // we're not set then we message caller
     // that an error occurred.
     self.block = nil;
-    completion(nil, nil, SignUpWorkerResponseFailed);
+    completion(nil, SignUpWorkerResponseFailed);
   }
-  
 }
 
 
@@ -117,24 +104,39 @@ NSString* const SIGN_UP_URL = @"https://guarded-mountain-99906.herokuapp.com/sig
     
     dispatch_async(dispatch_get_main_queue(), ^{
       
+      NSMutableDictionary *userInfo = [[NSMutableDictionary alloc] init];
+      
+      // Set all the user info we have been given access to
+      // including the user's token generetaed from Save A Selfie.
+      if (self.email) {
+        [userInfo setObject:self.email forKey:USER_INFO_EMAIL_KEY];
+      }
+      if (self.name) {
+        [userInfo setObject:self.email forKey:USER_INFO_NAME_KEY];
+      }
+      if (userToken) {
+        [userInfo setObject:self.email forKey:USER_INFO_NAME_KEY];
+      }
+      
       SignUpWorkerCompletionBlock block = self.block;
       
       // User already exists.
       if (insertStatus.integerValue == 101) {
         self.block = nil;
-        block(self.email, userToken, SignUpWorkerResponseUserExists);
+        block(userInfo, SignUpWorkerResponseUserExists);
       }
       else if (insertStatus.integerValue == 102) { // Failed
         self.block = nil;
-        block(self.email, nil, SignUpWorkerResponseFailed);
+        block(nil, SignUpWorkerResponseFailed);
       }
-      else if (insertStatus.integerValue == 103) {
+      else if (insertStatus.integerValue == 103) { // USer sign up success.
         self.block = nil;
-        block(self.email, userToken, SignUpWorkerResponseSuccess);
+        block(userInfo, SignUpWorkerResponseSuccess);
       }
     });
   }];
 }
+
 
 /**
  Get info from twitter.
@@ -153,11 +155,12 @@ NSString* const SIGN_UP_URL = @"https://guarded-mountain-99906.herokuapp.com/sig
           self.email = email;
           completion(YES);
         } else {
-          completion(NO);
+          // Just don't use email for signup.
+          self.email = @"";
+          completion(YES);
         }
       }];
-      [TWTRShareEmailViewController jr_swizzleClassMethod:@selector(viewWillUnload)
-                                          withClassMethod:@selector(swizzled_viewDidDisappear:) error:nil];
+      
       [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:v animated:YES completion:nil];
     } else {
       completion(NO);
@@ -172,7 +175,7 @@ NSString* const SIGN_UP_URL = @"https://guarded-mountain-99906.herokuapp.com/sig
   FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc]
                                 initWithGraphPath:@"me" parameters:self.faceBookParam];
   [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
-    if ([result isKindOfClass:[NSDictionary class]]) {
+    if (!(error) && [result isKindOfClass:[NSDictionary class]]) {
       self.name = [result objectForKey:@"name"];
       self.email = [result objectForKey:@"email"];
       
@@ -184,8 +187,6 @@ NSString* const SIGN_UP_URL = @"https://guarded-mountain-99906.herokuapp.com/sig
       // Turn into base 64 string.
       self.picture = [NSURL URLWithString:pictureUrl];
       //self.picture = [[NSData dataWithContentsOfURL:picUrl] base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
-      
-      self.fbInfoExtracted = YES;
       completion(YES);
     } else {
       completion(NO);
@@ -193,20 +194,8 @@ NSString* const SIGN_UP_URL = @"https://guarded-mountain-99906.herokuapp.com/sig
   }];
 }
 
-/**
- Please note this method is used because when -TWTRShareEmailViewController
- is being removed the -AppDelegate.h will not correctly display an
- alert if a failed signup occurs. So we will use the technique
- of Method Swizzling to swap out implemenations of -TWTRShareEmailViewController
- -viewWillDisapper method with this implementation so 
- the AppDelegate can be correctly notified
- when the view has been removed from the view hierarchy.
- */
-- (void) swizzled_viewDidDisappear:(BOOL) animated {
-  AppDelegate* app = [[UIApplication sharedApplication] delegate];
-  [app presentAlertView:@"THIS ACTUALL WORKED"];
 
-}
+
 - (void)setFaceBookParam:(NSDictionary *)faceBookParam {
   _faceBookParam = faceBookParam;
 }

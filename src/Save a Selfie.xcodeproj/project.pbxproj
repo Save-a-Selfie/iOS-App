@@ -371,13 +371,13 @@
 			name = SASAppSharedPreferences;
 			sourceTree = "<group>";
 		};
-		1806DB441C83BB690081CAFE /* SASFacebookLoginViewController */ = {
+		1806DB441C83BB690081CAFE /* SASSocialMediaLoginViewController */ = {
 			isa = PBXGroup;
 			children = (
 				1806DB411C83BAF50081CAFE /* SASSocialMediaLoginViewController.h */,
 				1806DB421C83BAF50081CAFE /* SASSocialMediaLoginViewController.m */,
 			);
-			name = SASFacebookLoginViewController;
+			name = SASSocialMediaLoginViewController;
 			sourceTree = "<group>";
 		};
 		1807AF401B4EE8F8006E1B28 /* StorageSystem */ = {
@@ -670,7 +670,7 @@
 		188CAEE71B20FE46006A90EB /* GUI */ = {
 			isa = PBXGroup;
 			children = (
-				1806DB441C83BB690081CAFE /* SASFacebookLoginViewController */,
+				1806DB441C83BB690081CAFE /* SASSocialMediaLoginViewController */,
 				18C323941B1E1FDC0027BDEA /* SASImageViewController */,
 				18EBF9781B272B3700EDA48B /* SASImagePickerController */,
 				181A02CA1B543EDD009048FE /* SASInformationViewController */,
