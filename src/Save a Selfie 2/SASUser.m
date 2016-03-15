@@ -53,15 +53,18 @@ const NSString* USER_DICT_NAME = @"saveaselfie_name";
   
   NSMutableDictionary *userDict = [[NSMutableDictionary alloc] init];
   
-  if (!email) {
-    [userDict setObject:name forKey:USER_DICT_NAME];
-  } else {
+  if (email) {
     [userDict setObject:email forKey:USER_DICT_EMAIL];
   }
-
-  [userDict setObject:token forKey:USER_DICT_TOKEN];
-  [userDict setObject:socialId forKey:USER_DICT_SOCIAL_ID];
-  
+  if (name) {
+    [userDict setObject:name forKey:USER_DICT_NAME];
+  }
+  if (token) {
+    [userDict setObject:token forKey:USER_DICT_TOKEN];
+  }
+  if (socialId) {
+    [userDict setObject:socialId forKey:USER_DICT_SOCIAL_ID];
+  }
   return [userDict mutableCopy];
 }
 

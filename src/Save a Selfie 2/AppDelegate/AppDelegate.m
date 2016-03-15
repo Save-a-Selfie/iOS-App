@@ -55,6 +55,13 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
   BOOL twitterSessionAvailable = NO;
   BOOL facebookSessionAvailable = NO;
   
+  // Check if the user has a Save a Selfie
+  // authorization token before checking
+  // social media.
+  if (![[SASUser currentLoggedUser] objectForKey:USER_DICT_TOKEN]) {
+    [self beginSignUpProcess];
+    return YES;
+  }
   
   // Provide fabric with the classes we
   // want to use. (Fabric is Twitter's dev SDK)
@@ -76,22 +83,11 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     facebookSessionAvailable = YES;
   }
   
+  
   // If both social media platforms don't have a available
   // sessions, then the user must log in with one.
   if (!twitterSessionAvailable && !facebookSessionAvailable) {
-    // Create Facebook login button.
-    FBSDKLoginButton *fbLoginButton = [[FBSDKLoginButton alloc] init];
-    fbLoginButton.readPermissions = @[@"public_profile", @"email"];
-    fbLoginButton.loginBehavior = FBSDKLoginBehaviorNative;
-    
-    // Create Twitter login button.
-    TWTRLogInButton *twtrLoginButton = [[TWTRLogInButton alloc] init];
-    
-    NSArray *loginButtons = [NSArray arrayWithObjects:twtrLoginButton, fbLoginButton, nil];
-    
-    // Present user with option to sign in with Twitter or Facebook.
-    self.socialMediaViewController = [[SASSocialMediaLoginViewController alloc] initWithSocialMediaButtons:loginButtons];
-    self.window.rootViewController = self.socialMediaViewController;
+    [self beginSignUpProcess];
   }
   else {
     // User has already logged into Twitter or Facebook, so just
@@ -101,6 +97,21 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
   return YES;
 }
 
+- (void) beginSignUpProcess {
+  // Create Facebook login button.
+  FBSDKLoginButton *fbLoginButton = [[FBSDKLoginButton alloc] init];
+  fbLoginButton.readPermissions = @[@"public_profile", @"email"];
+  fbLoginButton.loginBehavior = FBSDKLoginBehaviorNative;
+  
+  // Create Twitter login button.
+  TWTRLogInButton *twtrLoginButton = [[TWTRLogInButton alloc] init];
+  
+  NSArray *loginButtons = [NSArray arrayWithObjects:twtrLoginButton, fbLoginButton, nil];
+  
+  // Present user with option to sign in with Twitter or Facebook.
+  self.socialMediaViewController = [[SASSocialMediaLoginViewController alloc] initWithSocialMediaButtons:loginButtons];
+  self.window.rootViewController = self.socialMediaViewController;
+}
 
 
 - (void) presentSASMapViewController {

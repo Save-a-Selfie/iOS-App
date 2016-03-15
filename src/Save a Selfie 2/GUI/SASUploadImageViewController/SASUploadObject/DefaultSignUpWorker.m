@@ -125,10 +125,10 @@ const NSString* USER_INFO_SOCIAL_ID_KEY = @"SOCIAL_ID_KEY";
         [userInfo setObject:self.email forKey:USER_INFO_EMAIL_KEY];
       }
       if (self.name) {
-        [userInfo setObject:self.email forKey:USER_INFO_NAME_KEY];
+        [userInfo setObject:self.name forKey:USER_INFO_NAME_KEY];
       }
       if (userToken) {
-        [userInfo setObject:self.email forKey:USER_INFO_NAME_KEY];
+        [userInfo setObject:userToken forKey:USER_INFO_TOKEN_KEY];
       }
       if (self.socialID) {
         [userInfo setObject:self.socialID forKey:USER_INFO_SOCIAL_ID_KEY];
