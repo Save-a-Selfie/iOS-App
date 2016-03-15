@@ -22,25 +22,45 @@
 
 const NSString *USER_DICT_EMAIL = @"saveaselfie_email";
 const NSString *USER_DICT_TOKEN = @"saveaselfie_token";
+const NSString* USER_DICT_SOCIAL_ID = @"saveaselfie_social_id";
+const NSString* USER_DICT_NAME = @"saveaselfie_name";
 
-+ (void)setCurrentLoggedUser:(NSString *)token withEmail:(NSString *)email {
-  // Set the current logged in user.
+
++ (void)setCurrentLoggedUserEmail:(NSString *)email {
   [SASAppSharedPreferences setCurrentLoggedUserEmail:email];
-  
-  // Store that user to the device (keychain).
-  [SASAppSharedPreferences addUserToken:token withEmail:email];
+}
+
++ (void)setCurrentLoggedUserName:(NSString *)name {
+  [SASAppSharedPreferences setCurrentLoggedUserName:name];
+}
+
++ (void)setCurrentLoggedUserToken:(NSString *)token {
+  [SASAppSharedPreferences setCurrentLoggedUserToken:token];
+}
+
++ (void)setCurrentLoggedUserSocialID:(NSString *)ID {
+  [SASAppSharedPreferences setCurrentLoggedUserSocialID:ID];
   
 }
 
-
 + (NSDictionary *)currentLoggedUser {
   // Current logged in user's email.
-  NSString *email = [SASAppSharedPreferences currentLoggedInUserEmail];
-  NSString *token = [SASAppSharedPreferences userTokenWithEmail:email];
+  NSString *email = [SASAppSharedPreferences currentLoggedUserEmail];
+  NSString *name = [SASAppSharedPreferences currentLoggedUserName];
+  NSString *token = [SASAppSharedPreferences currentLoggedUserToken];
+  NSString *socialId = [SASAppSharedPreferences currentLoggedUserSocialID];
+  
   
   NSMutableDictionary *userDict = [[NSMutableDictionary alloc] init];
-  [userDict setObject:email forKey:USER_DICT_EMAIL];
+  
+  if (!email) {
+    [userDict setObject:name forKey:USER_DICT_NAME];
+  } else {
+    [userDict setObject:email forKey:USER_DICT_EMAIL];
+  }
+
   [userDict setObject:token forKey:USER_DICT_TOKEN];
+  [userDict setObject:socialId forKey:USER_DICT_SOCIAL_ID];
   
   return [userDict mutableCopy];
 }

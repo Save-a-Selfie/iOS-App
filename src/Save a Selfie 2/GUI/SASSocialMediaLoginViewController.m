@@ -126,26 +126,57 @@ didCompleteWithResult:(FBSDKLoginManagerLoginResult *)result error:(NSError *)er
 // from their social media handle.
 - (void) signUpUSerToSaveASelfie:(DefaultSignUpWorker*) signupWorker {
   SASNetworkManager *networkManager = [SASNetworkManager sharedInstance];
-  [networkManager signUpWithWorker:signupWorker completion:^(NSString *email, NSString *token, SignUpWorkerResponse response) {
+  [networkManager signUpWithWorker:signupWorker completion:^(NSDictionary *userInfo, SignUpWorkerResponse response) {
+    // Something went wrong.
+    if (!userInfo || response == SignUpWorkerResponseFailed) {
+      return;
+    }
+    
     switch (response) {
       case SignUpWorkerResponseFailed:
         self.errorMessage = @"There was a problem trying to sign you up";
         break;
       case SignUpWorkerResponseUserExists:
         // User's already signed up; Sign them in.
-        [SASUser setCurrentLoggedUser:token withEmail:email];
+        [self setCurrentUserInformation:userInfo];
         // Now let user into app.
         [self presentSASMapViewController];
         break;
       case SignUpWorkerResponseSuccess:
         // New account. Sign them in.
-        [SASUser setCurrentLoggedUser:token withEmail:email];
+        [self setCurrentUserInformation:userInfo];
         // Now let user into app.
         [self presentSASMapViewController];
         break;
       default:
         break;
     }}];
+}
+
+
+// Sets the current User's info with information from
+// a userInfo dict.
+- (void) setCurrentUserInformation:(NSDictionary*) userInfo {
+  // Get email and/ or name of user.
+  // If one isn't available use the other
+  // when calling -[SASUser setCurrentLoggedUser:withCredential].
+  NSString *socialID = [userInfo objectForKey:USER_INFO_SOCIAL_ID_KEY];
+  NSString *name = [userInfo objectForKey:USER_INFO_NAME_KEY];
+  NSString *email = [userInfo objectForKey:USER_INFO_EMAIL_KEY];
+  NSString *token = [userInfo objectForKey:USER_INFO_TOKEN_KEY];
+  
+  if (socialID) {
+    [SASUser setCurrentLoggedUserSocialID:socialID];
+  }
+  if (name) {
+    [SASUser setCurrentLoggedUserName:name];
+  }
+  if (email) {
+    [SASUser setCurrentLoggedUserEmail:email];
+  }
+  if (token) {
+    [SASUser setCurrentLoggedUserToken:token];
+  }
 }
 
 

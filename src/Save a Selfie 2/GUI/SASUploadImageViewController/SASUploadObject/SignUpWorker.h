@@ -21,6 +21,8 @@ typedef NS_ENUM(NSUInteger, SignUpWorkerResponse) {
 extern const NSString* USER_INFO_EMAIL_KEY;
 extern const NSString* USER_INFO_NAME_KEY;
 extern const NSString* USER_INFO_TOKEN_KEY;
+extern const NSString* USER_INFO_SOCIAL_ID_KEY;
+
 
 typedef void (^SignUpWorkerCompletionBlock)(NSDictionary* userInfo, SignUpWorkerResponse response);
 

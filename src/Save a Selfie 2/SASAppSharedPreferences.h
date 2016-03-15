@@ -17,27 +17,45 @@
 + (NSString *) getValueForEULAAccepted;
 
 
-/**
- Adds a user token with an associated email
- This is information is stored within keychain.
- @param token The user token id retrieved from the save
-              selfie backend.
- @param email The email of the user.
- */
-+ (void) addUserToken:(NSString*) token withEmail:(NSString*) email;
 
 /**
- Returns the token for a user using they're email as a key.
- @param email The email which is used to access the token.
- @return The user's token. If a token doesn't exist
-         then nil will be returned.
+ Sets the current logged on user's social id.
+ This is usually the id generated from the api used.
+ This id is stored inside keychain.
+ @param The social id of the user.
  */
-+ (NSString *)userTokenWithEmail:(NSString *)email;
++ (void) setCurrentLoggedUserSocialID:(NSString*) ID;
 
+/**
+ Sets the current logged on user's token.
+ This is generated from Save a Selfie servers.
+ This token is stored inside keychain.
+ @param The token of the user.
+ */
++ (void)setCurrentLoggedUserToken:(NSString *)token;
 
+/**
+ Sets the current logged in user's email.
+ This is not stored withing keychain.
+ @param email The email of the user to save.
+ */
 + (void) setCurrentLoggedUserEmail:(NSString*) email;
 
-+ (NSString*) currentLoggedInUserEmail;
+/**
+ Sets the current logged in user's name.
+ This is not stored withing keychain.
+ @param name The email of the user to save.
+ */
++ (void) setCurrentLoggedUserName:(NSString*) name;
+
+
++ (NSString*) currentLoggedUserSocialID;
+
++ (NSString*) currentLoggedUserToken;
+
++ (NSString*) currentLoggedUserName;
+
++ (NSString*) currentLoggedUserEmail;
 
 /**
  Removes the all user information from keychain and NSUserDefaults.

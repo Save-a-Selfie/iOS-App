@@ -22,6 +22,7 @@
 @property (strong, nonatomic) NSString *name;
 @property (strong, nonatomic) NSString *email;
 @property (strong, nonatomic) NSURL *picture;
+@property (strong, nonatomic) NSString *socialID;
 
 
 @property (nonatomic, copy) SignUpWorkerCompletionBlock block;
@@ -39,6 +40,8 @@ NSString* const SIGN_UP_URL = @"https://guarded-mountain-99906.herokuapp.com/sig
 const NSString* USER_INFO_EMAIL_KEY = @"EMAIL_KEY";
 const NSString* USER_INFO_NAME_KEY = @"NAME_KEY";
 const NSString* USER_INFO_TOKEN_KEY = @"TOKEN_KEY";
+const NSString* USER_INFO_SOCIAL_ID_KEY = @"SOCIAL_ID_KEY";
+
 
 
 
@@ -90,20 +93,30 @@ const NSString* USER_INFO_TOKEN_KEY = @"TOKEN_KEY";
     [simpleRequest setUrl:SIGN_UP_URL];
     [simpleRequest setHeaders:@{@"accept": @"application/json" }];
     [simpleRequest setParameters:@{@"name": self.name,
-                                   @"email": @"",
+                                   @"email": self.email,
                                    @"add": @"",
                                    @"area": @"",
                                    @"country": @"",
                                    @"file": self.picture}];
+    
   }] asJsonAsync:^(UNIHTTPJsonResponse *jsonResponse, NSError *error) {
     // Parse out the json.
     NSDictionary *jsonResponseMessage = [SASJSONParser parseSignUpResponse:jsonResponse.body.object];
+    
     NSString *userToken = [jsonResponseMessage objectForKey:@"token"];
-#pragma warning: check this status.
     NSNumber *insertStatus = [jsonResponseMessage objectForKey:@"insert_status"];
     
     dispatch_async(dispatch_get_main_queue(), ^{
       
+      SignUpWorkerCompletionBlock block = self.block;
+      // Something went wrong with the network call
+      // to the server.
+      if (!userToken || !insertStatus) {
+        self.block = nil;
+        block(nil, SignUpWorkerResponseFailed);
+        return;
+      }
+
       NSMutableDictionary *userInfo = [[NSMutableDictionary alloc] init];
       
       // Set all the user info we have been given access to
@@ -117,8 +130,9 @@ const NSString* USER_INFO_TOKEN_KEY = @"TOKEN_KEY";
       if (userToken) {
         [userInfo setObject:self.email forKey:USER_INFO_NAME_KEY];
       }
-      
-      SignUpWorkerCompletionBlock block = self.block;
+      if (self.socialID) {
+        [userInfo setObject:self.socialID forKey:USER_INFO_SOCIAL_ID_KEY];
+      }
       
       // User already exists.
       if (insertStatus.integerValue == 101) {
@@ -143,13 +157,24 @@ const NSString* USER_INFO_TOKEN_KEY = @"TOKEN_KEY";
  */
 - (void) extractTWTRSDKInfo:(void(^)(BOOL completion)) completion {
   NSString* twtrUserID = [self.twitterParam objectForKey:@"userId"];
+  self.socialID = twtrUserID;
   
   TWTRAPIClient *twtrApiClient = [[TWTRAPIClient alloc] initWithUserID:twtrUserID];
   [twtrApiClient loadUserWithID:twtrUserID completion:^(TWTRUser *user, NSError *error) {
     if (user) {
-      self.name = user.name;
+      // Check what we have access to.
+      if (user.name) {
+        self.name = user.name;
+      } else {
+        self.name = @"";
+      }
+      if (user.profileImageURL) {
+        self.picture = [NSURL URLWithString:user.profileImageURL];
+      } else {
+        self.picture = [NSURL new];
+      }
+      
       // Now get email.
-
       TWTRShareEmailViewController *v = [[TWTRShareEmailViewController alloc] initWithUserID:twtrUserID completion:^(NSString *email, NSError *error) {
         if (email) {
           self.email = email;
@@ -160,7 +185,6 @@ const NSString* USER_INFO_TOKEN_KEY = @"TOKEN_KEY";
           completion(YES);
         }
       }];
-      
       [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:v animated:YES completion:nil];
     } else {
       completion(NO);

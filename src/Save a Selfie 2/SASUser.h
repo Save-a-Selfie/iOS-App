@@ -16,19 +16,28 @@
  */
 @interface SASUser : NSObject
 
-extern const NSString* USER_DICT_EMAIL; // Key for user's email.
+extern const NSString* USER_DICT_CREDENTIAL; // Key for user credential.
 extern const NSString* USER_DICT_TOKEN; // Key for user's token.
+extern const NSString* USER_DICT_SOCIAL_ID; // Key given by social media apis.
+extern const NSString* USER_DICT_NAME; // The key for the name of the user.
 
 
-+ (void) setCurrentLoggedUser:(NSString*) token withEmail:(NSString*)email;
++ (void) setCurrentLoggedUserEmail:(NSString*) email;
 
++ (void) setCurrentLoggedUserToken:(NSString*) token;
+
++ (void) setCurrentLoggedUserSocialID:(NSString*) ID;
+
++ (void) setCurrentLoggedUserName:(NSString*) name;
 
 /**
  Returns information on the current logged on user.
  
  To access the infomation use:
-  USER_DICT_EMAIL: Key for user's email.
+  USER_DICT_CREDENTIAL: Key for user's credential.
   USER_DICT_TOKEN: Key for user's token.
+  USER_DICT_SOCIAL_ID: Key for user's social id.
+  USER_DICT_NAME: Key for user's name.
   */
 + (NSDictionary*) currentLoggedUser;
 
