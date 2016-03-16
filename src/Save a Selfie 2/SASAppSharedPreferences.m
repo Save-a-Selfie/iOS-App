@@ -31,21 +31,23 @@ NSString* TokenIDKey = @"TokenID";
 
 
 + (void)setCurrentLoggedUserToken:(NSString *)token {
-  FXKeychain *fxKeychain = [FXKeychain defaultKeychain];
-  if (![fxKeychain objectForKey:TokenIDKey]) {
-    [fxKeychain removeObjectForKey:TokenIDKey];
+  // If there's a user already logged in remove them.
+  if ([[NSUserDefaults standardUserDefaults] objectForKey:TokenIDKey] != nil) {
+    [[NSUserDefaults standardUserDefaults]removeObjectForKey:TokenIDKey];
   }
-  [fxKeychain setObject:token forKey:TokenIDKey];
+  [[NSUserDefaults standardUserDefaults]setValue:token forKey:TokenIDKey];
+  [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 
 
 + (void)setCurrentLoggedUserSocialID:(NSString *) ID {
-  FXKeychain *fxKeychain = [FXKeychain defaultKeychain];
-  if (![fxKeychain objectForKey:SocialIDKey]) {
-    [fxKeychain removeObjectForKey:SocialIDKey];
+  // If there's a user already logged in remove them.
+  if ([[NSUserDefaults standardUserDefaults] objectForKey:SocialIDKey] != nil) {
+    [[NSUserDefaults standardUserDefaults]removeObjectForKey:SocialIDKey];
   }
-  [fxKeychain setObject:ID forKey:SocialIDKey];
+  [[NSUserDefaults standardUserDefaults]setValue:ID forKey:CurrentUserEmail];
+  [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 
@@ -71,13 +73,11 @@ NSString* TokenIDKey = @"TokenID";
 
 
 + (NSString *)currentLoggedUserSocialID {
-  FXKeychain *k = [FXKeychain defaultKeychain];
-  return [k objectForKey:SocialIDKey];
+  return [[NSUserDefaults standardUserDefaults] objectForKey:SocialIDKey];
 }
 
 + (NSString *)currentLoggedUserToken {
-  FXKeychain *k = [FXKeychain defaultKeychain];
-  return [k objectForKey:TokenIDKey];
+return [[NSUserDefaults standardUserDefaults] objectForKey:TokenIDKey];
 }
 
 + (NSString*) currentLoggedUserEmail {
@@ -92,8 +92,7 @@ NSString* TokenIDKey = @"TokenID";
 + (void) removeUserInformation {
   [[NSUserDefaults standardUserDefaults]removeObjectForKey: CurrentUserEmail];
   [[NSUserDefaults standardUserDefaults] removeObjectForKey:CurrentUserName];
-  FXKeychain *keychain = [FXKeychain defaultKeychain];
-  [keychain removeObjectForKey:TokenIDKey];
-  [keychain removeObjectForKey:SocialIDKey];
+  [[NSUserDefaults standardUserDefaults] removeObjectForKey:SocialIDKey];
+  [[NSUserDefaults standardUserDefaults] removeObjectForKey:TokenIDKey];
 }
 @end

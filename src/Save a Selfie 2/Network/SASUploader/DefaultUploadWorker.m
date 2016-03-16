@@ -44,9 +44,9 @@ NSString* const UPLOAD_IMAGE_URL  = @"https://guarded-mountain-99906.herokuapp.c
     NSString *tokenFormat = [NSString stringWithFormat:@"Bearer %@", token];
     
     
-//    NSURL* imageFile = [self generateFileForPOST:uploadObject.image];
-    NSData *imageData = UIImageJPEGRepresentation(uploadObject.image, 1.0f);
-    NSString *imageUTF8 = [imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+    NSURL *imageFile = [self generateFileForPOST:uploadObject.image];
+
+
     
     NSNumber *lat = [NSNumber numberWithDouble:uploadObject.coordinates.latitude];
     NSNumber *long_ = [NSNumber numberWithDouble:uploadObject.coordinates.longitude];
@@ -62,7 +62,7 @@ NSString* const UPLOAD_IMAGE_URL  = @"https://guarded-mountain-99906.herokuapp.c
                                    @"aid_type": aidType,
                                    @"description": uploadObject.caption,
                                    @"postal_code": self.postCode,
-                                   @"file": imageUTF8}];
+                                   @"file": imageFile}];
   }] asJsonAsync:^(UNIHTTPJsonResponse *jsonResponse, NSError *error) {
     NSLog(@"ds");
   }];

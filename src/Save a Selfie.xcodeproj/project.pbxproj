@@ -21,7 +21,6 @@
 		180E295D1B5464C1003548FA /* EULAViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 180E295C1B5464C1003548FA /* EULAViewController.m */; };
 		1810C90A1B289044009063E5 /* UIImage+SASImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 1810C9091B289044009063E5 /* UIImage+SASImage.m */; };
 		1814257E1C95DDA3001342A7 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1814257D1C95DDA3001342A7 /* Security.framework */; };
-		181425871C95F494001342A7 /* KeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 181425861C95F494001342A7 /* KeychainItemWrapper.m */; };
 		1818AFC61B50435B004FF998 /* UIView+Animations.m in Sources */ = {isa = PBXBuildFile; fileRef = 1818AFC51B50435B004FF998 /* UIView+Animations.m */; };
 		1818AFDA1B5153A5004FF998 /* SASGalleryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1818AFD91B5153A5004FF998 /* SASGalleryCell.m */; };
 		1819829D1C5ADDFF008A1A14 /* SASNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1819829C1C5ADDFF008A1A14 /* SASNetworkManager.m */; };
@@ -147,8 +146,6 @@
 		1810C9081B289044009063E5 /* UIImage+SASImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+SASImage.h"; sourceTree = "<group>"; };
 		1810C9091B289044009063E5 /* UIImage+SASImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+SASImage.m"; sourceTree = "<group>"; };
 		1814257D1C95DDA3001342A7 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
-		181425851C95F494001342A7 /* KeychainItemWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainItemWrapper.h; sourceTree = "<group>"; };
-		181425861C95F494001342A7 /* KeychainItemWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainItemWrapper.m; sourceTree = "<group>"; };
 		1818AFC41B50435B004FF998 /* UIView+Animations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Animations.h"; sourceTree = "<group>"; };
 		1818AFC51B50435B004FF998 /* UIView+Animations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Animations.m"; sourceTree = "<group>"; };
 		1818AFD81B5153A5004FF998 /* SASGalleryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASGalleryCell.h; sourceTree = "<group>"; };
@@ -363,8 +360,6 @@
 		1806DB401C83B27C0081CAFE /* SASAppSharedPreferences */ = {
 			isa = PBXGroup;
 			children = (
-				181425851C95F494001342A7 /* KeychainItemWrapper.h */,
-				181425861C95F494001342A7 /* KeychainItemWrapper.m */,
 				1806DB3D1C83B2760081CAFE /* SASAppSharedPreferences.h */,
 				1806DB3E1C83B2760081CAFE /* SASAppSharedPreferences.m */,
 			);
@@ -1328,7 +1323,6 @@
 				18B00B161C71427B0039A150 /* SASAppCache.m in Sources */,
 				18EBF9771B272B3400EDA48B /* SASImagePickerViewController.m in Sources */,
 				D700239519F5253C00E45408 /* AlertBox.m in Sources */,
-				181425871C95F494001342A7 /* KeychainItemWrapper.m in Sources */,
 				1836F9AC1C945C5700EEB621 /* DefaultImageDownloader.m in Sources */,
 				186D600C1C591C8700B57B10 /* SASDeviceButtonView.m in Sources */,
 				18592E051B51854C004DDFD8 /* UIView+WidthXY.m in Sources */,
