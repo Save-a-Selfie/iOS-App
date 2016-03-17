@@ -179,11 +179,20 @@ SASDeviceButtonViewDelegate>
     SASNetworkManager *networkManager = [SASNetworkManager sharedInstance];
     DefaultUploadWorker *uploadWorker = [[DefaultUploadWorker alloc] init];
     
-
     [self preUploadChecks: ^(){
       [self uploadBegan];
-      [networkManager uploadWithWorker:uploadWorker withObject:self.sasUploadObject completion:^(UploadCompletionStatus completion) {
-        
+      [networkManager uploadWithWorker:uploadWorker
+                            withObject:self.sasUploadObject
+                            completion:^(UploadCompletionStatus completion) {
+        switch (completion) {
+          case UploadCompletionStatusSuccess:
+            [self uploadSuccess];
+            break;
+          case UploadCompletionStatusFailed:
+            [self uploadFailure];
+          default:
+            break;
+        }
       }];
     }];
   }

@@ -15,7 +15,6 @@
 #import <Fabric/Fabric.h>
 #import <TwitterKit/TwitterKit.h>
 #import "AppDelegate.h"
-#import <JRSwizzle.h>
 @interface DefaultSignUpWorker()
 
 

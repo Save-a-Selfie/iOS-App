@@ -133,8 +133,10 @@ SASGalleryCellDelegate> {
       self.canRefresh = YES;
       [self.collectionView reloadData];
     }
+    // The complete load of the gallery may
+    // not be finished, however another image
+    // may be loaded.
     [self.collectionView reloadData];
-
   }];
 }
 

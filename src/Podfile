@@ -8,4 +8,4 @@ pod 'FXKeychain', '~> 1.5'
 pod 'Fabric'
 pod 'TwitterKit'
 pod 'TwitterCore'
-pod 'JRSwizzle', '~> 1.0'
+pod "AFNetworking", "~> 2.0"

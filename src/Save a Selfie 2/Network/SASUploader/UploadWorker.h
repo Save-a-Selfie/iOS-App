@@ -12,8 +12,8 @@
 
 // Statuses concerned with upload.
 typedef NS_ENUM(NSUInteger, UploadCompletionStatus) {
-  Failed, // Upload failed.
-  Success, // Upload succeeded.
+  UploadCompletionStatusFailed, // Upload failed.
+  UploadCompletionStatusSuccess, // Upload succeeded.
 };
 
 

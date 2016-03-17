@@ -1,4 +1,25 @@
 PODS:
+  - AFNetworking (2.6.3):
+    - AFNetworking/NSURLConnection (= 2.6.3)
+    - AFNetworking/NSURLSession (= 2.6.3)
+    - AFNetworking/Reachability (= 2.6.3)
+    - AFNetworking/Security (= 2.6.3)
+    - AFNetworking/Serialization (= 2.6.3)
+    - AFNetworking/UIKit (= 2.6.3)
+  - AFNetworking/NSURLConnection (2.6.3):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/NSURLSession (2.6.3):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (2.6.3)
+  - AFNetworking/Security (2.6.3)
+  - AFNetworking/Serialization (2.6.3)
+  - AFNetworking/UIKit (2.6.3):
+    - AFNetworking/NSURLConnection
+    - AFNetworking/NSURLSession
   - Bolts (1.6.0):
     - Bolts/AppLinks (= 1.6.0)
     - Bolts/Tasks (= 1.6.0)
@@ -13,7 +34,6 @@ PODS:
   - FBSDKShareKit (4.10.0):
     - FBSDKCoreKit
   - FXKeychain (1.5.3)
-  - JRSwizzle (1.0)
   - MBProgressHUD (0.9.1)
   - TwitterCore (1.15.3):
     - Fabric
@@ -22,25 +42,25 @@ PODS:
   - Unirest (1.1.4)
 
 DEPENDENCIES:
+  - AFNetworking (~> 2.0)
   - Fabric
   - FBSDKCoreKit
   - FBSDKLoginKit
   - FBSDKShareKit
   - FXKeychain (~> 1.5)
-  - JRSwizzle (~> 1.0)
   - MBProgressHUD (~> 0.9.1)
   - TwitterCore
   - TwitterKit
   - Unirest (~> 1.1.4)
 
 SPEC CHECKSUMS:
+  AFNetworking: cb8d14a848e831097108418f5d49217339d4eb60
   Bolts: f52a250053bb517ca874523c3913776359ab3def
   Fabric: caf7580c725e64db144f610ac65cd60956911dc7
   FBSDKCoreKit: 13bec8373fb3af94d44daf2aa1e0958687897fbd
   FBSDKLoginKit: d3d4a2e9d31954deb00bfea964167a05ca1ea976
   FBSDKShareKit: 54587b4624706ace1e810cf83412a918141f807a
   FXKeychain: 2fe54573946ffef634f4e2a2851e6c8f4ea15e76
-  JRSwizzle: dd5ead5d913a0f29e7f558200165849f006bb1e3
   MBProgressHUD: c47f2c166c126cf2ce36498d80f33e754d4e93ad
   TwitterCore: cce24b3c798993ccde72787ea79ea9a478b284e4
   TwitterKit: 43600f2d2848c227739efea5b2939585e69339c3

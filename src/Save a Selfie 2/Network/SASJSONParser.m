@@ -23,5 +23,8 @@
   return [json objectForKey:@"data"];
 }
 
-
++ (NSInteger)parseInsertStatus:(NSDictionary *)json {
+  NSNumber *insertStatus = [[json objectForKey:@"responseMessage"] objectForKey:@"insert_status"];
+  return insertStatus.integerValue;
+}
 @end

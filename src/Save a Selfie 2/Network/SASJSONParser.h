@@ -81,5 +81,5 @@
 
 /**
  Parses json to return the insert status from a POST Request. */
-+ (int) parseInsertStatus:(NSDictionary*) json;
++ (NSInteger) parseInsertStatus:(NSDictionary*) json;
 @end

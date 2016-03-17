@@ -30,8 +30,7 @@
 <SASImagePickerDelegate,
 SASUploadViewControllerDelegate,
 UIAlertViewDelegate,
-MKMapViewDelegate,
-Cacheable>
+MKMapViewDelegate>
 
 @property (nonatomic, strong) IBOutlet SASMapView* sasMapView;
 
@@ -50,7 +49,8 @@ Cacheable>
 @property (strong, nonatomic) SASFilterView *sasFilterView;
 
 @property (strong, nonatomic) SASNetworkManager *networkManager;
-@property (strong, nonatomic) SASAppCache *sasAppCache;
+
+@property (strong, nonatomic) NSMutableDictionary<SASAnnotation*, SASDevice*> *annotaionsDict;
 
 @end
 
@@ -70,12 +70,11 @@ NSString *permissionsProblemText = @"Please enable location services for this ap
   [self.navigationController setNavigationBarHidden:YES animated:NO];
   self.tabBarController.tabBar.hidden = NO;
   
+  self.annotaionsDict = [[NSMutableDictionary alloc] init];
   self.sasMapView.notificationReceiver = self;
   self.sasMapView.zoomToUsersLocationInitially = YES;
   self.sasMapView.sasAnnotationImage = SASAnnotationImageCustom;
   self.sasMapView.mapType = MKMapTypeSatellite;
-  
-
 }
 
 - (void)viewDidLoad {
@@ -142,49 +141,26 @@ NSString *permissionsProblemText = @"Please enable location services for this ap
     //  [query setLocationArguments:[self.sasMapView currentUserLocation]];
     
     DefaultDownloadWorker *downloadWorker = [[DefaultDownloadWorker alloc] init];
-    
-    [self.networkManager cacheableDownloadWithQuery:query
-                                          forWorker:downloadWorker
-                                              cache:self];
+    [self.networkManager downloadWithQuery:query forWorker:downloadWorker completion:^(NSArray<SASDevice *> *result) {
+      
+    }];
   });
 }
 
-#pragma mark <Cacheable>
-- (void)cacheObjects:(NSArray<NSObject *> *) objects {
 
-  // Ideally we shouldn't need to check the contents
-  // of the array, as we know its source,
-  // however, as we're going to cache it
-  // we better make sure it is what we expect. (SASDevice);
-  if (objects && (objects.count > 0)) {
-    unsigned long length = objects.count;
-#warning Causes array out of index sometimes: update(Stephen Fox)
-    if ([objects[length - 1] isKindOfClass:[SASDevice class]]) {
-      if (!self.sasAppCache) {
-        self.sasAppCache = [SASAppCache sharedInstance];
-      }
-      
-
-      // Cache all the devices and annotations
-      // generated from the devices.
-      for (SASDevice *s in objects) {
-        SASAnnotation *annotation = [SASAnnotation annotationWithSASDevice:s];
-        [self.sasAppCache cacheAnnotation:annotation forDevice:s];
-      }
-    }
+- (void)setupAnnotations:(NSArray<SASDevice *> *) objects {
+  for (SASDevice *s in objects) {
+    SASAnnotation *annotation = [SASAnnotation annotationWithSASDevice:s];
+    [self.annotaionsDict setObject:s forKey:annotation];
   }
   [self displayAnnotationsToMap];
 }
 
 
 - (void) displayAnnotationsToMap {
-  if (!self.sasAppCache) {
-    self.sasAppCache = [SASAppCache sharedInstance];
-  }
-  
-  NSArray<SASDevice*> *annotationKeys = [self.sasAppCache keysForAnnotations];
-  for (SASDevice* key in annotationKeys) {
-    [self.sasMapView addAnnotation:[self.sasAppCache cachedAnnotationForKey:key]];
+  NSArray* keys = [self.annotaionsDict allKeys];
+  for (SASAnnotation *annotation in keys) {
+    [self.sasMapView addAnnotation:annotation];
   }
 }
 
@@ -195,20 +171,15 @@ NSString *permissionsProblemText = @"Please enable location services for this ap
   // with the annotation selected.
   SASImageViewController *sasImageViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SASImageViewController"];
   
-  // Get the device associated with the SASAnnotation from the App cache.
-  NSDictionary *annotationKeys = [self.sasAppCache annotationKeyValuePairs];
-  NSArray<SASDevice*> *deviceKeyArray = [annotationKeys allKeysForObject:annotation];
-  SASDevice *device = [deviceKeyArray lastObject];
-  
+
+  SASDevice *device = [self.annotaionsDict objectForKey:annotation];
   sasImageViewController.device = device;
-  
   sasImageViewController.annotation = annotation;
   [self.navigationController pushViewController:sasImageViewController animated:YES];
 }
 
 
 
-// This method will be called anytime permissions for lacation is changed.
 - (void)sasMapView:(SASMapView *)mapView authorizationStatusHasChanged:(CLAuthorizationStatus)status {
   
   BOOL makeCheckForMapWarning = NO;
