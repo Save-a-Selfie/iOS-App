@@ -47,6 +47,9 @@ SASGalleryCellDelegate> {
 - (void)viewDidLoad {
   [super viewDidLoad];
   
+  [self showActivityIndicator];
+  [self beginDownloadProcess];
+  
   if(!self.refreshControl) {
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(refresh) forControlEvents:UIControlEventValueChanged];
@@ -67,9 +70,9 @@ SASGalleryCellDelegate> {
   [self.navigationController.navigationBar
    setTitleTextAttributes:@{NSFontAttributeName: [UIFont fontWithName:@"AvenirNext-DemiBold" size:17.0f],
                             NSForegroundColorAttributeName : [UIColor blackColor] }];
-  [self showActivityIndicator];
-  [self beginDownloadProcess];
+
 }
+
 
 
 
@@ -149,7 +152,6 @@ SASGalleryCellDelegate> {
   
   unsigned int rangeLength = [self determineMinimumRangeForImageDownload:(unsigned)self.filePaths.count
                                                          withRangeLength:35];
-  NSLog(@"Download called");
   NSRange range = NSMakeRange(0, rangeLength);
   imagesDownloadedCount = (int)range.length;
   
@@ -175,6 +177,7 @@ SASGalleryCellDelegate> {
     [self.collectionView reloadData];
   }];
 }
+
 
 - (void) refresh {
   if (self.canRefresh) {

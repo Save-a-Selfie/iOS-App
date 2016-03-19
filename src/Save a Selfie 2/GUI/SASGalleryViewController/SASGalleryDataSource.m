@@ -69,7 +69,17 @@
       UIImage *image = [UIImage imageWithData:jpegData];
       // Add image reference to our `datasource`.
       [self.images addObject:image];
-      completed(NO);
+      
+      totalImagesDownloaded++;
+      // The total image count should be the same amount
+      // as imagePaths.count as these are all the files
+      // we have to download. this signifies we're finished
+      // downloaded this batch of images.
+      if (totalImagesDownloaded == query.imagePaths.count) {
+        completed(YES);
+      } else {
+        completed(NO);
+      }
     });
   }];
 }
