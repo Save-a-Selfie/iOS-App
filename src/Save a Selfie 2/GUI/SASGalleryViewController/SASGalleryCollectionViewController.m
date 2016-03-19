@@ -105,7 +105,7 @@ SASGalleryCellDelegate> {
   query.type = SASNetworkQueryTypeAll; // Download all devices.
   
   if (!self.networkManager) {
-    self.networkManager = [[SASNetworkManager alloc] init];
+    self.networkManager = [SASNetworkManager sharedInstance];
   }
   
   // Go dowload the devices from the server.

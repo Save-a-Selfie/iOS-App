@@ -130,7 +130,6 @@
                                                                     action:@selector(reportImage)];
   self.navigationItem.rightBarButtonItem = reportButton;
   
-  
   // Store the type of device shown in the image
   self.sasDeviceType = self.device.type;
   
@@ -146,7 +145,6 @@
   
   
   if (self.device != nil) {
-    
     // Set the image for deviceImageView associated with the device i.e lifeRing, defib etc..
     self.deviceImageView.image = [self deviceImageForAnnotation:self.device];
     
@@ -155,7 +153,6 @@
     [self setColourForColouredUIElements:self.device];
   }
 }
-
 
 
 
@@ -168,7 +165,6 @@
     [self.photoDescription.layer setBorderWidth:0.0];
   }
 }
-
 
 
 
@@ -196,7 +192,7 @@
   DefaultImageDownloader *imageDownloader = [DefaultImageDownloader new];
   SASNetworkQuery *networkQuery = [SASNetworkQuery queryWithType:SASNetworkQueryImageDownload];
   
-  NSArray <NSString*> * filepath = [NSArray arrayWithObject:self.device.filePath];
+  NSArray <NSString*> *filepath = [NSArray arrayWithObject:self.device.filePath];
   [networkQuery setImagesPaths: filepath];
   
   [networkManager downloadImageWithQuery:networkQuery forWorker:imageDownloader completion:^(UIImage *image) {
@@ -210,8 +206,8 @@
   }];
 }
 
+
 - (void) setupMapView {
-  
   // The sasMapView property should show the location
   // of where the device is located.
   self.sasMapView.sasAnnotationImage = SASAnnotationImageDefault;

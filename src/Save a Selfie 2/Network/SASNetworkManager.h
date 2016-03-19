@@ -28,6 +28,8 @@
 @interface SASNetworkManager : NSObject
 
 
+- (instancetype)init NS_UNAVAILABLE;
+
 
 /**
  Reference the shared instance to access

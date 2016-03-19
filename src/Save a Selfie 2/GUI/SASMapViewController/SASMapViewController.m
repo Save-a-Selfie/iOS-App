@@ -69,16 +69,15 @@ NSString *permissionsProblemText = @"Please enable location services for this ap
   
   [self.navigationController setNavigationBarHidden:YES animated:NO];
   self.tabBarController.tabBar.hidden = NO;
-  
+}
+
+- (void)viewDidLoad {
+  [super viewDidLoad];
   self.annotaionsDict = [[NSMutableDictionary alloc] init];
   self.sasMapView.notificationReceiver = self;
   self.sasMapView.zoomToUsersLocationInitially = YES;
   self.sasMapView.sasAnnotationImage = SASAnnotationImageCustom;
   self.sasMapView.mapType = MKMapTypeSatellite;
-}
-
-- (void)viewDidLoad {
-  [super viewDidLoad];
 }
 
 - (IBAction)locateUser:(id)sender {
@@ -90,7 +89,8 @@ NSString *permissionsProblemText = @"Please enable location services for this ap
   [self clearLocationDisabledAlert];
   
   if (self.permissionProblemAlert == nil) {
-    self.permissionProblemAlert = [[FXAlertController alloc] initWithTitle:@"LOCATION DISABLED" message:permissionsProblemText];
+    self.permissionProblemAlert = [[FXAlertController alloc] initWithTitle:@"LOCATION DISABLED"
+                                                                   message:permissionsProblemText];
     self.permissionProblemAlert.font = [UIFont fontWithName:@"Avenir Next" size:15];
     
     FXAlertButton *gotoSettingsButton = [[FXAlertButton alloc] initWithType:FXAlertButtonTypeCancel];
@@ -135,13 +135,14 @@ NSString *permissionsProblemText = @"Please enable location services for this ap
   
   static dispatch_once_t token;
   dispatch_once(&token, ^{
-#warning Add timing capabilities so if no location found all are displayed.
     self.networkManager = [SASNetworkManager sharedInstance];
     SASNetworkQuery *query = [SASNetworkQuery queryWithType:SASNetworkQueryTypeAll];
     //  [query setLocationArguments:[self.sasMapView currentUserLocation]];
     
     DefaultDownloadWorker *downloadWorker = [[DefaultDownloadWorker alloc] init];
-    [self.networkManager downloadWithQuery:query forWorker:downloadWorker completion:^(NSArray<SASDevice *> *result) {
+    [self.networkManager downloadWithQuery:query
+                                 forWorker:downloadWorker
+                                completion:^(NSArray<SASDevice *> *result) {
       [self setupAnnotations:result];
     }];
   });
@@ -170,8 +171,7 @@ NSString *permissionsProblemText = @"Please enable location services for this ap
   // Present the SASImageviewController to display the image associated
   // with the annotation selected.
   SASImageViewController *sasImageViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SASImageViewController"];
-  
-
+  NSObject *j = self.annotaionsDict;
   SASDevice *device = [self.annotaionsDict objectForKey:annotation];
   sasImageViewController.device = device;
   sasImageViewController.annotation = annotation;
