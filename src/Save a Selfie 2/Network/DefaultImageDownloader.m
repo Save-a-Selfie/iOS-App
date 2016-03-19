@@ -62,8 +62,7 @@ NSString* const GET_IMAGE_URL = @"https://guarded-mountain-99906.herokuapp.com/g
                                 @"Content-Type": @"application/json",
                                 @"Authorization": tokenFormat}];
   }] asBinaryAsync:^(UNIHTTPBinaryResponse *binaryResponse, NSError *error) {
-    UIImage *image = [UIImage imageWithData:binaryResponse.body];
-    completionBlock(image);
+      completionBlock(binaryResponse.body);
   }];
 }
 @end

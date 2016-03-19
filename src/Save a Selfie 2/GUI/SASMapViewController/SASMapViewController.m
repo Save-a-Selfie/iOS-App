@@ -24,7 +24,6 @@
 #import "SASNetworkQuery.h"
 #import "SASNetworkManager.h"
 #import "DefaultDownloadWorker.h"
-#import "Cacheable.h"
 
 @interface SASMapViewController ()
 <SASImagePickerDelegate,
@@ -36,6 +35,7 @@ MKMapViewDelegate>
 
 @property (nonatomic, strong) SASImagePickerViewController *sasImagePickerController;
 @property (nonatomic, strong) SASUploadViewController *sasUploadViewController;
+@property (nonatomic, strong) SASImageViewController *imageViewController;
 
 @property (nonatomic, strong) UINavigationController *uploadImageNavigationController;
 
@@ -66,13 +66,24 @@ NSString *permissionsProblemText = @"Please enable location services for this ap
 
 - (void)viewWillAppear:(BOOL)animated {
   [super viewWillAppear:animated];
-  
   [self.navigationController setNavigationBarHidden:YES animated:NO];
   self.tabBarController.tabBar.hidden = NO;
+  
+  UIViewController *fromViewController = [[[self navigationController] transitionCoordinator]
+                                          viewControllerForKey:UITransitionContextFromViewControllerKey];
+  
+  if ([[self.navigationController viewControllers] containsObject:fromViewController])
+  { } else {
+    if ([fromViewController isKindOfClass:SASImageViewController.class]) {
+      self.imageViewController = nil;
+    }
+  }
 }
+
 
 - (void)viewDidLoad {
   [super viewDidLoad];
+
   self.annotaionsDict = [[NSMutableDictionary alloc] init];
   self.sasMapView.notificationReceiver = self;
   self.sasMapView.zoomToUsersLocationInitially = YES;
@@ -170,12 +181,11 @@ NSString *permissionsProblemText = @"Please enable location services for this ap
 - (void)sasMapView:(SASMapView *)mapView annotationWasTapped:(SASAnnotation *) annotation {
   // Present the SASImageviewController to display the image associated
   // with the annotation selected.
-  SASImageViewController *sasImageViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SASImageViewController"];
-  NSObject *j = self.annotaionsDict;
+  self.imageViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SASImageViewController"];
   SASDevice *device = [self.annotaionsDict objectForKey:annotation];
-  sasImageViewController.device = device;
-  sasImageViewController.annotation = annotation;
-  [self.navigationController pushViewController:sasImageViewController animated:YES];
+  self.imageViewController.device = device;
+  self.imageViewController.annotation = annotation;
+  [self.navigationController pushViewController:self.imageViewController animated:YES];
 }
 
 

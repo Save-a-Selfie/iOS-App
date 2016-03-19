@@ -39,7 +39,7 @@
 
 @property (nonatomic, strong) SASActivityIndicator *sasActivityIndicator;
 
-@property (nonatomic, strong) IBOutlet SASMapView *sasMapView;
+@property (nonatomic, weak) IBOutlet SASMapView *sasMapView;
 
 @property (nonatomic, weak) IBOutlet UIImageView *deviceImageView;
 @property (nonatomic, weak) IBOutlet UILabel *distanceLabel;
@@ -91,15 +91,6 @@
   self.sasImageView.hideOriginalInPreview = YES;
 }
 
-- (void)viewDidDisappear:(BOOL)animated {
-  [super viewDidDisappear:animated];
-  self.sasMapView = nil;
-  
-  if(!self.downloadImage) {
-    self.image = nil;
-  }
-  
-}
 
 
 - (BOOL)hidesBottomBarWhenPushed {
@@ -195,8 +186,10 @@
   NSArray <NSString*> *filepath = [NSArray arrayWithObject:self.device.filePath];
   [networkQuery setImagesPaths: filepath];
   
-  [networkManager downloadImageWithQuery:networkQuery forWorker:imageDownloader completion:^(UIImage *image) {
+  [networkManager downloadImageWithQuery:networkQuery forWorker:imageDownloader completion:^(NSData *imageData) {
     dispatch_async(dispatch_get_main_queue(), ^{
+      NSData* jpegData = UIImageJPEGRepresentation([UIImage imageWithData:imageData], 0.5);
+      UIImage *image = [UIImage imageWithData:jpegData];
       self.sasImageView.image = image;
       [self.sasActivityIndicator stopAnimating];
       [self.sasActivityIndicator removeFromSuperview];

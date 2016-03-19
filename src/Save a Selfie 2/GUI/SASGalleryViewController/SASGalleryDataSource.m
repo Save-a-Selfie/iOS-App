@@ -55,49 +55,23 @@
 
 
 
-- (void)imagesWithinRange:(NSRange)range withQuery:(SASNetworkQuery *)query completion:(void (^)(BOOL))completion {
-  [self downloadImagesWithinRange:range withQuery:query completion:completion];
+- (void)imagesWithQuery:(SASNetworkQuery *)query completion:(void (^)(BOOL))completion {
+  [self downloadImagesWithQuery:query completion:completion];
 }
 
 
 
-- (void) downloadImagesWithinRange:(NSRange) range
-                         withQuery:(SASNetworkQuery*) query
+- (void) downloadImagesWithQuery:(SASNetworkQuery*) query
                         completion:(void(^)(BOOL completed)) completed {
-  
-  // Create all the urls for this range of images
-  // to be downloaded from the server.
-  NSMutableArray<NSURL*> *imageURLs;
-  if (query.type == SASNetworkQueryImageDownload) {
-    for (NSString *stringUrl in query.imagePaths) {
-      [imageURLs addObject:[NSURL URLWithString:stringUrl]];
-    }
-  }
-  
-  __block int downloadAmount = (int)range.length - (int)range.location;
-  __block int count = 0;
-  
-  for (int i = (int)range.location; i < (int)range.length; ++i) {
-    if (!(i >= totalImagesDownloaded)) {
-      
-      if (!self.worker) { return; }
-      
-      [self.worker downloadImageWithQuery:query completionResult:^(UIImage *image) {
-        // Add image reference to our `datasource`.
-        [self.images addObject:image];
-        dispatch_async(dispatch_get_main_queue(), ^{
-          ++count;
-          ++totalImagesDownloaded;
-          if (count == downloadAmount) {
-            completed(YES);
-          } else {
-            completed(NO);
-          }
-        });
-      }];
-
-    }
-  }
+  [self.worker downloadImageWithQuery:query completionResult:^(NSData *imageData) {
+    dispatch_async(dispatch_get_main_queue(), ^{
+      NSData* jpegData = UIImageJPEGRepresentation([UIImage imageWithData:imageData], 0.5);
+      UIImage *image = [UIImage imageWithData:jpegData];
+      // Add image reference to our `datasource`.
+      [self.images addObject:image];
+      completed(NO);
+    });
+  }];
 }
 
 
@@ -110,13 +84,9 @@
                   cellForItemAtIndexPath:(NSIndexPath *)indexPath {
 
   self.galleryCell = [collectionView dequeueReusableCellWithReuseIdentifier:self.reuseIdentifier forIndexPath:indexPath];
-
-  UIImage *image = [self.images objectAtIndex:indexPath.row];
-  
   self.galleryCell.delegate = self.cellDelegate;
-  
   // Set the cell's image.
-  self.galleryCell.imageView.image = image;
+  self.galleryCell.imageView.image = [self.images objectAtIndex:indexPath.row];
   
   return self.galleryCell;
 }

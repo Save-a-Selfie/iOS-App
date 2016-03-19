@@ -18,7 +18,7 @@
 
 typedef void (^DownloadWorkerCompletionBlock)(NSArray <SASDevice *> *result);
 
-typedef void (^DownloadWorkerImageCompletionBlock)(UIImage* image) ;
+typedef void (^DownloadWorkerImageCompletionBlock)(NSData* imageData) ;
 
 @optional
 - (void) downloadWithQuery:(SASNetworkQuery *) query

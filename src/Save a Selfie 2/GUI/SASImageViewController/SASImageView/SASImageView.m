@@ -28,8 +28,6 @@
         
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(handleTap)];
         [self addGestureRecognizer:tap];
-
-        
     }
     return self;
 }
@@ -38,9 +36,7 @@
 
 
 - (void) handleTap {
-    
-    
-    if (_canShowFullSizePreview && self.image) {
+    if (self.canShowFullSizePreview && self.image) {
         
         SASImageInspectorView *sasImageInspectorView = [[SASImageInspectorView alloc] initWithImage:self.image];
         sasImageInspectorView.delegate = self;
@@ -49,8 +45,6 @@
         
         [sasImageInspectorView animateImageIntoView:rootViewController.view];
     }
-    
-
     if (self.hideOriginalInPreview)
         self.hidden = YES;
     

@@ -18,13 +18,7 @@
 #import "DefaultDownloadWorker.h"
 #import "SASGalleryDataSource.h"
 
-/**
- The basic control flow of this class from
- image download to displaying to user:
- - viewDidLoad
- - downloadFromServer
- - setupGallery.
- */
+
 
 @interface SASGalleryCollectionViewController () <
 UICollectionViewDelegate,
@@ -76,6 +70,7 @@ SASGalleryCellDelegate> {
   [self showActivityIndicator];
   [self beginDownloadProcess];
 }
+
 
 
 - (void) beginDownloadProcess {
@@ -134,36 +129,51 @@ SASGalleryCellDelegate> {
   }
 }
 
+/**
+ Determines the minimum range length for a given number of elements.
+*/
+- (unsigned int) determineMinimumRangeForImageDownload:(unsigned int) totalElements
+                                        withRangeLength:(unsigned int) length {
+  if (length > totalElements) {
+    return totalElements;
+  } else {
+    return length;
+  }
+}
+
 
 - (void) downloadImages {
-  if (self.filePaths) {
-    
-    NSRange range = NSMakeRange(0, 35);
-    imagesDownloadedCount = (int)range.length;
-    
-    // We don't want to download every omage on the server
-    // only just the amount specified within the range so make
-    // a sub array of these filepaths.
-    NSArray *subArrayFilePaths = [self.filePaths subarrayWithRange:range];
-
-    // Query for the datasource to use.
-    SASNetworkQuery *query = [[SASNetworkQuery alloc] init];
-    [query setImagesPaths: subArrayFilePaths];
-    
-    [self.galleryDataSource imagesWithinRange:range withQuery:query completion:^(BOOL finished) {
-      if (finished) {
-        [self hideActivityIndicator];
-        self.canRefresh = YES;
-        [self.collectionView reloadData];
-      }
-      // The complete load of the gallery may
-      // not be finished, however another image
-      // may be loaded.
-      [self.collectionView reloadData];
-    }];
-    
-    
+  if (!self.filePaths || self.filePaths.count == 0) {
+    return;
   }
+  
+  unsigned int rangeLength = [self determineMinimumRangeForImageDownload:(unsigned)self.filePaths.count
+                                                         withRangeLength:35];
+  NSLog(@"Download called");
+  NSRange range = NSMakeRange(0, rangeLength);
+  imagesDownloadedCount = (int)range.length;
+  
+  // We don't want to download every omage on the server
+  // only just the amount specified within the range so make
+  // a sub array of these filepaths.
+  NSArray *subArrayFilePaths = [self.filePaths subarrayWithRange:range];
+  
+  // Query for the datasource to use.
+  SASNetworkQuery *query = [[SASNetworkQuery alloc] init];
+  [query setImagesPaths: subArrayFilePaths];
+  query.type = SASNetworkQueryImageDownload;
+  
+  [self.galleryDataSource imagesWithQuery:query completion:^(BOOL finished) {
+    if (finished) {
+      [self hideActivityIndicator];
+      self.canRefresh = YES;
+      [self.collectionView reloadData];
+    }
+    // The complete load of the gallery may
+    // not be finished, however another image
+    // may be loaded.
+    [self.collectionView reloadData];
+  }];
 }
 
 - (void) refresh {
@@ -194,12 +204,6 @@ SASGalleryCellDelegate> {
   [self.activityIndicator stopAnimating];
   self.navigationItem.rightBarButtonItem = nil;
 }
-
-
-- (void) initialSetupOfGallery {
-  
-}
-
 
 
 
@@ -242,26 +246,7 @@ SASGalleryCellDelegate> {
   if (bottomEdge >= self.collectionView.contentSize.height) {
     
     // Download the next 15 images.
-    NSRange range = NSMakeRange(imagesDownloadedCount, imagesDownloadedCount + 15);
-    imagesDownloadedCount = (int)range.length;
-    
-    SASNetworkQuery *query = [[SASNetworkQuery alloc] init];
-    
-    // Download the next 15 images from a sub array with the corresponding urls.
-    NSArray* subArrayFilePaths = [self.filePaths subarrayWithRange:range];
-    [query setImagesPaths:subArrayFilePaths];
-    
-    
-    [self showActivityIndicator];
-    [self.galleryDataSource imagesWithinRange:range
-                                    withQuery:query
-                                   completion:^(BOOL finished) {
-      if (finished) {
-        [self hideActivityIndicator];
-      } else {
-        [self.collectionView reloadData];
-      }
-    }];
+    [self downloadImages];
   }
 }
 

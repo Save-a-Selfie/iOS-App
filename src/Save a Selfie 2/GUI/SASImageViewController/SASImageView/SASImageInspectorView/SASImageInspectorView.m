@@ -16,8 +16,8 @@
 }
 
 @property (nonatomic, strong) UIImageView *imageView;
-
 @property (nonatomic, assign) BOOL shouldFinishInspectingImage;
+
 @end
 
 @implementation SASImageInspectorView
@@ -40,8 +40,6 @@
         _imageView.contentMode = UIViewContentModeScaleAspectFit;
         
         [self addSubview:_imageView];
-
-        
     }
     return self;
 }
