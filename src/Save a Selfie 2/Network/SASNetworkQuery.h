@@ -39,15 +39,16 @@ typedef NS_ENUM(NSUInteger, SASNetworkQueryType) {
  */
 - (void) setLocationArguments:(CLLocationCoordinate2D) coordinates;
 
+
 /**
- Sets the image path to an image for downloading.
+ Sets a collection of image paths to use for downloading.
 */
-- (void) setImageArguments:(NSString*) image;
+- (void)setImagesPaths:(NSArray<NSString *> *)imagesPaths;
 
-
-- (NSString*) imageArguments;
+- (NSArray<NSString*>*) imagePaths;
 
 /**
- The coordinates for a query.*/
+ The coordinates for a query.
+ */
 - (CLLocationCoordinate2D) coordinates;
 @end

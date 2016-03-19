@@ -176,7 +176,7 @@
   if(!self.shouldDownloadImage) {
     self.sasImageView.image = self.image;
   }
-  else if (self.device.imageFile != nil && self.shouldDownloadImage && !imageLoaded) {
+  else if (self.device.filePath != nil && self.shouldDownloadImage && !imageLoaded) {
     
     // Show activity indicator.
     self.sasActivityIndicator = [[SASActivityIndicator alloc] initWithMessage:@"Loading..."];
@@ -184,26 +184,31 @@
     self.sasActivityIndicator.center = CGPointMake(self.view.center.x, self.sasImageView.center.y);
     [self.sasImageView addSubview:self.sasActivityIndicator];
     [self.sasActivityIndicator startAnimating];
-    
-    SASNetworkManager *networkManager = [SASNetworkManager sharedInstance];
-    DefaultImageDownloader *imageDownloader = [DefaultImageDownloader new];
-    SASNetworkQuery *networkQuery = [SASNetworkQuery queryWithType:SASNetworkQueryImageDownload];
-    [networkQuery setImageArguments:self.device.imageFile];
-    
-    [networkManager downloadImageWithQuery:networkQuery forWorker:imageDownloader completion:^(UIImage *image) {
-      dispatch_async(dispatch_get_main_queue(), ^{
-        self.sasImageView.image = image;
-        [self.sasActivityIndicator stopAnimating];
-        [self.sasActivityIndicator removeFromSuperview];
-        self.sasActivityIndicator = nil;
-        imageLoaded = YES;
-      });
-    }];
+
+    // Download the image from server.
+    [self downloadImage];
   }
 }
 
 
-
+- (void) downloadImage {
+  SASNetworkManager *networkManager = [SASNetworkManager sharedInstance];
+  DefaultImageDownloader *imageDownloader = [DefaultImageDownloader new];
+  SASNetworkQuery *networkQuery = [SASNetworkQuery queryWithType:SASNetworkQueryImageDownload];
+  
+  NSArray <NSString*> * filepath = [NSArray arrayWithObject:self.device.filePath];
+  [networkQuery setImagesPaths: filepath];
+  
+  [networkManager downloadImageWithQuery:networkQuery forWorker:imageDownloader completion:^(UIImage *image) {
+    dispatch_async(dispatch_get_main_queue(), ^{
+      self.sasImageView.image = image;
+      [self.sasActivityIndicator stopAnimating];
+      [self.sasActivityIndicator removeFromSuperview];
+      self.sasActivityIndicator = nil;
+      imageLoaded = YES;
+    });
+  }];
+}
 
 - (void) setupMapView {
   

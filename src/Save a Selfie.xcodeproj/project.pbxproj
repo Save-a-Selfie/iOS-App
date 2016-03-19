@@ -255,7 +255,7 @@
 		18EE44DD1B556A1F00F8F93B /* SASNotificationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASNotificationView.m; sourceTree = "<group>"; };
 		18F736CC1C6409A2009B6A90 /* SASGalleryDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASGalleryDataSource.h; sourceTree = "<group>"; };
 		18F736CD1C6409A2009B6A90 /* SASGalleryDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASGalleryDataSource.m; sourceTree = "<group>"; };
-		18F736D31C6411E5009B6A90 /* Test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Test.h; sourceTree = "<group>"; };
+		18F736D31C6411E5009B6A90 /* SASGalleryControllerDataSourceProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASGalleryControllerDataSourceProtocol.h; sourceTree = "<group>"; };
 		6DD50A6FBD23D090F1506F00 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		6FAEC062F47D183CE9855B1C /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		CEC3A1E290F274AEC4E4510F /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -956,7 +956,7 @@
 			children = (
 				18F736CC1C6409A2009B6A90 /* SASGalleryDataSource.h */,
 				18F736CD1C6409A2009B6A90 /* SASGalleryDataSource.m */,
-				18F736D31C6411E5009B6A90 /* Test.h */,
+				18F736D31C6411E5009B6A90 /* SASGalleryControllerDataSourceProtocol.h */,
 			);
 			name = DataSource;
 			sourceTree = "<group>";

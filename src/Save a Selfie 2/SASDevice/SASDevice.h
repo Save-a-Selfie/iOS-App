@@ -24,7 +24,7 @@ typedef NS_ENUM(int, SASDeviceType) {
 @interface SASDevice : NSObject <NSCopying>;
 
 @property (nonatomic, assign) SASDeviceType type;
-@property (nonnull, nonatomic, strong, readonly) NSString *imageFile;
+@property (nonnull, nonatomic, strong, readonly) NSString *filePath;
 @property (nonnull, nonatomic, strong, readonly) NSString *caption;
 @property (nonatomic, readonly) CLLocationCoordinate2D deviceLocation;
 @property (nonnull, readonly) NSString *imageURLString;
@@ -40,9 +40,9 @@ typedef NS_ENUM(int, SASDeviceType) {
  @param coordinates The coordinates of the device.
  */
 - (nonnull instancetype) initDeviceWithInfo: (SASDeviceType)type
-                          imageFile:(nonnull NSString*) file
+                          filePath:(nonnull NSString*) file
                             caption:(nonnull NSString*) caption
-                        coordinates:(CLLocationCoordinate2D) coordinates;;
+                        coordinates:(CLLocationCoordinate2D) coordinates;
 
 
 

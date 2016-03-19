@@ -16,12 +16,12 @@
 
 
 
-- (instancetype)initDeviceWithInfo:(SASDeviceType) type
-                         imageFile:(NSString *)file
-                           caption:(NSString *)caption
-                       coordinates:(CLLocationCoordinate2D)coordinates {
+- (nonnull instancetype) initDeviceWithInfo: (SASDeviceType)type
+                                   filePath:(nonnull NSString*) file
+                                    caption:(nonnull NSString*) caption
+                                coordinates:(CLLocationCoordinate2D) coordinates {
   _type = type;
-  _imageFile = file;
+  _filePath = file;
   _caption = caption;
   _deviceLocation = coordinates;
   return self;
@@ -30,7 +30,7 @@
 
 - (NSString *)description {
   NSString *description = [NSString stringWithFormat:@"\nImageFile: %@,\nCaption: %@ ,\nType %d,\nCoordinates \n{ latititude: %f, \n longtitude: %f \n}\n",
-                           self.imageFile,
+                           self.filePath,
                            self.caption,
                            self.type,
                            self.deviceLocation.latitude,
@@ -41,7 +41,7 @@
 
 - (id)copyWithZone:(NSZone *)zone {
   return [[SASDevice alloc] initDeviceWithInfo:self.type
-                                     imageFile:[self.imageFile copy]
+                                     filePath:[self.filePath copy]
                                        caption:[self.caption copy]
                                    coordinates:self.deviceLocation];
 }

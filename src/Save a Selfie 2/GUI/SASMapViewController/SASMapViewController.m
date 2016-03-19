@@ -142,7 +142,7 @@ NSString *permissionsProblemText = @"Please enable location services for this ap
     
     DefaultDownloadWorker *downloadWorker = [[DefaultDownloadWorker alloc] init];
     [self.networkManager downloadWithQuery:query forWorker:downloadWorker completion:^(NSArray<SASDevice *> *result) {
-      
+      [self setupAnnotations:result];
     }];
   });
 }

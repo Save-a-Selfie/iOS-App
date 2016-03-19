@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Test.h"
+#import "SASGalleryControllerDataSourceProtocol.h"
 
 @interface SASGalleryCollectionViewController : UICollectionViewController
 

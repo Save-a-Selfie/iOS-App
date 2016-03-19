@@ -8,22 +8,25 @@
 
 #import "SASGalleryDataSource.h"
 #import "SASGalleryCell.h"
-#import "DefaultDownloadWorker.h"
+#import "DefaultImageDownloader.h"
 #import "SASGalleryContainer.h"
 #import "SASImageViewController.h"
 #import "SASAppCache.h"
+#import "SASNetworkManager.h"
 
-@interface SASGalleryDataSource ()
+@interface SASGalleryDataSource () {
+  // The total amount of images downloaded.
+  int totalImagesDownloaded;
+}
 
 @property (strong, nonatomic) NSString *reuseIdentifier;
 @property (strong, nonatomic) SASNetworkManager *networkManager;
 @property (strong, nonatomic) id<DownloadWorker> worker;
-@property (strong, nonatomic) NSArray<SASDevice*> *downloadedObjects;
-@property (strong, nonatomic) SASGalleryContainer *galleryContainer;
+@property (strong, nonatomic) NSArray<NSURL*> *downloadURLs;
 @property (weak, nonatomic) SASGalleryCell *galleryCell;
 @property (assign, nonatomic) BOOL objectsDowloaded;
 @property (weak, nonatomic) id<SASGalleryCellDelegate> cellDelegate;
-@property (strong, nonatomic) SASAppCache *appCache;
+@property (strong, nonatomic) NSMutableArray<UIImage*> *images;
 
 @end
 
@@ -44,89 +47,62 @@
   _networkManager = networkManager;
   _worker = worker;
   _galleryCell = reuseCell;
-  _galleryContainer = [[SASGalleryContainer alloc] init];
   _cellDelegate = _galleryCell.delegate;
+  _images = [[NSMutableArray alloc] init];
   return self;
   
 }
 
 
-/**
- Attempts to download from the server.
- Will check the app cache first to see if there is devices
- otherwise it will download.
- */
-- (void) downloadFromServer:(void(^)(BOOL )) completion {
-            
-  if (!self.networkManager) {
-    self.networkManager = [SASNetworkManager sharedInstance];
+
+- (void)imagesWithinRange:(NSRange)range withQuery:(SASNetworkQuery *)query completion:(void (^)(BOOL))completion {
+  [self downloadImagesWithinRange:range withQuery:query completion:completion];
+}
+
+
+
+- (void) downloadImagesWithinRange:(NSRange) range
+                         withQuery:(SASNetworkQuery*) query
+                        completion:(void(^)(BOOL completed)) completed {
+  
+  // Create all the urls for this range of images
+  // to be downloaded from the server.
+  NSMutableArray<NSURL*> *imageURLs;
+  if (query.type == SASNetworkQueryImageDownload) {
+    for (NSString *stringUrl in query.imagePaths) {
+      [imageURLs addObject:[NSURL URLWithString:stringUrl]];
+    }
   }
-
-  SASNetworkQuery *query = [SASNetworkQuery queryWithType:SASNetworkQueryTypeAll];
-  [self.networkManager downloadWithQuery:query
-                               forWorker:[[DefaultDownloadWorker alloc]init]
-                              completion:^(NSArray* devices) {
-                                self.downloadedObjects = devices;
-                                self.objectsDowloaded = YES;
-                                completion(YES);
-                              }];
-}
-
-- (BOOL) appCacheAvailable {
-  if (!self.appCache) {
-    self.appCache = [SASAppCache sharedInstance];
-  }
-  return [self.appCache cachedAmount] == 0 ? YES : NO;
-}
-
-
-
-
-- (void)imagesWithinRange:(NSRange)range completion:(void (^)(BOOL))completion {
-  [self downloadImagesWithinRange:range completion:completion];
-}
-
-
-- (void) downloadImagesWithinRange:(NSRange) range completion:(void(^)(BOOL completed)) completed {
   
   __block int downloadAmount = (int)range.length - (int)range.location;
   __block int count = 0;
   
   for (int i = (int)range.location; i < (int)range.length; ++i) {
-    if (!(i >= self.downloadedObjects.count)) {
+    if (!(i >= totalImagesDownloaded)) {
       
-      SASDevice *deviceAtIndex = [self.downloadedObjects objectAtIndex:i];
+      if (!self.worker) { return; }
       
-      NSString *imageURL = deviceAtIndex.imageURLString;
-      NSURL *url =[NSURL URLWithString:imageURL];
-      
-//      [SDWebImageDownloader.sharedDownloader
-//       downloadImageWithURL:url
-//       options:0
-//       progress:nil
-//       completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished) {
-//         
-//         if (image && finished) {
-//           [self.galleryContainer addImage:image forDevice:deviceAtIndex];
-//           
-//           dispatch_async(dispatch_get_main_queue(), ^() {
-//             ++count;
-//             if (count == downloadAmount) {
-//               completed(YES);
-//             } else {
-//               completed(NO);
-//             }
-//           });
-//         }
-//       }];
+      [self.worker downloadImageWithQuery:query completionResult:^(UIImage *image) {
+        // Add image reference to our `datasource`.
+        [self.images addObject:image];
+        dispatch_async(dispatch_get_main_queue(), ^{
+          ++count;
+          ++totalImagesDownloaded;
+          if (count == downloadAmount) {
+            completed(YES);
+          } else {
+            completed(NO);
+          }
+        });
+      }];
+
     }
   }
 }
 
 
-
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-  return [self.galleryContainer deviceCount];
+  return [self.images count];
 }
 
 
@@ -135,16 +111,12 @@
 
   self.galleryCell = [collectionView dequeueReusableCellWithReuseIdentifier:self.reuseIdentifier forIndexPath:indexPath];
 
-  SASDevice *device = self.downloadedObjects[indexPath.row];
-  UIImage *image = [self.galleryContainer imageForDevice:device];
+  UIImage *image = [self.images objectAtIndex:indexPath.row];
   
   self.galleryCell.delegate = self.cellDelegate;
   
   // Set the cell's image.
   self.galleryCell.imageView.image = image;
-  
-  // Set the cell's device.
-  self.galleryCell.device = device;
   
   return self.galleryCell;
 }

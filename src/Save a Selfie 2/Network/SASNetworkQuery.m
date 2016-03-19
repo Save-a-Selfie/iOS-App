@@ -11,7 +11,7 @@
 @interface SASNetworkQuery ()
 
 @property (assign, nonatomic) CLLocationCoordinate2D coordinates;
-@property (strong, nonatomic) NSString *imageArg;
+@property (strong, nonatomic) NSArray<NSString*> *imagesPaths;
 @end
 
 @implementation SASNetworkQuery
@@ -23,13 +23,14 @@
 }
 
 
-- (void)setImageArguments:(NSString *)image {
-  _imageArg = image;
+- (NSArray<NSString *> *)imagePaths {
+  return [_imagesPaths copy];
 }
 
-- (NSString *)imageArguments {
-  return [self.imageArg copy];
+- (void)setImagesPaths:(NSArray<NSString *> *)imagesPaths {
+  _imagesPaths = imagesPaths;
 }
+
 
 - (void)setLocationArguments:(CLLocationCoordinate2D) coordinates {
   _coordinates = coordinates;

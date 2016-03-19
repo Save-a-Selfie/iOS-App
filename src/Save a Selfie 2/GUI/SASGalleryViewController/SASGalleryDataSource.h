@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "SASNetworkManager.h"
-#import "Test.h"
+#import "SASGalleryControllerDataSourceProtocol.h"
 #import "SASGalleryCell.h"
+#import "DefaultImageDownloader.h"
 
 /**
  A data source for SASGalleryViewController.
@@ -29,7 +30,7 @@
  
  @param identifier       Provided for the UICollectionViewController.
  @param networkMananager Used to download the data.
- @param worker           Used for downloading data.
+ @param worker           Used for downloading images.
  
  */
 - (instancetype) initWithReuseCell:(SASGalleryCell*) reuseCell
@@ -38,7 +39,4 @@
                             worker:(id<DownloadWorker>) worker;
 
 
-/**
- Begins downloading all the information from the server.*/
-- (void) downloadFromServer:(void(^)(BOOL completion)) completion;
 @end

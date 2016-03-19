@@ -22,7 +22,7 @@
  The basic control flow of this class from
  image download to displaying to user:
  - viewDidLoad
- - downloadFromServer 
+ - downloadFromServer
  - setupGallery.
  */
 
@@ -41,6 +41,8 @@ SASGalleryCellDelegate> {
 @property (assign,nonatomic) __block BOOL canRefresh;
 @property (strong, nonatomic) SASGalleryDataSource *galleryDataSource;
 @property (strong, nonatomic) SASGalleryCell *galleryCell;
+@property (strong, nonatomic) NSMutableArray <SASDevice*> *devices;
+@property (strong, nonatomic) NSMutableArray <NSString *> *filePaths;
 
 @end
 
@@ -65,30 +67,104 @@ SASGalleryCellDelegate> {
 
 - (void)viewWillAppear:(BOOL)animated {
   [super viewWillAppear:animated];
-  
- 
-  if (!self.galleryDataSource) {
-    self.galleryCell = [[SASGalleryCell alloc] init];
-    self.galleryCell.delegate = self;
-    self.galleryDataSource = [[SASGalleryDataSource alloc] initWithReuseCell:self.galleryCell reuseIdentifier:@"cell" networkManager:self.networkManager worker:[[DefaultDownloadWorker alloc] init]];
-    [self.galleryDataSource downloadFromServer:^(BOOL completion) {
-      if (completion) {
-        self.collectionView.dataSource = self.galleryDataSource;
-        [self initialSetupOfGallery];
-      }
-    }];
-    
-    self.collectionView.delegate = self;
-    self.collectionView.backgroundColor = [UIColor whiteColor];
-  }
-  
+  self.collectionView.delegate = self;
+  self.collectionView.backgroundColor = [UIColor whiteColor];
   self.navigationItem.title = @"Gallery";
-  [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName: [UIFont fontWithName:@"AvenirNext-DemiBold" size:17.0f],
-                                                                    NSForegroundColorAttributeName : [UIColor blackColor]
-                                                                    }];
+  [self.navigationController.navigationBar
+   setTitleTextAttributes:@{NSFontAttributeName: [UIFont fontWithName:@"AvenirNext-DemiBold" size:17.0f],
+                            NSForegroundColorAttributeName : [UIColor blackColor] }];
+  [self showActivityIndicator];
+  [self beginDownloadProcess];
 }
 
 
+- (void) beginDownloadProcess {
+  [self downloadDevices];
+  if (!self.galleryDataSource) {
+    self.galleryCell = [[SASGalleryCell alloc] init];
+    self.galleryCell.delegate = self;
+    self.galleryDataSource = [[SASGalleryDataSource alloc]
+                              initWithReuseCell:self.galleryCell
+                              reuseIdentifier:@"cell"
+                              networkManager:self.networkManager worker:[DefaultImageDownloader new]];
+    self.collectionView.dataSource = self.galleryDataSource;
+  }
+}
+
+
+// When we first begin downloading we must
+// download all the devices from the server first.
+// We need to do this as when a user clicks on an images
+// we want to be able to present -SASImageViewController
+// and show all the data associated with the image downloaded.
+- (void) downloadDevices {
+  // We want to download all the devices from the
+  // server as we can.
+  DefaultDownloadWorker *downloadWorker = [[DefaultDownloadWorker alloc] init];
+  SASNetworkQuery *query = [[SASNetworkQuery alloc] init];
+  query.type = SASNetworkQueryTypeAll; // Download all devices.
+  
+  if (!self.networkManager) {
+    self.networkManager = [[SASNetworkManager alloc] init];
+  }
+  
+  // Go dowload the devices from the server.
+  [self.networkManager downloadWithQuery:query forWorker:downloadWorker completion:^(NSArray<SASDevice *> *result) {
+    // Keep reference to all devices downloaded.
+    self.devices = [result mutableCopy];
+    
+    // Once downloaded extract filePaths
+    [self extractFilePathsFromDevices:self.devices];
+    
+    [self downloadImages];
+  }];
+}
+
+
+
+- (void) extractFilePathsFromDevices:(NSArray <SASDevice*>*) devices {
+  if (!self.filePaths) {
+    self.filePaths = [[NSMutableArray alloc] init];
+  }
+  
+  // Get all the filePaths so we can give them to the datasource
+  // for downloading.
+  for (SASDevice *device in devices) {
+    [self.filePaths addObject:device.filePath];
+  }
+}
+
+
+- (void) downloadImages {
+  if (self.filePaths) {
+    
+    NSRange range = NSMakeRange(0, 35);
+    imagesDownloadedCount = (int)range.length;
+    
+    // We don't want to download every omage on the server
+    // only just the amount specified within the range so make
+    // a sub array of these filepaths.
+    NSArray *subArrayFilePaths = [self.filePaths subarrayWithRange:range];
+
+    // Query for the datasource to use.
+    SASNetworkQuery *query = [[SASNetworkQuery alloc] init];
+    [query setImagesPaths: subArrayFilePaths];
+    
+    [self.galleryDataSource imagesWithinRange:range withQuery:query completion:^(BOOL finished) {
+      if (finished) {
+        [self hideActivityIndicator];
+        self.canRefresh = YES;
+        [self.collectionView reloadData];
+      }
+      // The complete load of the gallery may
+      // not be finished, however another image
+      // may be loaded.
+      [self.collectionView reloadData];
+    }];
+    
+    
+  }
+}
 
 - (void) refresh {
   if (self.canRefresh) {
@@ -121,23 +197,7 @@ SASGalleryCellDelegate> {
 
 
 - (void) initialSetupOfGallery {
-  [self showActivityIndicator];
   
-  NSRange range = NSMakeRange(0, 35);
-  imagesDownloadedCount = (int)range.length;
-  
-  
-  [self.galleryDataSource imagesWithinRange:range completion:^(BOOL completion) {
-    if (completion) {
-      [self hideActivityIndicator];
-      self.canRefresh = YES;
-      [self.collectionView reloadData];
-    }
-    // The complete load of the gallery may
-    // not be finished, however another image
-    // may be loaded.
-    [self.collectionView reloadData];
-  }];
 }
 
 
@@ -155,6 +215,7 @@ SASGalleryCellDelegate> {
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
   return 1.0;
 }
+
 
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -184,10 +245,18 @@ SASGalleryCellDelegate> {
     NSRange range = NSMakeRange(imagesDownloadedCount, imagesDownloadedCount + 15);
     imagesDownloadedCount = (int)range.length;
     
-    [self showActivityIndicator];
+    SASNetworkQuery *query = [[SASNetworkQuery alloc] init];
     
-    [self.galleryDataSource imagesWithinRange:range completion:^(BOOL completed) {
-      if (completed) {
+    // Download the next 15 images from a sub array with the corresponding urls.
+    NSArray* subArrayFilePaths = [self.filePaths subarrayWithRange:range];
+    [query setImagesPaths:subArrayFilePaths];
+    
+    
+    [self showActivityIndicator];
+    [self.galleryDataSource imagesWithinRange:range
+                                    withQuery:query
+                                   completion:^(BOOL finished) {
+      if (finished) {
         [self hideActivityIndicator];
       } else {
         [self.collectionView reloadData];
