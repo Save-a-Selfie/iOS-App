@@ -21,8 +21,12 @@
                    images have been downloaded.
                    NO - The full range of images have not been
                    downloaded, however a new image has been downloaded.
+                  
+                   Upon successful download the filepath of the image
+                   downloaded will be passed to the block.
+ 
  */
 - (void) imagesWithQuery:(SASNetworkQuery*) query
-                completion: (void(^)(BOOL finished)) completion;
+                completion: (void(^)(BOOL finished, SASDevice *sasDevice)) completion;
 
 @end

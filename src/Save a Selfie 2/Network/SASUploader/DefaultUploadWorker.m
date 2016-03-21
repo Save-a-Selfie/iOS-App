@@ -42,7 +42,7 @@ NSString* const UPLOAD_IMAGE_URL  = @"https://guarded-mountain-99906.herokuapp.c
   NSNumber *long_ = [NSNumber numberWithDouble:uploadObject.coordinates.longitude];
   NSString *aidType = [SASDevice getDeviceNameForDeviceType:uploadObject.associatedDevice.type];
   
-  NSData *imageData = UIImageJPEGRepresentation(uploadObject.image, 0.1);
+  NSData *imageData = UIImageJPEGRepresentation(uploadObject.image, 0.01);
   
   NSDictionary *jsonPost = @{@"lat" : lat,
                              @"lng": long_,

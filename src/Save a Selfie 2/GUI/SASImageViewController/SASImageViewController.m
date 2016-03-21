@@ -183,10 +183,10 @@
   DefaultImageDownloader *imageDownloader = [DefaultImageDownloader new];
   SASNetworkQuery *networkQuery = [SASNetworkQuery queryWithType:SASNetworkQueryImageDownload];
   
-  NSArray <NSString*> *filepath = [NSArray arrayWithObject:self.device.filePath];
-  [networkQuery setImagesPaths: filepath];
+  NSArray <SASDevice*> *device = [NSArray arrayWithObject:self.device];
+  [networkQuery setDevices: device];
   
-  [networkManager downloadImageWithQuery:networkQuery forWorker:imageDownloader completion:^(NSData *imageData) {
+  [networkManager downloadImageWithQuery:networkQuery forWorker:imageDownloader completion:^(NSData *imageData, SASDevice *sasDevice) {
     dispatch_async(dispatch_get_main_queue(), ^{
       NSData* jpegData = UIImageJPEGRepresentation([UIImage imageWithData:imageData], 0.5);
       UIImage *image = [UIImage imageWithData:jpegData];

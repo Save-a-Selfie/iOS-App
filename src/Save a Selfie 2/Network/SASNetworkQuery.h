@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
+#import "SASDevice.h"
 
 typedef NS_ENUM(NSUInteger, SASNetworkQueryType) {
   SASNetworkQueryTypeAll,
@@ -22,6 +23,7 @@ typedef NS_ENUM(NSUInteger, SASNetworkQueryType) {
 @interface SASNetworkQuery : NSObject
 
 @property (nonatomic, assign) SASNetworkQueryType type;
+@property (strong, nonatomic) NSArray<SASDevice*> *devices;
 
 
 /**
@@ -29,6 +31,7 @@ typedef NS_ENUM(NSUInteger, SASNetworkQueryType) {
  type.
  */
 + (SASNetworkQuery*) queryWithType: (SASNetworkQueryType) type;
+
 
 
 /**
@@ -40,12 +43,7 @@ typedef NS_ENUM(NSUInteger, SASNetworkQueryType) {
 - (void) setLocationArguments:(CLLocationCoordinate2D) coordinates;
 
 
-/**
- Sets a collection of image paths to use for downloading.
-*/
-- (void)setImagesPaths:(NSArray<NSString *> *)imagesPaths;
 
-- (NSArray<NSString*>*) imagePaths;
 
 /**
  The coordinates for a query.

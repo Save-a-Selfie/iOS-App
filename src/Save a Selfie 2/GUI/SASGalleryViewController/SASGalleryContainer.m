@@ -13,7 +13,7 @@
 
 @interface SASGalleryContainer()
 
-@property (nonatomic, strong) NSMutableDictionary *data;
+@property (nonatomic, strong) NSMutableDictionary<UIImage*, SASDevice*> *data;
 
 
 @end
@@ -34,8 +34,8 @@
 
 
 
-- (void)addImage:(UIImage *)image forDevice:(SASDevice *)device {
-    [self.data setObject:image forKey:device];
+- (void) addDevice:(SASDevice *) device forImage:(UIImage *) image {
+    [self.data setObject:device forKey:[image copy]];
 }
 
 
@@ -44,12 +44,14 @@
 }
 
 
-- (UIImage *) imageForDevice:(SASDevice *) device {
-    UIImage* image = [self.data objectForKey:device];
-    return image;
+- (SASDevice *) deviceForImage:(UIImage *)image {
+    SASDevice* device = [self.data objectForKey:image];
+    return device;
 }
 
-
+- (NSArray<UIImage *> *)keys {
+  return [self.data allKeys];
+}
 - (void) clear {
     [self.data removeAllObjects];
 }

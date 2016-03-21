@@ -15,17 +15,20 @@
 
 
 /**
- Returns an image for the associated device.
+ Returns an device for the associated image.
  */
-- (UIImage *) imageForDevice:(SASDevice *) device;
+- (SASDevice *) deviceForImage:(UIImage *) image;
 
 
 - (NSInteger) deviceCount;
 
+
+- (NSArray<UIImage*>*) keys;
+
 /**
  Adds an image with a device as a key.
  */
-- (void) addImage:(UIImage *) image forDevice:(SASDevice *) device;
+- (void) addDevice:(SASDevice *) device forImage:(UIImage *) image;
 
 
 /**

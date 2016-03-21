@@ -25,6 +25,7 @@ UICollectionViewDelegate,
 SASGalleryCellDelegate> {
   
   int imagesDownloadedCount;
+  int imagesToDownload;
 }
 
 @property (strong, nonatomic) SASNetworkManager *networkManager;
@@ -37,6 +38,9 @@ SASGalleryCellDelegate> {
 @property (strong, nonatomic) SASGalleryCell *galleryCell;
 @property (strong, nonatomic) NSMutableArray <SASDevice*> *devices;
 @property (strong, nonatomic) NSMutableArray <NSString *> *filePaths;
+@property (assign, nonatomic) NSRange currentDownloadRange;
+@property (assign, nonatomic) BOOL allImagesDownloaded;
+
 
 @end
 
@@ -52,11 +56,11 @@ SASGalleryCellDelegate> {
   
   if(!self.refreshControl) {
     self.refreshControl = [[UIRefreshControl alloc] init];
-    [self.refreshControl addTarget:self action:@selector(refresh) forControlEvents:UIControlEventValueChanged];
+    //[self.refreshControl addTarget:self action:@selector(refresh) forControlEvents:UIControlEventValueChanged];
     NSAttributedString *a = [[NSAttributedString alloc] initWithString:@"Pull to refresh"];
     
     self.refreshControl.attributedTitle = a;
-    [self.collectionView addSubview:self.refreshControl];
+    //[self.collectionView addSubview:self.refreshControl];
     
   }
 }
@@ -77,6 +81,7 @@ SASGalleryCellDelegate> {
 
 
 - (void) beginDownloadProcess {
+  self.currentDownloadRange = NSMakeRange(0, 0);
   [self downloadDevices];
   if (!self.galleryDataSource) {
     self.galleryCell = [[SASGalleryCell alloc] init];
@@ -132,49 +137,81 @@ SASGalleryCellDelegate> {
   }
 }
 
-/**
- Determines the minimum range length for a given number of elements.
-*/
-- (unsigned int) determineMinimumRangeForImageDownload:(unsigned int) totalElements
-                                        withRangeLength:(unsigned int) length {
-  if (length > totalElements) {
-    return totalElements;
+
+- (NSRange) determineNextRangeForImageDownload:(unsigned int) totalElements
+                              withCurrentRange:(NSRange) range
+                            desiredRangeLength:(unsigned int) desiredLength {
+  if (!(range.location >= totalElements)) {
+    if (!(range.location + desiredLength) >= totalElements) {
+      // Download the next range of images up to the desired length from
+      // wherever we are currently located within the range.
+      return NSMakeRange(range.location, range.location + desiredLength);
+    }
+    else {
+      // Download the remaining images, from wherever the range.location
+      // is currently situated.
+      return NSMakeRange(range.location, totalElements - range.location);
+    }
   } else {
-    return length;
+    return NSMakeRange(0, 0);
   }
+}
+
+
+- (void) showGalleryAlery:(NSString*) message {
+  FXAlertController *galleryAlert = [[FXAlertController alloc] initWithTitle:@"Error" message: message];
+  FXAlertButton *okButton = [[FXAlertButton alloc] initWithType:FXAlertButtonTypeCancel];
+  [okButton setTitle:@"Ok" forState:UIControlStateNormal];
+  [galleryAlert addButton:okButton];
+  [self presentViewController:galleryAlert animated:YES completion:nil];
 }
 
 
 - (void) downloadImages {
   if (!self.filePaths || self.filePaths.count == 0) {
+    [self showGalleryAlery:@"Could not load gallery."];
+    return;
+  }
+  // All images available have been downloaded.
+  if (self.allImagesDownloaded) {
     return;
   }
   
-  unsigned int rangeLength = [self determineMinimumRangeForImageDownload:(unsigned)self.filePaths.count
-                                                         withRangeLength:35];
-  NSRange range = NSMakeRange(0, rangeLength);
-  imagesDownloadedCount = (int)range.length;
+  
+  self.currentDownloadRange = [self determineNextRangeForImageDownload:(int)self.filePaths.count
+                                                      withCurrentRange:self.currentDownloadRange
+                                                    desiredRangeLength:23];
+  
+  if (self.currentDownloadRange.location == 0 && self.currentDownloadRange.length == 0) {
+    return;
+  }
   
   // We don't want to download every omage on the server
   // only just the amount specified within the range so make
   // a sub array of these filepaths.
-  NSArray *subArrayFilePaths = [self.filePaths subarrayWithRange:range];
+  NSArray<SASDevice*> *subArrayOfDevices = [self.devices subarrayWithRange:self.currentDownloadRange];
   
   // Query for the datasource to use.
   SASNetworkQuery *query = [[SASNetworkQuery alloc] init];
-  [query setImagesPaths: subArrayFilePaths];
+  [query setDevices: subArrayOfDevices];
   query.type = SASNetworkQueryImageDownload;
   
-  [self.galleryDataSource imagesWithQuery:query completion:^(BOOL finished) {
+  [self.galleryDataSource imagesWithQuery:query completion:^(BOOL finished, SASDevice *sasDevice) {
     if (finished) {
       [self hideActivityIndicator];
       self.canRefresh = YES;
       [self.collectionView reloadData];
+      imagesDownloadedCount += 1;
     }
     // The complete load of the gallery may
     // not be finished, however another image
     // may be loaded.
     [self.collectionView reloadData];
+    imagesDownloadedCount += 1;
+    
+    if (imagesDownloadedCount >= self.filePaths.count) {
+      self.allImagesDownloaded = YES;
+    }
   }];
 }
 
@@ -262,8 +299,13 @@ SASGalleryCellDelegate> {
   sasImageViewController.downloadImage = NO;
   sasImageViewController.image = [cell.imageView.image copy];
   
+  SASAnnotation *a = [SASAnnotation annotationWithSASDevice:device];
+  sasImageViewController.annotation = a;
+  
   
   [self.navigationController pushViewController:sasImageViewController animated:YES];
 }
+
+
 
 @end

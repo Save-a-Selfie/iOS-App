@@ -27,6 +27,7 @@
 @property (assign, nonatomic) BOOL objectsDowloaded;
 @property (weak, nonatomic) id<SASGalleryCellDelegate> cellDelegate;
 @property (strong, nonatomic) NSMutableArray<UIImage*> *images;
+@property (strong, nonatomic) SASGalleryContainer *container;
 
 @end
 
@@ -49,36 +50,40 @@
   _galleryCell = reuseCell;
   _cellDelegate = _galleryCell.delegate;
   _images = [[NSMutableArray alloc] init];
+  _container = [[SASGalleryContainer alloc] init];
   return self;
   
 }
 
 
 
-- (void)imagesWithQuery:(SASNetworkQuery *)query completion:(void (^)(BOOL))completion {
+
+- (void)imagesWithQuery:(SASNetworkQuery *)query completion:(void (^)(BOOL, SASDevice*)) completion {
   [self downloadImagesWithQuery:query completion:completion];
 }
 
 
 
 - (void) downloadImagesWithQuery:(SASNetworkQuery*) query
-                        completion:(void(^)(BOOL completed)) completed {
-  [self.worker downloadImageWithQuery:query completionResult:^(NSData *imageData) {
+                        completion:(void(^)(BOOL completed, SASDevice *sasDevice)) completed {
+  [self.worker downloadImageWithQuery:query completionResult:^(NSData *imageData, SASDevice *device) {
     dispatch_async(dispatch_get_main_queue(), ^{
       NSData* jpegData = UIImageJPEGRepresentation([UIImage imageWithData:imageData], 0.5);
       UIImage *image = [UIImage imageWithData:jpegData];
       // Add image reference to our `datasource`.
-      [self.images addObject:image];
-      
+      if (image) {
+        [self.images addObject:image];
+        [self.container addDevice:device forImage:image];
+      }
       totalImagesDownloaded++;
       // The total image count should be the same amount
       // as imagePaths.count as these are all the files
       // we have to download. this signifies we're finished
       // downloaded this batch of images.
-      if (totalImagesDownloaded == query.imagePaths.count) {
-        completed(YES);
+      if (totalImagesDownloaded == query.devices.count) {
+        completed(YES, device);
       } else {
-        completed(NO);
+        completed(NO, device);
       }
     });
   }];
@@ -90,17 +95,24 @@
 }
 
 
+
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView
                   cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-
+  
   self.galleryCell = [collectionView dequeueReusableCellWithReuseIdentifier:self.reuseIdentifier forIndexPath:indexPath];
+  
+  
+  UIImage *image = [self.images objectAtIndex:indexPath.row];
   self.galleryCell.delegate = self.cellDelegate;
+  
   // Set the cell's image.
-  self.galleryCell.imageView.image = [self.images objectAtIndex:indexPath.row];
+  self.galleryCell.imageView.image = image;
+  
+  // Set the cell's device.
+  self.galleryCell.device = [self.container deviceForImage:image];
   
   return self.galleryCell;
 }
-
 
 
 @end

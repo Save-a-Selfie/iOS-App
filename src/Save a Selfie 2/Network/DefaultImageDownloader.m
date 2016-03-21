@@ -18,16 +18,16 @@ NSString* const GET_IMAGE_URL = @"https://guarded-mountain-99906.herokuapp.com/g
 
 - (void)downloadImageWithQuery:(SASNetworkQuery *)query
               completionResult:(DownloadWorkerImageCompletionBlock)completionBlock {
-  NSArray <NSString*> *pathToImages;
+  NSArray <SASDevice*> *imagesToDownload;
   
   if (query.type == SASNetworkQueryImageDownload) {
-    pathToImages = [query imagePaths];
+    imagesToDownload = [query devices];
     // If we only have on image to download.
-    if (pathToImages.count == 1) {
-      [self downloadImage:[pathToImages firstObject]
+    if (imagesToDownload.count == 1) {
+      [self downloadImage:[imagesToDownload firstObject]
            withCompletion:completionBlock];
-    } else if (pathToImages.count > 1) {
-      [self downloadImages:pathToImages withCompletion:completionBlock];
+    } else if (imagesToDownload.count > 1) {
+      [self downloadImages:imagesToDownload withCompletion:completionBlock];
     }
     
   }
@@ -35,34 +35,34 @@ NSString* const GET_IMAGE_URL = @"https://guarded-mountain-99906.herokuapp.com/g
 
 
 // Downloads one image.
-- (void) downloadImage:(NSString*) filePath withCompletion:(DownloadWorkerImageCompletionBlock) completionBlock {
-  [self beginNetworkCall:filePath withCompletion:completionBlock];
+- (void) downloadImage:(SASDevice*) device withCompletion:(DownloadWorkerImageCompletionBlock) completionBlock {
+  [self beginNetworkCall:device withCompletion:completionBlock];
 }
 
 
 
 // Downloads more than one image.
-- (void) downloadImages:(NSArray<NSString*>*) filePaths withCompletion:(DownloadWorkerImageCompletionBlock) completionBlock {
-  for (NSString* filePath in filePaths) {
-    [self beginNetworkCall:filePath withCompletion:completionBlock];
+- (void) downloadImages:(NSArray<SASDevice*>*) devices withCompletion:(DownloadWorkerImageCompletionBlock) completionBlock {
+  for (SASDevice* device in devices) {
+    [self beginNetworkCall:device withCompletion:completionBlock];
   }
 }
 
 
 // Begins download of an image from the URL.
-- (void) beginNetworkCall:(NSString*) filePath withCompletion:(DownloadWorkerImageCompletionBlock) completionBlock {
+- (void) beginNetworkCall:(SASDevice*) sasDevice withCompletion:(DownloadWorkerImageCompletionBlock) completionBlock {
   [[UNIRest get:^(UNISimpleRequest *simpleRequest) {
     NSDictionary *userInfo = [SASUser currentLoggedUser];
     NSString *token = [userInfo objectForKey:USER_DICT_TOKEN];
     NSString *tokenFormat = [NSString stringWithFormat:@"Bearer %@", token];
     
     // Append image file path to url.
-    [simpleRequest setUrl:[NSString stringWithFormat:@"%@%@", GET_IMAGE_URL, filePath]];
+    [simpleRequest setUrl:[NSString stringWithFormat:@"%@%@", GET_IMAGE_URL, sasDevice.filePath]];
     [simpleRequest setHeaders:@{@"Accept": @"application/json",
                                 @"Content-Type": @"application/json",
                                 @"Authorization": tokenFormat}];
   }] asBinaryAsync:^(UNIHTTPBinaryResponse *binaryResponse, NSError *error) {
-      completionBlock(binaryResponse.body);
+      completionBlock(binaryResponse.body, sasDevice);
   }];
 }
 @end
