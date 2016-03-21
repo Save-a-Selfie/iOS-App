@@ -83,7 +83,7 @@ NSString *permissionsProblemText = @"Please enable location services for this ap
 
 - (void)viewDidLoad {
   [super viewDidLoad];
-
+  
   self.annotaionsDict = [[NSMutableDictionary alloc] init];
   self.sasMapView.notificationReceiver = self;
   self.sasMapView.zoomToUsersLocationInitially = YES;
@@ -154,8 +154,8 @@ NSString *permissionsProblemText = @"Please enable location services for this ap
     [self.networkManager downloadWithQuery:query
                                  forWorker:downloadWorker
                                 completion:^(NSArray<SASDevice *> *result) {
-      [self setupAnnotations:result];
-    }];
+                                  [self setupAnnotations:result];
+                                }];
   });
 }
 
@@ -165,6 +165,7 @@ NSString *permissionsProblemText = @"Please enable location services for this ap
     SASAnnotation *annotation = [SASAnnotation annotationWithSASDevice:s];
     [self.annotaionsDict setObject:s forKey:annotation];
   }
+  self.sasMapView.sasDevices = [self.annotaionsDict allValues];
   [self displayAnnotationsToMap];
 }
 

@@ -43,6 +43,7 @@ typedef NS_ENUM(NSUInteger, SASAnnotationImage) {
 // Reference this object to receive appropriate method calls for
 //      @protocol SASMapViewNotifications. 
 @property (nonatomic, weak) id<SASMapViewNotifications> notificationReceiver;
+@property (nonatomic, strong) NSArray<SASDevice*> *sasDevices;
 
 
 /**

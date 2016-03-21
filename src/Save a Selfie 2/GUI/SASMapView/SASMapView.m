@@ -11,9 +11,7 @@
 #import "SASAnnotation.h"
 #import "AppDelegate.h"
 #import "ExtendNSLogFunctionality.h"
-#import "SASNetworkManager.h"
-#import "DefaultDownloadWorker.h"
-#import "SASDevice.h"
+
 
 @interface SASMapView() <SASLocationDelegate> {
   BOOL userAlreadyLocated;
@@ -26,12 +24,10 @@
 
 @property(strong, nonatomic) SASLocation* sasLocation;
 
+
 // The annotation type for the map to show.
 @property(assign, nonatomic) SASDeviceType annotationsToShow;
 
-@property(strong, nonatomic) SASNetworkManager* networkManager;
-
-@property(strong, nonatomic) NSArray<SASAnnotation*> *sasAnnotations;
 
 @end
 
@@ -39,6 +35,8 @@
 
 
 @implementation SASMapView
+
+
 
 
 #pragma mark Object Life Cycle
@@ -86,31 +84,24 @@
   
   self.delegate = self;
   self.showAnnotations = YES;
-
   
   // Our location object.
   self.sasLocation = [[SASLocation alloc] init];
   self.sasLocation.delegate = self;
   [self.sasLocation startUpdatingUsersLocation];
   
-  
 }
 
-- (void)addAnnotations:(NSArray<id<MKAnnotation>> *)annotations {
-  if (!self.showAnnotations) {
-    return;
-  }
-  for (SASAnnotation *a in annotations) {
-    if ([self isAnnotationToBeShown:a]) {
-      [self addAnnotation:a];
-    }
-  }
-}
+
+
+
+
 
 
 // Locates the user's current location and
 // zooms to that location.
 - (void) locateUser {
+  
   if([self.sasLocation checkLocationPermissions]) {
     if (CLLocationCoordinate2DIsValid(self.currentLocation)) {
       [self zoomToCoordinates:self.currentLocation animated:YES];
@@ -134,10 +125,12 @@
 // Displays a single annotation on the map.
 - (void) showAnnotation:(SASAnnotation*) annotation andZoom:(BOOL) zoom animated:(BOOL) animated{
   if(self.showAnnotations) {
-    [self removeAnnotations:self.annotations];
+    [self removeExistingAnnotationsFromMapView];
     self.showsUserLocation = NO;
+    
     [self addAnnotation:annotation];
   }
+  
   if(zoom) {
     [self zoomToCoordinates:annotation.coordinate animated:animated];
   }
@@ -145,8 +138,10 @@
 
 
 #pragma mark - Filterable Protocol
-- (void) filterMapForDevice:(SASDeviceType) deviceType {
+- (void)filterMapForDevice:(SASDeviceType) deviceType {
+  
   switch (deviceType) {
+      
     case SASDeviceTypeDefibrillator:
       self.annotationsToShow = SASDeviceTypeDefibrillator;
       break;
@@ -163,11 +158,13 @@
       self.annotationsToShow = SASDeviceTypeFireHydrant;
       break;
       
+    case SASDeviceTypeAll:
+      self.annotationsToShow = SASDeviceTypeAll;
+      break;
     default:
       break;
   }
-  [self removeAnnotations:self.annotations];
-  [self addAnnotations:self.annotations];
+  [self reloadAnnotations];
 }
 
 
@@ -176,16 +173,32 @@
 // Zooms to a region on the map view.
 - (void) zoomToCoordinates:(CLLocationCoordinate2D) coordinates animated:(BOOL) animated{
   float zoomTo = 0.003 * 0.3;
+  
   MKCoordinateSpan span = MKCoordinateSpanMake(zoomTo, zoomTo);
   [self setRegion: MKCoordinateRegionMake(coordinates, span) animated:animated];
 }
 
 
 
-- (void)reloadAnnotations:(NSArray <SASAnnotation*>*) annotations {
+
+
+- (void)reloadAnnotations {
   // Remove the current annotations on the map.
-  [self removeAnnotations:annotations];
-  [self addAnnotations:annotations];
+  [self removeExistingAnnotationsFromMapView];
+  
+  
+  // Call plotAnnotationsWithDeviceInformation:
+  // which will do the checking on whether or not
+  // that annotation should be shown on the map.
+  [self plotAnnotationsWithObjectInformation:self.sasDevices];
+}
+
+
+// Removes any existing annotations.
+- (void) removeExistingAnnotationsFromMapView {
+  for (id<MKAnnotation> annotation in self.annotations) {
+    [self removeAnnotation:annotation];
+  }
 }
 
 
@@ -225,6 +238,32 @@
     [self.notificationReceiver sasMapView:self authorizationStatusHasChanged:status];
   }
 }
+
+
+
+
+
+
+// @Discussion
+// Plots the annotations according to each object data retreived from
+// SASObjectDownloaderDelegate method -sasObjectDownloader: didDownloadObjects:
+- (void) plotAnnotationsWithObjectInformation: (NSArray*) objectInfo {
+  
+  [self removeExistingAnnotationsFromMapView];
+  
+  for (SASDevice *device in objectInfo) {
+    
+    SASAnnotation *annotation = [SASAnnotation annotationWithSASDevice:device];
+    
+    // Checks whether or not that particular annotation
+    // should be shown on the map. This could be due to the
+    // user filtering specific annotations.
+    if ([self isAnnotationDeviceTypeFiltered:device.type]) {
+      [self addAnnotation:annotation];
+    }
+  }
+}
+
 
 
 
@@ -283,8 +322,13 @@
 
 
 
-- (BOOL) isAnnotationToBeShown:(SASAnnotation *) annotation {
-  if (self.annotationsToShow == annotation.deviceType) {
+// @Discussion:
+// Call this method to check whether or not the -mapView:viewForAnnotation: should return
+// an MkAnnotationView. If SASMapView's -filterAnnotationsForType: has been called,
+// then the annoatations shown are custom, therefore we must check the
+// appropriate return.
+- (BOOL) isAnnotationDeviceTypeFiltered:(SASDeviceType) deviceType {
+  if (self.annotationsToShow == deviceType) {
     return YES;
   }
   else if(self.annotationsToShow == SASDeviceTypeAll) {

@@ -18,7 +18,7 @@
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UILabel *filterLabel;
 @property (assign, nonatomic) SASDeviceType selectedDevice;
-@property (strong, nonatomic) SASMapView *filterableMapView;
+@property (weak, nonatomic) SASMapView *filterableMapView;
 @property (strong, nonatomic) NSMutableArray *cells;
 
 @end
