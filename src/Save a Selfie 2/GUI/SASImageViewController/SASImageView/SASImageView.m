@@ -38,26 +38,19 @@
 - (void) handleTap {
     if (self.canShowFullSizePreview && self.image) {
         
-        SASImageInspectorView *sasImageInspectorView = [[SASImageInspectorView alloc] initWithImage:self.image];
+        SASImageInspectorView *sasImageInspectorView = [[SASImageInspectorView alloc] initWithImage:[self.image copy]];
         sasImageInspectorView.delegate = self;
         
         UIViewController *rootViewController = (UIViewController *)[UIApplication sharedApplication].keyWindow.rootViewController;
         
         [sasImageInspectorView animateImageIntoView:rootViewController.view];
     }
-    if (self.hideOriginalInPreview)
-        self.hidden = YES;
-    
 }
 
 
 
 #pragma mark <SASImageInspectorView>
 - (void) sasImageInspectorView:(SASImageInspectorView *) inspector didDismiss:(BOOL) dismissed {
-
-    if (dismissed && self.hideOriginalInPreview) {
-        self.hidden = NO;
-    }
 }
 
 

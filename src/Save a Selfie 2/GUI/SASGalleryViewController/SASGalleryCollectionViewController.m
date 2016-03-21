@@ -180,7 +180,7 @@ SASGalleryCellDelegate> {
   
   self.currentDownloadRange = [self determineNextRangeForImageDownload:(int)self.filePaths.count
                                                       withCurrentRange:self.currentDownloadRange
-                                                    desiredRangeLength:23];
+                                                    desiredRangeLength:20];
   
   if (self.currentDownloadRange.location == 0 && self.currentDownloadRange.length == 0) {
     return;
