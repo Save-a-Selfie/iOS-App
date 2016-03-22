@@ -20,7 +20,8 @@
 #import <UNIRest.h>
 #import "SASNetworkManager.h"
 #import "DefaultImageDownloader.h"
-
+#import "DefaultImageReporter.h"
+#import "SASNotificationView.h"
 
 @interface SASImageViewController () <SASMapViewNotifications ,UIScrollViewDelegate> {
   BOOL imageLoaded;
@@ -118,7 +119,7 @@
   SASBarButtonItem *reportButton = [[SASBarButtonItem alloc] initWithTitle:@"Report"
                                                                      style:UIBarButtonItemStylePlain
                                                                     target:self
-                                                                    action:@selector(reportImage)];
+                                                                    action:@selector(reportImagePrompt)];
   self.navigationItem.rightBarButtonItem = reportButton;
   
   // Store the type of device shown in the image
@@ -291,11 +292,51 @@
 
 
 #pragma mark Report Device
-- (void) reportImage {
-  [[UIApplication sharedApplication]
-   openURL:[NSURL URLWithString:
-            [NSString stringWithFormat:@"http://saveaselfie.org/problem-with-an-image/?imageURL=%@", self.device.imageURLString]]];
+- (void) reportImagePrompt {
+  if (!self.sasImageView.image) {
+    return;
+  }
+  FXAlertController *alert = [[FXAlertController alloc] initWithTitle:@"Note" message:@"Are you sure you want to report this image?"];
+  FXAlertButton* yes = [[FXAlertButton alloc] initWithType:FXAlertButtonTypeStandard];
+  FXAlertButton* no = [[FXAlertButton alloc] initWithType:FXAlertButtonTypeCancel];
   
+  [yes addTarget:self action:@selector(reportImage) forControlEvents:UIControlEventTouchUpInside];
+  
+  [yes setTitle:@"Yes" forState:UIControlStateNormal];
+  [no setTitle:@"No" forState:UIControlStateNormal];
+  [alert addButton:yes];
+  [alert addButton:no];
+  [self presentViewController:alert animated:YES completion:nil];
+  
+  
+}
+
+
+- (void) reportImage {
+  __block SASActivityIndicator *reportingImage = [[SASActivityIndicator alloc] initWithMessage:@"Reporting.."];
+  reportingImage.center = self.view.center;
+  [self.view addSubview:reportingImage];
+  
+  SASNetworkManager *manager = [SASNetworkManager sharedInstance];
+  SASNetworkQuery *query = [[SASNetworkQuery alloc] init];
+  DefaultImageReporter *reporter = [[DefaultImageReporter alloc] init];
+  query.fileToReport = self.device.filePath;
+  [manager reportImageWithQuery:query forReporter:reporter completion:^(BOOL success) {
+    dispatch_async(dispatch_get_main_queue(), ^() {
+      
+      [reportingImage removeFromSuperview];
+      reportingImage = nil;
+      
+      SASNotificationView *reportResult = [[SASNotificationView alloc] init];
+      if (success) {
+        reportResult.title = @"Reported";
+      } else {
+        reportResult.title = @"Failed";
+      }
+      [reportResult animateIntoView:self.view];
+    });
+    
+  }];
 }
 
 

@@ -13,7 +13,7 @@
 #import "SASAppCache.h"
 #import "Cacheable.h"
 #import "SignUpWorker.h"
-
+#import "ImageReporter.h"
 
 /**
  This is the goto class for any interaction with the backend.
@@ -109,6 +109,17 @@
 - (void) downloadImageWithQuery:(SASNetworkQuery*) query
                       forWorker:(id<DownloadWorker>) worker
                      completion:(DownloadWorkerImageCompletionBlock) completion;
+
+
+/**
+ Attempts to report an image.
+ 
+ @param filepath The filepath associated with the image.
+ @param completion A completion handler called when finished.
+ */
+- (void) reportImageWithQuery:(SASNetworkQuery *) query
+                  forReporter:(id<ImageReporter>) reporter
+                   completion:(void(^)(BOOL success)) completion;
 
 
 @end

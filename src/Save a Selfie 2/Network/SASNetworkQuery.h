@@ -24,7 +24,7 @@ typedef NS_ENUM(NSUInteger, SASNetworkQueryType) {
 
 @property (nonatomic, assign) SASNetworkQueryType type;
 @property (strong, nonatomic) NSArray<SASDevice*> *devices;
-
+@property (strong, nonatomic) NSString *fileToReport;
 
 /**
  Returns a new instance of SASNetworkQuery for a specific query
@@ -41,7 +41,6 @@ typedef NS_ENUM(NSUInteger, SASNetworkQueryType) {
  @param coordinates The coordinates to be used in the query.
  */
 - (void) setLocationArguments:(CLLocationCoordinate2D) coordinates;
-
 
 
 

@@ -60,5 +60,11 @@
   [worker downloadImageWithQuery:query completionResult:completion];
 }
 
+
+- (void)reportImageWithQuery:(SASNetworkQuery *)query
+                 forReporter:(id<ImageReporter>)reporter
+                  completion:(void (^)(BOOL))completion {
+  [reporter reportImage:query.fileToReport completion:completion];
+}
 @end
 

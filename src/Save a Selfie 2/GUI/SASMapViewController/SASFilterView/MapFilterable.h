@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "SASAnnotation.h"
 
 /**
  A protocol for any MKMapView instance can implement
@@ -16,5 +16,6 @@
 @protocol MapFilterable <NSObject>
 
 - (void) filterMapForDevice:(SASDeviceType) deviceType;
+
 
 @end

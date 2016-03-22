@@ -63,6 +63,7 @@
 		18BA4DF61B82C1500047DEC4 /* UIDevice+DeviceName.m in Sources */ = {isa = PBXBuildFile; fileRef = 18BA4DF51B82C1500047DEC4 /* UIDevice+DeviceName.m */; };
 		18C104861B714C5900B4731D /* SASGalleryContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C104851B714C5900B4731D /* SASGalleryContainer.m */; };
 		18C323991B1E2F1E0027BDEA /* SASImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C323981B1E2F1E0027BDEA /* SASImageViewController.m */; };
+		18CC4B701CA1F0C90031FF49 /* DefaultImageReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CC4B6F1CA1F0C90031FF49 /* DefaultImageReporter.m */; };
 		18CFECA51C5C2A0B00DC47AE /* DefaultDownloadWorker.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CFECA41C5C2A0B00DC47AE /* DefaultDownloadWorker.m */; };
 		18D66E461C5113D100AA7238 /* SASFilterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D66E451C5113D100AA7238 /* SASFilterView.m */; };
 		18D66E4A1C51144800AA7238 /* SASFilterViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D66E491C51144800AA7238 /* SASFilterViewCell.m */; };
@@ -231,6 +232,9 @@
 		18C104851B714C5900B4731D /* SASGalleryContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASGalleryContainer.m; sourceTree = "<group>"; };
 		18C323971B1E2F1E0027BDEA /* SASImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASImageViewController.h; sourceTree = "<group>"; };
 		18C323981B1E2F1E0027BDEA /* SASImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASImageViewController.m; sourceTree = "<group>"; };
+		18CC4B6E1CA1F0C90031FF49 /* DefaultImageReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefaultImageReporter.h; sourceTree = "<group>"; };
+		18CC4B6F1CA1F0C90031FF49 /* DefaultImageReporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DefaultImageReporter.m; sourceTree = "<group>"; };
+		18CC4B721CA1F0FD0031FF49 /* ImageReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageReporter.h; sourceTree = "<group>"; };
 		18CFECA31C5C2A0B00DC47AE /* DefaultDownloadWorker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DefaultDownloadWorker.h; path = "Save a Selfie 2/Network/DefaultDownloadWorker.h"; sourceTree = SOURCE_ROOT; };
 		18CFECA41C5C2A0B00DC47AE /* DefaultDownloadWorker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DefaultDownloadWorker.m; path = "Save a Selfie 2/Network/DefaultDownloadWorker.m"; sourceTree = SOURCE_ROOT; };
 		18D66E441C5113D100AA7238 /* SASFilterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASFilterView.h; sourceTree = "<group>"; };
@@ -844,6 +848,16 @@
 			path = AppDelegate;
 			sourceTree = "<group>";
 		};
+		18CC4B711CA1F0D20031FF49 /* ImageReporter */ = {
+			isa = PBXGroup;
+			children = (
+				18CC4B6E1CA1F0C90031FF49 /* DefaultImageReporter.h */,
+				18CC4B6F1CA1F0C90031FF49 /* DefaultImageReporter.m */,
+				18CC4B721CA1F0FD0031FF49 /* ImageReporter.h */,
+			);
+			name = ImageReporter;
+			sourceTree = "<group>";
+		};
 		18CFECA61C5C3EC400DC47AE /* SASNetworkQuery */ = {
 			isa = PBXGroup;
 			children = (
@@ -905,6 +919,7 @@
 			children = (
 				18EBF9791B273A6600EDA48B /* SASNetworkObject.h */,
 				18EBF97A1B273A6600EDA48B /* SASNetworkObject.m */,
+				18CC4B711CA1F0D20031FF49 /* ImageReporter */,
 			);
 			name = SASNetworkObject;
 			path = ../GUI/SASUploadImageViewController/SASUploadObject;
@@ -1288,6 +1303,7 @@
 				1806DB431C83BAF50081CAFE /* SASSocialMediaLoginViewController.m in Sources */,
 				185F3ED31B9E04FB00345CFB /* FXAlertControllerTransitionAnimator.m in Sources */,
 				18592E021B5184E2004DDFD8 /* SASSponsorViewController.m in Sources */,
+				18CC4B701CA1F0C90031FF49 /* DefaultImageReporter.m in Sources */,
 				185F3ED41B9E04FB00345CFB /* FXPresentationController.m in Sources */,
 				18DAE8531B46BA6400CAEF2D /* SASDeviceButton.m in Sources */,
 				1845C4EA1B2091F600E3D7BC /* SASActivityIndicator.m in Sources */,

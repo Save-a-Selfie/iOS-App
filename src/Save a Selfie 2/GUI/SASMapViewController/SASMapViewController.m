@@ -181,7 +181,7 @@ NSString *permissionsProblemText = @"Please enable location services for this ap
     SASAnnotation *annotation = [SASAnnotation annotationWithSASDevice:s];
     [self.annotaionsDict setObject:s forKey:annotation];
   }
-  self.sasMapView.sasDevices = [self.annotaionsDict allValues];
+  //self.sasMapView.sasDevices = [self.annotaionsDict allValues];
   [self displayAnnotationsToMap];
 }
 

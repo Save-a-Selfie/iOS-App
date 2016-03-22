@@ -40,7 +40,7 @@ SASGalleryCellDelegate> {
 @property (strong, nonatomic) NSMutableArray <NSString *> *filePaths;
 @property (assign, nonatomic) NSRange currentDownloadRange;
 @property (assign, nonatomic) BOOL allImagesDownloaded;
-
+@property (assign, nonatomic) BOOL currentlyDownloading;
 
 @end
 
@@ -172,7 +172,10 @@ SASGalleryCellDelegate> {
   if (self.allImagesDownloaded) {
     return;
   }
-  
+  // If we already downloading ignore any new requests.
+  if (self.currentlyDownloading) {
+    return;
+  }
   self.currentDownloadRange = NSMakeRange(imagesDownloadedCount, 0);
   self.currentDownloadRange = [self determineNextRangeForImageDownload:(int)self.filePaths.count
                                                       withCurrentRange:self.currentDownloadRange
@@ -191,6 +194,7 @@ SASGalleryCellDelegate> {
   SASNetworkQuery *query = [[SASNetworkQuery alloc] init];
   [query setDevices: subArrayOfDevices];
   query.type = SASNetworkQueryImageDownload;
+  self.currentlyDownloading = YES;
   
   [self.galleryDataSource imagesWithQuery:query completion:^(BOOL finished, SASDevice *sasDevice) {
     if (finished) {
@@ -198,6 +202,7 @@ SASGalleryCellDelegate> {
       self.canRefresh = YES;
       [self.collectionView reloadData];
       imagesDownloadedCount += 1;
+      self.currentlyDownloading = NO;
     } else {
       // The complete load of the gallery may
       // not be finished, however another image
