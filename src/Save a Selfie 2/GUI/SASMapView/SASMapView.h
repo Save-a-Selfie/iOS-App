@@ -68,6 +68,10 @@ typedef NS_ENUM(NSUInteger, SASAnnotationImage) {
 @property(nonatomic, assign) SASAnnotationImage sasAnnotationImage;
 
 
+/**
+ Removes all the annotations that are currently on the map.
+ */
+- (void) removeAllAnnotations;
 
 /**
  Locates the user on the map.

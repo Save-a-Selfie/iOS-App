@@ -58,9 +58,7 @@ NSString* const GET_IMAGE_URL = @"https://guarded-mountain-99906.herokuapp.com/g
     
     // Append image file path to url.
     [simpleRequest setUrl:[NSString stringWithFormat:@"%@%@", GET_IMAGE_URL, sasDevice.filePath]];
-    [simpleRequest setHeaders:@{@"Accept": @"application/json",
-                                @"Content-Type": @"application/json",
-                                @"Authorization": tokenFormat}];
+    [simpleRequest setHeaders:@{@"Authorization": tokenFormat}];
   }] asBinaryAsync:^(UNIHTTPBinaryResponse *binaryResponse, NSError *error) {
       completionBlock(binaryResponse.body, sasDevice);
   }];

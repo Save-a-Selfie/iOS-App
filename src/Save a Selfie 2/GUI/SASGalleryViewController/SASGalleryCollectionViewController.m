@@ -142,15 +142,11 @@ SASGalleryCellDelegate> {
                               withCurrentRange:(NSRange) range
                             desiredRangeLength:(unsigned int) desiredLength {
   if (!(range.location >= totalElements)) {
-    if (!(range.location + desiredLength) >= totalElements) {
-      // Download the next range of images up to the desired length from
-      // wherever we are currently located within the range.
-      return NSMakeRange(range.location, range.location + desiredLength);
+    if ((range.location + desiredLength) >= totalElements) {
+      return NSMakeRange(range.location, totalElements - range.location);
     }
     else {
-      // Download the remaining images, from wherever the range.location
-      // is currently situated.
-      return NSMakeRange(range.location, totalElements - range.location);
+      return NSMakeRange(range.location, range.location + desiredLength);
     }
   } else {
     return NSMakeRange(0, 0);
@@ -177,10 +173,10 @@ SASGalleryCellDelegate> {
     return;
   }
   
-  
+  self.currentDownloadRange = NSMakeRange(imagesDownloadedCount, 0);
   self.currentDownloadRange = [self determineNextRangeForImageDownload:(int)self.filePaths.count
                                                       withCurrentRange:self.currentDownloadRange
-                                                    desiredRangeLength:20];
+                                                    desiredRangeLength:30];
   
   if (self.currentDownloadRange.location == 0 && self.currentDownloadRange.length == 0) {
     return;
@@ -202,12 +198,14 @@ SASGalleryCellDelegate> {
       self.canRefresh = YES;
       [self.collectionView reloadData];
       imagesDownloadedCount += 1;
+    } else {
+      // The complete load of the gallery may
+      // not be finished, however another image
+      // may be loaded.
+      [self.collectionView reloadData];
+      imagesDownloadedCount += 1;
     }
-    // The complete load of the gallery may
-    // not be finished, however another image
-    // may be loaded.
-    [self.collectionView reloadData];
-    imagesDownloadedCount += 1;
+
     
     if (imagesDownloadedCount >= self.filePaths.count) {
       self.allImagesDownloaded = YES;
@@ -284,8 +282,6 @@ SASGalleryCellDelegate> {
   float bottomEdge = self.collectionView.contentOffset.y + self.collectionView.frame.size.height;
   
   if (bottomEdge >= self.collectionView.contentSize.height) {
-    
-    // Download the next 15 images.
     [self downloadImages];
   }
 }

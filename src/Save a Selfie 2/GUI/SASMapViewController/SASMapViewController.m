@@ -52,6 +52,7 @@ MKMapViewDelegate>
 
 @property (strong, nonatomic) NSMutableDictionary<SASAnnotation*, SASDevice*> *annotaionsDict;
 
+@property (strong, nonatomic) UIActivityIndicatorView *loading;
 @end
 
 @implementation SASMapViewController
@@ -83,6 +84,8 @@ NSString *permissionsProblemText = @"Please enable location services for this ap
 
 - (void)viewDidLoad {
   [super viewDidLoad];
+  self.loading = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+  self.loading.frame = CGRectMake(15, 20, 20, 20);
   
   self.annotaionsDict = [[NSMutableDictionary alloc] init];
   self.sasMapView.notificationReceiver = self;
@@ -151,14 +154,27 @@ NSString *permissionsProblemText = @"Please enable location services for this ap
     //  [query setLocationArguments:[self.sasMapView currentUserLocation]];
     
     DefaultDownloadWorker *downloadWorker = [[DefaultDownloadWorker alloc] init];
+    
+    [self startLoading];
     [self.networkManager downloadWithQuery:query
                                  forWorker:downloadWorker
                                 completion:^(NSArray<SASDevice *> *result) {
                                   [self setupAnnotations:result];
+                                  [self stopLoading];
                                 }];
   });
 }
 
+
+- (void) startLoading {
+  [self.view addSubview:self.loading];
+  [self.loading startAnimating];
+}
+
+- (void) stopLoading {
+  [self.loading removeFromSuperview];
+  [self.loading stopAnimating];
+}
 
 - (void)setupAnnotations:(NSArray<SASDevice *> *) objects {
   for (SASDevice *s in objects) {
@@ -380,11 +396,24 @@ NSString *permissionsProblemText = @"Please enable location services for this ap
 #pragma mark SASUploadViewController Delegate
 - (void)sasUploadViewController:(UIViewController *)viewController withResponse:(SASUploadControllerResponse)response withObject:(SASNetworkObject *)sasUploadObject {
   // Alert the user if it was succes.
-  if(response == SASUploadControllerResponseUploaded) {
+  if (response == SASUploadControllerResponseUploaded) {
     SASNotificationView *sasNotificationView = [[SASNotificationView alloc] init];
     sasNotificationView.title = @"THANK YOU!";
     sasNotificationView.image = [UIImage imageNamed:@"DoneImage"];
     [sasNotificationView animateIntoView:self.view];
+    
+    self.networkManager = [SASNetworkManager sharedInstance];
+    SASNetworkQuery *query = [SASNetworkQuery queryWithType:SASNetworkQueryTypeAll];
+    
+    [self startLoading];
+    DefaultDownloadWorker *downloadWorker = [[DefaultDownloadWorker alloc] init];
+    [self.networkManager downloadWithQuery:query
+                                 forWorker:downloadWorker
+                                completion:^(NSArray<SASDevice *> *result) {
+                                  [self.sasMapView removeAllAnnotations];
+                                  [self setupAnnotations:result];
+                                  [self stopLoading];
+                                }];
   }
   
   

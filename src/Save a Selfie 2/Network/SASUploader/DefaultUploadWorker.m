@@ -28,8 +28,7 @@ NSString* const UPLOAD_IMAGE_URL  = @"https://guarded-mountain-99906.herokuapp.c
 
 - (void)uploadObject:(SASNetworkObject *)uploadObject
           completion:(UploadCompletionBlock)completion {
-  [self upload:uploadObject completion:completion];
-}
+  [self upload:uploadObject completion:completion];}
 
 - (void)upload:(SASNetworkObject *)uploadObject completion:(UploadCompletionBlock)completion {
   // Get the current user's token.
@@ -42,7 +41,7 @@ NSString* const UPLOAD_IMAGE_URL  = @"https://guarded-mountain-99906.herokuapp.c
   NSNumber *long_ = [NSNumber numberWithDouble:uploadObject.coordinates.longitude];
   NSString *aidType = [SASDevice getDeviceNameForDeviceType:uploadObject.associatedDevice.type];
   
-  NSData *imageData = UIImageJPEGRepresentation(uploadObject.image, 0.01);
+  NSData *imageData = UIImageJPEGRepresentation(uploadObject.image, 0.1f);
   
   NSDictionary *jsonPost = @{@"lat" : lat,
                              @"lng": long_,
@@ -76,6 +75,7 @@ NSString* const UPLOAD_IMAGE_URL  = @"https://guarded-mountain-99906.herokuapp.c
   }];
   [op start];
 }
+
 
 
 @end

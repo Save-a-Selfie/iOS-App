@@ -67,15 +67,17 @@
 - (void) downloadImagesWithQuery:(SASNetworkQuery*) query
                         completion:(void(^)(BOOL completed, SASDevice *sasDevice)) completed {
   [self.worker downloadImageWithQuery:query completionResult:^(NSData *imageData, SASDevice *device) {
+
     dispatch_async(dispatch_get_main_queue(), ^{
       NSData* jpegData = UIImageJPEGRepresentation([UIImage imageWithData:imageData], 0.5);
       UIImage *image = [UIImage imageWithData:jpegData];
+      
       // Add image reference to our `datasource`.
       if (image) {
         [self.images addObject:image];
         [self.container addDevice:device forImage:image];
       }
-      totalImagesDownloaded++;
+      totalImagesDownloaded = (int)[self.images count];
       // The total image count should be the same amount
       // as imagePaths.count as these are all the files
       // we have to download. this signifies we're finished
