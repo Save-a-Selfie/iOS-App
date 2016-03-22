@@ -388,9 +388,6 @@ NSString *permissionsProblemText = @"Please enable location services for this ap
   }
   
   [self presentViewController:self.uploadImageNavigationController animated:YES completion:nil];
-  
-  
-  
 }
 
 #pragma mark SASUploadViewController Delegate

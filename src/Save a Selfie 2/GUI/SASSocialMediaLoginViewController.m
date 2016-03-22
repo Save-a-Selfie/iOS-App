@@ -17,7 +17,7 @@
 #import "FXAlert.h"
 #import "SASUser.h"
 #import "SASActivityIndicator/SASActivityIndicator.h"
-
+#import "Screen.h"
 
 @interface SASSocialMediaLoginViewController () <FBSDKLoginButtonDelegate>
 
@@ -69,6 +69,12 @@
 
 - (void)viewDidLoad {
   [super viewDidLoad];
+  UIImage* background = [UIImage imageNamed:@"CPR"];
+  UIImageView *backgroundView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, [Screen width], [Screen height])];
+  backgroundView.contentMode = UIViewContentModeScaleAspectFill;
+  [backgroundView setImage:background];
+  [self.view addSubview:backgroundView];
+  
   self.view.backgroundColor = [UIColor whiteColor];
   // Buttons should be correctly setup.
   [self.view addSubview:self.twtrLoginButton];

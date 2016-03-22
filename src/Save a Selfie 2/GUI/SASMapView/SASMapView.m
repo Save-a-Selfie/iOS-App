@@ -24,8 +24,6 @@
 
 @property(strong, nonatomic) SASLocation* sasLocation;
 
-@property (nonatomic, strong) NSArray<SASDevice*> *sasDevices;
-
 // The annotation type for the map to show.
 @property(assign, nonatomic) SASDeviceType annotationsToShow;
 

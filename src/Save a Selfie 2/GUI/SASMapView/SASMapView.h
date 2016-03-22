@@ -32,6 +32,7 @@ typedef NS_ENUM(NSUInteger, SASAnnotationImage) {
 
 - (void) sasMapView:(SASMapView *) mapView usersLocationHasUpdated: (CLLocationCoordinate2D) coordinate;
 
+
 @end
 
 
@@ -44,6 +45,7 @@ typedef NS_ENUM(NSUInteger, SASAnnotationImage) {
 //      @protocol SASMapViewNotifications. 
 @property (nonatomic, weak) id<SASMapViewNotifications> notificationReceiver;
 
+@property (nonatomic, strong) NSArray<SASDevice*> *sasDevices;
 
 
 /**
