@@ -21,7 +21,6 @@
 
 @property (strong, nonatomic) NSString *reuseIdentifier;
 @property (strong, nonatomic) SASNetworkManager *networkManager;
-@property (strong, nonatomic) id<DownloadWorker> worker;
 @property (strong, nonatomic) NSArray<NSURL*> *downloadURLs;
 @property (weak, nonatomic) SASGalleryCell *galleryCell;
 @property (assign, nonatomic) BOOL objectsDowloaded;
@@ -46,7 +45,7 @@
   
   _reuseIdentifier = identifier;
   _networkManager = networkManager;
-  _worker = worker;
+  //_worker = worker;
   _galleryCell = reuseCell;
   _cellDelegate = _galleryCell.delegate;
   _images = [[NSMutableArray alloc] init];
@@ -65,13 +64,15 @@
 
 
 - (void) downloadImagesWithQuery:(SASNetworkQuery*) query
-                        completion:(void(^)(BOOL completed, SASDevice *sasDevice)) completed {
-  [self.worker downloadImageWithQuery:query completionResult:^(NSData *imageData, SASDevice *device) {
-
+                      completion:(void(^)(BOOL completed, SASDevice *sasDevice)) completed {
+  DefaultImageDownloader *worker = [[DefaultImageDownloader alloc] init];
+  [worker downloadImageWithQuery:query completionResult:^(NSData *imageData, SASDevice *device) {
+    __block unsigned long totalBytes = 0;
     dispatch_async(dispatch_get_main_queue(), ^{
-      NSData* jpegData = UIImageJPEGRepresentation([UIImage imageWithData:imageData], 0.5);
-      UIImage *image = [UIImage imageWithData:jpegData];
-      
+      totalBytes += imageData.length;
+      NSLog(@"%d) Bytes: %lu", totalImagesDownloaded, imageData.length);
+      UIImage *image = [UIImage imageWithData:imageData];
+
       // Add image reference to our `datasource`.
       if (image) {
         [self.images addObject:image];
@@ -83,6 +84,7 @@
       // we have to download. this signifies we're finished
       // downloaded this batch of images.
       if (totalImagesDownloaded == query.devices.count) {
+        NSLog(@"[DONE] Bytes: %lu", totalBytes);
         completed(YES, device);
       } else {
         completed(NO, device);
@@ -101,19 +103,19 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView
                   cellForItemAtIndexPath:(NSIndexPath *)indexPath {
   
-  self.galleryCell = [collectionView dequeueReusableCellWithReuseIdentifier:self.reuseIdentifier forIndexPath:indexPath];
+  SASGalleryCell *galleryCell = (SASGalleryCell*)[collectionView dequeueReusableCellWithReuseIdentifier:self.reuseIdentifier forIndexPath:indexPath];
   
   
   UIImage *image = [self.images objectAtIndex:indexPath.row];
-  self.galleryCell.delegate = self.cellDelegate;
+  galleryCell.delegate = self.cellDelegate;
   
   // Set the cell's image.
-  self.galleryCell.imageView.image = image;
+  galleryCell.imageView.image = image;
   
   // Set the cell's device.
-  self.galleryCell.device = [self.container deviceForImage:image];
+  galleryCell.device = [self.container deviceForImage:image];
   
-  return self.galleryCell;
+  return galleryCell;
 }
 
 

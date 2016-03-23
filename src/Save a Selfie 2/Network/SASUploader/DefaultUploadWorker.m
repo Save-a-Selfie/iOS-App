@@ -53,6 +53,7 @@ NSString* const UPLOAD_IMAGE_URL  = @"https://guarded-mountain-99906.herokuapp.c
   AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager manager]
                                             initWithBaseURL:[NSURL URLWithString:@"https://guarded-mountain-99906.herokuapp.com"]];
   [manager.requestSerializer setValue:tokenFormat forHTTPHeaderField:@"Authorization"];
+  [manager.requestSerializer setValue:@"keep-alive" forHTTPHeaderField:@"connection"];
   
   AFHTTPRequestOperation *op = [manager POST:@"/uploadSelfie"
                                   parameters:jsonPost

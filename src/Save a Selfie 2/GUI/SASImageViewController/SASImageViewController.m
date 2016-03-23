@@ -172,7 +172,7 @@
     self.sasActivityIndicator.center = CGPointMake(self.view.center.x, self.sasImageView.center.y);
     [self.sasImageView addSubview:self.sasActivityIndicator];
     [self.sasActivityIndicator startAnimating];
-
+    
     // Download the image from server.
     [self downloadImage];
   }
@@ -188,15 +188,17 @@
   [networkQuery setDevices: device];
   
   [networkManager downloadImageWithQuery:networkQuery forWorker:imageDownloader completion:^(NSData *imageData, SASDevice *sasDevice) {
-    dispatch_async(dispatch_get_main_queue(), ^{
-      NSData* jpegData = UIImageJPEGRepresentation([UIImage imageWithData:imageData], 0.5);
-      UIImage *image = [UIImage imageWithData:jpegData];
-      self.sasImageView.image = image;
-      [self.sasActivityIndicator stopAnimating];
-      [self.sasActivityIndicator removeFromSuperview];
-      self.sasActivityIndicator = nil;
-      imageLoaded = YES;
-    });
+    
+      dispatch_async(dispatch_get_main_queue(), ^{
+        NSData *data = [NSData dataWithBytes:imageData.bytes length:imageData.length];
+        UIImage *image = [UIImage imageWithData:data];
+
+        self.sasImageView.image = image;
+        [self.sasActivityIndicator stopAnimating];
+        [self.sasActivityIndicator removeFromSuperview];
+        self.sasActivityIndicator = nil;
+        imageLoaded = YES;
+      });
   }];
 }
 
@@ -209,7 +211,7 @@
   self.sasMapView.userInteractionEnabled = YES;
   self.sasMapView.showsUserLocation = YES;
   [self.sasMapView setMapType:MKMapTypeHybrid];
-  [self showDeviceLocation];  
+  [self showDeviceLocation];
 }
 
 

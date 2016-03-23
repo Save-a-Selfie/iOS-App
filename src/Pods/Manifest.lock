@@ -20,6 +20,10 @@ PODS:
   - AFNetworking/UIKit (2.6.3):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
+  - APAsyncDictionary (0.0.6)
+  - APSmartStorage (0.1.4):
+    - APAsyncDictionary (= 0.0.6)
+    - MD5Digest (= 0.1.0)
   - Bolts (1.6.0):
     - Bolts/AppLinks (= 1.6.0)
     - Bolts/Tasks (= 1.6.0)
@@ -33,8 +37,11 @@ PODS:
     - FBSDKCoreKit
   - FBSDKShareKit (4.10.0):
     - FBSDKCoreKit
-  - FXKeychain (1.5.3)
   - MBProgressHUD (0.9.1)
+  - MD5Digest (0.1.0)
+  - SDWebImage (3.7.5):
+    - SDWebImage/Core (= 3.7.5)
+  - SDWebImage/Core (3.7.5)
   - TwitterCore (1.15.3):
     - Fabric
   - TwitterKit (1.15.3):
@@ -43,25 +50,29 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking (~> 2.0)
+  - APSmartStorage (~> 0.1)
   - Fabric
   - FBSDKCoreKit
   - FBSDKLoginKit
   - FBSDKShareKit
-  - FXKeychain (~> 1.5)
   - MBProgressHUD (~> 0.9.1)
+  - SDWebImage (~> 3.7)
   - TwitterCore
   - TwitterKit
   - Unirest (~> 1.1.4)
 
 SPEC CHECKSUMS:
   AFNetworking: cb8d14a848e831097108418f5d49217339d4eb60
+  APAsyncDictionary: f15c00be399fb3737743668d1f3216a83c01ea2f
+  APSmartStorage: 36803202fbec931122079afe88d173b7df1687a7
   Bolts: f52a250053bb517ca874523c3913776359ab3def
   Fabric: caf7580c725e64db144f610ac65cd60956911dc7
   FBSDKCoreKit: 13bec8373fb3af94d44daf2aa1e0958687897fbd
   FBSDKLoginKit: d3d4a2e9d31954deb00bfea964167a05ca1ea976
   FBSDKShareKit: 54587b4624706ace1e810cf83412a918141f807a
-  FXKeychain: 2fe54573946ffef634f4e2a2851e6c8f4ea15e76
   MBProgressHUD: c47f2c166c126cf2ce36498d80f33e754d4e93ad
+  MD5Digest: 99bcccfc389c5b7a0edaf66beb80fbc7596a3b65
+  SDWebImage: 69c6303e3348fba97e03f65d65d4fbc26740f461
   TwitterCore: cce24b3c798993ccde72787ea79ea9a478b284e4
   TwitterKit: 43600f2d2848c227739efea5b2939585e69339c3
   Unirest: 5e4d93eaf32463bf619a4ecd3bbc8c32acf21eac

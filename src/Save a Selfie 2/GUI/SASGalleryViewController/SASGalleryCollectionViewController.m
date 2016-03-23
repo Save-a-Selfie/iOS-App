@@ -113,13 +113,15 @@ SASGalleryCellDelegate> {
   
   // Go dowload the devices from the server.
   [self.networkManager downloadWithQuery:query forWorker:downloadWorker completion:^(NSArray<SASDevice *> *result) {
-    // Keep reference to all devices downloaded.
-    self.devices = [result mutableCopy];
-    
-    // Once downloaded extract filePaths
-    [self extractFilePathsFromDevices:self.devices];
-    
-    [self downloadImages];
+    dispatch_async(dispatch_get_main_queue(), ^{
+      // Keep reference to all devices downloaded.
+      self.devices = [result mutableCopy];
+      
+      // Once downloaded extract filePaths
+      [self extractFilePathsFromDevices:self.devices];
+      
+      [self downloadImages];
+    });
   }];
 }
 

@@ -71,10 +71,7 @@ NSString* const GET_ALL_SELFIES_URL = @"https://guarded-mountain-99906.herokuapp
   }] asJsonAsync:^(UNIHTTPJsonResponse *jsonResponse, NSError *error) {
     NSArray *jsonData = [SASJSONParser parseGetAllSelfieData:jsonResponse.body.object];
     NSArray<SASDevice*> *devices = [self constructDevicesFromJSONData:jsonData];
-    
-    dispatch_async(dispatch_get_main_queue(), ^() {
-      completionHandler(devices);
-    });
+    completionHandler(devices);
   }];
   
 }

@@ -159,8 +159,10 @@ NSString *permissionsProblemText = @"Please enable location services for this ap
     [self.networkManager downloadWithQuery:query
                                  forWorker:downloadWorker
                                 completion:^(NSArray<SASDevice *> *result) {
-                                  [self setupAnnotations:result];
-                                  [self stopLoading];
+                                  dispatch_async(dispatch_get_main_queue(), ^{
+                                    [self setupAnnotations:result];
+                                    [self stopLoading];
+                                  });
                                 }];
   });
 }
@@ -198,11 +200,11 @@ NSString *permissionsProblemText = @"Please enable location services for this ap
 - (void)sasMapView:(SASMapView *)mapView annotationWasTapped:(SASAnnotation *) annotation {
   // Present the SASImageviewController to display the image associated
   // with the annotation selected.
-  self.imageViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SASImageViewController"];
+  SASImageViewController *imageViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SASImageViewController"];
   SASDevice *device = [self.annotaionsDict objectForKey:annotation];
-  self.imageViewController.device = device;
-  self.imageViewController.annotation = annotation;
-  [self.navigationController pushViewController:self.imageViewController animated:YES];
+  imageViewController.device = device;
+  imageViewController.annotation = annotation;
+  [self.navigationController pushViewController:imageViewController animated:YES];
 }
 
 
@@ -398,20 +400,21 @@ NSString *permissionsProblemText = @"Please enable location services for this ap
     sasNotificationView.title = @"THANK YOU!";
     sasNotificationView.image = [UIImage imageNamed:@"DoneImage"];
     [sasNotificationView animateIntoView:self.view];
-    
-    self.networkManager = [SASNetworkManager sharedInstance];
-    SASNetworkQuery *query = [SASNetworkQuery queryWithType:SASNetworkQueryTypeAll];
-    
-    [self startLoading];
-    DefaultDownloadWorker *downloadWorker = [[DefaultDownloadWorker alloc] init];
-    [self.networkManager downloadWithQuery:query
-                                 forWorker:downloadWorker
-                                completion:^(NSArray<SASDevice *> *result) {
+  }
+  self.networkManager = [SASNetworkManager sharedInstance];
+  SASNetworkQuery *query = [SASNetworkQuery queryWithType:SASNetworkQueryTypeAll];
+  
+  [self startLoading];
+  DefaultDownloadWorker *downloadWorker = [[DefaultDownloadWorker alloc] init];
+  [self.networkManager downloadWithQuery:query
+                               forWorker:downloadWorker
+                              completion:^(NSArray<SASDevice *> *result) {
+                                dispatch_async(dispatch_get_main_queue(), ^{
                                   [self.sasMapView removeAllAnnotations];
                                   [self setupAnnotations:result];
                                   [self stopLoading];
-                                }];
-  }
+                                });
+                              }];
   
   
   sasUploadObject = nil;
