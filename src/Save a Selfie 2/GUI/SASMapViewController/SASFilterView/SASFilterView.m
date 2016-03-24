@@ -18,9 +18,8 @@
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UILabel *filterLabel;
 @property (assign, nonatomic) SASDeviceType selectedDevice;
-@property (weak, nonatomic) SASMapView *filterableMapView;
 @property (strong, nonatomic) NSMutableArray *cells;
-
+@property (strong, nonatomic) SASFilterViewResponseBlock block;
 @end
 
 @implementation SASFilterView
@@ -70,11 +69,9 @@ SASDeviceType availableDevicesToFilter[5] = {
 }
 
 
-
-- (void)mapToFilter:(SASMapView<MapFilterable>*) mapView {
-  self.filterableMapView = mapView;
+- (void)setResponseBlock:(SASFilterViewResponseBlock)block {
+  self.block = block;
 }
-
 
 #pragma mark UITableViewDelegate
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -177,10 +174,10 @@ SASDeviceType availableDevicesToFilter[5] = {
 
 // Forwards selected cells associatedDevice to delegate.
 - (IBAction) doneButtonPressed:(id)sender {
-  // Message map on what to filter annotation to filter.
-  [self.filterableMapView filterMapForDevice:self.selectedDevice];
-  NSLog(@"%d", self.selectedDevice);
-  [self animateOutOfParentView];
+  __weak typeof(self) wSelf = self;
+  
+  wSelf.block(self.selectedDevice);
+  [wSelf animateOutOfParentView];
 }
 
 

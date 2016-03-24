@@ -8,28 +8,23 @@
 
 #import <UIKit/UIKit.h>
 #import "SASDevice.h"
-#import "MapFilterable.h"
-#import "SASMapView.h"
-
-@class SASFilterView;
 
 
 
 @interface SASFilterView : UIView
 
 
+typedef void(^SASFilterViewResponseBlock)(SASDeviceType type);
+
+/**
+ A callback block when a new device has been selected.
+ */
+- (void) setResponseBlock:(SASFilterViewResponseBlock) block;
+
 /**
  Animate SASFilterView into another view.
  */
 - (void) animateIntoView:(UIView*) view;
 
-
-/**
- An instance of MKMapView that implemented the Filterable protocol
- see Filterable.h for more info.
- The map view will be message about what annotations to
- filter.
- */
-- (void) mapToFilter:(MKMapView<MapFilterable>*) mapView;
 
 @end

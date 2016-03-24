@@ -11,7 +11,7 @@
 #import "SASLocation.h"
 #import "SASAnnotation.h"
 #import "SASDevice.h"
-#import "MapFilterable.h"
+#import "Filterable.h"
 
 @class SASMapView;
 
@@ -38,7 +38,7 @@ typedef NS_ENUM(NSUInteger, SASAnnotationImage) {
 
 
 
-@interface SASMapView : MKMapView <MKMapViewDelegate, MapFilterable>
+@interface SASMapView : MKMapView <MKMapViewDelegate, Filterable>
 
 
 // Reference this object to receive appropriate method calls for

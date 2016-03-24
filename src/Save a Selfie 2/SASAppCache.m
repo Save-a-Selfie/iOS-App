@@ -77,26 +77,39 @@
 }
 
 
+- (NSArray <SASAnnotation*> *)filterAnnotation:(NSArray<SASAnnotation *> *)annotations
+                                     forFilter:(id<Filterable>  _Nonnull)filter
+                                withDeviceType:(SASDeviceType)type {
+  return [filter filterAnnotations:annotations forDeviceType:type];
+}
+
+
 - (UIImage *)cachedImageForKey:(SASDevice *)key {
   return [self.cachedDevicesAndImages objectForKey:key];
 }
 
 - (SASAnnotation *) cachedAnnotationForKey:(SASDevice *) key {
+  if (key == nil) { NSLog(@"Null: %@", key);}
   return [self.cachedDevicesAndAnnotations objectForKey:key];
 }
 
 
 - (NSArray<SASDevice *> *)keysForImages {
-  return [[self.cachedDevicesAndImages allKeys] copy];
+  return [self.cachedDevicesAndImages allKeys];
 }
 
 - (NSArray<SASDevice *> *)keysForAnnotations {
-  return [[self.cachedDevicesAndAnnotations allKeys] copy];
+  return [self.cachedDevicesAndAnnotations allKeys];
 }
 
 // Return a copy of the key value pairs for annotations.
 - (NSDictionary<SASDevice*, SASAnnotation*>*) annotationKeyValuePairs {
   return [self.cachedDevicesAndAnnotations copy];
+}
+
+
+- (SASDevice *)objectForAnnotationKey:(SASAnnotation*) annotation {
+  return  [self.cachedDevicesAndAnnotations allKeysForObject:annotation][0];
 }
 
 

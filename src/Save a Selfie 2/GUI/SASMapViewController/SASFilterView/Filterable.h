@@ -9,18 +9,18 @@
 #import <UIKit/UIKit.h>
 
 
+@class SASDevice;
 
-@class SASAnnotation;
 
 @protocol Filterable <NSObject>
 
 /**
  Filter an array of SASDevices for a SASDeviceType.
- @param annotations The annotations to filter.
+ @param devices The devices to filter.
  @param deviceType The device type to apply when filtering.
- @param An array of types SASAnnotations which have been filtered from the array passed.
+ @param An array of types SASDevice which have been filtered from the array passed.
  */
-- (NSArray<SASAnnotation*>*) filterAnnotations:(NSArray<SASAnnotation*>*)annotations forType:(SASDeviceType) deviceType;
+- (NSArray<SASAnnotation*>*) filterAnnotations:(NSArray <SASAnnotation*>*)annotations forDeviceType:(SASDeviceType) deviceType;
 
 
 @end

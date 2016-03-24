@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "SASDevice.h"
 #import "SASAnnotation.h"
-
+#import "Filterable.h"
 
 /**
  This is an internal cache clients can use to access
@@ -45,6 +45,11 @@
 
 
 
+- (nullable NSArray<SASAnnotation*>*) filterAnnotation:(nonnull NSArray<SASAnnotation*>*) annotations
+                                             forFilter:(nonnull id<Filterable>) filter
+                                        withDeviceType:(SASDeviceType) type;
+
+
 - (nullable UIImage*) cachedImageForKey:(nonnull SASDevice*) key;
 
 
@@ -53,6 +58,8 @@
 - (nullable NSArray<SASDevice*>*) keysForImages;
 
 - (nullable NSArray<SASDevice*>*) keysForAnnotations;
+
+- (nullable SASDevice *)objectForAnnotationKey:(nonnull SASAnnotation*) annotation;
 
 - (nullable NSDictionary<SASDevice*, UIImage*>*) imageKeyValuePairs;
 
