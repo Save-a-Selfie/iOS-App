@@ -8,23 +8,24 @@
 
 #import <UIKit/UIKit.h>
 #import "SASDevice.h"
+@class SASFilterView;
+@protocol SASFilterViewDelegate <NSObject>
 
+- (void) sasFilterView:(SASFilterView*) view didFilterType:(SASDeviceType) type;
 
+@end
 
 @interface SASFilterView : UIView
 
 
-typedef void(^SASFilterViewResponseBlock)(SASDeviceType type);
+@property (weak, nonatomic) id<SASFilterViewDelegate> delegate;
 
-/**
- A callback block when a new device has been selected.
- */
-- (void) setResponseBlock:(SASFilterViewResponseBlock) block;
+
 
 /**
  Animate SASFilterView into another view.
  */
 - (void) animateIntoView:(UIView*) view;
 
-
+- (void) restoreToDefault;
 @end

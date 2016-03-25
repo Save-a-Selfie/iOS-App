@@ -59,12 +59,16 @@
 
 - (nullable NSArray<SASDevice*>*) keysForAnnotations;
 
+- (nullable NSArray<SASAnnotation*>*) allAnnotations;
+
 - (nullable SASDevice *)objectForAnnotationKey:(nonnull SASAnnotation*) annotation;
 
 - (nullable NSDictionary<SASDevice*, UIImage*>*) imageKeyValuePairs;
 
 - (nullable NSDictionary<SASDevice*, SASAnnotation*>*) annotationKeyValuePairs;
 
+
+- (void) removeAllAnnotations;
 // Returns the number of items cached.
 - (NSUInteger) cachedAmount;
 @end

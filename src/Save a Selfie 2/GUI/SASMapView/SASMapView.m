@@ -86,9 +86,7 @@
 
 
 - (void)removeAllAnnotations {
-  for (SASAnnotation *annotation in self.annotations) {
-    [self removeAnnotation:annotation];
-  }
+  [self removeAnnotations:self.annotations];
 }
 
 

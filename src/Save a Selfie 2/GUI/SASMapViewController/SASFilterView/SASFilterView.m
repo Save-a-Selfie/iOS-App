@@ -19,7 +19,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *filterLabel;
 @property (assign, nonatomic) SASDeviceType selectedDevice;
 @property (strong, nonatomic) NSMutableArray *cells;
-@property (strong, nonatomic) SASFilterViewResponseBlock block;
+
 @end
 
 @implementation SASFilterView
@@ -69,9 +69,6 @@ SASDeviceType availableDevicesToFilter[5] = {
 }
 
 
-- (void)setResponseBlock:(SASFilterViewResponseBlock)block {
-  self.block = block;
-}
 
 #pragma mark UITableViewDelegate
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -174,10 +171,10 @@ SASDeviceType availableDevicesToFilter[5] = {
 
 // Forwards selected cells associatedDevice to delegate.
 - (IBAction) doneButtonPressed:(id)sender {
-  __weak typeof(self) wSelf = self;
-  
-  wSelf.block(self.selectedDevice);
-  [wSelf animateOutOfParentView];
+  if (self.delegate && [self.delegate respondsToSelector:@selector(sasFilterView:didFilterType:)]) {
+    [self.delegate sasFilterView:self didFilterType:self.selectedDevice];
+  }
+  [self animateOutOfParentView];
 }
 
 

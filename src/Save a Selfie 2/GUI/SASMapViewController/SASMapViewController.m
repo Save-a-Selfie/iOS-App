@@ -28,6 +28,7 @@
 @interface SASMapViewController ()
 <SASImagePickerDelegate,
 SASUploadViewControllerDelegate,
+SASFilterViewDelegate,
 UIAlertViewDelegate,
 MKMapViewDelegate>
 
@@ -133,7 +134,7 @@ NSString *permissionsProblemText = @"Please enable location services for this ap
 - (IBAction) showSASFilterView:(id)sender {
   if (!self.sasFilterView) {
     self.sasFilterView = [[SASFilterView alloc] init];
-    
+    self.sasFilterView.delegate = self;
     self.appCache = [SASAppCache sharedInstance];
     NSMutableArray <SASAnnotation*> *annotations = [[NSMutableArray alloc] init];
     
@@ -144,37 +145,43 @@ NSString *permissionsProblemText = @"Please enable location services for this ap
         [annotations addObject:annotation];
       }
     }
-    
-    __weak typeof(self) wSelf = self;
-    [self.sasFilterView setResponseBlock:^(SASDeviceType type) {
-      // Send annotations for filtering.
-      // Update annotations reference to the filtered annotations.
-      NSArray* lannotations = [wSelf.appCache filterAnnotation:annotations forFilter:wSelf.sasMapView withDeviceType:type];
-      [wSelf.sasMapView removeAllAnnotations];
-      [wSelf displayAnnotationsToMap:lannotations];
-    }];
   }
   [self.sasFilterView animateIntoView:self.view];
 }
 
 
-- (NSArray<SASAnnotation*>*) generateAnnotationsFromDevices:(NSArray<SASDevice*>*) devices {
-  NSMutableArray *annotations = [[NSMutableArray alloc] init];
+- (void) sasFilterView:(SASFilterView*) view didFilterType:(SASDeviceType) type {
+  // Send annotations for filtering.
+  // Update annotations reference to the filtered annotations.
+  NSArray *annotations = [self.appCache allAnnotations];
+  NSArray* lannotations = [self.appCache filterAnnotation:annotations forFilter:self.sasMapView withDeviceType:type];
+  [self.sasMapView removeAllAnnotations];
+  [self displayAnnotationsToMap:lannotations];
+}
+
+- (NSDictionary<SASDevice*,SASAnnotation*>*) generateDictAnnotationsFromDevices:(NSArray<SASDevice*>*) devices {
+  NSMutableDictionary<SASDevice*, SASAnnotation*> *devicesForAnnotationsDict = [[NSMutableDictionary alloc] init];
+  
   for (SASDevice *device in devices) {
-    [annotations addObject:[SASAnnotation annotationWithSASDevice:device]];
+    SASAnnotation* annotation = [SASAnnotation annotationWithSASDevice:device];
+    if (annotation) {
+      [devicesForAnnotationsDict setObject:annotation forKey:device];
+    }
   }
-  return annotations;
+  return devicesForAnnotationsDict;
 }
 
 
-- (void) addDownloadsToCache:(NSArray <SASDevice*>*) devices forAnnotations:(NSArray <SASAnnotation*>*) annotations {
+- (void) addDevicesWithAnnotations:(NSDictionary<SASDevice*,SASAnnotation*>*) dict {
   self.appCache = [SASAppCache sharedInstance];
   
-  int i = 0;
   // Add a device and the corresponding annotation to the app cache.
-  for (SASDevice* device in devices) {
-    [self.appCache cacheAnnotation: annotations[i] forDevice:device];
-    i++;
+  NSArray *keys = [dict allKeys];
+  for (SASDevice *key in keys) {
+    SASAnnotation *annotation = [dict objectForKey:key];
+    if (annotation && key) {
+      [self.appCache cacheAnnotation:annotation forDevice:key];
+    }
   }
 }
 
@@ -193,9 +200,11 @@ NSString *permissionsProblemText = @"Please enable location services for this ap
                                  forWorker:downloadWorker
                                 completion:^(NSArray<SASDevice *> *result) {
                                   dispatch_async(dispatch_get_main_queue(), ^{
-                                    NSArray *annotations =[self generateAnnotationsFromDevices:result];
-                                    [self addDownloadsToCache:result forAnnotations:annotations];
-                                    [self displayAnnotationsToMap: annotations];
+                                    self.appCache = [SASAppCache sharedInstance];
+                                    [self.appCache removeAllAnnotations];
+                                    NSDictionary *devicesWithAnnotationsDict = [self generateDictAnnotationsFromDevices:result];
+                                    [self addDevicesWithAnnotations:devicesWithAnnotationsDict];
+                                    [self displayAnnotationsToMap: [self.appCache allAnnotations]];
                                     [self stopLoading];
                                   });
                                 }];
@@ -421,33 +430,36 @@ NSString *permissionsProblemText = @"Please enable location services for this ap
 }
 
 #pragma mark SASUploadViewController Delegate
-- (void)sasUploadViewController:(UIViewController *)viewController withResponse:(SASUploadControllerResponse)response withObject:(SASNetworkObject *)sasUploadObject {
+- (void)sasUploadViewController:(UIViewController *)viewController
+                   withResponse:(SASUploadControllerResponse)response
+                     withObject:(SASNetworkObject *)sasUploadObject {
   // Alert the user if it was succes.
   if (response == SASUploadControllerResponseUploaded) {
     SASNotificationView *sasNotificationView = [[SASNotificationView alloc] init];
     sasNotificationView.title = @"THANK YOU!";
     sasNotificationView.image = [UIImage imageNamed:@"DoneImage"];
     [sasNotificationView animateIntoView:self.view];
+    self.networkManager = [SASNetworkManager sharedInstance];
+    SASNetworkQuery *query = [SASNetworkQuery queryWithType:SASNetworkQueryTypeAll];
+    
+    [self startLoading];
+    DefaultDownloadWorker *downloadWorker = [[DefaultDownloadWorker alloc] init];
+    [self.networkManager downloadWithQuery:query
+                                 forWorker:downloadWorker
+                                completion:^(NSArray<SASDevice *> *result) {
+                                  dispatch_async(dispatch_get_main_queue(), ^{
+                                    [self.sasMapView removeAllAnnotations];
+                                    self.appCache = [SASAppCache sharedInstance];
+                                    [self.appCache removeAllAnnotations];
+                                    NSDictionary *devicesWithAnnotationsDict = [self generateDictAnnotationsFromDevices:result];
+                                    [self addDevicesWithAnnotations:devicesWithAnnotationsDict];
+                                    [self displayAnnotationsToMap: [self.appCache allAnnotations]];
+                                    [self stopLoading];
+                                  });
+                                }];
   }
-  self.networkManager = [SASNetworkManager sharedInstance];
-  SASNetworkQuery *query = [SASNetworkQuery queryWithType:SASNetworkQueryTypeAll];
-  
-  [self startLoading];
-  DefaultDownloadWorker *downloadWorker = [[DefaultDownloadWorker alloc] init];
-  [self.networkManager downloadWithQuery:query
-                               forWorker:downloadWorker
-                              completion:^(NSArray<SASDevice *> *result) {
-                                dispatch_async(dispatch_get_main_queue(), ^{
-                                  [self.sasMapView removeAllAnnotations];
-                                  NSArray *annotations =[self generateAnnotationsFromDevices:result];
-                                  [self addDownloadsToCache:result forAnnotations:annotations];
-                                  [self displayAnnotationsToMap: annotations];
-                                  [self stopLoading];
-                                });
-                              }];
   
   
-  sasUploadObject = nil;
   self.sasUploadViewController = nil;
   self.uploadImageNavigationController = nil;
 }

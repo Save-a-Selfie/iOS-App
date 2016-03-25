@@ -29,7 +29,7 @@
 
 
 - (NSString *)description {
-  NSString *description = [NSString stringWithFormat:@"\nImageFile: %@,\nCaption: %@ ,\nType %d,\nCoordinates \n{ latititude: %f, \n longtitude: %f \n}\n",
+  NSString *description = [NSString stringWithFormat:@"\aaeronnImageFile: %@,\nCaption: %@ ,\nType %d,\nCoordinates \n{ latititude: %f, \n longtitude: %f \n}\n",
                            self.filePath,
                            self.caption,
                            self.type,

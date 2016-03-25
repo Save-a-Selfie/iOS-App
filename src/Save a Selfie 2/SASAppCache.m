@@ -46,6 +46,9 @@
   return sharedInstance;
 }
 
+- (void)removeAllAnnotations {
+  [self.cachedDevicesAndAnnotations removeAllObjects];
+}
 
 - (NSUInteger)cachedAmount {
   return [self.cachedDevicesAndAnnotations count] + [self.cachedDevicesAndImages count];
@@ -55,13 +58,6 @@
   if (!self.cachedDevicesAndImages) {
     self.cachedDevicesAndImages = [[NSMutableDictionary alloc] init];
   }
-  
-  // If there already exists an object with the exact key,
-  // remove it first and then add it back again with
-  // the new version of the image.
-  if ([self keyForAnnotationExists:device]) {
-    [self.cachedDevicesAndImages removeObjectForKey:device];
-  }
   [self.cachedDevicesAndImages setObject:image forKey:device];
 }
 
@@ -69,9 +65,6 @@
 - (void)cacheAnnotation:(SASAnnotation *)annotation forDevice:(SASDevice *)device {
   if (!self.cachedDevicesAndAnnotations) {
     self.cachedDevicesAndAnnotations = [[NSMutableDictionary alloc] init];
-  }
-  if ([self keyForAnnotationExists:device]) {
-    [self.cachedDevicesAndAnnotations removeObjectForKey:device];
   }
   [self.cachedDevicesAndAnnotations setObject:annotation forKey:device];
 }
@@ -89,7 +82,6 @@
 }
 
 - (SASAnnotation *) cachedAnnotationForKey:(SASDevice *) key {
-  if (key == nil) { NSLog(@"Null: %@", key);}
   return [self.cachedDevicesAndAnnotations objectForKey:key];
 }
 
@@ -107,9 +99,17 @@
   return [self.cachedDevicesAndAnnotations copy];
 }
 
+- (NSArray<SASAnnotation *> *)allAnnotations {
+  return [self.cachedDevicesAndAnnotations allValues];
+}
 
 - (SASDevice *)objectForAnnotationKey:(SASAnnotation*) annotation {
-  return  [self.cachedDevicesAndAnnotations allKeysForObject:annotation][0];
+  NSArray<SASDevice*> *devices = [self.cachedDevicesAndAnnotations allKeysForObject:annotation];
+  if (devices.count > 0) {
+    return devices.lastObject;
+  } else {
+    return nil;
+  }
 }
 
 

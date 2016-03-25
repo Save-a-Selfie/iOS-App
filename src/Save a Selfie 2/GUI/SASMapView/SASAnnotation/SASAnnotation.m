@@ -16,6 +16,9 @@
 @implementation SASAnnotation
 
 + (SASAnnotation*) annotationWithSASDevice:(SASDevice *) device {
+  if (!device) {
+    return  nil;
+  }
   SASAnnotation *annotation = [[SASAnnotation alloc] init];
   annotation.name = [SASDevice getDeviceNameForDeviceType:device.type];
   annotation.deviceType = device.type;

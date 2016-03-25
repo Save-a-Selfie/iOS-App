@@ -11,8 +11,8 @@
 #import "SASMapView.h"
 
 typedef NS_ENUM(NSInteger, SASUploadControllerResponse) {
-    SASUploadControllerResponseUploaded,
-    SASUploadControllerResponseCancelled
+    SASUploadControllerResponseCancelled,
+    SASUploadControllerResponseUploaded
 };
 
 

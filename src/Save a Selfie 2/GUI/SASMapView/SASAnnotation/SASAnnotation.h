@@ -12,7 +12,7 @@
  This property can be used to indentify what type
  of SASDevice an instance holds i.e Defibrillator, Life Ring etc..
  */
-@property (copy) NSString *name;
+@property (nonatomic, strong) NSString *name;
 
 /**
  The coordinates of the annotation.
