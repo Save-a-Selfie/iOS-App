@@ -27,5 +27,4 @@
  */
 - (void) animateIntoView:(UIView*) view;
 
-- (void) restoreToDefault;
 @end
