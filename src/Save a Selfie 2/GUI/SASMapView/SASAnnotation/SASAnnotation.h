@@ -26,6 +26,9 @@
  */
 @property (nonatomic, assign) SASDeviceType deviceType;
 
+
+@property (nonatomic, strong) SASDevice *device;
+
 /**
  Initialises an new SASAnnotation instance given a SASDevice.
  
@@ -35,6 +38,7 @@
  @return New instance of SASAnnotation.
  */
 + (SASAnnotation*) annotationWithSASDevice:(SASDevice*) device;
+
 
 
 

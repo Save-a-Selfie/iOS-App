@@ -159,31 +159,20 @@ NSString *permissionsProblemText = @"Please enable location services for this ap
   [self displayAnnotationsToMap:lannotations];
 }
 
-- (NSDictionary<SASDevice*,SASAnnotation*>*) generateDictAnnotationsFromDevices:(NSArray<SASDevice*>*) devices {
-  NSMutableDictionary<SASDevice*, SASAnnotation*> *devicesForAnnotationsDict = [[NSMutableDictionary alloc] init];
+- (NSArray<SASAnnotation*>*) generateAnnotations:(NSArray<SASDevice*>*) devices {
+  NSMutableArray *annotations = [[NSMutableArray alloc] init];
   
   for (SASDevice *device in devices) {
     SASAnnotation* annotation = [SASAnnotation annotationWithSASDevice:device];
     if (annotation) {
-      [devicesForAnnotationsDict setObject:annotation forKey:device];
+      [annotations addObject:annotation];
     }
   }
-  return devicesForAnnotationsDict;
+  return annotations;
 }
 
 
-- (void) addDevicesWithAnnotations:(NSDictionary<SASDevice*,SASAnnotation*>*) dict {
-  self.appCache = [SASAppCache sharedInstance];
-  
-  // Add a device and the corresponding annotation to the app cache.
-  NSArray *keys = [dict allKeys];
-  for (SASDevice *key in keys) {
-    SASAnnotation *annotation = [dict objectForKey:key];
-    if (annotation && key) {
-      [self.appCache cacheAnnotation:annotation forDevice:key];
-    }
-  }
-}
+
 
 
 - (void)sasMapView:(SASMapView *)mapView usersLocationHasUpdated:(CLLocationCoordinate2D)coordinate {
@@ -200,11 +189,9 @@ NSString *permissionsProblemText = @"Please enable location services for this ap
                                  forWorker:downloadWorker
                                 completion:^(NSArray<SASDevice *> *result) {
                                   dispatch_async(dispatch_get_main_queue(), ^{
-                                    self.appCache = [SASAppCache sharedInstance];
-                                    [self.appCache removeAllAnnotations];
-                                    NSDictionary *devicesWithAnnotationsDict = [self generateDictAnnotationsFromDevices:result];
-                                    [self addDevicesWithAnnotations:devicesWithAnnotationsDict];
-                                    [self displayAnnotationsToMap: [self.appCache allAnnotations]];
+                                    [self.sasMapView removeAllAnnotations];
+                                    NSArray *annotations = [self generateAnnotations:result];
+                                    [self displayAnnotationsToMap: annotations];
                                     [self stopLoading];
                                   });
                                 }];
@@ -233,13 +220,10 @@ NSString *permissionsProblemText = @"Please enable location services for this ap
 
 #pragma mark <SASMapViewNotifications>
 - (void)sasMapView:(SASMapView *)mapView annotationWasTapped:(SASAnnotation *) annotation {
-  
-  self.appCache = [SASAppCache sharedInstance];
   // Present the SASImageviewController to display the image associated
   // with the annotation selected.
   SASImageViewController *imageViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SASImageViewController"];
-  SASDevice *device = [self.appCache objectForAnnotationKey:annotation];
-  imageViewController.device = device;
+  imageViewController.device = annotation.device;
   imageViewController.annotation = annotation;
   [self.navigationController pushViewController:imageViewController animated:YES];
 }
@@ -449,11 +433,8 @@ NSString *permissionsProblemText = @"Please enable location services for this ap
                                 completion:^(NSArray<SASDevice *> *result) {
                                   dispatch_async(dispatch_get_main_queue(), ^{
                                     [self.sasMapView removeAllAnnotations];
-                                    self.appCache = [SASAppCache sharedInstance];
-                                    [self.appCache removeAllAnnotations];
-                                    NSDictionary *devicesWithAnnotationsDict = [self generateDictAnnotationsFromDevices:result];
-                                    [self addDevicesWithAnnotations:devicesWithAnnotationsDict];
-                                    [self displayAnnotationsToMap: [self.appCache allAnnotations]];
+                                    NSArray *annotations = [self generateAnnotations:result];
+                                    [self displayAnnotationsToMap: annotations];
                                     [self stopLoading];
                                   });
                                 }];

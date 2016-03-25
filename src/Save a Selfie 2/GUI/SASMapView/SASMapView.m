@@ -86,6 +86,14 @@
 
 
 - (void)removeAllAnnotations {
+  for (SASAnnotation *annotation in self.annotations) {
+    // Before annotations are removed from map
+    // remove reference to its device property,
+    // so we dont cause retain cycle.
+    if (![annotation isKindOfClass:MKUserLocation.class]) {
+      annotation.device = nil;
+    }
+  }
   [self removeAnnotations:self.annotations];
 }
 

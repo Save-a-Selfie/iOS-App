@@ -24,6 +24,7 @@
   annotation.deviceType = device.type;
   annotation.coordinate = device.deviceLocation;
   annotation.image = (UIImage*)[SASDevice getDeviceMapAnnotationImageForDeviceType:device.type];
+  annotation.device = device;
   return annotation;
 }
 
