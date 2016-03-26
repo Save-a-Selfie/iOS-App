@@ -8,5 +8,3 @@ pod 'Fabric'
 pod 'TwitterKit'
 pod 'TwitterCore'
 pod "AFNetworking", "~> 2.0"
-pod 'SDWebImage', '~> 3.7'
-pod 'APSmartStorage', '~> 0.1'

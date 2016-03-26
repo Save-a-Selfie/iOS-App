@@ -9,7 +9,6 @@
 #import "DefaultImageDownloader.h"
 #import <UNIRest.h>
 #import "SASUser.h"
-#import <SDWebImage/SDWebImageManager.h>
 #import <AFNetworking.h>
 
 @implementation DefaultImageDownloader
@@ -110,13 +109,13 @@ NSString* const GET_IMAGE_URL = @"https://guarded-mountain-99906.herokuapp.com/g
 //  NSString *token = [userInfo objectForKey:USER_DICT_TOKEN];
 //  NSString *tokenFormat = [NSString stringWithFormat:@"Bearer %@", token];
 //  NSString *urlString = [NSString stringWithFormat:@"%@%@", GET_IMAGE_URL, sasDevice.filePath];
-//  
+//
 //  [[[AFHTTPRequestOperationManager manager] requestSerializer] setValue:tokenFormat forHTTPHeaderField:@"Authorization"];
-//  
+//
 //  AFHTTPRequestOperation *op = [[AFHTTPRequestOperationManager manager] GET:urlString parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
 //    NSLog(@"");
 //  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//    
+//
 //  }];
 //  [op start];
 //}
@@ -127,13 +126,13 @@ NSString* const GET_IMAGE_URL = @"https://guarded-mountain-99906.herokuapp.com/g
     NSDictionary *userInfo = [SASUser currentLoggedUser];
     NSString *token = [userInfo objectForKey:USER_DICT_TOKEN];
     NSString *tokenFormat = [NSString stringWithFormat:@"Bearer %@", token];
-
+    
     // Append image file path to url.
     [simpleRequest setUrl:[NSString stringWithFormat:@"%@%@", GET_IMAGE_URL, sasDevice.filePath]];
     [simpleRequest setHeaders:@{@"Authorization": tokenFormat}];
   }] asBinaryAsync:^(UNIHTTPBinaryResponse *binaryResponse, NSError *error) {
-      completionBlock(binaryResponse.body, sasDevice);
+    completionBlock(binaryResponse.body, sasDevice);
   }];
-
+  
 }
 @end
